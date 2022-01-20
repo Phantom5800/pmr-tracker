@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Paper Mario";
+    src: url("../fonts/SuperMarioScript2Demo-Regular.ttf");
+}
+
+html, body {
+    background-color: darkslategray;
+
+    font-family: "Paper Mario", monospace;
+}
+
+table, tr, td {
+    border: none;
+}
+
+td {
+    text-align: center;
+    min-width: 64px;
+}
+
+p, h1 {
+    margin: 0 0 0 0;
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: white;
+
+    -webkit-text-stroke: 1px black;
+}
+
+h1 {
+    font-size: 2.5em;
+    padding-left: 0.25em;
+}
+
+.main-tracker {
+    background-color: rgba(0,0,0,0.25);
+    width: 43em;
+    height: 60em;
+}
+
+.chapter-group {
+    border-style: solid;
+    border-color: black;
+    border-width: 1;
+}
+
+img.unselected {
+    mix-blend-mode: multiply;
+}
