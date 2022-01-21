@@ -3,8 +3,8 @@ const maxKeyCounts = {
     2: 4,
     3: 3,
     4: 0,
-    5: 0,
-    6: 0,
+    5: 11,
+    6: 26,
     7: 0,
     8: 5
 };
@@ -18,30 +18,7 @@ var currentKeyCounts = {
     6: 0,
     7: 0,
     8: 0
-}
-
-var chapterState = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0
 };
-
-var chapterRequirements = {
-    1: 4,
-    2: 8,
-    3: 4,
-    4: 1,
-    5: 1,
-    6: 7,
-    7: 5,
-    8: 5
-}
-
 
 $(document).ready(function(){
     // disable some basic functionality
@@ -50,15 +27,42 @@ $(document).ready(function(){
     $('img').contextmenu(function(){return false;});
 
     $('.star-spirit').height(60);
-    $('.partner').height(60);
+    $('.partner, .upgrade').height(60);
     $('.key-item, .optional-item').height(40);
 
-    $('.partner, .optional-item').click(function() {
+    $('.partner, .optional-item, .upgrade').click(function() {
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
         } else {
             $(this).addClass("unselected");
         }
+    });
+
+    // set text display for the main items
+    $('.main-tracker img').on('mouseenter', function() {
+        $('#main-name-field').text($(this).attr('id'));
+    });
+
+    $('.main-tracker img').on('mouseleave', function() {
+        $('#main-name-field').text("");
+    });
+
+    // misc tracker
+    $('.misc-tracker img').on('mouseenter', function() {
+        $('#misc-name-field').text($(this).attr('id'));
+    });
+
+    $('.misc-tracker img').on('mouseleave', function() {
+        $('#misc-name-field').text("");
+    });
+
+    // koopa koot block names
+    $('.koopa-koot-tracker img').on('mouseenter', function() {
+        $('#secondary-name-field').text($(this).attr('id'));
+    });
+
+    $('.koopa-koot-tracker img').on('mouseleave', function() {
+        $('#secondary-name-field').text("");
     });
 
     // add all the tracker hooks for clicking on images
@@ -68,10 +72,8 @@ $(document).ready(function(){
             var c = parseInt($(this).attr("data-chapter"));
             if ($(this).hasClass("unselected")) {
                 $(this).removeClass("unselected");
-                --chapterState[c];
             } else {
                 $(this).addClass("unselected");
-                ++chapterState[c];
             }
         });
 
@@ -81,7 +83,6 @@ $(document).ready(function(){
             $(this).removeClass("unselected");
             if (currentKeyCounts[c] < maxKeyCounts[c]) {
                 ++currentKeyCounts[c];
-                ++chapterState[c];
                 $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
             }
         });
@@ -90,7 +91,6 @@ $(document).ready(function(){
             var c = parseInt($(this).attr("data-chapter-key"));
             if (currentKeyCounts[c] > 0) {
                 --currentKeyCounts[c];
-                --chapterState[c];
                 $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
             }
 
