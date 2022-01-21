@@ -5,8 +5,13 @@
 
 html, body {
     background-color: darkslategray;
+    font-family: "Paper Mario";
+    user-select: none;
+}
 
-    font-family: "Paper Mario", monospace;
+div.page {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 table, tr, td {
@@ -16,9 +21,10 @@ table, tr, td {
 td {
     text-align: center;
     min-width: 64px;
+    min-height: 64px;
 }
 
-p, h1 {
+p, h1, h2 {
     margin: 0 0 0 0;
     font-size: 1.5em;
     font-weight: bolder;
@@ -32,10 +38,34 @@ h1 {
     padding-left: 0.25em;
 }
 
+h1.koopa-koot {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+    padding-right: 0.25em;
+}
+
 .main-tracker {
     background-color: rgba(0,0,0,0.25);
-    width: 43em;
-    height: 60em;
+    width: 35em;
+    height: 46em;
+    margin: 5px 5px 5px 5px;
+}
+
+.misc-tracker {
+    background-color: rgba(0,0,0,0.25);
+    width: 35em;
+    height: 18em;
+    margin: 5px 5px 5px 5px;
+}
+
+.koopa-koot-tracker {
+    background-color: rgba(0,0,0,0.25);
+    width: 35em;
+    height: 13.5em;
+    margin: 5px 5px 5px 5px;
 }
 
 .chapter-group {
@@ -44,6 +74,24 @@ h1 {
     border-width: 1;
 }
 
+img {
+    cursor: pointer;
+}
+
 img.unselected {
     mix-blend-mode: multiply;
+}
+
+footer {
+    color: white;
+    font-size: 0.8em;
+}
+
+a {
+    text-decoration: none;
+    color: lightblue;
+}
+
+a:hover {
+    text-decoration: underline;
 }
