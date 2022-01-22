@@ -26,6 +26,7 @@ td {
     text-align: center;
     min-width: 64px;
     min-height: 64px;
+    vertical-align: middle;
 }
 
 p, h1, h2 {
@@ -61,7 +62,7 @@ h2 {
 .misc-tracker {
     background-color: rgba(0,0,0,0.25);
     width: 35em;
-    height: 18em;
+    height: 19.5em;
     margin: 5px 5px 5px 5px;
 }
 
