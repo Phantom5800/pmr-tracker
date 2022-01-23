@@ -1,12 +1,13 @@
 const maxKeyCounts = {
-    1: 4,
-    2: 4,
-    3: 3,
-    4: 0,
-    5: 11,
-    6: 26,
-    7: 2,
-    8: 5
+    1: 4, // fortress keys
+    2: 4, // ruins keys
+    3: 3, // tubba keys
+    4: 160, // star pieces
+    5: 11, // rip cheato
+    6: 26, // letters
+    7: 2, // prison keys
+    8: 5, // bowser castle keys
+    9: 64 // quizmo
 };
 
 var currentKeyCounts = {
@@ -17,7 +18,8 @@ var currentKeyCounts = {
     5: 0,
     6: 0,
     7: 0,
-    8: 0
+    8: 0,
+    9: 0
 };
 
 $(document).ready(function(){
@@ -66,7 +68,7 @@ $(document).ready(function(){
     });
 
     // add all the tracker hooks for clicking on images
-    for (var i = 1; i <= 8; ++i) {
+    for (var i = 1; i <= 9; ++i) {
         // required chapter items
         $(`*[data-chapter="${i}"]`).click(function(){
             var c = parseInt($(this).attr("data-chapter"));

@@ -24,8 +24,8 @@ table, tr, td {
 
 td {
     text-align: center;
-    min-width: 64px;
-    min-height: 64px;
+    min-width: 66px;
+    min-height: 66px;
     vertical-align: middle;
 }
 
@@ -54,23 +54,29 @@ h2 {
 
 .main-tracker {
     background-color: rgba(0,0,0,0.25);
-    width: 35em;
+    width: 36em;
     height: 46em;
     margin: 5px 5px 5px 5px;
 }
 
 .misc-tracker {
     background-color: rgba(0,0,0,0.25);
-    width: 35em;
-    height: 19.5em;
+    width: 36em;
+    height: 20.5em;
     margin: 5px 5px 5px 5px;
 }
 
 .koopa-koot-tracker {
     background-color: rgba(0,0,0,0.25);
-    width: 35em;
+    width: 36em;
     height: 13.5em;
     margin: 5px 5px 5px 5px;
+}
+
+.info-block {
+    width: 34em;
+    margin: 10px 10px 10px 10px;
+    color: white;
 }
 
 .chapter-group {
