@@ -112,4 +112,14 @@ $(document).ready(function(){
             }
         });
     }
+
+    // options menu
+    $("#options-menu-toggle").click(function() {
+        $(this).toggleClass("options-open");
+        $("#options-menu").toggleClass("options-open");
+    });
+
+    $("#chapter-6-open").click(function() {
+        $(".ch6-optional").toggle(!$(this).is(':checked'));
+    });
 });
