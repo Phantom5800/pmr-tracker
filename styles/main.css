@@ -119,6 +119,7 @@ a:hover {
 /* Options Menu */
 .hamburger {
     cursor: pointer;
+    width: 40px;
 }
 
 .hamburger-1, .hamburger-2, .hamburger-3 {
