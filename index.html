@@ -18,6 +18,13 @@
         </script>
     </head>
     <body>
+        <header>
+            <div id="options-menu-toggle" class="hamburger">
+                <div class="hamburger-1"></div>
+                <div class="hamburger-2"></div>
+                <div class="hamburger-3"></div>
+            </div>
+        </header>
         <div class="page">
             <div class="main-tracker">
                 <table width="100%">
@@ -68,10 +75,10 @@
                     </tr>
                     <tr>
                         <td><img id="chapter_6" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></td>
-                        <td><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></td>
-                        <td><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></td>
-                        <td><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></td>
-                        <td><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></td>
+                        <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></td>
+                        <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></td>
+                        <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></td>
+                        <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></td>
                         <td><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></td>
                         <td><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></td>
                         <td><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></td>
@@ -229,6 +236,16 @@
                 </div>
             </div>
         </div>
+
+        <div id="options-menu">
+            <table width="100%">
+                <tr>
+                    <td class="option-name">Chapter 6 Open</td>
+                    <td class="option"><input id="chapter-6-open" type="checkbox"></td>
+                </tr>
+            </table>
+        </div>
+
         <footer style="padding-top: 1em; text-align: center;">
             <a href="https://twitter.com/Phantom5800" target="_blank"><img width="15px" src="images/TwitterLogo.png"> @Phantom5800</a> &bull;
             <a href="https://www.twitch.tv/phantom5800" target="_blank"><img width="15px" src="images/TwitchLogo.png"> Phantom5800</a> &bull;

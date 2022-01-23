@@ -20,6 +20,10 @@ div.misc-page {
 
 table, tr, td {
     border: none;
+
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
 }
 
 td {
@@ -93,6 +97,11 @@ img.unselected {
     mix-blend-mode: multiply;
 }
 
+header {
+    padding-top: 5px;
+    margin: 5px 5px 5px 5px;
+}
+
 footer {
     color: white;
     font-size: 0.8em;
@@ -105,4 +114,58 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Options Menu */
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger-1, .hamburger-2, .hamburger-3 {
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.options-open .hamburger-1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.options-open .hamburger-2 {
+    opacity: 0;
+}
+
+.options-open .hamburger-3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+#options-menu {
+    background-color: darkblue;
+    color: white;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    position: absolute;
+    left: -600px;
+    top: 52px;
+    width: 500px;
+    transition: 0.4s;
+}
+
+#options-menu.options-open {
+    -webkit-transform: translate(608px);
+    transform: translate(608px);
+}
+
+td.option-name {
+    width: 75%;
+    text-align: left;
+}
+
+td.option {
+    width: 25%;
+    text-align: right;
 }
