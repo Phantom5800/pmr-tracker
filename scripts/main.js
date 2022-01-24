@@ -134,9 +134,20 @@ $(document).ready(function(){
         localStorage.setItem("chapter-6-open", isChecked);
     });
 
+    $("#koopa-koot-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".koopa-koot-tracker").toggle(isChecked);
+        localStorage.setItem("koopa-koot-randomized", isChecked);
+    });
+
     // local storage settings
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
         $("#chapter-6-open").click();
+    }
+
+    var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
+    if (koopa_koot_randomized) {
+        $("#koopa-koot-randomized").click();
     }
 });
