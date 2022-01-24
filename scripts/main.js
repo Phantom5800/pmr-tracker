@@ -7,7 +7,8 @@ const maxKeyCounts = {
     6: 26, // letters
     7: 2, // prison keys
     8: 5, // bowser castle keys
-    9: 64 // quizmo
+    9: 64, // quizmo
+    10: 3 // master
 };
 
 var currentKeyCounts = {
@@ -19,7 +20,8 @@ var currentKeyCounts = {
     6: 0,
     7: 0,
     8: 0,
-    9: 0
+    9: 0,
+    10: 0
 };
 
 function localStorageGetWithDefault(key, defaultValue) {
@@ -77,7 +79,7 @@ $(document).ready(function(){
     });
 
     // add all the tracker hooks for clicking on images
-    for (var i = 1; i <= 9; ++i) {
+    for (var i = 1; i <= 10; ++i) {
         // required chapter items
         $(`*[data-chapter="${i}"]`).click(function(){
             var c = parseInt($(this).attr("data-chapter"));
@@ -134,6 +136,12 @@ $(document).ready(function(){
         localStorage.setItem("chapter-6-open", isChecked);
     });
 
+    $("#blue-house-open").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".blue-house-optional").toggle(!isChecked);
+        localStorage.setItem("blue-house-open", isChecked);
+    });
+
     $("#koopa-koot-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         $(".koopa-koot-tracker").toggle(isChecked);
@@ -144,6 +152,11 @@ $(document).ready(function(){
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
         $("#chapter-6-open").click();
+    }
+
+    var blue_house_open = localStorageGetWithDefault("blue-house-open", false) == "true";
+    if (blue_house_open) {
+        $("#blue-house-open").click();
     }
 
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
