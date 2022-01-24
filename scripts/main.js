@@ -53,29 +53,47 @@ $(document).ready(function(){
 
     // set text display for the main items
     $('.main-tracker img').on('mouseenter', function() {
-        $('#main-name-field').text($(this).attr('id'));
+        $('.main-tracker h2').text($(this).attr('id'));
     });
 
     $('.main-tracker img').on('mouseleave', function() {
-        $('#main-name-field').text("");
+        $('.main-tracker h2').text("");
     });
 
     // misc tracker
     $('.misc-tracker img').on('mouseenter', function() {
-        $('#misc-name-field').text($(this).attr('id'));
+        $('.misc-tracker h2').text($(this).attr('id'));
     });
 
     $('.misc-tracker img').on('mouseleave', function() {
-        $('#misc-name-field').text("");
+        $('.misc-tracker h2').text("");
+    });
+
+    // keys tracker
+    $('.keys-tracker img').on('mouseenter', function() {
+        $('.keys-tracker h2').text($(this).attr('id'));
+    });
+
+    $('.keys-tracker img').on('mouseleave', function() {
+        $('.keys-tracker h2').text("");
     });
 
     // koopa koot block names
     $('.koopa-koot-tracker img').on('mouseenter', function() {
-        $('#secondary-name-field').text($(this).attr('id'));
+        $('.koopa-koot-tracker h2').text($(this).attr('id'));
     });
 
     $('.koopa-koot-tracker img').on('mouseleave', function() {
-        $('#secondary-name-field').text("");
+        $('.koopa-koot-tracker h2').text("");
+    });
+
+    // dojo block names
+    $('.dojo-tracker img').on('mouseenter', function() {
+        $('.dojo-tracker h2').text($(this).attr('id'));
+    });
+
+    $('.dojo-tracker img').on('mouseleave', function() {
+        $('.dojo-tracker h2').text("");
     });
 
     // add all the tracker hooks for clicking on images
@@ -148,6 +166,12 @@ $(document).ready(function(){
         localStorage.setItem("koopa-koot-randomized", isChecked);
     });
 
+    $("#dojo-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".dojo-tracker").toggle(isChecked);
+        localStorage.setItem("dojo-randomized", isChecked);
+    });
+
     // local storage settings
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
@@ -162,5 +186,10 @@ $(document).ready(function(){
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
     if (!koopa_koot_randomized) {
         $("#koopa-koot-randomized").click();
+    }
+
+    var dojo_randomized = localStorageGetWithDefault("dojo-randomized", true) == "true";
+    if (!koopa_koot_randomized) {
+        $("#dojo-randomized").click();
     }
 });

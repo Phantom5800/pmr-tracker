@@ -25,7 +25,7 @@
                 <div class="hamburger-3"></div>
             </div>
         </header>
-        <div class="page">
+        <div class="flex-row">
             <!--
                 Main tracker for chapter progress
             -->
@@ -36,7 +36,7 @@
                             <h1>Required Items</h1>
                         </td>
                         <td style="text-align: right;">
-                            <h2 id="main-name-field"></h2>
+                            <h2></h2>
                         </td>
                     </tr>
                 </table>
@@ -126,7 +126,7 @@
             <!--
                 Miscellaneous item list for things that don't really fit elsewhere
             -->
-            <div class="misc-page">
+            <div class="flex-column">
                 <div class="misc-tracker">
                     <table width="100%">
                         <tr style="height: 4em;">
@@ -134,55 +134,37 @@
                                 <h1>Misc. Items</h1>
                             </td>
                             <td style="text-align: right;">
-                                <h2 id="misc-name-field"></h2>
+                                <h2></h2>
                             </td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <td><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></td>
-                            <td><img id="First Degree Card" class="unselected optional-item" src="images/icons/First-DegreeCard_PM.png"></td>
-                            <td><img id="Second Degree Card" class="unselected optional-item" src="images/icons/Second-DegreeCard_PM.png"></td>
-                            <td><img id="Third Degree Card" class="unselected optional-item" src="images/icons/Third-DegreeCard_PM.png"></td>
-                            <td><img id="Fourth Degree Card" class="unselected optional-item" src="images/icons/Fourth-DegreeCard_PM.png"></td>
-                            <td><img id="Diploma" class="unselected optional-item" src="images/icons/Diploma.png"></td>
                             <td><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></td>
                             <td>
                                 <img data-chapter-key="6" id="Letter" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
                                 <p id="chapter-6-key-count">0/26</p>
                             </td>
-                        </tr>
-                        <tr>
                             <td><img id="Artifact" class="unselected optional-item" src="images/icons/Artifact_PM.png"></td>
                             <td><img id="Record" class="unselected optional-item" src="images/icons/Record.gif"></td>
                             <td><img id="Weight" class="unselected optional-item" src="images/icons/WeightPM.gif"></td>
                             <td><img id="Calculator" class="unselected optional-item" src="images/icons/Calculator_PM.png"></td>
-                            <td><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
                             <td><img id="Frying Pan" class="unselected optional-item" src="images/icons/PM_Frying_Pan.png"></td>
-                            <td><img id="Cookbook" class="unselected optional-item" src="images/icons/Cook_Book_Paper_Mario.png"></td>
-                            <td><img id="Dictionary" class="unselected optional-item" src="images/icons/PM_Dictionary.png"></td>
                         </tr>
                         <tr>
+                            <td><img id="Cookbook" class="unselected optional-item" src="images/icons/Cook_Book_Paper_Mario.png"></td>
+                            <td><img id="Dictionary" class="unselected optional-item" src="images/icons/PM_Dictionary.png"></td>
                             <td><img id="Mystery Note" class="unselected optional-item" src="images/icons/MysteryNote.png"></td>
                             <td><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></td>
                             <td><img id="Volcano Vase" class="unselected optional-item" src="images/icons/VolcanoVase.gif"></td>
-                            <td><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></td>
-                            <td><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></td>
-                            <td><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></td>
-                            <td><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></td>
                             <td><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></td>
+                            <td><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></td>
+                            <td><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></td>
                         </tr>
                         <tr>
-                            <td><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></td>
-                            <td class="blue-house-optional" ><img id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
-                            <td><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></td>
-                            <td>
-                                <img data-chapter-key="7" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
-                                <p id="chapter-7-key-count">0/2</p>
-                            </td>
-                            <td><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></td>
-                            <td><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></td>
                             <td><img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png"></td>
+                            <td><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></td>
                         </tr>
                         <tr>
                             <td>
@@ -193,16 +175,41 @@
                                 <img data-chapter-key="5" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
                                 <p id="chapter-5-key-count">0/11</p>
                             </td>
-                            <td><img id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png"></td>
-                            <td><img id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png"></td>
-                            <td>
-                                <img data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
-                                <p id="chapter-10-key-count">0/3</p>
-                            </td>
                             <td><img id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png"></td>
                             <td colspan="2">
                                 <img data-chapter-key="4" id="Star Piece" class="unselected optional-item" src="images/icons/Star_Piece.png">
                                 <p id="chapter-4-key-count">0/160</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 
+                    Misc. Keys. Items that open up rooms but may not be required for progression.
+                -->
+                <div class="keys-tracker">
+                    <table width="100%">
+                        <tr style="height: 4em;">
+                            <td style="text-align: left; width: 60%;">
+                                <h1 class="small-header">Misc. Keys</h1>
+                            </td>
+                            <td style="text-align: right;">
+                                <h2></h2>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></td>
+                            <td><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></td>
+                            <td><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></td>
+                            <td><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></td>
+                            <td><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
+                            <td class="blue-house-optional" ><img id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
+                            <td><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></td>
+                            <td>
+                                <img data-chapter-key="7" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                                <p id="chapter-7-key-count">0/2</p>
                             </td>
                         </tr>
                     </table>
@@ -215,10 +222,10 @@
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
-                                <h1 class="koopa-koot">Koopa Koot Favors</h1>
+                                <h1 class="small-header">Koopa Koot Favors</h1>
                             </td>
                             <td style="text-align: right;">
-                                <h2 id="secondary-name-field"></h2>
+                                <h2></h2>
                             </td>
                         </tr>
                     </table>
@@ -250,6 +257,40 @@
                     </table>
                 </div>
 
+            </div>
+            <div class="flex-column">
+                <!-- 
+                    Dojo
+                -->
+                <div class="dojo-tracker">
+                    <table width="100%">
+                        <tr style="height: 4em;">
+                            <td style="text-align: left; width: 40%;">
+                                <h1 class="small-header">Dojo</h1>
+                            </td>
+                            <td style="text-align: right;">
+                                <h2></h2>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td><img id="First Degree Card" class="unselected optional-item" src="images/icons/First-DegreeCard_PM.png"></td>
+                            <td><img id="Second Degree Card" class="unselected optional-item" src="images/icons/Second-DegreeCard_PM.png"></td>
+                            <td><img id="Third Degree Card" class="unselected optional-item" src="images/icons/Third-DegreeCard_PM.png"></td>
+                            <td><img id="Fourth Degree Card" class="unselected optional-item" src="images/icons/Fourth-DegreeCard_PM.png"></td>
+                            <td><img id="Diploma" class="unselected optional-item" src="images/icons/Diploma.png"></td>
+                        </tr>
+                        <tr>
+                            <td><img id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png"></td>
+                            <td><img id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png"></td>
+                            <td>
+                                <img data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
+                                <p id="chapter-10-key-count">0/3</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="info-block">
                     <ul>
                         <li>For suggestions and feature requests, please make issues on Github (link in the footer)!</li>
@@ -280,19 +321,29 @@
                         </div>
                     </td>
                 </tr>
-                <!--
-                    do this if any sections ever need a dividing line:
-                    <tr>
-                        <td colspan="2"><hr></td>
-                    </tr>
-                -->
                 <tr>
-                    <td class="option-name">Koopa Koot Favors</td>
+                    <!--
+                        do this if any sections ever need a dividing line:
+                    -->
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td class="option-name">Koopa Koot Randomized</td>
                     <td class="option">
                         <div class="checkbox-slider">
                             <input class="checkbox-slider" id="koopa-koot-randomized" type="checkbox" checked>
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="koopa-koot-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="option-name">Dojo Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input class="checkbox-slider" id="dojo-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="dojo-randomized"></label>
                         </div>
                     </td>
                 </tr>

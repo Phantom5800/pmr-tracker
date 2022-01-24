@@ -9,12 +9,12 @@ html, body {
     user-select: none;
 }
 
-div.page {
+div.flex-row {
     display: flex;
     flex-wrap: wrap;
 }
 
-div.misc-page {
+div.flex-column {
     flex-direction: column;
 }
 
@@ -47,7 +47,7 @@ h1 {
     padding-left: 0.25em;
 }
 
-h1.koopa-koot {
+h1.small-header {
     font-size: 2em;
 }
 
@@ -67,7 +67,15 @@ h2 {
 .misc-tracker {
     background-color: rgba(0,0,0,0.25);
     width: 36em;
-    height: 23em;
+    height: 19em;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
+
+.keys-tracker {
+    background-color: rgba(0,0,0,0.25);
+    width: 36em;
+    height: 9em;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
 }
@@ -76,6 +84,14 @@ h2 {
     background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 13.5em;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
+
+.dojo-tracker {
+    background-color: rgba(0,0,0,0.25);
+    width: 36em;
+    height: 12em;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
 }
