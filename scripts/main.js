@@ -147,7 +147,7 @@ $(document).ready(function(){
     }
 
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
-    if (koopa_koot_randomized) {
+    if (!koopa_koot_randomized) {
         $("#koopa-koot-randomized").click();
     }
 });
