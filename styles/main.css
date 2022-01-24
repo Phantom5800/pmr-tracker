@@ -149,6 +149,7 @@ a:hover {
     color: white;
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
+    font-size: 1.5em;
     position: absolute;
     left: -600px;
     top: 52px;
@@ -162,11 +163,55 @@ a:hover {
 }
 
 td.option-name {
-    width: 75%;
     text-align: left;
+    padding-left: 10px;
 }
 
 td.option {
-    width: 25%;
+    width: 60px;
     text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.checkbox-groove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ababab;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-groove:after {
+    position: absolute;
+    content: "";
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #fff;
+    top: 1px;
+    left: 1px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-slider {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 30px;
+}
+
+input.checkbox-slider {
+    display: none;
+}
+
+input:checked + .checkbox-groove {
+    background-color: #5fcf80;
+}
+
+input:checked + .checkbox-groove:after {
+    transform: translateX(30px);
 }
