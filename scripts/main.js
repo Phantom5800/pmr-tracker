@@ -22,6 +22,15 @@ var currentKeyCounts = {
     9: 0
 };
 
+function localStorageGetWithDefault(key, defaultValue) {
+    const value = localStorage.getItem(key);
+    if (!value) {
+        localStorage.setItem(key, defaultValue);
+        return defaultValue;
+    }
+    return value;
+}
+
 $(document).ready(function(){
     // disable some basic functionality
     $('img').on('dragstart', function(){return false;});
@@ -120,6 +129,14 @@ $(document).ready(function(){
     });
 
     $("#chapter-6-open").click(function() {
-        $(".ch6-optional").toggle(!$(this).is(':checked'));
+        var isChecked = $(this).is(':checked');
+        $(".ch6-optional").toggle(!isChecked);
+        localStorage.setItem("chapter-6-open", isChecked);
     });
+
+    // local storage settings
+    var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
+    if (chapter6_open) {
+        $("#chapter-6-open").click();
+    }
 });
