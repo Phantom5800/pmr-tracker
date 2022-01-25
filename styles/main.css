@@ -116,6 +116,12 @@ img.unselected {
     mix-blend-mode: multiply;
 }
 
+img.completable {
+    mix-blend-mode: soft-light;
+    -webkit-filter: drop-shadow(3px 3px 3px white);
+    filter: drop-shadow(3px 3px 3px white);
+}
+
 header {
     padding-top: 5px;
     margin: 5px 5px 5px 5px;
