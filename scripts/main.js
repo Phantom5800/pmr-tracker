@@ -2,13 +2,17 @@ const maxKeyCounts = {
     1: 4, // fortress keys
     2: 4, // ruins keys
     3: 3, // tubba keys
-    4: 160, // star pieces
-    5: 11, // rip cheato
-    6: 26, // letters
-    7: 2, // prison keys
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
     8: 5, // bowser castle keys
     9: 64, // quizmo
-    10: 3 // master
+    10: 3, // master
+    11: 160, // star pieces
+    12: 11, // rip cheato
+    13: 26, // letters
+    14: 2, // prison keys
 };
 
 var currentKeyCounts = {
@@ -21,7 +25,11 @@ var currentKeyCounts = {
     7: 0,
     8: 0,
     9: 0,
-    10: 0
+    10: 0,
+    11: 0,
+    12: 0,
+    13: 0,
+    14: 0
 };
 
 function localStorageGetWithDefault(key, defaultValue) {
@@ -31,6 +39,36 @@ function localStorageGetWithDefault(key, defaultValue) {
         return defaultValue;
     }
     return value;
+}
+
+function checkIfChapterIsCompletable(chapter) {
+    if (chapter <= 8) {
+        var totalCount = 0;
+        var completedCount = 0;
+        $(`img[data-chapter=${chapter}]`).each(function() {
+            if ($(this).is(":visible")) {
+                ++totalCount;
+            }
+            if (!$(this).hasClass("unselected")) {
+                ++completedCount;
+            }
+        });
+    
+        $(`img[data-chapter-key=${chapter}]`).each(function() {
+            totalCount += maxKeyCounts[chapter];
+            if (!$(this).hasClass("unselected")) {
+                completedCount += currentKeyCounts[chapter];
+            }
+        });
+    
+        var star_spirit = $(`#chapter_${chapter}`);
+        if (completedCount === totalCount && star_spirit.hasClass("unselected")) {
+            star_spirit.addClass("completable");
+        } else {
+            star_spirit.removeClass("completable");
+        }
+        console.log(`${completedCount} / ${totalCount}`);
+    }
 }
 
 $(document).ready(function(){
@@ -97,7 +135,7 @@ $(document).ready(function(){
     });
 
     // add all the tracker hooks for clicking on images
-    for (var i = 1; i <= 10; ++i) {
+    for (var i = 1; i <= 14; ++i) {
         // required chapter items
         $(`*[data-chapter="${i}"]`).click(function(){
             var c = parseInt($(this).attr("data-chapter"));
@@ -106,6 +144,8 @@ $(document).ready(function(){
             } else {
                 $(this).addClass("unselected");
             }
+
+            checkIfChapterIsCompletable(c);
         });
 
         // chapter keys
@@ -116,6 +156,8 @@ $(document).ready(function(){
                 ++currentKeyCounts[c];
                 $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
             }
+
+            checkIfChapterIsCompletable(c);
         });
 
         $(`*[data-chapter-key="${i}"]`).contextmenu(function(){
@@ -134,10 +176,13 @@ $(document).ready(function(){
 
         // star spirit trackers
         $(`#chapter_${i}`).click(function(){
+            var c = parseInt($(this).attr("data-chapter-star"));
             if ($(this).hasClass("unselected")) {
                 $(this).removeClass("unselected");
+                $(this).removeClass("completable");
             } else {
                 $(this).addClass("unselected");
+                checkIfChapterIsCompletable(c);
             }
         });
     }
