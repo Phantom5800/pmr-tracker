@@ -38,9 +38,9 @@ const extraChapterRequirements = {
     3: ["#Parakarry"],
     4: ["#Bombette", "#Watt"],
     5: ["#Sushie"],
-    6: ["#Lakilester"],
-    7: ["#Kooper", "#Bombette"],
-    8: ["#Bombette", "#Parakarry", "#Lakilester"]
+    6: ["#Lakilester", "[id='Super Boots']"],
+    7: ["#Kooper", "#Bombette", "[id='Super Boots']"],
+    8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
 }
 
 function localStorageGetWithDefault(key, defaultValue) {
@@ -167,59 +167,57 @@ $(document).ready(function(){
         $('.dojo-tracker h2').text("");
     });
 
-    // add all the tracker hooks for clicking on images
-    for (var i = 1; i <= 14; ++i) {
-        // required chapter items
-        $(`*[data-chapter="${i}"]`).click(function(){
-            var c = parseInt($(this).attr("data-chapter"));
-            if ($(this).hasClass("unselected")) {
-                $(this).removeClass("unselected");
-            } else {
-                $(this).addClass("unselected");
-            }
-
-            checkIfChapterIsCompletable(c);
-        });
-
-        // chapter keys
-        $(`*[data-chapter-key="${i}"]`).click(function(){
-            var c = parseInt($(this).attr("data-chapter-key"));
+    // required chapter items
+    $("img[data-chapter]").click(function(){
+        var c = parseInt($(this).attr("data-chapter"));
+        if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
-            if (currentKeyCounts[c] < maxKeyCounts[c]) {
-                ++currentKeyCounts[c];
-                $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
-            }
+        } else {
+            $(this).addClass("unselected");
+        }
 
+        checkIfChapterIsCompletable(c);
+    });
+
+    // chapter keys
+    $("img[data-chapter-key]").click(function(){
+        var c = parseInt($(this).attr("data-chapter-key"));
+        $(this).removeClass("unselected");
+        if (currentKeyCounts[c] < maxKeyCounts[c]) {
+            ++currentKeyCounts[c];
+            $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
+        }
+
+        checkIfChapterIsCompletable(c);
+    });
+
+    $("img[data-chapter-key]").contextmenu(function(){
+        var c = parseInt($(this).attr("data-chapter-key"));
+        if (currentKeyCounts[c] > 0) {
+            --currentKeyCounts[c];
+            $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
+        }
+
+        if (currentKeyCounts[c] === 0) {
+            $(this).addClass("unselected");
+        }
+
+        checkIfChapterIsCompletable(c);
+        return false;
+    });
+
+    // star spirit trackers
+    $(".star-spirit").click(function(){
+        var c = parseInt($(this).attr("data-chapter-star"));
+        if ($(this).hasClass("unselected")) {
+            $(this).removeClass("unselected");
+            $(this).removeClass("completable");
+        } else {
+            $(this).addClass("unselected");
             checkIfChapterIsCompletable(c);
-        });
-
-        $(`*[data-chapter-key="${i}"]`).contextmenu(function(){
-            var c = parseInt($(this).attr("data-chapter-key"));
-            if (currentKeyCounts[c] > 0) {
-                --currentKeyCounts[c];
-                $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
-            }
-
-            if (currentKeyCounts[c] === 0) {
-                $(this).addClass("unselected");
-            }
-
-            checkIfChapterIsCompletable(c);
-            return false;
-        });
-
-        // star spirit trackers
-        $(`#chapter_${i}`).click(function(){
-            var c = parseInt($(this).attr("data-chapter-star"));
-            if ($(this).hasClass("unselected")) {
-                $(this).removeClass("unselected");
-                $(this).removeClass("completable");
-            } else {
-                $(this).addClass("unselected");
-                checkIfChapterIsCompletable(c);
-            }
-        });
-    }
+        }
+        checkIfChapterIsCompletable(8);
+    });
 
     // options menu
     $(document).click(function(e) {
