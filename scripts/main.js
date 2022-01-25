@@ -143,7 +143,16 @@ $(document).ready(function(){
     }
 
     // options menu
-    $("#options-menu-toggle").click(function() {
+    $(document).click(function(e) {
+        // if the option menu is open, and the click is outside the options menu, close it
+        var container = $("#options-menu");
+        if (container.hasClass("options-open") && !container.is(e.target) && container.has(e.target).length === 0) {
+            $("#options-menu-toggle").click();
+        }
+    });
+
+    $("#options-menu-toggle").click(function(e) {
+        e.stopPropagation();
         $(this).toggleClass("options-open");
         $("#options-menu").toggleClass("options-open");
     });
