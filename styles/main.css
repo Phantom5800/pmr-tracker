@@ -144,7 +144,9 @@ a:hover {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 200px;
-    background-color: #555;
+    background-color: #666c;
+
+    font-size: 1em;
     color: #fff;
     text-align: center;
     padding: 5px 5px 5px 5px;
@@ -154,7 +156,7 @@ a:hover {
     z-index: 1;
     top: 125%;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -105px;
 
     opacity: 0;
     transition: opacity 0.3s;
@@ -168,7 +170,7 @@ a:hover {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent #555 transparent;
+    border-color: transparent transparent #666c transparent;
 }
 
 .tooltip:hover .tooltiptext {

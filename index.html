@@ -237,7 +237,12 @@
                     <table>
                         <tr>
                             <td><img id="Koopa Legends" class="unselected optional-item" src="images/koopa-koot-favors/KoopaLegends_PM.png"></td>
-                            <td><img id="Sleepy Sheep" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_SleepySheep.png"></td>
+                            <td>
+                                <div class="tooltip">
+                                    <img id="Sleepy Sheep" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_SleepySheep.png">
+                                    <span class="tooltiptext">Red/Yellow/Blue Berry + Strange Leaf</span>
+                                </div>
+                            </td>
                             <td><img id="Tape" class="unselected optional-item" src="images/koopa-koot-favors/Tape_PM.png"></td>
                             <td>
                                 <div class="tooltip">
@@ -247,11 +252,21 @@
                             </td>
                             <td><img id="Luigi's Autograph" class="unselected optional-item" src="images/koopa-koot-favors/Luigi's_Autograph.png"></td>
                             <td><img id="Wallet" class="unselected optional-item" src="images/koopa-koot-favors/PM_Empty_Wallet.png"></td>
-                            <td><img id="Tasty Tonic" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_TastyTonic.png"></td>
+                            <td>
+                                <div class="tooltip">
+                                    <img id="Tasty Tonic" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_TastyTonic.png">
+                                    <span class="tooltiptext">Red/Yellow/Blue Berry + Honey Syrup</span>
+                                </div>
+                            </td>
                             <td><img id="Merluvlee's Autograph" class="unselected optional-item" src="images/koopa-koot-favors/Merluvlee's_Autograph.png"></td>
                         </tr>
                         <tr>
-                            <td><img id="Life Shroom" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_LifeShroom.png"></td>
+                            <td>
+                                <div class="tooltip">
+                                    <img id="Life Shroom" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_LifeShroom.png">
+                                    <span class="tooltiptext">Super Shroom (or better) + (Koopa Leaf / Goomnut / Strange Leaf)</span>
+                                </div>
+                            </td>
                             <td>
                                 <div class="tooltip">
                                     <img id="Nutty Cake" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_NuttyCake.png">
@@ -367,6 +382,19 @@
                             <input class="checkbox-slider" id="dojo-randomized" type="checkbox" checked>
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="dojo-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td class="option-name">Recipe Tooltips</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input class="checkbox-slider" id="recipe-tooltips" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="recipe-tooltips"></label>
                         </div>
                     </td>
                 </tr>
