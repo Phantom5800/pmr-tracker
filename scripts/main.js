@@ -172,6 +172,12 @@ $(document).ready(function(){
         localStorage.setItem("dojo-randomized", isChecked);
     });
 
+    $("#recipe-tooltips").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".tooltiptext").toggle(isChecked);
+        localStorage.setItem("recipe-tooltips", isChecked);
+    });
+
     // local storage settings
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
@@ -189,7 +195,12 @@ $(document).ready(function(){
     }
 
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", true) == "true";
-    if (!koopa_koot_randomized) {
+    if (!dojo_randomized) {
         $("#dojo-randomized").click();
+    }
+
+    var tooltips_enabled = localStorageGetWithDefault("recipe-tooltips", true) == "true";
+    if (!tooltips_enabled) {
+        $("#recipe-tooltips").click();
     }
 });
