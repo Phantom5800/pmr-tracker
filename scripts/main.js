@@ -171,6 +171,7 @@ $(document).ready(function(){
                 $(this).addClass("unselected");
             }
 
+            checkIfChapterIsCompletable(c);
             return false;
         });
 
