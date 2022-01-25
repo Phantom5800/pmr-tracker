@@ -32,6 +32,17 @@ var currentKeyCounts = {
     14: 0
 };
 
+const extraChapterRequirements = {
+    1: ["#Kooper", "#Bombette"],
+    2: ["#Bombette", "#Parakarry"],
+    3: ["#Parakarry"],
+    4: ["#Bombette", "#Watt"],
+    5: ["#Sushie"],
+    6: ["#Lakilester"],
+    7: ["#Kooper", "#Bombette"],
+    8: ["#Bombette", "#Parakarry", "#Lakilester"]
+}
+
 function localStorageGetWithDefault(key, defaultValue) {
     const value = localStorage.getItem(key);
     if (!value) {
@@ -43,7 +54,7 @@ function localStorageGetWithDefault(key, defaultValue) {
 
 function checkIfChapterIsCompletable(chapter) {
     if (chapter <= 8) {
-        var totalCount = 0;
+        var totalCount = extraChapterRequirements[chapter].length;
         var completedCount = 0;
         $(`img[data-chapter=${chapter}]`).each(function() {
             if ($(this).is(":visible")) {
@@ -56,13 +67,22 @@ function checkIfChapterIsCompletable(chapter) {
     
         $(`img[data-chapter-key=${chapter}]`).each(function() {
             totalCount += maxKeyCounts[chapter];
+            if (chapter === 2) {
+                --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
+            }
             if (!$(this).hasClass("unselected")) {
                 completedCount += currentKeyCounts[chapter];
             }
         });
+
+        for (var i = 0; i < extraChapterRequirements[chapter].length; ++i) {
+            if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
+                ++completedCount;
+            }
+        }
     
         var star_spirit = $(`#chapter_${chapter}`);
-        if (completedCount === totalCount && star_spirit.hasClass("unselected")) {
+        if (completedCount >= totalCount && star_spirit.hasClass("unselected")) {
             star_spirit.addClass("completable");
         } else {
             star_spirit.removeClass("completable");
@@ -81,11 +101,24 @@ $(document).ready(function(){
     $('.partner, .upgrade').height(60);
     $('.key-item, .optional-item').height(40);
 
-    $('.partner, .optional-item, .upgrade').click(function() {
+    $('.optional-item').click(function() {
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
         } else {
             $(this).addClass("unselected");
+        }
+    });
+
+    // for partners and upgrades, need to update all chapter completion statuses
+    $('.partner, .upgrade').click(function() {
+        if ($(this).hasClass("unselected")) {
+            $(this).removeClass("unselected");
+        } else {
+            $(this).addClass("unselected");
+        }
+
+        for (var i = 1; i <= 8; ++i) {
+            checkIfChapterIsCompletable(i);
         }
     });
 
