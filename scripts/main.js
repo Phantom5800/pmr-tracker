@@ -67,7 +67,7 @@ function checkIfChapterIsCompletable(chapter) {
     
         $(`img[data-chapter-key=${chapter}]`).each(function() {
             totalCount += maxKeyCounts[chapter];
-            if (chapter === 2) {
+            if (chapter === 2 && currentKeyCounts[chapter] === 3) {
                 --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
             }
             if (!$(this).hasClass("unselected")) {
