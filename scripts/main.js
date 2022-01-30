@@ -264,6 +264,12 @@ $(document).ready(function(){
         localStorage.setItem("recipe-tooltips", isChecked);
     });
 
+    $("#background-color").on("input", function() {
+        var color = $(this).val();
+        $("body, html").css("background-color", color);
+        localStorage.setItem("background-color", color);
+    });
+
     // local storage settings
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
@@ -289,4 +295,8 @@ $(document).ready(function(){
     if (!tooltips_enabled) {
         $("#recipe-tooltips").click();
     }
+
+    var bg_color = localStorageGetWithDefault("background-color", "#2f4f4f");
+    $("body, html").css("background-color", bg_color);
+    $("#background-color").val(bg_color);
 });
