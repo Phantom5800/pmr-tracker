@@ -113,7 +113,9 @@ img {
 }
 
 img.unselected {
-    mix-blend-mode: multiply;
+    mix-blend-mode: difference;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
 
 img.completable {
