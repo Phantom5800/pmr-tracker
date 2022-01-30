@@ -119,9 +119,9 @@ img.unselected {
 }
 
 img.completable {
-    mix-blend-mode: soft-light;
-    -webkit-filter: drop-shadow(3px 3px 3px white);
-    filter: drop-shadow(3px 3px 3px white);
+    mix-blend-mode: difference;
+    -webkit-filter: grayscale(0.6) drop-shadow(3px 3px 3px white);
+    filter: grayscale(0.6) drop-shadow(3px 3px 3px white);
 }
 
 header {
