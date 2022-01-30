@@ -113,15 +113,13 @@ img {
 }
 
 img.unselected {
-    mix-blend-mode: difference;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
+    -webkit-filter: grayscale(1) brightness(50%);
+    filter: grayscale(1) brightness(50%);
 }
 
 img.completable {
-    mix-blend-mode: difference;
-    -webkit-filter: grayscale(0.6) drop-shadow(3px 3px 3px white);
-    filter: grayscale(0.6) drop-shadow(3px 3px 3px white);
+    -webkit-filter: grayscale(0.6) brightness(80%) drop-shadow(3px 3px 3px white);
+    filter: grayscale(0.6) brightness(80%) drop-shadow(3px 3px 3px white);
 }
 
 header {
