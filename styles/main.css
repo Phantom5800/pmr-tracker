@@ -283,3 +283,7 @@ input:checked + .checkbox-groove {
 input:checked + .checkbox-groove:after {
     transform: translateX(30px);
 }
+
+input[type="color"] {
+    width: 100%;
+}
