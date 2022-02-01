@@ -38,8 +38,8 @@ const extraChapterRequirements = {
     3: ["#Parakarry"],
     4: ["#Bombette", "#Watt"],
     5: ["#Sushie"],
-    6: ["#Lakilester", "[id='Super Boots']"],
-    7: ["#Kooper", "#Bombette", "[id='Super Boots']"],
+    6: ["#Lakilester", "Super Boots"],
+    7: ["#Kooper", "#Bombette", "Super Boots"],
     8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
 }
 
@@ -76,7 +76,13 @@ function checkIfChapterIsCompletable(chapter) {
         });
 
         for (var i = 0; i < extraChapterRequirements[chapter].length; ++i) {
-            if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
+            // if boots upgrade is required, increment when normal boots are not active
+            if (extraChapterRequirements[chapter][i] === "Super Boots") {
+                if ($("#Boots").length === 0) {
+                    ++completedCount;
+                }
+            }
+            else if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
                 ++completedCount;
             }
         }
@@ -109,8 +115,67 @@ $(document).ready(function(){
         }
     });
 
-    // for partners and upgrades, need to update all chapter completion statuses
-    $('.partner, .upgrade').click(function() {
+    // upgrade markers
+    $('.upgrade').click(function() {
+        switch ($(this).attr('id')) {
+            case "Boots":
+                $(this).attr('id', "Super Boots");
+                $(this).attr('src', "images/upgrades/SuperBoots_PM.png")
+                break;
+
+            case "Super Boots":
+                $(this).attr('id', "Ultra Boots");
+                $(this).attr('src', "images/upgrades/UltraBoots_PM.png")
+                break;
+
+            case "Hammer":
+                $(this).attr('id', "Super Hammer");
+                $(this).attr('src', "images/upgrades/PM_Super_Hammer_Sprite.png")
+                break;
+
+            case "Super Hammer":
+                $(this).attr('id', "Ultra Hammer");
+                $(this).attr('src', "images/upgrades/PM_Ultra_Hammer_Sprite.png")
+                break;
+        }
+
+        $('.main-tracker h2').text($(this).attr('id'));
+        for (var i = 1; i <= 8; ++i) {
+            checkIfChapterIsCompletable(i);
+        }
+    });
+
+    $('.upgrade').contextmenu(function() {
+        switch ($(this).attr('id')) {
+            case "Ultra Boots":
+                $(this).attr('id', "Super Boots");
+                $(this).attr('src', "images/upgrades/SuperBoots_PM.png")
+                break;
+
+            case "Super Boots":
+                $(this).attr('id', "Boots");
+                $(this).attr('src', "images/upgrades/PM_Normal_Boots_Sprite.png")
+                break;
+
+            case "Ultra Hammer":
+                $(this).attr('id', "Super Hammer");
+                $(this).attr('src', "images/upgrades/PM_Super_Hammer_Sprite.png")
+                break;
+
+            case "Super Hammer":
+                $(this).attr('id', "Hammer");
+                $(this).attr('src', "images/upgrades/PM_Normal_Hammer_Sprite.png")
+                break;
+        }
+
+        $('.main-tracker h2').text($(this).attr('id'));
+        for (var i = 1; i <= 8; ++i) {
+            checkIfChapterIsCompletable(i);
+        }
+    });
+
+    // for partners, need to update all chapter completion statuses
+    $('.partner').click(function() {
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
         } else {
