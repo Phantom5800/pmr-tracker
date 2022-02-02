@@ -64,6 +64,10 @@ h2 {
     border-radius: 10px;
 }
 
+.main-tracker.compact {
+    height: 27.5em;
+}
+
 .misc-tracker {
     background-color: rgba(0,0,0,0.25);
     width: 36em;
