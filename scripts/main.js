@@ -180,6 +180,7 @@ function checkIfChapterIsCompletable(chapter) {
 }
 
 function initializePage() {
+    $('img').on('dragstart', function(){return false;});
     $('.star-spirit').height(60);
     $('.partner, .upgrade').height(60);
     $('.key-item, .optional-item').height(40);
@@ -372,7 +373,6 @@ function initializePage() {
 
 $(document).ready(function(){
     // disable some basic functionality
-    $('img').on('dragstart', function(){return false;});
     $('html').contextmenu(function(){return false;});
     $('img').contextmenu(function(){return false;});
 
