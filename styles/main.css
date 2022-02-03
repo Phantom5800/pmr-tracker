@@ -40,6 +40,7 @@ p, h1, h2 {
     color: white;
 
     -webkit-text-stroke: 1px black;
+    stroke: 1px black;
 }
 
 h1 {
@@ -143,6 +144,50 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Notes */
+#notes {
+    background-color: rgba(0,0,0,0.25);
+    width: 36em;
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
+
+    flex: 0 1 auto;
+    min-height: 5em;
+}
+
+#notes textarea {
+    padding: 5px 5px 5px 5px;
+    width: 100%;
+    min-height: 5em;
+    background-color: transparent;
+    border: none;
+    resize: vertical;
+
+    color: white;
+    font-size: 1.5em;
+    font-weight: bolder;
+    -webkit-text-stroke: 1px black;
+    stroke: 1px black;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* Tooltips */
