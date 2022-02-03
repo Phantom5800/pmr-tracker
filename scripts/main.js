@@ -427,6 +427,12 @@ $(document).ready(function(){
         localStorage.setItem("compact-tracker", isChecked);
     });
 
+    $("#user-notes").click(function() {
+        var isChecked = $(this).is(':checked');
+        $("#notes").toggle(isChecked);
+        localStorage.setItem("user-notes", isChecked);
+    });
+
     $("#recipe-tooltips").click(function() {
         var isChecked = $(this).is(':checked');
         $(".tooltiptext").toggle(isChecked);
@@ -463,6 +469,11 @@ $(document).ready(function(){
     var use_compact_tracker = localStorageGetWithDefault("compact-tracker", false) == "true";
     if (use_compact_tracker) {
         $("#compact-tracker").click();
+    }
+
+    var user_notes_enabled = localStorageGetWithDefault("user-notes", false) == "true";
+    if (user_notes_enabled) {
+        $("#user-notes").click();
     }
 
     var tooltips_enabled = localStorageGetWithDefault("recipe-tooltips", true) == "true";
