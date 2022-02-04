@@ -119,7 +119,7 @@ const extraChapterRequirements = {
     2: ["#Bombette", "#Parakarry"],
     3: ["#Parakarry"],
     4: ["#Bombette", "#Watt"],
-    5: ["#Sushie"],
+    5: ["#Sushie", ["#Parakarry", "#Lakilester"]],
     6: ["#Lakilester", "Super Boots"],
     7: ["#Kooper", "#Bombette", "Super Boots"],
     8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
@@ -163,8 +163,14 @@ function checkIfChapterIsCompletable(chapter) {
                 if ($("#Boots").length === 0) {
                     ++completedCount;
                 }
-            }
-            else if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
+            } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
+                for (var j = 0; j < extraChapterRequirements[chapter][i].length; ++j) {
+                    if (!$(extraChapterRequirements[chapter][i][j]).hasClass("unselected")) {
+                        ++completedCount;
+                        break;
+                    } 
+                }
+            } else if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
                 ++completedCount;
             }
         }
