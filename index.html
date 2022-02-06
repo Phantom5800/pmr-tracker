@@ -29,7 +29,7 @@
             <!--
                 Main tracker for chapter progress
             -->
-            <div class="main-tracker">
+            <div class="main-tracker section">
                 <table width="100%">
                     <tr style="height: 4em;">
                         <td style="text-align: left; width: 60%;">
@@ -125,7 +125,7 @@
                 Miscellaneous item list for things that don't really fit elsewhere
             -->
             <div class="flex-column">
-                <div class="misc-tracker">
+                <div class="misc-tracker section">
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
@@ -190,7 +190,7 @@
                 <!-- 
                     Misc. Keys. Items that open up rooms but may not be required for progression.
                 -->
-                <div class="keys-tracker">
+                <div class="keys-tracker section">
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
@@ -221,7 +221,7 @@
                 <!--
                     User Notes
                 -->
-                <div id="notes" style="display: none;">
+                <div id="notes" class="section" style="display: none;">
                     <textarea>Put your own notes here if you want them</textarea>
                 </div>
             </div>
@@ -229,7 +229,7 @@
             <!--
                 Koopa Koot Favors
             -->
-            <div class="koopa-koot-tracker">
+            <div class="koopa-koot-tracker section">
                 <table width="100%">
                     <tr style="height: 4em;">
                         <td style="text-align: left; width: 60%;">
@@ -306,7 +306,7 @@
             <!-- 
                 Dojo
             -->
-            <div class="dojo-tracker">
+            <div class="dojo-tracker section">
                 <table width="100%">
                     <tr style="height: 4em;">
                         <td style="text-align: left; width: 40%;">
@@ -427,6 +427,14 @@
                     <td class="option">
                         <div>
                             <input type="color" id="background-color" value="#2f4f4f">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="option-name">Section Color</td>
+                    <td class="option">
+                        <div>
+                            <input type="color" id="section-color" value="#23233b">
                         </div>
                     </td>
                 </tr>
