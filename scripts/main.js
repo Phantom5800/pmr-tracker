@@ -456,6 +456,12 @@ $(document).ready(function(){
         localStorage.setItem("background-color", color);
     });
 
+    $("#section-color").on("input", function() {
+        var color = $(this).val();
+        $(".section").css("background-color", color);
+        localStorage.setItem("section-color", color);
+    });
+
     // local storage settings
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
@@ -495,4 +501,8 @@ $(document).ready(function(){
     var bg_color = localStorageGetWithDefault("background-color", "#2f4f4f");
     $("body, html").css("background-color", bg_color);
     $("#background-color").val(bg_color);
+
+    var section_color = localStorageGetWithDefault("section-color", "#23233b");
+    $(".section").css("background-color", section_color);
+    $("#section-color").val(section_color);
 });

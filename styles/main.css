@@ -57,8 +57,11 @@ h2 {
     padding-right: 0.25em;
 }
 
+.section {
+    background-color: rgb(35,35,59);
+}
+
 .main-tracker {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 46.5em;
     margin: 5px 5px 5px 5px;
@@ -70,7 +73,6 @@ h2 {
 }
 
 .misc-tracker {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 19em;
     margin: 5px 5px 5px 5px;
@@ -78,7 +80,6 @@ h2 {
 }
 
 .keys-tracker {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 9em;
     margin: 5px 5px 5px 5px;
@@ -86,7 +87,6 @@ h2 {
 }
 
 .koopa-koot-tracker {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 13.5em;
     margin: 5px 5px 5px 5px;
@@ -94,7 +94,6 @@ h2 {
 }
 
 .dojo-tracker {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     height: 9em;
     margin: 5px 5px 5px 5px;
@@ -148,7 +147,6 @@ a:hover {
 
 /* Notes */
 #notes {
-    background-color: rgba(0,0,0,0.25);
     width: 36em;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
