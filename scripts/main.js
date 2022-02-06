@@ -115,13 +115,13 @@ var altTracker = `<table width="100%">
 </table>`;
 
 const extraChapterRequirements = {
-    1: ["#Kooper", "#Bombette"],
+    1: ["#Kooper"],
     2: ["#Bombette", "#Parakarry"],
     3: ["#Parakarry"],
     4: ["#Bombette", "#Watt"],
     5: ["#Sushie", ["#Parakarry", "#Lakilester"]],
     6: ["#Lakilester", "Super Boots"],
-    7: ["#Kooper", "#Bombette", "Super Boots"],
+    7: ["#Kooper", "#Bombette", "Super Boots", ["#Sushie", "#blue-house-open"]],
     8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
 }
 
@@ -165,7 +165,11 @@ function checkIfChapterIsCompletable(chapter) {
                 }
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
                 for (var j = 0; j < extraChapterRequirements[chapter][i].length; ++j) {
-                    if (!$(extraChapterRequirements[chapter][i][j]).hasClass("unselected")) {
+                    var isChecked = $(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
+                        $(extraChapterRequirements[chapter][i][j]).is(":checked");
+                    var selected = !$(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
+                        !$(extraChapterRequirements[chapter][i][j]).hasClass("unselected");
+                    if (isChecked || selected) {
                         ++completedCount;
                         break;
                     } 
@@ -409,6 +413,7 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         $(".blue-house-optional").toggle(!isChecked);
         localStorage.setItem("blue-house-open", isChecked);
+        checkIfChapterIsCompletable(7);
     });
 
     $("#koopa-koot-randomized").click(function() {
