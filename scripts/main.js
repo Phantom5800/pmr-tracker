@@ -191,7 +191,7 @@ function initializePage() {
     $('.partner, .upgrade').height(60);
     $('.key-item, .optional-item').height(40);
 
-    $('.optional-item').click(function() {
+    $('.optional-item').unbind("click").click(function() {
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
         } else {
@@ -200,7 +200,7 @@ function initializePage() {
     });
 
     // upgrade markers
-    $('.upgrade').click(function() {
+    $('.upgrade').unbind("click").click(function() {
         switch ($(this).attr('id')) {
             case "Boots":
                 $(this).attr('id', "Super Boots");
@@ -229,7 +229,7 @@ function initializePage() {
         }
     });
 
-    $('.upgrade').contextmenu(function() {
+    $('.upgrade').unbind("contextmenu").contextmenu(function() {
         switch ($(this).attr('id')) {
             case "Ultra Boots":
                 $(this).attr('id', "Super Boots");
@@ -259,7 +259,7 @@ function initializePage() {
     });
 
     // for partners, need to update all chapter completion statuses
-    $('.partner').click(function() {
+    $('.partner').unbind("click").click(function() {
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
         } else {
@@ -325,7 +325,7 @@ function initializePage() {
     });
 
     // required chapter items
-    $("img[data-chapter]").click(function(){
+    $("img[data-chapter]").unbind("click").click(function(){
         var c = parseInt($(this).attr("data-chapter"));
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
@@ -337,7 +337,7 @@ function initializePage() {
     });
 
     // chapter keys
-    $("img[data-chapter-key]").click(function(){
+    $("img[data-chapter-key]").unbind("click").click(function(){
         var c = parseInt($(this).attr("data-chapter-key"));
         $(this).removeClass("unselected");
         if (currentKeyCounts[c] < maxKeyCounts[c]) {
@@ -348,7 +348,7 @@ function initializePage() {
         checkIfChapterIsCompletable(c);
     });
 
-    $("img[data-chapter-key]").contextmenu(function(){
+    $("img[data-chapter-key]").unbind("contextmenu").contextmenu(function(){
         var c = parseInt($(this).attr("data-chapter-key"));
         if (currentKeyCounts[c] > 0) {
             --currentKeyCounts[c];
@@ -364,7 +364,7 @@ function initializePage() {
     });
 
     // star spirit trackers
-    $(".star-spirit").click(function(){
+    $(".star-spirit").unbind("click").click(function(){
         var c = parseInt($(this).attr("data-chapter-star"));
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
