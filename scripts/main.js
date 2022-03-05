@@ -94,7 +94,7 @@ var altTracker = `<table width="100%">
     <td><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></td>
 </tr>
 <tr>
-    <td>
+    <td id="BowsersKeySlot">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <p id="chapter-8-key-count">0/5</p>
     </td>
@@ -117,7 +117,7 @@ var altTracker = `<table width="100%">
 const extraChapterRequirements = {
     1: ["#Kooper"],
     2: ["#Bombette", "#Parakarry"],
-    3: ["#Parakarry"],
+    3: ["#Parakarry", "Super Boots"],
     4: ["#Bombette", "#Watt"],
     5: ["#Sushie", ["#Parakarry", "#Lakilester"]],
     6: ["#Lakilester", "Super Boots"],
@@ -151,6 +151,8 @@ function checkIfChapterIsCompletable(chapter) {
             totalCount += maxKeyCounts[chapter];
             if (chapter === 2 && currentKeyCounts[chapter] === 3) {
                 --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
+            } else if (chapter === 8 && $("#fast-bowser-castle").is(':checked')) {
+                totalCount -= maxKeyCounts[8];
             }
             if (!$(this).hasClass("unselected")) {
                 completedCount += currentKeyCounts[chapter];
@@ -185,7 +187,7 @@ function checkIfChapterIsCompletable(chapter) {
         } else {
             star_spirit.removeClass("completable");
         }
-        console.log(`${completedCount} / ${totalCount}`);
+        //console.log(`${completedCount} / ${totalCount}`);
     }
 }
 
@@ -416,6 +418,18 @@ $(document).ready(function(){
         checkIfChapterIsCompletable(7);
     });
 
+    $("#fast-bowser-castle").click(function() {
+        // simple hack to clear out the key count when toggling fast bowser castle
+        for (var i = 0; i < 5; ++i) {
+            $("img[id='Bowser\\'s Castle Key']").contextmenu();
+        }
+
+        var isChecked = $(this).is(':checked');
+        $("#BowsersKeySlot").toggle(!isChecked);
+        localStorage.setItem("fast-bowser-castle", isChecked);
+        checkIfChapterIsCompletable(8);
+    });
+
     $("#koopa-koot-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         $(".koopa-koot-tracker").toggle(isChecked);
@@ -436,6 +450,10 @@ $(document).ready(function(){
         altTracker = currentTracker;
         initializePage();
         localStorage.setItem("compact-tracker", isChecked);
+
+        // update bowser key visibility in the new tracker
+        isChecked = $("#fast-bowser-castle").is(':checked');
+        $("#BowsersKeySlot").toggle(!isChecked);
     });
 
     $("#user-notes").click(function() {
@@ -471,6 +489,11 @@ $(document).ready(function(){
     var blue_house_open = localStorageGetWithDefault("blue-house-open", false) == "true";
     if (blue_house_open) {
         $("#blue-house-open").click();
+    }
+
+    var fast_bowser_castle = localStorageGetWithDefault("fast-bowser-castle", false) == "true";
+    if (fast_bowser_castle) {
+        $("#fast-bowser-castle").click();
     }
 
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
