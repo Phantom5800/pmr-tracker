@@ -106,13 +106,33 @@ var altTracker = `<table width="100%">
 </div>`;
 
 const extraChapterRequirements = {
-    1: ["#Kooper"],
-    2: ["#Bombette", "#Parakarry"],
-    3: ["#Parakarry", "Super Boots"],
-    4: ["#Bombette", "#Watt", ["#Bow", "#toybox-open"]],
-    5: ["#Sushie", ["#Parakarry", "#Lakilester"]],
-    6: ["#Lakilester", "Super Boots"],
-    7: ["#Kooper", "#Bombette", "Super Boots", ["#Sushie", "#blue-house-open"]],
+    1: [
+        "#Kooper" // switch to bring up bridge on pleasant path
+    ],
+    2: [
+        "#Bombette", // maybe these aren't actually necessary ... just ... really good to have
+        "#Parakarry"
+    ],
+    3: [
+        "#Parakarry", // need parakarry to get to Tubba's Castle
+        "Super Boots" // need a boots upgrade to fight the heart
+    ],
+    4: [
+        "#Bombette", // blow up the wall to general guy
+        "#Watt", // see in the room before general guy
+        ["#Bow", "#toybox-open"] // need Bow to get into toybox if it is not open by default
+    ],
+    5: [
+        "#Sushie", // need sushie in order to place the jade raven
+        ["#Parakarry", "#Lakilester"] // need one of these in order to get hammer upgrade
+    ],
+    6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
+    7: [
+        "#Kooper", // switch on shiver mountain
+        "#Bombette", // switch in crystal palace
+        "Super Boots", // break the ice on shiver mountain
+        ["#Sushie", "#blue-house-open"] // access to chapter 7 via blue house or past Blooper fight
+    ],
     8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
 }
 
