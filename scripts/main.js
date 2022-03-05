@@ -454,6 +454,10 @@ $(document).ready(function(){
         // update bowser key visibility in the new tracker
         isChecked = $("#fast-bowser-castle").is(':checked');
         $("#BowsersKeySlot").toggle(!isChecked);
+
+        // update seeds visibility
+        isChecked = $("#chapter-6-open").is(':checked');
+        $(".ch6-optional").toggle(!isChecked);
     });
 
     $("#user-notes").click(function() {
