@@ -109,7 +109,7 @@ const extraChapterRequirements = {
     1: ["#Kooper"],
     2: ["#Bombette", "#Parakarry"],
     3: ["#Parakarry", "Super Boots"],
-    4: ["#Bombette", "#Watt"],
+    4: ["#Bombette", "#Watt", ["#Bow", "#toybox-open"]],
     5: ["#Sushie", ["#Parakarry", "#Lakilester"]],
     6: ["#Lakilester", "Super Boots"],
     7: ["#Kooper", "#Bombette", "Super Boots", ["#Sushie", "#blue-house-open"]],
@@ -425,6 +425,12 @@ $(document).ready(function(){
         $("#options-menu").toggleClass("options-open");
     });
 
+    $("#toybox-open").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("toybox-open", isChecked);
+        checkIfChapterIsCompletable(4);
+    });
+
     $("#chapter-6-open").click(function() {
         var isChecked = $(this).is(':checked');
         $(".ch6-optional").toggle(!isChecked);
@@ -505,6 +511,11 @@ $(document).ready(function(){
     });
 
     // local storage settings
+    var toybox_open = localStorageGetWithDefault("toybox-open", "true") == "true";
+    if (!toybox_open) {
+        $("#toybox-open").click();
+    }
+
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
     if (chapter6_open) {
         $("#chapter-6-open").click();
@@ -520,12 +531,12 @@ $(document).ready(function(){
         $("#fast-bowser-castle").click();
     }
 
-    var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", true) == "true";
+    var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", "true") == "true";
     if (!koopa_koot_randomized) {
         $("#koopa-koot-randomized").click();
     }
 
-    var dojo_randomized = localStorageGetWithDefault("dojo-randomized", true) == "true";
+    var dojo_randomized = localStorageGetWithDefault("dojo-randomized", "true") == "true";
     if (!dojo_randomized) {
         $("#dojo-randomized").click();
     }
@@ -540,7 +551,7 @@ $(document).ready(function(){
         $("#user-notes").click();
     }
 
-    var tooltips_enabled = localStorageGetWithDefault("recipe-tooltips", true) == "true";
+    var tooltips_enabled = localStorageGetWithDefault("recipe-tooltips", "true") == "true";
     if (!tooltips_enabled) {
         $("#recipe-tooltips").click();
     }
