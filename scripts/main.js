@@ -110,9 +110,10 @@ const extraChapterRequirements = {
         "#Kooper" // switch to bring up bridge on pleasant path
     ],
     2: [
+        ["#Parakarry", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
         // Chapter 2 doesn't actually have other requirements to complete.
-        // Parakarry and Bombette are only required if the items to beat the chapter
-        // are blocked behind cracked walls or Parakarry gaps.
+        // Bombette is only required if the items to beat the chapter
+        // are blocked behind cracked walls.
     ],
     3: [
         "#Parakarry", // need parakarry to get to Tubba's Castle
@@ -204,13 +205,32 @@ function checkIfChapterIsCompletable(chapter) {
                 if ($("#Boots").length === 0) {
                     ++completedCount;
                 }
+            // if hammer upgrade is required, mark completed if the hammer is not default
+            } else if (extraChapterRequirements[chapter][i] === "Super Hammer") {
+                if ($("#Hammer").length === 0) {
+                    ++completedCount;
+                }
+            // if a condition is an array, the condition is true if any element of the array is true
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
                 for (var j = 0; j < extraChapterRequirements[chapter][i].length; ++j) {
+                    // look for a checkbox or if the element is selected
                     var isChecked = $(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
                         $(extraChapterRequirements[chapter][i][j]).is(":checked");
                     var selected = !$(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
                         !$(extraChapterRequirements[chapter][i][j]).hasClass("unselected");
-                    if (isChecked || selected) {
+
+                    // check for boots and hammer first
+                    if (extraChapterRequirements[chapter][i][j] === "Super Boots") {
+                        if ($("#Boots").length === 0) {
+                            ++completedCount;
+                        }
+                    } else if (extraChapterRequirements[chapter][i][j] === "Super Hammer") {
+                        if ($("#Hammer").length === 0) {
+                            ++completedCount;
+                            break;
+                        }
+                    // if not boots or hammer, mark completed if it's a checkbox or selected element
+                    } else if (isChecked || selected) {
                         ++completedCount;
                         break;
                     } 
