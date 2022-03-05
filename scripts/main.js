@@ -43,76 +43,67 @@ var altTracker = `<table width="100%">
     </td>
 </tr>
 </table>
-<table>
-<tr>
-    <td><img data-chapter-star="1" id="chapter_1" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></td>
-    <td><img data-chapter-star="2" id="chapter_2" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></td>
-    <td><img data-chapter-star="3" id="chapter_3" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></td>
-    <td><img data-chapter-star="4" id="chapter_4" class="unselected star-spirit" src="images/icons/Muskular_PM.png"></td>
-    <td><img data-chapter-star="5" id="chapter_5" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></td>
-    <td><img data-chapter-star="6" id="chapter_6" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></td>
-    <td><img data-chapter-star="8" id="chapter_7" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></td>
-    <td><img data-chapter-star="8" id="chapter_8" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></td>
-</tr>
-<tr>
-    <td>
+<div style="display: flex;flex-wrap:wrap;">
+    <div class="compact-element"><img data-chapter-star="1" id="chapter_1" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="2" id="chapter_2" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="3" id="chapter_3" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="4" id="chapter_4" class="unselected star-spirit" src="images/icons/Muskular_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="5" id="chapter_5" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="6" id="chapter_6" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="8" id="chapter_7" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="8" id="chapter_8" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div class="compact-element">
         <img data-chapter-key="1" id="Fortress Key" class="unselected key-item" src="images/icons/FortressKey_PM.png">
+        <br>
         <p id="chapter-1-key-count">0/4</p>
-    </td>
-    <td><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></td>
-    <td><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></td>
-    <td><img data-chapter="2" id="Diamond Stone" class="unselected key-item" src="images/icons/DiamondStone.png"></td>
-    <td><img data-chapter="2" id="Lunar Stone" class="unselected key-item" src="images/icons/LunarStone.gif"></td>
-    <td>
+    </div>
+    <div class="compact-element"><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></div>
+    <div class="compact-element"><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></div>
+    <div class="compact-element"><img data-chapter="2" id="Diamond Stone" class="unselected key-item" src="images/icons/DiamondStone.png"></div>
+    <div class="compact-element"><img data-chapter="2" id="Lunar Stone" class="unselected key-item" src="images/icons/LunarStone.gif"></div>
+    <div class="compact-element">
         <img data-chapter-key="2" id="Ruins Key" class="unselected key-item" src="images/icons/Ruins_Key.png">
+        <br>
         <p id="chapter-2-key-count">0/4</p>
-    </td>
-    <td><img data-chapter="3" id="Boo's Portrait" class="unselected key-item" src="images/icons/Boo'sPortrait_PM.png"></td>
-    <td>
+    </div>
+    <div class="compact-element"><img data-chapter="3" id="Boo's Portrait" class="unselected key-item" src="images/icons/Boo'sPortrait_PM.png"></div>
+    <div class="compact-element">
         <img data-chapter-key="3" id="Tubba Castle Key" class="unselected key-item" src="images/icons/Tubba_Blubba_Castle_Key.png">
+        <br>
         <p id="chapter-3-key-count">0/3</p>
-    </td>
-</tr>
-<tr>
-    <td><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></td>
-    <td><img data-chapter="4" id="Cake" class="unselected key-item" src="images/icons/Cake.gif"></td>
-    <td><img data-chapter="5" id="Jade Raven" class="unselected key-item" src="images/icons/JadeRaven_PM.png"></td>
-    <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></td>
-    <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></td>
-    <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></td>
-    <td class="ch6-optional"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></td>
-    <td><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></td>
-</tr>
-<tr>
-    <td><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></td>
-    <td><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></td>
-    <td><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></td>
-    <td><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></td>
-    <td><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></td>
-    <td><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></td>
-    <td><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></td>
-    <td><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></td>
-</tr>
-<tr>
-    <td id="BowsersKeySlot">
+    </div>
+    <div class="compact-element"><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></div>
+    <div class="compact-element"><img data-chapter="4" id="Cake" class="unselected key-item" src="images/icons/Cake.gif"></div>
+    <div class="compact-element"><img data-chapter="5" id="Jade Raven" class="unselected key-item" src="images/icons/JadeRaven_PM.png"></div>
+    <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></div>
+    <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></div>
+    <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></div>
+    <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></div>
+    <div class="compact-element"><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></div>
+    <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
+    <div class="compact-element"><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></div>
+    <div class="compact-element"><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></div>
+    <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
+    <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
+    <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
+    <div class="compact-element"><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></div>
+    <div class="compact-element"><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></div>
+    <div id="BowsersKeySlot" class="compact-element">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
+        <br>
         <p id="chapter-8-key-count">0/5</p>
-    </td>
-    <td><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
-    <td><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
-</tr>
-
-<tr>
-    <td><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></td>
-    <td><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></td>
-    <td><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></td>
-    <td><img id="Parakarry" class="unselected partner" src="images/partners/parakarr.png"></td>
-    <td><img id="Bow" class="unselected partner" src="images/partners/bow.png"></td>
-    <td><img id="Watt" class="unselected partner" src="images/partners/watt.png"></td>
-    <td><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></td>
-    <td><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></td>
-</tr>
-</table>`;
+    </div>
+    <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
+    <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
+    <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
+    <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
+    <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
+    <div class="compact-element"><img id="Parakarry" class="unselected partner" src="images/partners/parakarr.png"></div>
+    <div class="compact-element"><img id="Bow" class="unselected partner" src="images/partners/bow.png"></div>
+    <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
+    <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
+    <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
+</div>`;
 
 const extraChapterRequirements = {
     1: ["#Kooper"],
