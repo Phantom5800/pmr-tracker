@@ -63,13 +63,18 @@ h2 {
 
 .main-tracker {
     width: 36em;
-    height: 46.5em;
+    height: auto;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
 }
 
 .main-tracker.compact {
     height: auto;
+}
+
+.main-tracker td {
+    width: 68px;
+    height: 68px;
 }
 
 .misc-tracker {
