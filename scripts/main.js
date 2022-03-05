@@ -52,6 +52,14 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter-star="6" id="chapter_6" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="8" id="chapter_7" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="8" id="chapter_8" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
+    <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
+    <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
+    <div class="compact-element"><img id="Parakarry" class="unselected partner" src="images/partners/parakarr.png"></div>
+    <div class="compact-element"><img id="Bow" class="unselected partner" src="images/partners/bow.png"></div>
+    <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
+    <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
+    <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
     <div class="compact-element">
         <img data-chapter-key="1" id="Fortress Key" class="unselected key-item" src="images/icons/FortressKey_PM.png">
         <br>
@@ -95,14 +103,6 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
     <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
-    <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
-    <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
-    <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
-    <div class="compact-element"><img id="Parakarry" class="unselected partner" src="images/partners/parakarr.png"></div>
-    <div class="compact-element"><img id="Bow" class="unselected partner" src="images/partners/bow.png"></div>
-    <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
-    <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
-    <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
 </div>`;
 
 const extraChapterRequirements = {
