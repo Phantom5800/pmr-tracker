@@ -110,8 +110,9 @@ const extraChapterRequirements = {
         "#Kooper" // switch to bring up bridge on pleasant path
     ],
     2: [
-        "#Bombette", // maybe these aren't actually necessary ... just ... really good to have
-        "#Parakarry"
+        // Chapter 2 doesn't actually have other requirements to complete.
+        // Parakarry and Bombette are only required if the items to beat the chapter
+        // are blocked behind cracked walls or Parakarry gaps.
     ],
     3: [
         "#Parakarry", // need parakarry to get to Tubba's Castle
