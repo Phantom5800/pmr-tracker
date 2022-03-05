@@ -116,13 +116,40 @@ const extraChapterRequirements = {
     8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
 }
 
-function localStorageGetWithDefault(key, defaultValue) {
-    const value = localStorage.getItem(key);
-    if (!value) {
-        localStorage.setItem(key, defaultValue);
-        return defaultValue;
+var urlParams = {};
+
+function getUrlParamCount() {
+    return Object.keys(urlParams).length;
+}
+
+function getUrlVars() {
+    if (getUrlParamCount() === 0) {
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            urlParams[key.toLowerCase()] = value;
+        });
     }
-    return value;
+    return urlParams;
+}
+
+function getUrlParam(parameter, defaultValue) {
+    var urlParameter = defaultValue;
+    if (parameter in urlParams) {
+        urlParameter = urlParams[parameter];
+    }
+    return urlParameter;
+}
+
+function localStorageGetWithDefault(key, defaultValue) {
+    const urlVal = getUrlParam(key, defaultValue);
+    if (urlVal === defaultValue) {
+        const value = localStorage.getItem(key);
+        if (!value) {
+            localStorage.setItem(key, defaultValue);
+            return defaultValue;
+        }
+        return value;
+    }
+    return urlVal;
 }
 
 function checkIfChapterIsCompletable(chapter) {
@@ -375,6 +402,8 @@ function initializePage() {
 }
 
 $(document).ready(function(){
+    getUrlVars();
+
     // disable some basic functionality
     $('html').contextmenu(function(){return false;});
     $('img').contextmenu(function(){return false;});
