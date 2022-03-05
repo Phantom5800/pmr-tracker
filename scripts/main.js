@@ -43,7 +43,7 @@ var altTracker = `<table width="100%">
     </td>
 </tr>
 </table>
-<div style="display: flex;flex-wrap:wrap;">
+<div style="display: flex;flex-wrap:wrap;padding-left:10px;">
     <div class="compact-element"><img data-chapter-star="1" id="chapter_1" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="2" id="chapter_2" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="3" id="chapter_3" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></div>
