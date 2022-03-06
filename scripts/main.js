@@ -9,7 +9,7 @@ const maxKeyCounts = {
     8: 5, // bowser castle keys
     9: 64, // quizmo
     10: 3, // master
-    11: 160, // star pieces
+    11: 96, // star pieces
     12: 11, // rip cheato
     13: 26, // letters
     14: 2, // prison keys
