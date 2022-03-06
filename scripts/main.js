@@ -43,7 +43,7 @@ var altTracker = `<table width="100%">
     </td>
 </tr>
 </table>
-<div style="display: flex;flex-wrap:wrap;padding-left:10px;">
+<div style="display:flex;flex-wrap:wrap;padding-left:10px;">
     <div class="compact-element"><img data-chapter-star="1" id="Eldstar" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="2" id="Mamar" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="3" id="Skolar" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></div>
@@ -103,6 +103,7 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
     <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
+    <div class="compact-element"><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></div>
 </div>`;
 
 // The main requirements are grouped logically with their respective chapters.
@@ -255,6 +256,7 @@ function initializePage() {
     $('.star-spirit').height(60);
     $('.partner, .upgrade').height(60);
     $('.key-item, .optional-item').height(40);
+    $('[id="Ultra Stone"]').height(50);
 
     $('.optional-item').unbind("click").click(function() {
         if ($(this).hasClass("unselected")) {
@@ -504,6 +506,7 @@ $(document).ready(function(){
 
     $("#koopa-koot-randomized").click(function() {
         var isChecked = $(this).is(':checked');
+        $(".koopa-koot-generated-item").toggle(isChecked);
         $(".koopa-koot-tracker").toggle(isChecked);
         localStorage.setItem("koopa-koot-randomized", isChecked);
     });
