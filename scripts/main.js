@@ -44,14 +44,14 @@ var altTracker = `<table width="100%">
 </tr>
 </table>
 <div style="display: flex;flex-wrap:wrap;padding-left:10px;">
-    <div class="compact-element"><img data-chapter-star="1" id="chapter_1" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="2" id="chapter_2" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="3" id="chapter_3" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="4" id="chapter_4" class="unselected star-spirit" src="images/icons/Muskular_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="5" id="chapter_5" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="6" id="chapter_6" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="8" id="chapter_7" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="8" id="chapter_8" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div class="compact-element"><img data-chapter-star="1" id="Eldstar" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="2" id="Mamar" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="3" id="Skolar" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="4" id="Muskular" class="unselected star-spirit" src="images/icons/Muskular_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="5" id="Misstar" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="6" id="Klevar" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="7" id="Kalmar" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
+    <div class="compact-element"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
     <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
     <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
     <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
@@ -135,7 +135,7 @@ const extraChapterRequirements = {
         "Super Boots", // break the ice on shiver mountain
         ["#Sushie", "#blue-house-open"] // access to chapter 7 via blue house or past Blooper fight
     ],
-    8: ["#chapter_1", "#chapter_2", "#chapter_3", "#chapter_4", "#chapter_5", "#chapter_6", "#chapter_7"]
+    8: ["#Eldstar", "#Mamar", "#Skolar", "#Muskular", "#Misstar", "#Klevar", "#Kalmar"]
 }
 
 var urlParams = {};
@@ -240,7 +240,7 @@ function checkIfChapterIsCompletable(chapter) {
             }
         }
     
-        var star_spirit = $(`#chapter_${chapter}`);
+        var star_spirit = $(`[data-chapter-star='${chapter}']`);
         if (completedCount >= totalCount && star_spirit.hasClass("unselected")) {
             star_spirit.addClass("completable");
         } else {
