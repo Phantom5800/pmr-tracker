@@ -105,15 +105,16 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
 </div>`;
 
+// The main requirements are grouped logically with their respective chapters.
+// Additional requirements are typically partners or upgrades for mario.
+// Any nested arrays means that if any condition from that group is true, the entire group is treated as true.
 const extraChapterRequirements = {
     1: [
         "#Kooper" // switch to bring up bridge on pleasant path
     ],
     2: [
+        ["#Bombette", "Super Hammer"], // need bombette to blow up rock in toad town (or super hammer for sewers)
         ["#Parakarry", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
-        // Chapter 2 doesn't actually have other requirements to complete.
-        // Bombette is only required if the items to beat the chapter
-        // are blocked behind cracked walls.
     ],
     3: [
         "#Parakarry", // need parakarry to get to Tubba's Castle
