@@ -79,9 +79,10 @@ h2 {
 
 .misc-tracker {
     width: 36em;
-    height: 19em;
+    height: auto;
     margin: 5px 5px 5px 5px;
     border-radius: 10px;
+    padding-bottom: 10px;
 }
 
 .keys-tracker {
