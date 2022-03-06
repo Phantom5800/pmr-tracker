@@ -133,7 +133,7 @@ const extraChapterRequirements = {
         "#Kooper", // switch on shiver mountain
         "#Bombette", // switch in crystal palace
         "Super Boots", // break the ice on shiver mountain
-        ["#Sushie", "#blue-house-open"] // access to chapter 7 via blue house or past Blooper fight
+        ["#Sushie", "#blue-house-open", "[id='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
     8: ["#Eldstar", "#Mamar", "#Skolar", "#Muskular", "#Misstar", "#Klevar", "#Kalmar"]
 }
@@ -214,10 +214,9 @@ function checkIfChapterIsCompletable(chapter) {
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
                 for (var j = 0; j < extraChapterRequirements[chapter][i].length; ++j) {
                     // look for a checkbox or if the element is selected
-                    var isChecked = $(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
-                        $(extraChapterRequirements[chapter][i][j]).is(":checked");
-                    var selected = !$(extraChapterRequirements[chapter][i][j]).is(':checkbox') &&
-                        !$(extraChapterRequirements[chapter][i][j]).hasClass("unselected");
+                    var elem = $(extraChapterRequirements[chapter][i][j]).first();
+                    var isChecked = elem.is(':checkbox') && elem.is(":checked");
+                    var selected = !elem.is(':checkbox') && !elem.hasClass("unselected");
 
                     // check for boots and hammer first
                     if (extraChapterRequirements[chapter][i][j] === "Super Boots") {
@@ -235,7 +234,7 @@ function checkIfChapterIsCompletable(chapter) {
                         break;
                     } 
                 }
-            } else if (!$(extraChapterRequirements[chapter][i]).hasClass("unselected")) {
+            } else if (!$(extraChapterRequirements[chapter][i]).first().hasClass("unselected")) {
                 ++completedCount;
             }
         }
@@ -261,6 +260,11 @@ function initializePage() {
             $(this).removeClass("unselected");
         } else {
             $(this).addClass("unselected");
+        }
+
+        // this is to account for the blue house being opened from the outside
+        if ($(this).attr('id') === "Odd Key") {
+            checkIfChapterIsCompletable(7);
         }
     });
 
