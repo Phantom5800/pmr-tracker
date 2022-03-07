@@ -60,10 +60,17 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
     <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
     <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>
     <div class="compact-element">
         <img data-chapter-key="1" id="Fortress Key" class="unselected key-item" src="images/icons/FortressKey_PM.png">
         <br>
         <p id="chapter-1-key-count">0/4</p>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img data-chapter-key="13" id="Letter" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
+        <br>
+        <p id="chapter-13-key-count">0/26</p>
     </div>
     <div class="compact-element"><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></div>
     <div class="compact-element"><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></div>
@@ -74,32 +81,79 @@ var altTracker = `<table width="100%">
         <br>
         <p id="chapter-2-key-count">0/4</p>
     </div>
+    <div class="compact-misc-item compact-element"><img id="Artifact" class="unselected optional-item" src="images/icons/Artifact_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Record" class="unselected optional-item" src="images/icons/Record.gif"></div>
+    <div class="compact-misc-item compact-element"><img id="Weight" class="unselected optional-item" src="images/icons/WeightPM.gif"></div>
     <div class="compact-element"><img data-chapter="3" id="Boo's Portrait" class="unselected key-item" src="images/icons/Boo'sPortrait_PM.png"></div>
     <div class="compact-element">
         <img data-chapter-key="3" id="Tubba Castle Key" class="unselected key-item" src="images/icons/Tubba_Blubba_Castle_Key.png">
         <br>
         <p id="chapter-3-key-count">0/3</p>
     </div>
+    <div class="compact-misc-item compact-element><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Calculator" class="unselected optional-item" src="images/icons/Calculator_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Frying Pan" class="unselected optional-item" src="images/icons/PM_Frying_Pan.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Mailbag" class="unselected optional-item" src="images/icons/Mailbag_PM.png"></div>
     <div class="compact-element"><img data-chapter="4" id="Cake" class="unselected key-item" src="images/icons/Cake.gif"></div>
+    <div class="compact-misc-item compact-element"><img id="Cookbook" class="unselected optional-item" src="images/icons/Cook_Book_Paper_Mario.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Dictionary" class="unselected optional-item" src="images/icons/PM_Dictionary.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Mystery Note" class="unselected optional-item" src="images/icons/MysteryNote.png"></div>
     <div class="compact-element"><img data-chapter="5" id="Jade Raven" class="unselected key-item" src="images/icons/JadeRaven_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Volcano Vase" class="unselected optional-item" src="images/icons/VolcanoVase.gif"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></div>
+    <div class="compact-misc-item compact-element blue-house-optional"><img id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></div>
     <div id="BowsersKeySlot" class="compact-element">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <br>
         <p id="chapter-8-key-count">0/5</p>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+        <p id="chapter-14-key-count">0/2</p>
+    </div>
+    <div class="compact-misc-item compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png"></div>
+    <div class="compact-misc-item compact-element">
+        <img data-chapter-key="9" id="Quizmo" class="unselected optional-item" src="images/icons/ChuckQuizmo_PM.png">
+        <br>
+        <p id="chapter-9-key-count">0/64</p>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img data-chapter-key="11" id="Star Piece" class="unselected optional-item" src="images/icons/Star_Piece.png">
+        <br>
+        <p id="chapter-11-key-count">0/96</p>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
+        <br>
+        <p id="chapter-12-key-count">0/11</p>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <div class="tooltip">
+            <img id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
+            <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
+        </div>
     </div>
     <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
     <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
@@ -458,7 +512,11 @@ $(document).ready(function(){
 
     initializePage();
 
+    ////////////////////////////////////////////////////////////////
     // options menu
+    ////////////////////////////////////////////////////////////////
+
+    // hide options menu when clicking anywhere on the page
     $(document).click(function(e) {
         // if the option menu is open, and the click is outside the options menu, close it
         var container = $("#options-menu");
@@ -467,6 +525,7 @@ $(document).ready(function(){
         }
     });
 
+    // show / hide options menu
     $("#options-menu-toggle").click(function(e) {
         e.stopPropagation();
         $(this).toggleClass("options-open");
@@ -517,24 +576,6 @@ $(document).ready(function(){
         localStorage.setItem("dojo-randomized", isChecked);
     });
 
-    $("#compact-tracker").click(function() {
-        var isChecked = $(this).is(':checked');
-        var currentTracker = $(".main-tracker").html();
-        $(".main-tracker").html(altTracker);
-        $(".main-tracker").toggleClass("compact");
-        altTracker = currentTracker;
-        initializePage();
-        localStorage.setItem("compact-tracker", isChecked);
-
-        // update bowser key visibility in the new tracker
-        isChecked = $("#fast-bowser-castle").is(':checked');
-        $("#BowsersKeySlot").toggle(!isChecked);
-
-        // update seeds visibility
-        isChecked = $("#chapter-6-open").is(':checked');
-        $(".ch6-optional").toggle(!isChecked);
-    });
-
     $("#user-notes").click(function() {
         var isChecked = $(this).is(':checked');
         $("#notes").toggle(isChecked);
@@ -559,7 +600,86 @@ $(document).ready(function(){
         localStorage.setItem("section-color", color);
     });
 
-    // local storage settings
+    ////////////////////////////////////////////////////////////////
+    // Compact Tracker Initialization
+    ////////////////////////////////////////////////////////////////
+    
+    function combineMiscAndCompact() {
+        var compact_checked = $("#compact-tracker").is(':checked');
+        var misc_checked = $("#combine-misc").is(':checked');
+
+        if (compact_checked) {
+            if (misc_checked) {
+                $(".misc-tracker, .keys-tracker").toggle(false);
+                $(".compact-misc-item").toggle(true);
+            } else {
+                $(".misc-tracker, .keys-tracker").toggle(true);
+                $(".compact-misc-item").toggle(false);
+            }
+        } else {
+            $(".misc-tracker, .keys-tracker").toggle(true);
+        }
+    }
+
+    $("#compact-tracker").click(function() {
+        // clear key counts when toggling (manually)
+        $("img[data-chapter-key]").each(function() {
+            var chapter = parseInt($(this).attr("data-chapter-key"));
+            for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
+                $(this).contextmenu();
+            }
+        });
+
+        // make correct tracker visible
+        var isChecked = $(this).is(':checked');
+        var currentTracker = $(".main-tracker").html();
+        $(".main-tracker").html(altTracker);
+        $(".main-tracker").toggleClass("compact");
+        altTracker = currentTracker;
+        initializePage();
+        localStorage.setItem("compact-tracker", isChecked);
+
+        // hide/show compact tracker options
+        $(".compact-tracker-options").toggle(isChecked);
+        combineMiscAndCompact();
+
+        // update bowser key visibility in the new tracker
+        isChecked = $("#fast-bowser-castle").is(':checked');
+        $("#BowsersKeySlot").toggle(!isChecked);
+
+        // update seeds visibility
+        isChecked = $("#chapter-6-open").is(':checked');
+        $(".ch6-optional").toggle(!isChecked);
+
+        // hide odd key if blue house is open
+        isChecked = $("#blue-house-open").is(':checked');
+        $(".blue-house-optional").toggle(!isChecked);
+
+        // hide crystal ball if koopa koot is not randomized
+        isChecked = $("#koopa-koot-randomized").is(':checked');
+        $(".koopa-koot-generated-item").toggle(!isChecked);
+    });
+
+    $("#combine-misc").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("combine-misc", isChecked);
+        combineMiscAndCompact();
+    });
+
+    var use_compact_tracker = localStorageGetWithDefault("compact-tracker", false) == "true";
+    if (use_compact_tracker) {
+        $("#compact-tracker").click();
+    }
+
+    var combine_misc = localStorageGetWithDefault("combine-misc", false) == "true";
+    if (combine_misc) {
+        $("#combine-misc").click();
+    }
+
+    ////////////////////////////////////////////////////////////////
+    // misc. local storage settings
+    ////////////////////////////////////////////////////////////////
+
     var toybox_open = localStorageGetWithDefault("toybox-open", "true") == "true";
     if (!toybox_open) {
         $("#toybox-open").click();
@@ -588,11 +708,6 @@ $(document).ready(function(){
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", "true") == "true";
     if (!dojo_randomized) {
         $("#dojo-randomized").click();
-    }
-
-    var use_compact_tracker = localStorageGetWithDefault("compact-tracker", false) == "true";
-    if (use_compact_tracker) {
-        $("#compact-tracker").click();
     }
 
     var user_notes_enabled = localStorageGetWithDefault("user-notes", false) == "true";
