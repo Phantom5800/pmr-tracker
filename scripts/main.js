@@ -675,7 +675,7 @@ $(document).ready(function(){
 
         // hide crystal ball if koopa koot is not randomized
         isChecked = $("#koopa-koot-randomized").is(':checked');
-        $(".koopa-koot-generated-item").toggle(!isChecked);
+        $(".koopa-koot-generated-item").toggle(isChecked);
     });
 
     $("#combine-misc").click(function() {
