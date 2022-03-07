@@ -36,7 +36,7 @@ var currentKeyCounts = {
 var altTracker = `<table width="100%">
 <tr style="height: 4em;">
     <td style="text-align: left; width: 60%;">
-        <h1>Required Items</h1>
+        <h1 id="main-tracker-name">Required Items</h1>
     </td>
     <td style="text-align: right;">
         <h2></h2>
@@ -612,9 +612,15 @@ $(document).ready(function(){
             if (misc_checked) {
                 $(".misc-tracker, .keys-tracker").toggle(false);
                 $(".compact-misc-item").toggle(true);
+
+                $("#main-tracker-name").text("Basically Everything");
+                $("#main-tracker-name").css("font-size", "2em");
             } else {
                 $(".misc-tracker, .keys-tracker").toggle(true);
                 $(".compact-misc-item").toggle(false);
+
+                $("#main-tracker-name").text("Required Items");
+                $("#main-tracker-name").css("font-size", "2.75em");
             }
         } else {
             $(".misc-tracker, .keys-tracker").toggle(true);
