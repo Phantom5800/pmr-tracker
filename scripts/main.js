@@ -191,7 +191,19 @@ const extraChapterRequirements = {
         "Super Boots", // break the ice on shiver mountain
         ["#Sushie", "#blue-house-open", "[id='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
-    8: ["#Eldstar", "#Mamar", "#Skolar", "#Muskular", "#Misstar", "#Klevar", "#Kalmar"]
+    8: [
+        "#Eldstar", 
+        "#Mamar", 
+        "#Skolar", 
+        "#Muskular", 
+        "#Misstar", 
+        "#Klevar", 
+        "#Kalmar",
+        ["#Bombette", "#fast-bowser-castle"], // getting out of jail
+        ["#Parakarry", "#fast-bowser-castle"], // basement
+        ["#Bow", "#fast-bowser-castle"], // basement
+        ["#Lakilester", "#fast-bowser-castle"] // basement
+    ]
 }
 
 var urlParams = {};
