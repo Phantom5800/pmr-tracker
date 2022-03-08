@@ -693,7 +693,16 @@ $(document).ready(function(){
 
     $("#blue-house-open").click(function() {
         var isChecked = $(this).is(':checked');
-        $(".blue-house-optional").toggle(!isChecked);
+        $(".blue-house-optional").each(function() {
+            var compact_checked = $("#compact-tracker").is(':checked');
+            var misc_checked = $("#combine-misc").is(':checked');
+            // make sure to hide / show the correct odd key
+            if ($(this).hasClass("compact-misc-item")) {
+                $(this).toggle(!isChecked && misc_checked && compact_checked);
+            } else {
+                $(this).toggle(!isChecked);
+            }
+        });
         localStorage.setItem("blue-house-open", isChecked);
         checkIfChapterIsCompletable(5);
         checkIfChapterIsCompletable(7);
