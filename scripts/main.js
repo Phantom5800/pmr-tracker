@@ -787,7 +787,7 @@ $(document).ready(function(){
 
         // hide odd key if blue house is open
         var isChecked = $("#blue-house-open").is(':checked');
-        $("img[data-item-name='Odd Key']").each(function() {
+        $(".blue-house-optional").each(function() {
             // make sure to hide / show the correct odd key
             if ($(this).hasClass("compact-misc-item")) {
                 $(this).toggle(!isChecked && misc_checked && compact_checked);
