@@ -60,6 +60,9 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
     <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
     <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
+    <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
+    <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
+    <div class="compact-element"><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></div>
     <div class="compact-misc-item compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>
     <div class="compact-element">
@@ -155,9 +158,6 @@ var altTracker = `<table width="100%">
             <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
         </div>
     </div>
-    <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
-    <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
-    <div class="compact-element"><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></div>
 </div>`;
 
 // The main requirements are grouped logically with their respective chapters.
@@ -767,6 +767,14 @@ $(document).ready(function(){
         } else {
             $(".misc-tracker, .keys-tracker").toggle(true);
         }
+
+        // hide odd key if blue house is open
+        var isChecked = $("#blue-house-open").is(':checked');
+        $(".blue-house-optional").toggle(!isChecked);
+
+        // hide crystal ball if koopa koot is not randomized
+        isChecked = $("#koopa-koot-randomized").is(':checked');
+        $(".koopa-koot-generated-item").toggle(isChecked);
     }
 
     $("#compact-tracker").click(function() {
@@ -798,14 +806,6 @@ $(document).ready(function(){
         // update seeds visibility
         isChecked = $("#chapter-6-open").is(':checked');
         $(".ch6-optional").toggle(!isChecked);
-
-        // hide odd key if blue house is open
-        isChecked = $("#blue-house-open").is(':checked');
-        $(".blue-house-optional").toggle(!isChecked);
-
-        // hide crystal ball if koopa koot is not randomized
-        isChecked = $("#koopa-koot-randomized").is(':checked');
-        $(".koopa-koot-generated-item").toggle(isChecked);
     });
 
     $("#combine-misc").click(function() {
