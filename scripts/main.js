@@ -811,6 +811,9 @@ $(document).ready(function(){
         // hide crystal ball if koopa koot is not randomized
         isChecked = $("#koopa-koot-randomized").is(':checked');
         $(".koopa-koot-generated-item").toggle(isChecked);
+
+        isChecked = $("#recipe-tooltips").is(':checked');
+        $(".tooltiptext").toggle(isChecked);
     }
 
     $("#compact-tracker").click(function() {
