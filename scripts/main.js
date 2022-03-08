@@ -111,7 +111,12 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></div>
     <div class="compact-misc-item compact-element"><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></div>
+    <div class="compact-misc-item compact-element">
+        <div class="tooltip">
+            <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+            <span class="tooltiptext">Used in two places: the blue flower and the well in chapter 6.</span>
+        </div>
+    </div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
     <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
