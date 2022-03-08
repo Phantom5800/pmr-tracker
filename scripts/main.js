@@ -614,43 +614,47 @@ $(document).ready(function(){
         $(this).blur();
     });
 
+    function resetPage() {
+        // clear out all single click items
+        $("img.optional-item, img.key-item, img.partner").each(function() {
+            if (!$(this).hasClass("unselected")) {
+                $(this).addClass("unselected");
+            }
+        });
+
+        // clear upgrades
+        $("img.upgrade").each(function() {
+            for (var i = 0; i < 2; ++i) {
+                $(this).contextmenu();
+            }
+        });
+
+        // clear star spirits
+        $("img.star-spirit").each(function() {
+            if (!$(this).hasClass("completable") && !$(this).hasClass("unselected")) {
+                $(this).addClass("unselected");
+            }
+        });
+
+        // clear key counts
+        $("img[data-chapter-key]").each(function() {
+            var chapter = parseInt($(this).attr("data-chapter-key"));
+            for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
+                $(this).contextmenu();
+            }
+        });
+
+        // reset chapter completion states
+        for (var i = 1; i <= 8; ++i) {
+            checkIfChapterIsCompletable(i);
+        }
+    }
+
     // reset the tracker completely
     $("#reset-button").click(function() {
         var confirmation = confirm("Are you sure you want to reset the tracker status?");
         if (confirmation) {
-            // clear out all single click items
-            $("img.optional-item, img.key-item, img.partner").each(function() {
-                if (!$(this).hasClass("unselected")) {
-                    $(this).addClass("unselected");
-                }
-            });
-
-            // clear upgrades
-            $("img.upgrade").each(function() {
-                for (var i = 0; i < 2; ++i) {
-                    $(this).contextmenu();
-                }
-            });
-
-            // clear star spirits
-            $("img.star-spirit").each(function() {
-                if (!$(this).hasClass("completable") && !$(this).hasClass("unselected")) {
-                    $(this).addClass("unselected");
-                }
-            });
-
-            // clear key counts
-            $("img[data-chapter-key]").each(function() {
-                var chapter = parseInt($(this).attr("data-chapter-key"));
-                for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
-                    $(this).contextmenu();
-                }
-            });
-
-            // reset chapter completion states
-            for (var i = 1; i <= 8; ++i) {
-                checkIfChapterIsCompletable(i);
-            }
+            resetPage();
         }
         $(this).blur();
     });
@@ -747,6 +751,9 @@ $(document).ready(function(){
     ////////////////////////////////////////////////////////////////
     
     function combineMiscAndCompact() {
+        // reset the page state when changing tracker layouts
+        resetPage();
+
         var compact_checked = $("#compact-tracker").is(':checked');
         var misc_checked = $("#combine-misc").is(':checked');
 
@@ -778,14 +785,6 @@ $(document).ready(function(){
     }
 
     $("#compact-tracker").click(function() {
-        // clear key counts when toggling (manually)
-        $("img[data-chapter-key]").each(function() {
-            var chapter = parseInt($(this).attr("data-chapter-key"));
-            for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
-                $(this).contextmenu();
-            }
-        });
-
         // make correct tracker visible
         var isChecked = $(this).is(':checked');
         var currentTracker = $(".main-tracker").html();
