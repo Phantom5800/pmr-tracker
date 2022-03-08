@@ -68,12 +68,12 @@ var altTracker = `<table width="100%">
     <div class="compact-element">
         <img data-chapter-key="1" id="Fortress Key" class="unselected key-item" src="images/icons/FortressKey_PM.png">
         <br>
-        <p id="chapter-1-key-count">0/4</p>
+        <p data-chapter-key-count="1">0/4</p>
     </div>
     <div class="compact-misc-item compact-element">
         <img data-chapter-key="13" id="Letter" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
         <br>
-        <p id="chapter-13-key-count">0/26</p>
+        <p data-chapter-key-count="13">0/26</p>
     </div>
     <div class="compact-element"><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></div>
     <div class="compact-element"><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></div>
@@ -82,7 +82,7 @@ var altTracker = `<table width="100%">
     <div class="compact-element">
         <img data-chapter-key="2" id="Ruins Key" class="unselected key-item" src="images/icons/Ruins_Key.png">
         <br>
-        <p id="chapter-2-key-count">0/4</p>
+        <p data-chapter-key-count="2">0/4</p>
     </div>
     <div class="compact-misc-item compact-element"><img id="Artifact" class="unselected optional-item" src="images/icons/Artifact_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Record" class="unselected optional-item" src="images/icons/Record.gif"></div>
@@ -91,7 +91,7 @@ var altTracker = `<table width="100%">
     <div class="compact-element">
         <img data-chapter-key="3" id="Tubba Castle Key" class="unselected key-item" src="images/icons/Tubba_Blubba_Castle_Key.png">
         <br>
-        <p id="chapter-3-key-count">0/3</p>
+        <p data-chapter-key-count="3">0/3</p>
     </div>
     <div class="compact-misc-item compact-element><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></div>
@@ -122,7 +122,7 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></div>
-    <div class="compact-misc-item compact-element blue-house-optional"><img id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
+    <div class="compact-misc-item compact-element blue-house-optional"><img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
@@ -133,11 +133,11 @@ var altTracker = `<table width="100%">
     <div id="BowsersKeySlot" class="compact-element">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <br>
-        <p id="chapter-8-key-count">0/5</p>
+        <p data-chapter-key-count="8">0/5</p>
     </div>
     <div class="compact-misc-item compact-element">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
-        <p id="chapter-14-key-count">0/2</p>
+        <p data-chapter-key-count="14">0/2</p>
     </div>
     <div class="compact-misc-item compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></div>
@@ -145,17 +145,17 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element">
         <img data-chapter-key="9" id="Quizmo" class="unselected optional-item" src="images/icons/ChuckQuizmo_PM.png">
         <br>
-        <p id="chapter-9-key-count">0/64</p>
+        <p data-chapter-key-count="9">0/64</p>
     </div>
     <div class="compact-misc-item compact-element">
         <img data-chapter-key="11" id="Star Piece" class="unselected optional-item" src="images/icons/Star_Piece.png">
         <br>
-        <p id="chapter-11-key-count">0/96</p>
+        <p data-chapter-key-count="11">0/96</p>
     </div>
     <div class="compact-misc-item compact-element">
         <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
         <br>
-        <p id="chapter-12-key-count">0/11</p>
+        <p data-chapter-key-count="12">0/11</p>
     </div>
     <div class="compact-misc-item compact-element">
         <div class="tooltip">
@@ -191,7 +191,7 @@ const extraChapterRequirements = {
         [
             "#Watt", 
             "#whale-open", // watt or whale open to get to the island OR vvvv
-            ["#Bombette", ["[id='Odd Key']", "#blue-house-open"]] // bombette AND access to blue house for pipe
+            ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]] // bombette AND access to blue house for pipe
         ]
     ],
     6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
@@ -199,7 +199,7 @@ const extraChapterRequirements = {
         "#Kooper", // switch on shiver mountain
         "#Bombette", // switch in crystal palace
         "Super Boots", // break the ice on shiver mountain
-        ["#Sushie", "#blue-house-open", "[id='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
+        ["#Sushie", "#blue-house-open", "img[data-item-name='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
     8: [
         "#Eldstar", 
@@ -350,14 +350,19 @@ function initializePage() {
     $('[id="Ultra Stone"]').height(50);
 
     $('.optional-item').unbind("click").click(function() {
+        var isObtained = false;
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
+            isObtained = true;
         } else {
             $(this).addClass("unselected");
         }
 
         // this is to account for the blue house being opened from the outside
         if ($(this).attr('id') === "Odd Key") {
+            // there can be multiple odd key's on the page because of different
+            // compact tracker layouts, so synchronize the hidden ones just to be sure
+            //$('.blue-house-optional').toggleClass("unselected", !isObtained);
             checkIfChapterIsCompletable(5);
             checkIfChapterIsCompletable(7);
         }
@@ -506,7 +511,7 @@ function initializePage() {
         $(this).removeClass("unselected");
         if (currentKeyCounts[c] < maxKeyCounts[c]) {
             ++currentKeyCounts[c];
-            $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
+            $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
         }
 
         checkIfChapterIsCompletable(c);
@@ -516,7 +521,7 @@ function initializePage() {
         var c = parseInt($(this).attr("data-chapter-key"));
         if (currentKeyCounts[c] > 0) {
             --currentKeyCounts[c];
-            $(`#chapter-${c}-key-count`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
+            $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
         }
 
         if (currentKeyCounts[c] === 0) {
@@ -782,7 +787,14 @@ $(document).ready(function(){
 
         // hide odd key if blue house is open
         var isChecked = $("#blue-house-open").is(':checked');
-        $(".blue-house-optional").toggle(!isChecked);
+        $("img[data-item-name='Odd Key']").each(function() {
+            // make sure to hide / show the correct odd key
+            if ($(this).hasClass("compact-misc-item")) {
+                $(this).toggle(!isChecked && misc_checked && compact_checked);
+            } else {
+                $(this).toggle(!isChecked);
+            }
+        });
 
         // hide crystal ball if koopa koot is not randomized
         isChecked = $("#koopa-koot-randomized").is(':checked');
