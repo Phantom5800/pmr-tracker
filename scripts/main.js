@@ -565,6 +565,100 @@ $(document).ready(function(){
         $("#options-menu").toggleClass("options-open");
     });
 
+    // load seed info from the generator
+    $("#load-seed-button").click(function() {
+        var user_seed = $("#randomizer-seed").val();
+        var endpoint = `https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${user_seed}`;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+
+                    if (data["ToyboxOpen"] != $("#toybox-open").is(':checked')) {
+                        $("#toybox-open").click();
+                    }
+
+                    if (data["WhaleOpen"] != $("#whale-open").is(':checked')) {
+                        $("#whale-open").click();
+                    }
+
+                    if (data["FlowerGateOpen"] != $("#chapter-6-open").is(':checked')) {
+                        $("#chapter-6-open").click();
+                    }
+
+                    if (data["BlueHouseOpen"] != $("#blue-house-open").is(':checked')) {
+                        $("#blue-house-open").click();
+                    }
+                    
+                    if (data["ShortenBowsersCastle"] != $("#fast-bowser-castle").is(':checked')) {
+                        $("#fast-bowser-castle").click();
+                    }
+
+                    // TODO: koopa koot is not randomized yet, add it here when it is
+
+                    if (data["IncludeDojo"] != $("#dojo-randomized").is(':checked')) {
+                        $("#dojo-randomized").click();
+                    }
+
+                    alert(`Loaded settings for seed: ${user_seed}`);
+                } else {
+                    alert(`Failed to find seed: ${user_seed}`);
+                }
+            }
+        }
+        xmlhttp.open("GET", endpoint, true);
+        xmlhttp.send();
+
+        $(this).blur();
+    });
+
+    // reset the tracker completely
+    $("#reset-button").click(function() {
+        var confirmation = confirm("Are you sure you want to reset the tracker status?");
+        if (confirmation) {
+            // clear out all single click items
+            $("img.optional-item, img.key-item, img.partner").each(function() {
+                if (!$(this).hasClass("unselected")) {
+                    $(this).addClass("unselected");
+                }
+            });
+
+            // clear upgrades
+            $("img.upgrade").each(function() {
+                for (var i = 0; i < 2; ++i) {
+                    $(this).contextmenu();
+                }
+            });
+
+            // clear star spirits
+            $("img.star-spirit").each(function() {
+                if (!$(this).hasClass("completable") && !$(this).hasClass("unselected")) {
+                    $(this).addClass("unselected");
+                }
+            });
+
+            // clear key counts
+            $("img[data-chapter-key]").each(function() {
+                var chapter = parseInt($(this).attr("data-chapter-key"));
+                for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
+                    $(this).contextmenu();
+                }
+            });
+
+            // reset chapter completion states
+            for (var i = 1; i <= 8; ++i) {
+                checkIfChapterIsCompletable(i);
+            }
+        }
+        $(this).blur();
+    });
+
+    ////////////////////////////////////////////////////////////////
+    // preset open areas
+    ////////////////////////////////////////////////////////////////
+
     $("#toybox-open").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("toybox-open", isChecked);
@@ -603,6 +697,10 @@ $(document).ready(function(){
         checkIfChapterIsCompletable(8);
     });
 
+    ////////////////////////////////////////////////////////////////
+    // additional randomization
+    ////////////////////////////////////////////////////////////////
+
     $("#koopa-koot-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         $(".koopa-koot-generated-item").toggle(isChecked);
@@ -615,6 +713,10 @@ $(document).ready(function(){
         $(".dojo-tracker").toggle(isChecked);
         localStorage.setItem("dojo-randomized", isChecked);
     });
+
+    ////////////////////////////////////////////////////////////////
+    // tracker specific settings
+    ////////////////////////////////////////////////////////////////
 
     $("#user-notes").click(function() {
         var isChecked = $(this).is(':checked');
