@@ -582,7 +582,10 @@ $(document).ready(function(){
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
+            if (this.readyState == 1) {
+                $("#loading-icon").toggle(true);
+            } else if (this.readyState == 4) {
+                $("#loading-icon").toggle(false);
                 if (this.status == 200) {
                     var data = JSON.parse(this.responseText);
 
