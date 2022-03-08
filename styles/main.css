@@ -378,3 +378,37 @@ input[type="number"] {
 
     -moz-appearance: textfield;
 }
+
+/* Loading Icon */
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    border: 4px solid #fff;
+    border-radius: 75%;
+    animation: lds-ring 1.2s linear infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
