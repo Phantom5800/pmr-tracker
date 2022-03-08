@@ -182,7 +182,12 @@ const extraChapterRequirements = {
     ],
     5: [
         "#Sushie", // need sushie in order to place the jade raven
-        ["#Parakarry", "#Lakilester"] // need one of these in order to get hammer upgrade
+        ["#Parakarry", "#Lakilester"], // need one of these in order to get hammer upgrade
+        [
+            "#Watt", 
+            "#whale-open", // watt or whale open to get to the island OR vvvv
+            ["#Bombette", ["[id='Odd Key']", "#blue-house-open"]] // bombette AND access to blue house for pipe
+        ]
     ],
     6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
     7: [
@@ -267,40 +272,55 @@ function checkIfChapterIsCompletable(chapter) {
             }
         });
 
+        function handleExtraChapterRequirements(requirementsArray, depth = 0) {
+            var conditionsComplete = 0;
+
+            for (var i = 0; i < requirementsArray.length; ++i) {
+                var elem = $(requirementsArray[i]).first();
+                var isChecked = elem.is(':checkbox') && elem.is(":checked");
+                var selected = !elem.is(':checkbox') && !elem.hasClass("unselected");
+
+                // if boots upgrade is required, increment when normal boots are not active
+                if (requirementsArray[i] === "Super Boots") {
+                    if ($("#Boots").length === 0) {
+                        ++conditionsComplete;
+                    }
+                // if hammer upgrade is required, mark completed if the hammer is not default
+                } else if (requirementsArray[i] === "Super Hammer") {
+                    if ($("#Hammer").length === 0) {
+                        ++conditionsComplete;
+                    }
+                } else if (Array.isArray(requirementsArray[i])) {
+                    var completed = handleExtraChapterRequirements(requirementsArray[i], depth + 1);
+
+                    // even layers of depth are AND statements, odd layers are OR statements
+                    // this makes sense right now for how the arrays are nested in chapter 5
+                    if ((completed === requirementsArray[i].length && depth % 2 === 0) 
+                        || (completed >= 1 && depth % 2 === 1)) {
+                        ++conditionsComplete;
+                    }
+                } else if (isChecked || selected) {
+                    ++conditionsComplete;
+                }
+            }
+
+            return conditionsComplete;
+        }
+
         for (var i = 0; i < extraChapterRequirements[chapter].length; ++i) {
-            // if boots upgrade is required, increment when normal boots are not active
             if (extraChapterRequirements[chapter][i] === "Super Boots") {
                 if ($("#Boots").length === 0) {
                     ++completedCount;
                 }
-            // if hammer upgrade is required, mark completed if the hammer is not default
             } else if (extraChapterRequirements[chapter][i] === "Super Hammer") {
                 if ($("#Hammer").length === 0) {
                     ++completedCount;
                 }
             // if a condition is an array, the condition is true if any element of the array is true
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
-                for (var j = 0; j < extraChapterRequirements[chapter][i].length; ++j) {
-                    // look for a checkbox or if the element is selected
-                    var elem = $(extraChapterRequirements[chapter][i][j]).first();
-                    var isChecked = elem.is(':checkbox') && elem.is(":checked");
-                    var selected = !elem.is(':checkbox') && !elem.hasClass("unselected");
-
-                    // check for boots and hammer first
-                    if (extraChapterRequirements[chapter][i][j] === "Super Boots") {
-                        if ($("#Boots").length === 0) {
-                            ++completedCount;
-                        }
-                    } else if (extraChapterRequirements[chapter][i][j] === "Super Hammer") {
-                        if ($("#Hammer").length === 0) {
-                            ++completedCount;
-                            break;
-                        }
-                    // if not boots or hammer, mark completed if it's a checkbox or selected element
-                    } else if (isChecked || selected) {
-                        ++completedCount;
-                        break;
-                    } 
+                // for top level depth, conditions are an OR statement
+                if (handleExtraChapterRequirements(extraChapterRequirements[chapter][i]) >= 1) {
+                    ++completedCount;
                 }
             } else if (!$(extraChapterRequirements[chapter][i]).first().hasClass("unselected")) {
                 ++completedCount;
@@ -333,6 +353,7 @@ function initializePage() {
 
         // this is to account for the blue house being opened from the outside
         if ($(this).attr('id') === "Odd Key") {
+            checkIfChapterIsCompletable(5);
             checkIfChapterIsCompletable(7);
         }
     });
@@ -550,6 +571,12 @@ $(document).ready(function(){
         checkIfChapterIsCompletable(4);
     });
 
+    $("#whale-open").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("whale-open", isChecked);
+        checkIfChapterIsCompletable(5);
+    });
+
     $("#chapter-6-open").click(function() {
         var isChecked = $(this).is(':checked');
         $(".ch6-optional").toggle(!isChecked);
@@ -560,6 +587,7 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         $(".blue-house-optional").toggle(!isChecked);
         localStorage.setItem("blue-house-open", isChecked);
+        checkIfChapterIsCompletable(5);
         checkIfChapterIsCompletable(7);
     });
 
@@ -701,6 +729,11 @@ $(document).ready(function(){
     var toybox_open = localStorageGetWithDefault("toybox-open", "true") == "true";
     if (!toybox_open) {
         $("#toybox-open").click();
+    }
+
+    var whale_open = localStorageGetWithDefault("whale-open", "true") == "true";
+    if (!whale_open) {
+        $("#whale-open").click();
     }
 
     var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
