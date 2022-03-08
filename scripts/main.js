@@ -105,12 +105,12 @@ var altTracker = `<table width="100%">
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
+    <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></div>
