@@ -610,6 +610,9 @@ $(document).ready(function(){
                     }
 
                     // TODO: koopa koot is not randomized yet, add it here when it is
+                    if ($("#koopa-koot-randomized").is(':checked')) {
+                        $("#koopa-koot-randomized").click(); // disable koopa koot if enabled
+                    }
 
                     if (data["IncludeDojo"] != $("#dojo-randomized").is(':checked')) {
                         $("#dojo-randomized").click();
@@ -622,6 +625,8 @@ $(document).ready(function(){
             }
         }
         xmlhttp.open("GET", endpoint, true);
+        xmlhttp.setRequestHeader("accept", "application/json, text/plain, */*");
+        xmlhttp.setRequestHeader("sec-fetch-mode", "cors");
         xmlhttp.send();
 
         $(this).blur();
