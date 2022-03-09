@@ -842,12 +842,34 @@ $(document).ready(function(){
         // update seeds visibility
         isChecked = $("#chapter-6-open").is(':checked');
         $(".ch6-optional").toggle(!isChecked);
+
+        updateKeyItemHighlight();
     });
 
     $("#combine-misc").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("combine-misc", isChecked);
         combineMiscAndCompact();
+    });
+
+    function updateKeyItemHighlight() {
+        if ($("#compact-tracker").is(':checked') && $("#highlight-key").is(':checked')) {
+            $("img.key-item").each(function() {
+                if ($(this).hasClass("unselected")) {
+                    $(this).addClass("completable");
+                }
+            });
+        } else {
+            $("img.key-item").each(function() {
+                $(this).removeClass("completable");
+            });
+        }
+    }
+
+    $("#highlight-key").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("highlight-key", isChecked);
+        updateKeyItemHighlight();
     });
 
     var use_compact_tracker = localStorageGetWithDefault("compact-tracker", false) == "true";
@@ -858,6 +880,11 @@ $(document).ready(function(){
     var combine_misc = localStorageGetWithDefault("combine-misc", false) == "true";
     if (combine_misc) {
         $("#combine-misc").click();
+    }
+
+    var highlight_key_items = localStorageGetWithDefault("highlight-key", false) == "true";
+    if (highlight_key_items) {
+        $("#highlight-key").click();
     }
 
     ////////////////////////////////////////////////////////////////
