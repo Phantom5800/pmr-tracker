@@ -93,7 +93,7 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="3">0/3</p>
     </div>
-    <div class="compact-misc-item compact-element><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
+    <div class="compact-misc-item compact-element"><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Calculator" class="unselected optional-item" src="images/icons/Calculator_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Frying Pan" class="unselected optional-item" src="images/icons/PM_Frying_Pan.png"></div>
