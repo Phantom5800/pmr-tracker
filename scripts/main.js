@@ -498,8 +498,12 @@ function initializePage() {
         var c = parseInt($(this).attr("data-chapter"));
         if ($(this).hasClass("unselected")) {
             $(this).removeClass("unselected");
+            $(this).removeClass("completable");
         } else {
             $(this).addClass("unselected");
+            if ($("#compact-tracker").is(':checked') && $("#highlight-key").is(':checked')) {
+                $(this).addClass("completable");
+            }
         }
 
         checkIfChapterIsCompletable(c);
@@ -509,6 +513,7 @@ function initializePage() {
     $("img[data-chapter-key]").unbind("click").click(function(){
         var c = parseInt($(this).attr("data-chapter-key"));
         $(this).removeClass("unselected");
+        $(this).removeClass("completable");
         if (currentKeyCounts[c] < maxKeyCounts[c]) {
             ++currentKeyCounts[c];
             $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
@@ -526,6 +531,11 @@ function initializePage() {
 
         if (currentKeyCounts[c] === 0) {
             $(this).addClass("unselected");
+            if ($(this).hasClass("key-item")) {
+                if ($("#compact-tracker").is(':checked') && $("#highlight-key").is(':checked')) {
+                    $(this).addClass("completable");
+                }
+            }
         }
 
         checkIfChapterIsCompletable(c);
