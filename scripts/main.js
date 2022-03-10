@@ -687,6 +687,12 @@ $(document).ready(function(){
         $(this).blur();
     });
 
+    // hide or show seed specific settings
+    $("#toggle-seed-settings").click(function() {
+        $("#toggle-seed-settings td.section-toggle").toggleClass("section-toggle-closed");
+        $("tr.seed-setting").toggle();
+    });
+
     ////////////////////////////////////////////////////////////////
     // preset open areas
     ////////////////////////////////////////////////////////////////
