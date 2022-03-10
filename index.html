@@ -132,15 +132,16 @@
                     <h1>Maps</h1>
                     <!-- Put the area buttons here -->
                     <div class="map-buttons">
-                        <button class="map-select">Prologue</button>
+                        <button data-map="prologue-map" class="map-select">Prologue</button>
                         <button data-map="toad-town-map" class="map-select selected">Toad Town</button>
                         <button data-map="pleasant-path-map" class="map-select">Pleasant Path</button>
-                        <button class="map-select">Koopa Village</button>
-                        <button class="map-select">Koopa Bros Fortress</button>
-                        <button class="map-select">Mt. Rugged</button>
-                        <button class="map-select">Dry Dry Desert</button>
-                        <button class="map-select">Dry Dry Ruins</button>
-                        <button class="map-select">Forever Forest</button>
+                        <button data-map="koopa-village-map" class="map-select">Koopa Village</button>
+                        <button data-map="kbf-map" class="map-select">Koopa Bros Fortress</button>
+                        <button data-map="mt-rugged-map" class="map-select">Mt. Rugged</button>
+                        <button data-map="desert-map" class="map-select">Dry Dry Desert</button>
+                        <button data-map="outpost-map" class="map-select">Dry Dry Outpost</button>
+                        <button data-map="ruins-map" class="map-select">Dry Dry Ruins</button>
+                        <button data-map="forest-map" class="map-select">Forever Forest</button>
                         <button class="map-select">Boo's Mansion</button>
                         <button class="map-select">Gusty Gulch</button>
                         <button class="map-select">Tubba's Castle</button>
@@ -154,6 +155,29 @@
 
                     <!-- Display a set of maps as a grid -->
                     <div id="map-grid">
+                        <!--------------------------------------------------------------
+                            Prologue
+                        -------------------------------------------------------------->
+                        <div id="prologue-map" style="display:none;">
+                            <h2>Prologue</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-prologue-playground">Playground</td>
+                                    <td data-checks-list="maps-prologue-outside-playground">Outside Playground</td>
+                                    <td data-checks-list="maps-prologue-outside-village">Outside Village</td>
+                                    <td data-checks-list="maps-prologue-village" rowspan="2">Goomba Village</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-prologue-landing">Mario's Landing</td>
+                                    <td data-checks-list="maps-prologue-road1">Goomba Road 1</td>
+                                    <td data-checks-list="maps-prologue-road2">Goomba Road 2</td>
+                                    <td class="has-nothing" data-checks-list="maps-prologue-flavored">Red & Blue Goomba</td>
+                                    <td class="has-nothing" data-checks-list="maps-prologue-outside-castle">Outside Castle</td>
+                                    <td data-checks-list="maps-prologue-castle">Goomba King's Castle</td>
+                                </tr>
+                            </table>
+                        </div>
                         <!--------------------------------------------------------------
                             Toad Town
                         -------------------------------------------------------------->
@@ -198,6 +222,110 @@
                                     <td data-checks-list="maps-pleasant-path-koopa">Outside Koopa Village</td>
                                     <td data-checks-list="maps-pleasant-path-bridge2">Switch Bridge #2</td>
                                     <td data-checks-list="maps-pleasant-path-fortress">Path to Fortress</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Village
+                        -------------------------------------------------------------->
+                        <div id="koopa-village-map" style="display:none;">
+                            <h2>Koopa Village</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" />
+                                    <td class="has-nothing">Fuzzie Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" />
+                                    <td data-checks-list="maps-koopa-village-behind-kooper">Behind Kooper's House</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-koopa-village-west">Koopa Village West</td>
+                                    <td data-checks-list="maps-koopa-village-east">Koopa Village East</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Bros Fortress
+                        -------------------------------------------------------------->
+                        <div id="kbf-map" style="display:none;">
+                            <h2>Koopa Bros. Fortress</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-kbf-entrance" rowspan="2">Fortress Entrance</td>
+                                    <td data-checks-list="maps-kbf-cannons">Cannons</td>
+                                    <td class="has-nothing">Boss Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-kbf-outside">Outside Fortress</td>
+                                    <td class="has-nothing">Bomb Room</td>
+                                    <td data-checks-list="maps-kbf-puzzle-room">Kooper Puzzle Room</td>
+                                    <td data-checks-list="maps-kbf-staircase" rowspan="2">Staircase Room</td>
+                                    <td class="has-nothing" colspan="2">Trap Room</td>
+                                    <td data-checks-list="maps-kbf-refund">Outside Chest</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-kbf-firebars">Firebars</td>
+                                    <td class="has-nothing">The Pit</td>
+                                    <td data-checks-list="maps-kbf-jail">Jail</td>
+                                    <td class="has-nothing">Save Block</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Forever Forest
+                        -------------------------------------------------------------->
+                        <div id="forest-map" style="display:none;">
+                            <h2>Forever Forest</h2>
+                            <table class="map">
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-forest-fp">FP Plus</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td data-checks-list="maps-forest-hp">HP Plus</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Oaklie Room</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="has-nothing">Forest Room 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty">&#x25B2;</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">&#x25B2;</td>
+                                    <td class="empty"/>
+                                    <td class="empty">&#x25BC;</td>
+                                    <td class="empty"/>
+                                    <td class="empty">&#x25B2;</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing">Last Forest Room</td>
+                                    <td class="empty">&#x25BA;</td>
+                                    <td class="empty">Boo's Mansion</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Forest Room 5</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td data-checks-list="maps-forest-seed">Seed Room</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Forest Entrance</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty">&#x25B2;</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">&#x25BC;</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">&#x25B2;</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing">Forest Room 7</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="has-nothing">Forest Room 6</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">Toad Town</td>
                                 </tr>
                             </table>
                         </div>
@@ -618,6 +746,16 @@
                             <input autocomplete="off" class="checkbox-slider" id="highlight-key" type="checkbox">
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="highlight-key"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="option-name" colspan="3">Maps</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="game-maps" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="game-maps"></label>
                         </div>
                     </td>
                 </tr>

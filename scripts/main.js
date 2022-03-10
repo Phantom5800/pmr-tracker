@@ -637,6 +637,12 @@ $(document).ready(function(){
     // tracker specific settings
     ////////////////////////////////////////////////////////////////
 
+    $("#game-maps").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".map-display").toggle(isChecked);
+        localStorage.setItem("game-maps", isChecked);
+    });
+
     $("#user-notes").click(function() {
         var isChecked = $(this).is(':checked');
         $("#notes").toggle(isChecked);
@@ -818,6 +824,11 @@ $(document).ready(function(){
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", false) == "true";
     if (dojo_randomized) {
         $("#dojo-randomized").click();
+    }
+
+    var maps_enabled = localStorageGetWithDefault("game-maps", "true") == "true";
+    if (!maps_enabled) {
+        $("#game-maps").click();
     }
 
     var user_notes_enabled = localStorageGetWithDefault("user-notes", false) == "true";
