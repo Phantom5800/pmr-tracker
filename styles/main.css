@@ -465,6 +465,10 @@ input[type="number"] {
     margin-bottom: 0.25em;
 }
 
+button.map-select.complete {
+    text-decoration: line-through 5px;
+}
+
 button.selected {
     background-color: #fa5353;
     border-color: black;
