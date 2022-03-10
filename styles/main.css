@@ -492,7 +492,7 @@ button.selected {
 }
 
 #map-checks ul {
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: bolder;
     list-style-type: none;
     margin-left: -1em;
@@ -500,7 +500,8 @@ button.selected {
 
 #map-checks input[type="checkbox"] {
     mix-blend-mode: screen;
-    width: 1.5em;
+    width: 15px;
+    height: 15px;
 }
 
 table.map {
