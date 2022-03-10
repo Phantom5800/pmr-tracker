@@ -163,6 +163,25 @@ var altTracker = `<table width="100%">
             <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
         </div>
     </div>
+    <div class="compact-misc-item compact-element dojo-optional">
+        <div class="tooltip">
+            <img id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png">
+            <span class="tooltiptext">In logic from beginning</span>
+        </div>
+    </div>
+    <div class="compact-misc-item compact-element dojo-optional">
+        <div class="tooltip">
+            <img id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png">
+            <span class="tooltiptext">In logic after 2 star spirits</span>
+        </div>
+    </div>
+    <div class="compact-misc-item compact-element dojo-optional">
+        <div class="tooltip">
+            <img data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
+            <p data-chapter-key-count="10">0/3</p>
+            <span class="tooltiptext">In logic after 3/4/5 star spirits respectively</span>
+        </div>
+    </div>
 </div>`;
 
 // The main requirements are grouped logically with their respective chapters.
@@ -757,7 +776,9 @@ $(document).ready(function(){
 
     $("#dojo-randomized").click(function() {
         var isChecked = $(this).is(':checked');
-        $(".dojo-tracker").toggle(isChecked);
+        var isCompactMiscCombined = $("#compact-tracker").is(':checked') && $("#combine-misc").is(':checked');
+        $(".dojo-tracker").toggle(isChecked && !isCompactMiscCombined);
+        $(".dojo-optional").toggle(isChecked);
         localStorage.setItem("dojo-randomized", isChecked);
     });
 
@@ -832,6 +853,12 @@ $(document).ready(function(){
         // hide crystal ball if koopa koot is not randomized
         isChecked = $("#koopa-koot-randomized").is(':checked');
         $(".koopa-koot-generated-item").toggle(isChecked);
+
+        // handle dojo visibility
+        isChecked = $("#dojo-randomized").is(':checked');
+        $(".dojo-optional").toggle(isChecked);
+        var isCompactMiscCombined = compact_checked && misc_checked;
+        $(".dojo-tracker").toggle($("#dojo-randomized").is(':checked') && !isCompactMiscCombined);
 
         isChecked = $("#recipe-tooltips").is(':checked');
         $(".tooltiptext").toggle(isChecked);
@@ -937,8 +964,8 @@ $(document).ready(function(){
         $("#koopa-koot-randomized").click();
     }
 
-    var dojo_randomized = localStorageGetWithDefault("dojo-randomized", "true") == "true";
-    if (!dojo_randomized) {
+    var dojo_randomized = localStorageGetWithDefault("dojo-randomized", false) == "true";
+    if (dojo_randomized) {
         $("#dojo-randomized").click();
     }
 
