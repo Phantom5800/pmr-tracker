@@ -6,6 +6,7 @@
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="scripts/compact.js"></script>
+        <script src="scripts/maps.js"></script>
         <script src="scripts/main.js"></script>
         <link rel="stylesheet" href="styles/main.css">
 
@@ -121,6 +122,133 @@
                         <td><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></td>
                     </tr>
                 </table>
+            </div>
+
+            <!--
+                Map
+            -->
+            <div class="flex-column">
+                <div class="map-display section">
+                    <h1>Maps</h1>
+                    <!-- Put the area buttons here -->
+                    <div class="map-buttons">
+                        <button class="map-select">Prologue</button>
+                        <button class="map-select">Toad Town</button>
+                        <button class="map-select">Chapter 1</button>
+                        <button class="map-select">Mt. Rugged</button>
+                        <button class="map-select">Dry Dry Desert</button>
+                        <button class="map-select">Dry Dry Ruins</button>
+                        <button class="map-select">Forever Forest</button>
+                        <button class="map-select">Boo's Mansion</button>
+                        <button class="map-select">Gusty Gulch</button>
+                        <button class="map-select">Tubba's Castle</button>
+                        <button class="map-select">Shy Guy's Toybox</button>
+                        <button class="map-select">Yoshi's Island</button>
+                        <button class="map-select">Mt. Lavalava</button>
+                        <button class="map-select">Flower Fields</button>
+                        <button class="map-select">Shiver Region</button>
+                        <button class="map-select">Crystal Palace</button>
+                    </div>
+
+                    <!-- Display a set of maps as a grid -->
+                    <div id="map-grid">
+                        <div id="toad-town-map">
+                            <h2>Toad Town</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td data-checks-list="maps-toad-town-summit">Shooting Star Summit</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toad-town-castle">Peach's Castle</td>
+                                    <td data-checks-list="maps-toad-town-merluvlee">Merluvlee's House</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toad-town-outside">Outside Toad Town</td>
+                                    <td data-checks-list="maps-toad-town-gate">Main Gate</td>
+                                    <td data-checks-list="maps-toad-town-center">Central Plaza</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toad-town-harbor">Harbor</td>
+                                    <td class="has-nothing">Residential Area</td>
+                                    <td data-checks-list="maps-toad-town-below-center">Below Plaza</td>
+                                    <td class="has-nothing">Forever Forest Entrance</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toad-town-train">Train Station</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Put the checks for the current room here -->
+                    <div id="map-checks">
+                        <!--------------------------------------------------------------
+                            Toad Town
+                        -------------------------------------------------------------->
+                        <div id="maps-toad-town-summit" style="display:none;">
+                            <h3>Toad Town Harbor</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-summit" type="checkbox">[Panel] On First Step</label></li>
+                                <li><label><input data-map-group="maps-toad-town-summit" type="checkbox">Star Piece left from entrance</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-castle" style="display:none;">
+                            <h3>Toad Town Harbor</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-castle" type="checkbox">[Panel] Right side of bridge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-merluvlee" style="display:none;">
+                            <h3>Toad Town Harbor</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-merluvlee" type="checkbox">[Panel] Near picnic table</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-harbor" style="display:none;">
+                            <h3>Toad Town Harbor</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">[Panel] Outside Club 64</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">Give Melody to Simon in Club 64</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-outside" style="display:none;">
+                            <h3>Outside Toad Town</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-outside" type="checkbox">Chest on top of Gate</label></li>
+                                <li><label><input data-map-group="maps-toad-town-outside" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-gate" style="display:none;">
+                            <h3>Main Gate</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-gate" type="checkbox">[Panel] By three toad sisters</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" type="checkbox">Star Piece at Sushie panel</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-center" style="display:none;">
+                            <h3>Central Plaza</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-center" type="checkbox">Tree by Merlon's house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-below-center" style="display:none;">
+                            <h3>Below Plaza</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-below-center" type="checkbox">[Panel] By guard house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-train" style="display:none;">
+                            <h3>Train Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-train" type="checkbox">[Panel] Bottom right side of room</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--

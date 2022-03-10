@@ -431,6 +431,7 @@ $(document).ready(function(){
     $('img').contextmenu(function(){return false;});
 
     initializePage();
+    initializeMaps();
 
     ////////////////////////////////////////////////////////////////
     // options menu

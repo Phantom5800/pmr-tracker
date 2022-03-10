@@ -33,7 +33,7 @@ td {
     vertical-align: middle;
 }
 
-p, h1, h2 {
+p, h1, h2, h3 {
     margin: 0 0 0 0;
     font-size: 1.5em;
     font-weight: bolder;
@@ -59,13 +59,13 @@ h2 {
 
 .section {
     background-color: rgb(35,35,59);
+    margin: 5px 5px 5px 5px;
+    border-radius: 10px;
 }
 
 .main-tracker {
     width: 36em;
     height: auto;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
 }
 
 .main-tracker.compact {
@@ -77,33 +77,29 @@ h2 {
     height: 68px;
 }
 
+.map-display {
+    width: 36em;
+}
+
 .misc-tracker {
     width: 36em;
     height: auto;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
     padding-bottom: 10px;
 }
 
 .keys-tracker {
     width: 36em;
     height: 9em;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
 }
 
 .koopa-koot-tracker {
     width: 36em;
     height: 13.5em;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
 }
 
 .dojo-tracker {
     width: 36em;
     height: 9em;
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
 }
 
 .info-block {
@@ -384,6 +380,11 @@ button {
     font-family: "Paper Mario";
 }
 
+button.map-select {
+    width: auto;
+    height: 2em;
+}
+
 button:hover {
     background-color: #5fcf80;
 }
@@ -440,4 +441,98 @@ input[type="number"] {
     100% {
         transform: rotate(360deg);
     }
+}
+
+/* Maps */
+#map-grid {
+    width: 100%;
+    text-align: center;
+}
+
+.map-buttons {
+    margin:0em 1em 1em 1em;
+}
+
+#map-checks {
+    font-weight: bolder;
+    color: white;
+
+    -webkit-text-stroke: 1px black;
+    stroke: 1px black;
+
+    margin:0em 1em 1em 1em;
+    padding-bottom: 0.5em;
+}
+
+#map-checks li {
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+#map-checks ul {
+    font-size: 1.25em;
+    font-weight: bolder;
+    list-style-type: none;
+    margin-left: -1em;
+}
+
+#map-checks input[type="checkbox"] {
+    mix-blend-mode: screen;
+    width: 1.5em;
+}
+
+table.map {
+    margin: 0 auto;
+}
+
+table.map td {
+    width: 50px;
+    height: 50px;
+    background-color: #c9c9c9;
+
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+
+    -webkit-filter: drop-shadow(0px 0px 5px white);
+    filter: drop-shadow(0px 0px 5px white);
+}
+
+table.map td.complete {
+    -webkit-filter: none;
+    filter: none;
+    text-decoration: line-through 5px;
+}
+
+table.map td.empty {
+    border: none;
+}
+
+table.map td:hover {
+    background-color: #5fcf80;
+}
+
+table.map td.has-nothing {
+    background-color: #f3dc0e;
+    -webkit-filter: none;
+    filter: none;
+}
+
+table.map td.has-nothing:hover {
+    background-color: #f37e11;
+}
+
+table.map td.has-nothing.selected {
+    background-color: #9b1511;
+}
+
+table.map td.selected {
+    background-color: #1e7438;
+}
+
+table.map td.empty {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0,0,0,0);
 }
