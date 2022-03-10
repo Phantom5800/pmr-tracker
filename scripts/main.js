@@ -544,6 +544,8 @@ $(document).ready(function(){
         for (var i = 1; i <= 8; ++i) {
             checkIfChapterIsCompletable(i);
         }
+
+        resetMapChecks();
     }
 
     // reset the tracker completely

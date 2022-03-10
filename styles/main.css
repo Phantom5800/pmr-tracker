@@ -449,8 +449,25 @@ input[type="number"] {
     text-align: center;
 }
 
+#map-grid h2 {
+    margin-bottom: 0.5em;
+}
+
+#map-grid div {
+    margin-bottom: 1em;
+}
+
 .map-buttons {
     margin:0em 1em 1em 1em;
+}
+
+.map-buttons button {
+    margin-bottom: 0.25em;
+}
+
+button.selected {
+    background-color: #fa5353;
+    border-color: black;
 }
 
 #map-checks {

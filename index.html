@@ -133,8 +133,10 @@
                     <!-- Put the area buttons here -->
                     <div class="map-buttons">
                         <button class="map-select">Prologue</button>
-                        <button class="map-select">Toad Town</button>
-                        <button class="map-select">Chapter 1</button>
+                        <button data-map="toad-town-map" class="map-select selected">Toad Town</button>
+                        <button data-map="pleasant-path-map" class="map-select">Pleasant Path</button>
+                        <button class="map-select">Koopa Village</button>
+                        <button class="map-select">Koopa Bros Fortress</button>
                         <button class="map-select">Mt. Rugged</button>
                         <button class="map-select">Dry Dry Desert</button>
                         <button class="map-select">Dry Dry Ruins</button>
@@ -152,6 +154,9 @@
 
                     <!-- Display a set of maps as a grid -->
                     <div id="map-grid">
+                        <!--------------------------------------------------------------
+                            Toad Town
+                        -------------------------------------------------------------->
                         <div id="toad-town-map">
                             <h2>Toad Town</h2>
                             <table class="map">
@@ -181,6 +186,21 @@
                                 </tr>
                             </table>
                         </div>
+                        <!--------------------------------------------------------------
+                            Pleasant Path
+                        -------------------------------------------------------------->
+                        <div id="pleasant-path-map" style="display:none;">
+                            <h2>Pleasant Path</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-pleasant-path-toad">Outside Toad Town</td>
+                                    <td data-checks-list="maps-pleasant-path-bridge1">Switch Bridge #1</td>
+                                    <td data-checks-list="maps-pleasant-path-koopa">Outside Koopa Village</td>
+                                    <td data-checks-list="maps-pleasant-path-bridge2">Switch Bridge #2</td>
+                                    <td data-checks-list="maps-pleasant-path-fortress">Path to Fortress</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Put the checks for the current room here -->
@@ -191,60 +211,101 @@
                         <div id="maps-toad-town-summit" style="display:none;">
                             <h3>Shooting Star Summit</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-summit" type="checkbox">[Panel] On First Step</label></li>
-                                <li><label><input data-map-group="maps-toad-town-summit" type="checkbox">Star Piece left from entrance</label></li>
+                                <li><label><input data-map-group="maps-toad-town-summit" autocomplete="off" type="checkbox">[Panel] On First Step</label></li>
+                                <li><label><input data-map-group="maps-toad-town-summit" autocomplete="off" type="checkbox">Left from entrance</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-castle" style="display:none;">
                             <h3>Castle Ruins</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-castle" type="checkbox">[Panel] Right side of bridge</label></li>
+                                <li><label><input data-map-group="maps-toad-town-castle" autocomplete="off" type="checkbox">[Panel] Right side of bridge</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-merluvlee" style="display:none;">
                             <h3>Merluvlee's House</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-merluvlee" type="checkbox">[Panel] Near picnic table</label></li>
+                                <li><label><input data-map-group="maps-toad-town-merluvlee" autocomplete="off" type="checkbox">[Panel] Near picnic table</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-harbor" style="display:none;">
                             <h3>Toad Town Harbor</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">[Panel] Outside Club 64</label></li>
-                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
-                                <li><label><input data-map-group="maps-toad-town-harbor" type="checkbox">Give Melody to Simon in Club 64</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">[Panel] Outside Club 64</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Give Melody to Simon in Club 64</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-outside" style="display:none;">
                             <h3>Outside Toad Town</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-outside" type="checkbox">Chest on top of Gate</label></li>
-                                <li><label><input data-map-group="maps-toad-town-outside" type="checkbox">? Block</label></li>
+                                <li><label><input data-map-group="maps-toad-town-outside" autocomplete="off" type="checkbox">Chest on top of Gate</label></li>
+                                <li><label><input data-map-group="maps-toad-town-outside" autocomplete="off" type="checkbox">? Block</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-gate" style="display:none;">
                             <h3>Main Gate</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-gate" type="checkbox">[Panel] By three toad sisters</label></li>
-                                <li><label><input data-map-group="maps-toad-town-gate" type="checkbox">Star Piece at Sushie panel</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Panel] By three toad sisters</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Item at Sushie panel</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-center" style="display:none;">
                             <h3>Central Plaza</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-center" type="checkbox">Tree by Merlon's house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Tree by Merlon's house</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-below-center" style="display:none;">
                             <h3>Below Plaza</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-below-center" type="checkbox">[Panel] By guard house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">[Panel] By guard house</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-train" style="display:none;">
                             <h3>Train Station</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toad-town-train" type="checkbox">[Panel] Bottom right side of room</label></li>
+                                <li><label><input data-map-group="maps-toad-town-train" autocomplete="off" type="checkbox">[Panel] Bottom right side of room</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Pleasant Path
+                        -------------------------------------------------------------->
+                        <div id="maps-pleasant-path-toad" style="display:none;">
+                            <h3>Outside Toad Town</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Middle ? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Right ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-bridge1" style="display:none;">
+                            <h3>Switch Bridge #1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">Kooper item</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">Item behind small fence</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-koopa" style="display:none;">
+                            <h3>Outside Koopa Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">[Panel] Middle of three pillars</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">Item behind right-most pillar</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">Break brick boxes (left, right, middle)</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-bridge2" style="display:none;">
+                            <h3>Switch Bridge #2</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">[Coinsanity] 5 items at start of room</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">Item on brick block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">Hidden ? block after bridge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-fortress" style="display:none;">
+                            <h3>Path to Fortress</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-fortress" autocomplete="off" type="checkbox">Item in first tree</label></li>
                             </ul>
                         </div>
                     </div>
