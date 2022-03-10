@@ -1,6 +1,6 @@
 function initializeMaps() {
-    $(".map-buttons button").click(function() {
-        $(".map-buttons button").removeClass("selected");
+    $("button.map-select").click(function() {
+        $("button.map-select").removeClass("selected");
         $(this).addClass("selected");
 
         $("table.map td").removeClass("selected");
@@ -31,6 +31,20 @@ function initializeMaps() {
         });
 
         $(`td[data-checks-list="${mapGroup}"]`).toggleClass("complete", totalCount === completeCount);
+
+        // see if all screens are complete
+        totalCount = 0;
+        completeCount = 0;
+        $("td[data-checks-list]").each(function() {
+            if ($(this).is(':visible')) {
+                ++totalCount;
+                if ($(this).hasClass("has-nothing") || $(this).hasClass("complete")) {
+                    ++completeCount;
+                }
+            }
+        });
+
+        $("button.map-select.selected").toggleClass("complete", totalCount === completeCount);
     });
 }
 
@@ -41,5 +55,6 @@ function resetMapChecks() {
         }
     });
 
-    $(`td[data-checks-list]`).removeClass("complete");
+    $("td[data-checks-list]").removeClass("complete");
+    $("button.map-select").removeClass("complete");
 }
