@@ -468,6 +468,11 @@ input[type="number"] {
 
 button.map-select.complete {
     text-decoration: line-through 5px;
+    background-color: #ff818167;
+}
+
+button.map-select.complete.selected {
+    background-color: #9b1511;
 }
 
 button.selected {
@@ -526,6 +531,7 @@ table.map td.complete {
     -webkit-filter: none;
     filter: none;
     text-decoration: line-through 5px;
+    background-color: #ff818167;
 }
 
 table.map td.empty {
