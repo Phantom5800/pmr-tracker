@@ -471,7 +471,7 @@ button.map-select.complete {
 }
 
 button.selected {
-    background-color: #fa5353;
+    background-color: #1e7438;
     border-color: black;
 }
 
@@ -546,7 +546,7 @@ table.map td:hover {
 }
 
 table.map td.has-nothing {
-    background-color: #f3dc0e;
+    background-color: #ff818167;
     -webkit-filter: none;
     filter: none;
 }
@@ -555,7 +555,7 @@ table.map td.has-nothing:hover {
     background-color: #f37e11;
 }
 
-table.map td.has-nothing.selected {
+table.map td.has-nothing.selected, table.map td.complete.selected {
     background-color: #9b1511;
 }
 
