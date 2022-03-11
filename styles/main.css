@@ -441,13 +441,18 @@ input[type="number"] {
 
 /* Maps */
 .map-display {
-    width: 49em;
+    width: 50em;
     height: auto;
 }
 
 #map-grid {
     width: 100%;
     text-align: center;
+}
+
+div.map-display h1 {
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
 }
 
 #map-grid h2 {
@@ -459,7 +464,11 @@ input[type="number"] {
 }
 
 .map-buttons {
+    text-align: center;
     margin:0em 1em 1em 1em;
+    padding: 0.25em 0.25em 0.25em 0.25em;
+    border-radius: 5px;
+    background-color: #00000044;
 }
 
 .map-buttons button {
