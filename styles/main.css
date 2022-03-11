@@ -518,6 +518,11 @@ button.selected {
     height: 15px;
 }
 
+label.disabled {
+    color: #ffffff86;
+    text-decoration: line-through 5px #00000086;
+}
+
 table.map {
     margin: 0 auto;
 }

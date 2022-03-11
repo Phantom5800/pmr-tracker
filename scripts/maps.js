@@ -1,4 +1,5 @@
 function initializeMaps() {
+    // select a set of maps
     $("button.map-select").click(function() {
         $("button.map-select").removeClass("selected");
         $(this).addClass("selected");
@@ -9,6 +10,7 @@ function initializeMaps() {
         $(`#map-grid #${$(this).attr("data-map")}`).toggle(true);
     });
 
+    // select a map screen to see what checks are available
     $("table.map td").click(function() {
         $("table.map td").removeClass("selected");
         $(this).addClass("selected");
@@ -17,6 +19,7 @@ function initializeMaps() {
         $(`#map-checks div#${$(this).attr("data-checks-list")}`).toggle(true);
     });
 
+    // mark off a single check
     $("#map-checks input").click(function() {
         var totalCount = 0;
         var completeCount = 0;
@@ -24,7 +27,7 @@ function initializeMaps() {
         $(`#map-checks input[data-map-group="${mapGroup}"]`).each(function() {
             if ($(this).is(':visible')) {
                 ++totalCount;
-                if ($(this).is(':checked')) {
+                if ($(this).is(':checked') || $(this).is(':disabled')) {
                     ++completeCount;
                 }
             }
@@ -46,6 +49,9 @@ function initializeMaps() {
 
         $("button.map-select.selected").toggleClass("complete", totalCount === completeCount);
     });
+
+    // NOTE: for disabling a check, need to add disabled attribute to the input field and a
+    //       "disabled" class to the label
 }
 
 function resetMapChecks() {
