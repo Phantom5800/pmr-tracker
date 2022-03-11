@@ -141,7 +141,7 @@
                         <button data-map="desert-map" class="map-select">Dry Dry Desert</button>
                         <button data-map="ruins-map" class="map-select">Dry Dry Ruins</button>
                         <button data-map="forest-map" class="map-select">Forever Forest</button>
-                        <button class="map-select">Boo's Mansion</button>
+                        <button data-map="boo-mansion-map" class="map-select">Boo's Mansion</button>
                         <button class="map-select">Gusty Gulch</button>
                         <button class="map-select">Tubba's Castle</button>
                         <button class="map-select">Shy Guy's Toybox</button>
@@ -277,6 +277,25 @@
                             </table>
                         </div>
                         <!--------------------------------------------------------------
+                            Mt. Rugged
+                        -------------------------------------------------------------->
+                        <div id="mt-rugged-map" style="display:none;">
+                            <h2>Mt. Rugged</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-mt-rugged-letter3">Letter 3</td>
+                                    <td data-checks-list="maps-mt-rugged-letter1" rowspan="2">Letter 1</td>
+                                    <td data-checks-list="maps-mt-rugged-seed" rowspan="2">Seed Room</td>
+                                    <td data-checks-list="maps-mt-rugged-buzzar">Buzzar</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-mt-rugged-train">Train Station</td>
+                                    <td data-checks-list="maps-mt-rugged-whacka">Whacka</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
                             Dry Dry Desert
                         -------------------------------------------------------------->
                         <div id="desert-map" style="display:none;">
@@ -331,7 +350,7 @@
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-below-cactus">? Block</td>
                                     <td class="has-nothing"></td>
-                                    <td data-checks-list="maps-desert-bump-attack">Bump Attack</td>
+                                    <td data-checks-list="maps-desert-bump-attack">Spin Attack</td>
                                     <td data-checks-list="maps-desert-life-shroom">Life Shroom</td>
                                 </tr>
                                 <tr>
@@ -357,6 +376,54 @@
                             </table>
                         </div>
                         <!--------------------------------------------------------------
+                            Dry Dry Ruins
+                        -------------------------------------------------------------->
+                        <div id="ruins-map" style="display:none;">
+                            <h2>Dry Dry Ruins</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-ruins-pokey-hall" rowspan="2">Pokey Hall</td>
+                                    <td class="has-nothing">Sand Switch Room</td>
+                                    <td class="has-nothing" rowspan="3">Hub</td>
+                                    <td data-checks-list="maps-ruins-sand-switch-2">Sand Switch Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Ruins Entrance</td>
+                                    <td data-checks-list="maps-ruins-sand-room1">Sand Room</td>
+                                    <td data-checks-list="maps-ruins-key-room1">Key Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-ruins-super-hammer">Super Hammer Room</td>
+                                    <td class="has-nothing" rowspan="2">Hub</td>
+                                    <td data-checks-list="maps-ruins-pokey-room">Pokey Room</td>
+                                    <td data-checks-list="maps-ruins-chomp-room-2">Chomp Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing" rowspan="4">Spring Room</td>
+                                    <td class="has-nothing" rowspan="2" colspan="2">Puzzle Room</td>
+                                    <td class="has-nothing">Puzzle Solution Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td data-checks-list="maps-ruins-wall-stairs" rowspan="3">Wall Stairs</td>
+                                    <td data-checks-list="maps-ruins-chomp-room-3">Chomp Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Heart Block</td>
+                                    <td class="has-nothing">Boss Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-ruins-chomp-room-1">Chomp Room</td>
+                                    <td class="has-nothing" colspan="3">Beetle Room</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
                             Forever Forest
                         -------------------------------------------------------------->
                         <div id="forest-map" style="display:none;">
@@ -365,8 +432,7 @@
                                 <tr>
                                 </tr>
                                 <tr>
-                                    <td data-checks-list="maps-forest-fp">FP Plus</td>
-                                    <td class="empty" colspan="3"/>
+                                    <td class="empty" colspan="4"/>
                                     <td data-checks-list="maps-forest-hp">HP Plus</td>
                                     <td class="empty"/>
                                     <td class="has-nothing">Oaklie Room</td>
@@ -374,8 +440,7 @@
                                     <td class="has-nothing">Forest Room 2</td>
                                 </tr>
                                 <tr>
-                                    <td class="empty">&#x25B2;</td>
-                                    <td class="empty" colspan="3"/>
+                                    <td class="empty" colspan="4"/>
                                     <td class="empty">&#x25B2;</td>
                                     <td class="empty"/>
                                     <td class="empty">&#x25BC;</td>
@@ -383,8 +448,7 @@
                                     <td class="empty">&#x25B2;</td>
                                 </tr>
                                 <tr>
-                                    <td class="has-nothing">Last Forest Room</td>
-                                    <td class="empty">&#x25BA;</td>
+                                    <td class="empty" colspan="2"/>
                                     <td class="empty">Boo's Mansion</td>
                                     <td class="empty"/>
                                     <td class="has-nothing">Forest Room 5</td>
@@ -394,20 +458,54 @@
                                     <td class="has-nothing">Forest Entrance</td>
                                 </tr>
                                 <tr>
+                                    <td class="empty" colspan="2"/>
                                     <td class="empty">&#x25B2;</td>
-                                    <td class="empty" colspan="3"/>
+                                    <td class="empty" colspan="1"/>
                                     <td class="empty">&#x25BC;</td>
                                     <td class="empty" colspan="3"/>
                                     <td class="empty">&#x25B2;</td>
                                 </tr>
                                 <tr>
+                                    <td data-checks-list="maps-forest-fp">FP Plus</td>
+                                    <td class="empty">&#x25C0;</td>
                                     <td class="has-nothing">Forest Room 7</td>
-                                    <td class="empty">&#x25C0;</td>
-                                    <td class="empty">&#x25C0;</td>
                                     <td class="empty">&#x25C0;</td>
                                     <td class="has-nothing">Forest Room 6</td>
                                     <td class="empty" colspan="3"/>
                                     <td class="empty">Toad Town</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Boo's Mansion
+                        -------------------------------------------------------------->
+                        <div id="boo-mansion-map" style="display:none;">
+                            <h2>Boo's Mansion</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-bow" colspan="4">Bow's Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-weight">Weight Room</td>
+                                    <td data-checks-list="maps-boo-mansion-main" colspan="2" rowspan="2">Main Room</td>
+                                    <td data-checks-list="maps-boo-mansion-record">Record Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-trap" rowspan="3">Trap Chest</td>
+                                    <td data-checks-list="maps-boo-mansion-pixels" rowspan="2">Pixel Mario Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-outside" colspan="2">Outside</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-library" colspan="3">Library</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-boo-mansion-shop">Above Shop</td>
+                                    <td data-checks-list="maps-boo-mansion-boots">Super Boots</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing" colspan="2">Shop</td>
                                 </tr>
                             </table>
                         </div>
