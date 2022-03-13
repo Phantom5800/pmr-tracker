@@ -134,6 +134,7 @@
                     <div class="map-buttons">
                         <button data-map="prologue-map" class="map-select">Prologue</button>
                         <button data-map="toad-town-map" class="map-select selected">Toad Town</button>
+                        <button data-map="sewers-map" class="map-select">Toad Town Sewers</button>
                         <button data-map="pleasant-path-map" class="map-select">Pleasant Path</button>
                         <button data-map="koopa-village-map" class="map-select">Koopa Village</button>
                         <button data-map="kbf-map" class="map-select">Koopa Bros. Fortress</button>
@@ -206,6 +207,47 @@
                                 <tr>
                                     <td class="empty" colspan="2"/>
                                     <td data-checks-list="maps-toad-town-train">Train Station</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Sewers
+                        -------------------------------------------------------------->
+                        <div id="sewers-map" style="display:none;">
+                            <h2>Toad Town Sewers</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-sewers-pipe" rowspan="2">Pipe</td>
+                                    <td class="has-nothing"  colspan="4">Shortcuts</td>
+                                    <td class="has-nothing">Entrance</td>
+                                    <td data-checks-list="maps-sewers-bricks">Brick Blocks</td>
+                                    <td data-checks-list="maps-sewers-shrink-stomp">Shrink Stomp</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-sewers-upgrade">Upgrade Block</td>
+                                    <td class="has-nothing" colspan="2">Chapter 3 Shortcut</td>
+                                    <td class="has-nothing">Sushie Room</td>
+                                    <td data-checks-list="maps-sewers-spike-room">Spike Room</td>
+                                    <td data-checks-list="maps-sewers-chapter-7" rowspan="2">Chapter 7 Door</td>
+                                    <td class="has-nothing">Chapter 7 Pipe</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-sewers-power-smash">Power Smash</td>
+                                    <td class="has-nothing">Seesaw</td>
+                                    <td data-checks-list="maps-sewers-power-elevator">Elevator</td>
+                                    <td class="has-nothing">Upgrade Block</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Ultra Boots Room</td>
+                                    <td data-checks-list="maps-sewers-life-shroom">Ultra Boots Blocks</td>
+                                    <td data-checks-list="maps-sewers-spiny">Spiny Room</td>
+                                    <td class="has-nothing">Below Blue House</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td class="has-nothing">Upgrade Block</td>
                                 </tr>
                             </table>
                         </div>
@@ -893,6 +935,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">[Panel] By guard house</label></li>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Give Frying Pan to Tayce T.</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Inside Blue House</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-residential" style="display:none;">
