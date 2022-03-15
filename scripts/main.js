@@ -801,12 +801,14 @@ $(document).ready(function(){
     $("#panels-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("panels-randomized", isChecked);
+        toggleChecks("[Panel]", !isChecked);
         countChecks();
     });
 
     $("#coins-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coins-randomized", isChecked);
+        toggleChecks("[Coinsanity]", !isChecked);
         countChecks();
     });
 
