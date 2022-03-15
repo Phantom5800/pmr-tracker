@@ -487,6 +487,14 @@ $(document).ready(function(){
                         $("#fast-bowser-castle").click();
                     }
 
+                    if (data["IncludePanels"] != $("#panels-randomized").is(':checked')) {
+                        $("#panels-randomized").click();
+                    }
+
+                    if (data["IncludeCoins"] != $("#coins-randomized").is(':checked')) {
+                        $("#coins-randomized").click();
+                    }
+
                     // TODO: koopa koot is not randomized yet, add it here when it is
                     if ($("#koopa-koot-randomized").is(':checked')) {
                         $("#koopa-koot-randomized").click(); // disable koopa koot if enabled
@@ -785,6 +793,31 @@ $(document).ready(function(){
     var highlight_key_items = localStorageGetWithDefault("highlight-key", false) == "true";
     if (highlight_key_items) {
         $("#highlight-key").click();
+    }
+
+    ////////////////////////////////////////////////////////////////
+    // map exclusive settings
+    ////////////////////////////////////////////////////////////////
+    $("#panels-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("panels-randomized", isChecked);
+        countChecks();
+    });
+
+    $("#coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("coins-randomized", isChecked);
+        countChecks();
+    });
+
+    var panels_randomized = localStorageGetWithDefault("panels-randomized", "true") == "true";
+    if (!panels_randomized) {
+        $("#panels-randomized").click();
+    }
+
+    var coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
+    if (!coins_randomized) {
+        $("#coins-randomized").click();
     }
 
     ////////////////////////////////////////////////////////////////

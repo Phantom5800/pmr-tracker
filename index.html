@@ -129,7 +129,20 @@
             -->
             <div class="flex-column">
                 <div class="map-display section">
-                    <h1>Maps</h1>
+                    <table width="100%">
+                        <tr style="height: 4em;">
+                            <td style="text-align: left; width: 30%;">
+                                <h1>Maps</h1>
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="flex-row-reverse">
+                                    <div id="total-checks" class="flex-item">Total Checks: 0/0</div>
+                                    <div id="coinsanity-checks" class="flex-item">Coinsanity: 0/0</div>
+                                    <div id="panel-checks" class="flex-item">Panels: 0/0</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <!-- Put the area buttons here -->
                     <div class="map-buttons">
                         <button data-map="prologue-map" class="map-select">Prologue</button>
@@ -1689,6 +1702,26 @@
                 </tr>
                 <tr class="seed-setting">
                     <td colspan="4"><hr style="margin-left:50px;"></td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name seed-setting" colspan="3">Panels Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="panels-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="panels-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name seed-setting" colspan="3">Coinsanity</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="coins-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="coins-randomized"></label>
+                        </div>
+                    </td>
                 </tr>
                 <tr class="seed-setting">
                     <td class="option-name seed-setting" colspan="3">Koopa Koot Randomized</td>
