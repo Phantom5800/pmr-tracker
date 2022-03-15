@@ -1,4 +1,31 @@
+function countChecks() {
+    var total_checks = 0;
+    var panel_checks = 0;
+    var coinsanity_checks = 0;
+    $("#map-checks label").each(function() {
+        if ($(this).text().includes("[Coinsanity]")) {
+            if ($("#coins-randomized").is(':checked')) {
+                ++coinsanity_checks;
+                ++total_checks;
+            }
+        } else if ($(this).text().includes("[Panel]")) {
+            if ($("#panels-randomized").is(':checked')) {
+                ++panel_checks;
+                ++total_checks;
+            }
+        } else {
+            ++total_checks;
+        }
+    });
+
+    $("#total-checks").text(`Total Checks: 0/${total_checks}`);
+    $("#coinsanity-checks").text(`Coinsanity: 0/${coinsanity_checks}`);
+    $("#panel-checks").text(`Panels: 0/${panel_checks}`);
+}
+
 function initializeMaps() {
+    countChecks();
+
     // select a set of maps
     $("button.map-select").click(function() {
         $("button.map-select").removeClass("selected");

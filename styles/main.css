@@ -18,6 +18,18 @@ div.flex-column {
     flex-direction: column;
 }
 
+div.flex-row-reverse {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+}
+
+div.flex-item {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+}
+
 table, tr, td {
     border: none;
 
