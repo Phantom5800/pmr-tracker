@@ -85,7 +85,7 @@ function updateCompletion(mapGroup, skipVisible = false) {
     totalCount = 0;
     completeCount = 0;
     $("td[data-checks-list]").each(function() {
-        if ($(this).is(':visible')) {
+        if ($(this).is(':visible') || skipVisible) {
             ++totalCount;
             if ($(this).hasClass("has-nothing") || $(this).hasClass("complete")) {
                 ++completeCount;
@@ -98,6 +98,19 @@ function updateCompletion(mapGroup, skipVisible = false) {
 
 function initializeMaps() {
     countChecks();
+
+    // count how many checks per area
+    var mapChecks = {};
+    $("#map-checks div").each(function() {
+        var key = $(this).attr("id").split("-").slice(0,2).join("-");
+        if (!mapChecks[key]) {
+            mapChecks[key] = 0;
+        }
+        mapChecks[key] += $(this).children("ul").children("li").length;
+    });
+    for (map in mapChecks) {
+        console.log(`${map} - ${mapChecks[map]}`);
+    }
 
     // select a set of maps
     $("button.map-select").click(function() {
