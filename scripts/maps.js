@@ -25,6 +25,10 @@ function countChecks() {
                 ++panel_checks;
                 ++total_checks;
             }
+        } else if ($(this).text().includes("[Dojo]")) {
+            if ($("#dojo-randomized").is(':checked')) {
+                ++total_checks;
+            }
         } else {
             ++total_checks;
         }
@@ -36,9 +40,6 @@ function countChecks() {
 }
 
 function toggleChecks(check, enable) {
-    // NOTE: for disabling a check, need to add disabled attribute to the input field and a
-    //       "disabled" class to the label
-
     var changedMapGroups = [];
 
     $("#map-checks input").each(function() {
