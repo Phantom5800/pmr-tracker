@@ -638,6 +638,8 @@ $(document).ready(function(){
         var isCompactMiscCombined = $("#compact-tracker").is(':checked') && $("#combine-misc").is(':checked');
         $(".dojo-tracker").toggle(isChecked && !isCompactMiscCombined);
         $(".dojo-optional").toggle(isChecked);
+        toggleChecks("[Dojo]", !isChecked);
+        countChecks();
         localStorage.setItem("dojo-randomized", isChecked);
     });
 
