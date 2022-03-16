@@ -151,6 +151,7 @@ header {
 
 #logo-img {
     height: 40px;
+    cursor: unset;
     padding-left: 7.5em;
 }
 
