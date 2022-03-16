@@ -6,6 +6,7 @@
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="scripts/compact.js"></script>
+        <script src="scripts/maps.js"></script>
         <script src="scripts/main.js"></script>
         <link rel="stylesheet" href="styles/main.css">
 
@@ -121,6 +122,2071 @@
                         <td><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></td>
                     </tr>
                 </table>
+            </div>
+
+            <!--
+                Map
+            -->
+            <div class="flex-column">
+                <div class="map-display section">
+                    <table width="100%">
+                        <tr style="height: 4em;">
+                            <td style="text-align: left; width: 30%;">
+                                <h1>Maps</h1>
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="flex-row-reverse">
+                                    <div id="total-checks" class="flex-item">Total Checks: 0/0</div>
+                                    <div id="coinsanity-checks" class="flex-item">Coinsanity: 0/0</div>
+                                    <div id="panel-checks" class="flex-item">Panels: 0/0</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- Put the area buttons here -->
+                    <div class="map-buttons">
+                        <button data-map="prologue-map" class="map-select">Prologue</button>
+                        <button data-map="toad-town-map" class="map-select selected">Toad Town</button>
+                        <button data-map="sewers-map" class="map-select">Toad Town Tunnels</button>
+                        <button data-map="pleasant-path-map" class="map-select">Pleasant Path</button>
+                        <button data-map="koopa-village-map" class="map-select">Koopa Village</button>
+                        <button data-map="kbf-map" class="map-select">Koopa Bros. Fortress</button>
+                        <button data-map="mt-rugged-map" class="map-select">Mt. Rugged</button>
+                        <button data-map="desert-map" class="map-select">Dry Dry Desert</button>
+                        <button data-map="ruins-map" class="map-select">Dry Dry Ruins</button>
+                        <button data-map="forest-map" class="map-select">Forever Forest</button>
+                        <button data-map="boo-mansion-map" class="map-select">Boo's Mansion</button>
+                        <button data-map="gusty-gulch-map" class="map-select">Gusty Gulch</button>
+                        <button data-map="tubbas-castle-map" class="map-select">Tubba's Castle</button>
+                        <button data-map="toybox-map" class="map-select">Shy Guy's Toybox</button>
+                        <button data-map="yoshi-map" class="map-select">Yoshi's Island</button>
+                        <button data-map="mt-lavalava-map" class="map-select">Mt. Lavalava</button>
+                        <button data-map="flower-fields-map" class="map-select">Flower Fields</button>
+                        <button data-map="shiver-region-map" class="map-select">Shiver Region</button>
+                        <button data-map="crystal-palace-map" class="map-select">Crystal Palace</button>
+                    </div>
+
+                    <!-- Display a set of maps as a grid -->
+                    <div id="map-grid">
+                        <!--------------------------------------------------------------
+                            Prologue
+                        -------------------------------------------------------------->
+                        <div id="prologue-map" style="display:none;">
+                            <h2>Prologue</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-prologue-playground">Playground</td>
+                                    <td data-checks-list="maps-prologue-outside-playground">Outside Playground</td>
+                                    <td data-checks-list="maps-prologue-outside-village">Outside Village</td>
+                                    <td data-checks-list="maps-prologue-village" rowspan="2">Goomba Village</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-prologue-landing">Mario's Landing</td>
+                                    <td data-checks-list="maps-prologue-road1">Goomba Road 1</td>
+                                    <td data-checks-list="maps-prologue-road2">Goomba Road 2</td>
+                                    <td class="has-nothing" data-checks-list="maps-prologue-flavored">Red & Blue Goomba</td>
+                                    <td class="has-nothing" data-checks-list="maps-prologue-outside-castle">Outside Castle</td>
+                                    <td data-checks-list="maps-prologue-castle">Goomba King's Castle</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Toad Town
+                        -------------------------------------------------------------->
+                        <div id="toad-town-map">
+                            <h2>Toad Town</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toad-town-castle" rowspan="2">Castle Ruins</td>
+                                    <td data-checks-list="maps-toad-town-summit">Shooting Star Summit</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toad-town-merluvlee">Merluvlee's House</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toad-town-outside">Outside Toad Town</td>
+                                    <td data-checks-list="maps-toad-town-gate">Main Gate</td>
+                                    <td data-checks-list="maps-toad-town-center">Central Plaza</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toad-town-harbor">Harbor</td>
+                                    <td data-checks-list="maps-toad-town-residential">Residential Area</td>
+                                    <td data-checks-list="maps-toad-town-below-center">Below Plaza</td>
+                                    <td class="has-nothing">Forever Forest Entrance</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toad-town-train">Train Station</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Sewers
+                        -------------------------------------------------------------->
+                        <div id="sewers-map" style="display:none;">
+                            <h2>Toad Town Tunnels</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-sewers-pipe" rowspan="2">Pipe</td>
+                                    <td class="has-nothing" colspan="4">Shortcuts</td>
+                                    <td class="has-nothing">Entrance</td>
+                                    <td data-checks-list="maps-sewers-bricks">Brick Blocks</td>
+                                    <td data-checks-list="maps-sewers-shrink-stomp">Shrink Stomp</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-sewers-upgrade">Upgrade Block</td>
+                                    <td class="has-nothing" colspan="2">Chapter 3 Shortcut</td>
+                                    <td class="has-nothing">Sushie Room</td>
+                                    <td data-checks-list="maps-sewers-spike-room">Spike Room</td>
+                                    <td data-checks-list="maps-sewers-chapter-7" rowspan="2">Chapter 7 Door</td>
+                                    <td class="has-nothing">Chapter 7 Pipe</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-sewers-power-smash">Power Smash</td>
+                                    <td class="has-nothing">Seesaw</td>
+                                    <td data-checks-list="maps-sewers-power-elevator">Elevator</td>
+                                    <td class="has-nothing">Upgrade Block</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Ultra Boots Room</td>
+                                    <td data-checks-list="maps-sewers-life-shroom">Ultra Boots Blocks</td>
+                                    <td data-checks-list="maps-sewers-spiny">Spiny Room</td>
+                                    <td class="has-nothing">Below Blue House</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td class="has-nothing">Upgrade Block</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Pleasant Path
+                        -------------------------------------------------------------->
+                        <div id="pleasant-path-map" style="display:none;">
+                            <h2>Pleasant Path</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-pleasant-path-toad">Outside Toad Town</td>
+                                    <td data-checks-list="maps-pleasant-path-bridge1">Switch Bridge #1</td>
+                                    <td data-checks-list="maps-pleasant-path-koopa">Outside Koopa Village</td>
+                                    <td data-checks-list="maps-pleasant-path-bridge2">Switch Bridge #2</td>
+                                    <td data-checks-list="maps-pleasant-path-fortress">Path to Fortress</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Village
+                        -------------------------------------------------------------->
+                        <div id="koopa-village-map" style="display:none;">
+                            <h2>Koopa Village</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" />
+                                    <td class="has-nothing">Fuzzie Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" />
+                                    <td data-checks-list="maps-koopa-village-behind-kooper">Behind Kooper's House</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-koopa-village-west">Koopa Village West</td>
+                                    <td data-checks-list="maps-koopa-village-east">Koopa Village East</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Bros Fortress
+                        -------------------------------------------------------------->
+                        <div id="kbf-map" style="display:none;">
+                            <h2>Koopa Bros. Fortress</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-kbf-entrance" rowspan="3">Fortress Entrance</td>
+                                    <td data-checks-list="maps-kbf-cannons">Cannons</td>
+                                    <td class="has-nothing">Boss Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing" rowspan="2">Bomb Room</td>
+                                    <td data-checks-list="maps-kbf-puzzle-room" rowspan="2">Kooper Puzzle Room</td>
+                                    <td class="has-nothing" rowspan="3">Staircase Room</td>
+                                    <td class="has-nothing" colspan="2" rowspan="2">Trap Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-kbf-outside">Outside Fortress</td>
+                                    <td data-checks-list="maps-kbf-refund">Outside Chest</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-kbf-firebars">Firebars</td>
+                                    <td class="has-nothing">The Pit</td>
+                                    <td data-checks-list="maps-kbf-jail">Jail</td>
+                                    <td class="has-nothing">Save Block</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Mt. Rugged
+                        -------------------------------------------------------------->
+                        <div id="mt-rugged-map" style="display:none;">
+                            <h2>Mt. Rugged</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-mt-rugged-letter3">Letter 3</td>
+                                    <td data-checks-list="maps-mt-rugged-letter1" rowspan="2">Letter 1</td>
+                                    <td data-checks-list="maps-mt-rugged-seed" rowspan="2">Seed Room</td>
+                                    <td data-checks-list="maps-mt-rugged-buzzar">Buzzar</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-mt-rugged-train">Train Station</td>
+                                    <td data-checks-list="maps-mt-rugged-whacka">Whacka</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Dry Dry Desert
+                        -------------------------------------------------------------->
+                        <div id="desert-map" style="display:none;">
+                            <h2>Dry Dry Desert</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-desert-top-left">Two ? Blocks</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing">Dry Dry Ruins</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-pokey">Pokey Room</td>
+                                    <td class="has-nothing"></td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-desert-thunder-rage">Thunder Rage</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-above-runaway-pay">Two ? Blocks</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-desert-hammer-block">Hammer Block</td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-five-block">Five ? Blocks</td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-runaway-pay">Runaway Pay</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing">Save Block</td>
+                                    <td data-checks-list="maps-desert-camp">Kolorado's Camp</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-stone-cactus">Stone Cactus</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-outside-outpost">Outside Outpost</td>
+                                    <td data-checks-list="maps-desert-outpost-west">Dry Dry Outpost West</td>
+                                    <td data-checks-list="maps-desert-outpost-east">Dry Dry Outpost East</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-below-cactus">? Block</td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-bump-attack">Spin Attack</td>
+                                    <td data-checks-list="maps-desert-life-shroom">Life Shroom</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-before-oasis">Before Oasis</td>
+                                    <td data-checks-list="maps-desert-oasis">Oasis</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-fxc">Attack FX C</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-opposite-fxc">? Block</td>
+                                    <td class="has-nothing"></td>
+                                    <td class="has-nothing"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Dry Dry Ruins
+                        -------------------------------------------------------------->
+                        <div id="ruins-map" style="display:none;">
+                            <h2>Dry Dry Ruins</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-ruins-pokey-hall" rowspan="2">Pokey Hall</td>
+                                    <td class="has-nothing">Sand Switch Room</td>
+                                    <td class="has-nothing" rowspan="3">Hub</td>
+                                    <td data-checks-list="maps-ruins-sand-switch-2">Sand Switch Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Ruins Entrance</td>
+                                    <td data-checks-list="maps-ruins-sand-room1">Sand Room</td>
+                                    <td data-checks-list="maps-ruins-key-room1">Key Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-ruins-super-hammer">Super Hammer Room</td>
+                                    <td class="has-nothing" rowspan="2">Hub</td>
+                                    <td data-checks-list="maps-ruins-pokey-room">Pokey Room</td>
+                                    <td data-checks-list="maps-ruins-chomp-room-2">Chomp Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing" rowspan="4">Spring Room</td>
+                                    <td class="has-nothing" rowspan="2" colspan="2">Puzzle Room</td>
+                                    <td class="has-nothing">Puzzle Solution Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td data-checks-list="maps-ruins-wall-stairs" rowspan="3">Wall Stairs</td>
+                                    <td data-checks-list="maps-ruins-chomp-room-3">Chomp Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Heart Block</td>
+                                    <td class="has-nothing">Boss Room</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-ruins-chomp-room-1">Chomp Room</td>
+                                    <td class="has-nothing" colspan="3">Beetle Room</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Forever Forest
+                        -------------------------------------------------------------->
+                        <div id="forest-map" style="display:none;">
+                            <h2>Forever Forest</h2>
+                            <table class="map">
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-forest-hp">HP Plus</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Oaklie Room</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="has-nothing">Forest Room 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td class="empty">&#x25B2;</td>
+                                    <td class="empty"/>
+                                    <td class="empty">&#x25BC;</td>
+                                    <td class="empty"/>
+                                    <td class="empty">&#x25B2;</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td class="empty">Boo's Mansion</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Forest Room 5</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td data-checks-list="maps-forest-seed">Seed Room</td>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Forest Entrance</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td class="empty">&#x25B2;</td>
+                                    <td class="empty" colspan="1"/>
+                                    <td class="empty">&#x25BC;</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">&#x25B2;</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-forest-fp">FP Plus</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="has-nothing">Forest Room 7</td>
+                                    <td class="empty">&#x25C0;</td>
+                                    <td class="has-nothing">Forest Room 6</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="empty">Toad Town</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Boo's Mansion
+                        -------------------------------------------------------------->
+                        <div id="boo-mansion-map" style="display:none;">
+                            <h2>Boo's Mansion</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-bow" colspan="4">Bow's Room</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-weight">Weight Room</td>
+                                    <td data-checks-list="maps-boo-mansion-main" rowspan="2" colspan="2">Main Room</td>
+                                    <td data-checks-list="maps-boo-mansion-record">Record Room</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-trap" rowspan="3">Trap Chest</td>
+                                    <td data-checks-list="maps-boo-mansion-pixels" rowspan="2">Pixel Mario Room</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-outside" colspan="2">Outside</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-library" colspan="3">Library</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-boo-mansion-shop">Above Shop</td>
+                                    <td data-checks-list="maps-boo-mansion-boots">Super Boots</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing" colspan="2">Shop</td>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                    <td class="empty"/>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Gusty Gulch
+                        -------------------------------------------------------------->
+                        <div id="gusty-gulch-map" style="display:none;">
+                            <h2>Gusty Gulch</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-gusty-gulch-gate">Gate</td>
+                                    <td class="has-nothing">Windmill</td>
+                                    <td data-checks-list="maps-gusty-gulch-village1">Village 1</td>
+                                    <td class="has-nothing">Village 2</td>
+                                    <td data-checks-list="maps-gusty-gulch-1">Gulch 1</td>
+                                    <td data-checks-list="maps-gusty-gulch-2">Gulch 2</td>
+                                    <td class="has-nothing">Outside Tubba's Castle</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Tubba's Castle
+                        -------------------------------------------------------------->
+                        <div id="tubbas-castle-map" style="display:none;">
+                            <h2>Tubba's Castle</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-tubba-sleeping-clubba">Sleeping Clubba's</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-tubba-stairwell" rowspan="3">Stairwell</td>
+                                    <td class="has-nothing" colspan="2">Tubba Chase Room</td>
+                                    <td class="has-nothing">Save Block</td>
+                                    <td class="has-nothing" rowspan="5">Main Hall</td>
+                                    <td class="has-nothing">Tubba's Bedroom</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-tubba-behind-clock">Behind Clock</td>
+                                    <td data-checks-list="maps-tubba-spikes">Spike Room</td>
+                                    <td class="has-nothing">Floor Panel Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing">Above Table</td>
+                                    <td class="has-nothing" colspan="2">Left Hall</td>
+                                    <td class="has-nothing" rowspan="3">Right Hall / Stairwell</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-tubba-study">Study</td>
+                                    <td data-checks-list="maps-tubba-spring">Spring Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing" rowspan="2">Stairwell</td>
+                                    <td data-checks-list="maps-tubba-big-table">Table</td>
+                                    <td class="has-nothing" colspan="2">Left Hall</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-tubba-basement-chest">Basement Chest</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Shy Guy's Toybox
+                        -------------------------------------------------------------->
+                        <div id="toybox-map" style="display:none;">
+                            <h2>Shy Guy's Toybox</h2>
+                            <table class="map">
+                                <tr>
+                                    <td data-checks-list="maps-toybox-playroom">Playroom</td>
+                                    <td data-checks-list="maps-toybox-anti-guy">Anti Guy</td>
+                                    <td data-checks-list="maps-toybox-blue-station">Blue Station</td>
+                                    <td data-checks-list="maps-toybox-block-city">Block City</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toybox-gourmet-guy">Gourmet Guy</td>
+                                    <td data-checks-list="maps-toybox-tracks-hallway">Tracks Hallway</td>
+                                    <td data-checks-list="maps-toybox-pink-station">Pink Station</td>
+                                    <td data-checks-list="maps-toybox-playhouse">Playhouse</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-toybox-green-station">Green Station</td>
+                                    <td data-checks-list="maps-toybox-treadmill">Treadmill</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-toybox-lantern-ghost">Lantern Ghost</td>
+                                    <td data-checks-list="maps-toybox-moving-platforms">Moving Platforms</td>
+                                    <td data-checks-list="maps-toybox-red-station">Red Station</td>
+                                    <td data-checks-list="maps-toybox-barricade">Shy Guy Barricade</td>
+                                    <td class="has-nothing">Dark Room</td>
+                                    <td class="has-nothing">General Guy</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Yoshi's Island
+                        -------------------------------------------------------------->
+                        <div id="yoshi-map" style="display:none;">
+                            <h2>Yoshi's Island</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-yoshi-ambush-room" colspan="3">Ambush Room</td>
+                                    <td data-checks-list="maps-yoshi-raph" rowspan="6">Raph's Tree</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-yoshi-vine-room">Vine Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-yoshi-block-puzzle">Block Puzzle</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-yoshi-deep-jungle">Deep Jungle</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-yoshi-lightblue-yoshi">Light-Blue Yoshi</td>
+                                    <td data-checks-list="maps-yoshi-nw-jungle">NW Jungle</td>
+                                    <td data-checks-list="maps-yoshi-ne-jungle">NE Jungle</td>
+                                    <td class="has-nothing">Yellow Yoshi</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-yoshi-whale" rowspan="2">Whale</td>
+                                    <td data-checks-list="maps-yoshi-sw-jungle">SW Jungle</td>
+                                    <td data-checks-list="maps-yoshi-se-jungle" colspan="2">SE Jungle</td>
+                                    <td data-checks-list="maps-yoshi-sushie">Sushie Room</td>
+                                </tr>
+                                <tr>                                    
+                                    <td data-checks-list="maps-yoshi-beach">Beach</td>
+                                    <td data-checks-list="maps-yoshi-west-village">West Village</td>
+                                    <td data-checks-list="maps-yoshi-east-village" colspan="2">East Village</td>
+                                    <td data-checks-list="maps-yoshi-volcano">Outside Volcano</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Mt Lavalava
+                        -------------------------------------------------------------->
+                        <div id="mt-lavalava-map" style="display:none;">
+                            <h2>Mt. Lavalava</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty"/>
+                                    <td class="has-nothing">Mt. Lavalava Entrance</td>
+                                    <td class="has-nothing">Sinking Platforms</td>
+                                    <td data-checks-list="maps-lavalav-hub" rowspan="3">Hub Room</td>
+                                    <td class="has-nothing">Firebars + Upgrade</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td data-checks-list="maps-lavalav-zipline" rowspan="2">Zipline</td>
+                                    <td class="has-nothing">Spike Ball Chase</td>
+                                    <td class="has-nothing">Moving Platforms</td>
+                                    <td class="has-nothing">Spike Ball Wall Break</td>
+                                    <td data-checks-list="maps-lavalav-save" rowspan="2">Save Block</td>
+                                    <td data-checks-list="maps-lavalav-deadend">Deadend</td>
+                                </tr>
+                                <tr>
+                                    <td class="has-nothing">Ultra Hammer</td>
+                                    <td data-checks-list="maps-lavalav-lava-puzzle" rowspan="2">Lava Puzzle</td>
+                                    <td class="has-nothing">Slope Hallway</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Lava Piranha</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-lavalav-dizzy">Dizzy Stomp</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Flower Fields
+                        -------------------------------------------------------------->
+                        <div id="flower-fields-map" style="display:none;">
+                            <h2>Flower Fields</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="has-nothing">Sun Tower</td>
+                                    <td data-checks-list="maps-flower-fields-lakilester">Lakilester</td>
+                                    <td data-checks-list="maps-flower-fields-bubble-plant">Bubble Plant</td>
+                                    <td class="has-nothing" rowspan="3">Tree</td>
+                                    <td data-checks-list="maps-flower-fields-elevators">Elevators</td>
+                                    <td data-checks-list="maps-flower-fields-logs">Fallen Logs</td>
+                                    <td class="has-nothing">Cloud Machine</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-flower-fields-rosie">Rosie</td>
+                                    <td class="has-nothing">Maze</td>
+                                    <td data-checks-list="maps-flower-fields-blue-flower">Blue Flower</td>
+                                    <td data-checks-list="maps-flower-fields-three-trees">Three Trees</td>
+                                    <td data-checks-list="maps-flower-fields-petunia">Petunia</td>
+                                    <td data-checks-list="maps-flower-fields-well">Well</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                    <td data-checks-list="maps-flower-fields-posie">Posie</td>
+                                    <td data-checks-list="maps-flower-fields-red-flower">Red Flower</td>
+                                    <td data-checks-list="maps-flower-fields-yellow-flower">Yellow Flower</td>
+                                    <td data-checks-list="maps-flower-fields-bubble-tree">Bubble Berry Tree</td>
+                                    <td data-checks-list="maps-flower-fields-lily">Lily</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Shiver Region
+                        -------------------------------------------------------------->
+                        <div id="shiver-region-map" style="display:none;">
+                            <h2>Shiver Region</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-shiver-region-staircase">Ice Staircase</td>
+                                    <td data-checks-list="maps-shiver-region-merlar">Merlar's Sanctuary</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-shiver-region-tunnel">Shiver Mountain Tunnel</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-shiver-region-hills">Shiver Mountain Hills</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-shiver-region-passage">Shiver Mountain Passage</td>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-shiver-region-west-city">West Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-center-city">Center Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-east-city">East Shiver City</td>
+                                    <td class="has-nothing">Outside Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-snowfield">Shiver Snowfield</td>
+                                    <td data-checks-list="maps-shiver-outside-starborn">Outside Starborn Valley</td>
+                                    <td data-checks-list="maps-shiver-region-starborn">Starborn Valley</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Crystal Palace
+                        -------------------------------------------------------------->
+                        <div id="crystal-palace-map" style="display:none;">
+                            <h2>Crystal Palace</h2>
+                            <table class="map">
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-crystal-panel-room" rowspan="3">Ground Panel Room</td>
+                                    <td class="has-nothing">Duplighost Room</td>
+                                    <td data-checks-list="maps-crystal-shooting-star">Item Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Swoooper Room</td>
+                                    <td data-checks-list="maps-crystal-pdown">Item Room</td>
+                                    <td class="empty" colspan="2"/>
+                                    <td data-checks-list="maps-crystal-small-statue" rowspan="2">Small Statue Room</td>
+                                    <td class="has-nothing">Clubba Room</td>
+                                    <td data-checks-list="maps-crystal-pup">Item Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                </tr>
+                                <tr>
+                                    <td data-checks-list="maps-crystal-palace-cave">Cave</td>
+                                    <td class="has-nothing" rowspan="2">Crystal Palace Entrance</td>
+                                    <td class="has-nothing" rowspan="2">Main Room</td>
+                                    <td class="has-nothing" rowspan="2">Elevator + Clubba Room</td>
+                                    <td class="has-nothing" rowspan="2">Bomb Switch</td>
+                                    <td data-checks-list="maps-crystal-triple-dip" rowspan="2">Triple Dip</td>
+                                    <td class="has-nothing" rowspan="2">Kooper Puzzle</td>
+                                    <td class="has-nothing" rowspan="2">Hub 2</td>
+                                    <td class="has-nothing" rowspan="2">Kooper Switch + Palace Key Lock</td>
+                                    <td class="has-nothing" rowspan="2">Albino Dinos + Crystal King</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty"/>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="2"/>
+                                    <td class="has-nothing" rowspan="3">X Mark Room</td>
+                                    <td class="empty" colspan="4"/>
+                                    <td data-checks-list="maps-crystal-large-statue" rowspan="2">Large Statue Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Swooper Room</td>
+                                    <td data-checks-list="maps-crystal-blue-key">Item Room</td>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Duplighost Room</td>
+                                    <td data-checks-list="maps-crystal-palace-key">Item Room</td>
+                                </tr>
+                                <tr>
+                                    <td class="empty" colspan="3"/>
+                                    <td class="has-nothing">Bombette Puzzle</td>
+                                    <td data-checks-list="maps-crystal-red-key">Item Room</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Put the checks for the current room here -->
+                    <div id="map-checks">
+                        <!--------------------------------------------------------------
+                            Toad Town
+                        -------------------------------------------------------------->
+                        <div id="maps-prologue-playground" style="display:none;">
+                            <h3>Playground</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-playground" autocomplete="off" type="checkbox">Far right tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-outside-playground" style="display:none;">
+                            <h3>Outside Playground</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">[Panel] Right of stone block</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">[Coinsanity] 4 items above spring</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">Far left ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">Tree</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">Item on ledge above spring</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox">? Block above stone block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-outside-village" style="display:none;">
+                            <h3>Outside Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-outside-village" autocomplete="off" type="checkbox">Item on ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-village" style="display:none;">
+                            <h3>Goomba Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Goombario</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Goompa</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Goompa's Veranda</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-landing" style="display:none;">
+                            <h3>Mario's Landing</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-landing" autocomplete="off" type="checkbox">[Panel] Middle of the room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-road1" style="display:none;">
+                            <h3>Goomba Road 1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-road2" style="display:none;">
+                            <h3>Goomba Road 2</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-road2" autocomplete="off" type="checkbox">? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-road2" autocomplete="off" type="checkbox">Sign</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-prologue-castle" style="display:none;">
+                            <h3>Goomba King's Castle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox">[Panel] Right side of Goomba King's Fortress near tree</label></li>
+                                <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox">Tree</label></li>
+                                <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox">Break brick block to spawn ? Block</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Toad Town
+                        -------------------------------------------------------------->
+                        <div id="maps-toad-town-summit" style="display:none;">
+                            <h3>Shooting Star Summit</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-summit" autocomplete="off" type="checkbox">[Panel] On First Step</label></li>
+                                <li><label><input data-map-group="maps-toad-town-summit" autocomplete="off" type="checkbox">Left from entrance</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-castle" style="display:none;">
+                            <h3>Castle Ruins</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-castle" autocomplete="off" type="checkbox">[Panel] Right side of bridge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-merluvlee" style="display:none;">
+                            <h3>Merluvlee's House</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-merluvlee" autocomplete="off" type="checkbox">[Panel] Near picnic table</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-harbor" style="display:none;">
+                            <h3>Toad Town Harbor</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">[Panel] Outside Club 64</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Give Melody to Simon in Club 64</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-outside" style="display:none;">
+                            <h3>Outside Toad Town</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-outside" autocomplete="off" type="checkbox">Chest on top of Gate</label></li>
+                                <li><label><input data-map-group="maps-toad-town-outside" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-gate" style="display:none;">
+                            <h3>Main Gate</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Panel] By three toad sisters</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Chan</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Lee</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Master 1</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Master 2</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Master 3</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Item at Sushie panel</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-center" style="display:none;">
+                            <h3>Central Plaza</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Tree by Merlon's house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Give Calculator to Rowf</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-below-center" style="display:none;">
+                            <h3>Below Plaza</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">[Panel] By guard house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Bub-ulb</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Give Frying Pan to Tayce T.</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Inside Blue House</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-residential" style="display:none;">
+                            <h3>Residential Area</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-residential" autocomplete="off" type="checkbox">Four items in Harry's Storeroom</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toad-town-train" style="display:none;">
+                            <h3>Train Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toad-town-train" autocomplete="off" type="checkbox">[Panel] Bottom right side of room</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Sewers
+                        -------------------------------------------------------------->
+                        <div id="maps-sewers-pipe" style="display:none;">
+                            <h3>Pipe</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox">Middle ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-bricks" style="display:none;">
+                            <h3>Bricks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-bricks" autocomplete="off" type="checkbox">Hidden block next to last brick block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-shrink-stomp" style="display:none;">
+                            <h3>Shrink Stomp</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-shrink-stomp" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-upgrade" style="display:none;">
+                            <h3>Upgrade Block</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox">[Coinsanity] Left invisible block</label></li>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox">[Coinsanity] Middle invisible block</label></li>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox">[Coinsanity] Right invisible block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-spike-room" style="display:none;">
+                            <h3>Spike Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-spike-room" autocomplete="off" type="checkbox">Ultra Boots ? block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-chapter-7" style="display:none;">
+                            <h3>Chapter 7 Door</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox">[Coinsanity] ? Block 1</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox">[Coinsanity] ? Block 2</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox">[Coinsanity] ? Block 3</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox">[Coinsanity] ? Block 4</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox">[Coinsanity] ? Block 5</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-power-smash" style="display:none;">
+                            <h3>Power Smash</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-power-smash" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-power-elevator" style="display:none;">
+                            <h3>Elevator</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-power-elevator" autocomplete="off" type="checkbox">Item on far right ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-life-shroom" style="display:none;">
+                            <h3>Ultra Boots Blocks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox">Middle ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-sewers-spiny" style="display:none;">
+                            <h3>Spiny Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox">Invisible block left of pipe</label></li>
+                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox">Invisible block between first and second spiny</label></li>
+                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox">Invisible block next to visible ? block</label></li>
+                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox">? Block by stone block</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Pleasant Path
+                        -------------------------------------------------------------->
+                        <div id="maps-pleasant-path-toad" style="display:none;">
+                            <h3>Outside Toad Town</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Middle ? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Right ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-bridge1" style="display:none;">
+                            <h3>Switch Bridge #1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">Kooper item</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge1" autocomplete="off" type="checkbox">Item behind small fence</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-koopa" style="display:none;">
+                            <h3>Outside Koopa Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">[Panel] Middle of three pillars</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">Item behind right-most pillar</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-koopa" autocomplete="off" type="checkbox">Break brick boxes (left, right, middle)</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-bridge2" style="display:none;">
+                            <h3>Switch Bridge #2</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">[Panel] Under 5 coins / items</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">[Coinsanity] 5 items at start of room</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">Item on brick block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-bridge2" autocomplete="off" type="checkbox">Hidden ? block after bridge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-pleasant-path-fortress" style="display:none;">
+                            <h3>Path to Fortress</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-pleasant-path-fortress" autocomplete="off" type="checkbox">Item in first tree</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Village
+                        -------------------------------------------------------------->
+                        <div id="maps-koopa-village-behind-kooper" style="display:none;">
+                            <h3>Behind Kooper's House</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-koopa-village-behind-kooper" autocomplete="off" type="checkbox">On tall stump</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-koopa-village-west" style="display:none;">
+                            <h3>Koopa Village West</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">[Panel] Left of tree</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">Bottom bush on left side</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">Third bush from the right</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-koopa-village-east" style="display:none;">
+                            <h3>Koopa Village East</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">First bush on left</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">Give Kooper his shell</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">Item on top of brick block on right (after defeating fuzzies)</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Koopa Bros. Fortress
+                        -------------------------------------------------------------->
+                        <div id="maps-kbf-entrance" style="display:none;">
+                            <h3>Entrance</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-entrance" autocomplete="off" type="checkbox">Defeat Koopa by first locked door</label></li>
+                                <li><label><input data-map-group="maps-kbf-entrance" autocomplete="off" type="checkbox">Top of room guarded by Bob-omb</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-cannons" style="display:none;">
+                            <h3>Cannons</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-cannons" autocomplete="off" type="checkbox">? Block behind bombable rock</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-puzzle-room" style="display:none;">
+                            <h3>Kooper Puzzle Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-puzzle-room" autocomplete="off" type="checkbox">Left Jail Cell</label></li>
+                                <li><label><input data-map-group="maps-kbf-puzzle-room" autocomplete="off" type="checkbox">Middle Jail Cell</label></li>
+                                <li><label><input data-map-group="maps-kbf-puzzle-room" autocomplete="off" type="checkbox">Right Jail Cell</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-outside" style="display:none;">
+                            <h3>Outside Koopa Bros. Fortress</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-outside" autocomplete="off" type="checkbox">Inside chest on ledge from bombable wall on previous screen</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-refund" style="display:none;">
+                            <h3>Outside Chest</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-refund" autocomplete="off" type="checkbox">Chest after bombable wall in trap room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-firebars" style="display:none;">
+                            <h3>Firebars</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-firebars" autocomplete="off" type="checkbox">Item at end of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-kbf-jail" style="display:none;">
+                            <h3>Jail</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-kbf-jail" autocomplete="off" type="checkbox">Bombette</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Mt. Rugged
+                        -------------------------------------------------------------->
+                        <div id="maps-mt-rugged-letter3" style="display:none;">
+                            <h3>Letter 3</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">[Coinsanity] ? Block left after taking spring</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">[Coinsanity] Circle of items across Parakarry gap</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">[Coinsanity] 2 items on ground below Parakarry gap</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">? Block by Cleft when entering room</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">Chest in cave</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">Item across Parakarry gap</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">? Block past Cleft after spring</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox">Item on far right ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-mt-rugged-letter1" style="display:none;">
+                            <h3>Letter 1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-letter1" autocomplete="off" type="checkbox">[Panel] By wall near end of slide</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter1" autocomplete="off" type="checkbox">Item on first ledge</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter1" autocomplete="off" type="checkbox">Item on second ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-mt-rugged-seed" style="display:none;">
+                            <h3>Seed Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-seed" autocomplete="off" type="checkbox">Bub-ulb</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-seed" autocomplete="off" type="checkbox">Item on support beam when falling through opening at the top</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-mt-rugged-buzzar" style="display:none;">
+                            <h3>Buzzar</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-buzzar" autocomplete="off" type="checkbox">Item on ground by Cleft</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-mt-rugged-train" style="display:none;">
+                            <h3>Train Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-train" autocomplete="off" type="checkbox">Item in top most bush</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-train" autocomplete="off" type="checkbox">Give three letters to Parakarry</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-mt-rugged-whacka" style="display:none;">
+                            <h3>Whacka</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-mt-rugged-whacka" autocomplete="off" type="checkbox">[Coinsanity] Three items on slide</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-whacka" autocomplete="off" type="checkbox">Hit Whacka</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-whacka" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Dry Dry Desert
+                        -------------------------------------------------------------->
+                        <div id="maps-desert-top-left" style="display:none;">
+                            <h3>Two ? Blocks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox">Left ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-pokey" style="display:none;">
+                            <h3>Pokey Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-pokey" autocomplete="off" type="checkbox">Behind bush at top of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-thunder-rage" style="display:none;">
+                            <h3>Thunder Rage</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-thunder-rage" autocomplete="off" type="checkbox">Hidden block above rock on right side</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-above-runaway-pay" style="display:none;">
+                            <h3>Two ? Blocks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-above-runaway-pay" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-above-runaway-pay" autocomplete="off" type="checkbox">Right ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-hammer-block" style="display:none;">
+                            <h3>Hammer Block</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-hammer-block" autocomplete="off" type="checkbox">Hammer yellow block once</label></li>
+                                <li><label><input data-map-group="maps-desert-hammer-block" autocomplete="off" type="checkbox">Hammer yellow block five times</label></li>
+                                <li><label><input data-map-group="maps-desert-hammer-block" autocomplete="off" type="checkbox">Hammer yellow block ten times</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-five-block" style="display:none;">
+                            <h3>Five ? Blocks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox">[Coinsanity] Top-Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox">[Coinsanity] Top-Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox">[Coinsanity] Bottom-Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox">[Coinsanity] Bottom-Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox">Center ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-runaway-pay" style="display:none;">
+                            <h3>Runaway Pay</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-runaway-pay" autocomplete="off" type="checkbox">Hidden block in the middle of three trees</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-camp" style="display:none;">
+                            <h3>Kolorado's Camp</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-camp" autocomplete="off" type="checkbox">Tree at camp location after saving Mamar</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-stone-cactus" style="display:none;">
+                            <h3>Stone Cactus</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-stone-cactus" autocomplete="off" type="checkbox">[Panel] Below stone cactus</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-outside-outpost" style="display:none;">
+                            <h3>Outside Outpost</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-outside-outpost" autocomplete="off" type="checkbox">Far right tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-outpost-west" style="display:none;">
+                            <h3>Dry Dry Outpost West</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox">Turn in Lyrics at far right house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-outpost-east" style="display:none;">
+                            <h3>Dry Dry Outpost East</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">[Panel] On rooftops</label></li>
+                                <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">Item on rooftops</label></li>
+                                <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">Talk to Moustafa after buying Dried Shroom + Dusty Hammer</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-below-cactus" style="display:none;">
+                            <h3>? Block</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-below-cactus" autocomplete="off" type="checkbox">[Coinsanity] ? Block in middle of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-bump-attack" style="display:none;">
+                            <h3>Spin Attack</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-bump-attack" autocomplete="off" type="checkbox">Item on ledge (take Tweester in room down left from here)</label></li>
+                                <li><label><input data-map-group="maps-desert-bump-attack" autocomplete="off" type="checkbox">Item on brick block, requires Kooper or Ultra Boots</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-life-shroom" style="display:none;">
+                            <h3>Life Shroom</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox">[Coinsanity] ? Block in middle of room</label></li>
+                                <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox">Hidden block directly above other ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-before-oasis" style="display:none;">
+                            <h3>Before Oasis</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-before-oasis" autocomplete="off" type="checkbox">Item behind bush on right side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-oasis" style="display:none;">
+                            <h3>Oasis</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox">Lemon Tree</label></li>
+                                <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox">Lime Tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-fxc" style="display:none;">
+                            <h3>Attack FX C</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-fxc" autocomplete="off" type="checkbox">Hidden block in middle of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-opposite-fxc" style="display:none;">
+                            <h3>? Block</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-opposite-fxc" autocomplete="off" type="checkbox">[Coinsanity] ? Block in middle of room</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Dry Dry Ruins
+                        -------------------------------------------------------------->
+                        <div id="maps-ruins-pokey-hall" style="display:none;">
+                            <h3>Pokey Hall</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-pokey-hall" autocomplete="off" type="checkbox">Inside middle coffin</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-sand-switch-2" style="display:none;">
+                            <h3>Sand Switch Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-sand-switch-2" autocomplete="off" type="checkbox">Bottom right corner after lowering sand</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-sand-room1" style="display:none;">
+                            <h3>Sand Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-sand-room1" autocomplete="off" type="checkbox">Item on elevated platform</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-key-room1" style="display:none;">
+                            <h3>Key Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-key-room1" autocomplete="off" type="checkbox">Item on elevated platform</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-super-hammer" style="display:none;">
+                            <h3>Super Hammer</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-super-hammer" autocomplete="off" type="checkbox">Item in chest behind wall on ledge above Super Hammer chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-pokey-room" style="display:none;">
+                            <h3>Pokey Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-pokey-room" autocomplete="off" type="checkbox">Defeat all three Pokey's after hitting ? Block</label></li>
+                                <li><label><input data-map-group="maps-ruins-pokey-room" autocomplete="off" type="checkbox">On ledge behind hammer block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-chomp-room-1" style="display:none;">
+                            <h3>Chomp Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-chomp-room-1" autocomplete="off" type="checkbox">Item on pedestal</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-chomp-room-2" style="display:none;">
+                            <h3>Chomp Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-chomp-room-2" autocomplete="off" type="checkbox">Item on pedestal</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-chomp-room-3" style="display:none;">
+                            <h3>Chomp Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-chomp-room-3" autocomplete="off" type="checkbox">Item on pedestal</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-ruins-wall-stairs" style="display:none;">
+                            <h3>Wall Stairs</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-ruins-wall-stairs" autocomplete="off" type="checkbox">Item on ledge, reachable by breaking block and hitting switch</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Forever Forest
+                        -------------------------------------------------------------->
+                        <div id="maps-forest-fp" style="display:none;">
+                            <h3>FP Plus</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-forest-fp" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-forest-hp" style="display:none;">
+                            <h3>HP Plus</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-forest-hp" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-forest-seed" style="display:none;">
+                            <h3>Seed Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-forest-seed" autocomplete="off" type="checkbox">Bub-ulb</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Boo's Mansion
+                        -------------------------------------------------------------->
+                        <div id="maps-boo-mansion-bow" style="display:none;">
+                            <h3>Bow's Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-bow" autocomplete="off" type="checkbox">Bow</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-weight" style="display:none;">
+                            <h3>Weight Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-weight" autocomplete="off" type="checkbox">Chest guarded by Boo</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-main" style="display:none;">
+                            <h3>Main Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-main" autocomplete="off" type="checkbox">[Panel] By couch</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-record" style="display:none;">
+                            <h3>Record Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-record" autocomplete="off" type="checkbox">[Panel] Middle of room</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-record" autocomplete="off" type="checkbox">Open middle cabinets and do minigame</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-trap" style="display:none;">
+                            <h3>Trap Chest</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-trap" autocomplete="off" type="checkbox">[Panel] In front of grandfather clock downstairs</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-pixels" style="display:none;">
+                            <h3>Pixel Mario Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-pixels" autocomplete="off" type="checkbox">Left crate on right side of room</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-pixels" autocomplete="off" type="checkbox">Right crate on right side of room under other crate</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-outside" style="display:none;">
+                            <h3>Outside Boo's Mansion</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-outside" autocomplete="off" type="checkbox">? Block before gate</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-outside" autocomplete="off" type="checkbox">Right bush before Gusty Gulch</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-library" style="display:none;">
+                            <h3>Library</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-library" autocomplete="off" type="checkbox">Item on right bookshelf</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-library" autocomplete="off" type="checkbox">Bottom crate</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-shop" style="display:none;">
+                            <h3>Above Shop</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-shop" autocomplete="off" type="checkbox">Right crate on left side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-boots" style="display:none;">
+                            <h3>Super Boots</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-boots" autocomplete="off" type="checkbox">[Panel] On left near Boo</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-boots" autocomplete="off" type="checkbox">Bottom left crate</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Gusty Gulch
+                        -------------------------------------------------------------->
+                        <div id="maps-gusty-gulch-gate" style="display:none;">
+                            <h3>Gate</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-gusty-gulch-gate" autocomplete="off" type="checkbox">[Panel] Near gate</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-gusty-gulch-village1" style="display:none;">
+                            <h3>Village 1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-gusty-gulch-village1" autocomplete="off" type="checkbox">[Coinsanity] Block in far right house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-gusty-gulch-1" style="display:none;">
+                            <h3>Gluch 1</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox">[Coinsanity] First ? Block</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox">[Coinsanity] Upper ? Block near goomba</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox">Item on ledge (use Kooper)</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox">? Block in middle near goomba</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox">Item in front of log</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-gusty-gulch-2" style="display:none;">
+                            <h3>Gluch 2</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox">[Coinsanity] ? Block by exit</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox">? Block by goomba</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox">Item behind rock near exit</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Tubba's Castle
+                        -------------------------------------------------------------->
+                        <div id="maps-tubba-sleeping-clubba" style="display:none;">
+                            <h3>Sleeping Clubba's</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-sleeping-clubba" autocomplete="off" type="checkbox">Item at end of hall</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-stairwell" style="display:none;">
+                            <h3>Stairwell</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-stairwell" autocomplete="off" type="checkbox">? Block at bottom of staircase</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-behind-clock" style="display:none;">
+                            <h3>Behind Clock</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-behind-clock" autocomplete="off" type="checkbox">[Coinsanity] 6 items on bed</label></li>
+                                <li><label><input data-map-group="maps-tubba-behind-clock" autocomplete="off" type="checkbox">Behind wall on shelf at left side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-spikes" style="display:none;">
+                            <h3>Spike Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-spikes" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-study" style="display:none;">
+                            <h3>Study</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-study" autocomplete="off" type="checkbox">On table</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-spring" style="display:none;">
+                            <h3>Spring Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-spring" autocomplete="off" type="checkbox">On left side, break panels in room above behind bombable wall</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-big-table" style="display:none;">
+                            <h3>Table</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-big-table" autocomplete="off" type="checkbox">On table, fall down from above</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-tubba-basement-chest" style="display:none;">
+                            <h3>Basement Chest</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-tubba-basement-chest" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Shy Guy's Toybox
+                        -------------------------------------------------------------->
+                        <div id="maps-toybox-playroom" style="display:none;">
+                            <h3>Playroom</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-playroom" autocomplete="off" type="checkbox">Left hidden block</label></li>
+                                <li><label><input data-map-group="maps-toybox-playroom" autocomplete="off" type="checkbox">Right hidden block</label></li>
+                                <li><label><input data-map-group="maps-toybox-playroom" autocomplete="off" type="checkbox">Items held by Shy Guys (all of them)</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-anti-guy" style="display:none;">
+                            <h3>Anti Guy</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">[Coinsanity] ? Block on left side</label></li>
+                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Anti Guy Chest</label></li>
+                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Hidden block on right side</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-blue-station" style="display:none;">
+                            <h3>Blue Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-blue-station" autocomplete="off" type="checkbox">[Panel] In front of station</label></li>
+                                <li><label><input data-map-group="maps-toybox-blue-station" autocomplete="off" type="checkbox">Hidden block on right side</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-block-city" style="display:none;">
+                            <h3>Block City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">[Coinsanity] 3 items on left spring</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">[Coinsanity] 5 items on elevated spring</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">[Coinsanity] ? Block on left side of wall</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">[Coinsanity] ? Block on right side of wall that can be jumped across</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">Item behind fallen blocks</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">Item on roof of left house</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">? Block on platform</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">Item that Kammy spawns</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-gourmet-guy" style="display:none;">
+                            <h3>Gourmet Guy</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox">Hidden block left after Gourmet Guy arch</label></li>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox">Hidden block between two other ? Blocks</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-tracks-hallway" style="display:none;">
+                            <h3>Tracks Hallway</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox">[Coinsanity] ? Block before Spy Guy</label></li>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block by Groove Guy</label></li>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block by Groove Guy</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-pink-station" style="display:none;">
+                            <h3>Pink Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-pink-station" autocomplete="off" type="checkbox">[Panel] In front of station</label></li>
+                                <li><label><input data-map-group="maps-toybox-pink-station" autocomplete="off" type="checkbox">Chest on right side</label></li>
+                                <li><label><input data-map-group="maps-toybox-pink-station" autocomplete="off" type="checkbox">Hidden block by pink switch</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-playhouse" style="display:none;">
+                            <h3>Playhouse</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox">[Coinsanity] ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox">Chest on wall</label></li>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox">Chest after door</label></li>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox">Item that Kammy spawns</label></li>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox">Chest at end of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-green-station" style="display:none;">
+                            <h3>Green Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-green-station" autocomplete="off" type="checkbox">[Panel] In front of station</label></li>
+                                <li><label><input data-map-group="maps-toybox-green-station" autocomplete="off" type="checkbox">Hidden block in upper right corner</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-treadmill" style="display:none;">
+                            <h3>Treadmill</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">[Coinsanity] 3 items on first treadmill</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">[Coinsanity] 3 items on second treadmill</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">[Coinsanity] Ring of coins inside fort after moving blocks</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">Item held by Shy Guy after treadmills</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">Middle item inside fort after moving blocks</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">Item that Kammy spawns</label></li>
+                                <li><label><input data-map-group="maps-toybox-treadmill" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-lantern-ghost" style="display:none;">
+                            <h3>Lantern Ghost</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-lantern-ghost" autocomplete="off" type="checkbox">Watt</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-moving-platforms" style="display:none;">
+                            <h3>Moving Platforms</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox">Hidden block by first elevator</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox">Hidden block between two other ? blocks</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox">Hidden block by door to Lantern Ghost room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-red-station" style="display:none;">
+                            <h3>Red Station</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-red-station" autocomplete="off" type="checkbox">[Panel] In front of station</label></li>
+                                <li><label><input data-map-group="maps-toybox-red-station" autocomplete="off" type="checkbox">Hidden block on left side</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-toybox-barricade" style="display:none;">
+                            <h3>Shy Guy Barricade</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox">[Coinsanity] ? Block just past barricade</label></li>
+                                <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox">Item on top of brick block</label></li>
+                                <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox">? Block at end of room</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Yoshi's Island
+                        -------------------------------------------------------------->
+                        <div id="maps-yoshi-ambush-room" style="display:none;">
+                            <h3>Ambush Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-ambush-room" autocomplete="off" type="checkbox">[Panel] Near middle of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-raph" style="display:none;">
+                            <h3>Raph's Tree</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-raph" autocomplete="off" type="checkbox">Item on the outside Raph's Tree</label></li>
+                                <li><label><input data-map-group="maps-yoshi-raph" autocomplete="off" type="checkbox">Talk to Raphael at the top</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-vine-room" style="display:none;">
+                            <h3>Vine Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-vine-room" autocomplete="off" type="checkbox">Second Tree vine</label></li>
+                                <li><label><input data-map-group="maps-yoshi-vine-room" autocomplete="off" type="checkbox">Last Tree vine</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-block-puzzle" style="display:none;">
+                            <h3>Block Puzzle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-block-puzzle" autocomplete="off" type="checkbox">Hidden block near first push block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-deep-jungle" style="display:none;">
+                            <h3>Deep Jungle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-deep-jungle" autocomplete="off" type="checkbox">Hidden block near bell plant</label></li>
+                                <li><label><input data-map-group="maps-yoshi-deep-jungle" autocomplete="off" type="checkbox">Tree vine near bell plant</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-lightblue-yoshi" style="display:none;">
+                            <h3>Light-Blue Yoshi</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-lightblue-yoshi" autocomplete="off" type="checkbox">Item under water</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-nw-jungle" style="display:none;">
+                            <h3>NW Jungle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-nw-jungle" autocomplete="off" type="checkbox">Item in tree by right side exit</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-ne-jungle" style="display:none;">
+                            <h3>NE Jungle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-ne-jungle" autocomplete="off" type="checkbox">[Coinsanity] Item under water on right side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-whale" style="display:none;">
+                            <h3>Whale</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-whale" autocomplete="off" type="checkbox">[Coinsanity] 2 items on spinning flower</label></li>
+                                <li><label><input data-map-group="maps-yoshi-whale" autocomplete="off" type="checkbox">Coconut tree</label></li>
+                                <li><label><input data-map-group="maps-yoshi-whale" autocomplete="off" type="checkbox">Item behind bush near top of screen</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-sw-jungle" style="display:none;">
+                            <h3>SW Jungle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox">[Coinsanity] Three items under water</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox">Hidden block near exit to NW Jungle</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-se-jungle" style="display:none;">
+                            <h3>SE Jungle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-se-jungle" autocomplete="off" type="checkbox">? Block on island</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-sushie" style="display:none;">
+                            <h3>Sushie Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-sushie" autocomplete="off" type="checkbox">Sushie</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sushie" autocomplete="off" type="checkbox">Item on top right island</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sushie" autocomplete="off" type="checkbox">Item in tree on top right island</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-beach" style="display:none;">
+                            <h3>Beach</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">[Coinsanity] 2 items on spinning flower</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 1 (far left)</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 2</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Hidden block by bell plant</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 3</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Item on rock formation</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 4</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Hidden block by bell plant</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 5</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 6 (last tree)</label></li>
+                                <li><label><input data-map-group="maps-yoshi-beach" autocomplete="off" type="checkbox">Coconut tree 6 (last tree, reload room for extra check)</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-west-village" style="display:none;">
+                            <h3>West Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-west-village" autocomplete="off" type="checkbox">[Panel] In front of raven statue</label></li>
+                                <li><label><input data-map-group="maps-yoshi-west-village" autocomplete="off" type="checkbox">Talk to Yoshi Chief after saving all the kids</label></li>
+                                <li><label><input data-map-group="maps-yoshi-west-village" autocomplete="off" type="checkbox">Left Coconut tree</label></li>
+                                <li><label><input data-map-group="maps-yoshi-west-village" autocomplete="off" type="checkbox">Right Coconut tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-east-village" style="display:none;">
+                            <h3>East Village</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Give a Tayce T. item to Yellow Adult Yoshi</label></li>
+                                <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Give the vase to Kolorado</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-volcano" style="display:none;">
+                            <h3>Outside Volcano</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-volcano" autocomplete="off" type="checkbox">Item behind large tree</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Mt. Lavalava
+                        -------------------------------------------------------------->
+                        <div id="maps-lavalav-hub" style="display:none;">
+                            <h3>Hub Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">[Coinsanity] ? Block 1</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">[Coinsanity] ? Block 2</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">[Coinsanity] ? Block 3</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">[Coinsanity] ? Block 4</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">Item on top of brick block</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox">Item on platform halfway down second zip line</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-zipline" style="display:none;">
+                            <h3>Zipline</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-zipline" autocomplete="off" type="checkbox">[Panel] Right side of lower level</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-save" style="display:none;">
+                            <h3>Save Block</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-save" autocomplete="off" type="checkbox">[Panel] Left of heart block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-deadend" style="display:none;">
+                            <h3>Deadend</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-deadend" autocomplete="off" type="checkbox">Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-lavalav-deadend" autocomplete="off" type="checkbox">Right ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-lava-puzzle" style="display:none;">
+                            <h3>Lava Puzzle</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-lava-puzzle" autocomplete="off" type="checkbox">Hidden block on right side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-dizzy" style="display:none;">
+                            <h3>Dizzy Stomp</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-dizzy" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Flower Fields
+                        -------------------------------------------------------------->
+                        <div id="maps-flower-fields-lakilester" style="display:none;">
+                            <h3>Lakilester</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-lakilester" autocomplete="off" type="checkbox">Lakilester</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-lakilester" autocomplete="off" type="checkbox">Item in grass</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-lakilester" autocomplete="off" type="checkbox">Item in crevasse</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-bubble-plant" style="display:none;">
+                            <h3>Bubble Plant</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-plant" autocomplete="off" type="checkbox">Item on ledge</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-plant" autocomplete="off" type="checkbox">Item in vines immediately below ledge item</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-elevators" style="display:none;">
+                            <h3>Elevators</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-elevators" autocomplete="off" type="checkbox">Item in second vine (jump to trigger it)</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-elevators" autocomplete="off" type="checkbox">Item from ground pounding opposite side from partner upgrade block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-logs" style="display:none;">
+                            <h3>Fallen Logs</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-logs" autocomplete="off" type="checkbox">Item in grass at bottom of screen</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-logs" autocomplete="off" type="checkbox">? Block before cloud machine room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-rosie" style="display:none;">
+                            <h3>Rosie</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-rosie" autocomplete="off" type="checkbox">Give Rosie the Crystal Berry</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-blue-flower" style="display:none;">
+                            <h3>Blue Flower</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-blue-flower" autocomplete="off" type="checkbox">[Coinsanity] Hidden block between brick block and spring</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-blue-flower" autocomplete="off" type="checkbox">Hidden block above brick block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-three-trees" style="display:none;">
+                            <h3>Three Trees</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-three-trees" autocomplete="off" type="checkbox">Hit trees Middle, Right, Left</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-three-trees" autocomplete="off" type="checkbox">Second set of vines</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-petunia" style="display:none;">
+                            <h3>Petunia</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-petunia" autocomplete="off" type="checkbox">[Panel] Near bottom left corner of room directly above grass</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-petunia" autocomplete="off" type="checkbox">2 items in tree</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-petunia" autocomplete="off" type="checkbox">Talk to Petunia and defeat all moles</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-well" style="display:none;">
+                            <h3>Well</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-well" autocomplete="off" type="checkbox">Give a blue berry to the well</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-posie" style="display:none;">
+                            <h3>Posie</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-posie" autocomplete="off" type="checkbox">2 items from Posie</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-red-flower" style="display:none;">
+                            <h3>Red Flower</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-red-flower" autocomplete="off" type="checkbox">[Panel] In front of tree</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-red-flower" autocomplete="off" type="checkbox">2 items in tree</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-red-flower" autocomplete="off" type="checkbox">Item in middle vines</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-yellow-flower" style="display:none;">
+                            <h3>Yellow Flower</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-yellow-flower" autocomplete="off" type="checkbox">Vines next to yellow flower</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-yellow-flower" autocomplete="off" type="checkbox">2 items in tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-bubble-tree" style="display:none;">
+                            <h3>Bubble Berry Tree</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-tree" autocomplete="off" type="checkbox">[Panel] Under hidden block on right side</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-tree" autocomplete="off" type="checkbox">? Block on left side</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-tree" autocomplete="off" type="checkbox">2 items in tree</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-bubble-tree" autocomplete="off" type="checkbox">Hidden ? Block on right side</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-flower-fields-lily" style="display:none;">
+                            <h3>Lily</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-flower-fields-lily" autocomplete="off" type="checkbox">Give Water Stone to Lily</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-lily" autocomplete="off" type="checkbox">Item in tree</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Shiver Region
+                        -------------------------------------------------------------->
+                        <div id="maps-shiver-region-staircase" style="display:none;">
+                            <h3>Ice Staircase</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-staircase" autocomplete="off" type="checkbox">? Block up first set of stairs</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-staircase" autocomplete="off" type="checkbox">Item on ledge when falling down after second set of stairs</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-merlar" style="display:none;">
+                            <h3>Merlar's Sanctuary</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-merlar" autocomplete="off" type="checkbox">Sacred item sealed away for centuries</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-tunnel" style="display:none;">
+                            <h3>Shiver Mountain Tunnel</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Left pillar</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Middle pillar</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Right pillar</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-hills" style="display:none;">
+                            <h3>Shiver Mountain Hills</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-hills" autocomplete="off" type="checkbox">Item below Kooper switch</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-passage" style="display:none;">
+                            <h3>Shiver Mountain Passage</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-passage" autocomplete="off" type="checkbox">Ultra Boots block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-west-city" style="display:none;">
+                            <h3>West Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">[Panel] Next to the Mayor's house</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Talk to Mayor after having met Merle</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Chest in middle house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-center-city" style="display:none;">
+                            <h3>Center Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-center-city" autocomplete="off" type="checkbox">Item in the Inn</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-center-city" autocomplete="off" type="checkbox">5 items in the Inn after giving Scarf and Bucket to snowmen</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-east-city" style="display:none;">
+                            <h3>East Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-east-city" autocomplete="off" type="checkbox">Item in lake</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-snowfield" style="display:none;">
+                            <h3>Shiver Snowfield</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">[Panel] Along bottom of room</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">Hit left pine tree 4 times</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">Item behind pine tree in top right corner</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-outside-starborn" style="display:none;">
+                            <h3>Outside Starborn Valley</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-outside-starborn" autocomplete="off" type="checkbox">Item behind ice</label></li>
+                                <li><label><input data-map-group="maps-shiver-outside-starborn" autocomplete="off" type="checkbox">Hidden block where you fight Monstar</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-starborn" style="display:none;">
+                            <h3>Starborn Valley</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-starborn" autocomplete="off" type="checkbox">Talk to Merle</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Crystal Palace
+                        -------------------------------------------------------------->
+                        <div id="maps-crystal-palace-cave" style="display:none;">
+                            <h3>Cave</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-palace-cave" autocomplete="off" type="checkbox">Item in cave</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-panel-room" style="display:none;">
+                            <h3>Ground Panel Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-panel-room" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-shooting-star" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-shooting-star" autocomplete="off" type="checkbox">Item on ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-pdown" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-pdown" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-pup" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-pup" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-red-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-red-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-blue-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-blue-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-palace-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-palace-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-triple-dip" style="display:none;">
+                            <h3>Triple Dip</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-triple-dip" autocomplete="off" type="checkbox">Chest, blow up right wall in switch room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-small-statue" style="display:none;">
+                            <h3>Small Statue Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-small-statue" autocomplete="off" type="checkbox">[Panel] Under block</label></li>
+                                <li><label><input data-map-group="maps-crystal-small-statue" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-large-statue" style="display:none;">
+                            <h3>Large Statue Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-large-statue" autocomplete="off" type="checkbox">[Panel] Under block</label></li>
+                                <li><label><input data-map-group="maps-crystal-large-statue" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="color:white;margin:1em 1em 1em 1em;padding-bottom:1em;">
+                        * The maps may be missing checks, if you find something that is missing, please report it!
+                    </div>
+                </div>
             </div>
 
             <!--
@@ -433,6 +2499,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="option-name" colspan="3">Maps</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="game-maps" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="game-maps"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td class="option-name" colspan="3">Notes Field</td>
                     <td class="option">
                         <div class="checkbox-slider">
@@ -527,6 +2603,26 @@
                 </tr>
                 <tr class="seed-setting">
                     <td colspan="4"><hr style="margin-left:50px;"></td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name seed-setting" colspan="3">Panels Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="panels-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="panels-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name seed-setting" colspan="3">Coinsanity</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="coins-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="coins-randomized"></label>
+                        </div>
+                    </td>
                 </tr>
                 <tr class="seed-setting">
                     <td class="option-name seed-setting" colspan="3">Koopa Koot Randomized</td>

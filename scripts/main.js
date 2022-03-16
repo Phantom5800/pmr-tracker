@@ -431,6 +431,7 @@ $(document).ready(function(){
     $('img').contextmenu(function(){return false;});
 
     initializePage();
+    initializeMaps();
 
     ////////////////////////////////////////////////////////////////
     // options menu
@@ -484,6 +485,14 @@ $(document).ready(function(){
                     
                     if (data["ShortenBowsersCastle"] != $("#fast-bowser-castle").is(':checked')) {
                         $("#fast-bowser-castle").click();
+                    }
+
+                    if (data["IncludePanels"] != $("#panels-randomized").is(':checked')) {
+                        $("#panels-randomized").click();
+                    }
+
+                    if (data["IncludeCoins"] != $("#coins-randomized").is(':checked')) {
+                        $("#coins-randomized").click();
                     }
 
                     // TODO: koopa koot is not randomized yet, add it here when it is
@@ -543,6 +552,8 @@ $(document).ready(function(){
         for (var i = 1; i <= 8; ++i) {
             checkIfChapterIsCompletable(i);
         }
+
+        resetMapChecks();
     }
 
     // reset the tracker completely
@@ -627,12 +638,20 @@ $(document).ready(function(){
         var isCompactMiscCombined = $("#compact-tracker").is(':checked') && $("#combine-misc").is(':checked');
         $(".dojo-tracker").toggle(isChecked && !isCompactMiscCombined);
         $(".dojo-optional").toggle(isChecked);
+        toggleChecks("[Dojo]", !isChecked);
+        countChecks();
         localStorage.setItem("dojo-randomized", isChecked);
     });
 
     ////////////////////////////////////////////////////////////////
     // tracker specific settings
     ////////////////////////////////////////////////////////////////
+
+    $("#game-maps").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".map-display").toggle(isChecked);
+        localStorage.setItem("game-maps", isChecked);
+    });
 
     $("#user-notes").click(function() {
         var isChecked = $(this).is(':checked');
@@ -779,6 +798,33 @@ $(document).ready(function(){
     }
 
     ////////////////////////////////////////////////////////////////
+    // map exclusive settings
+    ////////////////////////////////////////////////////////////////
+    $("#panels-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("panels-randomized", isChecked);
+        toggleChecks("[Panel]", !isChecked);
+        countChecks();
+    });
+
+    $("#coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("coins-randomized", isChecked);
+        toggleChecks("[Coinsanity]", !isChecked);
+        countChecks();
+    });
+
+    var panels_randomized = localStorageGetWithDefault("panels-randomized", "true") == "true";
+    if (!panels_randomized) {
+        $("#panels-randomized").click();
+    }
+
+    var coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
+    if (!coins_randomized) {
+        $("#coins-randomized").click();
+    }
+
+    ////////////////////////////////////////////////////////////////
     // misc. local storage settings
     ////////////////////////////////////////////////////////////////
 
@@ -815,6 +861,11 @@ $(document).ready(function(){
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", false) == "true";
     if (dojo_randomized) {
         $("#dojo-randomized").click();
+    }
+
+    var maps_enabled = localStorageGetWithDefault("game-maps", "true") == "true";
+    if (!maps_enabled) {
+        $("#game-maps").click();
     }
 
     var user_notes_enabled = localStorageGetWithDefault("user-notes", false) == "true";
