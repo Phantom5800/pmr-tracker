@@ -797,29 +797,29 @@
                             <table class="map">
                                 <tr>
                                     <td class="empty" colspan="4"/>
-                                    <td data-checks-list="maps-shover-region-staircase">Ice Staircase</td>
-                                    <td data-checks-list="maps-shover-region-merlar">Merlar's Sanctuary</td>
+                                    <td data-checks-list="maps-shiver-region-staircase">Ice Staircase</td>
+                                    <td data-checks-list="maps-shiver-region-merlar">Merlar's Sanctuary</td>
                                 </tr>
                                 <tr>
                                     <td class="empty" colspan="4"/>
-                                    <td data-checks-list="maps-shover-region-tunnel">Shiver Mountain Tunnel</td>
+                                    <td data-checks-list="maps-shiver-region-tunnel">Shiver Mountain Tunnel</td>
                                 </tr>
                                 <tr>
                                     <td class="empty" colspan="4"/>
-                                    <td data-checks-list="maps-shover-region-hills">Shiver Mountain Hills</td>
+                                    <td data-checks-list="maps-shiver-region-hills">Shiver Mountain Hills</td>
                                 </tr>
                                 <tr>
                                     <td class="empty" colspan="4"/>
-                                    <td data-checks-list="maps-shover-region-passage">Shiver Mountain Passage</td>
+                                    <td data-checks-list="maps-shiver-region-passage">Shiver Mountain Passage</td>
                                 </tr>
                                 <tr>
-                                    <td data-checks-list="maps-shover-region-west-city">West Shiver City</td>
-                                    <td data-checks-list="maps-shover-region-center-city">Center Shiver City</td>
-                                    <td data-checks-list="maps-shover-region-east-city">East Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-west-city">West Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-center-city">Center Shiver City</td>
+                                    <td data-checks-list="maps-shiver-region-east-city">East Shiver City</td>
                                     <td class="has-nothing">Outside Shiver City</td>
-                                    <td data-checks-list="maps-shover-region-snowfield">Shiver Snowfield</td>
-                                    <td data-checks-list="maps-shover-outside-starborn">Outside Starborn Valley</td>
-                                    <td data-checks-list="maps-shover-region-starborn">Starborn Valley</td>
+                                    <td data-checks-list="maps-shiver-region-snowfield">Shiver Snowfield</td>
+                                    <td data-checks-list="maps-shiver-outside-starborn">Outside Starborn Valley</td>
+                                    <td data-checks-list="maps-shiver-region-starborn">Starborn Valley</td>
                                 </tr>
                             </table>
                         </div>
@@ -833,12 +833,12 @@
                                     <td class="empty" colspan="2"/>
                                     <td data-checks-list="maps-crystal-panel-room" rowspan="3">Ground Panel Room</td>
                                     <td class="has-nothing">Duplighost Room</td>
-                                    <td data-checks-list="maps-crystal-pdown">Item Room</td>
+                                    <td data-checks-list="maps-crystal-shooting-star">Item Room</td>
                                 </tr>
                                 <tr>
                                     <td class="empty" colspan="3"/>
                                     <td class="has-nothing">Swoooper Room</td>
-                                    <td data-checks-list="maps-crystal-shooting-star">Item Room</td>
+                                    <td data-checks-list="maps-crystal-pdown">Item Room</td>
                                     <td class="empty" colspan="2"/>
                                     <td data-checks-list="maps-crystal-small-statue" rowspan="2">Small Statue Room</td>
                                     <td class="has-nothing">Clubba Room</td>
@@ -2023,6 +2023,155 @@
                             <ul>
                                 <li><label><input data-map-group="maps-flower-fields-lily" autocomplete="off" type="checkbox">Give Water Stone to Lily</label></li>
                                 <li><label><input data-map-group="maps-flower-fields-lily" autocomplete="off" type="checkbox">Item in tree</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Shiver Region
+                        -------------------------------------------------------------->
+                        <div id="maps-shiver-region-staircase" style="display:none;">
+                            <h3>Ice Staircase</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-staircase" autocomplete="off" type="checkbox">? Block up first set of stairs</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-staircase" autocomplete="off" type="checkbox">Item on ledge when falling down after second set of stairs</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-merlar" style="display:none;">
+                            <h3>Merlar's Sanctuary</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-merlar" autocomplete="off" type="checkbox">Sacred item sealed away for centuries</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-tunnel" style="display:none;">
+                            <h3>Shiver Mountain Tunnel</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Left pillar</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Middle pillar</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-tunnel" autocomplete="off" type="checkbox">Right pillar</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-hills" style="display:none;">
+                            <h3>Shiver Mountain Hills</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-hills" autocomplete="off" type="checkbox">Item below Kooper switch</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-passage" style="display:none;">
+                            <h3>Shiver Mountain Passage</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-passage" autocomplete="off" type="checkbox">Ultra Boots block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-west-city" style="display:none;">
+                            <h3>West Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">[Panel] Next to the Mayor's house</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Talk to Mayor after having met Merle</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Chest in middle house</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-center-city" style="display:none;">
+                            <h3>Center Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-center-city" autocomplete="off" type="checkbox">Item in the Inn</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-center-city" autocomplete="off" type="checkbox">5 items in the Inn after giving Scarf and Bucket to snowmen</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-east-city" style="display:none;">
+                            <h3>East Shiver City</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-east-city" autocomplete="off" type="checkbox">Item in lake</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-snowfield" style="display:none;">
+                            <h3>Shiver Snowfield</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">[Panel] Along bottom of room</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">Hit left pine tree 4 times</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-snowfield" autocomplete="off" type="checkbox">Item behind pine tree in top right corner</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-outside-starborn" style="display:none;">
+                            <h3>Outside Starborn Valley</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-outside-starborn" autocomplete="off" type="checkbox">Item behind ice</label></li>
+                                <li><label><input data-map-group="maps-shiver-outside-starborn" autocomplete="off" type="checkbox">Hidden block where you fight Monstar</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-shiver-region-starborn" style="display:none;">
+                            <h3>Starborn Valley</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-shiver-region-starborn" autocomplete="off" type="checkbox">Talk to Merle</label></li>
+                            </ul>
+                        </div>
+                        <!--------------------------------------------------------------
+                            Crystal Palace
+                        -------------------------------------------------------------->
+                        <div id="maps-crystal-palace-cave" style="display:none;">
+                            <h3>Cave</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-palace-cave" autocomplete="off" type="checkbox">Item in cave</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-panel-room" style="display:none;">
+                            <h3>Ground Panel Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-panel-room" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-shooting-star" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-shooting-star" autocomplete="off" type="checkbox">Item on ledge</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-pdown" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-pdown" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-pup" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-pup" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-red-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-red-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-blue-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-blue-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-palace-key" style="display:none;">
+                            <h3>Item Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-palace-key" autocomplete="off" type="checkbox">Chest</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-triple-dip" style="display:none;">
+                            <h3>Triple Dip</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-triple-dip" autocomplete="off" type="checkbox">Chest, blow up right wall in switch room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-small-statue" style="display:none;">
+                            <h3>Small Statue Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-small-statue" autocomplete="off" type="checkbox">[Panel] Under block</label></li>
+                                <li><label><input data-map-group="maps-crystal-small-statue" autocomplete="off" type="checkbox">? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-crystal-large-statue" style="display:none;">
+                            <h3>Large Statue Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-crystal-large-statue" autocomplete="off" type="checkbox">[Panel] Under block</label></li>
+                                <li><label><input data-map-group="maps-crystal-large-statue" autocomplete="off" type="checkbox">? Block</label></li>
                             </ul>
                         </div>
                     </div>
