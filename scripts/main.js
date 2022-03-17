@@ -762,6 +762,7 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         localStorage.setItem("combine-misc", isChecked);
         combineMiscAndCompact();
+        synchronizeMapsAndTracker();
     });
 
     function updateKeyItemHighlight() {
