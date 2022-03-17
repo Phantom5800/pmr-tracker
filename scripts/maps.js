@@ -174,20 +174,22 @@ function resetMapChecks() {
 // this function needs to be called after initializeMaps as it will rebind new events for some checks
 // in order to synchronize the progress tracker and the map tracker
 function synchronizeMapsAndTracker() {
-    $("img[data-anti-guy]").each(function() {
+    $("img[data-sync]").each(function() {
+        var sync = $(this).attr("data-sync");
         $(this).unbind("click").click(function() {
-            $("img[data-anti-guy]").each(function() {
+            $(`img[data-sync="${sync}"]`).each(function() {
                 $(this).toggleClass("unselected");
             });
 
-                $("input[data-anti-guy]").attr("checked", !$(this).hasClass("unselected"));
+            $(`input[data-sync="${sync}"]`).click();
         });
     });
 
-    $("input[data-anti-guy]").unbind("click").click(function() {
+    $("input[data-sync]").unbind("click").click(function() {
         var isChecked = $(this).is(':checked');
+        var sync = $(this).attr("data-sync");
         updateSingleMapCheck($(this));
-        $("img[data-anti-guy]").each(function() {
+        $(`img[data-sync="${sync}"]`).each(function() {
             $(this).toggleClass("unselected", !isChecked);
         });
     });

@@ -125,7 +125,7 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-misc-item compact-element">
         <div class="tooltip">
-            <img data-anti-guy id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
+            <img data-sync="anti-guy" id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
             <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
         </div>
     </div>
