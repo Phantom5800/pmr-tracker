@@ -96,6 +96,28 @@ function updateCompletion(mapGroup, skipVisible = false) {
     $("button.map-select.selected").toggleClass("complete", totalCount === completeCount);
 }
 
+function updateSingleMapCheck(check) {
+    updateCompletion(check.attr("data-map-group"));
+
+    // update counts
+    var label = check.parent().text();
+    var count_dir = (check.is(':checked')) ? 1 : -1;
+    if (label.includes("[Coinsanity]")) {
+        current_coins += count_dir;
+        current_checks += count_dir;
+        $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
+        $("#coinsanity-checks").text(`Coinsanity: ${current_coins}/${coinsanity_checks}`);
+    } else if (label.includes("[Panel]")) {
+        current_panels += count_dir;
+        current_checks += count_dir;
+        $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
+        $("#panel-checks").text(`Panels: ${current_panels}/${panel_checks}`);
+    } else {
+        current_checks += count_dir;
+        $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
+    }
+}
+
 function initializeMaps() {
     countChecks();
 
@@ -134,25 +156,7 @@ function initializeMaps() {
 
     // mark off a single check
     $("#map-checks input").click(function() {
-        updateCompletion($(this).attr("data-map-group"));
-
-        // update counts
-        var label = $(this).parent().text();
-        var count_dir = ($(this).is(':checked')) ? 1 : -1;
-        if (label.includes("[Coinsanity]")) {
-            current_coins += count_dir;
-            current_checks += count_dir;
-            $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
-            $("#coinsanity-checks").text(`Coinsanity: ${current_coins}/${coinsanity_checks}`);
-        } else if (label.includes("[Panel]")) {
-            current_panels += count_dir;
-            current_checks += count_dir;
-            $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
-            $("#panel-checks").text(`Panels: ${current_panels}/${panel_checks}`);
-        } else {
-            current_checks += count_dir;
-            $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);
-        }
+        updateSingleMapCheck($(this));
     });
 }
 
@@ -165,4 +169,26 @@ function resetMapChecks() {
 
     $("td[data-checks-list]").removeClass("complete");
     $("button.map-select").removeClass("complete");
+}
+
+// this function needs to be called after initializeMaps as it will rebind new events for some checks
+// in order to synchronize the progress tracker and the map tracker
+function synchronizeMapsAndTracker() {
+    $("img[data-anti-guy]").each(function() {
+        $(this).unbind("click").click(function() {
+            $("img[data-anti-guy]").each(function() {
+                $(this).toggleClass("unselected");
+            });
+
+                $("input[data-anti-guy]").attr("checked", !$(this).hasClass("unselected"));
+        });
+    });
+
+    $("input[data-anti-guy]").unbind("click").click(function() {
+        var isChecked = $(this).is(':checked');
+        updateSingleMapCheck($(this));
+        $("img[data-anti-guy]").each(function() {
+            $(this).toggleClass("unselected", !isChecked);
+        });
+    });
 }

@@ -5,9 +5,9 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=1"></script>
-        <script src="scripts/maps.js?version=1"></script>
-        <script src="scripts/main.js?version=1"></script>
+        <script src="scripts/compact.js?version=2"></script>
+        <script src="scripts/maps.js?version=2"></script>
+        <script src="scripts/main.js?version=2"></script>
         <link rel="stylesheet" href="styles/main.css?version=1">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1666,7 +1666,7 @@
                             <h3>Anti Guy</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">[Coinsanity] ? Block on left side</label></li>
-                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Anti Guy Chest</label></li>
+                                <li><label><input data-anti-guy data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Anti Guy Chest</label></li>
                                 <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Hidden block on right side</label></li>
                             </ul>
                         </div>
@@ -2266,7 +2266,7 @@
                         </div>
                         <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
+                                <img data-anti-guy id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
                                 <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
                             </div>
                         </div>
