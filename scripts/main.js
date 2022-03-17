@@ -421,6 +421,8 @@ function initializePage() {
         }
         checkIfChapterIsCompletable(8);
     });
+
+    synchronizeMapsAndTracker();
 }
 
 $(document).ready(function(){
@@ -430,8 +432,8 @@ $(document).ready(function(){
     $('html').contextmenu(function(){return false;});
     $('img').contextmenu(function(){return false;});
 
-    initializePage();
     initializeMaps();
+    initializePage();
 
     ////////////////////////////////////////////////////////////////
     // options menu
