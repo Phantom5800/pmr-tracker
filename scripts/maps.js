@@ -96,8 +96,8 @@ function updateCompletion(mapGroup, skipVisible = false) {
     $("button.map-select.selected").toggleClass("complete", totalCount === completeCount);
 }
 
-function updateSingleMapCheck(check) {
-    updateCompletion(check.attr("data-map-group"));
+function updateSingleMapCheck(check, skipVisible = false) {
+    updateCompletion(check.attr("data-map-group"), skipVisible);
 
     // update counts
     var label = check.parent().text();
@@ -181,7 +181,12 @@ function synchronizeMapsAndTracker() {
                 $(this).toggleClass("unselected");
             });
 
-            $(`input[data-sync="${sync}"]`).click();
+            var isSelected = !$(this).hasClass("unselected");
+
+            $(`input[data-sync="${sync}"]`).each(function() {
+                $(this).attr("checked", isSelected);
+                updateSingleMapCheck($(this), true);
+            });
         });
     });
 

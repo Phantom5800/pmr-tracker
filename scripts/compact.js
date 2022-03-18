@@ -131,13 +131,13 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-misc-item compact-element dojo-optional">
         <div class="tooltip">
-            <img id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png">
+            <img data-sync="Chan" id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png">
             <span class="tooltiptext">In logic from beginning</span>
         </div>
     </div>
     <div class="compact-misc-item compact-element dojo-optional">
         <div class="tooltip">
-            <img id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png">
+            <img data-sync="Lee" id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png">
             <span class="tooltiptext">In logic after 2 star spirits</span>
         </div>
     </div>
