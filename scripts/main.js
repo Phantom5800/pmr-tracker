@@ -58,7 +58,8 @@ const extraChapterRequirements = {
         [
             "#Watt", 
             "#whale-open", // watt or whale open to get to the island OR vvvv
-            ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]] // bombette AND access to blue house for pipe
+            ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
+            ["Super Boots", "#Sushie"] // boots and sushie to reach shortcut from the left
         ]
     ],
     6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
