@@ -305,7 +305,8 @@ tr.seed-setting {
     display: none;
 }
 
-#toggle-seed-settings:hover td.option-name {
+#toggle-seed-settings:hover td.option-name, 
+#toggle-tracker-config:hover td.option-name {
     text-decoration: underline;
 }
 
