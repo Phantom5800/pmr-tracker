@@ -50,8 +50,19 @@ function toggleChecks(check, enable) {
                 $(this).click();
             }
 
+            // check dependencies first
+            var dependenciesPassed = true;
+            var dependency = $(this).attr("data-dependency");
+            if (dependency) {
+                dependenciesPassed = $(`#${dependency}`).is(':checked');
+            }
+
             // disable the checkbox and the label
-            $(this).attr("disabled", enable);
+            if (enable) {
+                $(this).attr("disabled", enable);
+            } else {
+                $(this).attr("disabled", !dependenciesPassed);
+            }
             $(this).parent().toggleClass("disabled", enable);
 
             var mapGroup = $(this).attr("data-map-group");
@@ -99,9 +110,16 @@ function updateCompletion(mapGroup, skipVisible = false) {
 function updateSingleMapCheck(check, skipVisible = false) {
     updateCompletion(check.attr("data-map-group"), skipVisible);
 
+    var isChecked = check.is(':checked');
+
+    // update dependencies
+    $(`input[data-dependency="${check.attr("id")}"`).each(function() {
+        $(this).attr("disabled", !isChecked);
+    });
+
     // update counts
     var label = check.parent().text();
-    var count_dir = (check.is(':checked')) ? 1 : -1;
+    var count_dir = (isChecked) ? 1 : -1;
     if (label.includes("[Coinsanity]")) {
         current_coins += count_dir;
         current_checks += count_dir;
@@ -163,7 +181,8 @@ function initializeMaps() {
 function resetMapChecks() {
     $("#map-checks input").each(function() {
         if ($(this).is(':checked')) {
-            $(this).click();
+            $(this).attr("checked", false);
+            updateSingleMapCheck($(this));
         }
     });
 
@@ -198,4 +217,39 @@ function synchronizeMapsAndTracker() {
             $(this).toggleClass("unselected", !isChecked);
         });
     });
+
+    $("input[data-key-sync]").unbind("click").click(function() {
+        var isChecked = $(this).is(':checked');
+        var sync = $(this).attr("data-key-sync");
+        var sync = sync.split("=")[0];
+
+        $(`img[data-key-sync="${sync}"]`).each(function() {
+            if ($(this).is(':visible')) {
+                if (isChecked) {
+                    $(this).click();
+                } else {
+                    $(this).contextmenu();
+                }
+            }
+        });
+
+        updateSingleMapCheck($(this));
+    });
+}
+
+function synchronizeMapsKey(keyObj, current, previous) {
+    if (current === previous) {
+        return;
+    }
+
+    var sync = keyObj.attr("data-key-sync");
+    if (current < previous) {
+        var check = $(`input[data-key-sync="${sync}=${previous}"]`);
+        check.attr("checked", false);
+        updateSingleMapCheck(check, true);
+    } else {
+        var check = $(`input[data-key-sync="${sync}=${current}"]`);
+        check.attr("checked", true);
+        updateSingleMapCheck(check, true);
+    }
 }

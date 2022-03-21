@@ -382,6 +382,8 @@ function initializePage() {
         var c = parseInt($(this).attr("data-chapter-key"));
         $(this).removeClass("unselected");
         $(this).removeClass("completable");
+
+        var previousCount = currentKeyCounts[c];
         if (currentKeyCounts[c] < maxKeyCounts[c]) {
             ++currentKeyCounts[c];
             $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
@@ -397,11 +399,13 @@ function initializePage() {
             $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
         }
 
+        synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         checkIfChapterIsCompletable(c);
     });
 
     $("img[data-chapter-key]").unbind("contextmenu").contextmenu(function(){
         var c = parseInt($(this).attr("data-chapter-key"));
+        var previousCount = currentKeyCounts[c];
         if (currentKeyCounts[c] > 0) {
             --currentKeyCounts[c];
             $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
@@ -424,9 +428,9 @@ function initializePage() {
                 totalCoins += coinCounts[i];
             }
             $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
-        }
-        
+        }        
 
+        synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         checkIfChapterIsCompletable(c);
         return false;
     });
@@ -672,7 +676,7 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         var isCompactMiscCombined = $("#compact-tracker").is(':checked') && $("#combine-misc").is(':checked');
         $(".dojo-tracker").toggle(isChecked && !isCompactMiscCombined);
-        $(".dojo-optional").toggle(isChecked);
+        $(".dojo-optional").toggle(isChecked && isCompactMiscCombined);
         toggleChecks("[Dojo]", !isChecked);
         countChecks();
         localStorage.setItem("dojo-randomized", isChecked);
@@ -764,8 +768,8 @@ $(document).ready(function(){
 
         // handle dojo visibility
         isChecked = $("#dojo-randomized").is(':checked');
-        $(".dojo-optional").toggle(isChecked);
         var isCompactMiscCombined = compact_checked && misc_checked;
+        $(".dojo-optional").toggle(isChecked && isCompactMiscCombined);
         $(".dojo-tracker").toggle($("#dojo-randomized").is(':checked') && !isCompactMiscCombined);
 
         // show/hide useless items

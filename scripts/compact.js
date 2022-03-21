@@ -146,7 +146,7 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-misc-item compact-element dojo-optional">
         <div class="tooltip">
-            <img data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
+            <img data-key-sync="Master" data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
             <p data-chapter-key-count="10">0/3</p>
             <span class="tooltiptext">In logic after 3/4/5 star spirits respectively</span>
         </div>
