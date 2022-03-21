@@ -119,7 +119,10 @@ var altTracker = `<table width="100%">
         <p data-chapter-key-count="11">0/96</p>
     </div>
     <div class="compact-misc-item compact-element">
-        <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
+        <div class="tooltip">
+            <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
+            <span class="tooltiptext rip-cheato-money">Total Coins Needed: 188</span>
+        </div>
         <br>
         <p data-chapter-key-count="12">0/11</p>
     </div>
