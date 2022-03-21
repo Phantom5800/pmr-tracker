@@ -387,6 +387,16 @@ function initializePage() {
             $(`p[data-chapter-key-count="${c}"]`).text(`${currentKeyCounts[c]}/${maxKeyCounts[c]}`);
         }
 
+        // for rip cheato, update tooltip for how much more money is needed
+        if (c === 12) {
+            var coinCounts = [2,2,4,4,8,8,16,16,32,32,64];
+            var totalCoins = 0;
+            for (var i = currentKeyCounts[c]; i < maxKeyCounts[c]; ++i) {
+                totalCoins += coinCounts[i];
+            }
+            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
+        }
+
         checkIfChapterIsCompletable(c);
     });
 
@@ -405,6 +415,17 @@ function initializePage() {
                 }
             }
         }
+
+        // for rip cheato, update tooltip for how much more money is needed
+        if (c === 12) {
+            var coinCounts = [2,2,4,4,8,8,16,16,32,32,64];
+            var totalCoins = 0;
+            for (var i = currentKeyCounts[c]; i < maxKeyCounts[c]; ++i) {
+                totalCoins += coinCounts[i];
+            }
+            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
+        }
+        
 
         checkIfChapterIsCompletable(c);
         return false;
