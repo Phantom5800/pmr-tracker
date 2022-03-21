@@ -590,6 +590,17 @@ $(document).ready(function(){
     });
 
     // hide or show seed specific settings
+    $("#toggle-tracker-config").click(function() {
+        $("#toggle-tracker-config td.section-toggle").toggleClass("section-toggle-closed");
+        $("tr.tracker-setting").each(function() {
+            if ($(this).hasClass("compact-tracker-options")) {
+                $(this).toggle($("#compact-tracker").is(':checked') && !$("#toggle-tracker-config td.section-toggle").hasClass("section-toggle-closed"));
+            } else {
+                $(this).toggle();
+            }
+        });
+    });
+
     $("#toggle-seed-settings").click(function() {
         $("#toggle-seed-settings td.section-toggle").toggleClass("section-toggle-closed");
         $("tr.seed-setting").toggle();
@@ -776,7 +787,7 @@ $(document).ready(function(){
         localStorage.setItem("compact-tracker", isChecked);
 
         // hide/show compact tracker options
-        $(".compact-tracker-options").toggle(isChecked);
+        $(".compact-tracker-options").toggle(isChecked && !$("#toggle-tracker-config td.section-toggle").hasClass("section-toggle-closed"));
         combineMiscAndCompact();
 
         // update bowser key visibility in the new tracker
