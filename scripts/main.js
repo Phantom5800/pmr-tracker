@@ -671,6 +671,12 @@ $(document).ready(function(){
     // tracker specific settings
     ////////////////////////////////////////////////////////////////
 
+    $("#useless-items").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".useless-item").toggle(isChecked);
+        localStorage.setItem("useless-items", isChecked);
+    });
+
     $("#game-maps").click(function() {
         var isChecked = $(this).is(':checked');
         $(".map-display").toggle(isChecked);
@@ -750,6 +756,10 @@ $(document).ready(function(){
         $(".dojo-optional").toggle(isChecked);
         var isCompactMiscCombined = compact_checked && misc_checked;
         $(".dojo-tracker").toggle($("#dojo-randomized").is(':checked') && !isCompactMiscCombined);
+
+        // show/hide useless items
+        isChecked = $("#useless-items").is(':checked');
+        $(".useless-item").toggle(isChecked);
 
         isChecked = $("#recipe-tooltips").is(':checked');
         $(".tooltiptext").toggle(isChecked);
@@ -886,6 +896,11 @@ $(document).ready(function(){
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", false) == "true";
     if (dojo_randomized) {
         $("#dojo-randomized").click();
+    }
+
+    var show_useless_items = localStorageGetWithDefault("useless-items", "true") == "true";
+    if (!show_useless_items) {
+        $("#useless-items").click();
     }
 
     var maps_enabled = localStorageGetWithDefault("game-maps", "true") == "true";

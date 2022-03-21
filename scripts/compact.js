@@ -65,9 +65,9 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element"><img id="Frying Pan" class="unselected optional-item" src="images/icons/PM_Frying_Pan.png"></div>
     <div class="compact-misc-item compact-element"><img id="Mailbag" class="unselected optional-item" src="images/icons/Mailbag_PM.png"></div>
     <div class="compact-element"><img data-chapter="4" id="Cake" class="unselected key-item" src="images/icons/Cake.gif"></div>
-    <div class="compact-misc-item compact-element"><img id="Cookbook" class="unselected optional-item" src="images/icons/Cook_Book_Paper_Mario.png"></div>
+    <div class="compact-misc-item compact-element useless-item"><img id="Cookbook" class="unselected optional-item" src="images/icons/Cook_Book_Paper_Mario.png"></div>
     <div class="compact-misc-item compact-element"><img id="Dictionary" class="unselected optional-item" src="images/icons/PM_Dictionary.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Mystery Note" class="unselected optional-item" src="images/icons/MysteryNote.png"></div>
+    <div class="compact-misc-item compact-element useless-item"><img id="Mystery Note" class="unselected optional-item" src="images/icons/MysteryNote.png"></div>
     <div class="compact-element"><img data-chapter="5" id="Jade Raven" class="unselected key-item" src="images/icons/JadeRaven_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Volcano Vase" class="unselected optional-item" src="images/icons/VolcanoVase.gif"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></div>
@@ -93,7 +93,7 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></div>
+    <div class="compact-misc-item compact-element useless-item"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></div>
     <div id="BowsersKeySlot" class="compact-element">
@@ -101,7 +101,7 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="8">0/5</p>
     </div>
-    <div class="compact-misc-item compact-element">
+    <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
         <p data-chapter-key-count="14">0/2</p>
     </div>
