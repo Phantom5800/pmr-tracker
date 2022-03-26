@@ -108,12 +108,12 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png"></div>
-    <div class="compact-misc-item compact-element">
+    <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="9" id="Quizmo" class="unselected optional-item" src="images/icons/ChuckQuizmo_PM.png">
         <br>
         <p data-chapter-key-count="9">0/64</p>
     </div>
-    <div class="compact-misc-item compact-element">
+    <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="11" id="Star Piece" class="unselected optional-item" src="images/icons/Star_Piece.png">
         <br>
         <p data-chapter-key-count="11">0/96</p>
