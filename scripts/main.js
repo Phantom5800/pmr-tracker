@@ -399,7 +399,9 @@ function initializePage() {
             $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
         }
 
-        synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
+        if ($(this).attr('data-key-sync')) {
+            synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
+        }
         checkIfChapterIsCompletable(c);
     });
 
@@ -430,7 +432,9 @@ function initializePage() {
             $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
         }        
 
-        synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
+        if ($(this).attr('data-key-sync')) {
+            synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
+        }
         checkIfChapterIsCompletable(c);
         return false;
     });
