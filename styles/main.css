@@ -426,6 +426,12 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+select {
+    font-family: "Paper Mario";
+    border-radius: 10px;
+    height: 30px;
+}
+
 /* Loading Icon */
 .lds-ring {
     display: inline-block;

@@ -5,10 +5,10 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=6"></script>
+        <script src="scripts/compact.js?version=7"></script>
         <script src="scripts/maps.js?version=4"></script>
-        <script src="scripts/main.js?version=6"></script>
-        <link rel="stylesheet" href="styles/main.css?version=4">
+        <script src="scripts/main.js?version=7"></script>
+        <link rel="stylesheet" href="styles/main.css?version=5">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -2516,6 +2516,15 @@
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="combine-misc"></label>
                         </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting compact-tracker-options" style="display:none;">
+                    <td class="option-name sub-setting" colspan="2">Sort Mode</td>
+                    <td class="option" colspan="2">
+                        <select id="compact-tracker-order">
+                            <option value="false">Vanilla Acquired Order</option>
+                            <option value="true">Required First</option>
+                        </select>
                     </td>
                 </tr>
                 <tr class="tracker-setting compact-tracker-options" style="display:none;">

@@ -90,8 +90,8 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
     <div class="compact-misc-item compact-element blue-house-optional"><img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></div>
-    <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
+    <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
     <div class="compact-misc-item compact-element useless-item"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></div>
