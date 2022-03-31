@@ -807,6 +807,7 @@ $(document).ready(function(){
         $(".ch6-optional").toggle(!isChecked);
 
         updateKeyItemHighlight();
+        sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
     });
 
     $("#combine-misc").click(function() {
@@ -814,6 +815,7 @@ $(document).ready(function(){
         localStorage.setItem("combine-misc", isChecked);
         combineMiscAndCompact();
         synchronizeMapsAndTracker();
+        sortCompactTracker($("#compact-tracker-order").val() === "true");
     });
 
     function updateKeyItemHighlight() {
@@ -835,6 +837,20 @@ $(document).ready(function(){
         localStorage.setItem("highlight-key", isChecked);
         updateKeyItemHighlight();
     });
+
+    function sortCompactTracker(requiredFirst) {
+        $(".compact-misc-item").css("order", (requiredFirst) ? 1 : 0);
+    }
+    
+    $("#compact-tracker-order").on("change", function() {
+        sortCompactTracker($(this).val() === "true");
+        localStorage.setItem("compact-tracker-order", $(this).val());
+    });
+
+    var compact_tracker_order = localStorageGetWithDefault("compact-tracker-order", "false") == "true";
+    if (compact_tracker_order) {
+        $("#compact-tracker-order").val("true");
+    }
 
     var use_compact_tracker = localStorageGetWithDefault("compact-tracker", false) == "true";
     if (use_compact_tracker) {
