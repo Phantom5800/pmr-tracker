@@ -973,8 +973,11 @@ function resetPage() {
 }
 
 function savePageState() {
-    var imageStates = {};
-    $("img.star-spirit, img.key-item, img.optional-item, img.upgrade").each(function() {
+    var imageStates = {
+        items: {},
+        checks: {}
+    };
+    $("img.star-spirit, img.key-item, img.optional-item, img.upgrade, img.partner").each(function() {
         if ($(this).is(':visible')) {
             var chapterKey = $(this).attr("data-chapter-key");
             var keyCount = 0;
@@ -984,13 +987,16 @@ function savePageState() {
                 keyCount = $(this).hasClass("unselected") ? 0 : 1;
             }
     
-            imageStates[$(this).attr('id')] = keyCount;
+            imageStates.items[$(this).attr('id')] = keyCount;
         }
     });
 
-    var json = JSON.stringify(imageStates);
-    console.log(json);
+    $("input[data-map-group]").each(function() {
+        var name = `${$(this).attr("data-map-group")} + ${$(this).parent().text()}`;
+        imageStates.checks[name] = $(this).is(':checked') ? 1 : 0;
+    });
 
+    var json = JSON.stringify(imageStates);
     var blob = new Blob([json], {type: "text/json"});
     var file = window.URL.createObjectURL(blob);
 
@@ -1015,9 +1021,8 @@ function loadPageState() {
             fileReader.onload = function() {
                 var json = fileReader.result;
                 var obj = JSON.parse(json);
-                console.log(obj);
 
-                for (var key in obj) {
+                for (var key in obj.items) {
                     if (key.includes("Boots") || key.includes("Hammer")) {
                         var marioupgrade = key.substring(key.lastIndexOf(' ') + 1);
                         if (key.includes("Super")) {
@@ -1027,9 +1032,27 @@ function loadPageState() {
                             $(`img[id="Super ${marioupgrade}"]`).click();
                         }
                     } else {
-                        for (var i = 0; i < obj[key]; ++i) {
-                            $(`img[id="${key}"]`).click();
+                        for (var i = 0; i < obj.items[key]; ++i) {
+                            $(`img[id="${key}"]`).each(function() {
+                                if ($(this).is(':visible')) {
+                                    $(this).click();
+                                }
+                            });
                         }
+                    }
+                }
+
+                for (var key in obj.checks) {
+                    if (obj.checks[key]) {
+                        var data_group = key.substring(0, key.indexOf(' '));
+                        var check_string = key.substring(key.lastIndexOf('+') + 2);
+    
+                        $(`input[data-map-group="${data_group}"]`).each(function() {
+                            if ($(this).parent().text() === check_string) {
+                                $(this).attr("checked", true);
+                                updateSingleMapCheck($(this), true);
+                            }
+                        });
                     }
                 }
             }
