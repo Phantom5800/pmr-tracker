@@ -974,7 +974,7 @@ function resetPage() {
 
 function savePageState() {
     var imageStates = {};
-    $("img.star-spirit, img.key-item, img.optional-item").each(function() {
+    $("img.star-spirit, img.key-item, img.optional-item, img.upgrade").each(function() {
         if ($(this).is(':visible')) {
             var chapterKey = $(this).attr("data-chapter-key");
             var keyCount = 0;
@@ -1018,8 +1018,18 @@ function loadPageState() {
                 console.log(obj);
 
                 for (var key in obj) {
-                    for (var i = 0; i < obj[key]; ++i) {
-                        $(`img[id="${key}"]`).click();
+                    if (key.includes("Boots") || key.includes("Hammer")) {
+                        var marioupgrade = key.substring(key.lastIndexOf(' ') + 1);
+                        if (key.includes("Super")) {
+                            $(`img[id="${marioupgrade}"]`).click();
+                        } else if (key.includes("Ultra")) {
+                            $(`img[id="${marioupgrade}"]`).click();
+                            $(`img[id="Super ${marioupgrade}"]`).click();
+                        }
+                    } else {
+                        for (var i = 0; i < obj[key]; ++i) {
+                            $(`img[id="${key}"]`).click();
+                        }
                     }
                 }
             }
