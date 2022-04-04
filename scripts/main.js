@@ -550,50 +550,22 @@ $(document).ready(function(){
         $(this).blur();
     });
 
-    function resetPage() {
-        // clear out all single click items
-        $("img.optional-item, img.key-item, img.partner").each(function() {
-            if (!$(this).hasClass("unselected")) {
-                $(this).addClass("unselected");
-            }
-        });
-
-        // clear upgrades
-        $("img.upgrade").each(function() {
-            for (var i = 0; i < 2; ++i) {
-                $(this).contextmenu();
-            }
-        });
-
-        // clear star spirits
-        $("img.star-spirit").each(function() {
-            if (!$(this).hasClass("completable") && !$(this).hasClass("unselected")) {
-                $(this).addClass("unselected");
-            }
-        });
-
-        // clear key counts
-        $("img[data-chapter-key]").each(function() {
-            var chapter = parseInt($(this).attr("data-chapter-key"));
-            for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
-                $(this).contextmenu();
-            }
-        });
-
-        // reset chapter completion states
-        for (var i = 1; i <= 8; ++i) {
-            checkIfChapterIsCompletable(i);
-        }
-
-        resetMapChecks();
-    }
-
     // reset the tracker completely
     $("#reset-button").click(function() {
         var confirmation = confirm("Are you sure you want to reset the tracker status?");
         if (confirmation) {
             resetPage();
         }
+        $(this).blur();
+    });
+
+    $("#save-button").click(function() {
+        savePageState();
+        $(this).blur();
+    });
+
+    $("#load-button").click(function() {
+        loadPageState();
         $(this).blur();
     });
 
@@ -961,3 +933,97 @@ $(document).ready(function(){
     $(".section").css("background-color", section_color);
     $("#section-color").val(section_color);
 });
+
+function resetPage() {
+    // clear out all single click items
+    $("img.optional-item, img.key-item, img.partner").each(function() {
+        if (!$(this).hasClass("unselected")) {
+            $(this).addClass("unselected");
+        }
+    });
+
+    // clear upgrades
+    $("img.upgrade").each(function() {
+        for (var i = 0; i < 2; ++i) {
+            $(this).contextmenu();
+        }
+    });
+
+    // clear star spirits
+    $("img.star-spirit").each(function() {
+        if (!$(this).hasClass("completable") && !$(this).hasClass("unselected")) {
+            $(this).addClass("unselected");
+        }
+    });
+
+    // clear key counts
+    $("img[data-chapter-key]").each(function() {
+        var chapter = parseInt($(this).attr("data-chapter-key"));
+        for (var i = 0; i < maxKeyCounts[chapter]; ++i) {
+            $(this).contextmenu();
+        }
+    });
+
+    // reset chapter completion states
+    for (var i = 1; i <= 8; ++i) {
+        checkIfChapterIsCompletable(i);
+    }
+
+    resetMapChecks();
+}
+
+function savePageState() {
+    var imageStates = {};
+    $("img.star-spirit, img.key-item, img.optional-item").each(function() {
+        if ($(this).is(':visible')) {
+            var chapterKey = $(this).attr("data-chapter-key");
+            var keyCount = 0;
+            if (chapterKey) {
+                keyCount = currentKeyCounts[parseInt(chapterKey)];
+            } else {
+                keyCount = $(this).hasClass("unselected") ? 0 : 1;
+            }
+    
+            imageStates[$(this).attr('id')] = keyCount;
+        }
+    });
+
+    var json = JSON.stringify(imageStates);
+    console.log(json);
+
+    var blob = new Blob([json], {type: "text/json"});
+    var file = window.URL.createObjectURL(blob);
+
+    var fileLink = document.createElement("a");
+    fileLink.download = `pmr-tracker-state.json`;
+    fileLink.href = file;
+    fileLink.click();
+
+    window.URL.revokeObjectURL(file);
+}
+
+function loadPageState() {
+    resetPage();
+
+    var fileDialog = document.createElement("input");
+    fileDialog.type = "file";
+    fileDialog.accept = ".json, text/json";
+    fileDialog.click();
+    fileDialog.onchange = function() {
+        if (fileDialog.files.length > 0) {
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                var json = fileReader.result;
+                var obj = JSON.parse(json);
+                console.log(obj);
+
+                for (var key in obj) {
+                    for (var i = 0; i < obj[key]; ++i) {
+                        $(`img[id="${key}"]`).click();
+                    }
+                }
+            }
+            fileReader.readAsText(fileDialog.files[0]);
+        }
+    }
+}
