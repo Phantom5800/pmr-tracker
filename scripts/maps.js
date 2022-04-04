@@ -92,19 +92,22 @@ function updateCompletion(mapGroup, skipVisible = false) {
 
     $(`td[data-checks-list="${mapGroup}"]`).toggleClass("complete", totalCount === completeCount);
 
-    // see if all screens are complete
-    totalCount = 0;
-    completeCount = 0;
-    $("td[data-checks-list]").each(function() {
-        if ($(this).is(':visible') || skipVisible) {
-            ++totalCount;
-            if ($(this).hasClass("has-nothing") || $(this).hasClass("complete")) {
-                ++completeCount;
-            }
-        }
-    });
 
-    $("button.map-select.selected").toggleClass("complete", totalCount === completeCount);
+    $("div.map-buttons button").each(function() {
+        // see if all screens are complete
+        totalCount = 0;
+        completeCount = 0;
+        $(`div#${$(this).attr("data-map")} td[data-checks-list]`).each(function() {
+            if ($(this).is(':visible') || skipVisible) {
+                ++totalCount;
+                if ($(this).hasClass("has-nothing") || $(this).hasClass("complete")) {
+                    ++completeCount;
+                }
+            }
+        });
+    
+        $(this).toggleClass("complete", totalCount === completeCount);
+    });
 }
 
 function updateSingleMapCheck(check, skipVisible = false) {
@@ -182,7 +185,7 @@ function resetMapChecks() {
     $("#map-checks input").each(function() {
         if ($(this).is(':checked')) {
             $(this).attr("checked", false);
-            updateSingleMapCheck($(this));
+            updateSingleMapCheck($(this), true);
         }
     });
 
@@ -192,7 +195,7 @@ function resetMapChecks() {
 
 // this function needs to be called after initializeMaps as it will rebind new events for some checks
 // in order to synchronize the progress tracker and the map tracker
-function synchronizeMapsAndTracker() {
+function synchronizeMapsAndTracker() {/*
     $("img[data-sync]").each(function() {
         var sync = $(this).attr("data-sync");
         $(this).unbind("click").click(function() {
@@ -234,10 +237,10 @@ function synchronizeMapsAndTracker() {
         });
 
         updateSingleMapCheck($(this));
-    });
+    });*/
 }
 
-function synchronizeMapsKey(keyObj, current, previous) {
+function synchronizeMapsKey(keyObj, current, previous) {/*
     if (current === previous) {
         return;
     }
@@ -251,5 +254,5 @@ function synchronizeMapsKey(keyObj, current, previous) {
         var check = $(`input[data-key-sync="${sync}=${current}"]`);
         check.attr("checked", true);
         updateSingleMapCheck(check, true);
-    }
+    }*/
 }
