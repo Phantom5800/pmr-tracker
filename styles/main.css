@@ -263,10 +263,13 @@ a:hover {
 
 .hamburger-1, .hamburger-2, .hamburger-3 {
     width: 35px;
-    height: 5px;
+    height: 3px;
     background-color: black;
     margin: 6px 0;
     transition: 0.4s;
+    border-color: gainsboro;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .options-open .hamburger-1 {
