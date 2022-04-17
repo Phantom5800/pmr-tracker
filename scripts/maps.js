@@ -106,7 +106,9 @@ function updateCompletion(mapGroup, skipVisible = false) {
             }
         });
     
-        $(this).toggleClass("complete", totalCount === completeCount);
+        if (totalCount > 0) {
+            $(this).toggleClass("complete", totalCount === completeCount);
+        }
     });
 }
 
