@@ -136,6 +136,23 @@ img.completable {
     filter: grayscale(0.6) brightness(80%) drop-shadow(0px 0px 5px white);
 }
 
+img.star-spirit, img.partner, img.upgrade {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+img.optional-item, img.key-item {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+img[id='Ultra Stone'] {
+    width: 50px;
+    height: 50px;
+}
+
 div.compact-element {
     width: 70px;
     height: 70px;
@@ -232,8 +249,7 @@ a:hover {
     position: absolute;
     z-index: 1;
     top: 125%;
-    left: 50%;
-    margin-left: -105px;
+    left: -50%;
 
     opacity: 0;
     transition: opacity 0.3s;
@@ -243,7 +259,7 @@ a:hover {
     content: "";
     position: absolute;
     bottom: 100%;
-    left: 50%;
+    left: 40px;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
