@@ -121,7 +121,7 @@ var altTracker = `<table width="100%">
     <div class="compact-misc-item compact-element">
         <div class="tooltip">
             <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
-            <span class="tooltiptext rip-cheato-money">Total Coins Needed: 188</span>
+            <span class="tooltiptext rip-cheato-money">Total Coins Needed: 188 (Only first 6 can be progression items)</span>
         </div>
         <br>
         <p data-chapter-key-count="12">0/11</p>

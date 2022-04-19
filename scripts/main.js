@@ -212,10 +212,6 @@ function checkIfChapterIsCompletable(chapter) {
 
 function initializePage() {
     $('img').on('dragstart', function(){return false;});
-    $('.star-spirit').height(60);
-    $('.partner, .upgrade').height(60);
-    $('.key-item, .optional-item').height(40);
-    $('[id="Ultra Stone"]').height(50);
 
     $('.optional-item').unbind("click").click(function() {
         var isObtained = false;
@@ -396,7 +392,7 @@ function initializePage() {
             for (var i = currentKeyCounts[c]; i < maxKeyCounts[c]; ++i) {
                 totalCoins += coinCounts[i];
             }
-            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
+            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins} (Only first 6 can be progression items)`)});
         }
 
         if ($(this).attr('data-key-sync')) {
@@ -429,7 +425,7 @@ function initializePage() {
             for (var i = currentKeyCounts[c]; i < maxKeyCounts[c]; ++i) {
                 totalCoins += coinCounts[i];
             }
-            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins}`)});
+            $(".rip-cheato-money").each(function() {$(this).text(`Total Coins Needed: ${totalCoins} (Only first 6 can be progression items)`)});
         }        
 
         if ($(this).attr('data-key-sync')) {
