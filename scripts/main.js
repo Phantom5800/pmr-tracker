@@ -213,6 +213,29 @@ function checkIfChapterIsCompletable(chapter) {
 function initializePage() {
     $('img').on('dragstart', function(){return false;});
 
+    $('img.star-spirit').each(function() {
+        var star_spirit = $(this);
+
+        if ($(this).siblings("div").length === 0) {
+            jQuery('<div>', {
+                class: 'chapter-level'
+            }).appendTo($(this).parent())
+            .click(function() {
+                star_spirit.click();
+            })
+            .contextmenu(function() {
+                star_spirit.contextmenu();
+            });
+        }
+    });
+
+    $('img.star-spirit').unbind("contextmenu").contextmenu(function() {
+        var value = parseInt($(this).siblings('div').text() || 0);
+        value = (value + 1) % 8;
+        $(this).siblings('div').text(value);
+        $(this).siblings('div').toggle(value > 0);
+    });
+
     $('.optional-item').unbind("click").click(function() {
         var isObtained = false;
         if ($(this).hasClass("unselected")) {
