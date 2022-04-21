@@ -990,6 +990,17 @@ function resetPage() {
         }
     });
 
+    // clear chapter difficulty marks
+    $("img.star-spirit").each(function() {
+        $(this).siblings("div").each(function() {
+            var val = parseInt($(this).text()) || 0;
+            while (val > 0) {
+                $(this).contextmenu();
+                --val;
+            }
+        });
+    });
+
     // reset chapter completion states
     for (var i = 1; i <= 8; ++i) {
         checkIfChapterIsCompletable(i);
