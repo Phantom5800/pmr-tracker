@@ -226,6 +226,13 @@ function initializePage() {
             .contextmenu(function() {
                 star_spirit.contextmenu();
             });
+        } else {
+            $(this).siblings("div").unbind("click").click(function() {
+                star_spirit.click();
+            })
+            .unbind("contextmenu").contextmenu(function() {
+                star_spirit.contextmenu();
+            });
         }
     });
 
