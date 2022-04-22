@@ -1033,9 +1033,17 @@ function resetPage() {
             var val = parseInt($(this).text()) || 0;
             while (val > 0) {
                 $(this).contextmenu();
-                --val;
+                val = (val + 1) % 8;
             }
         });
+    });
+
+    // clear checked off items
+    $("img.optional-item").each(function() {
+        var siblings = $(this).siblings("div");
+        if (siblings.length > 0 && siblings.is(':visible')) {
+            $(this).contextmenu();
+        }
     });
 
     // reset chapter completion states
