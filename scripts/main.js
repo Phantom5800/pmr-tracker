@@ -243,6 +243,43 @@ function initializePage() {
         $(this).siblings('div').toggle(value > 0);
     });
 
+    $('img.optional-item').each(function() {
+        var item = $(this);
+        var id = item.attr('id');
+        if (id !== "Ultra Stone" && id !== "Anti Guy" && id !== "Lee" && id !== "Chan") {
+            if (item.siblings("div").length === 0) {
+                jQuery('<div>', {
+                    class: 'item-turnin'
+                }).appendTo(item.parent())
+                .click(function() {
+                    item.click();
+                })
+                .contextmenu(function() {
+                    item.contextmenu();
+                })
+                .mouseenter(function() {
+                    item.mouseenter();
+                })
+                .mouseleave(function() {
+                    item.mouseleave();
+                })
+                .text("\u2714")
+                .toggle(false);
+            } else {
+                item.siblings("div").unbind("click").click(function() {
+                    item.click();
+                })
+                .unbind("contextmenu").contextmenu(function() {
+                    item.contextmenu();
+                });
+            }
+        }
+    });
+
+    $('img.optional-item').contextmenu(function() {
+        $(this).siblings("div").toggle();
+    });
+
     $('.optional-item').unbind("click").click(function() {
         var isObtained = false;
         if ($(this).hasClass("unselected")) {
