@@ -158,6 +158,20 @@ div.chapter-level {
     stroke: 1px black;
 }
 
+div.item-turnin {
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    width: 0;
+    cursor: pointer;
+
+    font-size: 2em;
+    font-family: "Paper Mario";
+    color: rgb(4, 160, 4);
+    -webkit-text-stroke: 1px black;
+    stroke: 1px black;
+}
+
 img.optional-item, img.key-item {
     width: 40px;
     height: 40px;
