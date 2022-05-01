@@ -50,19 +50,8 @@ function toggleChecks(check, enable) {
                 $(this).click();
             }
 
-            // check dependencies first
-            var dependenciesPassed = true;
-            var dependency = $(this).attr("data-dependency");
-            if (dependency) {
-                dependenciesPassed = $(`#${dependency}`).is(':checked');
-            }
-
             // disable the checkbox and the label
-            if (enable) {
-                $(this).attr("disabled", enable);
-            } else {
-                $(this).attr("disabled", !dependenciesPassed);
-            }
+            $(this).attr("disabled", enable);
             $(this).parent().toggleClass("disabled", enable);
 
             var mapGroup = $(this).attr("data-map-group");
@@ -116,11 +105,6 @@ function updateSingleMapCheck(check, skipVisible = false) {
     updateCompletion(check.attr("data-map-group"), skipVisible);
 
     var isChecked = check.is(':checked');
-
-    // update dependencies
-    $(`input[data-dependency="${check.attr("id")}"`).each(function() {
-        $(this).attr("disabled", !isChecked);
-    });
 
     // update counts
     var label = check.parent().text();

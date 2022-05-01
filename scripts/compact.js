@@ -146,29 +146,4 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="12">0/11</p>
     </div>
-    <div class="compact-misc-item compact-element">
-        <div class="tooltip">
-            <img data-sync="anti-guy" id="Anti Guy" class="unselected optional-item" src="images/icons/Anti_Guy_Sprite_-_Paper_Mario.png">
-            <span class="tooltiptext">Not in logic until Lemon Candy can be made (Cake Mix + Lemon)</span>
-        </div>
-    </div>
-    <div class="compact-misc-item compact-element dojo-optional">
-        <div class="tooltip">
-            <img data-sync="Chan" id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png">
-            <span class="tooltiptext">In logic from beginning</span>
-        </div>
-    </div>
-    <div class="compact-misc-item compact-element dojo-optional">
-        <div class="tooltip">
-            <img data-sync="Lee" id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png">
-            <span class="tooltiptext">In logic after 2 star spirits</span>
-        </div>
-    </div>
-    <div class="compact-misc-item compact-element dojo-optional">
-        <div class="tooltip">
-            <img data-key-sync="Master" data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
-            <p data-chapter-key-count="10">0/3</p>
-            <span class="tooltiptext">In logic after 3/4/5 star spirits respectively</span>
-        </div>
-    </div>
 </div>`;
