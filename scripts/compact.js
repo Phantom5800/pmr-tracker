@@ -106,8 +106,14 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
-    <div class="compact-misc-item compact-element useless-item"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></div>
-    <div class="compact-element"><img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png"></div>
+    <div class="compact-misc-item compact-element useless-item">
+        <img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png">
+        <div class="colorblind-label">B</div>
+    </div>
+    <div class="compact-element">
+        <img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png">
+        <div class="colorblind-label">R</div>
+    </div>
     <div class="compact-element"><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></div>
     <div id="BowsersKeySlot" class="compact-element">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
