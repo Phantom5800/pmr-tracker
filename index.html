@@ -5,10 +5,10 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=8"></script>
+        <script src="scripts/compact.js?version=10"></script>
         <script src="scripts/maps.js?version=5"></script>
-        <script src="scripts/main.js?version=14"></script>
-        <link rel="stylesheet" href="styles/main.css?version=10">
+        <script src="scripts/main.js?version=15"></script>
+        <link rel="stylesheet" href="styles/main.css?version=11">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -91,7 +91,10 @@
                     </tr>
                     <tr>
                         <td><img data-chapter-star="7" id="Kalmar" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></td>
-                        <td><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></td>
+                        <td>
+                            <img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif">
+                            <div class="colorblind-label">W</div>
+                        </td>
                         <td><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></td>
                         <td><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></td>
                         <td><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></td>
@@ -2252,8 +2255,14 @@
                         <div class="compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
                         <div class="compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
                         <div class="compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
-                        <div class="compact-element"><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></div>
-                        <div class="compact-element"><img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png"></div>
+                        <div class="compact-element">
+                            <img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png">
+                            <div class="colorblind-label">L</div>
+                        </div>
+                        <div class="compact-element">
+                            <img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png">
+                            <div class="colorblind-label">M</div>
+                        </div>
                         <div class="compact-element">
                             <img data-chapter-key="9" id="Quizmo" class="unselected optional-item" src="images/icons/ChuckQuizmo_PM.png">
                             <br>
@@ -2297,20 +2306,31 @@
                     </table>
                     <table>
                         <tr>
-                            <td><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></td>
-                            <td><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></td>
                             <td>
-                                <div class="tooltip">
-                                    <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
-                                    <span class="tooltiptext">Used in two places: the blue flower and the well in chapter 6.</span>
-                                </div>
+                                <img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png">
+                                <div class="colorblind-label">R</div>
+                            </td>
+                            <td>
+                                <img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png">
+                                <div class="colorblind-label">Y</div>
+                            </td>
+                            <td>
+                                <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+                                <div class="colorblind-label">B</div>
                             </td>
                             <td><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></td>
-                            <td><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
-                            <td class="blue-house-optional"><img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></td>
+                            <td>
+                                <img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                                <div class="colorblind-label">S</div>
+                            </td>
+                            <td class="blue-house-optional">
+                                <img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                                <div class="colorblind-label">O</div>
+                            </td>
                             <td class="useless-item"><img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png"></td>
                             <td class="useless-item">
                                 <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                                <div class="colorblind-label" style="top:10px;">P</div>
                                 <p data-chapter-key-count="14">0/2</p>
                             </td>
                         </tr>
@@ -2518,6 +2538,16 @@
                 <tr id="toggle-tracker-config">
                     <td class="section-toggle section-toggle-closed">&#x25B2;</td>
                     <td class="option-name" colspan="3" style="cursor:pointer;">Tracker Config</td>
+                </tr>
+                <tr class="tracker-setting" style="display:none;">
+                    <td class="option-name sub-setting" colspan="3">Color Blind Labels</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="colorblind" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="colorblind"></label>
+                        </div>
+                    </td>
                 </tr>
                 <tr class="tracker-setting" style="display:none;">
                     <td class="option-name sub-setting" colspan="3">Compact Tracker</td>

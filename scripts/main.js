@@ -243,11 +243,19 @@ function initializePage() {
         $(this).siblings('div').toggle(value > 0);
     });
 
+    $('div.colorblind-label').unbind("click").click(function() {
+        $(this).siblings("img").click();
+    });
+
+    $('div.colorblind-label').unbind("contextmenu").contextmenu(function() {
+        $(this).siblings("img").contextmenu();
+    });
+
     $('img.optional-item').each(function() {
         var item = $(this);
         var id = item.attr('id');
         if (id !== "Ultra Stone" && id !== "Anti Guy" && id !== "Lee" && id !== "Chan") {
-            if (item.siblings("div").length === 0) {
+            if (item.siblings(".item-turnin").length === 0) {
                 jQuery('<div>', {
                     class: 'item-turnin'
                 }).appendTo(item.parent())
@@ -266,7 +274,7 @@ function initializePage() {
                 .text("\u2714")
                 .toggle(false);
             } else {
-                item.siblings("div").unbind("click").click(function() {
+                item.siblings(".item-turnin").unbind("click").click(function() {
                     item.click();
                 })
                 .unbind("contextmenu").contextmenu(function() {
@@ -277,7 +285,7 @@ function initializePage() {
     });
 
     $('img.optional-item').contextmenu(function() {
-        $(this).siblings("div").toggle();
+        $(this).siblings(".item-turnin").toggle();
     });
 
     $('.optional-item').unbind("click").click(function() {
@@ -725,6 +733,12 @@ $(document).ready(function(){
     // tracker specific settings
     ////////////////////////////////////////////////////////////////
 
+    $("#colorblind").click(function() {
+        var isChecked = $(this).is(':checked');
+        $(".colorblind-label").toggle(isChecked);
+        localStorage.setItem("colorblind", isChecked);
+    });
+
     $("#useless-items").click(function() {
         var isChecked = $(this).is(':checked');
         $(".useless-item").toggle(isChecked);
@@ -772,6 +786,7 @@ $(document).ready(function(){
         var compact_checked = $("#compact-tracker").is(':checked');
         var misc_checked = $("#combine-misc").is(':checked');
 
+        $(".colorblind-label").toggle($("#colorblind").is(':checked'));
         if (compact_checked) {
             if (misc_checked) {
                 $(".misc-tracker, .keys-tracker").toggle(false);
@@ -968,6 +983,11 @@ $(document).ready(function(){
         $("#dojo-randomized").click();
     }
 
+    var colorblind_mode = localStorageGetWithDefault("colorblind", "true") == "true";
+    if (!colorblind_mode) {
+        $("#colorblind").click();
+    }
+
     var show_useless_items = localStorageGetWithDefault("useless-items", "true") == "true";
     if (!show_useless_items) {
         $("#useless-items").click();
@@ -1040,7 +1060,7 @@ function resetPage() {
 
     // clear checked off items
     $("img.optional-item").each(function() {
-        var siblings = $(this).siblings("div");
+        var siblings = $(this).siblings("item-turnin");
         if (siblings.length > 0 && siblings.is(':visible')) {
             $(this).contextmenu();
         }

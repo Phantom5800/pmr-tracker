@@ -59,7 +59,10 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="3">0/3</p>
     </div>
-    <div class="compact-misc-item compact-element"><img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
+    <div class="compact-misc-item compact-element">
+        <img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+        <div class="colorblind-label">S</div>
+    </div>
     <div class="compact-element"><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Calculator" class="unselected optional-item" src="images/icons/Calculator_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Frying Pan" class="unselected optional-item" src="images/icons/PM_Frying_Pan.png"></div>
@@ -75,21 +78,31 @@ var altTracker = `<table width="100%">
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></div>
     <div class="ch6-optional compact-element"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png"></div>
     <div class="compact-misc-item compact-element">
-        <div class="tooltip">
-            <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
-            <span class="tooltiptext">Used in two places: the blue flower and the well in chapter 6.</span>
-        </div>
+        <img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png">
+        <div class="colorblind-label">R</div>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png">
+        <div class="colorblind-label">Y</div>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+        <div class="colorblind-label">B</div>
     </div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
     <div class="compact-element"><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
-    <div class="compact-misc-item compact-element blue-house-optional"><img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif"></div>
-    <div class="compact-element"><img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif"></div>
+    <div class="compact-misc-item compact-element blue-house-optional">
+        <img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+        <div class="colorblind-label">O</div>
+    </div>
+    <div class="compact-element">
+        <img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif">
+        <div class="colorblind-label">W</div>
+    </div>
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
@@ -103,11 +116,18 @@ var altTracker = `<table width="100%">
     </div>
     <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+        <div class="colorblind-label" style="top:10px;">P</div>
         <p data-chapter-key-count="14">0/2</p>
     </div>
     <div class="compact-misc-item compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png"></div>
-    <div class="compact-misc-item compact-element"><img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png"></div>
+    <div class="compact-misc-item compact-element">
+        <img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png">
+        <div class="colorblind-label">L</div>
+    </div>
+    <div class="compact-misc-item compact-element">
+        <img id="Melody" class="unselected optional-item" src="images/koopa-koot-favors/PM_Melody.png">
+        <div class="colorblind-label">M</div>
+    </div>
     <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="9" id="Quizmo" class="unselected optional-item" src="images/icons/ChuckQuizmo_PM.png">
         <br>
