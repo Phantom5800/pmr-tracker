@@ -5,9 +5,9 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=10"></script>
-        <script src="scripts/maps.js?version=5"></script>
-        <script src="scripts/main.js?version=15"></script>
+        <script src="scripts/compact.js?version=11"></script>
+        <script src="scripts/maps.js?version=6"></script>
+        <script src="scripts/main.js?version=16"></script>
         <link rel="stylesheet" href="styles/main.css?version=11">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1001,11 +1001,11 @@
                             <h3>Main Gate</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Panel] By three toad sisters</label></li>
-                                <li><label><input data-sync="Chan" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Chan</label></li>
-                                <li><label><input data-sync="Lee" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Dojo] Defeat Lee</label></li>
-                                <li><label><input id="master-1-maps" data-map-group="maps-toad-town-gate" data-key-sync="Master=1" autocomplete="off" type="checkbox">[Dojo] Defeat Master 1</label></li>
-                                <li><label><input id="master-2-maps" data-dependency="master-1-maps" data-key-sync="Master=2" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 2</label></li>
-                                <li><label><input id="master-3-maps" data-dependency="master-2-maps" data-key-sync="Master=3" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 3</label></li>
+                                <li><label class="disabled"><input data-sync="Chan" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Chan (logic from beginng)</label></li>
+                                <li><label class="disabled"><input data-sync="Lee" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Lee (logic after 2 star spirits)</label></li>
+                                <li><label class="disabled"><input id="master-1-maps" data-map-group="maps-toad-town-gate" data-key-sync="Master=1" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 1 (logic after 3 star spirits)</label></li>
+                                <li><label class="disabled"><input id="master-2-maps" data-key-sync="Master=2" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 2 (logic after 4 star spirits)</label></li>
+                                <li><label class="disabled"><input id="master-3-maps" data-key-sync="Master=3" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 3 (logic after 5 star spirits)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Give Dictionary to Russ T. (house right above pipe to Mario's house)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Item at Sushie panel</label></li>
                             </ul>
@@ -1673,7 +1673,7 @@
                             <h3>Anti Guy</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">[Coinsanity] ? Block on left side</label></li>
-                                <li><label><input data-sync="anti-guy" data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Anti Guy Chest</label></li>
+                                <li><label><input data-sync="anti-guy" data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])</label></li>
                                 <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox">Hidden block on right side</label></li>
                             </ul>
                         </div>
@@ -2418,50 +2418,6 @@
                     <tr>
                         <td><img id="Coconut" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_Coconut.png"></td>
                         <td><img id="Red Jar" class="unselected optional-item" src="images/koopa-koot-favors/PM_Red_Jar.png"></td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- 
-                Dojo
-            -->
-            <div class="dojo-tracker section">
-                <table width="100%">
-                    <tr style="height: 4em;">
-                        <td style="text-align: left; width: 40%;">
-                            <h1 class="small-header">Dojo</h1>
-                        </td>
-                        <td style="text-align: right;">
-                            <h2></h2>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td><img id="First Degree Card" class="unselected optional-item" src="images/icons/First-DegreeCard_PM.png"></td>
-                        <td><img id="Second Degree Card" class="unselected optional-item" src="images/icons/Second-DegreeCard_PM.png"></td>
-                        <td><img id="Third Degree Card" class="unselected optional-item" src="images/icons/Third-DegreeCard_PM.png"></td>
-                        <td><img id="Fourth Degree Card" class="unselected optional-item" src="images/icons/Fourth-DegreeCard_PM.png"></td>
-                        <td><img id="Diploma" class="unselected optional-item" src="images/icons/Diploma.png"></td>
-                        <td>
-                            <div class="tooltip">
-                                <img data-sync="Chan" id="Chan" class="unselected optional-item" src="images/icons/Chan_PM.png">
-                                <span class="tooltiptext">In logic from beginning</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="tooltip">
-                                <img data-sync="Lee" id="Lee" class="unselected optional-item" src="images/icons/Lee_PM.png">
-                                <span class="tooltiptext">In logic after 2 star spirits</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="tooltip">
-                                <img data-key-sync="Master" data-chapter-key="10" id="The Master" class="unselected optional-item" src="images/icons/TheMasterFirst_PM.png">
-                                <p data-chapter-key-count="10">0/3</p>
-                                <span class="tooltiptext">In logic after 3/4/5 star spirits respectively</span>
-                            </div>
-                        </td>
                     </tr>
                 </table>
             </div>
