@@ -1073,9 +1073,9 @@ function resetPage() {
 
     resetMapChecks();
     $("#panels-randomized").click();
-	$("#panels-randomized").click();
-	$("#coins-randomized").click();
-	$("#coins-randomized").click();
+    $("#panels-randomized").click();
+    $("#coins-randomized").click();
+    $("#coins-randomized").click();
 }
 
 function savePageState() {
