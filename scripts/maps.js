@@ -170,8 +170,7 @@ function initializeMaps() {
 function resetMapChecks() {
     $("#map-checks input").each(function() {
         if ($(this).is(':checked')) {
-            $(this).attr("checked", false);
-            updateSingleMapCheck($(this), true);
+            $(this).click();
         }
     });
 
