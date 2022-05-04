@@ -590,6 +590,14 @@ $(document).ready(function(){
                         $("#fast-bowser-castle").click();
                     }
 
+                    if (data["IncludeShops"] != $("#shops-randomized").is(':checked')) {
+                        $("#shops-randomized").click();
+                    }
+
+                    if (data["KeyitemsOutsideDungeon"] != $("#keys-randomized").is(':checked')) {
+                        $("#keys-randomized").click();
+                    }
+
                     if (data["IncludePanels"] != $("#panels-randomized").is(':checked')) {
                         $("#panels-randomized").click();
                     }
@@ -717,14 +725,14 @@ $(document).ready(function(){
         $(".koopa-koot-generated-item").toggle(isChecked);
         $(".koopa-koot-tracker").toggle(isChecked);
         localStorage.setItem("koopa-koot-randomized", isChecked);
+        $("#flag-koopakoot").toggle(isChecked);
     });
 
     $("#dojo-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         var isCompactMiscCombined = $("#compact-tracker").is(':checked') && $("#combine-misc").is(':checked');
-        $(".dojo-tracker").toggle(isChecked && !isCompactMiscCombined);
-        $(".dojo-optional").toggle(isChecked && isCompactMiscCombined);
         toggleChecks("[Dojo]", !isChecked);
+        $("#flag-dojo").toggle(isChecked);
         countChecks();
         localStorage.setItem("dojo-randomized", isChecked);
     });
@@ -743,6 +751,12 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         $(".useless-item").toggle(isChecked);
         localStorage.setItem("useless-items", isChecked);
+    });
+
+    $("#seed-flags").click(function() {
+        var isChecked = $(this).is(':checked');
+        $("#enabled-settings").toggle(isChecked);
+        localStorage.setItem("seed-flags", isChecked);
     });
 
     $("#game-maps").click(function() {
@@ -920,10 +934,23 @@ $(document).ready(function(){
     ////////////////////////////////////////////////////////////////
     // map exclusive settings
     ////////////////////////////////////////////////////////////////
+    $("#shops-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("shops-randomized", isChecked);
+        $("#flag-shopsanity").toggle(isChecked);
+    });
+
+    $("#keys-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("keys-randomized", isChecked);
+        $("#flag-keysanity").toggle(isChecked);
+    });
+
     $("#panels-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("panels-randomized", isChecked);
         toggleChecks("[Panel]", !isChecked);
+        $("#flag-panels").toggle(isChecked);
         countChecks();
     });
 
@@ -931,8 +958,19 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coins-randomized", isChecked);
         toggleChecks("[Coinsanity]", !isChecked);
+        $("#flag-coinsanity").toggle(isChecked);
         countChecks();
     });
+
+    var shops_randomized = localStorageGetWithDefault("shops-randomized", "true") == "true";
+    if (!shops_randomized) {
+        $("#shops-randomized").click();
+    }
+
+    var keys_randomized = localStorageGetWithDefault("keys-randomized", "true") == "true";
+    if (!keys_randomized) {
+        $("#keys-randomized").click();
+    }
 
     var panels_randomized = localStorageGetWithDefault("panels-randomized", "true") == "true";
     if (!panels_randomized) {
@@ -991,6 +1029,11 @@ $(document).ready(function(){
     var show_useless_items = localStorageGetWithDefault("useless-items", "true") == "true";
     if (!show_useless_items) {
         $("#useless-items").click();
+    }
+
+    var seed_flags = localStorageGetWithDefault("seed-flags", false) == "true";
+    if (seed_flags) {
+        $("#seed-flags").click();
     }
 
     var maps_enabled = localStorageGetWithDefault("game-maps", "true") == "true";
