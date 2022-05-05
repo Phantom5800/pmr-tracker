@@ -75,6 +75,15 @@ h2 {
     border-radius: 10px;
 }
 
+#enabled-settings {
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+}
+
+#enabled-settings img {
+    height: 45px;
+}
+
 .main-tracker {
     width: 36em;
     height: auto;
