@@ -1103,7 +1103,7 @@ function resetPage() {
 
     // clear checked off items
     $("img.optional-item").each(function() {
-        var siblings = $(this).siblings("item-turnin");
+        var siblings = $(this).siblings(".item-turnin");
         if (siblings.length > 0 && siblings.is(':visible')) {
             $(this).contextmenu();
         }
