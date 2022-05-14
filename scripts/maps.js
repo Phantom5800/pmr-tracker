@@ -29,6 +29,10 @@ function countChecks() {
             if ($("#dojo-randomized").is(':checked')) {
                 ++total_checks;
             }
+        } else if ($(this).text().includes("[Letter]")) {
+            if ($("#letters-randomized").is(':checked')) {
+                ++total_checks;
+            }
         } else {
             ++total_checks;
         }

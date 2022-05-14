@@ -36,11 +36,6 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="1">0/4</p>
     </div>
-    <div class="compact-misc-item compact-element">
-        <img data-chapter-key="13" id="Letter" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
-        <br>
-        <p data-chapter-key-count="13">0/26</p>
-    </div>
     <div class="compact-element"><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></div>
     <div class="compact-element"><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></div>
     <div class="compact-element"><img data-chapter="2" id="Diamond Stone" class="unselected key-item" src="images/icons/DiamondStone.png"></div>
