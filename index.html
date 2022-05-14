@@ -5,10 +5,10 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=12"></script>
-        <script src="scripts/maps.js?version=7"></script>
-        <script src="scripts/main.js?version=18"></script>
-        <link rel="stylesheet" href="styles/main.css?version=12">
+        <script src="scripts/compact.js?version=13"></script>
+        <script src="scripts/maps.js?version=8"></script>
+        <script src="scripts/main.js?version=19"></script>
+        <link rel="stylesheet" href="styles/main.css?version=13">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -34,6 +34,7 @@
                     <img id="flag-shopsanity" src="images/flags/HarryTPM.png">
                     <img id="flag-keysanity" src="images/flags/OddKey.gif">
                     <img id="flag-coinsanity" src="images/flags/coin.png">
+                    <img id="flag-letters" src="images/flags/PM_Letter_Sprite.png">
                     <img id="flag-panels" src="images/flags/Star_Piece.png">
                     <img id="flag-dojo" src="images/icons/TheMasterFirst_PM.png" style="display:none;">
                     <img id="flag-koopakoot" src="images/flags/KoopaKoot_PM.png">
@@ -410,7 +411,7 @@
                                     <td class="has-nothing"></td>
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-stone-cactus">Stone Cactus</td>
-                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-nomadimouse">Mouse</td>
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-outside-outpost">Outside Outpost</td>
                                     <td data-checks-list="maps-desert-outpost-west">Dry Dry Outpost West</td>
@@ -591,7 +592,7 @@
                                 </tr>
                                 <tr>
                                     <td class="empty"/>
-                                    <td class="has-nothing" colspan="2">Shop</td>
+                                    <td data-checks-list="maps-boo-mansion-shop-real" colspan="2">Shop</td>
                                     <td class="empty"/>
                                 </tr>
                                 <tr>
@@ -939,6 +940,9 @@
                         <div id="maps-prologue-village" style="display:none;">
                             <h3>Goomba Village</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">[Letter] Goompa</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">[Letter] Goompapa 1 (Chain)</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">[Letter] Goompapa 2 (Chain)</label></li>
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Give Dolly to Goombaria</label></li>
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Goombario</label></li>
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox">Goompa</label></li>
@@ -987,6 +991,7 @@
                         <div id="maps-toad-town-castle" style="display:none;">
                             <h3>Castle Ruins</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-toad-town-castle" autocomplete="off" type="checkbox">[Letter] Muss T. (Chain)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-castle" autocomplete="off" type="checkbox">[Panel] Right side of bridge</label></li>
                             </ul>
                         </div>
@@ -994,12 +999,14 @@
                             <h3>Merluvlee's House</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-merluvlee" autocomplete="off" type="checkbox">[Panel] In front of pot outside house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-merluvlee" autocomplete="off" type="checkbox">[Letter] Merlow</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-harbor" style="display:none;">
                             <h3>Toad Town Harbor</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">[Panel] Outside Club 64</label></li>
+                                <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">[Letter] Fishmael (Chain)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Give Melody to Simon in Club 64</label></li>
                             </ul>
@@ -1020,13 +1027,17 @@
                                 <li><label class="disabled"><input id="master-1-maps" data-map-group="maps-toad-town-gate" data-key-sync="Master=1" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 1 (logic after 3 star spirits)</label></li>
                                 <li><label class="disabled"><input id="master-2-maps" data-key-sync="Master=2" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 2 (logic after 4 star spirits)</label></li>
                                 <li><label class="disabled"><input id="master-3-maps" data-key-sync="Master=3" data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled>[Dojo] Defeat Master 3 (logic after 5 star spirits)</label></li>
-                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Give Dictionary to Russ T. (house right above pipe to Mario's house)</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Letter] Miss T.</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Letter] Russ T.</label></li>
+                                <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Give Dictionary to Russ T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">Item at Sushie panel</label></li>
                             </ul>
                         </div>
                         <div id="maps-toad-town-center" style="display:none;">
                             <h3>Central Plaza</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">[Letter] Merlon</label></li>
+                                <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">[Letter] Minh T. (Chain)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Tree by Merlon's house</label></li>
                                 <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Give Calculator to Rowf</label></li>
                                 <li><label><input data-map-group="maps-toad-town-center" autocomplete="off" type="checkbox">Give Mailbag to Post Office</label></li>
@@ -1037,6 +1048,7 @@
                             <h3>Below Plaza</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">[Panel] By guard house</label></li>
+                                <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">[Letter] Fice T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Bub-ulb</label></li>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Give Frying Pan to Tayce T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-below-center" autocomplete="off" type="checkbox">Inside Blue House</label></li>
@@ -1052,6 +1064,8 @@
                             <h3>Train Station</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-train" autocomplete="off" type="checkbox">[Panel] Bottom right side of room</label></li>
+                                <li><label><input data-map-group="maps-toad-town-train" autocomplete="off" type="checkbox">[Letter] Dane T. 1 (Chain)</label></li>
+                                <li><label><input data-map-group="maps-toad-town-train" autocomplete="off" type="checkbox">[Letter] Dane T. 2 (Chain)</label></li>
                             </ul>
                         </div>
                         <!--------------------------------------------------------------
@@ -1191,6 +1205,9 @@
                             <h3>Koopa Village West</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">[Panel] Left of tree</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">[Letter] Mort T.</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">[Letter] Koover 1 (Chain)</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">[Letter] Koover 2 (Chain)</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">Bottom bush on left side</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox">Third bush from the right</label></li>
                             </ul>
@@ -1198,6 +1215,7 @@
                         <div id="maps-koopa-village-east" style="display:none;">
                             <h3>Koopa Village East</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">[Letter] Kolorado</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">First bush on left</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">Give Kooper his shell</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox">Give Artifact to Kolorado</label></li>
@@ -1369,6 +1387,12 @@
                                 <li><label><input data-map-group="maps-desert-stone-cactus" autocomplete="off" type="checkbox">[Panel] Below stone cactus</label></li>
                             </ul>
                         </div>
+                        <div id="maps-desert-nomadimouse" style="display:none;">
+                            <h3>Nomadimouse</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-nomadimouse" autocomplete="off" type="checkbox">[Letter] Nomadimouse</label></li>
+                            </ul>
+                        </div>
                         <div id="maps-desert-outside-outpost" style="display:none;">
                             <h3>Outside Outpost</h3>
                             <ul>
@@ -1378,6 +1402,7 @@
                         <div id="maps-desert-outpost-west" style="display:none;">
                             <h3>Dry Dry Outpost West</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox">[Letter] Shop (Chain)</label></li>
                                 <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox">Turn in Lyrics at far right house</label></li>
                             </ul>
                         </div>
@@ -1385,6 +1410,7 @@
                             <h3>Dry Dry Outpost East</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">[Panel] On rooftops</label></li>
+                                <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox">[Letter] Mr. E (Chain)</label></li>
                                 <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">Item on rooftops</label></li>
                                 <li><label><input data-map-group="maps-desert-outpost-east" autocomplete="off" type="checkbox">Talk to Moustafa after buying Dried Shroom + Dusty Hammer</label></li>
                             </ul>
@@ -1538,6 +1564,7 @@
                             <h3>Main Room</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-boo-mansion-main" autocomplete="off" type="checkbox">[Panel] By couch</label></li>
+                                <li><label><input data-map-group="maps-boo-mansion-main" autocomplete="off" type="checkbox">[Letter] Franky (Chain)</label></li>
                             </ul>
                         </div>
                         <div id="maps-boo-mansion-record" style="display:none;">
@@ -1578,6 +1605,12 @@
                             <h3>Above Shop</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-boo-mansion-shop" autocomplete="off" type="checkbox">Right crate on left side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-boo-mansion-shop-real" style="display:none;">
+                            <h3>Shop</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-shop-real" autocomplete="off" type="checkbox">[Letter] Igor</label></li>
                             </ul>
                         </div>
                         <div id="maps-boo-mansion-boots" style="display:none;">
@@ -1909,8 +1942,9 @@
                         <div id="maps-yoshi-east-village" style="display:none;">
                             <h3>East Village</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">[Letter] Red Yoshi Kid (Chain)</label></li>
                                 <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Give a Tayce T. item to Yellow Adult Yoshi</label></li>
-                                <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Give the vase to Kolorado</label></li>
+                                <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Give the volcano vase to Kolorado</label></li>
                                 <li><label><input data-map-group="maps-yoshi-east-village" autocomplete="off" type="checkbox">Coconut tree on right side of room</label></li>
                             </ul>
                         </div>
@@ -2115,6 +2149,7 @@
                             <h3>West Shiver City</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">[Panel] Next to the Mayor's house</label></li>
+                                <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">[Letter] Mayor Penguin</label></li>
                                 <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Talk to Mayor after having met Merle</label></li>
                                 <li><label><input data-map-group="maps-shiver-region-west-city" autocomplete="off" type="checkbox">Chest in middle house</label></li>
                             </ul>
@@ -2150,6 +2185,7 @@
                         <div id="maps-shiver-region-starborn" style="display:none;">
                             <h3>Starborn Valley</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-shiver-region-starborn" autocomplete="off" type="checkbox">[Letter] Frost T. (Chain)</label></li>
                                 <li><label><input data-map-group="maps-shiver-region-starborn" autocomplete="off" type="checkbox">Talk to Merle</label></li>
                             </ul>
                         </div>
@@ -2251,11 +2287,6 @@
                     <div style="display:flex;flex-wrap:wrap;padding-left:10px;">
                         <div class="compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
                         <div class="compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>
-                        <div class="compact-element">
-                            <img data-chapter-key="13" id="Letter" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
-                            <br>
-                            <p data-chapter-key-count="13">0/26</p>
-                        </div>
                         <div class="compact-element"><img id="Artifact" class="unselected optional-item" src="images/icons/Artifact_PM.png"></div>
                         <div class="compact-element"><img id="Record" class="unselected optional-item" src="images/icons/Record.gif"></div>
                         <div class="compact-element"><img id="Weight" class="unselected optional-item" src="images/icons/WeightPM.gif"></div>
@@ -2359,6 +2390,49 @@
                 -->
                 <div id="notes" class="section" style="display: none;">
                     <textarea>Put your own notes here if you want them</textarea>
+                </div>
+            </div>
+
+            <!--
+                Letter Tracker
+            -->
+            <div class="letter-tracker section">
+                <table width="100%">
+                    <tr style="height: 4em;">
+                        <td style="text-align: left; width: 30%;">
+                            <h1 class="small-header">Letters</h1>
+                        </td>
+                        <td style="text-align: right;">
+                            <h2></h2>
+                        </td>
+                    </tr>
+                </table>
+                <div style="display:flex;flex-wrap:wrap;padding-left:10px;">
+                    <div class="compact-element"><img id="Merlon" class="unselected optional-item" src="images/Letters/PM_Merlon.png"></div>
+                    <div class="compact-element"><img id="Kolorado" class="unselected optional-item" src="images/Letters/PM_Kolorado.png"></div>
+                    <div class="compact-element"><img id="Mort T. (Koopa Village Inn)" class="unselected optional-item" src="images/Letters/PM_Toad.png"></div>
+                    <div class="compact-element"><img id="Nomadimouse" class="unselected optional-item" src="images/Letters/Nomadimouse.png"></div>
+                    <div class="compact-element"><img id="Goompa" class="unselected optional-item" src="images/Letters/PM_Goompa_sprite.png"></div>
+                    <div class="compact-element"><img id="Fice T." class="unselected optional-item" src="images/Letters/PM_Fice_T_Sprite.png"></div>
+                    <div class="compact-element"><img id="Igor (Boo's Mansion Shop)" class="unselected optional-item" src="images/Letters/PM_Boo_Sprite.png"></div>
+                    <div class="compact-element"><img id="Russ T." class="unselected optional-item" src="images/Letters/Russ_T.png"></div>
+                    <div class="compact-element"><img id="Minh T." class="unselected optional-item" src="images/Letters/MinhT_PM.png"></div>
+                    <div class="compact-element"><img id="Mayor Penguin" class="unselected optional-item" src="images/Letters/MayorPenguinPM.png"></div>
+                    <div class="compact-element"><img id="Merlow" class="unselected optional-item" src="images/Letters/PM_Merlow.png"></div>
+                    <div class="compact-element"><img id="Goompapa 1" class="unselected optional-item" src="images/Letters/PM_Goompapa_Sprite.png"></div>
+                    <div class="compact-element"><img id="Muss T. (Castle Ruins)" class="unselected optional-item" src="images/Letters/PM_Toad.png"></div>
+                    <div class="compact-element"><img id="Koover 1 (Koopa Village Entrance)" class="unselected optional-item" src="images/Letters/KoopaTroopaPM.png"></div>
+                    <div class="compact-element"><img id="Fishmael" class="unselected optional-item" src="images/Letters/Fishmael_PM.png"></div>
+                    <div class="compact-element"><img id="Koover 2 (Koopa Village Entrance)" class="unselected optional-item" src="images/Letters/KoopaTroopaPM.png"></div>
+                    <div class="compact-element"><img id="Mr. E" class="unselected optional-item" src="images/Letters/MrEPM.png"></div>
+                    <div class="compact-element"><img id="Miss T." class="unselected optional-item" src="images/Letters/PMMissT.png"></div>
+                    <div class="compact-element"><img id="Dry Dry Shop" class="unselected optional-item" src="images/Letters/Little_Mouser_Paper_Mario.png"></div>
+                    <div class="compact-element"><img id="Franky (Boo's Mansion Entrance)" class="unselected optional-item" src="images/Letters/PM_Boo_Sprite.png"></div>
+                    <div class="compact-element"><img id="Dane T. 1" class="unselected optional-item" src="images/Letters/PM_Dane_T.png"></div>
+                    <div class="compact-element"><img id="Red Yoshi Kid" class="unselected optional-item" src="images/Letters/red_yoshi.png"></div>
+                    <div class="compact-element"><img id="Dane T. 2" class="unselected optional-item" src="images/Letters/PM_Dane_T.png"></div>
+                    <div class="compact-element"><img id="Frost T." class="unselected optional-item" src="images/Letters/Frost_T.png"></div>
+                    <div class="compact-element"><img id="Goompapa 2" class="unselected optional-item" src="images/Letters/PM_Goompapa_Sprite.png"></div>
                 </div>
             </div>
 
@@ -2736,6 +2810,16 @@
                             <input autocomplete="off" class="checkbox-slider" id="coins-randomized" type="checkbox" checked>
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="coins-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Letters Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="letters-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="letters-randomized"></label>
                         </div>
                     </td>
                 </tr>
