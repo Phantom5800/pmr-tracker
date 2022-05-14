@@ -615,6 +615,11 @@ $(document).ready(function(){
                         $("#coins-randomized").click();
                     }
 
+                    // TODO: add letter tracking here
+                    if ($("#letters-randomized").is(':checked')) {
+                        $("#letters-randomized").click(); // disable letters if enabled
+                    }
+
                     // TODO: koopa koot is not randomized yet, add it here when it is
                     if ($("#koopa-koot-randomized").is(':checked')) {
                         $("#koopa-koot-randomized").click(); // disable koopa koot if enabled
