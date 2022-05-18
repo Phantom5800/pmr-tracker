@@ -48,7 +48,7 @@ td {
 p, h1, h2, h3 {
     margin: 0 0 0 0;
     font-size: 1.5em;
-    font-weight: bolder;
+    font-weight: normal;
     color: white;
 
     -webkit-text-stroke: 1px black;
