@@ -595,7 +595,7 @@ $(document).ready(function(){
                         $("#blue-house-open").click();
                     }
                     
-                    if (data["ShortenBowsersCastle"] != $("#fast-bowser-castle").is(':checked')) {
+                    if ((data["BowsersCastleMode"] >= 1) != $("#fast-bowser-castle").is(':checked')) {
                         $("#fast-bowser-castle").click();
                     }
 
@@ -615,13 +615,20 @@ $(document).ready(function(){
                         $("#coins-randomized").click();
                     }
 
-                    // TODO: add letter tracking here
-                    if ($("#letters-randomized").is(':checked')) {
+                    // letter settings:
+                    // 0 = none
+                    // 1 = no letter chain
+                    // 2 = final chain reward
+                    // 3 = all letters
+                    if ((data["IncludeLettersMode"] >= 1) != $("#letters-randomized").is(':checked')) {
                         $("#letters-randomized").click(); // disable letters if enabled
                     }
 
-                    // TODO: koopa koot is not randomized yet, add it here when it is
-                    if ($("#koopa-koot-randomized").is(':checked')) {
+                    // koopa koot settings:
+                    // 0 = none
+                    // 1 = koot rewards
+                    // 2 = koot rewards and items
+                    if ((data["KooperSetting"] >= 1) != $("#koopa-koot-randomized").is(':checked')) {
                         $("#koopa-koot-randomized").click(); // disable koopa koot if enabled
                     }
 
