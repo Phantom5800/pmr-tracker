@@ -628,7 +628,7 @@ $(document).ready(function(){
                     // 0 = none
                     // 1 = koot rewards
                     // 2 = koot rewards and items
-                    if ((data["KooperSetting"] >= 1) != $("#koopa-koot-randomized").is(':checked')) {
+                    if ((data["IncludeFavorsMode"] >= 1) != $("#koopa-koot-randomized").is(':checked')) {
                         $("#koopa-koot-randomized").click(); // disable koopa koot if enabled
                     }
 
