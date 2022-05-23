@@ -5,19 +5,25 @@
 
 ## Features
 
-### URI Parameters
+### Tracker Logic
 
-All options can also be specified as a URI parameter. The parameter names are as follows:
+Automatically highlights star spirits that are available (without glitches) when all requirements are met.
 
-* chapter-6-open - If set to true, will hide magical seeds from tracker
-* blue-house-open - If set to true, will hide the odd key from tracker
-* fast-bowser-castle - If set to true, will hide bowser's castle keys from tracker
-* koopa-koot-randomized - If set to true, will show the koopa koot items tracker
-* dojo-randomized - If set to true, will show a tracker for the dojo fights
-* compact-tracker - If set to true, will force the main tracker into a compact layout
-* user-notes - If set to true, will provide a section on the page for custom notes
-* recipe-tooltips - If set to false, will disable the tooltips when hovering over recipe items
-* background-color - Sets the background color, must be provided as hex. Ex. #FF0000 for red
-* section-color - Sets the section color, must be provided as hex. Ex. #FF0000 for red
+### Seed Import
 
-Example uri that sets background and section colors: https://pmr-tracker.phantom-games.com?background-color=#000000&section-color=#5F417B
+Import seed id's directly from the randomizer website to configure the tracker appropriately for each seed the end user generates.
+
+### Map Tracker
+
+This was the first (and currently only?) tracker for Paper Mario Randomizer that has a checklist of every available item spawn location in the game in a very detailed map format.
+
+## Contributing
+
+While the production site is maintained exclusively by Phantom5800, anyone is welcome to submit features and bug fixes as pull requests. Feature development at this point is effectively done, there are a number of [Issues](https://github.com/Phantom5800/pmr-tracker/issues) that could use addressing, but they are all very low priority unless something comes in that absolutely needs addressing.
+
+For anyone that wants to submit changes or new features, all you have to do:
+* Create a fork on github
+* Submit a pull request from your own branch
+* Be descriptive in what you changed and consistent with existing code
+* ...
+* It will probably get merged unless there's major issues!
