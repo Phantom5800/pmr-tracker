@@ -121,7 +121,7 @@ td {
 
 .koopa-koot-tracker {
     width: 36em;
-    height: 13.5em;
+    height: 17em;
 }
 
 .dojo-tracker {
@@ -153,6 +153,16 @@ img.unselected {
 img.completable {
     -webkit-filter: grayscale(0.6) brightness(80%) drop-shadow(0px 0px 5px white);
     filter: grayscale(0.6) brightness(80%) drop-shadow(0px 0px 5px white);
+}
+
+img.koot-item.completable {
+    -webkit-filter: drop-shadow(0px 0px 5px white);
+    filter: drop-shadow(0px 0px 5px white);
+}
+
+img.koot-item.completable.unselected {
+    -webkit-filter: grayscale(0.8) brightness(60%) drop-shadow(0px 0px 5px white);
+    filter: grayscale(0.8) brightness(60%) drop-shadow(0px 0px 5px white);
 }
 
 img.star-spirit, img.partner, img.upgrade {
@@ -199,7 +209,7 @@ div.colorblind-label + div.item-turnin {
     right: 55px;
 }
 
-img.optional-item, img.key-item {
+img.optional-item, img.key-item, img.koot-item {
     width: 40px;
     height: 40px;
     object-fit: contain;
