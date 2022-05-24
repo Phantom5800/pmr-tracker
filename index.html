@@ -5,10 +5,10 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="scripts/compact.js?version=13"></script>
+        <script src="scripts/compact.js?version=14"></script>
         <script src="scripts/maps.js?version=8"></script>
-        <script src="scripts/main.js?version=22"></script>
-        <link rel="stylesheet" href="styles/main.css?version=14">
+        <script src="scripts/main.js?version=23"></script>
+        <link rel="stylesheet" href="styles/main.css?version=15">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -2299,7 +2299,6 @@
                         <div class="compact-element"><img id="Volcano Vase" class="unselected optional-item" src="images/icons/VolcanoVase.gif"></div>
                         <div class="compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
                         <div class="compact-element"><img id="Water Stone" class="unselected optional-item" src="images/icons/WaterStone_PM.png"></div>
-                        <div class="compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
                         <div class="compact-element">
                             <img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png">
                             <div class="colorblind-label">L</div>
@@ -2450,67 +2449,62 @@
                         </td>
                     </tr>
                 </table>
-                <table>
-                    <tr>
-                        <td><img id="Koopa Legends" class="unselected optional-item" src="images/koopa-koot-favors/KoopaLegends_PM.png"></td>
-                        <td>
+                <div style="display:flex;flex-wrap:wrap;padding-left:10px;">
+                        <div class="compact-element"><img data-koot-chapter="0" id="Koopa Legends" class="unselected completable koot-item" src="images/koopa-koot-favors/KoopaLegends_PM.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Sleepy Sheep" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_SleepySheep.png">
+                                <img data-koot-chapter="0" id="Sleepy Sheep" class="unselected completable koot-item" src="images/koopa-koot-favors/PaperMario_Items_SleepySheep.png">
                                 <span class="tooltiptext">Red/Yellow/Blue Berry + Strange Leaf</span>
                             </div>
-                        </td>
-                        <td><img id="Tape" class="unselected optional-item" src="images/koopa-koot-favors/Tape_PM.png"></td>
-                        <td>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="1" id="Tape" class="unselected koot-item" src="images/koopa-koot-favors/Tape_PM.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Koopa Tea" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_KoopaTea.png">
+                                <img data-koot-chapter="1" id="Koopa Tea" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_KoopaTea.png">
                                 <span class="tooltiptext">Cook Koopa Leaf</span>
                             </div>
-                        </td>
-                        <td><img id="Luigi's Autograph" class="unselected optional-item" src="images/koopa-koot-favors/Luigi's_Autograph.png"></td>
-                        <td><img id="Wallet" class="unselected optional-item" src="images/koopa-koot-favors/PM_Empty_Wallet.png"></td>
-                        <td>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="1" id="Luigi's Autograph" class="unselected koot-item" src="images/koopa-koot-favors/Luigi's_Autograph.png"></div>
+                        <div class="compact-element"><img data-koot-chapter="2" id="Wallet" class="unselected koot-item" src="images/koopa-koot-favors/PM_Empty_Wallet.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Tasty Tonic" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_TastyTonic.png">
+                                <img data-koot-chapter="2" id="Tasty Tonic" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_TastyTonic.png">
                                 <span class="tooltiptext">Red/Yellow/Blue Berry + Honey Syrup</span>
                             </div>
-                        </td>
-                        <td><img id="Merluvlee's Autograph" class="unselected optional-item" src="images/koopa-koot-favors/Merluvlee's_Autograph.png"></td>
-                    </tr>
-                    <tr>
-                        <td>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="3" id="Crystal Ball" class="unselected koot-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
+                        <div class="compact-element"><img data-koot-chapter="3" id="Merluvlee's Autograph" class="unselected koot-item" src="images/koopa-koot-favors/Merluvlee's_Autograph.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Life Shroom" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_LifeShroom.png">
+                                <img data-koot-chapter="4" id="Life Shroom" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_LifeShroom.png">
                                 <span class="tooltiptext">Super Shroom (or better) + (Koopa Leaf / Goomnut / Strange Leaf)</span>
                             </div>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Nutty Cake" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_NuttyCake.png">
+                                <img data-koot-chapter="4" id="Nutty Cake" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_NuttyCake.png">
                                 <span class="tooltiptext">Cook Goomnut</span>
                             </div>
-                        </td>
-                        <td><img id="Old Photo" class="unselected optional-item" src="images/koopa-koot-favors/OldPhoto_PM.png"></td>
-                        <td>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="4" id="Old Photo" class="unselected koot-item" src="images/koopa-koot-favors/OldPhoto_PM.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Koopasta" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_Koopasta.png">
+                                <img data-koot-chapter="5" id="Koopasta" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_Koopasta.png">
                                 <span class="tooltiptext">Dried Pasta + Koopa Leaf</span>
                             </div>
-                        </td>
-                        <td><img id="Glasses" class="unselected optional-item" src="images/koopa-koot-favors/Glasses_PM.png"></td>
-                        <td><img id="Lime" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_Lime.png"></td>
-                        <td>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="5" id="Glasses" class="unselected koot-item" src="images/koopa-koot-favors/Glasses_PM.png"></div>
+                        <div class="compact-element"><img data-koot-chapter="5" id="Lime" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_Lime.png"></div>
+                        <div class="compact-element">
                             <div class="tooltip">
-                                <img id="Kooky Cookie" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_KookyCookie.png">
+                                <img data-koot-chapter="6" id="Kooky Cookie" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_KookyCookie.png">
                                 <span class="tooltiptext">Cake Mix +<br> (Koopa Leaf / Stinky Herb / Maple Syrup)</span>
                             </div>
-                        </td>
-                        <td><img id="Package" class="unselected optional-item" src="images/koopa-koot-favors/PM_Package.png"></td>
-                    </tr>
-                    <tr>
-                        <td><img id="Coconut" class="unselected optional-item" src="images/koopa-koot-favors/PaperMario_Items_Coconut.png"></td>
-                        <td><img id="Red Jar" class="unselected optional-item" src="images/koopa-koot-favors/PM_Red_Jar.png"></td>
-                    </tr>
-                </table>
+                        </div>
+                        <div class="compact-element"><img data-koot-chapter="6" id="Package" class="unselected koot-item" src="images/koopa-koot-favors/PM_Package.png"></div>
+                        <div class="compact-element"><img data-koot-chapter="6" id="Coconut" class="unselected koot-item" src="images/koopa-koot-favors/PaperMario_Items_Coconut.png"></div>
+                        <div class="compact-element"><img data-koot-chapter="6" id="Red Jar" class="unselected koot-item" src="images/koopa-koot-favors/PM_Red_Jar.png"></div>
+                </div>
             </div>
 
             <div class="info-block">

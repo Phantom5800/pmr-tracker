@@ -120,7 +120,6 @@ var altTracker = `<table width="100%">
         <div class="colorblind-label" style="top:10px;">P</div>
         <p data-chapter-key-count="14">0/2</p>
     </div>
-    <div class="compact-misc-item compact-element koopa-koot-generated-item"><img id="Crystal Ball" class="unselected optional-item" src="images/koopa-koot-favors/Crystal_Ball_PM.png"></div>
     <div class="compact-misc-item compact-element">
         <img id="Lyrics" class="unselected optional-item" src="images/koopa-koot-favors/Lyrics_PM.png">
         <div class="colorblind-label">L</div>

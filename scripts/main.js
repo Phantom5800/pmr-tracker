@@ -120,6 +120,23 @@ function localStorageGetWithDefault(key, defaultValue) {
     return urlVal;
 }
 
+function updateKoopaKootAvailable() {
+    $(".koot-item").each(function() {
+        var chapterRequired = parseInt($(this).attr('data-koot-chapter'));
+        var chaptersCompleted = 0;
+        $(".star-spirit").each(function() {
+            if ($(this).is(':visible') && !$(this).hasClass("unselected")) {
+                chaptersCompleted += 1;
+            }
+        });
+        if (chaptersCompleted >= chapterRequired) {
+            $(this).addClass("completable");
+        } else {
+            $(this).removeClass("completable");
+        }
+    });
+}
+
 function checkIfChapterIsCompletable(chapter) {
     if (chapter <= 8) {
         var totalCount = extraChapterRequirements[chapter].length;
@@ -251,7 +268,7 @@ function initializePage() {
         $(this).siblings("img").contextmenu();
     });
 
-    $('img.optional-item').each(function() {
+    $('img.optional-item, img.koot-item').each(function() {
         var item = $(this);
         var id = item.attr('id');
         if (id !== "Ultra Stone" && id !== "Anti Guy" && id !== "Lee" && id !== "Chan") {
@@ -284,7 +301,7 @@ function initializePage() {
         }
     });
 
-    $('img.optional-item').unbind("contextmenu").contextmenu(function() {
+    $('img.optional-item, img.koot-item').unbind("contextmenu").contextmenu(function() {
         $(this).siblings(".item-turnin").toggle();
     });
 
@@ -305,6 +322,10 @@ function initializePage() {
             checkIfChapterIsCompletable(5);
             checkIfChapterIsCompletable(7);
         }
+    });
+
+    $('.koot-item').unbind("click").click(function() {
+        $(this).toggleClass("unselected");
     });
 
     // upgrade markers
@@ -530,6 +551,7 @@ function initializePage() {
             checkIfChapterIsCompletable(c);
         }
         checkIfChapterIsCompletable(8);
+        updateKoopaKootAvailable();
     });
 
     synchronizeMapsAndTracker();
@@ -1161,7 +1183,7 @@ function savePageState() {
         items: {},
         checks: {}
     };
-    $("img.star-spirit, img.key-item, img.optional-item, img.upgrade, img.partner").each(function() {
+    $("img.star-spirit, img.key-item, img.optional-item, img.koot-item, img.upgrade, img.partner").each(function() {
         if ($(this).is(':visible')) {
             var chapterKey = $(this).attr("data-chapter-key");
             var keyCount = 0;
