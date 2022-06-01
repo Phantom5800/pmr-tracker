@@ -1176,6 +1176,8 @@ function resetPage() {
     $("#panels-randomized").click();
     $("#coins-randomized").click();
     $("#coins-randomized").click();
+    $("#letters-randomized").click();
+    $("#letters-randomized").click();
 }
 
 function savePageState() {
