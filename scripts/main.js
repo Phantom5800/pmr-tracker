@@ -767,6 +767,9 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         $(".koopa-koot-generated-item").toggle(isChecked);
         $(".koopa-koot-tracker").toggle(isChecked);
+        toggleChecks("[Koot]", !isChecked);
+        toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#coins-randomized").is(':checked'));
+        countChecks();
         localStorage.setItem("koopa-koot-randomized", isChecked);
         $("#flag-koopakoot").toggle(isChecked);
     });
@@ -1001,6 +1004,7 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coins-randomized", isChecked);
         toggleChecks("[Coinsanity]", !isChecked);
+        toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
         $("#flag-coinsanity").toggle(isChecked);
         countChecks();
     });
@@ -1178,6 +1182,8 @@ function resetPage() {
     $("#coins-randomized").click();
     $("#letters-randomized").click();
     $("#letters-randomized").click();
+    $("#koopa-koot-randomized").click();
+    $("#koopa-koot-randomized").click();
 }
 
 function savePageState() {
