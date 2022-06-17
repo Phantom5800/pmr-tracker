@@ -638,6 +638,20 @@ label.disabled {
     text-decoration: line-through 5px #00000086;
 }
 
+label.unavailable {
+    color: #ffffff86;
+}
+
+table.map td.unavailable, button.unavailable {
+    background-color: #ff818167;
+    -webkit-filter: none;
+    filter: none;
+}
+
+table.map td.unavailable:hover, button.unavailable:hover {
+    background-color: #f37e11;
+}
+
 table.map {
     margin: 0 auto;
 }
