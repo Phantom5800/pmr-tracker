@@ -259,6 +259,8 @@ function getAvailableChecks(check) {
         // Arrays suggest any of their elements fulfills the same requirement
         // - Sub-arrays require all elements to fulfill the requirement
         // Objects are used for chapter keys in the format {chapter: <chapter number>, keys: <# keys>}
+        // As an example, the requirements for the Bombette check are listed as ['Kooper',[[{'chapter':1,'keys':1},'Bombette'],{'chapter':1,'keys':2}]]
+        // This means you need Kooper (to get the bridge to enter the fortress) and either 1 key and Bombette (to enter the first door and blow up the jail wall) or 2 keys (to get to the trap door)
         // The code below parses the list of requirements and determines if they are met
         var reqs = JSON.parse('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
         var available = true;
