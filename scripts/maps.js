@@ -16,7 +16,7 @@ function countChecks() {
 
     $("#map-checks label").each(function() {
         if ($(this).text().includes("[Coinsanity]")) {
-            if ($("#coins-randomized").is(':checked')) {
+            if ($("#coins-randomized").is(':checked') && !$(this).hasClass('disabled')) {
                 ++coinsanity_checks;
                 ++total_checks;
             }
@@ -27,6 +27,10 @@ function countChecks() {
             }
         } else if ($(this).text().includes("[Dojo]")) {
             if ($("#dojo-randomized").is(':checked')) {
+                ++total_checks;
+            }
+        } else if ($(this).text().includes("[Koot]")) {
+            if ($("#koopa-koot-randomized").is(':checked') && !$(this).hasClass('disabled')) {
                 ++total_checks;
             }
         } else if ($(this).text().includes("[Letter]")) {
