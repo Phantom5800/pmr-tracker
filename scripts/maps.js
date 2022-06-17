@@ -251,7 +251,15 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
 }
 
 function getAvailableChecks(check) {
+    // Loop over map checks relating to the item updated
     $(check ? (typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check - 1) + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*=\"" + check + "\"]") : "[data-requirements-glitchless]").each(function() {
+        // Each check has a logical set of requirements
+        // Strings are the name of the item required
+        // Numbers are numbers of Star Spirits required
+        // Arrays suggest any of their elements fulfills the same requirement
+        // - Sub-arrays require all elements to fulfill the requirement
+        // Objects are used for chapter keys in the format {chapter: <chapter number>, keys: <# keys>}
+        // The code below parses the list of requirements and determines if they are met
         var reqs = JSON.parse('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
         var available = true;
         for (var req of reqs) {
