@@ -251,9 +251,7 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
 }
 
 function getAvailableChecks(check) {
-    //console.log(1);
-    $(check ? typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check - 1) + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*='" + check + "']" : "[data-requirements-glitchless]").each(function() {
-        //console.log('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
+    $(check ? (typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check - 1) + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*=\"" + check + "\"]") : "[data-requirements-glitchless]").each(function() {
         var reqs = JSON.parse('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
         var available = true;
         for (var req of reqs) {

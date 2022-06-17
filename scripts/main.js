@@ -1120,7 +1120,7 @@ $(document).ready(function(){
     $(".section").css("background-color", section_color);
     $("#section-color").val(section_color);
 
-    $("img").click(function() {getAvailableChecks($(this).attr('id'))});
+    $("img").click(function() {getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
     $("img").contextmenu(function() {getAvailableChecks($(this).attr('id'))});
     $(".star-spirit").click(function() {getAvailableChecks($('.star-spirit:not(.unselected)').length);});
     $("[type='checkbox']").click(function() {getAvailableChecks($(this).attr('id'))});
