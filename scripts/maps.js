@@ -249,3 +249,66 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
         updateSingleMapCheck(check, true);
     }*/
 }
+
+function getAvailableChecks(check) {
+    //console.log(1);
+    $(check ? typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check - 1) + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*='" + check + "']" : "[data-requirements-glitchless]").each(function() {
+        //console.log('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
+        var reqs = JSON.parse('[' + $(this).attr('data-requirements-glitchless').replaceAll("'", '"').replaceAll('\\"', "'") + ']');
+        var available = true;
+        for (var req of reqs) {
+            if (Array.isArray(req)) {
+                for (var subreq of req) {
+                    if (Array.isArray(subreq)) {
+                        for (var subsubreq of subreq) {
+                            if (typeof(subsubreq) == typeof(1)) {
+                                available = $('.star-spirit:not(.unselected)').length >= subsubreq;
+                            } else if (typeof(subsubreq) == typeof('')) {
+                                available = $("[id=\"" + subsubreq + "\"]").length && $("[id=\"" + subsubreq + "\"]:not(.unselected)").length && ($("input[id=\"" + subsubreq + "\"]:checked").length || !$("input[id=\"" + subsubreq + "\"]").length);
+                            } else {
+                                available = parseInt($("[data-chapter-key-count='" + subsubreq.chapter + "']").text().split('/')[0]) >= subsubreq.keys;
+                            }
+                            if (!available) break;
+                        }
+                    } else if (typeof(subreq) == typeof(1)) {
+                        available = $('.star-spirit:not(.unselected)').length >= subreq;
+                    } else if (typeof(subreq) == typeof('')) {
+                        available = $("[id=\"" + subreq + "\"]").length && $("[id=\"" + subreq + "\"]:not(.unselected)").length && ($("input[id=\"" + subreq + "\"]:checked").length || !$("input[id=\"" + subreq + "\"]").length);
+                    } else {
+                        available = parseInt($("[data-chapter-key-count='" + subreq.chapter + "']").text().split('/')[0]) >= subreq.keys;
+                    }
+                    if (available) break;
+                }
+            } else if (typeof(req) == typeof(1)) {
+                available = $('.star-spirit:not(.unselected)').length >= req;
+            } else if (typeof(req) == typeof('')) {
+                available = $("[id=\"" + req + "\"]").length && $("[id=\"" + req + "\"]:not(.unselected)").length && ($("input[id=\"" + req + "\"]:checked").length || !$("input[id=\"" + req + "\"]").length);
+            } else {
+                available = parseInt($("[data-chapter-key-count='" + req.chapter + "']").text().split('/')[0]) >= req.keys;
+            }
+            if (!available) break;
+        }
+        if (!available) {
+            $(this).parent().addClass('unavailable');
+        }
+        else {
+            $(this).parent().removeClass('unavailable');
+        }
+    });
+    $("[data-checks-list]").each(function() {
+        if (!$('label:has([data-map-group=' + $(this).attr('data-checks-list') + ']:not(:checked)):not(.disabled):not(.unavailable)').length) {
+            $(this).addClass('unavailable');
+        }
+        else {
+            $(this).removeClass('unavailable');
+        }
+    });
+    $("[data-map]").each(function() {
+        if (!$('[id=' + $(this).attr('data-map') + '] [data-checks-list]:not(.has-nothing):not(.complete):not(.unavailable)').length) {
+            $(this).addClass('unavailable');
+        }
+        else {
+            $(this).removeClass('unavailable');
+        }
+    });
+}
