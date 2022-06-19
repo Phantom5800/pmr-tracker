@@ -1123,6 +1123,8 @@ $(document).ready(function(){
     $("img").click(function() {getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
     $("img").contextmenu(function() {getAvailableChecks($(this).attr('id'))});
     $(".star-spirit").click(function() {getAvailableChecks($('.star-spirit:not(.unselected)').length);});
+    $("[data-chapter-key]").click(function() {getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
+    $("[data-chapter-key]").contextmenu(function() {getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
     $("[type='checkbox']").click(function() {getAvailableChecks($(this).attr('id'))});
     getAvailableChecks();
 });
