@@ -251,8 +251,11 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
 }
 
 function getAvailableChecks(check) {
+    //var t = Date.now();
+    var affectedMaps = new Set();
+    if (check && check.toString().startsWith('maps')) affectedMaps.add(check);
     // Loop over map checks relating to the item updated
-    $(check ? (typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check - 1) + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*=\"" + check + "\"]") : "[data-requirements-glitchless]").each(function() {
+    $(check !== undefined ? (typeof(check) == typeof(1) ? "[data-requirements-glitchless*='" + check + "'],[data-requirements-glitchless*='" + (check + 1) + "']" : "[data-requirements-glitchless*=\"" + check + "\"]") : "[data-requirements-glitchless]").each(function() {
         // Each check has a logical set of requirements
         // Strings are the name of the item required
         // Numbers are numbers of Star Spirits required
@@ -302,8 +305,11 @@ function getAvailableChecks(check) {
         else {
             $(this).parent().removeClass('unavailable');
         }
+        affectedMaps.add($(this).attr('data-map-group'));
     });
+    //console.log(Date.now() - t);
     $("[data-checks-list]").each(function() {
+        if (!affectedMaps.has($(this).attr('data-checks-list'))) return;
         if (!$('label:has([data-map-group=' + $(this).attr('data-checks-list') + ']:not(:checked)):not(.disabled):not(.unavailable)').length) {
             $(this).addClass('unavailable');
         }
@@ -319,4 +325,5 @@ function getAvailableChecks(check) {
             $(this).removeClass('unavailable');
         }
     });
+    //console.log(Date.now() - t);
 }
