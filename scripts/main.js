@@ -1123,9 +1123,14 @@ $(document).ready(function(){
     $("img").click(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
     $("img").contextmenu(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id'))});
     $(".star-spirit").click(function() {if (!isPageReloading) getAvailableChecks($('.star-spirit:not(.unselected)').length);});
-    $("[data-chapter-key]").click(function() {if (!isPageReloading) getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
-    $("[data-chapter-key]").contextmenu(function() {if (!isPageReloading) getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
-    $("[type='checkbox']").click(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id'))});
+    $("[data-chapter-key]").click(function() {if (!isPageReloading) getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'))});
+    $("[data-chapter-key]").contextmenu(function() {if (!isPageReloading) getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'))});
+    $("[type='checkbox']").click(function() {
+        if (!isPageReloading) {
+            if ($(this).attr('data-map-group')) getAvailableChecks($(this).attr('data-map-group'));
+            else getAvailableChecks($(this).attr('id'));
+        }
+    });
     getAvailableChecks();
 });
 
@@ -1185,7 +1190,6 @@ function resetPage() {
         checkIfChapterIsCompletable(i);
     }
 
-    isPageReloading = false;
     resetMapChecks();
     $("#panels-randomized").click();
     $("#panels-randomized").click();
@@ -1195,6 +1199,8 @@ function resetPage() {
     $("#letters-randomized").click();
     $("#koopa-koot-randomized").click();
     $("#koopa-koot-randomized").click();
+    isPageReloading = false;
+    getAvailableChecks();
 }
 
 function savePageState() {
