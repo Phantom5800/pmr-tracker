@@ -1120,16 +1120,18 @@ $(document).ready(function(){
     $(".section").css("background-color", section_color);
     $("#section-color").val(section_color);
 
-    $("img").click(function() {getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
-    $("img").contextmenu(function() {getAvailableChecks($(this).attr('id'))});
-    $(".star-spirit").click(function() {getAvailableChecks($('.star-spirit:not(.unselected)').length);});
-    $("[data-chapter-key]").click(function() {getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
-    $("[data-chapter-key]").contextmenu(function() {getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
-    $("[type='checkbox']").click(function() {getAvailableChecks($(this).attr('id'))});
+    $("img").click(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
+    $("img").contextmenu(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id'))});
+    $(".star-spirit").click(function() {if (!isPageReloading) getAvailableChecks($('.star-spirit:not(.unselected)').length);});
+    $("[data-chapter-key]").click(function() {if (!isPageReloading) getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
+    $("[data-chapter-key]").contextmenu(function() {if (!isPageReloading) getAvailableChecks(':' + $(this).attr('data-chapter-key'))});
+    $("[type='checkbox']").click(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id'))});
     getAvailableChecks();
 });
 
+var isPageReloading = false;
 function resetPage() {
+    isPageReloading = true;
     // clear out all single click items
     $("img.optional-item, img.key-item, img.partner").each(function() {
         if (!$(this).hasClass("unselected")) {
@@ -1183,6 +1185,7 @@ function resetPage() {
         checkIfChapterIsCompletable(i);
     }
 
+    isPageReloading = false;
     resetMapChecks();
     $("#panels-randomized").click();
     $("#panels-randomized").click();
