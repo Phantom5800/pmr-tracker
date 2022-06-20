@@ -983,7 +983,9 @@ $(document).ready(function(){
     $("#shops-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("shops-randomized", isChecked);
+        toggleChecks("[Shop]", !isChecked);
         $("#flag-shopsanity").toggle(isChecked);
+        countChecks();
     });
 
     $("#keys-randomized").click(function() {
@@ -1131,7 +1133,7 @@ $(document).ready(function(){
             else getAvailableChecks($(this).attr('id'));
         }
     });
-    //getAvailableChecks();
+    getAvailableChecks();
 });
 
 var isPageReloading = false;
@@ -1191,6 +1193,8 @@ function resetPage() {
     }
 
     resetMapChecks();
+    $("#shops-randomized").click();
+    $("#shops-randomized").click();
     $("#panels-randomized").click();
     $("#panels-randomized").click();
     $("#coins-randomized").click();
