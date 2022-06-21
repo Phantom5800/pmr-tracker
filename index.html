@@ -38,6 +38,7 @@
                     <img id="flag-panels" src="images/flags/Star_Piece.png">
                     <img id="flag-dojo" src="images/icons/TheMasterFirst_PM.png" style="display:none;">
                     <img id="flag-koopakoot" src="images/flags/KoopaKoot_PM.png">
+                    <img id="flag-tradingevent" src="images/flags/TradingEvent_PM.png" style="display:none;">
                 </div>
 
                 <!--
@@ -380,7 +381,7 @@
                                     <td class="empty"/>
                                     <td data-checks-list="maps-desert-top-left">Two ? Blocks</td>
                                     <td class="has-nothing"></td>
-                                    <td class="has-nothing">Dry Dry Ruins</td>
+                                    <td data-checks-list="maps-desert-ruins">Dry Dry Ruins</td>
                                     <td class="has-nothing"></td>
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-pokey">Pokey Room</td>
@@ -1017,6 +1018,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots','Ultra Hammer']">[Panel] Outside Club 64</label></li>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox" data-requirements-glitchless="'Fishmael'">[Letter] Fishmael (Chain)</label></li>
+                                <li><label class="disabled"><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox" disabled data-requirements-glitchless="5">[Trade] Give Coconut to Trading Event Toad</label></li>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox">Talk to Simon in Club 64 (first time)</label></li>
                                 <li><label><input data-map-group="maps-toad-town-harbor" autocomplete="off" type="checkbox" data-requirements-glitchless="'Melody'">Give Melody to Simon in Club 64</label></li>
                             </ul>
@@ -1040,6 +1042,7 @@
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" data-requirements-glitchless="'Miss T.'">[Letter] Miss T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" data-requirements-glitchless="'Russ T.'">[Letter] Russ T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox">[Shop] 6 items in Shop</label></li>
+                                <li><label class="disabled"><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" disabled data-requirements-glitchless="1">[Trade] Give Koopa Leaf to Trading Event Toad</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" data-requirements-glitchless="'Dictionary'">Give Dictionary to Russ T.</label></li>
                                 <li><label><input data-map-group="maps-toad-town-gate" autocomplete="off" type="checkbox" data-requirements-glitchless="'Sushie'">Item at Sushie panel</label></li>
                             </ul>
@@ -1379,6 +1382,12 @@
                             <ul>
                                 <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">[Coinsanity] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Left ? Block</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-ruins" style="display:none;">
+                            <h3>Dry Dry Ruins</h3>
+                            <ul>
+                                <li><label class="disabled"><input data-map-group="maps-desert-ruins" autocomplete="off" type="checkbox" disabled data-requirements-glitchless="3">[Trade] Give Nutty Cake to Trading Event Toad</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-pokey" style="display:none;">
@@ -2891,6 +2900,16 @@
                             <input autocomplete="off" class="checkbox-slider" id="dojo-randomized" type="checkbox">
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="dojo-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Trading Event Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="trading-event-randomized" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="trading-event-randomized"></label>
                         </div>
                     </td>
                 </tr>

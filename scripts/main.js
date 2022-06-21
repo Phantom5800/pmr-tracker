@@ -658,6 +658,10 @@ $(document).ready(function(){
                         $("#dojo-randomized").click();
                     }
 
+                    if (data["IncludeRadioTradeEvent"] != $("#trading-event-randomized").is(':checked')) {
+                        $("#trading-event-randomized").click();
+                    }
+
                     alert(`Loaded settings for seed: ${user_seed}`);
                 } else {
                     alert(`Failed to find seed: ${user_seed}`);
@@ -1020,6 +1024,14 @@ $(document).ready(function(){
         $("div.letter-tracker").toggle(isChecked);
     });
 
+    $("#trading-event-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        toggleChecks("[Trade]", !isChecked);
+        $("#flag-tradingevent").toggle(isChecked);
+        countChecks();
+        localStorage.setItem("trading-event-randomized", isChecked);
+    });
+
     var shops_randomized = localStorageGetWithDefault("shops-randomized", "true") == "true";
     if (!shops_randomized) {
         $("#shops-randomized").click();
@@ -1043,6 +1055,11 @@ $(document).ready(function(){
     var letters_randomized = localStorageGetWithDefault("letters-randomized", "true") == "true";
     if (!letters_randomized) {
         $("#letters-randomized").click();
+    }
+
+    var trading_event_randomized = localStorageGetWithDefault("trading-event-randomized", false) == "true";
+    if (trading_event_randomized) {
+        $("#trading-event-randomized").click();
     }
 
     ////////////////////////////////////////////////////////////////
@@ -1203,6 +1220,8 @@ function resetPage() {
     $("#letters-randomized").click();
     $("#koopa-koot-randomized").click();
     $("#koopa-koot-randomized").click();
+    $("#trading-event-randomized").click();
+    $("#trading-event-randomized").click();
     isPageReloading = false;
     getAvailableChecks();
 }
