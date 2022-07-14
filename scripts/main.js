@@ -322,6 +322,10 @@ function initializePage() {
             checkIfChapterIsCompletable(5);
             checkIfChapterIsCompletable(7);
         }
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
+        }
     });
 
     $('.koot-item').unbind("click").click(function() {
@@ -356,6 +360,10 @@ function initializePage() {
         for (var i = 1; i <= 8; ++i) {
             checkIfChapterIsCompletable(i);
         }
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
+        }
     });
 
     $('.upgrade').unbind("contextmenu").contextmenu(function() {
@@ -385,6 +393,10 @@ function initializePage() {
         for (var i = 1; i <= 8; ++i) {
             checkIfChapterIsCompletable(i);
         }
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').split(' ').at(-1));
+        }
     });
 
     // for partners, need to update all chapter completion statuses
@@ -397,6 +409,10 @@ function initializePage() {
 
         for (var i = 1; i <= 8; ++i) {
             checkIfChapterIsCompletable(i);
+        }
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
         }
     });
 
@@ -503,6 +519,10 @@ function initializePage() {
         if ($(this).attr('data-key-sync')) {
             synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         }
+
+        if (!isPageReloading) {
+            getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
+        }
         checkIfChapterIsCompletable(c);
     });
 
@@ -537,6 +557,10 @@ function initializePage() {
             synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         }
         checkIfChapterIsCompletable(c);
+
+        if (!isPageReloading) {
+            getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
+        }
         return false;
     });
 
@@ -552,6 +576,9 @@ function initializePage() {
         }
         checkIfChapterIsCompletable(8);
         updateKoopaKootAvailable();
+        if (!isPageReloading) {
+            getAvailableChecks($('.star-spirit:not(.unselected)').length);
+        }
     });
 
     synchronizeMapsAndTracker();
@@ -1139,11 +1166,6 @@ $(document).ready(function(){
     $(".section").css("background-color", section_color);
     $("#section-color").val(section_color);
 
-    $("img").click(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id').replace("'","\\\\\'"))});
-    $(".upgrade").contextmenu(function() {if (!isPageReloading) getAvailableChecks($(this).attr('id').split(' ').at(-1))});
-    $(".star-spirit").click(function() {if (!isPageReloading) getAvailableChecks($('.star-spirit:not(.unselected)').length);});
-    $("[data-chapter-key]").click(function() {if (!isPageReloading) getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'))});
-    $("[data-chapter-key]").contextmenu(function() {if (!isPageReloading) getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'))});
     $("[type='checkbox']").click(function() {
         if (!isPageReloading) {
             if ($(this).attr('data-map-group')) getAvailableChecks($(this).attr('data-map-group'));
