@@ -492,6 +492,10 @@ function initializePage() {
         }
 
         checkIfChapterIsCompletable(c);
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
+        }
     });
 
     // chapter keys
