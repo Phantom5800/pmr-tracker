@@ -274,7 +274,7 @@
                                     <td data-checks-list="maps-sewers-power-elevator">Elevator</td>
                                     <td class="has-nothing">Upgrade Block</td>
                                     <td class="empty"/>
-                                    <td class="has-nothing">Ultra Boots Room</td>
+                                    <td data-checks-list="maps-sewers-ultra-boots">Ultra Boots Room</td>
                                     <td data-checks-list="maps-sewers-life-shroom">Ultra Boots Blocks</td>
                                     <td data-checks-list="maps-sewers-spiny">Spiny Room</td>
                                     <td data-checks-list="maps-sewers-rip-cheato">Below Blue House</td>
@@ -589,7 +589,7 @@
                                 <tr>
                                     <td class="empty"/>
                                     <td data-checks-list="maps-boo-mansion-shop">Above Shop</td>
-                                    <td data-checks-list="maps-boo-mansion-boots">Super Boots</td>
+                                    <td data-checks-list="maps-boo-mansion-boots">Super Boots Room</td>
                                     <td class="empty"/>
                                 </tr>
                                 <tr>
@@ -765,7 +765,7 @@
                                     <td data-checks-list="maps-lavalav-deadend">Deadend</td>
                                 </tr>
                                 <tr>
-                                    <td class="has-nothing">Ultra Hammer</td>
+                                    <td data-checks-list="maps-lavalav-ultra-hammer" rowspan="1">Ultra Hammer Room</td>
                                     <td data-checks-list="maps-lavalav-lava-puzzle" rowspan="2">Lava Puzzle</td>
                                     <td class="has-nothing">Slope Hallway</td>
                                     <td class="empty" colspan="3"/>
@@ -1147,12 +1147,18 @@
                                 <li><label><input data-map-group="maps-sewers-power-elevator" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer'],'Parakarry'">Item on far right ledge</label></li>
                             </ul>
                         </div>
+                        <div id="maps-sewers-ultra-boots" style="display:none;">
+                            <h3>Ultra Boots Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-sewers-ultra-boots" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Hammer',[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">Ultra Boots chest</label></li>
+                            </ul>
+                        </div>
                         <div id="maps-sewers-life-shroom" style="display:none;">
                             <h3>Ultra Boots Blocks</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Right ? Block</label></li>
-                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">Middle ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">Middle ? Block</label></li>
                             </ul>
                         </div>
                         <div id="maps-sewers-spiny" style="display:none;">
@@ -1549,9 +1555,10 @@
                             </ul>
                         </div>
                         <div id="maps-ruins-super-hammer" style="display:none;">
-                            <h3>Super Hammer</h3>
+                            <h3>Super Hammer Room</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-ruins-super-hammer" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],'Pulse Stone','Parakarry',{'chapter':2,'keys':3}">Item in chest behind wall on ledge above Super Hammer chest</label></li>
+                                <li><label><input data-map-group="maps-ruins-super-hammer" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],'Pulse Stone','Parakarry',{'chapter':2,'keys':3}">Super Hammer chest</label></li>
                             </ul>
                         </div>
                         <div id="maps-ruins-pokey-room" style="display:none;">
@@ -1677,8 +1684,9 @@
                             </ul>
                         </div>
                         <div id="maps-boo-mansion-boots" style="display:none;">
-                            <h3>Super Boots</h3>
+                            <h3>Super Boots Room</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-boo-mansion-boots" autocomplete="off" type="checkbox" data-requirements-glitchless="['Weight',['Super Boots','Bombette'],['Ultra Boots','Bombette']]">Super Boots chest</label></li>
                                 <li><label><input data-map-group="maps-boo-mansion-boots" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots','Ultra Hammer'],['Weight',['Super Boots','Bombette'],['Ultra Boots','Bombette']]">[Panel] On left near Boo</label></li>
                                 <li><label><input data-map-group="maps-boo-mansion-boots" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Weight','Bombette']">Bottom left crate</label></li>
                             </ul>
@@ -2056,6 +2064,12 @@
                             <h3>Lava Puzzle</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-lavalav-lava-puzzle" autocomplete="off" type="checkbox" data-requirements-glitchless="['Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven'">Hidden block on right side of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-lavalav-ultra-hammer" style="display:none;">
+                            <h3>Ultra Hammer Room</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-lavalav-ultra-hammer" autocomplete="off" type="checkbox" data-requirements-glitchless="['Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Parakarry','Lakilester']">Ultra Hammer chest</label></li>
                             </ul>
                         </div>
                         <div id="maps-lavalav-dizzy" style="display:none;">
