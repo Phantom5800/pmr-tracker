@@ -514,6 +514,12 @@ function initializePage() {
         checkIfChapterIsCompletable(c);
 
         if (!isPageReloading) {
+            if (c == 6) {
+                if ($(this).attr('id').includes("Magical Seed")) {
+                    getAvailableChecks("chapter-6-entry");
+                    return;
+                }
+            }
             getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
         }
     });
@@ -786,6 +792,7 @@ $(document).ready(function(){
         for (var i = 1; i <= 4; ++i) {
             $(`.seed-${i}`).toggle(i > 4 - requiredCount);
         }
+        getAvailableChecks("chapter-6-entry");
     });
 
     $("#blue-house-open").click(function() {
