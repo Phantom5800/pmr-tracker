@@ -780,7 +780,12 @@ $(document).ready(function(){
     });
 
     $("#seeds-required").change(function() {
-        localStorage.setItem("seeds-required", $(this).prop('selectedIndex'));
+        var requiredCount = $(this).prop('selectedIndex');
+        localStorage.setItem("seeds-required", requiredCount);
+
+        for (var i = 1; i <= 4; ++i) {
+            $(`.seed-${i}`).toggle(i > 4 - requiredCount);
+        }
     });
 
     $("#blue-house-open").click(function() {
@@ -990,6 +995,7 @@ $(document).ready(function(){
 
     var seeds_required = localStorageGetWithDefault("seeds-required", 4);
     $("#seeds-required").prop('selectedIndex', seeds_required);
+    $("#seeds-required").change();
 
     var blue_house_open = localStorageGetWithDefault("blue-house-open", false) == "true";
     if (blue_house_open) {
@@ -1261,6 +1267,7 @@ function resetPage() {
     $("#koopa-koot-randomized").click();
     $("#trading-event-randomized").click();
     $("#trading-event-randomized").click();
+    $("#seeds-required").change();
     isPageReloading = false;
     getAvailableChecks();
 }
