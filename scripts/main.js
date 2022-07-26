@@ -667,7 +667,8 @@ $(document).ready(function(){
                     }
 
                     if (data["MagicalSeedsRequired"] != $("#seeds-required").prop('selectedIndex')) {
-                        $("#seeds-required").prop('selectedIndex', data["MagicalSeedsRequired"]);
+                        var seedsRequired = Math.min(data["MagicalSeedsRequired"], 4); // 5 is random so ... just show them all
+                        $("#seeds-required").prop('selectedIndex', seedsRequired);
                     }
 
                     if (data["BlueHouseOpen"] != $("#blue-house-open").is(':checked')) {
