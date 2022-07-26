@@ -660,8 +660,8 @@ $(document).ready(function(){
                         $("#whale-open").click();
                     }
 
-                    if (data["FlowerGateOpen"] != $("#chapter-6-open").is(':checked')) {
-                        $("#chapter-6-open").click();
+                    if (data["MagicalSeedsRequired"] != $("#seeds-required").prop('selectedIndex')) {
+                        $("#seeds-required").prop('selectedIndex', data["MagicalSeedsRequired"]);
                     }
 
                     if (data["BlueHouseOpen"] != $("#blue-house-open").is(':checked')) {
@@ -779,10 +779,8 @@ $(document).ready(function(){
         checkIfChapterIsCompletable(5);
     });
 
-    $("#chapter-6-open").click(function() {
-        var isChecked = $(this).is(':checked');
-        $(".ch6-optional").toggle(!isChecked);
-        localStorage.setItem("chapter-6-open", isChecked);
+    $("#seeds-required").change(function() {
+        localStorage.setItem("seeds-required", $(this).prop('selectedIndex'));
     });
 
     $("#blue-house-open").click(function() {
@@ -990,10 +988,8 @@ $(document).ready(function(){
         $("#whale-open").click();
     }
 
-    var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
-    if (chapter6_open) {
-        $("#chapter-6-open").click();
-    }
+    var seeds_required = localStorageGetWithDefault("seeds-required", 4);
+    $("#seeds-required").prop('selectedIndex', seeds_required);
 
     var blue_house_open = localStorageGetWithDefault("blue-house-open", false) == "true";
     if (blue_house_open) {
