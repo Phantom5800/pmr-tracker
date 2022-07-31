@@ -520,6 +520,10 @@ select {
     height: 30px;
 }
 
+select.seed-setting {
+    width: 60px;
+}
+
 /* Loading Icon */
 .lds-ring {
     display: inline-block;

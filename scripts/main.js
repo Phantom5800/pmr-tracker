@@ -514,6 +514,12 @@ function initializePage() {
         checkIfChapterIsCompletable(c);
 
         if (!isPageReloading) {
+            if (c == 6) {
+                if ($(this).attr('id').includes("Magical Seed")) {
+                    getAvailableChecks("chapter-6-entry");
+                    return;
+                }
+            }
             getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
         }
     });
@@ -660,8 +666,9 @@ $(document).ready(function(){
                         $("#whale-open").click();
                     }
 
-                    if (data["FlowerGateOpen"] != $("#chapter-6-open").is(':checked')) {
-                        $("#chapter-6-open").click();
+                    if (data["MagicalSeedsRequired"] != $("#seeds-required").prop('selectedIndex')) {
+                        var seedsRequired = Math.min(data["MagicalSeedsRequired"], 4); // 5 is random so ... just show them all
+                        $("#seeds-required").prop('selectedIndex', seedsRequired);
                     }
 
                     if (data["BlueHouseOpen"] != $("#blue-house-open").is(':checked')) {
@@ -779,10 +786,14 @@ $(document).ready(function(){
         checkIfChapterIsCompletable(5);
     });
 
-    $("#chapter-6-open").click(function() {
-        var isChecked = $(this).is(':checked');
-        $(".ch6-optional").toggle(!isChecked);
-        localStorage.setItem("chapter-6-open", isChecked);
+    $("#seeds-required").change(function() {
+        var requiredCount = $(this).prop('selectedIndex');
+        localStorage.setItem("seeds-required", requiredCount);
+
+        for (var i = 1; i <= 4; ++i) {
+            $(`.seed-${i}`).toggle(i > 4 - requiredCount);
+        }
+        getAvailableChecks("chapter-6-entry");
     });
 
     $("#blue-house-open").click(function() {
@@ -990,10 +1001,9 @@ $(document).ready(function(){
         $("#whale-open").click();
     }
 
-    var chapter6_open = localStorageGetWithDefault("chapter-6-open", false) == "true";
-    if (chapter6_open) {
-        $("#chapter-6-open").click();
-    }
+    var seeds_required = localStorageGetWithDefault("seeds-required", 4);
+    $("#seeds-required").prop('selectedIndex', seeds_required);
+    $("#seeds-required").change();
 
     var blue_house_open = localStorageGetWithDefault("blue-house-open", false) == "true";
     if (blue_house_open) {
@@ -1132,10 +1142,6 @@ $(document).ready(function(){
         isChecked = $("#fast-bowser-castle").is(':checked');
         $("#BowsersKeySlot").toggle(!isChecked);
 
-        // update seeds visibility
-        isChecked = $("#chapter-6-open").is(':checked');
-        $(".ch6-optional").toggle(!isChecked);
-
         updateKeyItemHighlight();
         sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
     });
@@ -1269,6 +1275,7 @@ function resetPage() {
     $("#koopa-koot-randomized").click();
     $("#trading-event-randomized").click();
     $("#trading-event-randomized").click();
+    $("#seeds-required").change();
     isPageReloading = false;
     getAvailableChecks();
 }

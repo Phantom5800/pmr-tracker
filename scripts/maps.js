@@ -292,6 +292,16 @@ function getAvailableChecks(check) {
                 }
             } else if (typeof(req) == typeof(1)) {
                 available = $('.star-spirit:not(.unselected)').length >= req;
+            } else if (req === "chapter-6-entry") {
+                var requiredSeedCnt = $("#seeds-required").prop('selectedIndex');
+                available = true;
+                for (var i = 4; i > 4 - requiredSeedCnt; --i) {
+                    if ($(`[id="Magical Seed ${i}"]`).is(':visible') && !$(`[id="Magical Seed ${i}"]`).hasClass('unselected')) {
+                        continue;
+                    }
+                    available = false;
+                    break;
+                }
             } else if (typeof(req) == typeof('')) {
                 available = $("[id=\"" + req + "\"]").length && $("[id=\"" + req + "\"]:not(.unselected)").length && ($("input[id=\"" + req + "\"]:checked").length || !$("input[id=\"" + req + "\"]").length);
             } else {
