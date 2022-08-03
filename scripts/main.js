@@ -802,7 +802,7 @@ $(document).ready(function(){
         for (var i = 1; i <= 4; ++i) {
             $(`.seed-${i}`).toggle(i > 4 - requiredCount);
         }
-        getAvailableChecks("chapter-6-entry");
+        if (!isPageReloading) getAvailableChecks("chapter-6-entry");
     });
 
     $("#blue-house-open").click(function() {
@@ -823,7 +823,7 @@ $(document).ready(function(){
     });
 
     $("#starting-location").change(function() {
-        getAvailableChecks("starting-location");
+        if (!isPageReloading) getAvailableChecks("starting-location");
         localStorage.setItem("starting-location", $("#starting-location").val());
         checkIfChapterIsCompletable(2);
         checkIfChapterIsCompletable(5);
@@ -1230,7 +1230,7 @@ var isPageReloading = false;
 function resetPage() {
     isPageReloading = true;
     // clear out all single click items
-    $("img.optional-item, img.key-item, img.partner").each(function() {
+    $("img.optional-item, img.key-item, img.partner, img.koot-item").each(function() {
         if (!$(this).hasClass("unselected")) {
             $(this).addClass("unselected");
         }

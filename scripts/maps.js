@@ -184,6 +184,8 @@ function resetMapChecks() {
 
     $("td[data-checks-list]").removeClass("complete");
     $("button.map-select").removeClass("complete");
+    $("td[data-checks-list]").removeClass("unavailable");
+    $("button.map-select").removeClass("unavailable");
 }
 
 // this function needs to be called after initializeMaps as it will rebind new events for some checks
