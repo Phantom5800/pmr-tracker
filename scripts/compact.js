@@ -102,7 +102,7 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
-    <div class="compact-misc-item compact-element useless-item">
+    <div class="compact-misc-item compact-element">
         <img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png">
         <div class="colorblind-label">B</div>
     </div>
@@ -139,7 +139,7 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="11">0/96</p>
     </div>
-    <div class="compact-misc-item compact-element">
+    <div class="compact-misc-item compact-element useless-item">
         <div class="tooltip">
             <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
             <span class="tooltiptext rip-cheato-money">Total Coins Needed: 188 (Only first 6 can be progression items)</span>
