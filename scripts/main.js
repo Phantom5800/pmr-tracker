@@ -4,7 +4,7 @@ const maxKeyCounts = {
     3: 3, // tubba keys
     4: 0,
     5: 0,
-    6: 0,
+    6: 2, // blue berry
     7: 0,
     8: 5, // bowser castle keys
     9: 64, // quizmo

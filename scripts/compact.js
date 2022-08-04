@@ -82,8 +82,9 @@ var altTracker = `<table width="100%">
         <div class="colorblind-label">Y</div>
     </div>
     <div class="compact-misc-item compact-element">
-        <img id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
-        <div class="colorblind-label">B</div>
+        <img data-chapter-key="6" id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+        <div class="colorblind-label" style="top:10px;">B</div>
+        <p data-chapter-key-count="6">0/2</p>
     </div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
