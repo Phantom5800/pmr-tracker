@@ -37,11 +37,12 @@ var currentKeyCounts = {
 // Any nested arrays means that if any condition from that group is true, the entire group is treated as true.
 const extraChapterRequirements = {
     1: [
+        ["#Hammer", "Super Hammer", "#Bombette"], // tree for switch on pleasant path
         "#Kooper" // switch to bring up bridge on pleasant path
     ],
     2: [
-        ["#Bombette", "Super Hammer"], // need bombette to blow up rock in toad town (or super hammer for sewers)
-        ["#Parakarry", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
+        ["#starting-location [value='DryDryOutpost']", "#Bombette", "Super Hammer"], // need bombette to blow up rock in toad town (or super hammer for sewers)
+        ["#starting-location [value='DryDryOutpost']", "#Parakarry", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
     ],
     3: [
         "#Parakarry", // need parakarry to get to Tubba's Castle
@@ -50,12 +51,15 @@ const extraChapterRequirements = {
     4: [
         "#Bombette", // blow up the wall to general guy
         "#Watt", // see in the room before general guy
+        ["#Hammer", "Super Hammer"], // hit boxes in green station
         ["#Bow", "#toybox-open"] // need Bow to get into toybox if it is not open by default
     ],
     5: [
         "#Sushie", // need sushie in order to place the jade raven
         ["#Parakarry", "#Lakilester"], // need one of these in order to get hammer upgrade
+        ["#Hammer", "Super Hammer"], // drop log bridge
         [
+            "#starting-location [value='YoshiVillage']",
             "#Watt", 
             "#whale-open", // watt or whale open to get to the island OR vvvv
             ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
@@ -66,6 +70,7 @@ const extraChapterRequirements = {
     7: [
         "#Kooper", // switch on shiver mountain
         "#Bombette", // switch in crystal palace
+        ["#Hammer", "Super Hammer"], // hit fake Kooper
         "Super Boots", // break the ice on shiver mountain
         ["#Sushie", "#blue-house-open", "img[data-item-name='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
@@ -168,16 +173,16 @@ function checkIfChapterIsCompletable(chapter) {
             for (var i = 0; i < requirementsArray.length; ++i) {
                 var elem = $(requirementsArray[i]).first();
                 var isChecked = elem.is(':checkbox') && elem.is(":checked");
-                var selected = !elem.is(':checkbox') && !elem.hasClass("unselected");
+                var selected = elem.is(':selected') || elem.length && !elem.is(':checkbox') && !elem.is('option') && !elem.hasClass("unselected");
 
                 // if boots upgrade is required, increment when normal boots are not active
                 if (requirementsArray[i] === "Super Boots") {
-                    if ($("#Boots").length === 0) {
+                    if ($("[id='Super Boots']").length || $("[id='Ultra Boots']").length) {
                         ++conditionsComplete;
                     }
                 // if hammer upgrade is required, mark completed if the hammer is not default
                 } else if (requirementsArray[i] === "Super Hammer") {
-                    if ($("#Hammer").length === 0) {
+                    if ($("[id='Super Hammer']").length || $("[id='Ultra Hammer']").length) {
                         ++conditionsComplete;
                     }
                 } else if (Array.isArray(requirementsArray[i])) {
@@ -199,11 +204,11 @@ function checkIfChapterIsCompletable(chapter) {
 
         for (var i = 0; i < extraChapterRequirements[chapter].length; ++i) {
             if (extraChapterRequirements[chapter][i] === "Super Boots") {
-                if ($("#Boots").length === 0) {
+                if ($("[id='Super Boots']").length || $("[id='Ultra Boots']").length) {
                     ++completedCount;
                 }
             } else if (extraChapterRequirements[chapter][i] === "Super Hammer") {
-                if ($("#Hammer").length === 0) {
+                if ($("[id='Super Hammer']").length || $("[id='Ultra Hammer']").length) {
                     ++completedCount;
                 }
             // if a condition is an array, the condition is true if any element of the array is true
@@ -415,7 +420,7 @@ function initializePage() {
         }
 
         if (!isPageReloading) {
-            getAvailableChecks($(this).attr('id').split(' ').at(-1));
+            getAvailableChecks($(this).attr('id').split(' ').at(-1).split('-').at(0));
         }
     });
 
@@ -674,6 +679,10 @@ $(document).ready(function(){
                     if (data["BlueHouseOpen"] != $("#blue-house-open").is(':checked')) {
                         $("#blue-house-open").click();
                     }
+
+                    if (data["StartingMap"] != $("#starting-location").val()) {
+                        $("#starting-location").val(data["StartingMap"]);
+                    }
                     
                     if ((data["BowsersCastleMode"] >= 1) != $("#fast-bowser-castle").is(':checked')) {
                         $("#fast-bowser-castle").click();
@@ -793,7 +802,7 @@ $(document).ready(function(){
         for (var i = 1; i <= 4; ++i) {
             $(`.seed-${i}`).toggle(i > 4 - requiredCount);
         }
-        getAvailableChecks("chapter-6-entry");
+        if (!isPageReloading) getAvailableChecks("chapter-6-entry");
     });
 
     $("#blue-house-open").click(function() {
@@ -811,6 +820,13 @@ $(document).ready(function(){
         localStorage.setItem("blue-house-open", isChecked);
         checkIfChapterIsCompletable(5);
         checkIfChapterIsCompletable(7);
+    });
+
+    $("#starting-location").change(function() {
+        if (!isPageReloading) getAvailableChecks("starting-location");
+        localStorage.setItem("starting-location", $("#starting-location").val());
+        checkIfChapterIsCompletable(2);
+        checkIfChapterIsCompletable(5);
     });
 
     $("#fast-bowser-castle").click(function() {
@@ -1009,6 +1025,10 @@ $(document).ready(function(){
     if (blue_house_open) {
         $("#blue-house-open").click();
     }
+
+    var starting_location = localStorageGetWithDefault("starting-location", "ToadTown");
+    $("#starting-location").val(starting_location);
+    $("#starting-location").change();
 
     var fast_bowser_castle = localStorageGetWithDefault("fast-bowser-castle", false) == "true";
     if (fast_bowser_castle) {
@@ -1210,7 +1230,7 @@ var isPageReloading = false;
 function resetPage() {
     isPageReloading = true;
     // clear out all single click items
-    $("img.optional-item, img.key-item, img.partner").each(function() {
+    $("img.optional-item, img.key-item, img.partner, img.koot-item").each(function() {
         if (!$(this).hasClass("unselected")) {
             $(this).addClass("unselected");
         }
@@ -1276,6 +1296,7 @@ function resetPage() {
     $("#trading-event-randomized").click();
     $("#trading-event-randomized").click();
     $("#seeds-required").change();
+    $("#starting-location").change();
     isPageReloading = false;
     getAvailableChecks();
 }

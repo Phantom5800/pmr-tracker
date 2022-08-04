@@ -184,6 +184,8 @@ function resetMapChecks() {
 
     $("td[data-checks-list]").removeClass("complete");
     $("button.map-select").removeClass("complete");
+    $("td[data-checks-list]").removeClass("unavailable");
+    $("button.map-select").removeClass("unavailable");
 }
 
 // this function needs to be called after initializeMaps as it will rebind new events for some checks
@@ -274,6 +276,8 @@ function getAvailableChecks(check) {
                         for (var subsubreq of subreq) {
                             if (typeof(subsubreq) == typeof(1)) {
                                 available = $('.star-spirit:not(.unselected)').length >= subsubreq;
+                            } else if (typeof(subsubreq) == typeof('') && subsubreq.startsWith("starting-location:")) {
+                                available = subsubreq.includes($("#starting-location").val());
                             } else if (typeof(subsubreq) == typeof('')) {
                                 available = $("[id=\"" + subsubreq + "\"]").length && $("[id=\"" + subsubreq + "\"]:not(.unselected)").length && ($("input[id=\"" + subsubreq + "\"]:checked").length || !$("input[id=\"" + subsubreq + "\"]").length);
                             } else {
@@ -283,6 +287,8 @@ function getAvailableChecks(check) {
                         }
                     } else if (typeof(subreq) == typeof(1)) {
                         available = $('.star-spirit:not(.unselected)').length >= subreq;
+                    } else if (typeof(subreq) == typeof('') && subreq.startsWith("starting-location:")) {
+                        available = subreq.includes($("#starting-location").val());
                     } else if (typeof(subreq) == typeof('')) {
                         available = $("[id=\"" + subreq + "\"]").length && $("[id=\"" + subreq + "\"]:not(.unselected)").length && ($("input[id=\"" + subreq + "\"]:checked").length || !$("input[id=\"" + subreq + "\"]").length);
                     } else {
@@ -302,6 +308,8 @@ function getAvailableChecks(check) {
                     available = false;
                     break;
                 }
+            } else if (typeof(req) == typeof('') && req.startsWith("starting-location:")) {
+                available = req.includes($("#starting-location").val());
             } else if (typeof(req) == typeof('')) {
                 available = $("[id=\"" + req + "\"]").length && $("[id=\"" + req + "\"]:not(.unselected)").length && ($("input[id=\"" + req + "\"]:checked").length || !$("input[id=\"" + req + "\"]").length);
             } else {
