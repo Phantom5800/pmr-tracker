@@ -75,6 +75,16 @@ h2 {
     border-radius: 10px;
 }
 
+.resizable {
+    height: auto;
+    resize: horizontal;
+    overflow: hidden;
+}
+
+.resizable::-webkit-resizer {
+    background-color: transparent;
+}
+
 #enabled-settings {
     padding: 5px 5px 5px 5px;
     text-align: center;
@@ -111,7 +121,7 @@ td {
 
 .keys-tracker {
     width: 36em;
-    height: 9em;
+    height: auto;
 }
 
 .letter-tracker {

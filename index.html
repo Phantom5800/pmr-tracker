@@ -6,7 +6,7 @@
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="main.min.js?version=36"></script>
-        <link rel="stylesheet" href="styles/main.css?version=17">
+        <link rel="stylesheet" href="styles/main.css?version=18">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -42,7 +42,7 @@
                 <!--
                     Main tracker for chapter progress
                 -->
-                <div class="main-tracker section">
+                <div class="main-tracker section resizable">
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
@@ -2351,7 +2351,7 @@
                 Miscellaneous item list for things that don't really fit elsewhere
             -->
             <div class="flex-column">
-                <div class="misc-tracker section">
+                <div class="misc-tracker section resizable">
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
@@ -2415,7 +2415,7 @@
                 <!-- 
                     Misc. Keys. Items that open up rooms but may not be required for progression.
                 -->
-                <div class="keys-tracker section">
+                <div class="keys-tracker section resizable">
                     <table width="100%">
                         <tr style="height: 4em;">
                             <td style="text-align: left; width: 60%;">
@@ -2426,41 +2426,39 @@
                             </td>
                         </tr>
                     </table>
-                    <table>
-                        <tr>
-                            <td>
-                                <img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png">
-                                <div class="colorblind-label">R</div>
-                            </td>
-                            <td>
-                                <img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png">
-                                <div class="colorblind-label">Y</div>
-                            </td>
-                            <td>
-                                <img data-chapter-key="6" id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
-                                <div class="colorblind-label" style="top:10px;">B</div>
-                                <p data-chapter-key-count="6">0/2</p>
-                            </td>
-                            <td><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></td>
-                            <td>
-                                <img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif">
-                                <div class="colorblind-label">S</div>
-                            </td>
-                            <td class="blue-house-optional">
-                                <img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif">
-                                <div class="colorblind-label">O</div>
-                            </td>
-                            <td class="useless-item">
-                                <img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png">
-                                <div class="colorblind-label">B</div>
-                            </td>
-                            <td class="useless-item">
-                                <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
-                                <div class="colorblind-label" style="top:10px;">P</div>
-                                <p data-chapter-key-count="14">0/2</p>
-                            </td>
-                        </tr>
-                    </table>
+                    <div style="display:flex;flex-wrap:wrap;padding-left:10px;">
+                        <div class="compact-element">
+                            <img id="Red Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_RedBerry.png">
+                            <div class="colorblind-label">R</div>
+                        </div>
+                        <div class="compact-element">
+                            <img id="Yellow Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_YellowBerry.png">
+                            <div class="colorblind-label">Y</div>
+                        </div>
+                        <div class="compact-element">
+                            <img data-chapter-key="6" id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+                            <div class="colorblind-label" style="top:10px;">B</div>
+                            <p data-chapter-key-count="6">0/2</p>
+                        </div>
+                        <div class="compact-element"><img id="Bubble Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BubbleBerry.png"></div>
+                        <div class="compact-element">
+                            <img id="Storeroom Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                            <div class="colorblind-label">S</div>
+                        </div>
+                        <div class="compact-element blue-house-optional">
+                            <img data-item-name="Odd Key" id="Odd Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                            <div class="colorblind-label">O</div>
+                        </div>
+                        <div class="compact-element useless-item">
+                            <img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png">
+                            <div class="colorblind-label">B</div>
+                        </div>
+                        <div class="compact-element useless-item">
+                            <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
+                            <div class="colorblind-label" style="top:10px;">P</div>
+                            <p data-chapter-key-count="14">0/2</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!--
@@ -2474,7 +2472,7 @@
             <!--
                 Letter Tracker
             -->
-            <div class="letter-tracker section">
+            <div class="letter-tracker section resizable">
                 <table width="100%">
                     <tr style="height: 4em;">
                         <td style="text-align: left; width: 30%;">
@@ -2517,7 +2515,7 @@
             <!--
                 Koopa Koot Favors
             -->
-            <div class="koopa-koot-tracker section">
+            <div class="koopa-koot-tracker section resizable">
                 <table width="100%">
                     <tr style="height: 4em;">
                         <td style="text-align: left; width: 60%;">
