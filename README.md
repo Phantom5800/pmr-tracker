@@ -27,3 +27,7 @@ For anyone that wants to submit changes or new features, all you have to do:
 * Be descriptive in what you changed and consistent with existing code
 * ...
 * It will probably get merged unless there's major issues!
+
+## Building
+
+This project uses Google's closure compiler for minifying javascript before pushing to live. Information on the compiler can be found on [Google's developer site](https://developers.google.com/closure/compiler), and the compiler itself can be found as a runnable jar file on [Maven](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler).
