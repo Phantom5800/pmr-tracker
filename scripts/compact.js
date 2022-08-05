@@ -82,9 +82,9 @@ var altTracker = `<table width="100%">
         <div class="colorblind-label">Y</div>
     </div>
     <div class="compact-misc-item compact-element">
-        <img data-chapter-key="6" id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
+        <img data-chapter-key="15" id="Blue Berry" class="unselected optional-item" src="images/icons/PaperMario_Items_BlueBerry.png">
         <div class="colorblind-label" style="top:10px;">B</div>
-        <p data-chapter-key-count="6">0/2</p>
+        <p data-chapter-key-count="15">0/2</p>
     </div>
     <div class="compact-element"><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></div>
     <div class="compact-misc-item compact-element"><img id="Crystal Berry" class="unselected optional-item" src="images/icons/CrystalBerry_PM.png"></div>
@@ -102,7 +102,7 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></div>
     <div class="compact-element"><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></div>
     <div class="compact-element"><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></div>
-    <div class="compact-misc-item compact-element useless-item">
+    <div class="compact-misc-item compact-element">
         <img id="Blue Key" class="unselected optional-item" src="images/icons/PM_BlueKey.png">
         <div class="colorblind-label">B</div>
     </div>
@@ -139,7 +139,7 @@ var altTracker = `<table width="100%">
         <br>
         <p data-chapter-key-count="11">0/96</p>
     </div>
-    <div class="compact-misc-item compact-element">
+    <div class="compact-misc-item compact-element useless-item">
         <div class="tooltip">
             <img data-chapter-key="12" id="Rip Cheato" class="unselected optional-item" src="images/icons/RipCheato.png">
             <span class="tooltiptext rip-cheato-money">Total Coins Needed: 188 (Only first 6 can be progression items)</span>

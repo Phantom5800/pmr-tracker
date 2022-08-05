@@ -4,7 +4,7 @@ const maxKeyCounts = {
     3: 3, // tubba keys
     4: 0,
     5: 0,
-    6: 2, // blue berry
+    6: 0,
     7: 0,
     8: 5, // bowser castle keys
     9: 64, // quizmo
@@ -13,6 +13,7 @@ const maxKeyCounts = {
     12: 11, // rip cheato
     13: 26, // letters
     14: 2, // prison keys
+    15: 2, // blue berry
 };
 
 var currentKeyCounts = {
@@ -29,7 +30,8 @@ var currentKeyCounts = {
     11: 0,
     12: 0,
     13: 0,
-    14: 0
+    14: 0,
+    15: 0
 };
 
 // The main requirements are grouped logically with their respective chapters.
@@ -154,7 +156,7 @@ function checkIfChapterIsCompletable(chapter) {
                 ++completedCount;
             }
         });
-    
+   
         $(`img[data-chapter-key=${chapter}]`).each(function() {
             totalCount += maxKeyCounts[chapter];
             if (chapter === 2 && currentKeyCounts[chapter] === 3) {
