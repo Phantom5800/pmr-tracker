@@ -126,17 +126,17 @@ td {
 
 .letter-tracker {
     width: 36em;
-    height: 21em;
+    height: auto;
 }
 
 .koopa-koot-tracker {
     width: 36em;
-    height: 17em;
+    height: auto;
 }
 
 .dojo-tracker {
     width: 36em;
-    height: 9em;
+    height: auto;
 }
 
 .info-block {
