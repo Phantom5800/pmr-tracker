@@ -337,6 +337,10 @@ function initializePage() {
 
     $('.koot-item').unbind("click").click(function() {
         $(this).toggleClass("unselected");
+
+        if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id').replace("'","\\\\\'"));
+        }
     });
 
     // upgrade markers
