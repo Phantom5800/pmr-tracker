@@ -5,8 +5,8 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="main.min.js?version=39"></script>
-        <link rel="stylesheet" href="styles/main.css?version=19">
+        <script src="main.min.js?version=40"></script>
+        <link rel="stylesheet" href="styles/main.css?version=20">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -19,12 +19,17 @@
     </head>
     <body>
         <header>
-            <div id="options-menu-toggle" class="hamburger">
-                <div class="hamburger-1"></div>
-                <div class="hamburger-2"></div>
-                <div class="hamburger-3"></div>
+            <div style="display:flex;">
+                <div id="options-menu-toggle" class="hamburger">
+                    <div class="hamburger-1"></div>
+                    <div class="hamburger-2"></div>
+                    <div class="hamburger-3"></div>
+                </div>
+                <img id="logo-img" src="images/Logo.png">
             </div>
-            <img id="logo-img" src="images/Logo.png">
+            <div id="settings-menu-toggle">
+                &#x2699;
+            </div>
         </header>
         <div class="flex-row">
             <div class="flex-column">
@@ -2626,38 +2631,8 @@
             </div>
         </div>
 
-        <div id="options-menu">
+        <div id="tracker-settings-menu">
             <table width="100%">
-                <tr>
-                    <td class="option-name" style="width:12.5em;" colspan="2">Randomizer Seed<div id="loading-icon" class="lds-ring" style="display:none;"><div></div></div></td>
-                    <td style="text-align: center;">
-                        <input id="randomizer-seed" type="number" value="0">
-                    </td>
-                    <td class="option">
-                        <button id="load-seed-button">Load Seed</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="option-name" colspan="3">Reset Tracker</td>
-                    <td class="option">
-                        <button id="reset-button">Reset</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="option-name" colspan="2">Save Progress</td>
-                    <td class="option">
-                        <button id="save-button">Save</button>
-                    </td>
-                    <td class="option">
-                        <button id="load-button">Load</button>
-                    </td>
-                </tr>
-                <tr>
-                    <!--
-                        do this if any sections ever need a dividing line:
-                    -->
-                    <td colspan="4"><hr></td>
-                </tr>
                 <tr id="toggle-tracker-config">
                     <td class="section-toggle section-toggle-closed">&#x25B2;</td>
                     <td class="option-name" colspan="3" style="cursor:pointer;">Tracker Config</td>
@@ -2789,7 +2764,39 @@
                         </div>
                     </td>
                 </tr>
+            </table>
+        </div>
+
+        <div id="options-menu">
+            <table width="100%">
                 <tr>
+                    <td class="option-name" style="width:12.5em;" colspan="2">Randomizer Seed<div id="loading-icon" class="lds-ring" style="display:none;"><div></div></div></td>
+                    <td style="text-align: center;">
+                        <input id="randomizer-seed" type="number" value="0">
+                    </td>
+                    <td class="option">
+                        <button id="load-seed-button">Load Seed</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="option-name" colspan="3">Reset Tracker</td>
+                    <td class="option">
+                        <button id="reset-button">Reset</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="option-name" colspan="2">Save Progress</td>
+                    <td class="option">
+                        <button id="save-button">Save</button>
+                    </td>
+                    <td class="option">
+                        <button id="load-button">Load</button>
+                    </td>
+                </tr>
+                <tr>
+                    <!--
+                        do this if any sections ever need a dividing line:
+                    -->
                     <td colspan="4"><hr></td>
                 </tr>
                 <tr id="toggle-seed-settings">

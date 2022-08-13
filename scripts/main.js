@@ -646,6 +646,11 @@ $(document).ready(function(){
         if (container.hasClass("options-open") && !container.is(e.target) && container.has(e.target).length === 0) {
             $("#options-menu-toggle").click();
         }
+
+        container = $("#tracker-settings-menu");
+        if (container.hasClass("options-open") && !container.is(e.target) && container.has(e.target).length === 0) {
+            $("#settings-menu-toggle").click();
+        }
     });
 
     // show / hide options menu
@@ -653,6 +658,12 @@ $(document).ready(function(){
         e.stopPropagation();
         $(this).toggleClass("options-open");
         $("#options-menu").toggleClass("options-open");
+    });
+
+    $("#settings-menu-toggle").click(function(e) {
+        e.stopPropagation();
+        $(this).toggleClass("options-open");
+        $("#tracker-settings-menu").toggleClass("options-open");
     });
 
     // load seed info from the generator
