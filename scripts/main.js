@@ -11,7 +11,7 @@ const maxKeyCounts = {
     10: 3, // master
     11: 96, // star pieces
     12: 11, // rip cheato
-    13: 26, // letters
+    13: 3, // letters
     14: 2, // prison keys
     15: 2, // blue berry
 };
@@ -965,6 +965,7 @@ $(document).ready(function(){
         $("#flag-letters").toggle(isChecked);
         countChecks();
         $("div.letter-tracker").toggle(isChecked);
+        $("#Letters").parent().toggle(!isChecked);
     });
 
     $("#trading-event-randomized").click(function() {
@@ -1149,6 +1150,9 @@ $(document).ready(function(){
 
         isChecked = $("#recipe-tooltips").is(':checked');
         $(".tooltiptext").toggle(isChecked);
+
+        // enforce letter visibility
+        $("#Letters").parent().toggle(!$("#letters-randomized").is(':checked'));
     }
 
     $("#compact-tracker").click(function() {
