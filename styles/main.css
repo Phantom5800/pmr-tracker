@@ -396,6 +396,11 @@ header {
     -webkit-text-stroke-color: gainsboro;
 }
 
+#settings-menu-toggle.options-open {
+    color:gainsboro;
+    -webkit-text-stroke-color: black;
+}
+
 #options-menu, #tracker-settings-menu {
     background-color: darkblue;
     color: white;
