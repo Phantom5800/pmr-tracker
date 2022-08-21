@@ -70,7 +70,7 @@ function toggleChecks(check, enable) {
     });
 
     // update map states for everything that changed
-    for (mapGroup in changedMapGroups) {
+    for (var mapGroup in changedMapGroups) {
         updateCompletion(changedMapGroups[mapGroup], true);
     }
 }
@@ -145,7 +145,7 @@ function initializeMaps() {
         }
         mapChecks[key] += $(this).children("ul").children("li").length;
     });
-    for (map in mapChecks) {
+    for (var map in mapChecks) {
         console.log(`${map} - ${mapChecks[map]}`);
     }
 
