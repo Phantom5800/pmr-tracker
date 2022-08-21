@@ -5,8 +5,8 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="main.min.js?version=39"></script>
-        <link rel="stylesheet" href="styles/main.css?version=19">
+        <script src="main.min.js?version=40"></script>
+        <link rel="stylesheet" href="styles/main.css?version=20">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -19,12 +19,17 @@
     </head>
     <body>
         <header>
-            <div id="options-menu-toggle" class="hamburger">
-                <div class="hamburger-1"></div>
-                <div class="hamburger-2"></div>
-                <div class="hamburger-3"></div>
+            <div style="display:flex;">
+                <div id="options-menu-toggle" class="hamburger">
+                    <div class="hamburger-1"></div>
+                    <div class="hamburger-2"></div>
+                    <div class="hamburger-3"></div>
+                </div>
+                <img id="logo-img" src="images/Logo.png">
             </div>
-            <img id="logo-img" src="images/Logo.png">
+            <div id="settings-menu-toggle">
+                &#x2699;
+            </div>
         </header>
         <div class="flex-row">
             <div class="flex-column">
@@ -2365,6 +2370,11 @@
                     <div style="display:flex;flex-wrap:wrap;padding-left:10px;">
                         <div class="compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
                         <div class="compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>
+                        <div class="compact-element">
+                            <img data-chapter-key="13" id="Letters" class="unselected optional-item" src="images/icons/PM_Letter_Sprite.png">
+                            <br>
+                            <p data-chapter-key-count="13">0/3</p>
+                        </div>
                         <div class="compact-element"><img id="Artifact" class="unselected optional-item" src="images/icons/Artifact_PM.png"></div>
                         <div class="compact-element"><img id="Record" class="unselected optional-item" src="images/icons/Record.gif"></div>
                         <div class="compact-element"><img id="Weight" class="unselected optional-item" src="images/icons/WeightPM.gif"></div>
@@ -2621,6 +2631,135 @@
             </div>
         </div>
 
+        <div id="tracker-settings-menu">
+            <table width="100%">
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Color Blind Labels</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="colorblind" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="colorblind"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting compact-tracker-options">
+                    <td class="option-name" colspan="3">Highlight Important Items</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="highlight-key" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="highlight-key"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td colspan="4"><hr></td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Compact Tracker</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="compact-tracker" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="compact-tracker"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting compact-tracker-options">
+                    <td class="option-name" colspan="3">Combine Misc. Items</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="combine-misc" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="combine-misc"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting compact-tracker-options">
+                    <td class="option-name" colspan="2">Combine Sort Mode</td>
+                    <td class="option" colspan="2">
+                        <select id="compact-tracker-order">
+                            <option value="false">Vanilla Acquired Order</option>
+                            <option value="true">Required First</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td colspan="4"><hr></td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Show Seed Flags</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="seed-flags" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="seed-flags"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Maps</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="game-maps" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="game-maps"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Notes Field</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="user-notes" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="user-notes"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td colspan="4"><hr></td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Show Logic-Only Items</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="useless-items" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="useless-items"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Tooltip Info</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="recipe-tooltips" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="recipe-tooltips"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Background Color</td>
+                    <td class="option">
+                        <div>
+                            <input type="color" id="background-color" value="#2f4f4f">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Section Color</td>
+                    <td class="option">
+                        <div>
+                            <input type="color" id="section-color" value="#23233b">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <div id="options-menu">
             <table width="100%">
                 <tr>
@@ -2651,140 +2790,6 @@
                     <!--
                         do this if any sections ever need a dividing line:
                     -->
-                    <td colspan="4"><hr></td>
-                </tr>
-                <tr id="toggle-tracker-config">
-                    <td class="section-toggle section-toggle-closed">&#x25B2;</td>
-                    <td class="option-name" colspan="3" style="cursor:pointer;">Tracker Config</td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Color Blind Labels</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="colorblind" type="checkbox" checked>
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="colorblind"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting compact-tracker-options" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Highlight Important Items</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="highlight-key" type="checkbox">
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="highlight-key"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td/>
-                    <td colspan="3"><hr></td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Compact Tracker</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="compact-tracker" type="checkbox">
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="compact-tracker"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting compact-tracker-options" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Combine Misc. Items</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="combine-misc" type="checkbox">
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="combine-misc"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting compact-tracker-options" style="display:none;">
-                    <td class="option-name sub-setting" colspan="2">Combine Sort Mode</td>
-                    <td class="option" colspan="2">
-                        <select id="compact-tracker-order">
-                            <option value="false">Vanilla Acquired Order</option>
-                            <option value="true">Required First</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td/>
-                    <td colspan="3"><hr></td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Show Seed Flags</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="seed-flags" type="checkbox">
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="seed-flags"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Maps</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="game-maps" type="checkbox" checked>
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="game-maps"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Notes Field</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="user-notes" type="checkbox">
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="user-notes"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td/>
-                    <td colspan="3"><hr></td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Show Logic-Only Items</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="useless-items" type="checkbox" checked>
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="useless-items"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Tooltip Info</td>
-                    <td class="option">
-                        <div class="checkbox-slider">
-                            <input autocomplete="off" class="checkbox-slider" id="recipe-tooltips" type="checkbox" checked>
-                            <div class="checkbox-groove"></div>
-                            <label class="checkbox-slider" for="recipe-tooltips"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Background Color</td>
-                    <td class="option">
-                        <div>
-                            <input type="color" id="background-color" value="#2f4f4f">
-                        </div>
-                    </td>
-                </tr>
-                <tr class="tracker-setting" style="display:none;">
-                    <td class="option-name sub-setting" colspan="3">Section Color</td>
-                    <td class="option">
-                        <div>
-                            <input type="color" id="section-color" value="#23233b">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
                     <td colspan="4"><hr></td>
                 </tr>
                 <tr id="toggle-seed-settings">

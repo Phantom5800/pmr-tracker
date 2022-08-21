@@ -380,7 +380,28 @@ a:hover {
     transform: rotate(45deg) translate(-8px, -8px);
 }
 
-#options-menu {
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#settings-menu-toggle {
+    cursor: pointer;
+    padding-right: 1em;
+    color: black;
+    font-size: 35px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 0.125px;
+    -webkit-text-stroke-color: gainsboro;
+}
+
+#settings-menu-toggle.options-open {
+    color:gainsboro;
+    -webkit-text-stroke-color: black;
+}
+
+#options-menu, #tracker-settings-menu {
     background-color: darkblue;
     color: white;
     margin: 5px 5px 5px 5px;
@@ -394,6 +415,11 @@ a:hover {
 }
 
 #options-menu.options-open {
+    -webkit-transform: translate(608px);
+    transform: translate(608px);
+}
+
+#tracker-settings-menu.options-open {
     -webkit-transform: translate(608px);
     transform: translate(608px);
 }
