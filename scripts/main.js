@@ -618,6 +618,7 @@ function initializePage() {
         checkIfChapterIsCompletable(8);
         updateKoopaKootAvailable();
         if (!isPageReloading) {
+            getAvailableChecks($(this).attr('id'));
             getAvailableChecks($('.star-spirit:not(.unselected)').length);
         }
     });
