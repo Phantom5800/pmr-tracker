@@ -66,7 +66,8 @@ const extraChapterRequirements = {
             "#whale-open", // watt or whale open to get to the island OR vvvv
             ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
             ["Super Boots", "#Sushie"] // boots and sushie to reach shortcut from the left
-        ]
+        ],
+        ["Ultra Hammer", "#gear-shuffle [value='Vanilla']"] // volcano blocks
     ],
     6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
     7: [
@@ -187,6 +188,11 @@ function checkIfChapterIsCompletable(chapter) {
                     if ($("[id='Super Hammer']").length || $("[id='Ultra Hammer']").length) {
                         ++conditionsComplete;
                     }
+                // ultra hammer needs special case for gear shuffle
+                } else if (requirementsArray[i] === "Ultra Hammer") {
+                    if ($("[id='Ultra Hammer']").length) {
+                        ++conditionsComplete;
+                    }
                 } else if (Array.isArray(requirementsArray[i])) {
                     var completed = handleExtraChapterRequirements(requirementsArray[i], depth + 1);
 
@@ -212,6 +218,10 @@ function checkIfChapterIsCompletable(chapter) {
             } else if (extraChapterRequirements[chapter][i] === "Super Hammer") {
                 if ($("[id='Super Hammer']").length || $("[id='Ultra Hammer']").length) {
                     ++completedCount;
+                }
+            } else if (extraChapterRequirements[chapter][i] === "Ultra Hammer") {
+                if ($("[id='Ultra Hammer']").length) {
+                    ++conditionsComplete;
                 }
             // if a condition is an array, the condition is true if any element of the array is true
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
@@ -748,6 +758,11 @@ $(document).ready(function(){
                         $("#trading-event-randomized").click();
                     }
 
+                    if (data["GearShuffleMode"] != $("#gear-shuffle").prop('selectedIndex')) {
+                        $("#gear-shuffle").prop('selectedIndex', data["GearShuffleMode"]);
+                        $("#gear-shuffle").change();
+                    }
+
                     alert(`Loaded settings for seed: ${user_seed}`);
                 } else {
                     alert(`Failed to find seed: ${user_seed}`);
@@ -988,6 +1003,11 @@ $(document).ready(function(){
         localStorage.setItem("trading-event-randomized", isChecked);
     });
 
+    $("#gear-shuffle").change(function() {
+        var shuffleMode = $(this).prop('selectedIndex');
+        localStorage.setItem("gear-shuffle", shuffleMode);
+    });
+
     var shops_randomized = localStorageGetWithDefault("shops-randomized", "true") == "true";
     if (!shops_randomized) {
         $("#shops-randomized").click();
@@ -1022,6 +1042,10 @@ $(document).ready(function(){
     if (trading_event_randomized) {
         $("#trading-event-randomized").click();
     }
+
+    var gear_shuffle = localStorageGetWithDefault("gear-shuffle", 0);
+    $("#gear-shuffle").prop('selectedIndex', gear_shuffle);
+    $("#gear-shuffle").change();
 
     ////////////////////////////////////////////////////////////////
     // misc. local storage settings
