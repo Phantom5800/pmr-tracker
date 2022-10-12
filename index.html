@@ -5,7 +5,7 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="main.min.js?version=42"></script>
+        <script src="main.min.js?version=43"></script>
         <link rel="stylesheet" href="styles/main.css?version=20">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -2612,6 +2612,9 @@
                     <li>
                         Right clicking on various "optional" items will add a checkmark to them, this can be used to signify that they have been turned in.
                     </li>
+                    <li>
+                        Settings are expected to be configured before items are marked. Some items or completion states may not update when changing settings.
+                    </li>
                 </ul>
             </div>
             <div class="info-block">
@@ -2631,6 +2634,9 @@
             </div>
         </div>
 
+        <!----------------------------------------------
+            Tracker Config
+        ------------------------------------------------>
         <div id="tracker-settings-menu">
             <table width="100%">
                 <tr class="tracker-setting">
@@ -2650,6 +2656,16 @@
                             <input autocomplete="off" class="checkbox-slider" id="highlight-key" type="checkbox">
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="highlight-key"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">Tracker Logic</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="tracker-logic" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="tracker-logic"></label>
                         </div>
                     </td>
                 </tr>
@@ -2742,6 +2758,16 @@
                     </td>
                 </tr>
                 <tr class="tracker-setting">
+                    <td class="option-name" colspan="3">How-To Fields</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="how-to-fields" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="how-to-fields"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tracker-setting">
                     <td class="option-name" colspan="3">Background Color</td>
                     <td class="option">
                         <div>
@@ -2760,6 +2786,9 @@
             </table>
         </div>
 
+        <!----------------------------------------------
+            Seed Specific Settings
+        ------------------------------------------------>
         <div id="options-menu">
             <table width="100%">
                 <tr>

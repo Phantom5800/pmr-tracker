@@ -253,6 +253,8 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
 }
 
 function getAvailableChecks(check) {
+    if (!useTrackerLogic) return;
+
     //var t = Date.now();
     var affectedMaps = new Set();
     if (check && check.toString().startsWith('maps')) affectedMaps.add(check);

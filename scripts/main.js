@@ -34,6 +34,8 @@ var currentKeyCounts = {
     15: 0
 };
 
+var useTrackerLogic = true;
+
 // The main requirements are grouped logically with their respective chapters.
 // Additional requirements are typically partners or upgrades for mario.
 // Any nested arrays means that if any condition from that group is true, the entire group is treated as true.
@@ -146,6 +148,8 @@ function updateKoopaKootAvailable() {
 }
 
 function checkIfChapterIsCompletable(chapter) {
+    if (!useTrackerLogic) return;
+
     if (chapter <= 8) {
         var totalCount = extraChapterRequirements[chapter].length;
         var completedCount = 0;
@@ -639,6 +643,11 @@ function initializePage() {
 $(document).ready(function(){
     getUrlVars();
 
+    useTrackerLogic = localStorageGetWithDefault("tracker-logic", "true") == "true";
+    if (!useTrackerLogic) {
+        $("#tracker-logic").click();
+    }
+
     // disable some basic functionality
     $('html').contextmenu(function(){return false;});
     $('img').contextmenu(function(){return false;});
@@ -939,6 +948,12 @@ $(document).ready(function(){
         localStorage.setItem("recipe-tooltips", isChecked);
     });
 
+    $("#how-to-fields").click(function() {
+        var isChecked = $(this).is(':checked');
+        $("div.info-block").toggle(isChecked);
+        localStorage.setItem("how-to-fields", isChecked);
+    });
+
     $("#background-color").on("input", function() {
         var color = $(this).val();
         $("body, html").css("background-color", color);
@@ -1114,6 +1129,11 @@ $(document).ready(function(){
         $("#recipe-tooltips").click();
     }
 
+    var howto_enabled = localStorageGetWithDefault("how-to-fields", "true") == "true";
+    if (!howto_enabled) {
+        $("#how-to-fields").click();
+    }
+
     var bg_color = localStorageGetWithDefault("background-color", "#2f4f4f");
     $("body, html").css("background-color", bg_color);
     $("#background-color").val(bg_color);
@@ -1239,6 +1259,11 @@ $(document).ready(function(){
         var isChecked = $(this).is(':checked');
         localStorage.setItem("highlight-key", isChecked);
         updateKeyItemHighlight();
+    });
+
+    $("#tracker-logic").click(function() {
+        useTrackerLogic = $(this).is(':checked');
+        localStorage.setItem("tracker-logic", useTrackerLogic);
     });
 
     function sortCompactTracker(requiredFirst) {
