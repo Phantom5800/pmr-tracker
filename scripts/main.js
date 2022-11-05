@@ -1,3 +1,9 @@
+/******************************************************************************
+ * main.js
+ * 
+ * Contains core site functionality.
+*******************************************************************************/
+
 function localStorageGetWithDefault(key, defaultValue) {
     const value = localStorage.getItem(key);
     if (!value) {
