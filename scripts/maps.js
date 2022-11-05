@@ -1,4 +1,10 @@
-// total check counts
+/******************************************************************************
+ * maps.js
+ * 
+ * Contains functions related to the map tracker portion of the site.
+*******************************************************************************/
+
+ // total check counts
 var total_checks = 0;
 var panel_checks = 0;
 var coinsanity_checks = 0;
