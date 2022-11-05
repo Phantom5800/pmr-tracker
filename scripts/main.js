@@ -108,7 +108,7 @@ function checkIfChapterIsCompletable(chapter) {
                 }
             } else if (extraChapterRequirements[chapter][i] === "Ultra Hammer") {
                 if ($("[id='Ultra Hammer']").length) {
-                    ++conditionsComplete;
+                    ++completedCount;
                 }
             // if a condition is an array, the condition is true if any element of the array is true
             } else if (Array.isArray(extraChapterRequirements[chapter][i])) {
