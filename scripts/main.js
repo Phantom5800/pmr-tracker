@@ -7,7 +7,7 @@ const maxKeyCounts = {
     6: 0,
     7: 0,
     8: 5, // bowser castle keys
-    9: 64, // quizmo
+    9: 16, // quizmo
     10: 3, // master
     11: 96, // star pieces
     12: 11, // rip cheato
