@@ -269,6 +269,7 @@ function synchronizeMapsKey(keyObj, current, previous) {/*
 
 function getAvailableChecks(check) {
     if (!useTrackerLogic) return;
+    if (!$("#game-maps").is(':checked')) return; // don't update maps if maps aren't visible
 
     //var t = Date.now();
     var affectedMaps = new Set();
