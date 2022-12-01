@@ -66,7 +66,6 @@ const extraChapterRequirements = {
     ],
     5: [
         "#Sushie", // need sushie in order to place the jade raven
-        ["#Parakarry", "#Lakilester"], // need one of these in order to get hammer upgrade
         ["#Hammer", "Super Hammer"], // drop log bridge
         [
             "#starting-location [value='YoshiVillage']",
@@ -75,7 +74,7 @@ const extraChapterRequirements = {
             ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
             ["Super Boots", "#Sushie"] // boots and sushie to reach shortcut from the left
         ],
-        ["Ultra Hammer", "#gear-shuffle [value='Vanilla']"] // volcano blocks
+        ["Ultra Hammer", ["#gear-shuffle [value='Vanilla']", ["#Parakarry", "#Lakilester"]]] // volcano blocks
     ],
     6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
     7: [
