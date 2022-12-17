@@ -182,10 +182,8 @@ function initializeMaps() {
 
     // marks off all checks for a given map on right-click
     $("table.map td").contextmenu(function(e) {
-        $(`#${$(this).attr("data-checks-list")} input:not(:disabled)`).each(function() {
-            if ($(this).not(':checked')) {
-                $(this).click();
-            }
+        $(`#${$(this).attr("data-checks-list")} input:not(:disabled):not(:checked)`).each(function() {
+            $(this).click();
         });
     });
 }
