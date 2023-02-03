@@ -127,6 +127,26 @@ function initializeOptionalRandomizedSettings() {
         toggleChecks("[Shop]", !isChecked);
         $("#flag-shopsanity").toggle(isChecked);
         countChecks();
+
+        $("#flag-rowf").toggle(isChecked && $("#rowf-randomized").is(':checked'));
+        $("#flag-merlow").toggle(isChecked && $("#merlow-randomized").is(':checked'));
+        $(".shopsanity-subsetting").toggle(isChecked && seedSettingsExpanded);
+    });
+
+    $("#rowf-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("shops-rowf", isChecked);
+        toggleChecks("[Shop]", !isChecked);
+        $("#flag-rowf").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#merlow-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("merlow-randomized", isChecked);
+        toggleChecks("[Shop]", !isChecked);
+        $("#flag-merlow").toggle(isChecked);
+        countChecks();
     });
 
     $("#keys-randomized").click(function() {
@@ -180,6 +200,16 @@ function loadOptionalRandomizedSettings() {
     var shops_randomized = localStorageGetWithDefault("shops-randomized", "true") == "true";
     if (!shops_randomized) {
         $("#shops-randomized").click();
+    }
+
+    var rowf_randomized = localStorageGetWithDefault("rowf-randomized", "true") == "true";
+    if (!rowf_randomized) {
+        $("#rowf-randomized").click();
+    }
+
+    var merlow_randomized = localStorageGetWithDefault("merlow-randomized", "true") == "true";
+    if (!merlow_randomized) {
+        $("#merlow-randomized").click();
     }
 
     var keys_randomized = localStorageGetWithDefault("keys-randomized", "true") == "true";

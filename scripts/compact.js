@@ -184,8 +184,8 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
     <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
     <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
-    <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
-    <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
+    <div class="compact-element"><img id="Boots" data-state="0" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
+    <div class="compact-element"><img id="Hammer" data-state="0" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
     <div class="compact-element"><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></div>
     <div class="compact-misc-item compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>

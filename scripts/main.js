@@ -246,31 +246,37 @@ function initializePage() {
             case "Boot-less":
                 $(this).attr('id', "Boots");
                 $(this).attr('src', "images/upgrades/PM_Normal_Boots_Sprite.png")
+                $(this).attr('data-state', 0);
                 break;
 
             case "Boots":
                 $(this).attr('id', "Super Boots");
                 $(this).attr('src', "images/upgrades/SuperBoots_PM.png")
+                $(this).attr('data-state', 1);
                 break;
 
             case "Super Boots":
                 $(this).attr('id', "Ultra Boots");
                 $(this).attr('src', "images/upgrades/UltraBoots_PM.png")
+                $(this).attr('data-state', 2);
                 break;
 
             case "Hammer-less":
                 $(this).attr('id', "Hammer");
                 $(this).attr('src', "images/upgrades/PM_Normal_Hammer_Sprite.png")
+                $(this).attr('data-state', 0);
                 break;
 
             case "Hammer":
                 $(this).attr('id', "Super Hammer");
                 $(this).attr('src', "images/upgrades/PM_Super_Hammer_Sprite.png")
+                $(this).attr('data-state', 1);
                 break;
 
             case "Super Hammer":
                 $(this).attr('id', "Ultra Hammer");
                 $(this).attr('src', "images/upgrades/PM_Ultra_Hammer_Sprite.png")
+                $(this).attr('data-state', 2);
                 break;
         }
 
@@ -289,31 +295,37 @@ function initializePage() {
             case "Ultra Boots":
                 $(this).attr('id', "Super Boots");
                 $(this).attr('src', "images/upgrades/SuperBoots_PM.png")
+                $(this).attr('data-state', 1);
                 break;
 
             case "Super Boots":
                 $(this).attr('id', "Boots");
                 $(this).attr('src', "images/upgrades/PM_Normal_Boots_Sprite.png")
+                $(this).attr('data-state', 0);
                 break;
 
             case "Boots":
                 $(this).attr('id', "Boot-less");
                 $(this).attr('src', "images/upgrades/PM_No_Boots.png")
+                $(this).attr('data-state', -1);
                 break;
             
             case "Ultra Hammer":
                 $(this).attr('id', "Super Hammer");
                 $(this).attr('src', "images/upgrades/PM_Super_Hammer_Sprite.png")
+                $(this).attr('data-state', 1);
                 break;
 
             case "Super Hammer":
                 $(this).attr('id', "Hammer");
                 $(this).attr('src', "images/upgrades/PM_Normal_Hammer_Sprite.png")
+                $(this).attr('data-state', 0);
                 break;
 
             case "Hammer":
                 $(this).attr('id', "Hammer-less");
                 $(this).attr('src', "images/upgrades/PM_No_Hammer.png")
+                $(this).attr('data-state', -1);
                 break;
         }
 
@@ -611,6 +623,14 @@ $(document).ready(function(){
                         $("#shops-randomized").click();
                     }
 
+                    if (data["ProgressionOnRowf"] != $("#rowf-randomized").is(':checked')) {
+                        $("#rowf-randomized").click();
+                    }
+
+                    if (data["ProgressionOnMerlow"] != $("#merlow-randomized").is(':checked')) {
+                        $("#merlow-randomized").click();
+                    }
+
                     if (data["KeyitemsOutsideDungeon"] != $("#keys-randomized").is(':checked')) {
                         $("#keys-randomized").click();
                     }
@@ -651,6 +671,21 @@ $(document).ready(function(){
                     if (data["GearShuffleMode"] != $("#gear-shuffle").prop('selectedIndex')) {
                         $("#gear-shuffle").prop('selectedIndex', data["GearShuffleMode"]);
                         $("#gear-shuffle").change();
+                    }
+
+                    var startingBoots = data["StartingBoots"];
+                    var startingHammer = data["StartingHammer"];
+                    while($("#Boots").attr('data-state') > startingBoots) {
+                        $("#Boots").contextmenu();
+                    }
+                    while($("#Hammer").attr('data-state') > startingHammer) {
+                        $("#Hammer").contextmenu();
+                    }
+                    while($("#Boots").attr('data-state') < startingBoots) {
+                        $("#Boots").click();
+                    }
+                    while($("#Hammer").attr('data-state') < startingHammer) {
+                        $("#Hammer").click();
                     }
 
                     alert(`Loaded settings for seed: ${user_seed}`);
@@ -699,8 +734,10 @@ $(document).ready(function(){
     });
 
     $("#toggle-seed-settings").click(function() {
+        seedSettingsExpanded = !seedSettingsExpanded;
         $("#toggle-seed-settings td.section-toggle").toggleClass("section-toggle-closed");
         $("tr.seed-setting").toggle();
+        $("tr.shopsanity-subsetting").toggle($("#shops-randomized").is(':checked') && seedSettingsExpanded);
     });
 
     initializeOpenAreasSettings();

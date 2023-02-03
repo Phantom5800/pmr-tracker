@@ -45,6 +45,8 @@
             <div class="flex-column">
                 <div id="enabled-settings" class="section" style="display:none;">
                     <img id="flag-shopsanity" src="images/flags/HarryTPM.png">
+                    <img id="flag-rowf" src="images/flags/Rowf.png">
+                    <img id="flag-merlow" src="images/flags/Merlow.png">
                     <img id="flag-keysanity" src="images/flags/OddKey.gif">
                     <img id="flag-coinsanity" src="images/flags/coin.png">
                     <img id="flag-letters" src="images/flags/PM_Letter_Sprite.png">
@@ -138,8 +140,8 @@
                         </tr>
 
                         <tr>
-                            <td><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
-                            <td><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
+                            <td><img id="Boots" data-state="0" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
+                            <td><img id="Hammer" data-state="0" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
                             <td><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></td>
                         </tr>
 
@@ -2913,6 +2915,26 @@
                             <input autocomplete="off" class="checkbox-slider" id="shops-randomized" type="checkbox" checked>
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="shops-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting shopsanity-subsetting">
+                    <td class="option-name sub-setting" colspan="3">Rowf Shop In Logic</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="rowf-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="rowf-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting shopsanity-subsetting">
+                    <td class="option-name sub-setting" colspan="3">Merlow In Logic</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="merlow-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="merlow-randomized"></label>
                         </div>
                     </td>
                 </tr>
