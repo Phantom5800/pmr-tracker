@@ -168,7 +168,25 @@ function initializeOptionalRandomizedSettings() {
         localStorage.setItem("coins-randomized", isChecked);
         toggleChecks("[Coinsanity]", !isChecked);
         toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
-        $("#flag-coinsanity").toggle(isChecked);
+        $("#flag-overworld-coins").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#coin-blocks-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("coin-blocks-randomized", isChecked);
+        // toggleChecks("[Coinsanity]", !isChecked);
+        // toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        $("#flag-coin-block").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#foliage-coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("foliage-coins-randomized", isChecked);
+        // toggleChecks("[Coinsanity]", !isChecked);
+        // toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        $("#flag-foliage-coins").toggle(isChecked);
         countChecks();
     });
 
@@ -222,9 +240,19 @@ function loadOptionalRandomizedSettings() {
         $("#panels-randomized").click();
     }
 
-    var coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
-    if (!coins_randomized) {
+    var overworld_coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
+    if (!overworld_coins_randomized) {
         $("#coins-randomized").click();
+    }
+
+    var foliage_coins_randomized = localStorageGetWithDefault("foliage-coins-randomized", "true") == "true";
+    if (!foliage_coins_randomized) {
+        $("#foliage-coins-randomized").click();
+    }
+
+    var coin_blocks_randomized = localStorageGetWithDefault("coin-blocks-randomized", "true") == "true";
+    if (!coin_blocks_randomized) {
+        $("#coin-blocks-randomized").click();
     }
 
     var letters_randomized = localStorageGetWithDefault("letters-randomized", "true") == "true";

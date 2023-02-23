@@ -639,8 +639,16 @@ $(document).ready(function(){
                         $("#panels-randomized").click();
                     }
 
-                    if (data["IncludeCoins"] != $("#coins-randomized").is(':checked')) {
+                    if (data["IncludeCoinsOverworld"] != $("#coins-randomized").is(':checked')) {
                         $("#coins-randomized").click();
+                    }
+
+                    if (data["IncludeCoinsBlocks"] != $("#coin-blocks-randomized").is(':checked')) {
+                        $("#coin-blocks-randomized").click();
+                    }
+
+                    if (data["IncludeCoinsFoliage"] != $("#foliage-coins-randomized").is(':checked')) {
+                        $("#foliage-coins-randomized").click();
                     }
 
                     // letter settings:
