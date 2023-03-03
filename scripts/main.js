@@ -687,17 +687,17 @@ $(document).ready(function(){
 
                     var startingBoots = data["StartingBoots"];
                     var startingHammer = data["StartingHammer"];
-                    while($("#Boots").attr('data-state') > startingBoots) {
-                        $("#Boots").contextmenu();
+                    while($("img.boots").attr('data-state') > startingBoots) {
+                        $("img.boots").contextmenu();
                     }
-                    while($("#Hammer").attr('data-state') > startingHammer) {
-                        $("#Hammer").contextmenu();
+                    while($("img.hammer").attr('data-state') > startingHammer) {
+                        $("img.hammer").contextmenu();
                     }
-                    while($("#Boots").attr('data-state') < startingBoots) {
-                        $("#Boots").click();
+                    while($("img.boots").attr('data-state') < startingBoots) {
+                        $("img.boots").click();
                     }
-                    while($("#Hammer").attr('data-state') < startingHammer) {
-                        $("#Hammer").click();
+                    while($("img.hammer").attr('data-state') < startingHammer) {
+                        $("img.hammer").click();
                     }
 
                     alert(`Loaded settings for seed: ${user_seed}`);
