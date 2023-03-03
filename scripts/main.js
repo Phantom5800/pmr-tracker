@@ -651,6 +651,10 @@ $(document).ready(function(){
                         $("#foliage-coins-randomized").click();
                     }
 
+                    if (data["IncludeCoinsFavors"] != $("#koot-coins-randomized").is(':checked')) {
+                        $("#koot-coins-randomized").click();
+                    }
+
                     // letter settings:
                     // 0 = none
                     // 1 = no letter chain
@@ -835,10 +839,16 @@ function resetPage() {
     $("#panels-randomized").click();
     $("#coins-randomized").click();
     $("#coins-randomized").click();
+    $("#coin-blocks-randomized").click();
+    $("#coin-blocks-randomized").click();
+    $("#foliage-coins-randomized").click();
+    $("#foliage-coins-randomized").click();
     $("#letters-randomized").click();
     $("#letters-randomized").click();
     $("#koopa-koot-randomized").click();
     $("#koopa-koot-randomized").click();
+    $("#koot-coins-randomized").click();
+    $("#koot-coins-randomized").click();
     $("#trading-event-randomized").click();
     $("#trading-event-randomized").click();
     $("#seeds-required").change();
