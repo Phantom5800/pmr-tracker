@@ -167,7 +167,6 @@ function initializeOptionalRandomizedSettings() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coins-randomized", isChecked);
         toggleChecks("[Coinsanity]", !isChecked);
-        toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
         $("#flag-overworld-coins").toggle(isChecked);
         countChecks();
     });
@@ -175,8 +174,7 @@ function initializeOptionalRandomizedSettings() {
     $("#coin-blocks-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coin-blocks-randomized", isChecked);
-        // toggleChecks("[Coinsanity]", !isChecked);
-        // toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        toggleChecks("[Coin Block]", !isChecked);
         $("#flag-coin-block").toggle(isChecked);
         countChecks();
     });
@@ -184,9 +182,16 @@ function initializeOptionalRandomizedSettings() {
     $("#foliage-coins-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("foliage-coins-randomized", isChecked);
-        // toggleChecks("[Coinsanity]", !isChecked);
-        // toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        toggleChecks("[Foliage Coin]", !isChecked);
         $("#flag-foliage-coins").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#koot-coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("koot-coins-randomized", isChecked);
+        toggleChecks("[Koot Coin]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        $("#flag-koot-coins").toggle(isChecked);
         countChecks();
     });
 
@@ -263,6 +268,11 @@ function loadOptionalRandomizedSettings() {
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", false) == "true";
     if (koopa_koot_randomized) {
         $("#koopa-koot-randomized").click();
+    }
+
+    var koot_coins_randomized = localStorageGetWithDefault("koot-coins-randomized", false) == "true";
+    if (!koot_coins_randomized) {
+        $("#koot-coins-randomized").click();
     }
 
     var trading_event_randomized = localStorageGetWithDefault("trading-event-randomized", false) == "true";
