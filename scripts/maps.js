@@ -38,7 +38,7 @@ function countChecks() {
             }
         } else if ($(this).text().includes("[Koot Coin]")) {
             if ($("#koopa-koot-randomized").is(':checked') && $("#koot-coins-randomized").is(':checked')) {
-                ++panel_checks;
+                ++coinsanity_checks;
                 ++total_checks;
             }
         } else if ($(this).text().includes("[Panel]")) {
