@@ -98,3 +98,5 @@ const extraChapterRequirements = {
         ["#Lakilester", "#fast-bowser-castle"] // basement
     ]
 }
+
+var seedSettingsExpanded = false;
