@@ -84,6 +84,14 @@ function initializeCompactTrackerSettings() {
         isChecked = $("#fast-bowser-castle").is(':checked');
         $("#BowsersKeySlot").toggle(!isChecked);
 
+        // update power star visibility in the new tracker
+        isChecked = $("#power-star").is(':checked');
+        if(isChecked){
+            maxKeyCounts[16] = parseInt($("#power-star-num").val());
+            $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        }
+        $("#PowerStarSlot").toggle(isChecked);
+
         updateKeyItemHighlight();
         sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
     });
@@ -184,8 +192,8 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img id="Watt" class="unselected partner" src="images/partners/watt.png"></div>
     <div class="compact-element"><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></div>
     <div class="compact-element"><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></div>
-    <div class="compact-element"><img id="Boots" data-state="0" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
-    <div class="compact-element"><img id="Hammer" data-state="0" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
+    <div class="compact-element"><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></div>
+    <div class="compact-element"><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></div>
     <div class="compact-element"><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></div>
     <div class="compact-misc-item compact-element"><img id="Dolly" class="unselected optional-item" src="images/icons/PeachDoll_PM.png"></div>
     <div class="compact-misc-item compact-element"><img id="Kooper's Shell" class="unselected optional-item" src="images/icons/Kooper'sShell_PM.png"></div>
@@ -278,6 +286,11 @@ var altTracker = `<table width="100%">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <br>
         <p data-chapter-key-count="8">0/5</p>
+    </div>
+    <div id="PowerStarSlot" class="compact-element">
+        <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
+        <br>
+        <p data-chapter-key-count="16">0/120</p>
     </div>
     <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
