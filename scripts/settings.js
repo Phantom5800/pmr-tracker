@@ -127,6 +127,26 @@ function initializeOptionalRandomizedSettings() {
         toggleChecks("[Shop]", !isChecked);
         $("#flag-shopsanity").toggle(isChecked);
         countChecks();
+
+        $("#flag-rowf").toggle(isChecked && $("#rowf-randomized").is(':checked'));
+        $("#flag-merlow").toggle(isChecked && $("#merlow-randomized").is(':checked'));
+        $(".shopsanity-subsetting").toggle(isChecked && seedSettingsExpanded);
+    });
+
+    $("#rowf-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("shops-rowf", isChecked);
+        toggleChecks("[Shop]", !isChecked);
+        $("#flag-rowf").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#merlow-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("merlow-randomized", isChecked);
+        toggleChecks("[Shop]", !isChecked);
+        $("#flag-merlow").toggle(isChecked);
+        countChecks();
     });
 
     $("#keys-randomized").click(function() {
@@ -147,8 +167,31 @@ function initializeOptionalRandomizedSettings() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("coins-randomized", isChecked);
         toggleChecks("[Coinsanity]", !isChecked);
-        toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
-        $("#flag-coinsanity").toggle(isChecked);
+        $("#flag-overworld-coins").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#coin-blocks-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("coin-blocks-randomized", isChecked);
+        toggleChecks("[Coin Block]", !isChecked);
+        $("#flag-coin-block").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#foliage-coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("foliage-coins-randomized", isChecked);
+        toggleChecks("[Foliage Coin]", !isChecked);
+        $("#flag-foliage-coins").toggle(isChecked);
+        countChecks();
+    });
+
+    $("#koot-coins-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("koot-coins-randomized", isChecked);
+        toggleChecks("[Koot Coin]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
+        $("#flag-koot-coins").toggle(isChecked);
         countChecks();
     });
 
@@ -182,6 +225,16 @@ function loadOptionalRandomizedSettings() {
         $("#shops-randomized").click();
     }
 
+    var rowf_randomized = localStorageGetWithDefault("rowf-randomized", "true") == "true";
+    if (!rowf_randomized) {
+        $("#rowf-randomized").click();
+    }
+
+    var merlow_randomized = localStorageGetWithDefault("merlow-randomized", "true") == "true";
+    if (!merlow_randomized) {
+        $("#merlow-randomized").click();
+    }
+
     var keys_randomized = localStorageGetWithDefault("keys-randomized", "true") == "true";
     if (!keys_randomized) {
         $("#keys-randomized").click();
@@ -192,9 +245,19 @@ function loadOptionalRandomizedSettings() {
         $("#panels-randomized").click();
     }
 
-    var coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
-    if (!coins_randomized) {
+    var overworld_coins_randomized = localStorageGetWithDefault("coins-randomized", "true") == "true";
+    if (!overworld_coins_randomized) {
         $("#coins-randomized").click();
+    }
+
+    var foliage_coins_randomized = localStorageGetWithDefault("foliage-coins-randomized", "true") == "true";
+    if (!foliage_coins_randomized) {
+        $("#foliage-coins-randomized").click();
+    }
+
+    var coin_blocks_randomized = localStorageGetWithDefault("coin-blocks-randomized", "true") == "true";
+    if (!coin_blocks_randomized) {
+        $("#coin-blocks-randomized").click();
     }
 
     var letters_randomized = localStorageGetWithDefault("letters-randomized", "true") == "true";
@@ -205,6 +268,11 @@ function loadOptionalRandomizedSettings() {
     var koopa_koot_randomized = localStorageGetWithDefault("koopa-koot-randomized", false) == "true";
     if (koopa_koot_randomized) {
         $("#koopa-koot-randomized").click();
+    }
+
+    var koot_coins_randomized = localStorageGetWithDefault("koot-coins-randomized", false) == "true";
+    if (!koot_coins_randomized) {
+        $("#koot-coins-randomized").click();
     }
 
     var trading_event_randomized = localStorageGetWithDefault("trading-event-randomized", false) == "true";

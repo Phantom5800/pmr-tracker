@@ -22,7 +22,22 @@ function countChecks() {
 
     $("#map-checks label").each(function() {
         if ($(this).text().includes("[Coinsanity]")) {
-            if ($("#coins-randomized").is(':checked') && !$(this).hasClass('disabled')) {
+            if ($("#coins-randomized").is(':checked')) {
+                ++coinsanity_checks;
+                ++total_checks;
+            }
+        } else if ($(this).text().includes("[Coin Block]")) {
+            if ($("#coin-blocks-randomized").is(':checked')) {
+                ++coinsanity_checks;
+                ++total_checks;
+            }
+        } else if ($(this).text().includes("[Foliage Coin]")) {
+            if ($("#foliage-coins-randomized").is(':checked')) {
+                ++coinsanity_checks;
+                ++total_checks;
+            }
+        } else if ($(this).text().includes("[Koot Coin]")) {
+            if ($("#koopa-koot-randomized").is(':checked') && $("#koot-coins-randomized").is(':checked')) {
                 ++coinsanity_checks;
                 ++total_checks;
             }
@@ -123,7 +138,7 @@ function updateSingleMapCheck(check, skipVisible = false) {
     // update counts
     var label = check.parent().text();
     var count_dir = (isChecked) ? 1 : -1;
-    if (label.includes("[Coinsanity]")) {
+    if (label.includes("[Coinsanity]") || label.includes("[Coin Block]") || label.includes("[Foliage Coin]") || label.includes("[Koot Coin]")) {
         current_coins += count_dir;
         current_checks += count_dir;
         $("#total-checks").text(`Total Checks: ${current_checks}/${total_checks}`);

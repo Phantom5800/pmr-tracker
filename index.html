@@ -5,7 +5,7 @@
         <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="main.min.js?version=47"></script>
+        <script src="main.min.js?version=50"></script>
         <link rel="stylesheet" href="styles/main.css?version=21">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -16,6 +16,16 @@
             gtag('js', new Date());
             gtag('config', 'G-LW6YPGQDM5');
         </script>
+
+        <!-- Pre-Fetch Boots and Hammer images -->
+        <link rel="preload" as="image" href="images/upgrades/PM_No_Boots.png">
+        <link rel="preload" as="image" href="images/upgrades/PM_Normal_Boots_Sprite.png">
+        <link rel="preload" as="image" href="images/upgrades/SuperBoots_PM.png">
+        <link rel="preload" as="image" href="images/upgrades/UltraBoots_PM.png">
+        <link rel="preload" as="image" href="images/upgrades/PM_No_Hammer.png">
+        <link rel="preload" as="image" href="images/upgrades/PM_Normal_Hammer_Sprite.png">
+        <link rel="preload" as="image" href="images/upgrades/PM_Super_Hammer_Sprite.png">
+        <link rel="preload" as="image" href="images/upgrades/PM_Ultra_Hammer_Sprite.png">
     </head>
     <body>
         <header>
@@ -35,8 +45,12 @@
             <div class="flex-column">
                 <div id="enabled-settings" class="section" style="display:none;">
                     <img id="flag-shopsanity" src="images/flags/HarryTPM.png">
+                    <img id="flag-rowf" src="images/flags/Rowf.png">
+                    <img id="flag-merlow" src="images/flags/Merlow.png">
                     <img id="flag-keysanity" src="images/flags/OddKey.gif">
-                    <img id="flag-coinsanity" src="images/flags/coin.png">
+                    <img id="flag-overworld-coins" src="images/flags/coin.png">
+                    <img id="flag-coin-block" src="images/flags/coinblock.png">
+                    <img id="flag-foliage-coins" src="images/flags/bush.png">
                     <img id="flag-letters" src="images/flags/PM_Letter_Sprite.png">
                     <img id="flag-panels" src="images/flags/Star_Piece.png">
                     <img id="flag-dojo" src="images/icons/TheMasterFirst_PM.png" style="display:none;">
@@ -128,8 +142,8 @@
                         </tr>
 
                         <tr>
-                            <td><img id="Boots" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
-                            <td><img id="Hammer" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
+                            <td><img id="Boots" data-state="0" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
+                            <td><img id="Hammer" data-state="0" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
                             <td><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></td>
                         </tr>
 
@@ -388,7 +402,7 @@
                                     <td class="has-nothing"></td>
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-pokey">Pokey Room</td>
-                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-northeast">Tree</td>
                                 </tr>
                                 <tr>
                                     <td class="empty"/>
@@ -408,7 +422,7 @@
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-runaway-pay">Runaway Pay</td>
                                     <td class="has-nothing"></td>
-                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-lone-tree">Tree</td>
                                 </tr>
                                 <tr>
                                     <td class="has-nothing">Save Block</td>
@@ -417,7 +431,7 @@
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-stone-cactus">Stone Cactus</td>
                                     <td data-checks-list="maps-desert-nomadimouse">Mouse</td>
-                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-three-trees">Far Left Tree</td>
                                     <td data-checks-list="maps-desert-outside-outpost">Outside Outpost</td>
                                     <td data-checks-list="maps-desert-outpost-west">Dry Dry Outpost West</td>
                                     <td data-checks-list="maps-desert-outpost-east">Dry Dry Outpost East</td>
@@ -450,7 +464,7 @@
                                     <td class="has-nothing"></td>
                                     <td data-checks-list="maps-desert-opposite-fxc">? Block</td>
                                     <td class="has-nothing"></td>
-                                    <td class="has-nothing"></td>
+                                    <td data-checks-list="maps-desert-multicoin-blocks">Six Multicoin Blocks</td>
                                 </tr>
                             </table>
                         </div>
@@ -729,7 +743,7 @@
                                     <td data-checks-list="maps-yoshi-lightblue-yoshi">Light-Blue Yoshi</td>
                                     <td data-checks-list="maps-yoshi-nw-jungle">NW Jungle</td>
                                     <td data-checks-list="maps-yoshi-ne-jungle">NE Jungle</td>
-                                    <td class="has-nothing">Yellow Yoshi</td>
+                                    <td data-checks-list="maps-yoshi-yellow-yoshi">Yellow Yoshi</td>
                                 </tr>
                                 <tr>
                                     <td data-checks-list="maps-yoshi-whale" rowspan="2">Whale</td>
@@ -924,6 +938,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-prologue-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">Furthest left bush</label></li>
                                 <li><label><input data-map-group="maps-prologue-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">Far right tree</label></li>
+                                <li><label><input data-map-group="maps-prologue-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Foliage Coin] All other bushes (6) and trees (2)</label></li>
                             </ul>
                         </div>
                         <div id="maps-prologue-outside-playground" style="display:none;">
@@ -931,7 +946,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer'],['Super Boots','Ultra Boots','Ultra Hammer']">[Panel] Right of stone block</label></li>
                                 <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">[Coinsanity] 4 items above spring</label></li>
-                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coinsanity] Far left ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coin Block] Far left ? Block</label></li>
                                 <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">Tree</label></li>
                                 <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">Item on ledge above spring</label></li>
                                 <li><label><input data-map-group="maps-prologue-outside-playground" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">? Block above stone block</label></li>
@@ -941,6 +956,7 @@
                             <h3>Outside Village</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-prologue-outside-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">Item on ledge</label></li>
+                                <li><label><input data-map-group="maps-prologue-outside-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree on ledge</label></li>
                             </ul>
                         </div>
                         <div id="maps-prologue-village" style="display:none;">
@@ -955,6 +971,7 @@
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">Goompa</label></li>
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">Goompa's Veranda</label></li>
                                 <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">Tree</label></li>
+                                <li><label><input data-map-group="maps-prologue-village" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:GoombaVillage','Super Hammer','Ultra Hammer']">[Foliage Coin] Bottom right bush</label></li>
                             </ul>
                         </div>
                         <div id="maps-prologue-landing" style="display:none;">
@@ -966,8 +983,8 @@
                         <div id="maps-prologue-road1" style="display:none;">
                             <h3>Goomba Road 1</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coin Block] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-road1" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">[Coin Block] Right ? Block</label></li>
                             </ul>
                         </div>
                         <div id="maps-prologue-road2" style="display:none;">
@@ -983,6 +1000,7 @@
                                 <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots','Ultra Hammer']">[Panel] Right side of Goomba King's Fortress near tree</label></li>
                                 <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:GoombaVillage','Hammer'],'Super Hammer','Ultra Hammer']">Tree left of the fortress</label></li>
                                 <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">Break brick block to spawn ? Block</label></li>
+                                <li><label><input data-map-group="maps-prologue-castle" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree right of the fortress</label></li>
                             </ul>
                         </div>
                         <!--------------------------------------------------------------
@@ -1098,8 +1116,8 @@
                         <div id="maps-sewers-pipe" style="display:none;">
                             <h3>Pipe</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">[Coin Block] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">[Coin Block] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-sewers-pipe" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Hammer','Ultra Hammer']">Middle ? Block</label></li>
                             </ul>
                         </div>
@@ -1118,9 +1136,9 @@
                         <div id="maps-sewers-upgrade" style="display:none;">
                             <h3>Upgrade Block</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coinsanity] Left invisible block</label></li>
-                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coinsanity] Middle invisible block</label></li>
-                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coinsanity] Right invisible block</label></li>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coin Block] Left invisible block</label></li>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coin Block] Middle invisible block</label></li>
+                                <li><label><input data-map-group="maps-sewers-upgrade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots',['Odd Key','Bombette','Sushie'],['blue-house-open','Bombette','Sushie']]">[Coin Block] Right invisible block</label></li>
                             </ul>
                         </div>
                         <div id="maps-sewers-spike-room" style="display:none;">
@@ -1132,11 +1150,11 @@
                         <div id="maps-sewers-chapter-7" style="display:none;">
                             <h3>Chapter 7 Door</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coinsanity] ? Block 1</label></li>
-                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coinsanity] ? Block 2</label></li>
-                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coinsanity] ? Block 3</label></li>
-                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coinsanity] ? Block 4</label></li>
-                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coinsanity] ? Block 5</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coin Block] ? Block 1</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coin Block] ? Block 2</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coin Block] ? Block 3</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coin Block] ? Block 4</label></li>
+                                <li><label><input data-map-group="maps-sewers-chapter-7" autocomplete="off" type="checkbox" data-requirements-glitchless="['Super Boots','Ultra Boots'],['Sushie',['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Coin Block] ? Block 5</label></li>
                             </ul>
                         </div>
                         <div id="maps-sewers-power-smash" style="display:none;">
@@ -1160,8 +1178,8 @@
                         <div id="maps-sewers-life-shroom" style="display:none;">
                             <h3>Ultra Boots Blocks</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coin Block] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">[Coin Block] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-sewers-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="'Ultra Boots',['Super Hammer','Ultra Hammer'],[['Odd Key','Bombette'],['blue-house-open','Bombette'],'Sushie'],'Lakilester'">Middle ? Block</label></li>
                             </ul>
                         </div>
@@ -1171,7 +1189,7 @@
                                 <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">Invisible block left of pipe</label></li>
                                 <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">Invisible block between first and second spiny</label></li>
                                 <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">Invisible block next to visible ? block</label></li>
-                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">[Coinsanity] ? Block by stone block</label></li>
+                                <li><label><input data-map-group="maps-sewers-spiny" autocomplete="off" type="checkbox" data-requirements-glitchless="[['Odd Key','Bombette'],['blue-house-open','Bombette'],['Super Boots','Sushie'],['Ultra Boots','Sushie']],'Lakilester'">[Coin Block] ? Block by stone block</label></li>
                             </ul>
                         </div>
                         <div id="maps-sewers-rip-cheato" style="display:none;">
@@ -1186,7 +1204,7 @@
                         <div id="maps-pleasant-path-toad" style="display:none;">
                             <h3>Outside Toad Town</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">[Coin Block] Left ? Block</label></li>
                                 <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Middle ? Block</label></li>
                                 <li><label><input data-map-group="maps-pleasant-path-toad" autocomplete="off" type="checkbox">Right ? Block</label></li>
                             </ul>
@@ -1249,6 +1267,8 @@
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta'">[Koot] Second bush from left after Koopa Koot requests his Glasses</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">Bottom bush on left side</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">Third bush from the right</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far left bush</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Second bush from the right</label></li>
                             </ul>
                         </div>
                         <div id="maps-koopa-village-east" style="display:none;">
@@ -1256,32 +1276,33 @@
                             <ul>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="'Kolorado','Parakarry'">[Letter] Kolorado</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer']">[Koot] Talk to Kolorado's wife after starting Koopa Koot's first favor</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Koopa Legends'">[Koot] [Coinsanity] Return Koopa Legends to Koopa Koot</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Koopa Legends','Sleepy Sheep'">[Koot] [Coinsanity] Give Koopa Koot a Sleepy Sheep (first item)</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Koopa Legends'">[Koot] [Koot Coin] Return Koopa Legends to Koopa Koot</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Koopa Legends','Sleepy Sheep'">[Koot] [Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Koopa Legends','Sleepy Sheep'">[Koot] Give Koopa Koot a Sleepy Sheep (second item)</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],1,'Koopa Legends','Sleepy Sheep','Tape'">[Koot] [Coinsanity] Return Koopa Koot's Tape</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],1,'Koopa Legends','Sleepy Sheep','Tape'">[Koot] [Koot Coin] Return Koopa Koot's Tape</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],1,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea'">[Koot] Give Koopa Koot Koopa Tea</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],1,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph'">[Koot] [Coinsanity] Give Luigi's Autograph to Koopa Koot</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],2,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet'">[Koot] [Coinsanity] Return Koopa Koot's wallet</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],2,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic'">[Koot] [Coinsanity] Give Koopa Koot a Tasty Tonic</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],1,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph'">[Koot] [Koot Coin] Give Luigi's Autograph to Koopa Koot</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],2,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet'">[Koot] [Koot Coin] Return Koopa Koot's wallet</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],2,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic'">[Koot] [Koot Coin] Give Koopa Koot a Tasty Tonic</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],2,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph'">[Koot] Give Merluvlee's Autograph to Koopa Koot</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph'">[Koot] [Coinsanity] Talk to Koopa Koot after reading the news in Toad Town</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom'">[Koot] [Coinsanity] Give Koopa Koot a Life Shroom (first item)</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph'">[Koot] [Koot Coin] Talk to Koopa Koot after reading the news in Toad Town</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom'">[Koot] [Koot Coin] Give Koopa Koot a Life Shroom (first item)</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom'">[Koot] Give Koopa Koot a Life Shroom (second item)</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake'">[Koot] [Coinsanity] Give Koopa Koot a Nutty Cake</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],3,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake'">[Koot] [Koot Coin] Give Koopa Koot a Nutty Cake</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],4,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette'">[Koot] Talk to Koopa Koot after calming the Bob-ombs</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],4,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo'">[Koot] [Coinsanity] Give Koopa Koot the Old Photo</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],4,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta'">[Koot] [Coinsanity] Give Koopa Koot Koopasta</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses'">[Koot] [Coinsanity] Return Koopa Koot's glasses</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],4,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo'">[Koot] [Koot Coin] Give Koopa Koot the Old Photo</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],4,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta'">[Koot] [Koot Coin] Give Koopa Koot Koopasta</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses'">[Koot] [Koot Coin] Return Koopa Koot's glasses</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime'">[Koot] Give Koopa Koot a Lime</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie'">[Koot] [Coinsanity] Give Koopa Koot a Kooky Cookie</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],6,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie','Package'">[Koot] [Coinsanity] Give Koopa Koot his package</label></li>
-                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],6,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie','Package','Coconut'">[Koot] [Coinsanity] Give Koopa Koot a Coconut</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie'">[Koot] [Koot Coin] Give Koopa Koot a Kooky Cookie</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],6,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie','Package'">[Koot] [Koot Coin] Give Koopa Koot his package</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],6,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie','Package','Coconut'">[Koot] [Koot Coin] Give Koopa Koot a Coconut</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],6,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie','Package','Coconut','Red Jar'">[Koot] Give Koopa Koot the Red Jar</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">First bush on left</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette'],'Kooper\'s Shell'">Give Kooper his shell</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="'Artifact',['Mamar',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Give Artifact to Kolorado</label></li>
                                 <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer']">Item on top of brick block on right (after defeating fuzzies)</label></li>
+                                <li><label><input data-map-group="maps-koopa-village-east" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far right bush</label></li>
                             </ul>
                         </div>
                         <!--------------------------------------------------------------
@@ -1338,7 +1359,7 @@
                         <div id="maps-mt-rugged-letter3" style="display:none;">
                             <h3>Letter 3</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:DryDryOutpost','Hammer'],['starting-location:DryDryOutpost','Kooper'],'Bombette','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block left after taking spring</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox" data-requirements-glitchless="[['starting-location:DryDryOutpost','Hammer'],['starting-location:DryDryOutpost','Kooper'],'Bombette','Super Hammer','Ultra Hammer']">[Coin Block] ? Block left after taking spring</label></li>
                                 <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer'],'Parakarry'">[Coinsanity] Circle of items across Parakarry gap</label></li>
                                 <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer']">[Coinsanity] 2 items on ground below Parakarry gap</label></li>
                                 <li><label><input data-map-group="maps-mt-rugged-letter3" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer']">? Block by Cleft when entering room</label></li>
@@ -1374,6 +1395,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-mt-rugged-train" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer']">Item in top most bush</label></li>
                                 <li><label><input data-map-group="maps-mt-rugged-train" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer']">Give three letters to Parakarry</label></li>
+                                <li><label><input data-map-group="maps-mt-rugged-train" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer']">[Foliage Coin] All 3 other bushes</label></li>
                             </ul>
                         </div>
                         <div id="maps-mt-rugged-whacka" style="display:none;">
@@ -1390,7 +1412,7 @@
                         <div id="maps-desert-top-left" style="display:none;">
                             <h3>Two ? Blocks</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-desert-top-left" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">Left ? Block</label></li>
                             </ul>
                         </div>
@@ -1406,6 +1428,12 @@
                                 <li><label><input data-map-group="maps-desert-pokey" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Behind cactus at top of room</label></li>
                             </ul>
                         </div>
+                        <div id="maps-desert-northeast" style="display:none;">
+                            <h3>Northeast Tree</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-northeast" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree</label></li>
+                            </ul>
+                        </div>
                         <div id="maps-desert-thunder-rage" style="display:none;">
                             <h3>Thunder Rage</h3>
                             <ul>
@@ -1415,7 +1443,7 @@
                         <div id="maps-desert-above-runaway-pay" style="display:none;">
                             <h3>Two ? Blocks</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-above-runaway-pay" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-above-runaway-pay" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Left ? Block</label></li>
                                 <li><label><input data-map-group="maps-desert-above-runaway-pay" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">Right ? Block</label></li>
                             </ul>
                         </div>
@@ -1430,10 +1458,10 @@
                         <div id="maps-desert-five-block" style="display:none;">
                             <h3>Five ? Blocks</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Top-Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Top-Right ? Block</label></li>
-                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Bottom-Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] Bottom-Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Top-Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Top-Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Bottom-Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] Bottom-Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-desert-five-block" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">Center ? Block</label></li>
                             </ul>
                         </div>
@@ -1441,6 +1469,12 @@
                             <h3>Runaway Pay</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-desert-runaway-pay" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Hidden block in the middle of three trees</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-lone-tree" style="display:none;">
+                            <h3>Tree</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-lone-tree" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-camp" style="display:none;">
@@ -1459,12 +1493,22 @@
                             <h3>Nomadimouse</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-desert-nomadimouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer'],'Nomadimouse','Parakarry'">[Letter] Nomadimouse</label></li>
+                                <li><label><input data-map-group="maps-desert-nomadimouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-three-trees" style="display:none;">
+                            <h3>Three Trees</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-three-trees" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far left tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-outside-outpost" style="display:none;">
                             <h3>Outside Outpost</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-desert-outside-outpost" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">Far right tree</label></li>
+                                <li><label><input data-map-group="maps-desert-outside-outpost" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far left tree</label></li>
+                                <li><label><input data-map-group="maps-desert-outside-outpost" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Second tree from left</label></li>
+                                <li><label><input data-map-group="maps-desert-outside-outpost" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Fourth tree from right</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-outpost-west" style="display:none;">
@@ -1474,6 +1518,7 @@
                                 <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost','Bombette','Super Hammer','Ultra Hammer'],'Dry Dry Shop','Parakarry'">[Letter] Shop (Chain)</label></li>
                                 <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">[Koot] Buy Dusty Hammer, Dried Pasta, Dusty Hammer, Dried Shroom</label></li>
                                 <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],'Lyrics'">Turn in Lyrics at far right house</label></li>
+                                <li><label><input data-map-group="maps-desert-outpost-west" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Red tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-outpost-east" style="display:none;">
@@ -1489,7 +1534,7 @@
                         <div id="maps-desert-below-cactus" style="display:none;">
                             <h3>? Block</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-below-cactus" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] ? Block in middle of room</label></li>
+                                <li><label><input data-map-group="maps-desert-below-cactus" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] ? Block in middle of room</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-bump-attack" style="display:none;">
@@ -1502,14 +1547,16 @@
                         <div id="maps-desert-life-shroom" style="display:none;">
                             <h3>Life Shroom</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] ? Block in middle of room</label></li>
+                                <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] ? Block in middle of room</label></li>
                                 <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Hidden block directly above other ? Block</label></li>
+                                <li><label><input data-map-group="maps-desert-life-shroom" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Bottom tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-before-oasis" style="display:none;">
                             <h3>Before Oasis</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-desert-before-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer']">Item behind bush on right side of room</label></li>
+                                <li><label><input data-map-group="maps-desert-before-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-oasis" style="display:none;">
@@ -1517,6 +1564,8 @@
                             <ul>
                                 <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">Lemon Tree</label></li>
                                 <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">Lime Tree</label></li>
+                                <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far left tree</label></li>
+                                <li><label><input data-map-group="maps-desert-oasis" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Bottom right tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-desert-fxc" style="display:none;">
@@ -1528,7 +1577,13 @@
                         <div id="maps-desert-opposite-fxc" style="display:none;">
                             <h3>? Block</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-desert-opposite-fxc" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coinsanity] ? Block in middle of room</label></li>
+                                <li><label><input data-map-group="maps-desert-opposite-fxc" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots','Bombette','Kooper']">[Coin Block] ? Block in middle of room</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-desert-multicoin-blocks" style="display:none;">
+                            <h3>Six Multicoin Blocks</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-desert-multicoin-blocks" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:DryDryOutpost',['Bombette','Parakarry'],'Super Hammer','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far right tree</label></li>
                             </ul>
                         </div>
                         <!--------------------------------------------------------------
@@ -1707,15 +1762,15 @@
                         <div id="maps-gusty-gulch-village1" style="display:none;">
                             <h3>Village 1</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-gusty-gulch-village1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coinsanity] Block in far right house</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-village1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coin Block] Block in far right house</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-village1" autocomplete="off" type="checkbox" data-requirements-glitchless="['Hammer','Super Hammer','Ultra Hammer'],'Boo\'s Portrait',5,'Koopa Legends','Sleepy Sheep','Tape','Koopa Tea','Luigi\'s Autograph','Wallet','Tasty Tonic','Merluvlee\'s Autograph','Life Shroom','Nutty Cake','Eldstar','Bombette','Old Photo','Koopasta','Glasses','Lime','Kooky Cookie'">[Koot] Talk to Boo near Save Block after Koopa Koot requests a Package</label></li>
                             </ul>
                         </div>
                         <div id="maps-gusty-gulch-1" style="display:none;">
                             <h3>Gulch 1</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coinsanity] First ? Block</label></li>
-                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coinsanity] Upper ? Block near goomba</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coin Block] First ? Block</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">[Coin Block] Upper ? Block near goomba</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait','Kooper'">Item on ledge (use Kooper)</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">? Block in middle near goomba</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-1" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait'">Item in front of log</label></li>
@@ -1724,7 +1779,7 @@
                         <div id="maps-gusty-gulch-2" style="display:none;">
                             <h3>Gulch 2</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait','Parakarry'">[Coinsanity] ? Block by exit</label></li>
+                                <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait','Parakarry'">[Coin Block] ? Block by exit</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait','Parakarry'">? Block by goomba</label></li>
                                 <li><label><input data-map-group="maps-gusty-gulch-2" autocomplete="off" type="checkbox" data-requirements-glitchless="'Boo\'s Portrait','Parakarry'">Item behind rock near exit</label></li>
                             </ul>
@@ -1795,7 +1850,7 @@
                         <div id="maps-toybox-anti-guy" style="display:none;">
                             <h3>Anti Guy</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open']">[Coinsanity] ? Block on left side</label></li>
+                                <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open']">[Coin Block] ? Block on left side</label></li>
                                 <li><label><input data-sync="anti-guy" data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open']">Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])</label></li>
                                 <li><label><input data-map-group="maps-toybox-anti-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open']">Hidden block on right side</label></li>
                             </ul>
@@ -1812,8 +1867,8 @@
                             <ul>
                                 <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coinsanity] 3 items on left spring</label></li>
                                 <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coinsanity] 5 items on elevated spring</label></li>
-                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coinsanity] ? Block on left side of wall</label></li>
-                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coinsanity] ? Block on right side of wall that can be jumped across</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coin Block] ? Block on left side of wall</label></li>
+                                <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coin Block] ? Block on right side of wall that can be jumped across</label></li>
                                 <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">Item behind fallen blocks</label></li>
                                 <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots'],'Parakarry'">Item on roof of left house</label></li>
                                 <li><label><input data-map-group="maps-toybox-block-city" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">? Block on platform</label></li>
@@ -1824,8 +1879,8 @@
                         <div id="maps-toybox-gourmet-guy" style="display:none;">
                             <h3>Gourmet Guy</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coin Block] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coin Block] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">Give Cake to Gourmet Guy</label></li>
                                 <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">Hidden block left after Gourmet Guy arch</label></li>
                                 <li><label><input data-map-group="maps-toybox-gourmet-guy" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">Hidden block between two other ? Blocks</label></li>
@@ -1834,9 +1889,9 @@
                         <div id="maps-toybox-tracks-hallway" style="display:none;">
                             <h3>Tracks Hallway</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train'">[Coinsanity] ? Block before Spy Guy</label></li>
-                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coinsanity] Left ? Block by Groove Guy</label></li>
-                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coinsanity] Right ? Block by Groove Guy</label></li>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train'">[Coin Block] ? Block before Spy Guy</label></li>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coin Block] Left ? Block by Groove Guy</label></li>
+                                <li><label><input data-map-group="maps-toybox-tracks-hallway" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake'">[Coin Block] Right ? Block by Groove Guy</label></li>
                             </ul>
                         </div>
                         <div id="maps-toybox-pink-station" style="display:none;">
@@ -1850,7 +1905,7 @@
                         <div id="maps-toybox-playhouse" style="display:none;">
                             <h3>Playhouse</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train',['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coinsanity] ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train',['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">[Coin Block] ? Block</label></li>
                                 <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train',['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">Chest on wall</label></li>
                                 <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train',['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">Chest after door</label></li>
                                 <li><label><input data-map-group="maps-toybox-playhouse" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train',['Hammer','Super Hammer','Ultra Hammer','Super Boots','Ultra Boots']">Item that Kammy spawns</label></li>
@@ -1885,8 +1940,8 @@
                         <div id="maps-toybox-moving-platforms" style="display:none;">
                             <h3>Moving Platforms</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] Left ? Block</label></li>
-                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] Right ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] Left ? Block</label></li>
+                                <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] Right ? Block</label></li>
                                 <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">Hidden block by first elevator</label></li>
                                 <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">Hidden block between two other ? blocks</label></li>
                                 <li><label><input data-map-group="maps-toybox-moving-platforms" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake',['Hammer','Super Hammer','Ultra Hammer']">Hidden block by door to Lantern Ghost room</label></li>
@@ -1902,7 +1957,7 @@
                         <div id="maps-toybox-barricade" style="display:none;">
                             <h3>Shy Guy Barricade</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake','Bombette',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block just past barricade</label></li>
+                                <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake','Bombette',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] ? Block just past barricade</label></li>
                                 <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake','Bombette',['Hammer','Super Hammer','Ultra Hammer'],['Kooper','Ultra Boots']">Item on top of brick block</label></li>
                                 <li><label><input data-map-group="maps-toybox-barricade" autocomplete="off" type="checkbox" data-requirements-glitchless="['Bow','toybox-open'],'Toy Train','Cake','Bombette',['Hammer','Super Hammer','Ultra Hammer']">? Block at end of room</label></li>
                             </ul>
@@ -1914,6 +1969,7 @@
                             <h3>Ambush Room</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-ambush-room" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Super Boots','Ultra Boots','Ultra Hammer'],['Hammer','Super Hammer','Ultra Hammer']">[Panel] Near middle of room</label></li>
+                                <li><label><input data-map-group="maps-yoshi-ambush-room" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Foliage Coin] Far right tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-raph" style="display:none;">
@@ -1933,6 +1989,7 @@
                         <div id="maps-yoshi-block-puzzle" style="display:none;">
                             <h3>Block Puzzle</h3>
                             <ul>
+                                <li><label><input data-map-group="maps-yoshi-block-puzzle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Foliage Coin] Far left tree</label></li>
                                 <li><label><input data-map-group="maps-yoshi-block-puzzle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">Hidden block near first push block</label></li>
                             </ul>
                         </div>
@@ -1941,6 +1998,7 @@
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-deep-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">Hidden block near bell plant</label></li>
                                 <li><label><input data-map-group="maps-yoshi-deep-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">Tree vine near bell plant</label></li>
+                                <li><label><input data-map-group="maps-yoshi-deep-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Foliage Coin] Tree near bell plant</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-lightblue-yoshi" style="display:none;">
@@ -1953,12 +2011,22 @@
                             <h3>NW Jungle</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-nw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer','Bombette']">Item in tree by right side exit</label></li>
+                                <li><label><input data-map-group="maps-yoshi-nw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree on ledge</label></li>
+                                <li><label><input data-map-group="maps-yoshi-nw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">[Foliage Coin] Second bush from right</label></li>
+                                <li><label><input data-map-group="maps-yoshi-nw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">[Foliage Coin] Second bush from left</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-ne-jungle" style="display:none;">
                             <h3>NE Jungle</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-ne-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] Item under water on right side of room</label></li>
+                                <li><label><input data-map-group="maps-yoshi-ne-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer']">[Foliage Coin] Tree near raven statue</label></li>
+                            </ul>
+                        </div>
+                        <div id="maps-yoshi-yellow-yoshi" style="display:none;">
+                            <h3>Yellow Yoshi</h3>
+                            <ul>
+                                <li><label><input data-map-group="maps-yoshi-yellow-yoshi" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer']">[Foliage Coin] Tree</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-whale" style="display:none;">
@@ -1974,12 +2042,19 @@
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">[Coinsanity] Three items under water</label></li>
                                 <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">Hidden block near exit to NW Jungle</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree near north exit</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie',['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Tree near Spear Guy</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">[Foliage Coin] Right bush near north exit</label></li>
+                                <li><label><input data-map-group="maps-yoshi-sw-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">[Foliage Coin] Bottom bush on left side</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-se-jungle" style="display:none;">
                             <h3>SE Jungle</h3>
                             <ul>
                                 <li><label><input data-map-group="maps-yoshi-se-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie'">? Block on island</label></li>
+                                <li><label><input data-map-group="maps-yoshi-se-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],['Hammer','Super Hammer','Ultra Hammer','Bombette']">[Foliage Coin] Far right tree</label></li>
+                                <li><label><input data-map-group="maps-yoshi-se-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Foliage Coin] Bottom left bush</label></li>
+                                <li><label><input data-map-group="maps-yoshi-se-jungle" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage',['Watt','Hammer'],['Watt','Super Hammer'],['Watt','Ultra Hammer'],['Watt','Super Boots'],['Watt','Ultra Boots'],'whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']]">[Foliage Coin] Bottom right bush</label></li>
                             </ul>
                         </div>
                         <div id="maps-yoshi-sushie" style="display:none;">
@@ -2037,10 +2112,10 @@
                         <div id="maps-lavalav-hub" style="display:none;">
                             <h3>Hub Room</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block 1</label></li>
-                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block 2</label></li>
-                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block 3</label></li>
-                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coinsanity] ? Block 4</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] ? Block 1</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] ? Block 2</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] ? Block 3</label></li>
+                                <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">[Coin Block] ? Block 4</label></li>
                                 <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer'],['Kooper','Ultra Boots']">Item on top of brick block</label></li>
                                 <li><label><input data-map-group="maps-lavalav-hub" autocomplete="off" type="checkbox" data-requirements-glitchless="['starting-location:YoshiVillage','Watt','whale-open',['Super Boots','Sushie'],['Ultra Boots','Sushie'],['Odd Key','Bombette'],['blue-house-open','Bombette']],'Sushie','Jade Raven',['Hammer','Super Hammer','Ultra Hammer']">Item on platform halfway down second zip line</label></li>
                             </ul>
@@ -2129,7 +2204,7 @@
                         <div id="maps-flower-fields-blue-flower" style="display:none;">
                             <h3>Blue Flower</h3>
                             <ul>
-                                <li><label><input data-map-group="maps-flower-fields-blue-flower" autocomplete="off" type="checkbox" data-requirements-glitchless="'chapter-6-entry','Blue Berry'">[Coinsanity] Hidden block between brick block and spring</label></li>
+                                <li><label><input data-map-group="maps-flower-fields-blue-flower" autocomplete="off" type="checkbox" data-requirements-glitchless="'chapter-6-entry','Blue Berry'">[Coin Block] Hidden block between brick block and spring</label></li>
                                 <li><label><input data-map-group="maps-flower-fields-blue-flower" autocomplete="off" type="checkbox" data-requirements-glitchless="'chapter-6-entry','Blue Berry'">Hidden block above brick block</label></li>
                             </ul>
                         </div>
@@ -2906,6 +2981,26 @@
                         </div>
                     </td>
                 </tr>
+                <tr class="seed-setting shopsanity-subsetting">
+                    <td class="option-name sub-setting" colspan="3">Rowf Shop In Logic</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="rowf-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="rowf-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting shopsanity-subsetting">
+                    <td class="option-name sub-setting" colspan="3">Merlow In Logic</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="merlow-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="merlow-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
                 <tr class="seed-setting">
                     <td class="option-name sub-setting" colspan="3">Keysanity</td>
                     <td class="option">
@@ -2927,12 +3022,32 @@
                     </td>
                 </tr>
                 <tr class="seed-setting">
-                    <td class="option-name sub-setting" colspan="3">Coinsanity</td>
+                    <td class="option-name sub-setting" colspan="3">Overworld Coins</td>
                     <td class="option">
                         <div class="checkbox-slider">
                             <input autocomplete="off" class="checkbox-slider" id="coins-randomized" type="checkbox" checked>
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="coins-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Coin Blocks</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="coin-blocks-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="coin-blocks-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Foliage Coins</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="foliage-coins-randomized" type="checkbox" checked>
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="foliage-coins-randomized"></label>
                         </div>
                     </td>
                 </tr>
@@ -2953,6 +3068,16 @@
                             <input autocomplete="off" class="checkbox-slider" id="koopa-koot-randomized" type="checkbox">
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="koopa-koot-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Koot Coins Randomized</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="koot-coins-randomized" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="koot-coins-randomized"></label>
                         </div>
                     </td>
                 </tr>
