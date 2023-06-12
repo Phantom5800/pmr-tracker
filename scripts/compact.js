@@ -84,6 +84,14 @@ function initializeCompactTrackerSettings() {
         isChecked = $("#fast-bowser-castle").is(':checked');
         $("#BowsersKeySlot").toggle(!isChecked);
 
+        // update power star visibility in the new tracker
+        isChecked = $("#power-star").is(':checked');
+        if(isChecked){
+            maxKeyCounts[16] = parseInt($("#power-star-num").val());
+            $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        }
+        $("#PowerStarSlot").toggle(isChecked);
+
         updateKeyItemHighlight();
         sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
     });
@@ -278,6 +286,11 @@ var altTracker = `<table width="100%">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <br>
         <p data-chapter-key-count="8">0/5</p>
+    </div>
+    <div id="PowerStarSlot" class="compact-element">
+        <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
+        <br>
+        <p data-chapter-key-count="16">0/120</p>
     </div>
     <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">

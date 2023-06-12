@@ -49,13 +49,22 @@ function checkIfChapterIsCompletable(chapter) {
             totalCount += maxKeyCounts[chapter];
             if (chapter === 2 && currentKeyCounts[chapter] === 3) {
                 --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
-            } else if (chapter === 8 && $("#fast-bowser-castle").is(':checked')) {
+            } else if (chapter === 8 && ($("#fast-bowser-castle").is(':checked') || $("#power-star-skip").is(':checked'))){
                 totalCount -= maxKeyCounts[8];
             }
             if (!$(this).hasClass("unselected")) {
                 completedCount += currentKeyCounts[chapter];
             }
         });
+
+        if(chapter === 8 && $("#power-star").is(':checked')){
+            $(`img[data-chapter-key=16]`).each(function() {
+                totalCount += maxKeyCounts[16];
+                if (!$(this).hasClass("unselected")) {
+                    completedCount += currentKeyCounts[16];
+                }
+            });
+        }
 
         function handleExtraChapterRequirements(requirementsArray, depth = 0) {
             var conditionsComplete = 0;
@@ -473,7 +482,12 @@ function initializePage() {
         if (!isPageReloading) {
             getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
         }
-        checkIfChapterIsCompletable(c);
+        //Power stars need to check chapter 8 completion
+        if(c === 16) {
+            checkIfChapterIsCompletable(8);
+        }else{
+            checkIfChapterIsCompletable(c);
+        }
     });
 
     $("img[data-chapter-key]").unbind("contextmenu").contextmenu(function(){
@@ -506,7 +520,12 @@ function initializePage() {
         if ($(this).attr('data-key-sync')) {
             synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         }
-        checkIfChapterIsCompletable(c);
+        //Power stars need to check chapter 8 completion
+        if(c === 16) {
+            checkIfChapterIsCompletable(8);
+        }else{
+            checkIfChapterIsCompletable(c);
+        }
 
         if (!isPageReloading) {
             getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
@@ -680,6 +699,21 @@ $(document).ready(function(){
                         $("#trading-event-randomized").click();
                     }
 
+                    if (data["StarHunt"] != $("#power-star").is(':checked')) {
+                        $("#power-star").click();
+                    }
+
+                    if (data["StarHuntEndsGame"] != $("#power-star-skip").is(':checked')) {
+                        $("#power-star-skip").click();
+                    }
+
+                    if(data["StarHuntRequired"] != $("#power-star-num").val()){
+                        $("#power-star-num").val(parseInt(data['StarHuntRequired']));
+                        currentKeyCounts[16] = 0;
+                        maxKeyCounts[16] = parseInt(data['StarHuntRequired']);
+                        $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+                    }
+
                     if (data["GearShuffleMode"] != $("#gear-shuffle").prop('selectedIndex')) {
                         $("#gear-shuffle").prop('selectedIndex', data["GearShuffleMode"]);
                         $("#gear-shuffle").change();
@@ -709,7 +743,6 @@ $(document).ready(function(){
         xmlhttp.open("GET", endpoint, true);
         xmlhttp.setRequestHeader("accept", "application/json, text/plain, */*");
         xmlhttp.setRequestHeader("sec-fetch-mode", "cors");
-        xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
         xmlhttp.send();
 
         $(this).blur();

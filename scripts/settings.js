@@ -65,6 +65,33 @@ function initializeOpenAreasSettings() {
         localStorage.setItem("fast-bowser-castle", isChecked);
         checkIfChapterIsCompletable(8);
     });
+
+    $("#power-star").click(function() {
+        // simple hack to clear out the key count when toggling power star hunt
+        for (var i = 0; i < currentKeyCounts[16]; ++i) {
+            $("img[id='Power Stars Found']").contextmenu();
+        }
+
+        var isChecked = $(this).is(':checked');
+        $("#PowerStarSlot").toggle(isChecked);
+        localStorage.setItem("power-star", isChecked);
+        checkIfChapterIsCompletable(8);
+    });
+
+    $("#power-star-skip").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("power-star-skip", isChecked);
+        checkIfChapterIsCompletable(8);
+    });
+
+    $("#power-star-num").change(function() {
+        var starNum = parseInt($(this).val());
+        maxKeyCounts[16] = starNum;
+        currentKeyCounts[16] = 0;
+        localStorage.setItem("power-star-num", starNum);
+        $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        checkIfChapterIsCompletable(8);
+    });
 }
 
 function loadOpenAreaSettings() {
@@ -94,6 +121,16 @@ function loadOpenAreaSettings() {
     var fast_bowser_castle = localStorageGetWithDefault("fast-bowser-castle", false) == "true";
     if (fast_bowser_castle) {
         $("#fast-bowser-castle").click();
+    }
+
+    var power_star = localStorageGetWithDefault("power-star", false) == "true";
+    if (power_star) {
+        $("#power-star").click();
+    }
+
+    var power_star_skip = localStorageGetWithDefault("power-star-skip", false) == "true";
+    if (power_star_skip) {
+        $("#power-star-skip").click();
     }
 }
 
