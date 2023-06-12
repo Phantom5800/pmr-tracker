@@ -662,6 +662,7 @@ $(document).ready(function(){
         xmlhttp.open("GET", endpoint, true);
         xmlhttp.setRequestHeader("accept", "application/json, text/plain, */*");
         xmlhttp.setRequestHeader("sec-fetch-mode", "cors");
+        xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
         xmlhttp.send();
 
         $(this).blur();
