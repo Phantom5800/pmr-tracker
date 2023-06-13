@@ -213,6 +213,12 @@ function initializeOptionalRandomizedSettings() {
         localStorage.setItem("trading-event-randomized", isChecked);
     });
 
+    $("#dungeon-entrances-randomized").click(function() {
+        var isChecked = $(this).is(':checked');
+        $("#DungeonEntranceRow").toggle(isChecked);
+        localStorage.setItem("dungeon-entrances-randomized", isChecked);
+    });
+
     $("#gear-shuffle").change(function() {
         var shuffleMode = $(this).prop('selectedIndex');
         localStorage.setItem("gear-shuffle", shuffleMode);
@@ -287,6 +293,12 @@ function loadOptionalRandomizedSettings() {
     var dojo_randomized = localStorageGetWithDefault("dojo-randomized", false) == "true";
     if (dojo_randomized) {
         $("#dojo-randomized").click();
+    }
+
+    var dungeon_entrances_randomized = localStorageGetWithDefault("dungeon-entrances-randomized", false) == "true";
+    if (dungeon_entrances_randomized) {
+        console.log("hello darkness my old friend");
+        $("#dungeon-entrances-randomized").click();
     }
 }
 

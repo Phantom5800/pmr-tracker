@@ -532,6 +532,115 @@ function initializePage() {
         }
     });
 
+    // dungeon entrance tracker
+    $('.boss').unbind("click").click(function() {
+        if ($(this).attr('data-state') <= 6) {
+            let current = $(this).attr('data-state');
+            current++
+            $(this).attr('data-state', current)
+        } else {
+            $(this).attr('data-state', 0)
+        }
+        switch ($(this).attr('data-state')) {
+            case "0":
+                $(this).attr('id', "Unknown");
+                $(this).attr('src', "images/bosses/unknown.png")
+                break;
+
+            case "1":
+                $(this).attr('id', "Koopa Bros. Fortress");
+                $(this).attr('src', "images/bosses/NinjaKoopa.png")
+                break;
+
+            case "2":
+                $(this).attr('id', "Dry Dry Ruins");
+                $(this).attr('src', "images/bosses/Tutankoopa.png")
+                break;
+
+            case "3":
+                $(this).attr('id', "Tubba's Castle");
+                $(this).attr('src', "images/bosses/Tubbaheart.png")
+                break;
+
+            case "4":
+                $(this).attr('id', "Shy Guy's Toybox");
+                $(this).attr('src', "images/bosses/Generalguy.png")
+                break;
+
+            case "5":
+                $(this).attr('id', "Mt. Lavalava");
+                $(this).attr('src', "images/bosses/LavaPiranha.png")
+                break;
+
+            case "6":
+                $(this).attr('id', "Flower Fields");
+                $(this).attr('src', "images/bosses/HuffNPuff.png")
+                break;
+            
+            case "7":
+                $(this).attr('id', "Crystal Palace");
+                $(this).attr('src', "images/bosses/CrystalKing.png")
+                break;
+        }
+
+        $('.main-tracker h2').text($(this).attr('id'));
+
+    });
+
+    $('.boss').unbind("contextmenu").contextmenu(function() {
+        if ($(this).attr('data-state') >= 1) {
+            let current = $(this).attr('data-state');
+            current--
+            $(this).attr('data-state', current)
+        } else {
+            $(this).attr('data-state', 7)
+        }
+        switch ($(this).attr('data-state')) {
+            case "0":
+                $(this).attr('id', "Unknown");
+                $(this).attr('src', "images/bosses/unknown.png")
+                break;
+
+            case "1":
+                $(this).attr('id', "Koopa Bros. Fortress");
+                $(this).attr('src', "images/bosses/NinjaKoopa.png")
+                break;
+
+            case "2":
+                $(this).attr('id', "Dry Dry Ruins");
+                $(this).attr('src', "images/bosses/Tutankoopa.png")
+                break;
+
+            case "3":
+                $(this).attr('id', "Tubba's Castle");
+                $(this).attr('src', "images/bosses/Tubbaheart.png")
+                break;
+
+            case "4":
+                $(this).attr('id', "Shy Guy's Toybox");
+                $(this).attr('src', "images/bosses/Generalguy.png")
+                break;
+
+            case "5":
+                $(this).attr('id', "Mt. Lavalava");
+                $(this).attr('src', "images/bosses/LavaPiranha.png")
+                break;
+
+            case "6":
+                $(this).attr('id', "Flower Fields");
+                $(this).attr('src', "images/bosses/HuffNPuff.png")
+                break;
+            
+            case "7":
+                $(this).attr('id', "Crystal Palace");
+                $(this).attr('src', "images/bosses/CrystalKing.png")
+                break;
+        }
+
+        $('.main-tracker h2').text($(this).attr('id'));
+
+    });
+
     synchronizeMapsAndTracker();
 }
 
@@ -678,6 +787,10 @@ $(document).ready(function(){
 
                     if (data["IncludeRadioTradeEvent"] != $("#trading-event-randomized").is(':checked')) {
                         $("#trading-event-randomized").click();
+                    }
+
+                    if (data["ShuffleDungeonEntrances"] != $("#dungeon-entrances-randomized").is(':checked')) {
+                        $("#dungeon-entrances-randomized").click();
                     }
 
                     if (data["GearShuffleMode"] != $("#gear-shuffle").prop('selectedIndex')) {
