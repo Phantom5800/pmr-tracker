@@ -964,6 +964,8 @@ function resetPage() {
     $("#koot-coins-randomized").click();
     $("#trading-event-randomized").click();
     $("#trading-event-randomized").click();
+    $("#dungeon-entrances-randomized").click();
+    $("#dungeon-entrances-randomized").click();
     $("#seeds-required").change();
     $("#starting-location").change();
     isPageReloading = false;
