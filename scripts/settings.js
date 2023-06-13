@@ -141,10 +141,7 @@ function initializeOptionalRandomizedSettings() {
     $("#koopa-koot-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("koopa-koot-randomized", isChecked);
-        $(".koopa-koot-generated-item").toggle(isChecked);
-        $(".koopa-koot-tracker").toggle(isChecked);
-        toggleChecks("[Koot]", !isChecked);
-        toggleChecks("[Koot] [Coinsanity]", !isChecked || !$("#coins-randomized").is(':checked'));
+        updateKootItemsAndCoins();
         countChecks();
         $("#flag-koopakoot").toggle(isChecked);
     });
@@ -227,8 +224,7 @@ function initializeOptionalRandomizedSettings() {
     $("#koot-coins-randomized").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("koot-coins-randomized", isChecked);
-        toggleChecks("[Koot Coin]", !isChecked || !$("#koopa-koot-randomized").is(':checked'));
-        $("#flag-koot-coins").toggle(isChecked);
+        updateKootItemsAndCoins();
         countChecks();
     });
 
@@ -254,6 +250,19 @@ function initializeOptionalRandomizedSettings() {
         var shuffleMode = $(this).prop('selectedIndex');
         localStorage.setItem("gear-shuffle", shuffleMode);
     });
+}
+
+function updateKootItemsAndCoins(){
+    console.log("Runnig update koot");
+    var enableKootItems = $("#koopa-koot-randomized").is(':checked');
+    var enableKootCoins = enableKootItems && $("#koot-coins-randomized").is(':checked');
+
+    toggleChecks("[Koot]", !enableKootItems);
+    $(".koopa-koot-generated-item").toggle(!enableKootItems);
+    $(".koopa-koot-tracker").toggle(!enableKootItems);
+
+    toggleChecks("[Koot Coin]", !enableKootCoins);
+    $("#flag-koot-coins").toggle(!enableKootCoins);
 }
 
 function loadOptionalRandomizedSettings() {
@@ -308,7 +317,7 @@ function loadOptionalRandomizedSettings() {
     }
 
     var koot_coins_randomized = localStorageGetWithDefault("koot-coins-randomized", false) == "true";
-    if (!koot_coins_randomized) {
+    if (koot_coins_randomized) {
         $("#koot-coins-randomized").click();
     }
 
@@ -325,6 +334,8 @@ function loadOptionalRandomizedSettings() {
     if (dojo_randomized) {
         $("#dojo-randomized").click();
     }
+
+    updateKootItemsAndCoins();
 }
 
 ///
@@ -384,6 +395,34 @@ function initializeUsabilitySettings() {
         $(".section").css("background-color", color);
         localStorage.setItem("section-color", color);
     });
+
+    $("#show-num-checks").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("show-num-checks", isChecked);
+        if(!isChecked){
+            //Replace all zone names
+            $('button.map-select').each(function(){
+                if($(this).data('origName') != undefined){
+                    $(this).html($(this).data('origName'));
+                }
+            });
+        }
+    });
+
+    $("#remove-disabled-checks").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("remove-disabled-checks", isChecked);
+        removeDisabledChecks(isChecked);
+    });
+}
+
+function removeDisabledChecks(shouldHide) {
+    $('#map-checks label').show();
+    if(!shouldHide){
+        $('#map-checks label.disabled').show();
+    }else{
+        $('#map-checks label.disabled').hide();
+    }
 }
 
 function loadUsabilitySettings() {
@@ -420,6 +459,16 @@ function loadUsabilitySettings() {
     var howto_enabled = localStorageGetWithDefault("how-to-fields", "true") == "true";
     if (!howto_enabled) {
         $("#how-to-fields").click();
+    }
+
+    var show_num_checks = localStorageGetWithDefault("show-num-checks", false) == "true";
+    if (show_num_checks) {
+        $("#show-num-checks").click();
+    }
+
+    var remove_disabled_checks = localStorageGetWithDefault("remove-disabled-checks", false) == "true";
+    if (remove_disabled_checks) {
+        $("#remove-disabled-checks").click();
     }
 
     var bg_color = localStorageGetWithDefault("background-color", "#2f4f4f");

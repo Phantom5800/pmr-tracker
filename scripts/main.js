@@ -734,6 +734,8 @@ $(document).ready(function(){
                         $("img.hammer").click();
                     }
 
+                    removeDisabledChecks($("#remove-disabled-checks").is(":checked"));
+
                     alert(`Loaded settings for seed: ${user_seed}`);
                 } else {
                     alert(`Failed to find seed: ${user_seed}`);
@@ -868,23 +870,25 @@ function resetPage() {
 
     resetMapChecks();
     $("#shops-randomized").click();
+    $("#panels-randomized").click();
+    $("#coins-randomized").click();
+    $("#coin-blocks-randomized").click();
+    $("#foliage-coins-randomized").click();
+    $("#letters-randomized").click();
+    $("#koot-coins-randomized").click();
+    $("#koopa-koot-randomized").click();
+    $("#trading-event-randomized").click();
+
     $("#shops-randomized").click();
     $("#panels-randomized").click();
-    $("#panels-randomized").click();
-    $("#coins-randomized").click();
     $("#coins-randomized").click();
     $("#coin-blocks-randomized").click();
-    $("#coin-blocks-randomized").click();
-    $("#foliage-coins-randomized").click();
     $("#foliage-coins-randomized").click();
     $("#letters-randomized").click();
-    $("#letters-randomized").click();
-    $("#koopa-koot-randomized").click();
-    $("#koopa-koot-randomized").click();
     $("#koot-coins-randomized").click();
-    $("#koot-coins-randomized").click();
+    $("#koopa-koot-randomized").click();
     $("#trading-event-randomized").click();
-    $("#trading-event-randomized").click();
+
     $("#seeds-required").change();
     $("#starting-location").change();
     isPageReloading = false;

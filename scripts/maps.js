@@ -375,4 +375,79 @@ function getAvailableChecks(check) {
         }
     });
     //console.log(Date.now() - t);
+    if($("#show-num-checks").is(":checked")) {
+        updateNumChecks();
+    }
+}
+
+function updateNumChecks(){
+	$('button.map-select').each(function(){
+		switch($(this).data('map')){
+			case 'prologue-map':
+				var id = 'maps-prologue';
+				break;
+			case 'toad-town-map':
+				var id = 'maps-toad-town';
+				break;
+			case 'sewers-map':
+				var id = 'maps-sewer';
+				break;
+			case 'pleasant-path-map':
+				var id = 'maps-pleasant';
+				break;
+			case 'koopa-village-map':
+				var id = 'maps-koopa';
+				break;
+			case 'kbf-map':
+				var id = 'maps-kbf';
+				break;
+			case 'mt-rugged-map':
+				var id = 'maps-mt-rugged';
+				break;
+			case 'desert-map':
+				var id = 'maps-desert';
+				break;
+			case 'ruins-map':
+				var id = 'maps-ruin';
+				break;
+			case 'forest-map':
+				var id = 'maps-forest';
+				break;
+			case 'boo-mansion-map':
+				var id = 'maps-boo';
+				break;
+			case 'gusty-gulch-map':
+				var id = 'maps-gusty';
+				break;
+			case 'tubbas-castle-map':
+				var id = 'maps-tubba';
+				break;
+			case 'toybox-map':
+				var id = 'maps-toybox';
+				break;
+			case 'yoshi-map':
+				var id = 'maps-yoshi';
+				break;
+			case 'mt-lavalava-map':
+				var id = 'maps-lavalav';
+				break;
+			case 'flower-fields-map':
+				var id = 'maps-flower';
+				break;
+			case 'shiver-region-map':
+				var id = 'maps-shiver';
+				break;
+			case 'crystal-palace-map':
+				var id = 'maps-crystal';
+				break;
+			default:
+				break;
+		}
+		if($(this).data('origName') == undefined){
+			$(this).data('origName', $(this).html());
+		}
+
+        $(this).html($(this).data('origName') + ' (' + $('[id^="' + id + '"] label:not(".disabled"):not(".unavailable") input:not(:checked)').length + '/' + $('[id^="' + id + '"] label:not(".disabled") input:not(:checked)').length + ')');
+
+	});
 }
