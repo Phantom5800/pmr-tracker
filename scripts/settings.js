@@ -215,7 +215,7 @@ function initializeOptionalRandomizedSettings() {
 
     $("#dungeon-entrances-randomized").click(function() {
         var isChecked = $(this).is(':checked');
-        $("#DungeonEntranceRow").toggle(isChecked);
+        $("[id=DungeonEntranceRow]").toggle(isChecked);
         localStorage.setItem("dungeon-entrances-randomized", isChecked);
     });
 

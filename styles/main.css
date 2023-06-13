@@ -237,6 +237,12 @@ div.compact-element {
     position: relative;
 }
 
+p.boss-chapter {
+    position: absolute;
+    bottom: 6px;
+    left: 12px;
+}
+
 header {
     padding-top: 5px;
     margin: 5px 5px 5px 5px;

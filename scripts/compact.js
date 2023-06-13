@@ -84,6 +84,10 @@ function initializeCompactTrackerSettings() {
         isChecked = $("#fast-bowser-castle").is(':checked');
         $("#BowsersKeySlot").toggle(!isChecked);
 
+        // update Entrance Shuffle tracker visibility in the new tracker
+        isChecked = $("#dungeon-entrances-randomized").is(':checked');
+        $("#DungeonEntranceRow").toggle(isChecked);
+
         updateKeyItemHighlight();
         sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
     });
@@ -176,6 +180,34 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter-star="6" id="Klevar" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="7" id="Kalmar" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.1</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.2</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.3</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.4</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.5</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.6</p>
+    </div>
+    <div id="DungeonEntranceRow" class="compact-element">
+        <img id="Unknown" data-state="0" class="boss" src="images/bosses/unknown.png">
+        <p class="boss-chapter">Ch.7</p>
+    </div>
     <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
     <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
     <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
