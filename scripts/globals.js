@@ -20,7 +20,7 @@ const maxKeyCounts = {
     13: 3, // letters
     14: 2, // prison keys
     15: 2, // blue berry
-    16: 2, // power stars
+    16: 120, // power stars
 };
 
 var currentKeyCounts = {

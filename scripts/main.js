@@ -57,15 +57,6 @@ function checkIfChapterIsCompletable(chapter) {
             }
         });
 
-        if(chapter === 8 && $("#power-star").is(':checked')){
-            $(`img[data-chapter-key=16]`).each(function() {
-                totalCount += maxKeyCounts[16];
-                if (!$(this).hasClass("unselected")) {
-                    completedCount += currentKeyCounts[16];
-                }
-            });
-        }
-
         function handleExtraChapterRequirements(requirementsArray, depth = 0) {
             var conditionsComplete = 0;
 
@@ -482,12 +473,7 @@ function initializePage() {
         if (!isPageReloading) {
             getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
         }
-        //Power stars need to check chapter 8 completion
-        if(c === 16) {
-            checkIfChapterIsCompletable(8);
-        }else{
-            checkIfChapterIsCompletable(c);
-        }
+        checkIfChapterIsCompletable(c);
     });
 
     $("img[data-chapter-key]").unbind("contextmenu").contextmenu(function(){
@@ -520,12 +506,7 @@ function initializePage() {
         if ($(this).attr('data-key-sync')) {
             synchronizeMapsKey($(this), currentKeyCounts[c], previousCount);
         }
-        //Power stars need to check chapter 8 completion
-        if(c === 16) {
-            checkIfChapterIsCompletable(8);
-        }else{
-            checkIfChapterIsCompletable(c);
-        }
+        checkIfChapterIsCompletable(c);
 
         if (!isPageReloading) {
             getAvailableChecks("'chapter':" + $(this).attr('data-chapter-key'));
@@ -712,6 +693,13 @@ $(document).ready(function(){
                         currentKeyCounts[16] = 0;
                         maxKeyCounts[16] = parseInt(data['StarHuntRequired']);
                         $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+                        if(maxKeyCounts[16] >= 100){
+                            console.log(maxKeyCounts[16], "Cur count high");
+                            $(`p[data-chapter-key-count="16"]`).css("font-size", "1.125em");
+                        }else{
+                            console.log(maxKeyCounts[16], "Cur count low");
+                            $(`p[data-chapter-key-count="16"]`).css("font-size", "");
+                        }
                     }
 
                     if (data["GearShuffleMode"] != $("#gear-shuffle").prop('selectedIndex')) {

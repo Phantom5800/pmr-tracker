@@ -74,6 +74,7 @@ function initializeOpenAreasSettings() {
 
         var isChecked = $(this).is(':checked');
         $("#PowerStarSlot").toggle(isChecked);
+        $("#StarRodSlot").toggle(!isChecked);
         localStorage.setItem("power-star", isChecked);
         checkIfChapterIsCompletable(8);
     });
@@ -90,6 +91,13 @@ function initializeOpenAreasSettings() {
         currentKeyCounts[16] = 0;
         localStorage.setItem("power-star-num", starNum);
         $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        if(maxKeyCounts[16] >= 100){
+            console.log(maxKeyCounts[16], "Cur count high");
+            $(`p[data-chapter-key-count="16"]`).css("font-size", "1.125em");
+        }else{
+            console.log(maxKeyCounts[16], "Cur count low");
+            $(`p[data-chapter-key-count="16"]`).css("font-size", "");
+        }
         checkIfChapterIsCompletable(8);
     });
 }

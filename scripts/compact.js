@@ -86,11 +86,17 @@ function initializeCompactTrackerSettings() {
 
         // update power star visibility in the new tracker
         isChecked = $("#power-star").is(':checked');
-        if(isChecked){
-            maxKeyCounts[16] = parseInt($("#power-star-num").val());
-            $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        maxKeyCounts[16] = parseInt($("#power-star-num").val());
+        $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+        if(maxKeyCounts[16] >= 100){
+            console.log(maxKeyCounts[16], "Cur count high");
+            $(`p[data-chapter-key-count="16"]`).css("font-size", "1.125em");
+        }else{
+            console.log(maxKeyCounts[16], "Cur count low");
+            $(`p[data-chapter-key-count="16"]`).css("font-size", "");
         }
         $("#PowerStarSlot").toggle(isChecked);
+        $("#StarRodSlot").toggle(!isChecked);
 
         updateKeyItemHighlight();
         sortCompactTracker($("#compact-tracker-order").find(':selected').val() === "true");
@@ -183,7 +189,12 @@ var altTracker = `<table width="100%">
     <div class="compact-element"><img data-chapter-star="5" id="Misstar" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="6" id="Klevar" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></div>
     <div class="compact-element"><img data-chapter-star="7" id="Kalmar" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></div>
-    <div class="compact-element"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div id="StarRodSlot" class="compact-element"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></div>
+    <div id="PowerStarSlot" class="compact-element">
+        <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
+        <br>
+        <p data-chapter-key-count="16">0/120</p>
+    </div>
     <div class="compact-element"><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></div>
     <div class="compact-element"><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></div>
     <div class="compact-element"><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></div>
@@ -286,11 +297,6 @@ var altTracker = `<table width="100%">
         <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
         <br>
         <p data-chapter-key-count="8">0/5</p>
-    </div>
-    <div id="PowerStarSlot" class="compact-element">
-        <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
-        <br>
-        <p data-chapter-key-count="16">0/120</p>
     </div>
     <div class="compact-misc-item compact-element useless-item">
         <img data-chapter-key="14" id="Prison Key" class="unselected optional-item" src="images/icons/OddKey.gif">
