@@ -874,6 +874,7 @@ function resetPage() {
     $("#koot-coins-randomized").click();
     $("#koot-coins-randomized").click();
     $("#trading-event-randomized").click();
+    $("#trading-event-randomized").click();
 
     $("#seeds-required").change();
     $("#starting-location").change();
