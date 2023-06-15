@@ -198,11 +198,7 @@ function initializeMaps() {
     // marks off all checks for a given map on right-click
     $("table.map td").contextmenu(function(e) {
         $(`#${$(this).attr("data-checks-list")} input:not(:disabled):not(:checked)`).each(function() {
-            if(rightClickAvailable) {
-                if(!$(this).parent().hasClass("unavailable")) {
-                    $(this).click();
-                }
-            }else{
+            if(!$(this).parent().hasClass("unavailable")) {
                 $(this).click();
             }
         });

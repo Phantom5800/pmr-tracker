@@ -336,12 +336,6 @@ function initializeUsabilitySettings() {
         localStorage.setItem("how-to-fields", isChecked);
     });
 
-    $("#right-click-available").click(function() {
-        var isChecked = $(this).is(':checked');
-        rightClickAvailable = isChecked;
-        localStorage.setItem("right-click-available", isChecked);
-    });
-
     $("#background-color").on("input", function() {
         var color = $(this).val();
         $("body, html").css("background-color", color);
@@ -355,7 +349,6 @@ function initializeUsabilitySettings() {
     });
 }
 
-var rightClickAvailable;
 function loadUsabilitySettings() {
     var colorblind_mode = localStorageGetWithDefault("colorblind", "true") == "true";
     if (!colorblind_mode) {
@@ -390,11 +383,6 @@ function loadUsabilitySettings() {
     var howto_enabled = localStorageGetWithDefault("how-to-fields", "true") == "true";
     if (!howto_enabled) {
         $("#how-to-fields").click();
-    }
-    
-    rightClickAvailable = localStorageGetWithDefault("right-click-available", false) == "true";
-    if (rightClickAvailable) {
-        $("#right-click-available").click();
     }
 
     var bg_color = localStorageGetWithDefault("background-color", "#2f4f4f");
