@@ -858,23 +858,21 @@ function resetPage() {
 
     resetMapChecks();
     $("#shops-randomized").click();
-    $("#panels-randomized").click();
-    $("#coins-randomized").click();
-    $("#coin-blocks-randomized").click();
-    $("#foliage-coins-randomized").click();
-    $("#letters-randomized").click();
-    $("#koot-coins-randomized").click();
-    $("#koopa-koot-randomized").click();
-    $("#trading-event-randomized").click();
-
     $("#shops-randomized").click();
     $("#panels-randomized").click();
+    $("#panels-randomized").click();
+    $("#coins-randomized").click();
     $("#coins-randomized").click();
     $("#coin-blocks-randomized").click();
+    $("#coin-blocks-randomized").click();
+    $("#foliage-coins-randomized").click();
     $("#foliage-coins-randomized").click();
     $("#letters-randomized").click();
-    $("#koot-coins-randomized").click();
+    $("#letters-randomized").click();
     $("#koopa-koot-randomized").click();
+    $("#koopa-koot-randomized").click();
+    $("#koot-coins-randomized").click();
+    $("#koot-coins-randomized").click();
     $("#trading-event-randomized").click();
 
     $("#seeds-required").change();
