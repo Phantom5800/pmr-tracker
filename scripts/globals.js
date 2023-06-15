@@ -20,6 +20,7 @@ const maxKeyCounts = {
     13: 3, // letters
     14: 2, // prison keys
     15: 2, // blue berry
+    16: 120, // power stars
 };
 
 var currentKeyCounts = {
@@ -37,7 +38,8 @@ var currentKeyCounts = {
     12: 0,
     13: 0,
     14: 0,
-    15: 0
+    15: 0,
+    16: 0
 };
 
 var useTrackerLogic = true;
@@ -85,17 +87,17 @@ const extraChapterRequirements = {
         ["#Sushie", "#blue-house-open", "img[data-item-name='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
     8: [
-        "#Eldstar", 
-        "#Mamar", 
-        "#Skolar", 
-        "#Muskular", 
-        "#Misstar", 
-        "#Klevar", 
-        "#Kalmar",
-        ["#Bombette", "#fast-bowser-castle"], // getting out of jail
-        ["#Parakarry", "#fast-bowser-castle"], // basement
-        ["#Bow", "#fast-bowser-castle"], // basement
-        ["#Lakilester", "#fast-bowser-castle"] // basement
+        ["#Eldstar", "#power-star"], 
+        ["#Mamar", "#power-star"], 
+        ["#Skolar", "#power-star"], 
+        ["#Muskular", "#power-star"], 
+        ["#Misstar", "#power-star"], 
+        ["#Klevar", "#power-star"], 
+        ["#Kalmar", "#power-star"],
+        ["#Bombette", "#fast-bowser-castle", "#power-star-skip"], // getting out of jail
+        ["#Parakarry", "#fast-bowser-castle", "#power-star-skip"], // basement
+        ["#Bow", "#fast-bowser-castle", "#power-star-skip"], // basement
+        ["#Lakilester", "#fast-bowser-castle", "#power-star-skip"] // basement
     ]
 }
 
