@@ -49,7 +49,7 @@ function checkIfChapterIsCompletable(chapter) {
             totalCount += maxKeyCounts[chapter];
             if (chapter === 2 && currentKeyCounts[chapter] === 3) {
                 --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
-            } else if (chapter === 8 && $("#fast-bowser-castle").is(':checked')) {
+            } else if (chapter === 8 && ($("#fast-bowser-castle").is(':checked') || $("#power-star-skip").is(':checked'))){
                 totalCount -= maxKeyCounts[8];
             }
             if (!$(this).hasClass("unselected")) {
@@ -787,6 +787,28 @@ $(document).ready(function(){
 
                     if (data["IncludeRadioTradeEvent"] != $("#trading-event-randomized").is(':checked')) {
                         $("#trading-event-randomized").click();
+                    }
+
+                    if (data["StarHunt"] != $("#power-star").is(':checked')) {
+                        $("#power-star").click();
+                    }
+
+                    if (data["StarHuntEndsGame"] != $("#power-star-skip").is(':checked')) {
+                        $("#power-star-skip").click();
+                    }
+
+                    if(data["StarHuntRequired"] != $("#power-star-num").val()){
+                        $("#power-star-num").val(parseInt(data['StarHuntRequired']));
+                        currentKeyCounts[16] = 0;
+                        maxKeyCounts[16] = parseInt(data['StarHuntRequired']);
+                        $(`p[data-chapter-key-count="16"]`).text(`${currentKeyCounts[16]}/${maxKeyCounts[16]}`);
+                        if(maxKeyCounts[16] >= 100){
+                            console.log(maxKeyCounts[16], "Cur count high");
+                            $(`p[data-chapter-key-count="16"]`).css("font-size", "1.125em");
+                        }else{
+                            console.log(maxKeyCounts[16], "Cur count low");
+                            $(`p[data-chapter-key-count="16"]`).css("font-size", "");
+                        }
                     }
 
                     if (data["ShuffleDungeonEntrances"] != $("#dungeon-entrances-randomized").is(':checked')) {

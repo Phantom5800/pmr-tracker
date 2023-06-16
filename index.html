@@ -6,7 +6,7 @@
         <meta name="author" content="Phantom Games LLC.">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="main.min.js?version=50"></script>
-        <link rel="stylesheet" href="styles/main.css?version=21">
+        <link rel="stylesheet" href="styles/main.css?version=22">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
@@ -134,7 +134,11 @@
                             <td><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></td>
                         </tr>
                         <tr>
-                            <td><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></td>
+                            <td id="StarRodSlot"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></td>
+                            <td id="PowerStarSlot" style="display:none">
+                                <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
+                                <p data-chapter-key-count="16">0/120</p>
+                            </td>
                             <td id="BowsersKeySlot">
                                 <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
                                 <p data-chapter-key-count="8">0/5</p>
@@ -3128,6 +3132,32 @@
                             <input autocomplete="off" class="checkbox-slider" id="trading-event-randomized" type="checkbox">
                             <div class="checkbox-groove"></div>
                             <label class="checkbox-slider" for="trading-event-randomized"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Power Star Hunt</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="power-star" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="power-star"></label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Power Star Hunt Num</td>
+                    <td class="option">
+                        <input id="power-star-num" type="number" value="120">
+                    </td>
+                </tr>
+                <tr class="seed-setting">
+                    <td class="option-name sub-setting" colspan="3">Star Hunt Skips Ch.8</td>
+                    <td class="option">
+                        <div class="checkbox-slider">
+                            <input autocomplete="off" class="checkbox-slider" id="power-star-skip" type="checkbox">
+                            <div class="checkbox-groove"></div>
+                            <label class="checkbox-slider" for="s-skip"></label>
                         </div>
                     </td>
                 </tr>
