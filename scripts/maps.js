@@ -192,13 +192,15 @@ function initializeMaps() {
 
     // mark off a single check
     $("#map-checks input").click(function() {
-        updateSingleMapCheck($(this));
+        updateSingleMapCheck($(this), true);
     });
 
     // marks off all checks for a given map on right-click
     $("table.map td").contextmenu(function(e) {
         $(`#${$(this).attr("data-checks-list")} input:not(:disabled):not(:checked)`).each(function() {
-            $(this).click();
+            if(!$(this).parent().hasClass("unavailable")) {
+                $(this).click();
+            }
         });
     });
 }
