@@ -63,7 +63,7 @@ function initializeCompactTrackerSettings() {
         $(".tooltiptext").toggle(isChecked);
 
         // enforce letter visibility
-        $("#Letters").parent().toggle(!$("#letters-randomized").is(':checked'));
+        $("[id=Letters]").parent().toggle(!$("#letters-randomized").is(':checked'));
     }
 
     $("#compact-tracker").click(function() {

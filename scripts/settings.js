@@ -247,7 +247,7 @@ function initializeOptionalRandomizedSettings() {
         $("#flag-letters").toggle(isChecked);
         countChecks();
         $("div.letter-tracker").toggle(isChecked);
-        $("#Letters").parent().toggle(!isChecked);
+        $("[id=Letters]").parent().toggle(!isChecked);
     });
 
     $("#trading-event-randomized").click(function() {
