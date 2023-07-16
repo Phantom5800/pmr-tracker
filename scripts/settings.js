@@ -61,7 +61,7 @@ function initializeOpenAreasSettings() {
         }
 
         var isChecked = $(this).is(':checked');
-        $("#BowsersKeySlot").toggle(!isChecked);
+        $("[id=BowsersKeySlot]").toggle(!isChecked);
         localStorage.setItem("fast-bowser-castle", isChecked);
         checkIfChapterIsCompletable(8);
     });
@@ -73,8 +73,8 @@ function initializeOpenAreasSettings() {
         }
 
         var isChecked = $(this).is(':checked');
-        $("#PowerStarSlot").toggle(isChecked);
-        $("#StarRodSlot").toggle(!isChecked);
+        $("[id=PowerStarSlot]").toggle(isChecked);
+        $("[id=StarRodSlot]").toggle(!isChecked);
         localStorage.setItem("power-star", isChecked);
         checkIfChapterIsCompletable(8);
     });
@@ -247,7 +247,7 @@ function initializeOptionalRandomizedSettings() {
         $("#flag-letters").toggle(isChecked);
         countChecks();
         $("div.letter-tracker").toggle(isChecked);
-        $("#Letters").parent().toggle(!isChecked);
+        $("[id=Letters]").parent().toggle(!isChecked);
     });
 
     $("#trading-event-randomized").click(function() {

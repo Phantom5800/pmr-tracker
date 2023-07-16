@@ -1,0 +1,105 @@
+<!--
+    Main tracker for chapter progress
+-->
+<div id="vertical_tracker" class="main-tracker section resizable">
+    <table width="100%">
+        <tr style="height: 4em;">
+            <td style="text-align: left; width: 60%;">
+                <h1>Required Items</h1>
+            </td>
+            <td style="text-align: right;">
+                <h2></h2>
+            </td>
+        </tr>
+    </table>
+    <table style="padding-left:5px;padding-bottom:10px;">
+        <tr>
+            <td><img data-chapter-star="1" id="Eldstar" class="unselected star-spirit" src="images/icons/Eldstar_PM.png"></td>
+            <td>
+                <img data-chapter-key="1" id="Fortress Key" class="unselected key-item" src="images/icons/FortressKey_PM.png">
+                <p data-chapter-key-count="1">0/4</p>
+            </td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="2" id="Mamar" class="unselected star-spirit" src="images/icons/Mamar_PM.png"></td>
+            <td><img data-chapter="2" id="Pulse Stone" class="unselected key-item" src="images/icons/PulseStone.gif"></td>
+            <td><img data-chapter="2" id="Pyramid Stone" class="unselected key-item" src="images/icons/PyramidStone.gif"></td>
+            <td><img data-chapter="2" id="Diamond Stone" class="unselected key-item" src="images/icons/DiamondStone.png"></td>
+            <td><img data-chapter="2" id="Lunar Stone" class="unselected key-item" src="images/icons/LunarStone.gif"></td>
+            <td>
+                <img data-chapter-key="2" id="Ruins Key" class="unselected key-item" src="images/icons/Ruins_Key.png">
+                <p data-chapter-key-count="2">0/4</p>
+            </td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="3" id="Skolar" class="unselected star-spirit" src="images/icons/Skolar_PM.png"></td>
+            <td><img data-chapter="3" id="Boo's Portrait" class="unselected key-item" src="images/icons/Boo'sPortrait_PM.png"></td>
+            <td>
+                <img data-chapter-key="3" id="Tubba Castle Key" class="unselected key-item" src="images/icons/Tubba_Blubba_Castle_Key.png">
+                <p data-chapter-key-count="3">0/3</p>
+            </td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="4" id="Muskular" class="unselected star-spirit" src="images/icons/Muskular_PM.png"></td>
+            <td><img data-chapter="4" id="Toy Train" class="unselected key-item" src="images/icons/ToyTrain_PM.png"></td>
+            <td><img data-chapter="4" id="Cake" class="unselected key-item" src="images/icons/Cake.gif"></td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="5" id="Misstar" class="unselected star-spirit" src="images/icons/Misstar_PM.png"></td>
+            <td><img data-chapter="5" id="Jade Raven" class="unselected key-item" src="images/icons/JadeRaven_PM.png"></td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="6" id="Klevar" class="unselected star-spirit" src="images/icons/Klevar_PM.png"></td>
+            <td class="seed-1"><img data-chapter="6" id="Magical Seed 1" class="unselected key-item" src="images/icons/MagicalSeed1.png"></td>
+            <td class="seed-2"><img data-chapter="6" id="Magical Seed 2" class="unselected key-item" src="images/icons/MagicalSeed2.png"></td>
+            <td class="seed-3"><img data-chapter="6" id="Magical Seed 3" class="unselected key-item" src="images/icons/MagicalSeed3.png"></td>
+            <td class="seed-4"><img data-chapter="6" id="Magical Seed 4" class="unselected key-item" src="images/icons/MagicalSeed4.png"></td>
+            <td><img data-chapter="6" id="Magical Bean" class="unselected key-item" src="images/icons/MagicBean_PM.png"></td>
+            <td><img data-chapter="6" id="Fertile Soil" class="unselected key-item" src="images/icons/Fertilesoil.png"></td>
+            <td><img data-chapter="6" id="Miracle Water" class="unselected key-item" src="images/icons/MiracleWater_PM.png"></td>
+        </tr>
+        <tr>
+            <td><img data-chapter-star="7" id="Kalmar" class="unselected star-spirit" src="images/icons/Kalmar_PM.png"></td>
+            <td>
+                <img data-chapter="7" id="Warehouse Key" class="unselected key-item" src="images/icons/OddKey.gif">
+                <div class="colorblind-label">W</div>
+            </td>
+            <td><img data-chapter="7" id="Bucket" class="unselected key-item" src="images/icons/Bucket.png"></td>
+            <td><img data-chapter="7" id="Scarf" class="unselected key-item" src="images/icons/Scarf.gif"></td>
+            <td><img data-chapter="7" id="Star Stone" class="unselected key-item" src="images/icons/StarStone_PM.png"></td>
+            <td>
+                <img data-chapter="7" id="Red Key" class="unselected key-item" src="images/icons/PM_Red_Key.png">
+                <div class="colorblind-label">R</div>
+            </td>
+            <td><img data-chapter="7" id="Palace Key" class="unselected key-item" src="images/icons/PM_Palace_Key.png"></td>
+        </tr>
+        <tr>
+            <td id="StarRodSlot"><img data-chapter-star="8" id="Star Rod" class="unselected star-spirit" src="images/icons/PM_Starrod.png"></td>
+            <td id="PowerStarSlot" style="display:none">
+                <img data-chapter-key="16" id="Power Stars Found" class="unselected key-item" src="images/icons/Power_Star.png">
+                <p data-chapter-key-count="16">0/120</p>
+            </td>
+            <td id="BowsersKeySlot">
+                <img data-chapter-key="8" id="Bowser's Castle Key" class="unselected key-item" src="images/icons/PM_Bowser_Castle_Key.png">
+                <p data-chapter-key-count="8">0/5</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td><img id="Boots" data-state="0" class="boots upgrade" src="images/upgrades/PM_Normal_Boots_Sprite.png"></td>
+            <td><img id="Hammer" data-state="0" class="hammer upgrade" src="images/upgrades/PM_Normal_Hammer_Sprite.png"></td>
+            <td><img id="Ultra Stone" class="unselected optional-item" src="images/icons/UltraStone.gif"></td>
+        </tr>
+
+        <tr>
+            <td><img id="Goombario" class="unselected partner" src="images/partners/goombario.png"></td>
+            <td><img id="Kooper" class="unselected partner" src="images/partners/kooper.png"></td>
+            <td><img id="Bombette" class="unselected partner" src="images/partners/bombette.png"></td>
+            <td><img id="Parakarry" class="unselected partner" src="images/partners/parakarr.png"></td>
+            <td><img id="Bow" class="unselected partner" src="images/partners/bow.png"></td>
+            <td><img id="Watt" class="unselected partner" src="images/partners/watt.png"></td>
+            <td><img id="Sushie" class="unselected partner" src="images/partners/sushie.png"></td>
+            <td><img id="Lakilester" class="unselected partner" src="images/partners/lakilester.png"></td>
+        </tr>
+    </table>
+</div>
