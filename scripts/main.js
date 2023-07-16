@@ -86,10 +86,7 @@ function checkIfChapterIsCompletable(chapter) {
                         ++conditionsComplete;
                     }
                 } else {
-                    var selector = requirementsArray[i];
-                    // Replace # with [id=] and add visible filter to allow standard and compact tracker to work on the same page
-                    if (selector.indexOf('#') == 0 && selector.indexOf('-') == -1) selector = '[id=' + selector.substr(1) + ']:visible';
-                    var elem = $(selector).first();
+                    var elem = $(requirementsArray[i]).first();
                     var isChecked = elem.is(':checkbox') && elem.is(":checked");
                     var selected = elem.is(':selected') || elem.length && !elem.is(':checkbox') && !elem.is('option') && !elem.hasClass("unselected");
                     if (isChecked || selected) ++conditionsComplete;
