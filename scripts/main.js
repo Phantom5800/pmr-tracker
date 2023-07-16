@@ -45,7 +45,7 @@ function checkIfChapterIsCompletable(chapter) {
             }
         });
    
-        $(`img[data-chapter-key=${chapter}]`).each(function() {
+        $(`img[data-chapter-key=${chapter}]:visible`).each(function() {
             totalCount += maxKeyCounts[chapter];
             if (chapter === 2 && currentKeyCounts[chapter] === 3) {
                 --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
@@ -61,10 +61,6 @@ function checkIfChapterIsCompletable(chapter) {
             var conditionsComplete = 0;
 
             for (var i = 0; i < requirementsArray.length; ++i) {
-                var elem = $(requirementsArray[i]).first();
-                var isChecked = elem.is(':checkbox') && elem.is(":checked");
-                var selected = elem.is(':selected') || elem.length && !elem.is(':checkbox') && !elem.is('option') && !elem.hasClass("unselected");
-
                 // if boots upgrade is required, increment when normal boots are not active
                 if (requirementsArray[i] === "Super Boots") {
                     if ($("[id='Super Boots']").length || $("[id='Ultra Boots']").length) {
@@ -89,8 +85,14 @@ function checkIfChapterIsCompletable(chapter) {
                         || (completed >= 1 && depth % 2 === 1)) {
                         ++conditionsComplete;
                     }
-                } else if (isChecked || selected) {
-                    ++conditionsComplete;
+                } else {
+                    var selector = requirementsArray[i];
+                    // Replace # with [id=] and add visible filter to allow standard and compact tracker to work on the same page
+                    if (selector.indexOf('#') == 0 && selector.indexOf('-') == -1) selector = '[id=' + selector.substr(1) + ']:visible';
+                    var elem = $(selector).first();
+                    var isChecked = elem.is(':checkbox') && elem.is(":checked");
+                    var selected = elem.is(':selected') || elem.length && !elem.is(':checkbox') && !elem.is('option') && !elem.hasClass("unselected");
+                    if (isChecked || selected) ++conditionsComplete;
                 }
             }
 
