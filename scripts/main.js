@@ -36,26 +36,22 @@ function checkIfChapterIsCompletable(chapter) {
     if (chapter <= 8) {
         var totalCount = extraChapterRequirements[chapter].length;
         var completedCount = 0;
-        $(`img[data-chapter=${chapter}]`).each(function() {
-            if ($(this).is(":visible")) {
-                ++totalCount;
-            }
+        // look for chapter specific items that are required
+        $(`img[data-chapter=${chapter}]:visible`).each(function() {
+            ++totalCount;
             if (!$(this).hasClass("unselected")) {
                 ++completedCount;
             }
         });
    
-        $(`img[data-chapter-key=${chapter}]:visible`).each(function() {
-            totalCount += maxKeyCounts[chapter];
-            if (chapter === 2 && currentKeyCounts[chapter] === 3) {
-                --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
-            } else if (chapter === 8 && ($("#fast-bowser-castle").is(':checked') || $("#power-star-skip").is(':checked'))){
-                totalCount -= maxKeyCounts[8];
-            }
-            if (!$(this).hasClass("unselected")) {
-                completedCount += currentKeyCounts[chapter];
-            }
-        });
+        // count the keys for the current chapter
+        totalCount += maxKeyCounts[chapter];
+        if (chapter === 2 && currentKeyCounts[chapter] === 3) {
+            --totalCount; // chapter 2 specifically only _requires_ 3 of the keys
+        } else if (chapter === 8 && ($("#fast-bowser-castle").is(':checked') || $("#power-star-skip").is(':checked'))){
+            totalCount -= maxKeyCounts[8];
+        }
+        completedCount += currentKeyCounts[chapter];
 
         function handleExtraChapterRequirements(requirementsArray, depth = 0) {
             var conditionsComplete = 0;
@@ -86,10 +82,7 @@ function checkIfChapterIsCompletable(chapter) {
                         ++conditionsComplete;
                     }
                 } else {
-                    var selector = requirementsArray[i];
-                    // Replace # with [id=] and add visible filter to allow standard and compact tracker to work on the same page
-                    if (selector.indexOf('#') == 0 && selector.indexOf('-') == -1) selector = '[id=' + selector.substr(1) + ']:visible';
-                    var elem = $(selector).first();
+                    var elem = $(requirementsArray[i]).first();
                     var isChecked = elem.is(':checkbox') && elem.is(":checked");
                     var selected = elem.is(':selected') || elem.length && !elem.is(':checkbox') && !elem.is('option') && !elem.hasClass("unselected");
                     if (isChecked || selected) ++conditionsComplete;

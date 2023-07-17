@@ -49,55 +49,55 @@ var useTrackerLogic = true;
 // Any nested arrays means that if any condition from that group is true, the entire group is treated as true.
 const extraChapterRequirements = {
     1: [
-        ["#Hammer", "Super Hammer", "#Bombette"], // tree for switch on pleasant path
-        "#Kooper" // switch to bring up bridge on pleasant path
+        ["[id=Hammer]:visible", "Super Hammer", "[id=Bombette]:visible"], // tree for switch on pleasant path
+        "[id=Kooper]:visible" // switch to bring up bridge on pleasant path
     ],
     2: [
-        ["#starting-location [value='DryDryOutpost']", "#Bombette", "Super Hammer"], // need bombette to blow up rock in toad town (or super hammer for sewers)
-        ["#starting-location [value='DryDryOutpost']", "#Parakarry", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
+        ["#starting-location [value='DryDryOutpost']", "[id=Bombette]:visible", "Super Hammer"], // need bombette to blow up rock in toad town (or super hammer for sewers)
+        ["#starting-location [value='DryDryOutpost']", "[id=Parakarry]:visible", "Super Hammer"] // this is just to access the ruins via mt rugged or sewers respectively
     ],
     3: [
-        "#Parakarry", // need parakarry to get to Tubba's Castle
+        "[id=Parakarry]:visible", // need parakarry to get to Tubba's Castle
         "Super Boots" // need a boots upgrade to fight the heart
     ],
     4: [
-        "#Bombette", // blow up the wall to general guy
-        "#Watt", // see in the room before general guy
-        ["#Hammer", "Super Hammer"], // hit boxes in green station
-        ["#Bow", "#toybox-open"] // need Bow to get into toybox if it is not open by default
+        "[id=Bombette]:visible", // blow up the wall to general guy
+        "[id=Watt]:visible", // see in the room before general guy
+        ["[id=Hammer]:visible", "Super Hammer"], // hit boxes in green station
+        ["[id=Bow]:visible", "#toybox-open"] // need Bow to get into toybox if it is not open by default
     ],
     5: [
-        "#Sushie", // need sushie in order to place the jade raven
-        ["#Hammer", "Super Hammer"], // drop log bridge
+        "[id=Sushie]:visible", // need sushie in order to place the jade raven
+        ["[id=Hammer]:visible", "Super Hammer"], // drop log bridge
         [
             "#starting-location [value='YoshiVillage']",
-            "#Watt", 
+            "[id=Watt]:visible", 
             "#whale-open", // watt or whale open to get to the island OR vvvv
-            ["#Bombette", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
-            ["Super Boots", "#Sushie"] // boots and sushie to reach shortcut from the left
+            ["[id=Bombette]:visible", ["img[data-item-name='Odd Key']", "#blue-house-open"]], // bombette AND access to blue house for pipe
+            ["Super Boots", "[id=Sushie]:visible"] // boots and sushie to reach shortcut from the left
         ],
-        ["Ultra Hammer", ["#gear-shuffle [value='Vanilla']", ["#Parakarry", "#Lakilester"]]] // volcano blocks
+        ["Ultra Hammer", ["#gear-shuffle [value='Vanilla']", ["[id=Parakarry]:visible", "[id=Lakilester]:visible"]]] // volcano blocks
     ],
-    6: ["#Lakilester", "Super Boots"], // both of these requirements are for top right room
+    6: ["[id=Lakilester]:visible", "Super Boots"], // both of these requirements are for top right room
     7: [
-        "#Kooper", // switch on shiver mountain
-        "#Bombette", // switch in crystal palace
-        ["#Hammer", "Super Hammer"], // hit fake Kooper
+        "[id=Kooper]:visible", // switch on shiver mountain
+        "[id=Bombette]:visible", // switch in crystal palace
+        ["[id=Hammer]:visible", "Super Hammer"], // hit fake Kooper
         "Super Boots", // break the ice on shiver mountain
-        ["#Sushie", "#blue-house-open", "img[data-item-name='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
+        ["[id=Sushie]:visible", "#blue-house-open", "img[data-item-name='Odd Key']"] // access to chapter 7 via blue house or past Blooper fight
     ],
     8: [
-        ["#Eldstar", "#power-star"], 
-        ["#Mamar", "#power-star"], 
-        ["#Skolar", "#power-star"], 
-        ["#Muskular", "#power-star"], 
-        ["#Misstar", "#power-star"], 
-        ["#Klevar", "#power-star"], 
-        ["#Kalmar", "#power-star"],
-        ["#Bombette", "#fast-bowser-castle", "#power-star-skip"], // getting out of jail
-        ["#Parakarry", "#fast-bowser-castle", "#power-star-skip"], // basement
-        ["#Bow", "#fast-bowser-castle", "#power-star-skip"], // basement
-        ["#Lakilester", "#fast-bowser-castle", "#power-star-skip"] // basement
+        ["[id=Eldstar]:visible", "#power-star"], 
+        ["[id=Mamar]:visible", "#power-star"], 
+        ["[id=Skolar]:visible", "#power-star"], 
+        ["[id=Muskular]:visible", "#power-star"], 
+        ["[id=Misstar]:visible", "#power-star"], 
+        ["[id=Klevar]:visible", "#power-star"], 
+        ["[id=Kalmar]:visible", "#power-star"],
+        ["[id=Bombette]:visible", "#fast-bowser-castle", "#power-star-skip"], // getting out of jail
+        ["[id=Parakarry]:visible", "#fast-bowser-castle", "#power-star-skip"], // basement
+        ["[id=Bow]:visible", "#fast-bowser-castle", "#power-star-skip"], // basement
+        ["[id=Lakilester]:visible", "#fast-bowser-castle", "#power-star-skip"] // basement
     ]
 }
 
