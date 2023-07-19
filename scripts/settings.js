@@ -10,10 +10,17 @@
 function initializeOpenAreasSettings() {
     $("#forest-open").click(function() {
         var isChecked = $(this).is(':checked');
-        localStorage.setItem("forest-open", isChecked);
         $("[id='Forest Pass']").each(function() {
-            $(this).parent().toggle(!isChecked);
-        })
+            var compact_checked = $("#compact-tracker").is(':checked');
+            var misc_checked = $("#combine-misc").is(':checked');
+            // make sure to hide / show the correct forest pass
+            if ($(this).parent().hasClass("compact-misc-item")) {
+                $(this).parent().toggle(!isChecked && misc_checked && compact_checked);
+            } else {
+                $(this).parent().toggle(!isChecked);
+            }
+        });
+        localStorage.setItem("forest-open", isChecked);
     });
 
     $("#toybox-open").click(function() {
