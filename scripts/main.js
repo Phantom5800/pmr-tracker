@@ -588,6 +588,10 @@ $(document).ready(function(){
                 if (this.status == 200) {
                     var data = JSON.parse(this.responseText);
 
+                    if (data["ForeverForestOpen"] != $("#forest-open").is(':checked')) {
+                        $("#forest-open").click();
+                    }
+
                     if (data["ToyboxOpen"] != $("#toybox-open").is(':checked')) {
                         $("#toybox-open").click();
                     }

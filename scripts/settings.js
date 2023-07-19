@@ -8,6 +8,14 @@
 /// Initialize the callbacks for setting what areas are open from the start.
 ///
 function initializeOpenAreasSettings() {
+    $("#forest-open").click(function() {
+        var isChecked = $(this).is(':checked');
+        localStorage.setItem("forest-open", isChecked);
+        $("[id='Forest Pass']").each(function() {
+            $(this).parent().toggle(!isChecked);
+        })
+    });
+
     $("#toybox-open").click(function() {
         var isChecked = $(this).is(':checked');
         localStorage.setItem("toybox-open", isChecked);
@@ -103,6 +111,11 @@ function initializeOpenAreasSettings() {
 }
 
 function loadOpenAreaSettings() {
+    var forest_open = localStorageGetWithDefault("forest-open", false) == "true";
+    if (forest_open) {
+        $("#forest-open").click();
+    }
+
     var toybox_open = localStorageGetWithDefault("toybox-open", "true") == "true";
     if (!toybox_open) {
         $("#toybox-open").click();
