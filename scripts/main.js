@@ -116,7 +116,7 @@ function checkIfChapterIsCompletable(chapter) {
             }
         }
     
-        var star_spirit = $(`[data-chapter-star='${chapter}']`);
+        var star_spirit = $(`[data-chapter-star='${chapter}']:visible`);
         if (completedCount >= totalCount && star_spirit.hasClass("unselected")) {
             star_spirit.addClass("completable");
         } else {
