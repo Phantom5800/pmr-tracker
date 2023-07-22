@@ -335,7 +335,7 @@ function getAvailableChecks(check) {
                 var requiredSeedCnt = $("#seeds-required").prop('selectedIndex');
                 available = true;
                 for (var i = 4; i > 4 - requiredSeedCnt; --i) {
-                    if ($(`[id="Magical Seed ${i}"]`).is(':visible') && !$(`[id="Magical Seed ${i}"]`).hasClass('unselected')) {
+                    if (!$(`[id="Magical Seed ${i}"]:visible`).hasClass('unselected')) {
                         continue;
                     }
                     available = false;
