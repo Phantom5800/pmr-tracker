@@ -45,6 +45,17 @@ function initializeCompactTrackerSettings() {
             }
         });
 
+        // handle forest pass visibility
+        isChecked = $("#forest-open").is(':checked');
+        $("[id='Forest Pass']").each(function() {
+            // make sure to hide / show the correct forest pass
+            if ($(this).parent().hasClass("compact-misc-item")) {
+                $(this).parent().toggle(!isChecked && misc_checked && compact_checked);
+            } else {
+                $(this).parent().toggle(!isChecked);
+            }
+        });
+
         // hide crystal ball if koopa koot is not randomized
         isChecked = $("#koopa-koot-randomized").is(':checked');
         $(".koopa-koot-generated-item").toggle(isChecked);
