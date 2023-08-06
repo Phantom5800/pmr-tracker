@@ -85,7 +85,7 @@ h2 {
     background-color: transparent;
 }
 
-#enabled-settings {
+#enabled-settings, #limit-chapters {
     padding: 5px 5px 5px 5px;
     text-align: center;
 }
