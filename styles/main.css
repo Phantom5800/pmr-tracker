@@ -16,6 +16,7 @@ div.flex-row {
 
 div.flex-column {
     flex-direction: column;
+    float: left;
 }
 
 div.flex-row-reverse {
@@ -75,6 +76,10 @@ h2 {
     border-radius: 10px;
 }
 
+#page>.section {
+    float: left;
+}
+
 .resizable {
     height: auto;
     resize: horizontal;
@@ -88,6 +93,10 @@ h2 {
 #enabled-settings, #limit-chapters {
     padding: 5px 5px 5px 5px;
     text-align: center;
+}
+
+#limit-chapters {
+    width: 35.4em;
 }
 
 #enabled-settings img {
