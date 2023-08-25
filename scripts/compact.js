@@ -74,7 +74,15 @@ function initializeCompactTrackerSettings() {
         $(".tooltiptext").toggle(isChecked);
 
         // enforce letter visibility
-        $("[id=Letters]").parent().toggle(!$("#letters-randomized").is(':checked'));
+        isChecked = $("#letters-randomized").is(':checked');
+        $("[id=Letters]").each(function() {
+            var elem = $(this).parent();
+            if (elem.hasClass("compact-misc-item")) {
+                elem.toggle(!isChecked && $("#combine-misc").is(':checked'));
+            } else {
+                elem.toggle(!isChecked);
+            }
+        });
     }
 
     $("#compact-tracker").click(function() {

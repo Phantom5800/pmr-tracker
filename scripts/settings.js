@@ -267,7 +267,15 @@ function initializeOptionalRandomizedSettings() {
         $("#flag-letters").toggle(isChecked);
         countChecks();
         $("div.letter-tracker").toggle(isChecked);
-        $("[id=Letters]").parent().toggle(!isChecked);
+
+        $("[id=Letters]").each(function() {
+            var elem = $(this).parent();
+            if (elem.hasClass("compact-misc-item")) {
+                elem.toggle(!isChecked && $("#combine-misc").is(':checked'));
+            } else {
+                elem.toggle(!isChecked);
+            }
+        });
     });
 
     $("#trading-event-randomized").click(function() {
