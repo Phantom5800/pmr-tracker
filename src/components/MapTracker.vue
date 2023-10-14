@@ -2,8 +2,12 @@
 import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
 import { getAreas, allRegions, getBlanks, getChecks } from "../data/map";
+import { usePlaythrough } from "../stores/playthrough";
+
+const playthrough = usePlaythrough();
 
 const currentMap = ref("Toad Town");
+const currentArea = ref("Main Gate");
 
 const areas = computed(() => getAreas(currentMap.value));
 
@@ -48,6 +52,8 @@ const toadTown: Record<
 					class="map-area"
 					v-for="area in Object.getOwnPropertyNames(areas)"
 					:key="area"
+					:class="{ selected: area === currentArea }"
+					@click="currentArea = area"
 					:style="{
 						gridRow: `${areas[area].row} / span ${areas[area].rowSpan || 1}`,
 						gridColumn: `${areas[area].col} / span ${areas[area].colSpan || 1}`
@@ -57,7 +63,21 @@ const toadTown: Record<
 				</button>
 			</div>
 		</div>
-		<div class="map-checks"></div>
+		<div class="map-checks">
+			<ul>
+				<li
+					v-for="[checkName, check] in Object.entries(
+						getChecks(currentMap, currentArea)
+					)"
+					:key="checkName"
+					:class="{
+						available: playthrough.canCheckLocation(check.reqs)
+					}"
+				>
+					{{ checkName }}
+				</li>
+			</ul>
+		</div>
 	</TrackerPanel>
 </template>
 
@@ -117,5 +137,17 @@ button.selected {
 
 button.map-area {
 	width: 100%;
+}
+
+.map-checks li {
+	color: #888;
+}
+
+.map-checks li.obtained {
+	text-decoration: line-through;
+}
+
+.map-checks li.available {
+	color: #ddd;
 }
 </style>

@@ -9,6 +9,8 @@ import InfoBlocks from "./components/InfoBlocks.vue";
 import { configKeys, settingsKeys } from "./stores/config";
 import MainTracker from "./components/MainTracker.vue";
 import MapTracker from "./components/MapTracker.vue";
+import LetterTracker from "./components/LetterTracker.vue";
+import Notes from "./components/Notes.vue";
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -48,9 +50,11 @@ const year = new Date().getFullYear();
 
 	<main>
 		<EnabledSettings />
-		<!-- <MainTracker /> -->
+		<Notes />
+		<MainTracker />
 		<!-- <InfoBlocks /> -->
 		<MapTracker />
+		<LetterTracker />
 	</main>
 
 	<MenuOptions :isOpen="configOpen" :optionsKeys="configKeys" />

@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { usePlaythrough } from "@/stores/playthrough";
-import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import TrackableItem from "./TrackableItem.vue";
-
-const playthroughStore = usePlaythrough();
-const { items, checks } = storeToRefs(playthroughStore);
 
 const tooltip = ref("");
 

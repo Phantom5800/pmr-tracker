@@ -1,4 +1,4 @@
-type Requirements = null | number | string | Requirements[];
+export type Requirements = null | number | string | Requirements[];
 type Coords = { row: number; col: number; rowSpan?: number; colSpan?: number };
 type Area = Coords & {
 	checks: {
@@ -5765,7 +5765,17 @@ const regionData: MapRegions = {
 			"Albino Dinos + Crystal King": {
 				row: 4,
 				col: 10,
-				checks: {}
+				checks: {
+					Kalmar: {
+						reqs: [
+							"Kooper",
+							"Bombette",
+							"Super Hammer",
+							"Super Boots",
+							["Sushie", "logic:blueHouseOpen", "Odd Key"]
+						]
+					}
+				}
 			},
 			"X Mark Room": { row: 6, col: 3, checks: {} },
 			"Large Statue Room": {
