@@ -1,9 +1,15 @@
 import { defineStore } from "pinia";
 import type { Requirements } from "../data/map";
 
+type PlaythroughProps = {
+	items: string[];
+	checks: string[];
+	notes: string;
+};
+
 const storagePlaythroughStr = localStorage.getItem("playthrough");
 
-const storagePlaythrough = storagePlaythroughStr
+const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
 	? JSON.parse(storagePlaythroughStr)
 	: {};
 
@@ -33,6 +39,38 @@ export const usePlaythrough = defineStore("playthrough", {
 				})
 			);
 		},
+		addItem(item: string | null, max: number = 1) {
+			if (item !== null) {
+				if (this.items.filter((el) => el === item).length < max) {
+					this.items.push(item);
+
+					localStorage.setItem(
+						"playthrough",
+						JSON.stringify({
+							items: this.items,
+							checks: this.checks,
+							notes: this.notes
+						})
+					);
+				}
+			}
+		},
+		removeItem(item: string | null) {
+			if (item !== null) {
+				if (this.items.includes(item)) {
+					this.items.splice(this.items.indexOf(item), 1);
+
+					localStorage.setItem(
+						"playthrough",
+						JSON.stringify({
+							items: this.items,
+							checks: this.checks,
+							notes: this.notes
+						})
+					);
+				}
+			}
+		},
 		hasItem(item: string) {
 			return this.items.includes(item);
 		},
@@ -44,6 +82,7 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		toggleCheck(check: string) {
 			if (this.checks.includes(check)) {
+				this.checks = this.checks.filter((el) => el !== check);
 			} else {
 				this.checks.push(check);
 			}

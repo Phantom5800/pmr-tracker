@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
+import { computed, toRefs } from "vue";
 
 const playthroughStore = usePlaythrough();
-const { items, checks } = storeToRefs(playthroughStore);
 const { item, src, multiple, label, shrink } = defineProps<{
 	item: string;
 	src: string;
@@ -11,17 +11,73 @@ const { item, src, multiple, label, shrink } = defineProps<{
 	label?: string;
 	shrink?: boolean;
 }>();
+
+const bootsOrHammer = computed(() => item === "Boots" || item === "Hammer");
+
+const derivedData = computed(
+	(): {
+		adding: null | string;
+		removing: null | string;
+		item: string;
+		src: string;
+	} => {
+		if (bootsOrHammer.value) {
+			console.log("derived data");
+			const _ultra = `Ultra ${item}`;
+			const _super = `Super ${item}`;
+			if (playthroughStore.hasItem(_ultra)) {
+				return {
+					adding: null,
+					removing: _ultra,
+					item: _ultra,
+					src: `/src/assets/images/upgrades/PM_${_ultra.replace(" ", "_")}.png`
+				};
+			} else if (playthroughStore.hasItem(_super)) {
+				return {
+					adding: _ultra,
+					removing: _super,
+					item: _ultra,
+					src: `/src/assets/images/upgrades/PM_${_super.replace(" ", "_")}.png`
+				};
+			} else if (playthroughStore.hasItem(item)) {
+				return {
+					adding: _super,
+					removing: item,
+					item: _ultra,
+					src: `/src/assets/images/upgrades/PM_${item}.png`
+				};
+			} else {
+				return {
+					adding: item,
+					removing: null,
+					item: _ultra,
+					src: `/src/assets/images/upgrades/PM_No_${item}.png`
+				};
+			}
+		} else {
+			return { adding: item, removing: item, item: item, src: src };
+		}
+	}
+);
 </script>
 
 <template>
 	<div
 		:class="{
-			fade: !playthroughStore.hasItem(item),
+			fade: !bootsOrHammer && !playthroughStore.hasItem(item),
 			shrink: shrink
 		}"
-		@click="playthroughStore.toggleItem(item)"
+		@click="
+			multiple || bootsOrHammer
+				? playthroughStore.addItem(derivedData.adding, multiple)
+				: playthroughStore.toggleItem(item)
+		"
+		@contextmenu.prevent="
+			(multiple || bootsOrHammer) &&
+				playthroughStore.removeItem(derivedData.removing)
+		"
 	>
-		<img :src="src" :alt="item" />
+		<img :src="derivedData.src" :alt="item" />
 		<p class="label" v-if="label">{{ label }}</p>
 		<p class="count" v-if="multiple">
 			{{ playthroughStore.itemCount(item) + "/" + multiple }}
@@ -31,6 +87,8 @@ const { item, src, multiple, label, shrink } = defineProps<{
 
 <style scoped>
 div {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

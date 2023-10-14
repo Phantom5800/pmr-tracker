@@ -40,7 +40,10 @@ const toadTown: Record<
 				}"
 				v-for="map in allRegions"
 				:key="map"
-				@click="currentMap = map"
+				@click="
+					currentMap = map;
+					currentArea = Object.getOwnPropertyNames(getAreas(map))[0];
+				"
 			>
 				{{ map }}
 			</button>
@@ -71,10 +74,20 @@ const toadTown: Record<
 					)"
 					:key="checkName"
 					:class="{
-						available: playthrough.canCheckLocation(check.reqs)
+						available: playthrough.canCheckLocation(check.reqs),
+						obtained: playthrough.checkedLocation(checkName)
 					}"
 				>
-					{{ checkName }}
+					<input
+						type="checkbox"
+						:name="checkName"
+						:id="checkName"
+						:checked="playthrough.checkedLocation(checkName)"
+						@change="playthrough.toggleCheck(checkName)"
+					/>
+					<label :for="checkName">
+						{{ checkName }}
+					</label>
 				</li>
 			</ul>
 		</div>
@@ -139,12 +152,17 @@ button.map-area {
 	width: 100%;
 }
 
+.map-checks ul {
+	list-style-type: none;
+}
+
 .map-checks li {
 	color: #888;
 }
 
 .map-checks li.obtained {
 	text-decoration: line-through;
+	color: #666;
 }
 
 .map-checks li.available {

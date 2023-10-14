@@ -77,15 +77,16 @@ const recipients = [
 			<h2>Letters</h2>
 			<span>{{ tooltip }}</span>
 		</div>
-		<div class="flex-main">
-			<TrackableItem
+		<div class="grid">
+			<div
+				class="grid-item"
 				v-for="recipient in recipients"
 				:key="recipient.name"
-				:item="recipient.name"
-				:src="recipient.src"
 				@mouseover="tooltip = recipient.name"
 				@mouseout="tooltip = ''"
-			/>
+			>
+				<TrackableItem :item="recipient.name" :src="recipient.src" />
+			</div>
 		</div>
 	</TrackerPanel>
 </template>
@@ -112,6 +113,16 @@ div.flex-main {
 	column-gap: 3rem;
 	row-gap: 1rem;
 	justify-content: center;
+}
+
+div.grid {
+	display: grid;
+	grid-template-columns: repeat(8, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+div.grid-item {
+	height: 4rem;
 }
 
 div.flex-main > * {

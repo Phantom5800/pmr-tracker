@@ -2,8 +2,10 @@
 import TrackerPanel from "./TrackerPanel.vue";
 import { ref } from "vue";
 import TrackableItem from "./TrackableItem.vue";
+import { usePlaythrough } from "../stores/playthrough";
 
 const tooltip = ref("");
+const playthrough = usePlaythrough();
 
 const trackerItems = [
 	{
@@ -164,12 +166,12 @@ const trackerItems = [
 	{
 		chapter: 0,
 		id: "Boots",
-		src: "/src/assets/images/upgrades/PM_Normal_Boots_Sprite.png"
+		src: "/src/assets/images/upgrades/PM_Boots.png"
 	},
 	{
 		chapter: 0,
 		id: "Hammer",
-		src: "/src/assets/images/upgrades/PM_Normal_Hammer_Sprite.png"
+		src: "/src/assets/images/upgrades/PM_Hammer.png"
 	},
 	{
 		chapter: 0,
