@@ -12,10 +12,7 @@ type OptionData = {
 	| {
 			type: "select";
 			default: string;
-			choices: {
-				name: string;
-				id: string;
-			}[];
+			choices: string[];
 	  }
 	| {
 			type: "color";
@@ -24,7 +21,11 @@ type OptionData = {
 	| { type: "string"; default: string }
 );
 
-const allOptions: Record<string, OptionData> = {
+const test = {
+	key: false
+};
+
+const optionsData = {
 	colorblind: {
 		namespace: "config",
 		name: "Color Blind Labels",
@@ -60,16 +61,7 @@ const allOptions: Record<string, OptionData> = {
 		name: "Combine Sort Mode",
 		type: "select",
 		default: "vanilla",
-		choices: [
-			{
-				id: "vanilla",
-				name: "Vanilla Acquired Order"
-			},
-			{
-				id: "required",
-				name: "Required First"
-			}
-		]
+		choices: ["Vanilla Acquired Order", "Required First"]
 	},
 	seedFlags: {
 		namespace: "config",
@@ -159,29 +151,8 @@ const allOptions: Record<string, OptionData> = {
 		namespace: "settings",
 		name: "Starting Location",
 		type: "select",
-		default: "random",
-		choices: [
-			{
-				id: "random",
-				name: "Random"
-			},
-			{
-				id: "toadTown",
-				name: "Toad Town"
-			},
-			{
-				id: "goombaVillage",
-				name: "Goomba Village"
-			},
-			{
-				id: "dryDryOutpost",
-				name: "Dry Dry Outpost"
-			},
-			{
-				id: "yoshiVillage",
-				name: "Yoshi Village"
-			}
-		]
+		default: "Toad Town",
+		choices: ["Toad Town", "Goomba Village", "Dry Dry Outpost", "Yoshi Village"]
 	},
 	fastBowserCastle: {
 		namespace: "settings",
@@ -290,29 +261,24 @@ const allOptions: Record<string, OptionData> = {
 		name: "Gear Shuffle",
 		type: "select",
 		default: "vanilla",
-		choices: [
-			{
-				id: "vanilla",
-				name: "Vanilla"
-			},
-			{
-				id: "bigChest",
-				name: "Big Chest Shuffle"
-			},
-			{
-				id: "full",
-				name: "Full Shuffle"
-			}
-		]
+		choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
 	}
+} satisfies Record<string, OptionData>;
+
+export type OptionsValues = {
+	[key in keyof typeof optionsData]: (typeof optionsData)[key]["default"];
 };
 
 const storageOptionsStr = localStorage.getItem("options");
 
-const storageOptions = storageOptionsStr ? JSON.parse(storageOptionsStr) : {};
+const storageOptions: Partial<OptionsValues> = storageOptionsStr
+	? JSON.parse(storageOptionsStr)
+	: {};
 
-const defaultOptions = Object.getOwnPropertyNames(allOptions).reduce(
-	(a, v) => ({ ...a, [v]: allOptions[v].default }),
+const defaultOptions: OptionsValues = Object.getOwnPropertyNames(
+	optionsData
+).reduce(
+	(a, v) => ({ ...a, [v]: optionsData[v as keyof typeof optionsData].default }),
 	{}
 );
 
@@ -321,28 +287,38 @@ const init = { ...defaultOptions, ...storageOptions };
 export const useOptions = defineStore("options", {
 	state: () => ({ options: { ...init } }),
 	actions: {
-		toggle(key: keyof typeof allOptions) {
-			this.options[key] = !this.options[key];
-
-			console.log(key);
-			console.log(this.options[key]);
-
+		toggle(key: keyof typeof optionsData) {
+			if (optionsData[key].type === "boolean") {
+				this.options[key] = !this.options[key];
+				localStorage.setItem("options", JSON.stringify(this.options));
+			}
+		},
+		setValue(key: keyof typeof optionsData, value: unknown) {
+			this.options[key] = value;
 			localStorage.setItem("options", JSON.stringify(this.options));
 		},
-		getName(key: keyof typeof allOptions) {
-			return allOptions[key].name;
+		getName(key: keyof typeof optionsData) {
+			return optionsData[key].name;
 		},
-		getType(key: keyof typeof allOptions) {
-			return allOptions[key].type;
+		getType(key: keyof typeof optionsData) {
+			return optionsData[key].type;
+		},
+		getValue(key: keyof typeof optionsData) {
+			return this.options[key];
+		},
+		getChoices(key: keyof typeof optionsData) {
+			if (optionsData[key].type === "select") {
+				return optionsData[key].choices;
+			}
 		}
 	}
 });
 
-export const settingsKeys = Object.getOwnPropertyNames(allOptions).filter(
-	(option) => allOptions[option].namespace === "settings"
+export const settingsKeys = Object.getOwnPropertyNames(optionsData).filter(
+	(option) => optionsData[option].namespace === "settings"
 );
-export const configKeys = Object.getOwnPropertyNames(allOptions).filter(
-	(option) => allOptions[option].namespace === "config"
+export const configKeys = Object.getOwnPropertyNames(optionsData).filter(
+	(option) => optionsData[option].namespace === "config"
 );
 
 export type OptionsStore = typeof useOptions;

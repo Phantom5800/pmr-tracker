@@ -1,4 +1,13 @@
-export type Requirements = null | number | string | Requirements[];
+import type { OptionsValues } from "@/stores/config";
+import logic from "../utils/logic";
+
+export type Requirements =
+	| null
+	| number
+	| string
+	| boolean
+	| ((items: string[], settings: OptionsValues) => boolean)
+	| Requirements[];
 type Coords = { row: number; col: number; rowSpan?: number; colSpan?: number };
 type Area = Coords & {
 	checks: {
@@ -26,7 +35,10 @@ const regionData: MapRegions = {
 					"Furthest left bush": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[
+									// options.value.startingLocation?.default === "Goomba Village",
+									"Hammer"
+								],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -35,7 +47,7 @@ const regionData: MapRegions = {
 					"Far right tree": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -44,7 +56,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] All other bushes (6) and trees (2)": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -59,7 +71,7 @@ const regionData: MapRegions = {
 					"[Panel] Right of stone block": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -69,7 +81,7 @@ const regionData: MapRegions = {
 					"[Coinsanity] 4 items above spring": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -78,7 +90,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Far left ? Block": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -87,7 +99,7 @@ const regionData: MapRegions = {
 					Tree: {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -96,7 +108,7 @@ const regionData: MapRegions = {
 					"Item on ledge above spring": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -114,7 +126,7 @@ const regionData: MapRegions = {
 					"Item on ledge": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -123,7 +135,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree on ledge": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -140,7 +152,7 @@ const regionData: MapRegions = {
 					"[Letter] Goompa": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -151,7 +163,7 @@ const regionData: MapRegions = {
 					"[Letter] Goompapa 1 (Chain)": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -162,7 +174,7 @@ const regionData: MapRegions = {
 					"[Letter] Goompapa 2 (Chain)": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -173,7 +185,7 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -185,7 +197,7 @@ const regionData: MapRegions = {
 					Goombario: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -194,7 +206,7 @@ const regionData: MapRegions = {
 					"Give Dolly to Goombaria": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -204,7 +216,7 @@ const regionData: MapRegions = {
 					Goompa: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -213,7 +225,7 @@ const regionData: MapRegions = {
 					"Goompa's Veranda": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -222,7 +234,7 @@ const regionData: MapRegions = {
 					Tree: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -232,7 +244,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Bottom right bush": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -247,7 +259,7 @@ const regionData: MapRegions = {
 					"[Panel] Middle of the room": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
+								logic.startingLocation("Goomba Village"),
 								"Super Hammer",
 								"Ultra Hammer"
 							],
@@ -263,7 +275,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Left ? Block": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -272,7 +284,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Right ? Block": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -287,7 +299,7 @@ const regionData: MapRegions = {
 					"? Block": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -296,7 +308,7 @@ const regionData: MapRegions = {
 					Sign: {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -316,7 +328,7 @@ const regionData: MapRegions = {
 					"Tree left of the fortress": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
+								[logic.startingLocation("Goomba Village"), "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
 							]
@@ -524,7 +536,7 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								"Odd Key",
-								"blue-house-open",
+								logic.blueHouseOpen,
 								["Super Boots", "Sushie", "Bombette"],
 								["Ultra Boots", "Sushie", "Bombette"]
 							]
@@ -619,7 +631,7 @@ const regionData: MapRegions = {
 								"Super Boots",
 								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
+								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
 						]
 					},
@@ -629,7 +641,7 @@ const regionData: MapRegions = {
 								"Super Boots",
 								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
+								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
 						]
 					},
@@ -639,7 +651,7 @@ const regionData: MapRegions = {
 								"Super Boots",
 								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
+								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
 						]
 					}
@@ -656,7 +668,7 @@ const regionData: MapRegions = {
 							"Ultra Boots",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								"Sushie"
 							]
 						]
@@ -674,7 +686,7 @@ const regionData: MapRegions = {
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -684,7 +696,7 @@ const regionData: MapRegions = {
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -694,7 +706,7 @@ const regionData: MapRegions = {
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -704,7 +716,7 @@ const regionData: MapRegions = {
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -714,7 +726,7 @@ const regionData: MapRegions = {
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					}
@@ -747,7 +759,7 @@ const regionData: MapRegions = {
 							"Ultra Hammer",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"]
 							],
@@ -766,7 +778,7 @@ const regionData: MapRegions = {
 							["Super Hammer", "Ultra Hammer"],
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								"Sushie"
 							],
 							"Lakilester"
@@ -778,7 +790,7 @@ const regionData: MapRegions = {
 							["Super Hammer", "Ultra Hammer"],
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								"Sushie"
 							],
 							"Lakilester"
@@ -790,7 +802,7 @@ const regionData: MapRegions = {
 							["Super Hammer", "Ultra Hammer"],
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								"Sushie"
 							],
 							"Lakilester"
@@ -806,7 +818,7 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"]
 							],
@@ -817,7 +829,7 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"]
 							],
@@ -828,7 +840,7 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"]
 							],
@@ -839,7 +851,7 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"]
 							],
@@ -857,7 +869,7 @@ const regionData: MapRegions = {
 							reqs: [
 								[
 									"Odd Key",
-									"blue-house-open",
+									logic.blueHouseOpen,
 									["Super Boots", "Sushie", "Bombette"],
 									["Ultra Boots", "Sushie", "Bombette"]
 								]
@@ -1546,8 +1558,8 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block left after taking spring": {
 						reqs: [
 							[
-								["starting-location:DryDryOutpost", "Hammer"],
-								["starting-location:DryDryOutpost", "Kooper"],
+								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
+								[logic.startingLocation("Dry Dry Outpost"), "Kooper"],
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1557,7 +1569,7 @@ const regionData: MapRegions = {
 					"[Coinsanity] Circle of items across Parakarry gap": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1568,7 +1580,7 @@ const regionData: MapRegions = {
 					"[Coinsanity] 2 items on ground below Parakarry gap": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1578,7 +1590,7 @@ const regionData: MapRegions = {
 					"? Block by Cleft when entering room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1588,7 +1600,7 @@ const regionData: MapRegions = {
 					"Chest in cave": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1598,7 +1610,7 @@ const regionData: MapRegions = {
 					"Item across Parakarry gap": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1609,8 +1621,8 @@ const regionData: MapRegions = {
 					"? Block past Cleft after spring": {
 						reqs: [
 							[
-								["starting-location:DryDryOutpost", "Hammer"],
-								["starting-location:DryDryOutpost", "Kooper"],
+								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
+								[logic.startingLocation("Dry Dry Outpost"), "Kooper"],
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1620,7 +1632,7 @@ const regionData: MapRegions = {
 					"Item on far right ledge": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1637,7 +1649,7 @@ const regionData: MapRegions = {
 					"[Panel] By wall near end of slide": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1648,7 +1660,7 @@ const regionData: MapRegions = {
 					"Item on first ledge": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1659,7 +1671,7 @@ const regionData: MapRegions = {
 					"Item on second ledge": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1677,7 +1689,7 @@ const regionData: MapRegions = {
 					"Bub-ulb": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1688,7 +1700,7 @@ const regionData: MapRegions = {
 					"Item on support beam when falling through opening at the top": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1704,7 +1716,7 @@ const regionData: MapRegions = {
 					"Item on ground by Cleft": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1720,7 +1732,7 @@ const regionData: MapRegions = {
 					"Item in top most bush": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1730,7 +1742,7 @@ const regionData: MapRegions = {
 					"Give three letters to Parakarry": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1740,7 +1752,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] All 3 other bushes": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1756,7 +1768,7 @@ const regionData: MapRegions = {
 					"[Coinsanity] Three items on slide": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1766,7 +1778,7 @@ const regionData: MapRegions = {
 					"Hit Whacka": {
 						reqs: [
 							[
-								["starting-location:DryDryOutpost", "Hammer"],
+								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
 								["Bombette", "Hammer"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1776,7 +1788,7 @@ const regionData: MapRegions = {
 					"? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1796,7 +1808,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Right ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1815,7 +1827,7 @@ const regionData: MapRegions = {
 					"Left ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1834,7 +1846,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Left ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1853,7 +1865,7 @@ const regionData: MapRegions = {
 					"Right ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1878,7 +1890,7 @@ const regionData: MapRegions = {
 					"[Trade] Give Nutty Cake to Trading Event Toad": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1895,7 +1907,7 @@ const regionData: MapRegions = {
 					"Behind cactus at top of room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1911,7 +1923,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1928,7 +1940,7 @@ const regionData: MapRegions = {
 					"Hidden block above rock on right side": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1944,7 +1956,7 @@ const regionData: MapRegions = {
 					"Hammer yellow block once": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1963,7 +1975,7 @@ const regionData: MapRegions = {
 					"Hammer yellow block five times": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -1982,7 +1994,7 @@ const regionData: MapRegions = {
 					"Hammer yellow block ten times": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2007,7 +2019,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Top-Left ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2026,7 +2038,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Top-Right ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2045,7 +2057,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Bottom-Left ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2064,7 +2076,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Bottom-Right ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2083,7 +2095,7 @@ const regionData: MapRegions = {
 					"Center ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2108,7 +2120,7 @@ const regionData: MapRegions = {
 					"Hidden block in the middle of three trees": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2124,7 +2136,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2142,7 +2154,7 @@ const regionData: MapRegions = {
 					"Tree at camp location after saving Mamar": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2160,7 +2172,7 @@ const regionData: MapRegions = {
 					"[Panel] Below stone cactus": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2177,7 +2189,7 @@ const regionData: MapRegions = {
 					"[Letter] Nomadimouse": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2189,7 +2201,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2207,7 +2219,7 @@ const regionData: MapRegions = {
 					"Far right tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2218,7 +2230,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far left tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2229,7 +2241,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Second tree from left": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2240,7 +2252,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Fourth tree from right": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2258,7 +2270,7 @@ const regionData: MapRegions = {
 						{
 							reqs: [
 								[
-									"starting-location:DryDryOutpost",
+									logic.startingLocation("Dry Dry Outpost"),
 									["Bombette", "Parakarry"],
 									"Super Hammer",
 									"Ultra Hammer"
@@ -2268,7 +2280,7 @@ const regionData: MapRegions = {
 					"[Letter] Shop (Chain)": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2280,7 +2292,7 @@ const regionData: MapRegions = {
 					"[Koot] Buy Dusty Hammer, Dried Pasta, Dusty Hammer, Dried Shroom": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2290,7 +2302,7 @@ const regionData: MapRegions = {
 					"Turn in Lyrics at far right house": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2301,7 +2313,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Red tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2318,7 +2330,7 @@ const regionData: MapRegions = {
 					"[Panel] On rooftops": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2329,7 +2341,7 @@ const regionData: MapRegions = {
 					"[Letter] Mr. E (Chain)": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2341,7 +2353,7 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Merlee after Merluvlee requests Crystal Ball": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2360,7 +2372,7 @@ const regionData: MapRegions = {
 					"Item on rooftops": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2370,7 +2382,7 @@ const regionData: MapRegions = {
 					"Talk to Moustafa after buying Dried Shroom + Dusty Hammer": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2386,7 +2398,7 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block in middle of room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2411,7 +2423,7 @@ const regionData: MapRegions = {
 					"Item on ledge (take Tweester in room down left from here)": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2421,7 +2433,7 @@ const regionData: MapRegions = {
 					"Item on brick block, requires Kooper or Ultra Boots": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2438,7 +2450,7 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block in middle of room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2457,7 +2469,7 @@ const regionData: MapRegions = {
 					"Hidden block directly above other ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2467,7 +2479,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Bottom tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2484,7 +2496,7 @@ const regionData: MapRegions = {
 					"Item behind bush on right side of room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2494,7 +2506,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2511,7 +2523,7 @@ const regionData: MapRegions = {
 					"Lemon Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2522,7 +2534,7 @@ const regionData: MapRegions = {
 					"Lime Tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2533,7 +2545,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far left tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2544,7 +2556,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Bottom right tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2561,7 +2573,7 @@ const regionData: MapRegions = {
 					"Hidden block in middle of room": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2577,7 +2589,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far right tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2626,7 +2638,7 @@ const regionData: MapRegions = {
 					"Inside middle coffin": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2654,7 +2666,7 @@ const regionData: MapRegions = {
 					"Item on elevated platform": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2681,7 +2693,7 @@ const regionData: MapRegions = {
 					"Item in chest behind wall on ledge above Super Hammer chest": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2696,7 +2708,7 @@ const regionData: MapRegions = {
 					"Super Hammer chest": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								"Bombette",
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2717,7 +2729,7 @@ const regionData: MapRegions = {
 					"Defeat all three Pokey's after hitting ? Block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2730,7 +2742,7 @@ const regionData: MapRegions = {
 					"On ledge behind hammer block": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2751,7 +2763,7 @@ const regionData: MapRegions = {
 					"Item on pedestal": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -2776,7 +2788,7 @@ const regionData: MapRegions = {
 					"Item on ledge, reachable by breaking block and hitting switch": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -3198,10 +3210,10 @@ const regionData: MapRegions = {
 				row: 1,
 				col: 1,
 				checks: {
-					"Left hidden block": { reqs: [["Bow", "toybox-open"]] },
-					"Right hidden block": { reqs: [["Bow", "toybox-open"]] },
+					"Left hidden block": { reqs: [logic.toyboxAccess] },
+					"Right hidden block": { reqs: [logic.toyboxAccess] },
 					"Items held by Shy Guys (all of them)": {
-						reqs: [["Bow", "toybox-open"]]
+						reqs: [logic.toyboxAccess]
 					}
 				}
 			},
@@ -3210,14 +3222,14 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block on left side": {
-						reqs: [["Bow", "toybox-open"]]
+						reqs: [logic.toyboxAccess]
 					},
 					"Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])":
 						{
-							reqs: [["Bow", "toybox-open"]]
+							reqs: [logic.toyboxAccess]
 						},
 					"Hidden block on right side": {
-						reqs: [["Bow", "toybox-open"]]
+						reqs: [logic.toyboxAccess]
 					}
 				}
 			},
@@ -3227,12 +3239,12 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of station": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
 					},
 					"Hidden block on right side": {
-						reqs: [["Bow", "toybox-open"]]
+						reqs: [logic.toyboxAccess]
 					}
 				}
 			},
@@ -3242,7 +3254,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coinsanity] 3 items on left spring": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3254,7 +3266,7 @@ const regionData: MapRegions = {
 					},
 					"[Coinsanity] 5 items on elevated spring": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3266,7 +3278,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block on left side of wall": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3279,7 +3291,7 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block on right side of wall that can be jumped across":
 						{
 							reqs: [
-								["Bow", "toybox-open"],
+								logic.toyboxAccess,
 								[
 									"Hammer",
 									"Super Hammer",
@@ -3291,7 +3303,7 @@ const regionData: MapRegions = {
 						},
 					"Item behind fallen blocks": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3303,7 +3315,7 @@ const regionData: MapRegions = {
 					},
 					"Item on roof of left house": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3316,7 +3328,7 @@ const regionData: MapRegions = {
 					},
 					"? Block on platform": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3328,7 +3340,7 @@ const regionData: MapRegions = {
 					},
 					"Item that Kammy spawns": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3340,7 +3352,7 @@ const regionData: MapRegions = {
 					},
 					Chest: {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							[
 								"Hammer",
 								"Super Hammer",
@@ -3357,19 +3369,19 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"Give Cake to Gourmet Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"Hidden block left after Gourmet Guy arch": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"Hidden block between two other ? Blocks": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					}
 				}
 			},
@@ -3378,13 +3390,13 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block before Spy Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train"]
+						reqs: [logic.toyboxAccess, "Toy Train"]
 					},
 					"[Coin Block] Left ? Block by Groove Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"[Coin Block] Right ? Block by Groove Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					}
 				}
 			},
@@ -3394,16 +3406,16 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of station": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
 					},
 					"Chest on right side": {
-						reqs: [["Bow", "toybox-open"], "Toy Train"]
+						reqs: [logic.toyboxAccess, "Toy Train"]
 					},
 					"Hidden block by pink switch": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					}
 				}
 			},
@@ -3413,7 +3425,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							[
 								"Hammer",
@@ -3426,7 +3438,7 @@ const regionData: MapRegions = {
 					},
 					"Chest on wall": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							[
 								"Hammer",
@@ -3439,7 +3451,7 @@ const regionData: MapRegions = {
 					},
 					"Chest after door": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							[
 								"Hammer",
@@ -3452,7 +3464,7 @@ const regionData: MapRegions = {
 					},
 					"Item that Kammy spawns": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							[
 								"Hammer",
@@ -3465,7 +3477,7 @@ const regionData: MapRegions = {
 					},
 					"Chest at end of room": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							[
 								"Hammer",
@@ -3484,14 +3496,14 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of station": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
 					},
 					"Hidden block in upper right corner": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					}
 				}
 			},
@@ -3500,10 +3512,10 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coinsanity] 3 items on first treadmill": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"[Coinsanity] 3 items on second treadmill": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
 					},
 					"[Coinsanity] Ring of coins inside fort after moving blocks": {
 						reqs: ["Bow", "Toy Train", "Cake"]
@@ -3526,7 +3538,7 @@ const regionData: MapRegions = {
 				checks: {
 					Watt: {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3540,7 +3552,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] Left ? Block": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3548,7 +3560,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] Right ? Block": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3556,7 +3568,7 @@ const regionData: MapRegions = {
 					},
 					"Hidden block by first elevator": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3564,7 +3576,7 @@ const regionData: MapRegions = {
 					},
 					"Hidden block between two other ? blocks": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3572,7 +3584,7 @@ const regionData: MapRegions = {
 					},
 					"Hidden block by door to Lantern Ghost room": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3586,7 +3598,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of station": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"],
@@ -3595,7 +3607,7 @@ const regionData: MapRegions = {
 					},
 					"Hidden block on left side": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3609,7 +3621,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block just past barricade": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							"Bombette",
@@ -3618,7 +3630,7 @@ const regionData: MapRegions = {
 					},
 					"Item on top of brick block": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							"Bombette",
@@ -3628,7 +3640,7 @@ const regionData: MapRegions = {
 					},
 					"? Block at end of room": {
 						reqs: [
-							["Bow", "toybox-open"],
+							logic.toyboxAccess,
 							"Toy Train",
 							"Cake",
 							"Bombette",
@@ -3651,13 +3663,13 @@ const regionData: MapRegions = {
 					"[Panel] Near middle of room": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3668,13 +3680,13 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far right tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3691,13 +3703,13 @@ const regionData: MapRegions = {
 					"Item on the outside Raph's Tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3707,13 +3719,13 @@ const regionData: MapRegions = {
 					"Talk to Raphael at the top": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3729,13 +3741,13 @@ const regionData: MapRegions = {
 					"Second Tree vine": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3745,13 +3757,13 @@ const regionData: MapRegions = {
 					"Last Tree vine": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3767,13 +3779,13 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far left tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3783,13 +3795,13 @@ const regionData: MapRegions = {
 					"Hidden block near first push block": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3805,13 +3817,13 @@ const regionData: MapRegions = {
 					"Hidden block near bell plant": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3821,13 +3833,13 @@ const regionData: MapRegions = {
 					"Tree vine near bell plant": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3837,13 +3849,13 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree near bell plant": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -3859,17 +3871,17 @@ const regionData: MapRegions = {
 					"Item under water": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -3883,17 +3895,17 @@ const regionData: MapRegions = {
 					"Item in tree by right side exit": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
@@ -3902,17 +3914,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree on ledge": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
@@ -3921,17 +3933,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Second bush from right": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -3939,17 +3951,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Second bush from left": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -3963,13 +3975,13 @@ const regionData: MapRegions = {
 					"[Coinsanity] Item under water on right side of room": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3978,13 +3990,13 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree near raven statue": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -3999,13 +4011,13 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -4021,34 +4033,34 @@ const regionData: MapRegions = {
 					"[Coinsanity] 2 items on spinning flower": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"Coconut tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4056,17 +4068,17 @@ const regionData: MapRegions = {
 					"Item behind bush near top of screen": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					}
@@ -4079,17 +4091,17 @@ const regionData: MapRegions = {
 					"[Coinsanity] Three items under water": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4097,17 +4109,17 @@ const regionData: MapRegions = {
 					"Hidden block near exit to NW Jungle": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4115,17 +4127,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree near north exit": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
@@ -4134,17 +4146,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Tree near Spear Guy": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
@@ -4153,17 +4165,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Right bush near north exit": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4171,17 +4183,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Bottom bush on left side": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4196,17 +4208,17 @@ const regionData: MapRegions = {
 					"? Block on island": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4214,17 +4226,17 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far right tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4232,34 +4244,34 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Bottom left bush": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"[Foliage Coin] Bottom right bush": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					}
@@ -4272,34 +4284,34 @@ const regionData: MapRegions = {
 					Sushie: {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"Item on top right island": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4307,17 +4319,17 @@ const regionData: MapRegions = {
 					"Item in tree on top right island": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie"
 						]
@@ -4325,17 +4337,17 @@ const regionData: MapRegions = {
 					"Chest after saving Misstar": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Misstar"
 						]
@@ -4349,34 +4361,34 @@ const regionData: MapRegions = {
 					"[Coinsanity] 2 items on spinning flower": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"Coconut tree 1 (far left)": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4384,17 +4396,17 @@ const regionData: MapRegions = {
 					"Coconut tree 2": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4402,34 +4414,34 @@ const regionData: MapRegions = {
 					"Hidden block by bell plant": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"Coconut tree 3": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4437,34 +4449,34 @@ const regionData: MapRegions = {
 					"Item on rock formation": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"Coconut tree 4": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4472,17 +4484,17 @@ const regionData: MapRegions = {
 					"Coconut tree 5": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4490,17 +4502,17 @@ const regionData: MapRegions = {
 					"Coconut tree 6 (last tree, 2 items)": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4514,13 +4526,13 @@ const regionData: MapRegions = {
 					"[Panel] In front of raven statue": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
@@ -4531,17 +4543,17 @@ const regionData: MapRegions = {
 					"Left Coconut tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4549,17 +4561,17 @@ const regionData: MapRegions = {
 					"Right Coconut tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4574,34 +4586,34 @@ const regionData: MapRegions = {
 					"[Shop] 6 items in Shop": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
 					"[Letter] Red Yoshi Kid (Chain)": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Red Yoshi Kid",
 							"Parakarry"
@@ -4627,17 +4639,17 @@ const regionData: MapRegions = {
 					"Coconut tree on right side of room": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
@@ -4651,17 +4663,17 @@ const regionData: MapRegions = {
 					"Item behind large tree": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								["Watt", "Hammer"],
 								["Watt", "Super Hammer"],
 								["Watt", "Ultra Hammer"],
 								["Watt", "Super Boots"],
 								["Watt", "Ultra Boots"],
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					}
@@ -4680,13 +4692,13 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block 1": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4696,13 +4708,13 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block 2": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4712,13 +4724,13 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block 3": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4728,13 +4740,13 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block 4": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4744,13 +4756,13 @@ const regionData: MapRegions = {
 					"Item on top of brick block": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4761,13 +4773,13 @@ const regionData: MapRegions = {
 					"Item on platform halfway down second zip line": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4784,13 +4796,13 @@ const regionData: MapRegions = {
 					"[Panel] Right side of lower level": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4811,13 +4823,13 @@ const regionData: MapRegions = {
 					"[Panel] Left of heart block": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4835,13 +4847,13 @@ const regionData: MapRegions = {
 					"Left ? Block": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4852,13 +4864,13 @@ const regionData: MapRegions = {
 					"Right ? Block": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4875,13 +4887,13 @@ const regionData: MapRegions = {
 					"Ultra Hammer chest": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4898,13 +4910,13 @@ const regionData: MapRegions = {
 					"Hidden block on right side of room": {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4922,13 +4934,13 @@ const regionData: MapRegions = {
 					Chest: {
 						reqs: [
 							[
-								"starting-location:YoshiVillage",
+								logic.startingLocation("Yoshi Village"),
 								"Watt",
-								"whale-open",
+								logic.whaleOpen,
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Sushie",
 							"Jade Raven",
@@ -4948,7 +4960,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Ride cloud elevator up to item": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Lakilester",
 							["Super Boots", "Ultra Boots"],
 							"Magical Bean",
@@ -4966,17 +4978,17 @@ const regionData: MapRegions = {
 				checks: {
 					Lakilester: {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							["Lakilester", "Bubble Berry"],
 							"Bombette"
 						]
 					},
 					"Item in grass": {
-						reqs: ["chapter-6-entry", ["Lakilester", "Bubble Berry"]]
+						reqs: [logic.chapter6Entry, ["Lakilester", "Bubble Berry"]]
 					},
 					"Item in crevasse": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							["Lakilester", "Bubble Berry"],
 							"Bombette"
 						]
@@ -4988,10 +5000,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on ledge": {
-						reqs: ["chapter-6-entry", ["Lakilester", "Bubble Berry"]]
+						reqs: [logic.chapter6Entry, ["Lakilester", "Bubble Berry"]]
 					},
 					"Item in vines immediately below ledge item": {
-						reqs: ["chapter-6-entry"]
+						reqs: [logic.chapter6Entry]
 					}
 				}
 			},
@@ -5001,12 +5013,12 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item in second vine (jump to trigger it)": {
-						reqs: ["chapter-6-entry"]
+						reqs: [logic.chapter6Entry]
 					},
 					"Item from ground pounding opposite side from partner upgrade block":
 						{
 							reqs: [
-								"chapter-6-entry",
+								logic.chapter6Entry,
 								"Lakilester",
 								["Super Boots", "Ultra Boots"]
 							]
@@ -5019,14 +5031,14 @@ const regionData: MapRegions = {
 				checks: {
 					"Item in grass at bottom of screen": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Lakilester",
 							["Super Boots", "Ultra Boots"]
 						]
 					},
 					"? Block before cloud machine room": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Lakilester",
 							["Super Boots", "Ultra Boots"]
 						]
@@ -5039,7 +5051,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Give Rosie the Crystal Berry": {
-						reqs: ["chapter-6-entry", "Blue Berry", "Crystal Berry"]
+						reqs: [logic.chapter6Entry, "Blue Berry", "Crystal Berry"]
 					}
 				}
 			},
@@ -5049,10 +5061,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Coin Block] Hidden block between brick block and spring": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
+						reqs: [logic.chapter6Entry, "Blue Berry"]
 					},
 					"Hidden block above brick block": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
+						reqs: [logic.chapter6Entry, "Blue Berry"]
 					}
 				}
 			},
@@ -5063,7 +5075,7 @@ const regionData: MapRegions = {
 					"[Foliage Coin] Far left tree": {
 						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
 								"Ultra Hammer"
@@ -5073,11 +5085,11 @@ const regionData: MapRegions = {
 					},
 					"Hit trees Middle, Right, Left": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
 					},
-					"Second set of vines": { reqs: ["chapter-6-entry"] }
+					"Second set of vines": { reqs: [logic.chapter6Entry] }
 				}
 			},
 			Petunia: {
@@ -5086,18 +5098,18 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Near bottom left corner of room directly above grass": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
 					},
 					"Talk to Petunia and defeat all moles": {
-						reqs: ["chapter-6-entry"]
+						reqs: [logic.chapter6Entry]
 					}
 				}
 			},
@@ -5106,7 +5118,7 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"Give a blue berry to the well": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
+						reqs: [logic.chapter6Entry, "Blue Berry"]
 					}
 				}
 			},
@@ -5115,7 +5127,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"2 items from Posie": {
-						reqs: ["chapter-6-entry", "Red Berry"]
+						reqs: [logic.chapter6Entry, "Red Berry"]
 					}
 				}
 			},
@@ -5125,20 +5137,20 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Red Berry",
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Red Berry",
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
 						]
 					},
 					"Item in middle vines": {
-						reqs: ["chapter-6-entry", "Red Berry"]
+						reqs: [logic.chapter6Entry, "Red Berry"]
 					}
 				}
 			},
@@ -5147,11 +5159,11 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Vines next to yellow flower": {
-						reqs: ["chapter-6-entry"]
+						reqs: [logic.chapter6Entry]
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
@@ -5159,7 +5171,7 @@ const regionData: MapRegions = {
 					},
 					"Item in grass right of tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"]
 						]
@@ -5172,7 +5184,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Under hidden block on right side": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
@@ -5180,14 +5192,14 @@ const regionData: MapRegions = {
 					},
 					"? Block on left side": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"]
 						]
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
 							"Water Stone",
@@ -5197,7 +5209,7 @@ const regionData: MapRegions = {
 					},
 					"Hidden ? Block on right side": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"]
 						]
@@ -5210,7 +5222,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Give Water Stone to Lily": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
 							"Water Stone"
@@ -5218,7 +5230,7 @@ const regionData: MapRegions = {
 					},
 					"Item in tree": {
 						reqs: [
-							"chapter-6-entry",
+							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"]
 						]
@@ -5239,7 +5251,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5256,7 +5268,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5279,7 +5291,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5302,7 +5314,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5318,7 +5330,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5334,7 +5346,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5356,7 +5368,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5376,7 +5388,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5396,7 +5408,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
 						]
@@ -5407,7 +5419,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Mayor Penguin",
 							"Parakarry"
@@ -5419,7 +5431,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key"
 						]
@@ -5430,7 +5442,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					}
@@ -5446,7 +5458,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -5456,7 +5468,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							]
 						]
 					},
@@ -5466,7 +5478,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5495,7 +5507,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							["Super Boots", "Ultra Boots", "Ultra Hammer"]
@@ -5507,7 +5519,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							["Hammer", "Super Hammer", "Ultra Hammer"]
@@ -5519,7 +5531,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key"
 						]
@@ -5536,7 +5548,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key"
 						]
@@ -5547,7 +5559,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key"
 						]
@@ -5564,7 +5576,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Frost T.",
@@ -5577,7 +5589,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key"
 						]
@@ -5598,7 +5610,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5623,7 +5635,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5641,7 +5653,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5667,7 +5679,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5686,7 +5698,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5712,7 +5724,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5740,7 +5752,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5772,7 +5784,7 @@ const regionData: MapRegions = {
 							"Bombette",
 							"Super Hammer",
 							"Super Boots",
-							["Sushie", "logic:blueHouseOpen", "Odd Key"]
+							["Sushie", logic.blueHouseOpen, "Odd Key"]
 						]
 					}
 				}
@@ -5788,7 +5800,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",
@@ -5807,7 +5819,7 @@ const regionData: MapRegions = {
 								["Super Boots", "Sushie"],
 								["Ultra Boots", "Sushie"],
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
+								[logic.blueHouseOpen, "Bombette"]
 							],
 							"Warehouse Key",
 							"Scarf",

@@ -22,7 +22,6 @@ const derivedData = computed(
 		src: string;
 	} => {
 		if (bootsOrHammer.value) {
-			console.log("derived data");
 			const _ultra = `Ultra ${item}`;
 			const _super = `Super ${item}`;
 			if (playthroughStore.hasItem(_ultra)) {

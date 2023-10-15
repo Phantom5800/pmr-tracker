@@ -19,7 +19,9 @@ const props = defineProps<{
 			<tr
 				v-for="key in optionsKeys"
 				:key="key"
-				@click="optionsStore.toggle(key)"
+				@click="
+					optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
+				"
 			>
 				<td class="option-name" colspan="3">{{ optionsStore.getName(key) }}</td>
 				<td v-if="optionsStore.getType(key) === 'boolean'" class="option">
@@ -35,6 +37,31 @@ const props = defineProps<{
 						<div class="checkbox-groove"></div>
 						<!-- <label class="checkbox-slider" :for="key"></label> -->
 					</div>
+				</td>
+				<td v-else-if="optionsStore.getType(key) === 'select'">
+					<select
+						:name="key"
+						:id="key"
+						@change="(event) => optionsStore.setValue(key, event.target.value)"
+					>
+						<option
+							v-for="option in optionsStore.getChoices(key)"
+							:key="option"
+							:value="option"
+							:selected="options[key] === option"
+						>
+							{{ option }}
+						</option>
+					</select>
+				</td>
+				<td v-else-if="optionsStore.getType(key) === 'number'">
+					<input
+						:name="key"
+						:id="key"
+						type="number"
+						:value="options[key]"
+						@change="(event) => optionsStore.setValue(key, event.target.value)"
+					/>
 				</td>
 			</tr>
 		</table>

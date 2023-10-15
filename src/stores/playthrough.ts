@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Requirements } from "../data/map";
+import { useOptions } from "./config";
 
 type PlaythroughProps = {
 	items: string[];
@@ -122,9 +123,12 @@ const resolveRequirement = (
 	operation: "and" | "or"
 ): boolean => {
 	const playthrough = usePlaythrough();
+	const options = useOptions();
 
 	if (reqs === null) {
 		return true;
+	} else if (typeof reqs === "boolean") {
+		return reqs;
 	} else if (typeof reqs === "string") {
 		return playthrough.hasItem(reqs);
 	} else if (typeof reqs === "number") {
@@ -139,6 +143,8 @@ const resolveRequirement = (
 				"Kalmar"
 			]).length >= reqs
 		);
+	} else if (typeof reqs === "function") {
+		return reqs(playthrough.$state.items, options.$state.options);
 	} else if (operation === "and") {
 		return reqs.every((el) => resolveRequirement(el, "or"));
 	} else if (operation === "or") {
