@@ -37,7 +37,9 @@ export default {
 	},
 	crystalPalaceAccess(items: string[], settings: OptionsValues) {
 		return (
-			this.shiverRegionAccess(items, settings) &&
+			((items.includes("Sushie") && items.includes("Super Boots")) ||
+				(items.includes("Bombette") &&
+					(settings.blueHouseOpen || items.includes("Odd Key")))) &&
 			items.includes("Warehouse Key") &&
 			items.includes("Scarf") &&
 			items.includes("Bucket") &&

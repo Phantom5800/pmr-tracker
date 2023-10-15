@@ -480,7 +480,7 @@ const regionData: MapRegions = {
 					"[Panel] In front of pot outside house": {
 						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
 					},
-					"[Shop] 6 items from Merlow Star Piece Rewards": {
+					"[Merlow] 6 items from Merlow Star Piece Rewards": {
 						reqs: null
 					},
 					"[Letter] Merlow": { reqs: ["Merlow", "Parakarry"] },
@@ -550,17 +550,17 @@ const regionData: MapRegions = {
 					"[Letter] Minh T. (Chain)": {
 						reqs: ["Minh T.", "Parakarry"]
 					},
-					"[Shop] 4 items in Rowf's Shop": { reqs: null },
-					"[Shop] 3 items in Rowf's Shop after clearing 1 chapter": {
+					"[Rowf] 4 items in Rowf's Shop": { reqs: null },
+					"[Rowf] 3 items in Rowf's Shop after clearing 1 chapter": {
 						reqs: [1]
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 2 chapters": {
+					"[Rowf] 3 items in Rowf's Shop after clearing 2 chapters": {
 						reqs: [2]
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 3 chapters": {
+					"[Rowf] 3 items in Rowf's Shop after clearing 3 chapters": {
 						reqs: [3]
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 4 chapters": {
+					"[Rowf] 3 items in Rowf's Shop after clearing 4 chapters": {
 						reqs: [4]
 					},
 					"Tree by Merlon's house": {
@@ -1162,10 +1162,10 @@ const regionData: MapRegions = {
 						{
 							reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
 						},
-					"[Koot] [Koot Coin] Return Koopa Legends to Koopa Koot": {
+					"[Koot Coin] Return Koopa Legends to Koopa Koot": {
 						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"], "Koopa Legends"]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
+					"[Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							"Koopa Legends",
@@ -1179,7 +1179,7 @@ const regionData: MapRegions = {
 							"Sleepy Sheep"
 						]
 					},
-					"[Koot] [Koot Coin] Return Koopa Koot's Tape": {
+					"[Koot Coin] Return Koopa Koot's Tape": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							1,
@@ -1198,7 +1198,7 @@ const regionData: MapRegions = {
 							"Koopa Tea"
 						]
 					},
-					"[Koot] [Koot Coin] Give Luigi's Autograph to Koopa Koot": {
+					"[Koot Coin] Give Luigi's Autograph to Koopa Koot": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							1,
@@ -1209,7 +1209,7 @@ const regionData: MapRegions = {
 							"Luigi's Autograph"
 						]
 					},
-					"[Koot] [Koot Coin] Return Koopa Koot's wallet": {
+					"[Koot Coin] Return Koopa Koot's wallet": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
@@ -1221,7 +1221,7 @@ const regionData: MapRegions = {
 							"Wallet"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Tasty Tonic": {
+					"[Koot Coin] Give Koopa Koot a Tasty Tonic": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
@@ -1248,7 +1248,7 @@ const regionData: MapRegions = {
 							"Merluvlee's Autograph"
 						]
 					},
-					"[Koot] [Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
+					"[Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
 						{
 							reqs: [
 								["Hammer", "Super Hammer", "Ultra Hammer"],
@@ -1263,7 +1263,7 @@ const regionData: MapRegions = {
 								"Merluvlee's Autograph"
 							]
 						},
-					"[Koot] [Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
+					"[Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
@@ -1293,7 +1293,7 @@ const regionData: MapRegions = {
 							"Life Shroom"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Nutty Cake": {
+					"[Koot Coin] Give Koopa Koot a Nutty Cake": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
@@ -1327,7 +1327,7 @@ const regionData: MapRegions = {
 							"Bombette"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot the Old Photo": {
+					"[Koot Coin] Give Koopa Koot the Old Photo": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
@@ -1346,7 +1346,7 @@ const regionData: MapRegions = {
 							"Old Photo"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot Koopasta": {
+					"[Koot Coin] Give Koopa Koot Koopasta": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
@@ -1366,7 +1366,7 @@ const regionData: MapRegions = {
 							"Koopasta"
 						]
 					},
-					"[Koot] [Koot Coin] Return Koopa Koot's glasses": {
+					"[Koot Coin] Return Koopa Koot's glasses": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
@@ -1409,7 +1409,7 @@ const regionData: MapRegions = {
 							"Lime"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Kooky Cookie": {
+					"[Koot Coin] Give Koopa Koot a Kooky Cookie": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
@@ -1432,7 +1432,7 @@ const regionData: MapRegions = {
 							"Kooky Cookie"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot his package": {
+					"[Koot Coin] Give Koopa Koot his package": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
@@ -1456,7 +1456,7 @@ const regionData: MapRegions = {
 							"Package"
 						]
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Coconut": {
+					"[Koot Coin] Give Koopa Koot a Coconut": {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,

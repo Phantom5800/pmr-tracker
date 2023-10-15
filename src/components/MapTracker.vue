@@ -10,6 +10,43 @@ const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
 
 const region = computed(() => getRegionData(currentMap.value));
+
+function areaHasChecksInLogic(pRegion: string, area: string): boolean {
+	const checks = getRegionData(pRegion).areas[area].checks;
+	return Object.entries(checks).some(
+		([checkName, check]) =>
+			playthrough.locationIsRandomized(checkName) &&
+			!playthrough.checkedLocation(checkName) &&
+			playthrough.canCheckLocation(check.reqs)
+	);
+}
+
+function areaFullCleared(pRegion: string, area: string): boolean {
+	const checks = getRegionData(pRegion).areas[area].checks;
+	return Object.entries(checks).every(
+		([checkName, check]) =>
+			!playthrough.locationIsRandomized(checkName) ||
+			playthrough.checkedLocation(checkName)
+	);
+}
+
+function regionHasChecksInLogic(pRegion: string): boolean {
+	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).some((el) =>
+		areaHasChecksInLogic(pRegion, el)
+	);
+}
+
+function regionFullCleared(pRegion: string): boolean {
+	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).every((el) =>
+		areaFullCleared(pRegion, el)
+	);
+}
+
+const unshuffledChecks = computed(() =>
+	Object.getOwnPropertyNames(
+		region.value.areas[currentArea.value].checks
+	).filter((el) => !playthrough.locationIsRandomized(el))
+);
 </script>
 
 <template>
@@ -18,7 +55,9 @@ const region = computed(() => getRegionData(currentMap.value));
 			<button
 				class="map-select"
 				:class="{
-					selected: map === currentMap
+					selected: map === currentMap,
+					fullCleared: regionFullCleared(map),
+					checksInLogic: regionHasChecksInLogic(map)
 				}"
 				v-for="map in allRegions"
 				:key="map"
@@ -37,7 +76,11 @@ const region = computed(() => getRegionData(currentMap.value));
 					class="map-area"
 					v-for="area in Object.getOwnPropertyNames(region.areas)"
 					:key="area"
-					:class="{ selected: area === currentArea }"
+					:class="{
+						selected: area === currentArea,
+						checksInLogic: areaHasChecksInLogic(currentMap, area),
+						fullCleared: areaFullCleared(currentMap, area)
+					}"
 					@click="currentArea = area"
 					:style="{
 						gridRow: `${region.areas[area].row} / span ${
@@ -64,18 +107,20 @@ const region = computed(() => getRegionData(currentMap.value));
 			<ul>
 				<li
 					v-for="[checkName, check] in Object.entries(
-						getChecks(currentMap, currentArea)
+						region.areas[currentArea].checks
 					)"
 					:key="checkName"
 					:class="{
 						available: playthrough.canCheckLocation(check.reqs),
-						obtained: playthrough.checkedLocation(checkName)
+						obtained: playthrough.checkedLocation(checkName),
+						disabled: unshuffledChecks.includes(checkName)
 					}"
 				>
 					<input
 						type="checkbox"
 						:name="checkName"
 						:id="checkName"
+						:disabled="unshuffledChecks.includes(checkName)"
 						:checked="playthrough.checkedLocation(checkName)"
 						@change="playthrough.toggleCheck(checkName)"
 					/>
@@ -91,7 +136,6 @@ const region = computed(() => getRegionData(currentMap.value));
 <style scoped>
 button {
 	height: 100%;
-
 	border-radius: 5px;
 	font-family: "Paper Mario";
 }
@@ -115,6 +159,7 @@ button:hover {
 
 .map-buttons button {
 	margin-bottom: 0.25em;
+	background-color: #ff818167;
 }
 
 button.map-select.complete {
@@ -127,7 +172,7 @@ button.map-select.complete.selected {
 }
 
 button.selected {
-	background-color: #1e7438;
+	background-color: #1e7438 !important;
 	border-color: black;
 }
 
@@ -140,6 +185,16 @@ button.selected {
 
 button.map-area {
 	width: 100%;
+	background-color: #ff818167;
+}
+
+button.checksInLogic {
+	background-color: white;
+}
+
+button.fullCleared {
+	text-decoration: line-through;
+	color: #333;
 }
 
 .map-checks ul {
@@ -152,5 +207,10 @@ button.map-area {
 
 .map-checks li.available {
 	color: #ddd;
+}
+
+.map-checks li.disabled {
+	color: #666;
+	text-decoration: line-through;
 }
 </style>

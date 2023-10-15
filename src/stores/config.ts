@@ -1,30 +1,5 @@
 import { defineStore } from "pinia";
 
-type OptionData = {
-	namespace: "config" | "settings";
-	name: string;
-} & (
-	| {
-			type: "boolean";
-			default: boolean;
-	  }
-	| { type: "number"; default: number }
-	| {
-			type: "select";
-			default: string;
-			choices: string[];
-	  }
-	| {
-			type: "color";
-			default: string;
-	  }
-	| { type: "string"; default: string }
-);
-
-const test = {
-	key: false
-};
-
 const optionsData = {
 	colorblind: {
 		namespace: "config",
@@ -263,7 +238,7 @@ const optionsData = {
 		default: "vanilla",
 		choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
 	}
-} satisfies Record<string, OptionData>;
+};
 
 export type OptionsValues = {
 	[key in keyof typeof optionsData]: (typeof optionsData)[key]["default"];

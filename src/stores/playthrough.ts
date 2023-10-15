@@ -140,6 +140,39 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		canCheckLocation(reqs: Requirements) {
 			return resolveRequirement(reqs, "and");
+		},
+		locationIsRandomized(check: string) {
+			const optionsStore = useOptions();
+			const settings = optionsStore.$state.options;
+			const tags = {
+				Panel: settings.panelsRandomized,
+				Dojo: settings.dojoRandomized,
+				Shop: settings.shopsRandomized,
+				Rowf: settings.shopsRandomized && settings.rowfRandomized,
+				Trade: settings.tradingEventRandomized,
+				Letter: settings.lettersRandomized,
+				Koot: settings.koopaKootRandomized,
+				"Koot Coin":
+					settings.koopaKootRandomized && settings.kootCoinsRandomized,
+				"Foliage Coin": settings.foliageCoinsRandomized,
+				Coinsanity: settings.coinsRandomized,
+				"Coin Block": settings.coinBlocksRandomized,
+				Merlow: settings.merlowRandomized
+			};
+
+			if (check.startsWith("[")) {
+				const tag: keyof typeof tags | undefined = (
+					Object.getOwnPropertyNames(tags) as (keyof typeof tags)[]
+				).find((el) => check.startsWith(`[${el}]`));
+				if (!tag) {
+					console.error(`Error processing tag ${check}`);
+					return true;
+				} else {
+					return tags[tag];
+				}
+			} else {
+				return true;
+			}
 		}
 	}
 });
