@@ -30,5 +30,6 @@ textarea {
 	min-height: 6rem;
 	min-width: 100%;
 	max-width: 100%;
+	font-size: 1rem;
 }
 </style>

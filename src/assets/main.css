@@ -8,6 +8,8 @@ body {
 	background-color: darkslategray;
 	font-family: "Paper Mario";
 	user-select: none;
+	font-size: 1.2rem;
+	color: white;
 }
 
 *,
@@ -25,15 +27,14 @@ a:hover {
 	text-decoration: underline;
 }
 
-p,
+p {
+	margin: 0;
+}
+
 h1,
 h2,
 h3 {
 	margin: 0 0 0 0;
 	font-size: 1.5rem;
 	font-weight: normal;
-	color: white;
-
-	-webkit-text-stroke: 1px black;
-	stroke: 1px black;
 }

@@ -50,7 +50,7 @@ const unshuffledChecks = computed(() =>
 </script>
 
 <template>
-	<TrackerPanel>
+	<TrackerPanel :width-rem="60">
 		<div class="map-buttons">
 			<button
 				class="map-select"
@@ -94,6 +94,7 @@ const unshuffledChecks = computed(() =>
 					{{ area }}
 				</button>
 				<button
+					class="map-area"
 					v-for="blank in region.blanks"
 					:key="blank.row * 100 + blank.col"
 					:style="{
@@ -143,6 +144,7 @@ button {
 button.map-select {
 	width: auto;
 	height: 2em;
+	font-size: 0.9rem;
 }
 
 button:hover {
@@ -186,6 +188,7 @@ button.selected {
 button.map-area {
 	width: 100%;
 	background-color: #ff818167;
+	font-size: 1rem;
 }
 
 button.checksInLogic {
@@ -206,7 +209,7 @@ button.fullCleared {
 }
 
 .map-checks li.available {
-	color: #ddd;
+	color: white;
 }
 
 .map-checks li.disabled {

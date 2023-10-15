@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { widthRem } = defineProps<{ widthRem?: number }>();
+</script>
 
 <template>
-	<div>
+	<div :style="{ width: `${widthRem}rem !important` }">
 		<slot></slot>
 	</div>
 </template>

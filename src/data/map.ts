@@ -2312,7 +2312,23 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Far Left Tree": { row: 4, col: 7, checks: {} },
+			"Far Left Tree": {
+				row: 4,
+				col: 7,
+				checks: {
+					"[Foliage Coin] Far left tree": {
+						reqs: [
+							[
+								logic.startingLocation("Dry Dry Outpost"),
+								["Bombette", "Parakarry"],
+								"Super Hammer",
+								"Ultra Hammer"
+							],
+							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
+						]
+					}
+				}
+			},
 			"Outside Outpost": {
 				row: 4,
 				col: 8,
@@ -5281,17 +5297,6 @@ const regionData: MapRegions = {
 				row: 3,
 				col: 5,
 				checks: {
-					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					},
 					"Hit trees Middle, Right, Left": {
 						reqs: [
 							logic.chapter6Entry,
