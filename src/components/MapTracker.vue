@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
-import { getAreas, allRegions, getBlanks, getChecks } from "../data/map";
+import { allRegions, getChecks, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
 
 const playthrough = usePlaythrough();
@@ -9,25 +9,7 @@ const playthrough = usePlaythrough();
 const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
 
-const areas = computed(() => getAreas(currentMap.value));
-
-const toadTown: Record<
-	string,
-	{ col: number; row: number; colSpan?: number; rowSpan?: number }
-> = {
-	"Castle Ruins": { col: 3, row: 1, rowSpan: 2 },
-	"Shooting Star Summit": { col: 4, row: 1 },
-	"Mario's House": { col: 2, row: 2 },
-	"Merluvlee's House": { col: 4, row: 2 },
-	"Outside Toad Town": { col: 1, row: 3 },
-	"Main Gate": { col: 2, row: 3 },
-	"Central Plaza": { col: 3, row: 3 },
-	Harbor: { col: 1, row: 4 },
-	"Residential Area": { col: 2, row: 4 },
-	"Below Plaza": { col: 3, row: 4 },
-	"Forever Forest Entrance": { col: 4, row: 4 },
-	"Train Station": { col: 4, row: 5 }
-};
+const region = computed(() => getRegionData(currentMap.value));
 </script>
 
 <template>
@@ -42,7 +24,7 @@ const toadTown: Record<
 				:key="map"
 				@click="
 					currentMap = map;
-					currentArea = Object.getOwnPropertyNames(getAreas(map))[0];
+					currentArea = Object.getOwnPropertyNames(region.areas)[0];
 				"
 			>
 				{{ map }}
@@ -53,17 +35,29 @@ const toadTown: Record<
 			<div class="map-areas">
 				<button
 					class="map-area"
-					v-for="area in Object.getOwnPropertyNames(areas)"
+					v-for="area in Object.getOwnPropertyNames(region.areas)"
 					:key="area"
 					:class="{ selected: area === currentArea }"
 					@click="currentArea = area"
 					:style="{
-						gridRow: `${areas[area].row} / span ${areas[area].rowSpan || 1}`,
-						gridColumn: `${areas[area].col} / span ${areas[area].colSpan || 1}`
+						gridRow: `${region.areas[area].row} / span ${
+							region.areas[area].rowSpan || 1
+						}`,
+						gridColumn: `${region.areas[area].col} / span ${
+							region.areas[area].colSpan || 1
+						}`
 					}"
 				>
 					{{ area }}
 				</button>
+				<button
+					v-for="blank in region.blanks"
+					:key="blank.row * 100 + blank.col"
+					:style="{
+						gridRow: `${blank.row} / span ${blank.rowSpan || 1}`,
+						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`
+					}"
+				></button>
 			</div>
 		</div>
 		<div class="map-checks">
@@ -111,10 +105,6 @@ button:hover {
 	background-color: #5fcf80;
 }
 
-button:focus {
-	background-color: #1e7438;
-}
-
 .map-buttons {
 	text-align: center;
 	margin: 0em 1em 1em 1em;
@@ -158,11 +148,6 @@ button.map-area {
 
 .map-checks li {
 	color: #888;
-}
-
-.map-checks li.obtained {
-	text-decoration: line-through;
-	color: #666;
 }
 
 .map-checks li.available {

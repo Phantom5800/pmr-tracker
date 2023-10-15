@@ -6081,7 +6081,6 @@ const regionData: MapRegions = {
 };
 
 export const allRegions = Object.getOwnPropertyNames(regionData);
-export const getAreas = (region: string) => regionData[region].areas;
-export const getBlanks = (region: string) => regionData[region].blanks;
+export const getRegionData = (region: string) => regionData[region];
 export const getChecks = (region: string, area: string) =>
 	regionData[region].areas[area].checks;
