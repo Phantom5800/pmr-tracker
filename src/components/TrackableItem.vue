@@ -3,59 +3,65 @@ import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
 import { computed, toRefs } from "vue";
 import { chapterRewardReqs } from "@/data/map";
+import type { TrackableItemInfo } from "@/types/items.ts";
 
 const playthroughStore = usePlaythrough();
-const { item, src, multiple, label, shrink } = defineProps<{
-	item: string;
-	src: string;
-	multiple?: number;
-	label?: string;
+const { info, shrink } = defineProps<{
+	info: TrackableItemInfo;
 	shrink?: boolean;
 }>();
 
-const bootsOrHammer = computed(() => item === "Boots" || item === "Hammer");
+const { name, image, multiple, label } = info;
+
+const bootsOrHammer = computed(() => name === "Boots" || name === "Hammer");
 
 const derivedData = computed(
 	(): {
 		adding: null | string;
 		removing: null | string;
-		item: string;
-		src: string;
+		name: string;
+		image: string;
 	} => {
 		if (bootsOrHammer.value) {
-			const _ultra = `Ultra ${item}`;
-			const _super = `Super ${item}`;
+			const _ultra = `Ultra ${name}`;
+			const _super = `Super ${name}`;
 			if (playthroughStore.hasItem(_ultra)) {
 				return {
 					adding: null,
 					removing: _ultra,
-					item: _ultra,
-					src: `/src/assets/images/upgrades/PM_${_ultra.replace(" ", "_")}.png`
+					name: _ultra,
+					image: `/src/assets/images/upgrades/PM_${_ultra.replace(
+						" ",
+						"_"
+					)}.png`
 				};
 			} else if (playthroughStore.hasItem(_super)) {
 				return {
 					adding: _ultra,
 					removing: _super,
-					item: _ultra,
-					src: `/src/assets/images/upgrades/PM_${_super.replace(" ", "_")}.png`
+					name: _ultra,
+					image: `/src/assets/images/upgrades/PM_${_super.replace(
+						" ",
+						"_"
+					)}.png`
 				};
-			} else if (playthroughStore.hasItem(item)) {
+			} else if (playthroughStore.hasItem(name)) {
 				return {
 					adding: _super,
-					removing: item,
-					item: _ultra,
-					src: `/src/assets/images/upgrades/PM_${item}.png`
+					removing: name,
+					name: _ultra,
+					image: `/src/assets/images/upgrades/PM_${name}.png`
 				};
 			} else {
 				return {
-					adding: item,
+					adding: name,
 					removing: null,
-					item: _ultra,
-					src: `/src/assets/images/upgrades/PM_No_${item}.png`
+					name: _ultra,
+					image: `/src/assets/images/upgrades/PM_No_${name}.png`
 				};
 			}
 		} else {
-			return { adding: item, removing: item, item: item, src: src };
+			return { adding: name, removing: name, name: name, image: image };
 		}
 	}
 );
@@ -64,27 +70,27 @@ const derivedData = computed(
 <template>
 	<div
 		:class="{
-			fade: !bootsOrHammer && !playthroughStore.hasItem(item),
+			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
 			shrink: shrink,
 			glow:
-				item in chapterRewardReqs &&
-				!playthroughStore.hasItem(item) &&
-				playthroughStore.canCheckLocation(chapterRewardReqs[item])
+				name in chapterRewardReqs &&
+				!playthroughStore.hasItem(name) &&
+				playthroughStore.canCheckLocation(chapterRewardReqs[name])
 		}"
 		@click="
 			multiple || bootsOrHammer
 				? playthroughStore.addItem(derivedData.adding, multiple)
-				: playthroughStore.toggleItem(item)
+				: playthroughStore.toggleItem(name)
 		"
 		@contextmenu.prevent="
 			(multiple || bootsOrHammer) &&
 				playthroughStore.removeItem(derivedData.removing)
 		"
 	>
-		<img :src="derivedData.src" :alt="item" />
+		<img :src="derivedData.image" :alt="name" />
 		<p class="label" v-if="label">{{ label }}</p>
 		<p class="count" v-if="multiple">
-			{{ playthroughStore.itemCount(item) + "/" + multiple }}
+			{{ playthroughStore.itemCount(name) + "/" + multiple }}
 		</p>
 	</div>
 </template>
@@ -98,6 +104,7 @@ div {
 	justify-content: center;
 	align-items: center;
 	image-rendering: crisp-edges;
+	position: relative;
 }
 
 img {

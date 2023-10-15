@@ -28,6 +28,7 @@ textarea {
 	width: 100%;
 	height: 100%;
 	min-height: 6rem;
+	min-width: 100%;
 	max-width: 100%;
 }
 </style>

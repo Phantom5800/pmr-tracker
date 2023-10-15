@@ -10,6 +10,7 @@ import { configKeys, settingsKeys } from "./stores/config";
 import MainTracker from "./components/MainTracker.vue";
 import MapTracker from "./components/MapTracker.vue";
 import LetterTracker from "./components/LetterTracker.vue";
+import MiscItemTracker from "./components/MiscItemTracker.vue";
 import Notes from "./components/Notes.vue";
 
 const configOpen = ref(false);
@@ -51,6 +52,7 @@ const year = new Date().getFullYear();
 	<main>
 		<EnabledSettings />
 		<Notes />
+		<MiscItemTracker />
 		<MainTracker />
 		<!-- <InfoBlocks /> -->
 		<MapTracker />
