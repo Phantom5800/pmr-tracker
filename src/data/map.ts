@@ -696,9 +696,14 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Upgrade Block": {
+			"Lower Upgrade Block": {
 				row: 4,
 				col: 3,
+				checks: {}
+			},
+			"Bridge Upgrade Block": {
+				row: 2,
+				col: 4,
 				checks: {
 					"[Coin Block] Left invisible block": {
 						reqs: [
@@ -732,11 +737,11 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Chapter 3 Shortcut": { row: 2, col: 4, colSpan: 2, checks: {} },
-			"Tunnels Sushie Room": { row: 2, col: 6, checks: {} },
+			"Chapter 3 Shortcut": { row: 2, col: 5, colSpan: 2, checks: {} },
+			"Tunnels Sushie Room": { row: 2, col: 7, checks: {} },
 			"Above Spiny Room": {
 				row: 2,
-				col: 7,
+				col: 8,
 				checks: {
 					"Ultra Boots ? block": {
 						reqs: [
@@ -752,7 +757,7 @@ const regionData: MapRegions = {
 			},
 			"Chapter 7 Door": {
 				row: 2,
-				col: 8,
+				col: 9,
 				rowSpan: 2,
 				checks: {
 					"[Coin Block] ? Block 1": {
@@ -807,7 +812,7 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Chapter 7 Pipe": { row: 2, col: 9, checks: {} },
+			"Chapter 7 Pipe": { row: 2, col: 10, checks: {} },
 			"Power Smash": {
 				row: 3,
 				col: 1,
@@ -824,6 +829,11 @@ const regionData: MapRegions = {
 						reqs: [["Super Hammer", "Ultra Hammer"], "Parakarry"]
 					}
 				}
+			},
+			"Elevator Upgrade Block": {
+				row: 3,
+				col: 4,
+				checks: {}
 			},
 			"Ultra Boots Room": {
 				row: 3,
@@ -937,7 +947,7 @@ const regionData: MapRegions = {
 			},
 			"Below Blue House": {
 				row: 3,
-				col: 9,
+				col: 10,
 				checks: {
 					"All items from Rip Cheato - 11 total, only first 6 (28 coins) can be progression":
 						{
@@ -965,7 +975,7 @@ const regionData: MapRegions = {
 					"Right ? Block": { reqs: null }
 				}
 			},
-			"Switch Bridge #1": {
+			"Switch Bridge 1": {
 				row: 1,
 				col: 2,
 				checks: {
@@ -999,7 +1009,7 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Switch Bridge #2": {
+			"Switch Bridge 2": {
 				row: 1,
 				col: 4,
 				checks: {
@@ -1886,9 +1896,9 @@ const regionData: MapRegions = {
 	},
 	"Dry Dry Desert": {
 		areas: {
-			"Two ? Blocks": {
-				row: 2,
-				col: 6,
+			"NW Two ? Blocks": {
+				row: 1,
+				col: 2,
 				checks: {
 					"[Coin Block] Right ? Block": {
 						reqs: [
@@ -1927,7 +1937,13 @@ const regionData: MapRegions = {
 								"Kooper"
 							]
 						]
-					},
+					}
+				}
+			},
+			"Two ? Blocks": {
+				row: 2,
+				col: 6,
+				checks: {
 					"[Coin Block] Left ? Block": {
 						reqs: [
 							[
@@ -2001,7 +2017,7 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Northeast Tree": {
+			"NE Tree": {
 				row: 1,
 				col: 8,
 				checks: {
@@ -2501,6 +2517,31 @@ const regionData: MapRegions = {
 					}
 				}
 			},
+			"Green Cactus": {
+				row: 5,
+				col: 5,
+				checks: {
+					"[Coin Block] ? Block in middle of room": {
+						reqs: [
+							[
+								logic.startingLocation("Dry Dry Outpost"),
+								["Bombette", "Parakarry"],
+								"Super Hammer",
+								"Ultra Hammer"
+							],
+							[
+								"Hammer",
+								"Super Hammer",
+								"Ultra Hammer",
+								"Super Boots",
+								"Ultra Boots",
+								"Bombette",
+								"Kooper"
+							]
+						]
+					}
+				}
+			},
 			"Spin Attack": {
 				row: 5,
 				col: 7,
@@ -2719,6 +2760,7 @@ const regionData: MapRegions = {
 			"Pokey Hall": {
 				row: 1,
 				col: 3,
+				rowSpan: 2,
 				checks: {
 					"Inside middle coffin": {
 						reqs: [
@@ -2733,7 +2775,12 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Sand Switch Room": {
+			"Sand Switch Room 1": {
+				row: 1,
+				col: 4,
+				checks: {}
+			},
+			"Sand Switch Room 2": {
 				row: 1,
 				col: 6,
 				checks: {
@@ -2742,11 +2789,12 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			Hub: { row: 3, col: 3, checks: {} },
+			"West Hub": { row: 3, col: 3, rowSpan: 2, checks: {} },
+			"East Hub": { row: 1, col: 5, rowSpan: 3, checks: {} },
 			"Ruins Entrance": { row: 2, col: 2, checks: {} },
 			"Sand Room": {
 				row: 2,
-				col: 3,
+				col: 4,
 				checks: {
 					"Item on elevated platform": {
 						reqs: [
@@ -2764,7 +2812,7 @@ const regionData: MapRegions = {
 			},
 			"Key Room": {
 				row: 2,
-				col: 4,
+				col: 6,
 				checks: {
 					"Item on elevated platform": {
 						reqs: ["Bombette", "Parakarry", "Pulse Stone", "Ruins Key"]
@@ -2834,9 +2882,28 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Chomp Room": {
-				row: 7,
-				col: 1,
+			"Chomp Room 2": {
+				row: 3,
+				col: 6,
+				checks: {
+					"Item on pedestal": {
+						reqs: [
+							[
+								logic.startingLocation("Dry Dry Outpost"),
+								["Bombette", "Parakarry"],
+								"Super Hammer",
+								"Ultra Hammer"
+							],
+							"Pulse Stone",
+							"Parakarry",
+							logic.multipleItemCheck("Ruins Key", 3)
+						]
+					}
+				}
+			},
+			"Chomp Room 3": {
+				row: 5,
+				col: 7,
 				checks: {
 					"Item on pedestal": {
 						reqs: [
@@ -2853,12 +2920,31 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Ruins Spring Room": { row: 4, col: 2, checks: {} },
-			"Puzzle Room": { row: 4, col: 3, checks: {} },
-			"Puzzle Solution Room": { row: 4, col: 5, checks: {} },
+			"Chomp Room 1": {
+				row: 7,
+				col: 1,
+				checks: {
+					"Item on pedestal": {
+						reqs: [
+							[
+								logic.startingLocation("Dry Dry Outpost"),
+								["Bombette", "Parakarry"],
+								"Super Hammer",
+								"Ultra Hammer"
+							],
+							"Pulse Stone",
+							logic.multipleItemCheck("Ruins Key", 3)
+						]
+					}
+				}
+			},
+			"Ruins Spring Room": { row: 4, col: 2, rowSpan: 4, checks: {} },
+			"Puzzle Room": { row: 4, col: 4, rowSpan: 2, colSpan: 2, checks: {} },
+			"Puzzle Solution Room": { row: 4, col: 6, checks: {} },
 			"Wall Stairs": {
 				row: 5,
-				col: 4,
+				col: 6,
+				rowSpan: 3,
 				checks: {
 					"Item on ledge, reachable by breaking block and hitting switch": {
 						reqs: [
@@ -2884,7 +2970,7 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Beetle Room": { row: 7, col: 2, checks: {} }
+			"Beetle Room": { row: 7, col: 3, colSpan: 3, checks: {} }
 		}
 	},
 	"Forever Forest": {
@@ -3198,9 +3284,16 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			Stairwell: {
+			"Stairwell 1": {
 				row: 6,
 				col: 1,
+				rowSpan: 2,
+				checks: {}
+			},
+			"Stairwell 3": {
+				row: 2,
+				col: 1,
+				rowSpan: 3,
 				checks: {
 					"? Block at bottom of staircase": {
 						reqs: [
@@ -3211,13 +3304,13 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Tubba Chase Room": { row: 2, col: 2, checks: {} },
+			"Tubba Chase Room": { row: 2, col: 2, colSpan: 2, checks: {} },
 			"Castle Save Block": { row: 2, col: 4, checks: {} },
-			"Main Hall": { row: 2, col: 5, checks: {} },
+			"Main Hall": { row: 2, col: 5, rowSpan: 5, checks: {} },
 			"Tubba's Bedroom": { row: 2, col: 6, checks: {} },
 			"Behind Clock": {
 				row: 3,
-				col: 1,
+				col: 2,
 				checks: {
 					"[Coinsanity] 6 items on bed": {
 						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
@@ -3229,7 +3322,7 @@ const regionData: MapRegions = {
 			},
 			"Spike Room": {
 				row: 3,
-				col: 2,
+				col: 3,
 				checks: {
 					Chest: {
 						reqs: [
@@ -3241,10 +3334,11 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Floor Panel Room": { row: 3, col: 3, checks: {} },
-			"Above Table": { row: 4, col: 1, checks: {} },
-			"Left Hall": { row: 6, col: 3, checks: {} },
-			"Right Hall / Stairwell": { row: 4, col: 4, checks: {} },
+			"Floor Panel Room": { row: 3, col: 4, checks: {} },
+			"Above Table": { row: 4, col: 2, checks: {} },
+			"Left Hall 1": { row: 6, col: 3, colSpan: 2, checks: {} },
+			"Left Hall 2": { row: 4, col: 3, colSpan: 2, checks: {} },
+			"Right Hall / Stairwell": { row: 4, col: 6, rowSpan: 3, checks: {} },
 			Study: {
 				row: 5,
 				col: 3,
@@ -3278,7 +3372,7 @@ const regionData: MapRegions = {
 			},
 			"Basement Chest": {
 				row: 7,
-				col: 1,
+				col: 2,
 				checks: {
 					Chest: {
 						reqs: [
@@ -4783,6 +4877,7 @@ const regionData: MapRegions = {
 			"Hub Room": {
 				row: 1,
 				col: 4,
+				rowSpan: 3,
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
@@ -4886,7 +4981,8 @@ const regionData: MapRegions = {
 			"Firebars + Upgrade": { row: 1, col: 5, checks: {} },
 			Zipline: {
 				row: 2,
-				col: 4,
+				col: 5,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Right side of lower level": {
 						reqs: [
@@ -4908,12 +5004,13 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Spike Ball Chase": { row: 2, col: 5, checks: {} },
-			"Moving Platforms": { row: 2, col: 6, checks: {} },
-			"Spike Ball Wall Break": { row: 2, col: 7, checks: {} },
-			"Save Block": {
+			"Spike Ball Chase": { row: 2, col: 6, checks: {} },
+			"Moving Platforms": { row: 2, col: 7, checks: {} },
+			"Spike Ball Wall Break": { row: 2, col: 8, checks: {} },
+			"Volcano Save Block": {
 				row: 2,
-				col: 8,
+				col: 9,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Left of heart block": {
 						reqs: [
@@ -4937,7 +5034,7 @@ const regionData: MapRegions = {
 			},
 			Deadend: {
 				row: 2,
-				col: 9,
+				col: 10,
 				checks: {
 					"Left ? Block": {
 						reqs: [
@@ -5001,6 +5098,7 @@ const regionData: MapRegions = {
 			"Lava Puzzle": {
 				row: 3,
 				col: 2,
+				rowSpan: 2,
 				checks: {
 					"Hidden block on right side of room": {
 						reqs: [
@@ -5023,7 +5121,7 @@ const regionData: MapRegions = {
 			"Slope Hallway": { row: 3, col: 3, checks: {} },
 			"Lava Piranha": {
 				row: 3,
-				col: 7,
+				col: 10,
 				checks: {
 					Misstar: {
 						reqs: chapterRewardReqs.Misstar
@@ -5032,7 +5130,7 @@ const regionData: MapRegions = {
 			},
 			"Dizzy Stomp": {
 				row: 4,
-				col: 2,
+				col: 3,
 				checks: {
 					Chest: {
 						reqs: [
@@ -5714,6 +5812,7 @@ const regionData: MapRegions = {
 			"Ground Panel Room": {
 				row: 1,
 				col: 3,
+				rowSpan: 3,
 				checks: {
 					"? Block": {
 						reqs: [
@@ -5735,9 +5834,19 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Duplighost Room": { row: 7, col: 8, checks: {} },
-			"Item Room": {
-				row: 8,
+			"Duplighost Room 1": { row: 1, col: 4, checks: {} },
+			"P-Down/​D-Up": {
+				row: 2,
+				col: 5,
+				checks: {
+					Chest: {
+						reqs: [logic.crystalPalaceAccess, ["Red Key", "Blue Key"]]
+					}
+				}
+			},
+			"Upper Swooper Room": { row: 2, col: 4, checks: {} },
+			"Shooting Star": {
+				row: 1,
 				col: 5,
 				checks: {
 					"Item on ledge": {
@@ -5757,32 +5866,37 @@ const regionData: MapRegions = {
 							"Star Stone",
 							["Red Key", "Blue Key"]
 						]
-					},
+					}
+				}
+			},
+			"Duplighost Room 2": { row: 7, col: 9, checks: {} },
+			"Red Key": {
+				row: 8,
+				col: 5,
+				checks: {
 					Chest: {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
+							logic.crystalPalaceAccess,
+							["Red Key", "Blue Key"],
 							"Bombette"
 						]
 					}
 				}
 			},
-			"Swooper Room": { row: 7, col: 4, checks: {} },
+			"Lower Swooper Room": { row: 7, col: 4, checks: {} },
+			"Blue Key": {
+				row: 7,
+				col: 5,
+				checks: {
+					Chest: {
+						reqs: logic.crystalPalaceAccess
+					}
+				}
+			},
 			"Small Statue Room": {
 				row: 2,
-				col: 7,
+				col: 8,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
 						reqs: [
@@ -5824,7 +5938,16 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Clubba Room": { row: 2, col: 8, checks: {} },
+			"Clubba Room": { row: 2, col: 9, checks: {} },
+			"P-Up/​D-Down": {
+				row: 2,
+				col: 10,
+				checks: {
+					Chest: {
+						reqs: [logic.crystalPalaceAccess, "Red Key", "Bombette"]
+					}
+				}
+			},
 			Cave: {
 				row: 4,
 				col: 1,
@@ -5849,13 +5972,14 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Crystal Palace Entrance": { row: 4, col: 2, checks: {} },
-			"First Room": { row: 4, col: 3, checks: {} },
-			"Elevator + Clubba Room": { row: 4, col: 4, checks: {} },
-			"Bomb Switch": { row: 4, col: 5, checks: {} },
+			"Crystal Palace Entrance": { row: 4, col: 2, rowSpan: 2, checks: {} },
+			"Mirror Room": { row: 4, col: 3, rowSpan: 2, checks: {} },
+			"Elevator + Clubba Room": { row: 4, col: 4, rowSpan: 2, checks: {} },
+			"Bomb Switch": { row: 4, col: 5, rowSpan: 2, checks: {} },
 			"Triple Dip": {
 				row: 4,
 				col: 6,
+				rowSpan: 2,
 				checks: {
 					"Chest, blow up right wall in switch room": {
 						reqs: [
@@ -5878,26 +6002,38 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Kooper Puzzle": { row: 4, col: 7, checks: {} },
-			"Hub 2": { row: 4, col: 8, checks: {} },
+			"Kooper Puzzle": { row: 4, col: 7, rowSpan: 2, checks: {} },
+			"Hub 2": { row: 4, col: 8, rowSpan: 2, checks: {} },
+			"Palace Key": {
+				row: 7,
+				col: 10,
+				checks: {
+					Chest: {
+						reqs: [logic.crystalPalaceAccess, "Red Key", "Bombette"]
+					}
+				}
+			},
 			"Kooper Switch + Palace Key Lock": {
 				row: 4,
 				col: 9,
+				rowSpan: 2,
 				checks: {}
 			},
 			"Albino Dinos + Crystal King": {
 				row: 4,
 				col: 10,
+				rowSpan: 2,
 				checks: {
 					Kalmar: {
 						reqs: chapterRewardReqs.Kalmar
 					}
 				}
 			},
-			"X Mark Room": { row: 6, col: 3, checks: {} },
+			"X Mark Room": { row: 6, col: 3, rowSpan: 3, checks: {} },
 			"Large Statue Room": {
 				row: 6,
 				col: 8,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
 						reqs: [

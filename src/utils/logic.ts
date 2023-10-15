@@ -28,6 +28,25 @@ export default {
 		return (items: string[], settings: OptionsValues) =>
 			settings.gearShuffle === shuffle;
 	},
+	shiverRegionAccess(items: string[], settings: OptionsValues) {
+		return (
+			(items.includes("Sushie") && items.includes("Super Boots")) ||
+			(items.includes("Bombette") &&
+				(settings.blueHouseOpen || items.includes("Odd Key")))
+		);
+	},
+	crystalPalaceAccess(items: string[], settings: OptionsValues) {
+		return (
+			this.shiverRegionAccess(items, settings) &&
+			items.includes("Warehouse Key") &&
+			items.includes("Scarf") &&
+			items.includes("Bucket") &&
+			items.includes("Super Boots") &&
+			items.includes("Kooper") &&
+			items.includes("Hammer") &&
+			items.includes("Star Stone")
+		);
+	},
 	fastBowserCastle(items: string[], settings: OptionsValues) {
 		return settings.fastBowserCastle;
 	}
