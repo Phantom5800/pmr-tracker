@@ -115,8 +115,9 @@ img {
 
 p.label {
 	position: absolute;
-	bottom: 4px;
+	top: 4px;
 	right: 4px;
+	font-size: 2rem;
 }
 
 .shrink > img {

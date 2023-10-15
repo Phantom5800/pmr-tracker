@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import TrackerPanel from "./TrackerPanel.vue";
-import TrackableItem from "./TrackableItem.vue";
 import ItemTracker from "./ItemTracker.vue";
 
 const trackerItems = [
@@ -70,10 +68,4 @@ const trackerItems = [
 	<ItemTracker :tracker-items="trackerItems" heading="Misc. Items" />
 </template>
 
-<style scoped>
-div.grid {
-	display: grid;
-	grid-template-columns: repeat(8, minmax(0, 1fr));
-	gap: 1rem;
-}
-</style>
+<style scoped></style>

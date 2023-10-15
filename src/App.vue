@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
 import Main from "./components/Main.vue";
 import MenuOptions from "./components/MenuOptions.vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
@@ -11,6 +9,7 @@ import MainTracker from "./components/MainTracker.vue";
 import MapTracker from "./components/MapTracker.vue";
 import LetterTracker from "./components/LetterTracker.vue";
 import MiscItemTracker from "./components/MiscItemTracker.vue";
+import MiscKeyTracker from "./components/MiscKeyTracker.vue";
 import Notes from "./components/Notes.vue";
 
 const configOpen = ref(false);
@@ -52,6 +51,7 @@ const year = new Date().getFullYear();
 	<main>
 		<EnabledSettings />
 		<Notes />
+		<MiscKeyTracker />
 		<MiscItemTracker />
 		<MainTracker />
 		<!-- <InfoBlocks /> -->
