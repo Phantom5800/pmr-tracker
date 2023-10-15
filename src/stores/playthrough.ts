@@ -8,6 +8,17 @@ type PlaythroughProps = {
 	notes: string;
 };
 
+const fixedChapterRewards = [
+	"Eldstar",
+	"Mamar",
+	"Skolar",
+	"Muskular",
+	"Misstar",
+	"Klevar",
+	"Kalmar",
+	"Star Rod"
+];
+
 const storagePlaythroughStr = localStorage.getItem("playthrough");
 
 const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
@@ -27,8 +38,14 @@ export const usePlaythrough = defineStore("playthrough", {
 		toggleItem(item: string) {
 			if (this.items.includes(item)) {
 				this.items.splice(this.items.indexOf(item), 1);
+				if (fixedChapterRewards.includes(item) && this.checks.includes(item)) {
+					this.checks.splice(this.checks.indexOf(item), 1);
+				}
 			} else {
 				this.items.push(item);
+				if (fixedChapterRewards.includes(item) && !this.checks.includes(item)) {
+					this.checks.push(item);
+				}
 			}
 
 			localStorage.setItem(
@@ -84,8 +101,17 @@ export const usePlaythrough = defineStore("playthrough", {
 		toggleCheck(check: string) {
 			if (this.checks.includes(check)) {
 				this.checks = this.checks.filter((el) => el !== check);
+				if (fixedChapterRewards.includes(check) && this.items.includes(check)) {
+					this.items = this.items.filter((el) => el !== check);
+				}
 			} else {
 				this.checks.push(check);
+				if (
+					fixedChapterRewards.includes(check) &&
+					!this.items.includes(check)
+				) {
+					this.items.push(check);
+				}
 			}
 
 			localStorage.setItem(

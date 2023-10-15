@@ -25,6 +25,84 @@ type Region = {
 
 type MapRegions = { [key: string]: Region };
 
+export const chapterRewardReqs: Record<string, Requirements> = {
+	Eldstar: [
+		logic.multipleItemCheck("Fortress Key", 4),
+		"Kooper",
+		["Hammer", "Bombette"]
+	],
+	Mamar: [
+		"Pulse Stone",
+		"Pyramid Stone",
+		"Diamond Stone",
+		"Lunar Stone",
+		logic.multipleItemCheck("Ruins Key", 3),
+		[
+			logic.startingLocation("Dry Dry Outpost"),
+			["Bombette", "Parakarry"],
+			"Super Hammer"
+		]
+	],
+	Skolar: [
+		"Boo's Portrait",
+		logic.multipleItemCheck("Tubba Castle Key", 3),
+		"Parakarry",
+		"Super Boots"
+	],
+	Muskular: [
+		"Toy Train",
+		"Cake",
+		"Bombette",
+		"Watt",
+		"Hammer",
+		logic.toyboxAccess
+	],
+	Misstar: [
+		"Jade Raven",
+		"Sushie",
+		"Hammer",
+		[
+			logic.startingLocation("Yoshi Village"),
+			"Watt",
+			logic.whaleOpen,
+			["Bombette", [logic.blueHouseOpen, "Odd Key"]],
+			["Super Boots", "Sushie"]
+		],
+		[
+			"Ultra Hammer",
+			[logic.gearShuffle("Vanilla"), ["Parakarry", "Lakilester"]]
+		]
+	],
+	Klevar: [
+		logic.chapter6Entry,
+		"Magical Bean",
+		"Fertile Soil",
+		"Miracle Water",
+		"Lakilester",
+		"Super Boots"
+	],
+	Kalmar: [
+		"Warehouse Key",
+		"Bucket",
+		"Scarf",
+		"Star Stone",
+		"Red Key",
+		"Palace Key",
+		"Kooper",
+		"Bombette",
+		"Hammer",
+		"Super Boots",
+		["Sushie", logic.blueHouseOpen, "Odd Key"]
+	],
+	"Star Rod": [
+		7,
+		[
+			["Bowser's Castle Key", "Bombette", "Parakarry", "Bow", "Lakilester"],
+			logic.fastBowserCastle
+		]
+	]
+};
+
 const regionData: MapRegions = {
 	Prologue: {
 		areas: {
@@ -1465,7 +1543,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Boss Room": { row: 1, col: 4, checks: {} },
+			"Boss Room": {
+				row: 1,
+				col: 4,
+				checks: {
+					Eldstar: {
+						reqs: chapterRewardReqs.Eldstar
+					}
+				}
+			},
 			"Bomb Room": { row: 2, col: 3, rowSpan: 2, checks: {} },
 			"Kooper Puzzle Room": {
 				row: 2,
@@ -2789,7 +2875,15 @@ const regionData: MapRegions = {
 				}
 			},
 			"Heart Block": { row: 6, col: 4, checks: {} },
-			"Boss Room": { row: 6, col: 5, checks: {} },
+			"Boss Room": {
+				row: 6,
+				col: 5,
+				checks: {
+					Mamar: {
+						reqs: chapterRewardReqs.Mamar
+					}
+				}
+			},
 			"Beetle Room": { row: 7, col: 2, checks: {} }
 		}
 	},
@@ -3008,7 +3102,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			Windmill: { row: 1, col: 2, checks: {} },
+			Windmill: {
+				row: 1,
+				col: 2,
+				checks: {
+					Skolar: {
+						reqs: chapterRewardReqs.Skolar
+					}
+				}
+			},
 			"Village 1": {
 				row: 1,
 				col: 3,
@@ -3635,7 +3737,15 @@ const regionData: MapRegions = {
 				}
 			},
 			"Dark Room": { row: 4, col: 5, checks: {} },
-			"General Guy": { row: 4, col: 6, checks: {} }
+			"General Guy": {
+				row: 4,
+				col: 6,
+				checks: {
+					Muskular: {
+						reqs: chapterRewardReqs.Muskular
+					}
+				}
+			}
 		}
 	},
 	"Yoshi's Island": {
@@ -4911,7 +5021,15 @@ const regionData: MapRegions = {
 				}
 			},
 			"Slope Hallway": { row: 3, col: 3, checks: {} },
-			"Lava Piranha": { row: 3, col: 7, checks: {} },
+			"Lava Piranha": {
+				row: 3,
+				col: 7,
+				checks: {
+					Misstar: {
+						reqs: chapterRewardReqs.Misstar
+					}
+				}
+			},
 			"Dizzy Stomp": {
 				row: 4,
 				col: 2,
@@ -4955,7 +5073,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Huff n Puff": { row: 1, col: 5, checks: {} },
+			"Huff n Puff": {
+				row: 1,
+				col: 5,
+				checks: {
+					Klevar: {
+						reqs: chapterRewardReqs.Klevar
+					}
+				}
+			},
 			"Sun Tower": { row: 2, col: 1, checks: {} },
 			Lakilester: {
 				row: 2,
@@ -5764,13 +5890,7 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					Kalmar: {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							"Super Hammer",
-							"Super Boots",
-							["Sushie", logic.blueHouseOpen, "Odd Key"]
-						]
+						reqs: chapterRewardReqs.Kalmar
 					}
 				}
 			},

@@ -23,5 +23,12 @@ export default {
 	multipleItemCheck(item: string, quantity: number) {
 		return (items: string[], settings: OptionsValues) =>
 			items.filter((el) => el === item).length >= quantity;
+	},
+	gearShuffle(shuffle: string) {
+		return (items: string[], settings: OptionsValues) =>
+			settings.gearShuffle === shuffle;
+	},
+	fastBowserCastle(items: string[], settings: OptionsValues) {
+		return settings.fastBowserCastle;
 	}
 };

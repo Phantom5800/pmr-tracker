@@ -2,6 +2,7 @@
 import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
 import { computed, toRefs } from "vue";
+import { chapterRewardReqs } from "@/data/map";
 
 const playthroughStore = usePlaythrough();
 const { item, src, multiple, label, shrink } = defineProps<{
@@ -64,7 +65,11 @@ const derivedData = computed(
 	<div
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.hasItem(item),
-			shrink: shrink
+			shrink: shrink,
+			glow:
+				item in chapterRewardReqs &&
+				!playthroughStore.hasItem(item) &&
+				playthroughStore.canCheckLocation(chapterRewardReqs[item])
 		}"
 		@click="
 			multiple || bootsOrHammer
@@ -115,7 +120,7 @@ p.label {
 	filter: grayscale(1) brightness(50%);
 }
 
-.glow {
+.glow > img {
 	filter: grayscale(0.6) brightness(80%) drop-shadow(0px 0px 5px white);
 }
 </style>
