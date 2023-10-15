@@ -19,5 +19,9 @@ export default {
 	},
 	whaleOpen(items: string[], settings: OptionsValues) {
 		return settings.whaleOpen;
+	},
+	multipleItemCheck(item: string, quantity: number) {
+		return (items: string[], settings: OptionsValues) =>
+			items.filter((el) => el === item).length >= quantity;
 	}
 };

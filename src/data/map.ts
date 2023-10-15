@@ -595,10 +595,7 @@ const regionData: MapRegions = {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
 							"Kooper",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
+							logic.multipleItemCheck("Fortress Key", 4)
 						]
 					}
 				}
@@ -1463,10 +1460,7 @@ const regionData: MapRegions = {
 						reqs: [
 							"Kooper",
 							"Bombette",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
+							logic.multipleItemCheck("Fortress Key", 4)
 						]
 					}
 				}
@@ -1482,9 +1476,7 @@ const regionData: MapRegions = {
 						reqs: [
 							"Kooper",
 							"Bombette",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
+							logic.multipleItemCheck("Fortress Key", 3)
 						]
 					},
 					"Middle Jail Cell": {
@@ -1515,7 +1507,11 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"Chest after bombable wall in trap room": {
-						reqs: ["Kooper", "Bombette", "Fortress Key", "Fortress Key"]
+						reqs: [
+							"Kooper",
+							"Bombette",
+							logic.multipleItemCheck("Fortress Key", 2)
+						]
 					}
 				}
 			},
@@ -1541,7 +1537,10 @@ const regionData: MapRegions = {
 						reqs: [
 							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
 							"Kooper",
-							[["Fortress Key", "Bombette"], "Fortress Key", "Fortress Key"]
+							[
+								["Fortress Key", "Bombette"],
+								logic.multipleItemCheck("Fortress Key", 2)
+							]
 						]
 					}
 				}
@@ -2700,9 +2699,7 @@ const regionData: MapRegions = {
 							],
 							"Pulse Stone",
 							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					},
 					"Super Hammer chest": {
@@ -2715,9 +2712,7 @@ const regionData: MapRegions = {
 							],
 							"Pulse Stone",
 							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					}
 				}
@@ -2735,8 +2730,7 @@ const regionData: MapRegions = {
 								"Ultra Hammer"
 							],
 							"Pulse Stone",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 2)
 						]
 					},
 					"On ledge behind hammer block": {
@@ -2749,9 +2743,7 @@ const regionData: MapRegions = {
 							],
 							"Pulse Stone",
 							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					}
 				}
@@ -2770,10 +2762,7 @@ const regionData: MapRegions = {
 							],
 							"Pulse Stone",
 							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 4)
 						]
 					}
 				}
@@ -2794,9 +2783,7 @@ const regionData: MapRegions = {
 								"Ultra Hammer"
 							],
 							"Pulse Stone",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
+							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					}
 				}
@@ -3104,8 +3091,7 @@ const regionData: MapRegions = {
 						reqs: [
 							"Boo's Portrait",
 							"Parakarry",
-							"Tubba Castle Key",
-							"Tubba Castle Key"
+							logic.multipleItemCheck("Tubba Castle Key", 2)
 						]
 					}
 				}
@@ -3118,8 +3104,7 @@ const regionData: MapRegions = {
 						reqs: [
 							"Boo's Portrait",
 							"Parakarry",
-							"Tubba Castle Key",
-							"Tubba Castle Key"
+							logic.multipleItemCheck("Tubba Castle Key", 2)
 						]
 					}
 				}
