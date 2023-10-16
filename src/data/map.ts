@@ -114,36 +114,26 @@ const regionData: MapRegions = {
 				checks: {
 					"Furthest left bush": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Boots", "Parakarry"], "Hammer"]
-							]
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
 						]
 					},
 					"Far right tree": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Boots", "Parakarry"], "Hammer"]
-							],
-							logic.canShakeTree
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
 						]
 					},
 					"[Foliage Coin] 2 more trees": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Boots", "Parakarry"], "Hammer"]
-							],
-							logic.canShakeTree
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
 						]
 					},
 					"[Foliage Coin] 6 more bushes": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Boots", "Parakarry"], "Hammer"]
-							]
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
 						]
 					}
 				}
@@ -155,29 +145,44 @@ const regionData: MapRegions = {
 					"[Panel] Right of stone block": {
 						reqs: [
 							logic.canFlipPanel,
-							[logic.startingLocation("Goomba Village"), ["Boots", "Parakarry"]]
-						]
-					},
-					"[Coinsanity] 4 items above spring": {
-						reqs: [["Boots", "Parakarry"]]
-					},
-					"[Coin Block] Far left ? Block": {
-						reqs: [[logic.startingLocation("Goomba Village"), "Hammer"]]
-					},
-					Tree: {
-						reqs: [
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[["Hammer", "Bombette"], logic.canClimbLedges]
 							]
 						]
 					},
+					"[Coinsanity] 4 items above spring": {
+						reqs: [
+							logic.canClimbLedges,
+							[
+								logic.startingLocation("Goomba Village"),
+								[["Hammer", "Bombette"]]
+							]
+						]
+					},
+					"[Coin Block] Far left ? Block": {
+						reqs: [
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
+						]
+					},
+					Tree: {
+						reqs: [
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
+						]
+					},
 					"Item on ledge above spring": {
-						reqs: [["Boots", "Parakarry"]]
+						reqs: [
+							logic.canClimbLedges,
+							[
+								logic.startingLocation("Goomba Village"),
+								[["Hammer", "Bombette"]]
+							]
+						]
 					},
 					"? Block above stone block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -187,21 +192,15 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on ledge": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
-							]
+							logic.canClimbLedges,
+							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"]
 						]
 					},
 					"[Foliage Coin] Tree on ledge": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
+							logic.canClimbLedges,
+							logic.canShakeTree,
+							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"]
 						]
 					}
 				}
@@ -213,21 +212,30 @@ const regionData: MapRegions = {
 				checks: {
 					"[Letter] Goompa": {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							],
 							"Goompa",
 							"Parakarry"
 						]
 					},
 					"[Letter] Goompapa 1 (Chain)": {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							],
 							"Goompapa 1",
 							"Parakarry"
 						]
 					},
 					"[Letter] Goompapa 2 (Chain)": {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							],
 							"Goompapa 2",
 							"Parakarry"
 						]
@@ -235,9 +243,8 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Hammer",
-								"Bombette"
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
 							],
 							1,
 							"Koopa Legends",
@@ -246,26 +253,34 @@ const regionData: MapRegions = {
 					},
 					Goombario: {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"]
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							]
 						]
 					},
 					"Give Dolly to Goombaria": {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							],
 							"Dolly"
 						]
 					},
 					Goompa: {
 						reqs: [
-							[logic.startingLocation("Goomba Village"), "Hammer", "Bombette"]
+							[
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
+							]
 						]
 					},
 					"Goompa's Veranda": {
 						reqs: [
 							[
 								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
 							]
 						]
 					},
@@ -273,18 +288,16 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
 							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
+							logic.canShakeTree
 						]
 					},
 					"[Foliage Coin] Bottom right bush": {
 						reqs: [
 							[
 								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
 							]
 						]
 					}
@@ -298,10 +311,9 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								logic.startingLocation("Goomba Village"),
-								"Super Hammer",
-								"Ultra Hammer"
+								[logic.canClimbLedges, ["Hammer", "Bombette"]]
 							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
+							logic.canFlipPanel
 						]
 					}
 				}
@@ -312,19 +324,25 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] Left ? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"]
+								],
+								[logic.canReachToadTown, logic.canClimbLedges]
 							]
 						]
 					},
 					"[Coin Block] Right ? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"]
+								],
+								[logic.canReachToadTown, logic.canClimbLedges]
 							]
 						]
 					}
@@ -336,19 +354,24 @@ const regionData: MapRegions = {
 				checks: {
 					"? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"]
+								],
+								[logic.canReachToadTown, logic.canClimbLedges]
 							]
 						]
 					},
 					Sign: {
 						reqs: [
 							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"]
+								],
+								[logic.canReachToadTown, logic.canClimbLedges]
 							]
 						]
 					}
@@ -361,25 +384,33 @@ const regionData: MapRegions = {
 				col: 9,
 				checks: {
 					"[Panel] Right side of Goomba King's Fortress near tree": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [
+							logic.canFlipPanel,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"]
+						]
 					},
 					"Tree left of the fortress": {
 						reqs: [
-							[
-								[logic.startingLocation("Goomba Village"), "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"]
 						]
 					},
 					"Break brick block to spawn ? Block": {
 						reqs: [
 							logic.canBreakBlocksAbove,
-							["Hammer", "Super Boots", "Bombette", "Kooper"]
+							logic.canBreakGroundBlocks,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"]
 						]
 					},
 					"[Foliage Coin] Tree right of the fortress": {
-						reqs: logic.canShakeTree
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"]
+						]
 					}
 				}
 			}
@@ -397,7 +428,7 @@ const regionData: MapRegions = {
 						reqs: ["Muss T. (Castle Ruins)", "Parakarry"]
 					},
 					"[Panel] Right side of bridge": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel
 					}
 				}
 			},
@@ -406,9 +437,9 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Panel] On First Step": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel, logic.canClimbLedges]
 					},
-					"Left from entrance": { reqs: null }
+					"Left from entrance": { reqs: logic.canClimbLedges }
 				}
 			},
 			"Mario's House": {
@@ -417,7 +448,8 @@ const regionData: MapRegions = {
 				checks: {
 					"[Koot] Talk to Luigi after Koopa Koot requests his autograph": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							logic.canClimbLedges,
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -432,15 +464,15 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Panel] In front of pot outside house": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel]
 					},
 					"[Merlow] 6 items from Merlow Star Piece Rewards": {
-						reqs: null
+						reqs: logic.canClimbLedges
 					},
 					"[Letter] Merlow": { reqs: ["Merlow", "Parakarry"] },
 					"[Koot] Give Merluvlee the Crystal Ball": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -459,9 +491,9 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Chest on top of Gate": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges]
 					},
-					"? Block": { reqs: null }
+					"? Block": { reqs: logic.canBreakBlocksAbove }
 				}
 			},
 			"Main Gate": {
@@ -469,28 +501,28 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Panel] By three toad sisters": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel]
 					},
 					"[Dojo] Defeat Chan (logic from beginning)": {
 						reqs: null
 					},
 					"[Dojo] Defeat Lee (logic after 2 star spirits)": {
-						reqs: [2]
+						reqs: 2
 					},
 					"[Dojo] Defeat Master 1 (logic after 3 star spirits)": {
-						reqs: [3]
+						reqs: 3
 					},
 					"[Dojo] Defeat Master 2 (logic after 4 star spirits)": {
-						reqs: [4]
+						reqs: 4
 					},
 					"[Dojo] Defeat Master 3 (logic after 5 star spirits)": {
-						reqs: [5]
+						reqs: 5
 					},
 					"[Letter] Miss T.": { reqs: ["Miss T.", "Parakarry"] },
 					"[Letter] Russ T.": { reqs: ["Russ T.", "Parakarry"] },
 					"[Shop] 6 items in Shop": { reqs: null },
 					"[Trade] Give Koopa Leaf to Trading Event Toad": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"], 1]
+						reqs: [["Hammer", "Bombette"], 1]
 					},
 					"Give Dictionary to Russ T.": { reqs: ["Dictionary"] },
 					"Item at Sushie panel": { reqs: ["Sushie"] }
@@ -506,24 +538,24 @@ const regionData: MapRegions = {
 					},
 					"[Rowf] 4 items in Rowf's Shop": { reqs: null },
 					"[Rowf] 3 items in Rowf's Shop after clearing 1 chapter": {
-						reqs: [1]
+						reqs: 1
 					},
 					"[Rowf] 3 items in Rowf's Shop after clearing 2 chapters": {
-						reqs: [2]
+						reqs: 2
 					},
 					"[Rowf] 3 items in Rowf's Shop after clearing 3 chapters": {
-						reqs: [3]
+						reqs: 3
 					},
 					"[Rowf] 3 items in Rowf's Shop after clearing 4 chapters": {
-						reqs: [4]
+						reqs: 4
 					},
 					"Tree by Merlon's house": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: logic.canShakeTree
 					},
-					"Give Calculator to Rowf": { reqs: ["Calculator"] },
-					"Give Mailbag to Post Office": { reqs: ["Mailbag"] },
+					"Give Calculator to Rowf": { reqs: "Calculator" },
+					"Give Mailbag to Post Office": { reqs: "Mailbag" },
 					"Ground Pound inside Merlon's house 3 times": {
-						reqs: [["Super Boots", "Ultra Boots"]]
+						reqs: "Super Boots"
 					}
 				}
 			},
@@ -532,16 +564,16 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Panel] Outside Club 64": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel
 					},
 					"[Letter] Fishmael (Chain)": {
 						reqs: ["Fishmael", "Parakarry"]
 					},
 					"[Trade] Give Coconut to Trading Event Toad": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"], 5]
+						reqs: [["Hammer", "Bombette"], 5]
 					},
 					"Talk to Simon in Club 64 (first time)": { reqs: null },
-					"Give Melody to Simon in Club 64": { reqs: ["Melody"] }
+					"Give Melody to Simon in Club 64": { reqs: "Melody" }
 				}
 			},
 			"Residential Area": {
@@ -550,7 +582,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Shop] 6 items in Shop": { reqs: null },
 					"Four items in Harry's Storeroom": {
-						reqs: ["Storeroom Key"]
+						reqs: "Storeroom Key"
 					}
 				}
 			},
@@ -559,18 +591,17 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] By guard house": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel
 					},
 					"[Letter] Fice T.": { reqs: ["Fice T.", "Parakarry"] },
-					"Bub-ulb": { reqs: null },
-					"Give Frying Pan to Tayce T.": { reqs: ["Frying Pan"] },
+					"Bub-ulb": { reqs: logic.canClimbLedges },
+					"Give Frying Pan to Tayce T.": { reqs: "Frying Pan" },
 					"Inside Blue House": {
 						reqs: [
 							[
 								"Odd Key",
 								logic.blueHouseOpen,
-								["Super Boots", "Sushie", "Bombette"],
-								["Ultra Boots", "Sushie", "Bombette"]
+								[logic.canClimbLedges, "Super Boots", "Sushie", "Bombette"]
 							]
 						]
 					}
@@ -582,7 +613,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] Bottom right side of room": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel
 					},
 					"[Letter] Dane T. 1 (Chain)": {
 						reqs: ["Dane T. 1", "Parakarry"]
@@ -595,7 +626,7 @@ const regionData: MapRegions = {
 		}
 	},
 	"Toad Town Tunnels": {
-		reqs: [logic.canReachToadTown, logic.canJumpOnPipe],
+		reqs: [logic.canReachToadTown, logic.canClimbLedges],
 		areas: {
 			Pipe: {
 				row: 1,
@@ -603,13 +634,13 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
 					},
 					"Middle ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -617,28 +648,14 @@ const regionData: MapRegions = {
 			Entrance: {
 				row: 1,
 				col: 7,
-				checks: {
-					"Defeat Koopa by first locked door": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
-					},
-					"Top of room guarded by Bob-omb": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							logic.multipleItemCheck("Fortress Key", 4)
-						]
-					}
-				}
+				checks: {}
 			},
 			"Brick Blocks": {
 				row: 1,
 				col: 8,
 				checks: {
 					"Hidden block next to last brick block": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: ["Hammer", logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -647,7 +664,7 @@ const regionData: MapRegions = {
 				col: 9,
 				checks: {
 					Chest: {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: ["Hammer"]
 					}
 				}
 			},
@@ -662,9 +679,9 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] Left invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
 								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
@@ -672,9 +689,9 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] Middle invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
 								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
@@ -682,9 +699,9 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] Right invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
 								[logic.blueHouseOpen, "Bombette", "Sushie"]
 							]
@@ -717,7 +734,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -727,7 +744,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 2": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -737,7 +754,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 3": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -747,7 +764,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 4": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -757,7 +774,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 5": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -772,7 +789,7 @@ const regionData: MapRegions = {
 				row: 3,
 				col: 1,
 				checks: {
-					Chest: { reqs: [["Super Hammer", "Ultra Hammer"]] }
+					Chest: { reqs: ["Super Hammer", logic.canBreakBlocksAbove] }
 				}
 			},
 			Seesaw: { row: 3, col: 2, checks: {} },
@@ -781,7 +798,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on far right ledge": {
-						reqs: [["Super Hammer", "Ultra Hammer"], "Parakarry"]
+						reqs: ["Super Hammer", "Parakarry"]
 					}
 				}
 			},
@@ -800,8 +817,7 @@ const regionData: MapRegions = {
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
+								["Super Boots", "Sushie"]
 							],
 							"Lakilester"
 						]
@@ -815,7 +831,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Left ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
@@ -827,7 +843,7 @@ const regionData: MapRegions = {
 					"[Coin Block] Right ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
@@ -839,7 +855,7 @@ const regionData: MapRegions = {
 					"Middle ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
@@ -859,8 +875,7 @@ const regionData: MapRegions = {
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
+								["Super Boots", "Sushie"]
 							],
 							"Lakilester"
 						]
@@ -870,8 +885,7 @@ const regionData: MapRegions = {
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
+								["Super Boots", "Sushie"]
 							],
 							"Lakilester"
 						]
@@ -881,8 +895,7 @@ const regionData: MapRegions = {
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
+								["Super Boots", "Sushie"]
 							],
 							"Lakilester"
 						]
@@ -892,8 +905,7 @@ const regionData: MapRegions = {
 							[
 								["Odd Key", "Bombette"],
 								[logic.blueHouseOpen, "Bombette"],
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
+								["Super Boots", "Sushie"]
 							],
 							"Lakilester"
 						]
@@ -910,8 +922,7 @@ const regionData: MapRegions = {
 								[
 									"Odd Key",
 									logic.blueHouseOpen,
-									["Super Boots", "Sushie", "Bombette"],
-									["Ultra Boots", "Sushie", "Bombette"]
+									["Super Boots", "Sushie", "Bombette"]
 								]
 							]
 						}
@@ -1007,7 +1018,7 @@ const regionData: MapRegions = {
 		}
 	},
 	"Koopa Village": {
-		reqs: [logic.canReachToadTown, logic.canShakeTree, ["Boots", "Parakarry"]],
+		reqs: [logic.canReachToadTown, logic.canShakeTree, logic.canClimbLedges],
 		areas: {
 			"Fuzzy Room": {
 				row: 1,
@@ -1498,11 +1509,30 @@ const regionData: MapRegions = {
 		reqs: [
 			logic.canReachToadTown,
 			logic.canShakeTree,
-			["Boots", "Parakarry"],
+			logic.canClimbLedges,
 			"Kooper"
 		],
 		areas: {
-			"Fortress Entrance": { row: 1, col: 2, rowSpan: 3, checks: {} },
+			"Fortress Entrance": {
+				row: 1,
+				col: 2,
+				rowSpan: 3,
+				checks: {
+					"Defeat Koopa by first locked door": {
+						reqs: [
+							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
+							"Kooper"
+						]
+					},
+					"Top of room guarded by Bob-omb": {
+						reqs: [
+							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
+							"Kooper",
+							logic.multipleItemCheck("Fortress Key", 4)
+						]
+					}
+				}
+			},
 			Cannons: {
 				row: 1,
 				col: 3,
@@ -1613,11 +1643,11 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, "Bombette"],
 				[
 					logic.canReachToadTown,
-					logic.canJumpOnPipe,
+					logic.canClimbLedges,
 					"Super Hammer",
-					["Boots", "Parakarry"]
+					logic.canClimbLedges
 				],
-				[logic.startingLocation("Dry Dry Outpost"), ["Boots", "Parakarry"]]
+				[logic.startingLocation("Dry Dry Outpost"), logic.canClimbLedges]
 			]
 		],
 		areas: {
@@ -1873,7 +1903,7 @@ const regionData: MapRegions = {
 		reqs: [
 			[
 				[logic.canReachToadTown, "Bombette", "Parakarry"],
-				[logic.canReachToadTown, logic.canJumpOnPipe, "Super Hammer"],
+				[logic.canReachToadTown, logic.canClimbLedges, "Super Hammer"],
 				logic.startingLocation("Dry Dry Outpost")
 			]
 		],
@@ -2757,7 +2787,7 @@ const regionData: MapRegions = {
 		reqs: [
 			[
 				[logic.canReachToadTown, "Bombette", "Parakarry"],
-				[logic.canReachToadTown, logic.canJumpOnPipe, "Super Hammer"],
+				[logic.canReachToadTown, logic.canClimbLedges, "Super Hammer"],
 				logic.startingLocation("Dry Dry Outpost")
 			],
 			"Pulse Stone"
@@ -3010,7 +3040,7 @@ const regionData: MapRegions = {
 			logic.canReachToadTown,
 			[
 				[logic.forestOpen, "Forest Pass"],
-				[logic.canJumpOnPipe, "Super Boots"]
+				[logic.canClimbLedges, "Super Boots"]
 			]
 		],
 		areas: {
@@ -3193,7 +3223,7 @@ const regionData: MapRegions = {
 			logic.canReachToadTown,
 			[
 				[logic.forestOpen, "Forest Pass"],
-				[logic.canJumpOnPipe, "Super Boots"]
+				[logic.canClimbLedges, "Super Boots"]
 			],
 			"Boo's Portrait"
 		],
@@ -3296,7 +3326,7 @@ const regionData: MapRegions = {
 			logic.canReachToadTown,
 			[
 				[logic.forestOpen, "Forest Pass"],
-				[logic.canJumpOnPipe, "Super Boots"]
+				[logic.canClimbLedges, "Super Boots"]
 			],
 			"Boo's Portrait",
 			"Parakarry"
@@ -3881,7 +3911,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canJumpOnPipe,
+					logic.canClimbLedges,
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"]
@@ -4923,7 +4953,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canJumpOnPipe,
+					logic.canClimbLedges,
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"]
@@ -5504,7 +5534,7 @@ const regionData: MapRegions = {
 	"Shiver Region": {
 		reqs: [
 			logic.canReachToadTown,
-			logic.canJumpOnPipe,
+			logic.canClimbLedges,
 			[
 				["Super Boots", "Sushie"],
 				["Odd Key", "Bombette"],
@@ -5873,7 +5903,7 @@ const regionData: MapRegions = {
 	"Crystal Palace": {
 		reqs: [
 			logic.canReachToadTown,
-			logic.canJumpOnPipe,
+			logic.canClimbLedges,
 			[
 				["Super Boots", "Sushie"],
 				["Odd Key", "Bombette"],

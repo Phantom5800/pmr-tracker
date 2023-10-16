@@ -13,7 +13,7 @@ export default {
 				(items.includes("Watt") || settings.whaleOpen))
 		);
 	},
-	canJumpOnPipe(items: string[], settings: OptionsValues) {
+	canClimbLedges(items: string[], settings: OptionsValues) {
 		return items.includes("Boots") || items.includes("Parakarry");
 	},
 	canBreakBlocksAbove(items: string[], settings: OptionsValues) {
@@ -23,7 +23,8 @@ export default {
 		return (
 			items.includes("Hammer") ||
 			items.includes("Kooper") ||
-			items.includes("Bombette")
+			items.includes("Bombette") ||
+			items.includes("Super Boots")
 		);
 	},
 	canShakeTree(items: string[], settings: OptionsValues) {
