@@ -99,14 +99,17 @@ export const usePlaythrough = defineStore("playthrough", {
 		filterItems(items: string[]) {
 			return this.items.filter((el) => items.includes(el));
 		},
-		toggleCheck(check: string) {
-			if (this.checks.includes(check)) {
-				this.checks = this.checks.filter((el) => el !== check);
+		toggleCheck(area: string, check: string) {
+			const checkString = fixedChapterRewards.includes(check)
+				? check
+				: `${area}:${check}`;
+			if (this.checks.includes(checkString)) {
+				this.checks = this.checks.filter((el) => el !== checkString);
 				if (fixedChapterRewards.includes(check) && this.items.includes(check)) {
 					this.items = this.items.filter((el) => el !== check);
 				}
 			} else {
-				this.checks.push(check);
+				this.checks.push(checkString);
 				if (
 					fixedChapterRewards.includes(check) &&
 					!this.items.includes(check)
@@ -124,8 +127,11 @@ export const usePlaythrough = defineStore("playthrough", {
 				})
 			);
 		},
-		checkedLocation(check: string) {
-			return this.checks.includes(check);
+		checkedLocation(area: string, check: string) {
+			const checkString = fixedChapterRewards.includes(check)
+				? check
+				: `${area}:${check}`;
+			return this.checks.includes(checkString);
 		},
 		setNotes(notes: string) {
 			this.notes = notes;

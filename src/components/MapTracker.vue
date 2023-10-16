@@ -16,7 +16,7 @@ function areaHasChecksInLogic(pRegion: string, area: string): boolean {
 	return Object.entries(checks).some(
 		([checkName, check]) =>
 			playthrough.locationIsRandomized(checkName) &&
-			!playthrough.checkedLocation(checkName) &&
+			!playthrough.checkedLocation(area, checkName) &&
 			playthrough.canCheckLocation(check.reqs, pRegion)
 	);
 }
@@ -26,7 +26,7 @@ function areaFullCleared(pRegion: string, area: string): boolean {
 	return Object.entries(checks).every(
 		([checkName, check]) =>
 			!playthrough.locationIsRandomized(checkName) ||
-			playthrough.checkedLocation(checkName)
+			playthrough.checkedLocation(area, checkName)
 	);
 }
 
@@ -113,7 +113,7 @@ const unshuffledChecks = computed(() =>
 					:key="checkName"
 					:class="{
 						available: playthrough.canCheckLocation(check.reqs, currentMap),
-						obtained: playthrough.checkedLocation(checkName),
+						obtained: playthrough.checkedLocation(currentArea, checkName),
 						disabled: unshuffledChecks.includes(checkName)
 					}"
 				>
@@ -122,8 +122,8 @@ const unshuffledChecks = computed(() =>
 						:name="checkName"
 						:id="checkName"
 						:disabled="unshuffledChecks.includes(checkName)"
-						:checked="playthrough.checkedLocation(checkName)"
-						@change="playthrough.toggleCheck(checkName)"
+						:checked="playthrough.checkedLocation(currentArea, checkName)"
+						@change="playthrough.toggleCheck(currentArea, checkName)"
 					/>
 					<label :for="checkName">
 						{{ checkName }}
