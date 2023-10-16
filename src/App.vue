@@ -5,15 +5,19 @@ import MenuOptions from "./components/MenuOptions.vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import { configKeys, settingsKeys } from "./stores/config";
-import MainTracker from "./components/MainTracker.vue";
 import MapTracker from "./components/MapTracker.vue";
-import LetterTracker from "./components/LetterTracker.vue";
-import MiscItemTracker from "./components/MiscItemTracker.vue";
-import MiscKeyTracker from "./components/MiscKeyTracker.vue";
+import ItemTracker from "./components/ItemTracker.vue";
 import Notes from "./components/Notes.vue";
+import RequiredTracker from "./components/RequiredTracker.vue";
+import { useOptions } from "./stores/config";
+import { storeToRefs } from "pinia";
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
+
+const optionsStore = useOptions();
+
+const { options } = storeToRefs(optionsStore);
 
 const year = new Date().getFullYear();
 </script>
@@ -51,12 +55,30 @@ const year = new Date().getFullYear();
 	<main>
 		<EnabledSettings />
 		<Notes />
-		<MiscKeyTracker />
-		<MiscItemTracker />
-		<MainTracker />
-		<!-- <InfoBlocks /> -->
+		<RequiredTracker v-if="!options.compactTracker" />
+		<ItemTracker
+			v-if="options.compactTracker"
+			:heading="options.combineMisc ? 'Basically Everything' : 'Required Items'"
+			:itemTypes="
+				options.combineMisc
+					? ['required', 'chapterReward', 'miscItem', 'miscKey']
+					: ['required', 'chapterReward']
+			"
+		/>
+		<ItemTracker
+			v-if="!options.combineMisc"
+			heading="Misc. Keys"
+			:itemTypes="['miscKey']"
+		/>
+		<ItemTracker
+			v-if="!options.combineMisc"
+			heading="Misc. Items"
+			:itemTypes="['miscItem']"
+		/>
+
+		<InfoBlocks />
 		<MapTracker />
-		<LetterTracker />
+		<ItemTracker heading="Letters" :itemTypes="['letter']" />
 	</main>
 
 	<MenuOptions :isOpen="configOpen" :optionsKeys="configKeys" />

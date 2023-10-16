@@ -1,17 +1,30 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { ref } from "vue";
+import { ref, computed, toRef, watch, toRefs } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import type { TrackableItemInfo } from "../types/items.ts";
+import { allItems } from "@/data/items";
 
-const { heading, tooltip } = defineProps<{
+const props = defineProps<{
 	heading: string;
 	tooltip?: string;
-	trackerItems?: TrackableItemInfo[];
+	itemTypes?: string[];
 }>();
 
 const tooltipRef = ref("");
+
+const { heading, tooltip, itemTypes } = toRefs(props);
+
+const trackerItems = computed(() => {
+	const filteredItems = allItems.filter(
+		(el) => itemTypes.value && itemTypes.value.includes(el.type)
+	);
+	return filteredItems.sort(
+		(a, b) =>
+			Number(b.type === "chapterReward") - Number(a.type === "chapterReward")
+	);
+});
 </script>
 
 <template>
