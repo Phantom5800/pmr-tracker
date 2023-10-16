@@ -13,7 +13,7 @@ const { info, shrink } = defineProps<{
 	shrink?: boolean;
 }>();
 
-const { name, image, multiple, label, show } = info;
+const { name, image, multiple, label, show, turnInCheck } = info;
 
 const { options } = storeToRefs(optionsStore);
 
@@ -68,6 +68,15 @@ const derivedData = computed(
 	}
 );
 
+const showCheck = computed(() => {
+	if (turnInCheck) {
+		const [checkArea, checkCheck] = turnInCheck.split(":");
+		return playthroughStore.checkedLocation(checkArea, checkCheck);
+	} else {
+		return false;
+	}
+});
+
 function getImageUrl(image: string) {
 	return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
@@ -90,12 +99,19 @@ function getImageUrl(image: string) {
 				: playthroughStore.toggleItem(name)
 		"
 		@contextmenu.prevent="
-			(powerStarNum || multiple || bootsOrHammer) &&
-				playthroughStore.removeItem(derivedData.removing)
+			() => {
+				if (turnInCheck) {
+					const [checkArea, checkCheck] = turnInCheck.split(':');
+					playthroughStore.toggleCheck(checkArea, checkCheck);
+				} else if (powerStarNum || multiple || bootsOrHammer) {
+					playthroughStore.removeItem(derivedData.removing);
+				}
+			}
 		"
 	>
 		<img :src="getImageUrl(derivedData.image)" :alt="name" />
 		<p class="label" v-if="label">{{ label }}</p>
+		<p class="checkmark" v-if="showCheck">✔</p>
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
@@ -125,6 +141,18 @@ p.label {
 	top: 4px;
 	right: 4px;
 	font-size: 2rem;
+	stroke: 1px black;
+	-webkit-text-stroke: 1px black;
+}
+
+p.checkmark {
+	position: absolute;
+	bottom: 0px;
+	right: 4px;
+	font-size: 2rem;
+	color: #00dd00;
+	stroke: 1px black;
+	-webkit-text-stroke: 1px black;
 }
 
 .shrink > img {

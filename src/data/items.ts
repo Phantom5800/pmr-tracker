@@ -128,12 +128,14 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Dolly",
 		type: "miscItem",
-		image: "icons/PeachDoll_PM.png"
+		image: "icons/PeachDoll_PM.png",
+		turnInCheck: "Goomba Village:Give Dolly to Goombaria"
 	},
 	{
 		name: "Kooper's Shell",
 		type: "miscItem",
-		image: "icons/Kooper'sShell_PM.png"
+		image: "icons/Kooper'sShell_PM.png",
+		turnInCheck: "Koopa Village East:Give Kooper his shell"
 	},
 	{
 		chapter: 1,
@@ -182,7 +184,8 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Artifact",
 		type: "miscItem",
-		image: "icons/Artifact_PM.png"
+		image: "icons/Artifact_PM.png",
+		turnInCheck: "Koopa Village East:Give Artifact to Kolorado"
 	},
 	{
 		name: "Forest Pass",
@@ -193,7 +196,8 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Record",
 		type: "miscItem",
-		image: "icons/Record.gif"
+		image: "icons/Record.gif",
+		turnInCheck: "Weight Room:Chest guarded by Boo"
 	},
 	{
 		name: "Weight",
@@ -228,17 +232,20 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Calculator",
 		type: "miscItem",
-		image: "icons/Calculator_PM.png"
+		image: "icons/Calculator_PM.png",
+		turnInCheck: "Central Plaza:Give Calculator to Rowf"
 	},
 	{
 		name: "Frying Pan",
 		type: "miscItem",
-		image: "icons/PM_Frying_Pan.png"
+		image: "icons/PM_Frying_Pan.png",
+		turnInCheck: "Below Plaza:Give Frying Pan to Tayce T."
 	},
 	{
 		name: "Mailbag",
 		type: "miscItem",
-		image: "icons/Mailbag_PM.png"
+		image: "icons/Mailbag_PM.png",
+		turnInCheck: "Central Plaza:Give Mailbag to Post Office"
 	},
 	{
 		chapter: 4,
@@ -254,7 +261,8 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Dictionary",
 		type: "miscItem",
-		image: "icons/PM_Dictionary.png"
+		image: "icons/PM_Dictionary.png",
+		turnInCheck: "Main Gate:Give Dictionary to Russ T."
 	},
 	{
 		name: "Mystery Note",
@@ -270,7 +278,8 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Volcano Vase",
 		type: "miscItem",
-		image: "icons/VolcanoVase.gif"
+		image: "icons/VolcanoVase.gif",
+		turnInCheck: "East Village:Give the volcano vase to Kolorado"
 	},
 	{
 		chapter: 6,
@@ -334,12 +343,14 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Crystal Berry",
 		type: "miscItem",
-		image: "icons/CrystalBerry_PM.png"
+		image: "icons/CrystalBerry_PM.png",
+		turnInCheck: "Rosie:Give Rosie the Crystal Berry"
 	},
 	{
 		name: "Water Stone",
 		type: "miscItem",
-		image: "icons/WaterStone_PM.png"
+		image: "icons/WaterStone_PM.png",
+		turnInCheck: "Lily:Give Water Stone to Lily"
 	},
 	{
 		chapter: 6,
@@ -423,13 +434,15 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Lyrics",
 		type: "miscItem",
 		image: "koopa-koot-favors/Lyrics_PM.png",
-		label: "L"
+		label: "L",
+		turnInCheck: "Dry Dry Outpost West:Turn in Lyrics at far right house"
 	},
 	{
 		name: "Melody",
 		type: "miscItem",
 		image: "koopa-koot-favors/PM_Melody.png",
-		label: "M"
+		label: "M",
+		turnInCheck: "Harbor:Give Melody to Simon in Club 64"
 	},
 	{
 		name: "Quizmo",
@@ -455,126 +468,151 @@ export const allItems: TrackableItemInfo[] = [
 		image: "icons/Anti_Guy_Sprite_-_Paper_Mario.png"
 	},
 	{
+		turnInCheck: "Central Plaza:[Letter] Merlon",
 		name: "Merlon",
 		type: "letter",
 		image: "Letters/PM_Merlon.png"
 	},
 	{
+		turnInCheck: "Koopa Village East:[Letter] Kolorado",
 		name: "Kolorado",
 		type: "letter",
 		image: "Letters/PM_Kolorado.png"
 	},
 	{
+		turnInCheck: "Koopa Village West:[Letter] Mort T.",
 		name: "Mort T. (Koopa Village Inn)",
 		type: "letter",
 		image: "Letters/PM_Toad.png"
 	},
 	{
+		turnInCheck: "Mouse:[Letter] Nomadimouse",
 		name: "Nomadimouse",
 		type: "letter",
 		image: "Letters/Nomadimouse.png"
 	},
 	{
+		turnInCheck: "Goomba Village:[Letter] Goompa",
 		name: "Goompa",
 		type: "letter",
 		image: "Letters/PM_Goompa_sprite.png"
 	},
 	{
+		turnInCheck: "Below Plaza:[Letter] Fice T.",
 		name: "Fice T.",
 		type: "letter",
 		image: "Letters/PM_Fice_T_Sprite.png"
 	},
 	{
+		turnInCheck: "Shop:[Letter] Igor",
 		name: "Igor (Boo's Mansion Shop)",
 		type: "letter",
 		image: "Letters/PM_Boo_Sprite.png"
 	},
 	{
+		turnInCheck: "Main Gate:[Letter] Russ T.",
 		name: "Russ T.",
 		type: "letter",
 		image: "Letters/Russ_T.png"
 	},
 	{
+		turnInCheck: "Central Plaza:[Letter] Minh T. (Chain)",
 		name: "Minh T.",
 		type: "letter",
 		image: "Letters/MinhT_PM.png"
 	},
 	{
+		turnInCheck: "West Shiver City:[Letter] Mayor Penguin",
 		name: "Mayor Penguin",
 		type: "letter",
 		image: "Letters/MayorPenguinPM.png"
 	},
 	{
+		turnInCheck: "Merluvlee's House:[Letter] Merlow",
 		name: "Merlow",
 		type: "letter",
 		image: "Letters/PM_Merlow.png"
 	},
 	{
+		turnInCheck: "Goomba Village:[Letter] Goompapa 1 (Chain)",
 		name: "Goompapa 1",
 		type: "letter",
 		image: "Letters/PM_Goompapa_Sprite.png"
 	},
 	{
+		turnInCheck: "Castle Ruins:[Letter] Muss T. (Chain)",
 		name: "Muss T. (Castle Ruins)",
 		type: "letter",
 		image: "Letters/PM_Toad.png"
 	},
 	{
+		turnInCheck: "Koopa Village West:[Letter] Koover 1 (Chain)",
 		name: "Koover 1 (Koopa Village Entrance)",
 		type: "letter",
 		image: "Letters/KoopaTroopaPM.png"
 	},
 	{
+		turnInCheck: "Harbor:[Letter] Fishmael (Chain)",
 		name: "Fishmael",
 		type: "letter",
 		image: "Letters/Fishmael_PM.png"
 	},
 	{
+		turnInCheck: "Koopa Village West:[Letter] Koover 2 (Chain)",
 		name: "Koover 2 (Koopa Village Entrance)",
 		type: "letter",
 		image: "Letters/KoopaTroopaPM.png"
 	},
 	{
+		turnInCheck: "Dry Dry Outpost East:[Letter] Mr. E (Chain)",
 		name: "Mr. E",
 		type: "letter",
 		image: "Letters/MrEPM.png"
 	},
 	{
+		turnInCheck: "Main Gate:[Letter] Miss T.",
 		name: "Miss T.",
 		type: "letter",
 		image: "Letters/PMMissT.png"
 	},
 	{
+		turnInCheck: "Dry Dry Outpost West:[Letter] Shop (Chain)",
 		name: "Dry Dry Shop",
 		type: "letter",
 		image: "Letters/Little_Mouser_Paper_Mario.png"
 	},
 	{
+		turnInCheck: "Main Room:[Letter] Franky (Chain)",
 		name: "Franky (Boo's Mansion Entrance)",
 		type: "letter",
 		image: "Letters/PM_Boo_Sprite.png"
 	},
 	{
+		turnInCheck: "Train Station:[Letter] Dane T. 1 (Chain)",
 		name: "Dane T. 1",
 		type: "letter",
 		image: "Letters/PM_Dane_T.png"
 	},
 	{
+		turnInCheck: "East Village:[Letter] Red Yoshi Kid (Chain)",
 		name: "Red Yoshi Kid",
 		type: "letter",
 		image: "Letters/red_yoshi.png"
 	},
 	{
+		turnInCheck: "Train Station:[Letter] Dane T. 2 (Chain)",
 		name: "Dane T. 2",
 		type: "letter",
 		image: "Letters/PM_Dane_T.png"
 	},
 	{
+		turnInCheck: "Starborn Valley:[Letter] Frost T. (Chain)",
 		name: "Frost T.",
 		type: "letter",
 		image: "Letters/Frost_T.png"
 	},
 	{
+		turnInCheck: "Goomba Village:[Letter] Goompapa 2 (Chain)",
 		name: "Goompapa 2",
 		type: "letter",
 		image: "Letters/PM_Goompapa_Sprite.png"

@@ -8,4 +8,5 @@ export type TrackableItemInfo = {
 	label?: string;
 	type: string;
 	show?: (settings: OptionsValues) => boolean;
+	turnInCheck?: string;
 };
