@@ -65,6 +65,7 @@ const year = new Date().getFullYear();
 					: ['required', 'chapterReward']
 			"
 		/>
+		<MapTracker />
 		<ItemTracker
 			v-if="!options.combineMisc"
 			heading="Misc. Keys"
@@ -77,7 +78,6 @@ const year = new Date().getFullYear();
 		/>
 
 		<InfoBlocks />
-		<MapTracker />
 		<ItemTracker heading="Letters" :itemTypes="['letter']" />
 	</main>
 
