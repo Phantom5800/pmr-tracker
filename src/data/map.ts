@@ -530,7 +530,10 @@ const regionData: MapRegions = {
 						reqs: [["Hammer", "Bombette"], 1]
 					},
 					"Give Dictionary to Russ T.": { reqs: ["Dictionary"] },
-					"Item at Sushie panel": { reqs: ["Sushie"] }
+					"Item at Sushie panel": { reqs: ["Sushie"] },
+					"[Upgrade] Super Block": {
+						reqs: ["Sushie", logic.canClimbLedges, logic.canBreakBlocksAbove]
+					}
 				}
 			},
 			"Central Plaza": {
@@ -676,7 +679,11 @@ const regionData: MapRegions = {
 			"Lower Upgrade Block": {
 				row: 4,
 				col: 3,
-				checks: {}
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: ["Ultra Hammer", logic.canBreakBlocksAbove]
+					}
+				}
 			},
 			"Bridge Upgrade Block": {
 				row: 2,
@@ -703,6 +710,16 @@ const regionData: MapRegions = {
 						]
 					},
 					"[Coin Block] Right invisible block": {
+						reqs: [
+							logic.canBreakBlocksAbove,
+							[
+								"Super Boots",
+								["Odd Key", "Bombette", "Sushie"],
+								[logic.blueHouseOpen, "Bombette", "Sushie"]
+							]
+						]
+					},
+					"[Upgrade] Super Block": {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
@@ -789,7 +806,22 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Chapter 7 Pipe": { row: 2, col: 10, checks: {} },
+			"Chapter 7 Pipe": {
+				row: 2,
+				col: 10,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: [
+							"Super Boots",
+							[
+								"Sushie",
+								["Odd Key", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"]
+							]
+						]
+					}
+				}
+			},
 			"Power Smash": {
 				row: 3,
 				col: 1,
@@ -810,7 +842,11 @@ const regionData: MapRegions = {
 			"Elevator Upgrade Block": {
 				row: 3,
 				col: 4,
-				checks: {}
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
+					}
+				}
 			},
 			"Ultra Boots Room": {
 				row: 3,
@@ -1636,6 +1672,9 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] All 3 other bushes": {
 						reqs: null
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -1955,6 +1994,9 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] Bottom right tree": {
 						reqs: logic.canShakeTree
+					},
+					"[Upgrade] Super Block": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -2127,7 +2169,21 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Ruins Spring Room": { row: 4, col: 2, rowSpan: 4, checks: {} },
+			"Ruins Spring Room": {
+				row: 4,
+				col: 2,
+				rowSpan: 4,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: [
+							"Bombette",
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove,
+							logic.multipleItemCheck("Ruins Key", 3)
+						]
+					}
+				}
+			},
 			"Puzzle Room": { row: 4, col: 4, rowSpan: 2, colSpan: 2, checks: {} },
 			"Puzzle Solution Room": { row: 4, col: 6, checks: {} },
 			"Wall Stairs": {
@@ -2476,7 +2532,7 @@ const regionData: MapRegions = {
 				row: 6,
 				col: 1,
 				rowSpan: 2,
-				checks: {}
+				checks: { "[Upgrade] Super Block": { reqs: null } }
 			},
 			"Stairwell 3": {
 				row: 2,
@@ -2766,6 +2822,9 @@ const regionData: MapRegions = {
 					},
 					"Hidden block by door to Lantern Ghost room": {
 						reqs: [logic.canMoveStations, "Cake", "Hammer"]
+					},
+					"[Upgrade] Super Block": {
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					}
 				}
 			},
@@ -2998,6 +3057,9 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] Bottom bush on left side": {
 						reqs: "Sushie"
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Sushie", logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -3169,7 +3231,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			"Firebars + Upgrade": { row: 1, col: 5, checks: {} },
+			"Firebars + Upgrade": {
+				row: 1,
+				col: 5,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: "Boots"
+					}
+				}
+			},
 			Zipline: {
 				row: 2,
 				col: 5,
@@ -3177,6 +3247,9 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Right side of lower level": {
 						reqs: logic.canFlipPanel
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Boots", "Ultra Hammer"]
 					}
 				}
 			},
@@ -3312,7 +3385,10 @@ const regionData: MapRegions = {
 					"Item from ground pounding opposite side from partner upgrade block":
 						{
 							reqs: ["Lakilester", "Super Boots"]
-						}
+						},
+					"[Upgrade] Super Block": {
+						reqs: ["Lakilester", "Super Boots"]
+					}
 				}
 			},
 			"Fallen Logs": {
@@ -3424,6 +3500,13 @@ const regionData: MapRegions = {
 					},
 					"Item in grass right of tree": {
 						reqs: ["Yellow Berry", ["Parakarry", "Lakilester"]]
+					},
+					"[Upgrade] Super Block": {
+						reqs: [
+							"Yellow Berry",
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges
+						]
 					}
 				}
 			},
@@ -3559,6 +3642,9 @@ const regionData: MapRegions = {
 				checks: {
 					"Item below Kooper switch": {
 						reqs: ["Warehouse Key", "Scarf", "Bucket"]
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"]
 					}
 				}
 			},
