@@ -62,6 +62,7 @@ export const chapterRewardReqs: Record<string, Requirements> = {
 		"Jade Raven",
 		"Sushie",
 		"Hammer",
+		logic.canClimbLedges,
 		[
 			logic.startingLocation("Yoshi Village"),
 			"Watt",
@@ -3119,7 +3120,8 @@ const regionData: MapRegions = {
 			],
 			"Sushie",
 			"Jade Raven",
-			"Hammer"
+			"Hammer",
+			logic.canClimbLedges
 		],
 		areas: {
 			"Mt. Lavalava Entrance": { row: 1, col: 2, checks: {} },
@@ -3130,101 +3132,22 @@ const regionData: MapRegions = {
 				rowSpan: 3,
 				checks: {
 					"[Coin Block] ? Block 1": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"[Coin Block] ? Block 2": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"[Coin Block] ? Block 3": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"[Coin Block] ? Block 4": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"Item on top of brick block": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Kooper", "Ultra Boots"]
-						]
+						reqs: ["Ultra Boots", ["Boots", "Kooper"]]
 					},
 					"Item on platform halfway down second zip line": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: "Boots"
 					}
 				}
 			},
@@ -3235,22 +3158,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] Right side of lower level": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					}
 				}
 			},
@@ -3263,22 +3171,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] Left of heart block": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Ultra Hammer", "Boots", logic.canFlipPanel]
 					}
 				}
 			},
@@ -3287,38 +3180,10 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					"Left ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
+						reqs: ["Ultra Hammer", "Boots"]
 					},
 					"Right ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
+						reqs: ["Ultra Hammer", "Boots"]
 					}
 				}
 			},
@@ -3327,21 +3192,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Ultra Hammer chest": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
+						reqs: [["Parakarry", "Lakilester"]]
 					}
 				}
 			},
@@ -3351,20 +3202,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Hidden block on right side of room": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -3383,21 +3221,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					Chest: {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
+						reqs: ["Ultra Hammer", ["Parakarry", "Lakilester"]]
 					}
 				}
 			}
