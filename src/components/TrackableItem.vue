@@ -3,7 +3,7 @@ import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
 import { computed, toRefs } from "vue";
 import { chapterRewardReqs } from "@/data/map";
-import type { TrackableItemInfo } from "@/types/items.ts";
+import type { TrackableItemInfo } from "@/types/items";
 
 const playthroughStore = usePlaythrough();
 const { info, shrink } = defineProps<{
@@ -30,34 +30,28 @@ const derivedData = computed(
 					adding: null,
 					removing: _ultra,
 					name: _ultra,
-					image: `/src/assets/images/upgrades/PM_${_ultra.replace(
-						" ",
-						"_"
-					)}.png`
+					image: `upgrades/PM_${_ultra.replace(" ", "_")}.png`
 				};
 			} else if (playthroughStore.hasItem(_super)) {
 				return {
 					adding: _ultra,
 					removing: _super,
 					name: _ultra,
-					image: `/src/assets/images/upgrades/PM_${_super.replace(
-						" ",
-						"_"
-					)}.png`
+					image: `upgrades/PM_${_super.replace(" ", "_")}.png`
 				};
 			} else if (playthroughStore.hasItem(name)) {
 				return {
 					adding: _super,
 					removing: name,
 					name: _ultra,
-					image: `/src/assets/images/upgrades/PM_${name}.png`
+					image: `upgrades/PM_${name}.png`
 				};
 			} else {
 				return {
 					adding: name,
 					removing: null,
 					name: _ultra,
-					image: `/src/assets/images/upgrades/PM_No_${name}.png`
+					image: `upgrades/PM_No_${name}.png`
 				};
 			}
 		} else {
@@ -65,6 +59,11 @@ const derivedData = computed(
 		}
 	}
 );
+
+const imageUrl = computed(() => {
+	const relativeUrl = `../assets/images/${derivedData.value.image}`;
+	return new URL(relativeUrl, import.meta.url).href;
+});
 </script>
 
 <template>
@@ -87,7 +86,7 @@ const derivedData = computed(
 				playthroughStore.removeItem(derivedData.removing)
 		"
 	>
-		<img :src="derivedData.image" :alt="name" />
+		<img :src="imageUrl" :alt="name" />
 		<p class="label" v-if="label">{{ label }}</p>
 		<p class="count" v-if="multiple">
 			{{ playthroughStore.itemCount(name) + "/" + multiple }}

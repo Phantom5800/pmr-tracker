@@ -7,31 +7,36 @@ const optionsStore = useOptions();
 const { options } = storeToRefs(optionsStore);
 
 const settings = [
-	{ id: "shopsRandomized", src: "/src/assets/images/flags/HarryTPM.png" },
-	{ id: "rowfRandomized", src: "/src/assets/images/flags/Rowf.png" },
-	{ id: "merlowRandomized", src: "/src/assets/images/flags/Merlow.png" },
-	{ id: "keysRandomized", src: "/src/assets/images/flags/OddKey.gif" },
-	{ id: "coinsRandomized", src: "/src/assets/images/flags/coin.png" },
-	{ id: "coinBlocksRandomized", src: "/src/assets/images/flags/coinblock.png" },
-	{ id: "foliageCoinsRandomized", src: "/src/assets/images/flags/bush.png" },
+	{ id: "shopsRandomized", src: "flags/HarryTPM.png" },
+	{ id: "rowfRandomized", src: "flags/Rowf.png" },
+	{ id: "merlowRandomized", src: "flags/Merlow.png" },
+	{ id: "keysRandomized", src: "flags/OddKey.gif" },
+	{ id: "coinsRandomized", src: "flags/coin.png" },
+	{ id: "coinBlocksRandomized", src: "flags/coinblock.png" },
+	{ id: "foliageCoinsRandomized", src: "flags/bush.png" },
 	{
 		id: "lettersRandomized",
-		src: "/src/assets/images/flags/PM_Letter_Sprite.png"
+		src: "flags/PM_Letter_Sprite.png"
 	},
-	{ id: "panelsRandomized", src: "/src/assets/images/flags/Star_Piece.png" },
+	{ id: "panelsRandomized", src: "flags/Star_Piece.png" },
 	{
 		id: "dojoRandomized",
-		src: "/src/assets/images/icons/TheMasterFirst_PM.png"
+		src: "icons/TheMasterFirst_PM.png"
 	},
 	{
 		id: "koopaKootRandomized",
-		src: "/src/assets/images/flags/KoopaKoot_PM.png"
+		src: "flags/KoopaKoot_PM.png"
 	},
 	{
 		id: "tradingEventRandomized",
-		src: "/src/assets/images/flags/TradingEvent_PM.png"
+		src: "flags/TradingEvent_PM.png"
 	}
 ];
+
+function getImageUrl(image: string) {
+	const relativeUrl = `../assets/images/${image}`;
+	return new URL(relativeUrl, import.meta.url).href;
+}
 </script>
 
 <template>
@@ -39,7 +44,7 @@ const settings = [
 		<img
 			v-for="setting in settings"
 			:key="setting.id"
-			:src="setting.src"
+			:src="getImageUrl(setting.src)"
 			:class="{ hide: !options[setting.id] }"
 		/>
 	</TrackerPanel>
