@@ -8,103 +8,75 @@ const optionsStore = useOptions();
 const { options } = storeToRefs(optionsStore);
 
 const props = defineProps<{
-	isOpen: boolean;
 	optionsKeys: string[];
 }>();
 </script>
 
 <template>
-	<div :class="[{ 'options-open': props.isOpen }, 'panel']">
-		<table>
-			<tr
-				v-for="key in optionsKeys"
-				:key="key"
-				@click="
-					optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
-				"
-			>
-				<td class="option-name" colspan="3">{{ optionsStore.getName(key) }}</td>
-				<td v-if="optionsStore.getType(key) === 'boolean'" class="option">
-					<div class="checkbox-slider">
-						<input
-							autocomplete="off"
-							class="checkbox-slider"
-							:id="key"
-							type="checkbox"
-							:name="key"
-							:checked="options[key]"
-						/>
-						<div class="checkbox-groove"></div>
-						<!-- <label class="checkbox-slider" :for="key"></label> -->
-					</div>
-				</td>
-				<td v-else-if="optionsStore.getType(key) === 'select'">
-					<select
-						:name="key"
-						:id="key"
-						@change="(event) => optionsStore.setValue(key, event.target.value)"
-					>
-						<option
-							v-for="option in optionsStore.getChoices(key)"
-							:key="option"
-							:value="option"
-							:selected="options[key] === option"
-						>
-							{{ option }}
-						</option>
-					</select>
-				</td>
-				<td v-else-if="optionsStore.getType(key) === 'number'">
+	<div class="flex">
+		<div
+			v-for="key in optionsKeys"
+			class="flex-row"
+			:key="key"
+			@click="
+				optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
+			"
+		>
+			<div class="option-name" colspan="3">{{ optionsStore.getName(key) }}</div>
+			<div v-if="optionsStore.getType(key) === 'boolean'" class="option">
+				<div class="checkbox-slider">
 					<input
-						:name="key"
+						autocomplete="off"
+						class="checkbox-slider"
 						:id="key"
-						type="number"
-						:value="options[key]"
-						@change="(event) => optionsStore.setValue(key, event.target.value)"
+						type="checkbox"
+						:name="key"
+						:checked="options[key]"
 					/>
-				</td>
-			</tr>
-		</table>
+					<div class="checkbox-groove"></div>
+					<!-- <label class="checkbox-slider" :for="key"></label> -->
+				</div>
+			</div>
+			<div v-else-if="optionsStore.getType(key) === 'select'">
+				<select
+					:name="key"
+					:id="key"
+					@change="(event) => optionsStore.setValue(key, event.target.value)"
+				>
+					<option
+						v-for="option in optionsStore.getChoices(key)"
+						:key="option"
+						:value="option"
+						:selected="options[key] === option"
+					>
+						{{ option }}
+					</option>
+				</select>
+			</div>
+			<div v-else-if="optionsStore.getType(key) === 'number'">
+				<input
+					:name="key"
+					:id="key"
+					type="number"
+					:value="options[key]"
+					@change="(event) => optionsStore.setValue(key, event.target.value)"
+				/>
+			</div>
+		</div>
 	</div>
 </template>
 
 <style scoped>
-div.panel {
-	background-color: darkblue;
-	color: white;
-	margin: 5px 5px 5px 5px;
-	padding: 5px 5px 5px 5px;
-	font-size: 1.5em;
-	position: absolute;
-	left: -600px;
-	top: 58px;
-	width: 500px;
-	transition: 0.4s;
+div.flex {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
-div.panel.options-open {
-	-webkit-transform: translate(608px);
-	transform: translate(608px);
-}
-
-table {
-	width: 100%;
-}
-
-td.option-name {
-	text-align: left;
-	padding-left: 10px;
-}
-
-tr:hover td.option-name {
-	text-decoration: underline;
-}
-
-td.option {
-	width: 60px;
-	text-align: right;
-	padding-top: 5px;
-	padding-bottom: 5px;
+div.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .checkbox-groove {
@@ -153,5 +125,10 @@ label {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+input,
+select {
+	min-height: 100%;
 }
 </style>

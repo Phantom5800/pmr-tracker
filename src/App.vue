@@ -11,6 +11,8 @@ import Notes from "./components/Notes.vue";
 import RequiredTracker from "./components/RequiredTracker.vue";
 import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
+import SettingsModal from "./components/SettingsModal.vue";
+import ConfigModal from "./components/ConfigModal.vue";
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -81,8 +83,8 @@ const year = new Date().getFullYear();
 		<ItemTracker heading="Letters" :itemTypes="['letter']" />
 	</main>
 
-	<MenuOptions :isOpen="configOpen" :optionsKeys="configKeys" />
-	<MenuOptions :isOpen="settingsOpen" :optionsKeys="settingsKeys" />
+	<ConfigModal :isOpen="configOpen" :optionsKeys="configKeys" />
+	<SettingsModal :isOpen="settingsOpen" :optionsKeys="settingsKeys" />
 
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"

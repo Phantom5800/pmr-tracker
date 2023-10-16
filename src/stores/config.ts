@@ -86,12 +86,6 @@ const optionsData = {
 		type: "color",
 		default: "#23233b"
 	},
-	randomizerSeed: {
-		namespace: "settings",
-		name: "Randomizer Seed",
-		type: "string",
-		default: "0"
-	},
 	forestOpen: {
 		namespace: "settings",
 		name: "Forever Forest Open",

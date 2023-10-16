@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { allRegions, type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
+import { saveAs } from "file-saver";
 
 type PlaythroughProps = {
 	items: string[];
@@ -177,6 +178,48 @@ export const usePlaythrough = defineStore("playthrough", {
 			} else {
 				return true;
 			}
+		},
+		resetPlaythrough() {
+			this.checks = [];
+			this.items = [];
+			this.notes = "";
+			localStorage.setItem(
+				"playthrough",
+				JSON.stringify({ checks: [], items: [], notes: "" })
+			);
+		},
+		savePlaythrough() {
+			const saveData = JSON.stringify({
+				checks: this.checks,
+				items: this.items,
+				notes: this.notes
+			});
+			const blob = new Blob([saveData], { type: "application/json" });
+			saveAs(blob, `pmr-tracker-${new Date().toISOString()}.json`);
+		},
+		loadPlaythrough(file: File) {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				console.log(e.target?.result);
+				const contents = e.target?.result;
+				if (typeof contents === "string") {
+					const saveData = JSON.parse(contents);
+					if (saveData.checks && saveData.items && saveData.notes) {
+						this.checks = saveData.checks;
+						this.items = saveData.items;
+						this.notes = saveData.notes;
+						localStorage.setItem(
+							"playthrough",
+							JSON.stringify({
+								items: this.items,
+								checks: this.checks,
+								notes: this.notes
+							})
+						);
+					}
+				}
+			};
+			reader.readAsText(file);
 		}
 	}
 });

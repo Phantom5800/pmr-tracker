@@ -1,0 +1,132 @@
+<script setup lang="ts">
+import { useOptions } from "@/stores/config";
+import { usePlaythrough } from "@/stores/playthrough";
+import { storeToRefs, defineStore } from "pinia";
+import { ref } from "vue";
+import MenuOptions from "./MenuOptions.vue";
+import axios from "axios";
+
+const optionsStore = useOptions();
+const playthroughStore = usePlaythrough();
+
+const { options } = storeToRefs(optionsStore);
+
+const importButton = ref<HTMLInputElement | null>(null);
+const seedToLoad = ref("0");
+const showingSeedSettings = ref(false);
+
+const props = defineProps<{
+	isOpen: boolean;
+	optionsKeys: string[];
+}>();
+
+function fetchSeedSettings(id: string) {
+	axios
+		.get(
+			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`,
+			{
+				headers: {
+					Accept: "application/json",
+					Origin: "https://pmr-tracker.phantom-games.com",
+					Referer: "https://pmr-tracker.phantom-games.com/"
+				}
+			}
+		)
+		.then((result) => {
+			console.log(result);
+		});
+}
+</script>
+
+<template>
+	<div :class="[{ 'options-open': props.isOpen }, 'panel']">
+		<div class="flex">
+			<div class="flex-row">
+				<div>Import Seed</div>
+				<input type="text" v-model="seedToLoad" />
+				<button @click="fetchSeedSettings(seedToLoad)">Load</button>
+			</div>
+			<div class="flex-row">
+				<div>Reset Tracker</div>
+				<button @click="playthroughStore.resetPlaythrough()">Reset</button>
+			</div>
+			<div class="flex-row">
+				<div>Saved Progress</div>
+				<button @click="playthroughStore.savePlaythrough()">Export</button>
+				<input
+					type="file"
+					ref="importButton"
+					:style="{ display: 'none' }"
+					@change="
+						(e) =>
+							playthroughStore.loadPlaythrough(
+								(<HTMLInputElement>e.target).files[0]
+							)
+					"
+				/>
+				<button @click="importButton.click()">Import</button>
+			</div>
+		</div>
+		<hr />
+		<div @click="showingSeedSettings = !showingSeedSettings">
+			{{ showingSeedSettings ? "▼" : "▶" }} Seed Settings
+		</div>
+		<MenuOptions
+			:style="{
+				display: showingSeedSettings ? undefined : 'none',
+				paddingLeft: '2rem'
+			}"
+			:options-keys="optionsKeys"
+		/>
+	</div>
+</template>
+
+<style scoped>
+div.panel {
+	background-color: darkblue;
+	color: white;
+	margin: 5px 5px 5px 5px;
+	padding: 1rem;
+	font-size: 1.5em;
+	position: absolute;
+	left: -600px;
+	top: 58px;
+	width: 500px;
+	transition: 0.4s;
+}
+
+div.panel.options-open {
+	-webkit-transform: translate(608px);
+	transform: translate(608px);
+}
+
+table {
+	width: 100%;
+}
+
+div.flex {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+div.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+button {
+	min-height: 100%;
+	color: black;
+	font-weight: bold;
+	border-radius: 0;
+	background-color: white;
+	border: 2px solid black;
+	padding-inline: 1rem;
+}
+
+input {
+	min-height: 100%;
+}
+</style>
