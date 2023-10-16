@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Main from "./components/Main.vue";
 import MenuOptions from "./components/MenuOptions.vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
@@ -13,6 +13,7 @@ import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
 import SettingsModal from "./components/SettingsModal.vue";
 import ConfigModal from "./components/ConfigModal.vue";
+import { allItems } from "@/data/items";
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -22,6 +23,10 @@ const optionsStore = useOptions();
 const { options } = storeToRefs(optionsStore);
 
 const year = new Date().getFullYear();
+
+const allItemsFiltered = computed(() =>
+	allItems.filter((el) => el.show === undefined || el.show(options.value))
+);
 </script>
 
 <template>
@@ -60,6 +65,7 @@ const year = new Date().getFullYear();
 		<RequiredTracker v-if="!options.compactTracker" />
 		<ItemTracker
 			v-if="options.compactTracker"
+			:all-items="allItemsFiltered"
 			:heading="options.combineMisc ? 'Basically Everything' : 'Required Items'"
 			:itemTypes="
 				options.combineMisc
@@ -70,17 +76,23 @@ const year = new Date().getFullYear();
 		<MapTracker />
 		<ItemTracker
 			v-if="!options.combineMisc"
+			:all-items="allItemsFiltered"
 			heading="Misc. Keys"
 			:itemTypes="['miscKey']"
 		/>
 		<ItemTracker
 			v-if="!options.combineMisc"
+			:all-items="allItemsFiltered"
 			heading="Misc. Items"
 			:itemTypes="['miscItem']"
 		/>
 
 		<InfoBlocks />
-		<ItemTracker heading="Letters" :itemTypes="['letter']" />
+		<ItemTracker
+			:all-items="allItemsFiltered"
+			heading="Letters"
+			:itemTypes="['letter']"
+		/>
 	</main>
 
 	<ConfigModal :isOpen="configOpen" :optionsKeys="configKeys" />

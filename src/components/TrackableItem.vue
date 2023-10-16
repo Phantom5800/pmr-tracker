@@ -4,14 +4,22 @@ import { storeToRefs } from "pinia";
 import { computed, toRefs } from "vue";
 import { chapterRewardReqs } from "@/data/map";
 import type { TrackableItemInfo } from "@/types/items";
+import { useOptions } from "../stores/config";
 
 const playthroughStore = usePlaythrough();
+const optionsStore = useOptions();
 const { info, shrink } = defineProps<{
 	info: TrackableItemInfo;
 	shrink?: boolean;
 }>();
 
-const { name, image, multiple, label } = info;
+const { name, image, multiple, label, show } = info;
+
+const { options } = storeToRefs(optionsStore);
+
+const powerStarNum = computed(() =>
+	name === "Power Stars Found" ? options.value.powerStarNum : null
+);
 
 const bootsOrHammer = computed(() => name === "Boots" || name === "Hammer");
 
@@ -67,6 +75,7 @@ function getImageUrl(image: string) {
 
 <template>
 	<div
+		v-if="show === undefined || show(options)"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
 			shrink: shrink,
@@ -76,19 +85,19 @@ function getImageUrl(image: string) {
 				playthroughStore.canCheckLocation(chapterRewardReqs[name])
 		}"
 		@click="
-			multiple || bootsOrHammer
-				? playthroughStore.addItem(derivedData.adding, multiple)
+			powerStarNum || multiple || bootsOrHammer
+				? playthroughStore.addItem(derivedData.adding, powerStarNum || multiple)
 				: playthroughStore.toggleItem(name)
 		"
 		@contextmenu.prevent="
-			(multiple || bootsOrHammer) &&
+			(powerStarNum || multiple || bootsOrHammer) &&
 				playthroughStore.removeItem(derivedData.removing)
 		"
 	>
 		<img :src="getImageUrl(derivedData.image)" :alt="name" />
 		<p class="label" v-if="label">{{ label }}</p>
-		<p class="count" v-if="multiple">
-			{{ playthroughStore.itemCount(name) + "/" + multiple }}
+		<p class="count" v-if="powerStarNum || multiple">
+			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
 	</div>
 </template>

@@ -92,5 +92,14 @@ export default {
 	},
 	fastBowserCastle(items: string[], settings: OptionsValues) {
 		return settings.fastBowserCastle;
+	},
+	powerStarHunt(settings: OptionsValues) {
+		return settings.powerStarHunt;
+	},
+	noPowerStarHunt(settings: OptionsValues) {
+		return !settings.powerStarHunt;
+	},
+	powerStarNum(settings: OptionsValues) {
+		return settings.powerStarNum;
 	}
 };

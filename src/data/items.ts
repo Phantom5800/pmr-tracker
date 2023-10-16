@@ -1,4 +1,7 @@
-export const allItems = [
+import type { TrackableItemInfo } from "@/types/items";
+import logic from "../utils/logic";
+
+export const allItems: TrackableItemInfo[] = [
 	{
 		chapter: 1,
 		name: "Eldstar",
@@ -45,13 +48,15 @@ export const allItems = [
 		chapter: 8,
 		name: "Star Rod",
 		type: "chapterReward",
-		image: "icons/PM_Starrod.png"
+		image: "icons/PM_Starrod.png",
+		show: logic.noPowerStarHunt
 	},
 	{
 		chapter: 16,
 		name: "Power Stars Found",
 		type: "required",
-		image: "icons/Power_Star.png"
+		image: "icons/Power_Star.png",
+		show: logic.powerStarHunt
 	},
 	{
 		chapter: -1,

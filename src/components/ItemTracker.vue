@@ -4,12 +4,12 @@ import { ref, computed, toRef, watch, toRefs } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import type { TrackableItemInfo } from "../types/items.ts";
-import { allItems } from "@/data/items";
 
 const props = defineProps<{
 	heading: string;
 	tooltip?: string;
 	itemTypes?: string[];
+	allItems: TrackableItemInfo[];
 }>();
 
 const tooltipRef = ref("");
@@ -17,7 +17,7 @@ const tooltipRef = ref("");
 const { heading, itemTypes } = toRefs(props);
 
 const trackerItems = computed(() => {
-	const filteredItems = allItems.filter(
+	const filteredItems = props.allItems.filter(
 		(el) => itemTypes.value && itemTypes.value.includes(el.type)
 	);
 	return filteredItems.sort(
