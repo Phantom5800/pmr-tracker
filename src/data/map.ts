@@ -140,6 +140,12 @@ const regionData: MapRegions = {
 							"Hammer",
 							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
 						]
+					},
+					"[Multicoin Block] Block on ground": {
+						reqs: [
+							"Hammer",
+							[logic.startingLocation("Goomba Village"), logic.canClimbLedges]
+						]
 					}
 				}
 			},
@@ -581,7 +587,8 @@ const regionData: MapRegions = {
 						reqs: [["Hammer", "Bombette"], 5]
 					},
 					"Talk to Simon in Club 64 (first time)": { reqs: null },
-					"Give Melody to Simon in Club 64": { reqs: "Melody" }
+					"Give Melody to Simon in Club 64": { reqs: "Melody" },
+					"[Multicoin Block] Block on crates": { reqs: "Boots" }
 				}
 			},
 			"Residential Area": {
@@ -663,6 +670,9 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"Hidden block next to last brick block": {
+						reqs: ["Hammer", logic.canBreakBlocksAbove]
+					},
+					"[Multicoin Block] Third block from the left": {
 						reqs: ["Hammer", logic.canBreakBlocksAbove]
 					}
 				}
@@ -993,6 +1003,13 @@ const regionData: MapRegions = {
 					},
 					"Item behind small fence": {
 						reqs: [logic.canShakeTree, logic.canClimbLedges]
+					},
+					"[Multicoin Block] Last block on the right": {
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove
+						]
 					}
 				}
 			},
@@ -2499,10 +2516,13 @@ const regionData: MapRegions = {
 					"[Coin Block] ? Block by exit": {
 						reqs: "Parakarry"
 					},
-					"? Block by goomba": {
+					"? Block by Goomba": {
 						reqs: "Parakarry"
 					},
 					"Item behind rock near exit": {
+						reqs: "Parakarry"
+					},
+					"[Multicoin Block] Near exit": {
 						reqs: "Parakarry"
 					}
 				}
@@ -2719,6 +2739,9 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] Right ? Block by Groove Guy": {
 						reqs: [logic.canMoveStations, "Cake"]
+					},
+					"[Multicoin Block] Between two ? Blocks": {
+						reqs: [logic.canMoveStations, "Cake"]
 					}
 				}
 			},
@@ -2786,6 +2809,9 @@ const regionData: MapRegions = {
 					"Item held by Shy Guy after treadmills": {
 						reqs: ["Bow", logic.canMoveStations, "Cake"]
 					},
+					"[Multicoin Block] On pink moving platform": {
+						reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"]
+					},
 					"Middle item inside fort after moving blocks": {
 						reqs: ["Bow", logic.canMoveStations, "Cake"]
 					},
@@ -2824,6 +2850,9 @@ const regionData: MapRegions = {
 						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					},
 					"[Upgrade] Super Block": {
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
+					},
+					"[Multicoin Block] On top of wheel": {
 						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					}
 				}
@@ -3413,7 +3442,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
-			Maze: { row: 3, col: 2, checks: {} },
+			Maze: {
+				row: 3,
+				col: 2,
+				checks: {
+					"[Multicoin Block] Right of exit pipe": {
+						reqs: ["Blue Berry", "Boots"]
+					}
+				}
+			},
 			"Blue Flower": {
 				row: 3,
 				col: 3,
@@ -3842,7 +3879,16 @@ const regionData: MapRegions = {
 				}
 			},
 			"Crystal Palace Entrance": { row: 4, col: 2, rowSpan: 2, checks: {} },
-			"Mirror Room": { row: 4, col: 3, rowSpan: 2, checks: {} },
+			"Mirror Room": {
+				row: 4,
+				col: 3,
+				rowSpan: 2,
+				checks: {
+					"[Multicoin Block] 2 Blocks past blue door": {
+						reqs: "Blue Key"
+					}
+				}
+			},
 			"Elevator + Clubba Room": { row: 4, col: 4, rowSpan: 2, checks: {} },
 			"Bomb Switch": { row: 4, col: 5, rowSpan: 2, checks: {} },
 			"Triple Dip": {
