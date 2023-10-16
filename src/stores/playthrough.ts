@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Requirements } from "../data/map";
+import { allRegions, type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
 
 type PlaythroughProps = {
@@ -138,8 +138,13 @@ export const usePlaythrough = defineStore("playthrough", {
 				})
 			);
 		},
-		canCheckLocation(reqs: Requirements) {
-			return resolveRequirement(reqs, "and");
+		canCheckLocation(reqs: Requirements, region?: string) {
+			console.log(region);
+			const regionReqs = region ? getRegionData(region).reqs : null;
+			return (
+				resolveRequirement(regionReqs ?? null, "and") &&
+				resolveRequirement(reqs, "and")
+			);
 		},
 		locationIsRandomized(check: string) {
 			const optionsStore = useOptions();

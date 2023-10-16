@@ -1,6 +1,37 @@
 import type { OptionsValues } from "@/stores/config";
 
 export default {
+	canReachToadTown(items: string[], settings: OptionsValues) {
+		return (
+			settings.startingLocation === "Toad Town" ||
+			(settings.startingLocation === "Goomba Village" &&
+				(items.includes("Hammer") || items.includes("Bombette")) &&
+				(items.includes("Boots") || items.includes("Parakarry"))) ||
+			(settings.startingLocation === "Dry Dry Outpost" &&
+				items.includes("Boots")) ||
+			(settings.startingLocation === "Yoshi Village" &&
+				(items.includes("Watt") || settings.whaleOpen))
+		);
+	},
+	canJumpOnPipe(items: string[], settings: OptionsValues) {
+		return items.includes("Boots") || items.includes("Parakarry");
+	},
+	canBreakBlocksAbove(items: string[], settings: OptionsValues) {
+		return items.includes("Boots") || items.includes("Kooper");
+	},
+	canBreakGroundBlocks(items: string[], settings: OptionsValues) {
+		return (
+			items.includes("Hammer") ||
+			items.includes("Kooper") ||
+			items.includes("Bombette")
+		);
+	},
+	canShakeTree(items: string[], settings: OptionsValues) {
+		return items.includes("Hammer") || items.includes("Bombette");
+	},
+	canFlipPanel(items: string[], settings: OptionsValues) {
+		return items.includes("Super Boots") || items.includes("Ultra Hammer");
+	},
 	chapter6Entry(items: string[], settings: OptionsValues) {
 		return (
 			items.filter((el) => el.includes("Magical Seed")).length >=
@@ -13,6 +44,9 @@ export default {
 	},
 	toyboxAccess(items: string[], settings: OptionsValues) {
 		return items.includes("Bow") || settings.toyboxOpen;
+	},
+	forestOpen(items: string[], settings: OptionsValues) {
+		return settings.forestOpen;
 	},
 	blueHouseOpen(items: string[], settings: OptionsValues) {
 		return settings.blueHouseOpen;

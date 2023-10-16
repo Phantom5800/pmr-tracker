@@ -17,7 +17,7 @@ function areaHasChecksInLogic(pRegion: string, area: string): boolean {
 		([checkName, check]) =>
 			playthrough.locationIsRandomized(checkName) &&
 			!playthrough.checkedLocation(checkName) &&
-			playthrough.canCheckLocation(check.reqs)
+			playthrough.canCheckLocation(check.reqs, pRegion)
 	);
 }
 
@@ -112,7 +112,7 @@ const unshuffledChecks = computed(() =>
 					)"
 					:key="checkName"
 					:class="{
-						available: playthrough.canCheckLocation(check.reqs),
+						available: playthrough.canCheckLocation(check.reqs, currentMap),
 						obtained: playthrough.checkedLocation(checkName),
 						disabled: unshuffledChecks.includes(checkName)
 					}"
