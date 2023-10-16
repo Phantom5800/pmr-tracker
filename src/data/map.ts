@@ -1,5 +1,6 @@
 import type { OptionsValues } from "@/stores/config";
 import logic from "../utils/logic";
+import { has3Letters } from "@/utils/letterLogic";
 
 export type Requirements =
 	| null
@@ -1631,7 +1632,7 @@ const regionData: MapRegions = {
 						reqs: null
 					},
 					"Give three letters to Parakarry": {
-						reqs: logic.canClimbLedges
+						reqs: [logic.canClimbLedges, has3Letters]
 					},
 					"[Foliage Coin] All 3 other bushes": {
 						reqs: null

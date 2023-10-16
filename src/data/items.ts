@@ -144,12 +144,12 @@ export const allItems: TrackableItemInfo[] = [
 		image: "icons/FortressKey_PM.png",
 		multiple: 4
 	},
-	{
-		name: "Letters",
-		type: "miscItem",
-		image: "icons/PM_Letter_Sprite.png",
-		multiple: 3
-	},
+	// {
+	// 	name: "Letters",
+	// 	type: "miscItem",
+	// 	image: "icons/PM_Letter_Sprite.png",
+	// 	multiple: 3
+	// },
 	{
 		chapter: 2,
 		name: "Pulse Stone",
