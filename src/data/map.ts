@@ -92,8 +92,9 @@ export const chapterRewardReqs: Record<string, Requirements> = {
 		"Red Key",
 		"Palace Key",
 		"Kooper",
-		"Bombette",
 		"Hammer",
+		"Bombette",
+		logic.canReachToadTown,
 		"Super Boots",
 		["Sushie", logic.blueHouseOpen, "Odd Key"]
 	],
@@ -3475,13 +3476,8 @@ const regionData: MapRegions = {
 	"Shiver Region": {
 		reqs: [
 			logic.canReachToadTown,
-			logic.canClimbLedges,
-			[
-				["Super Boots", "Sushie"],
-				["Odd Key", "Bombette"],
-				[logic.blueHouseOpen, "Bombette"]
-			],
-			"Super Boots"
+			"Super Boots",
+			["Sushie", ["Odd Key", "Bombette"], [logic.blueHouseOpen, "Bombette"]]
 		],
 		areas: {
 			"Ice Staircase": {
@@ -3490,35 +3486,21 @@ const regionData: MapRegions = {
 				checks: {
 					"? Block up first set of stairs": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							"Star Stone"
 						]
 					},
 					"Item on ledge when falling down after second set of stairs": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							"Star Stone"
 						]
 					}
@@ -3530,18 +3512,11 @@ const regionData: MapRegions = {
 				checks: {
 					"Sacred item sealed away for centuries": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							"Bombette"
 						]
 					}
@@ -3552,52 +3527,13 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Left pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"]
 					},
 					"Middle pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"]
 					},
 					"Right pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"]
 					}
 				}
 			},
@@ -3606,18 +3542,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item below Kooper switch": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket"]
 					}
 				}
 			},
@@ -3626,18 +3551,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Ultra Boots block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							"Ultra Boots"
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Ultra Boots"]
 					}
 				}
 			},
@@ -3646,48 +3560,16 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Panel] Next to the Mayor's house": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					},
 					"[Letter] Mayor Penguin": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Mayor Penguin",
-							"Parakarry"
-						]
+						reqs: ["Mayor Penguin", "Parakarry"]
 					},
 					"Talk to Mayor after having met Merle": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key"
 					},
 					"Chest in middle house": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					}
 				}
 			},
@@ -3696,37 +3578,13 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					},
 					"Item in the Inn": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					},
 					"5 items in the Inn after giving Scarf and Bucket to snowmen": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket"
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket"]
 					}
 				}
 			},
@@ -3735,7 +3593,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item in lake": {
-						reqs: [["Super Boots", "Ultra Boots"], "Sushie"]
+						reqs: "Sushie"
 					}
 				}
 			},
@@ -3745,39 +3603,13 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Panel] Along bottom of room": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", logic.canFlipPanel]
 					},
 					"Hit left pine tree 4 times": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Hammer"]
 					},
 					"Item behind pine tree in top right corner": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key"
 					}
 				}
 			},
@@ -3786,26 +3618,10 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item behind ice": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key"
 					},
 					"Hidden block where you fight Monstar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key"
 					}
 				}
 			},
@@ -3814,28 +3630,10 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"[Letter] Frost T. (Chain)": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Frost T.",
-							"Parakarry"
-						]
+						reqs: ["Warehouse Key", "Frost T.", "Parakarry"]
 					},
 					"Talk to Merle": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key"
 					}
 				}
 			}
@@ -3850,6 +3648,9 @@ const regionData: MapRegions = {
 				["Odd Key", "Bombette"],
 				[logic.blueHouseOpen, "Bombette"]
 			],
+			"Warehouse Key",
+			"Scarf",
+			"Bucket",
 			"Super Boots",
 			"Kooper",
 			"Hammer",
@@ -3862,22 +3663,7 @@ const regionData: MapRegions = {
 				rowSpan: 3,
 				checks: {
 					"? Block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
+						reqs: [["Red Key", "Blue Key"]]
 					}
 				}
 			},
@@ -3887,7 +3673,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					Chest: {
-						reqs: [logic.crystalPalaceAccess, ["Red Key", "Blue Key"]]
+						reqs: [["Red Key", "Blue Key"]]
 					}
 				}
 			},
@@ -3897,22 +3683,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item on ledge": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
+						reqs: [["Red Key", "Blue Key"]]
 					}
 				}
 			},
@@ -3922,11 +3693,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					Chest: {
-						reqs: [
-							logic.crystalPalaceAccess,
-							["Red Key", "Blue Key"],
-							"Bombette"
-						]
+						reqs: [["Red Key", "Blue Key"], "Bombette"]
 					}
 				}
 			},
@@ -3936,7 +3703,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					Chest: {
-						reqs: logic.crystalPalaceAccess
+						reqs: null
 					}
 				}
 			},
@@ -3946,42 +3713,10 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"]
 					},
 					"? Block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							"Ultra Boots",
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"]
 					}
 				}
 			},
@@ -3991,7 +3726,7 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					Chest: {
-						reqs: [logic.crystalPalaceAccess, "Red Key", "Bombette"]
+						reqs: ["Red Key", "Bombette"]
 					}
 				}
 			},
@@ -4000,22 +3735,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Item in cave": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
+						reqs: [["Red Key", "Blue Key"]]
 					}
 				}
 			},
@@ -4029,23 +3749,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Chest, blow up right wall in switch room": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"]
 					}
 				}
 			},
@@ -4056,7 +3760,7 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					Chest: {
-						reqs: [logic.crystalPalaceAccess, "Red Key", "Bombette"]
+						reqs: ["Red Key", "Bombette"]
 					}
 				}
 			},
@@ -4083,42 +3787,10 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"]
 					},
 					"? Block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							"Ultra Boots",
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"]
 					}
 				}
 			},
