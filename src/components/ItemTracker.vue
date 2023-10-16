@@ -14,6 +14,8 @@ const props = defineProps<{
 
 const tooltipRef = ref("");
 
+const playthrough = usePlaythrough();
+
 const { heading, itemTypes } = toRefs(props);
 
 const trackerItems = computed(() => {
@@ -25,6 +27,20 @@ const trackerItems = computed(() => {
 			Number(b.type === "chapterReward") - Number(a.type === "chapterReward")
 	);
 });
+
+function equipmentTooltip(item: string) {
+	if (item === "Boots" || item === "Hammer") {
+		const _ultra = `Ultra ${item}`;
+		const _super = `Super ${item}`;
+		return playthrough.hasItem(_ultra)
+			? _ultra
+			: playthrough.hasItem(_super)
+			? _super
+			: item;
+	} else {
+		return item;
+	}
+}
 </script>
 
 <template>
@@ -39,7 +55,9 @@ const trackerItems = computed(() => {
 					class="grid-item"
 					v-for="item in trackerItems"
 					:key="item.name"
-					@mouseover="tooltipRef = item.name"
+					@click="tooltipRef = equipmentTooltip(item.name)"
+					@contextmenu="tooltipRef = equipmentTooltip(item.name)"
+					@mouseover="tooltipRef = equipmentTooltip(item.name)"
 					@mouseout="tooltipRef = ''"
 				>
 					<TrackableItem :info="item" />

@@ -16,6 +16,20 @@ const requiredItems = computed(() =>
 		(el) => el.type === "required" || el.type === "chapterReward"
 	)
 );
+
+function equipmentTooltip(item: string) {
+	if (item === "Boots" || item === "Hammer") {
+		const _ultra = `Ultra ${item}`;
+		const _super = `Super ${item}`;
+		return playthrough.hasItem(_ultra)
+			? _ultra
+			: playthrough.hasItem(_super)
+			? _super
+			: item;
+	} else {
+		return item;
+	}
+}
 </script>
 
 <template>
@@ -36,7 +50,9 @@ const requiredItems = computed(() =>
 					:key="item.name"
 					:info="item"
 					:shrink="1 <= chapter && chapter <= 8 && index > 0"
-					@mouseover="tooltip = item.name"
+					@click="tooltip = equipmentTooltip(item.name)"
+					@contextmenu="tooltip = equipmentTooltip(item.name)"
+					@mouseover="tooltip = equipmentTooltip(item.name)"
 					@mouseout="tooltip = ''"
 				/>
 			</div>
