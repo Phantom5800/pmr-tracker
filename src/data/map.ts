@@ -2002,14 +2002,7 @@ const regionData: MapRegions = {
 		]
 	},
 	"Dry Dry Ruins": {
-		reqs: [
-			[
-				[logic.canReachToadTown, "Bombette", "Parakarry"],
-				[logic.canReachToadTown, logic.canClimbLedges, "Super Hammer"],
-				logic.startingLocation("Dry Dry Outpost")
-			],
-			"Pulse Stone"
-		],
+		reqs: [logic.desertAccess, "Pulse Stone"],
 		areas: {
 			"Pokey Hall": {
 				row: 1,
@@ -2017,15 +2010,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Inside middle coffin": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone"
-						]
+						reqs: null
 					}
 				}
 			},
@@ -2039,7 +2024,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Bottom right corner after lowering sand": {
-						reqs: ["Bombette", "Parakarry", "Pulse Stone", "Ruins Key"]
+						reqs: [logic.canClimbLedges, "Bombette", "Parakarry", "Ruins Key"]
 					}
 				}
 			},
@@ -2051,16 +2036,7 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"Item on elevated platform": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Ruins Key"
-						]
+						reqs: logic.canClimbLedges
 					}
 				}
 			},
@@ -2069,7 +2045,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item on elevated platform": {
-						reqs: ["Bombette", "Parakarry", "Pulse Stone", "Ruins Key"]
+						reqs: [logic.canClimbLedges, "Bombette", "Parakarry", "Ruins Key"]
 					}
 				}
 			},
@@ -2078,30 +2054,10 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Item in chest behind wall on ledge above Super Hammer chest": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							logic.multipleItemCheck("Ruins Key", 3)
-						]
+						reqs: ["Parakarry", logic.multipleItemCheck("Ruins Key", 3)]
 					},
 					"Super Hammer chest": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							logic.multipleItemCheck("Ruins Key", 3)
-						]
+						reqs: ["Parakarry", logic.multipleItemCheck("Ruins Key", 3)]
 					}
 				}
 			},
@@ -2111,27 +2067,15 @@ const regionData: MapRegions = {
 				checks: {
 					"Defeat all three Pokey's after hitting ? Block": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
+							logic.canClimbLedges,
 							logic.multipleItemCheck("Ruins Key", 2)
 						]
 					},
 					"On ledge behind hammer block": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							logic.multipleItemCheck("Ruins Key", 3)
+							logic.canClimbLedges,
+							"Super Hammer",
+							logic.multipleItemCheck("Ruins Key", 2)
 						]
 					}
 				}
@@ -2141,17 +2085,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item on pedestal": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							logic.multipleItemCheck("Ruins Key", 3)
-						]
+						reqs: [logic.canClimbLedges, "Super Hammer", "Ruins Key"]
 					}
 				}
 			},
@@ -2180,13 +2114,9 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on pedestal": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
+							"Bombette",
+							logic.canClimbLedges,
+							"Super Hammer",
 							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					}
@@ -2202,13 +2132,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on ledge, reachable by breaking block and hitting switch": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
+							logic.canClimbLedges,
 							logic.multipleItemCheck("Ruins Key", 3)
 						]
 					}
