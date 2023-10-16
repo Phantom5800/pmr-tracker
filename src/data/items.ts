@@ -616,5 +616,143 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Goompapa 2",
 		type: "letter",
 		image: "Letters/PM_Goompapa_Sprite.png"
+	},
+	{
+		name: "Koopa Legends",
+		turnInCheck:
+			"Koopa Village East:[Koot Coin] Return Koopa Legends to Koopa Koot",
+		type: "kootFavor",
+		image: "koopa-koot-favors/KoopaLegends_PM.png"
+	},
+
+	{
+		name: "Sleepy Sheep",
+		turnInCheck:
+			"Koopa Village East:[Koot] Give Koopa Koot a Sleepy Sheep (second item)",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_SleepySheep.png"
+	},
+
+	{
+		name: "Tape",
+		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's Tape",
+		type: "kootFavor",
+		image: "koopa-koot-favors/Tape_PM.png"
+	},
+
+	{
+		name: "Koopa Tea",
+		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot Koopa Tea",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_KoopaTea.png"
+	},
+
+	{
+		name: "Luigi's Autograph",
+		turnInCheck:
+			"Koopa Village East:[Koot Coin] Give Luigi's Autograph to Koopa Koot",
+		type: "kootFavor",
+		image: "koopa-koot-favors/Luigi's_Autograph.png"
+	},
+
+	{
+		name: "Wallet",
+		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's wallet",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PM_Empty_Wallet.png"
+	},
+
+	{
+		name: "Tasty Tonic",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Tasty Tonic",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_TastyTonic.png"
+	},
+
+	{
+		name: "Crystal Ball",
+		turnInCheck: "Merluvlee's House:[Koot] Give Merluvlee the Crystal Ball",
+		type: "kootFavor",
+		image: "koopa-koot-favors/Crystal_Ball_PM.png"
+	},
+
+	{
+		name: "Merluvlee's Autograph",
+		turnInCheck:
+			"Koopa Village East:[Koot] Give Merluvlee's Autograph to Koopa Koot",
+		type: "kootFavor",
+		image: "koopa-koot-favors/Merluvlee's_Autograph.png"
+	},
+
+	{
+		name: "Life Shroom",
+		turnInCheck:
+			"Koopa Village East:[Koot] Give Koopa Koot a Life Shroom (second item)",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_LifeShroom.png"
+	},
+
+	{
+		name: "Nutty Cake",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Nutty Cake",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_NuttyCake.png"
+	},
+
+	{
+		name: "Old Photo",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot the Old Photo",
+		type: "kootFavor",
+		image: "koopa-koot-favors/OldPhoto_PM.png"
+	},
+
+	{
+		name: "Koopasta",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot Koopasta",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_Koopasta.png"
+	},
+
+	{
+		name: "Glasses",
+		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's glasses",
+		type: "kootFavor",
+		image: "koopa-koot-favors/Glasses_PM.png"
+	},
+
+	{
+		name: "Lime",
+		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot a Lime",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_Lime.png"
+	},
+
+	{
+		name: "Kooky Cookie",
+		turnInCheck:
+			"Koopa Village East:[Koot Coin] Give Koopa Koot a Kooky Cookie",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_KookyCookie.png"
+	},
+
+	{
+		name: "Package",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot his package",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PM_Package.png"
+	},
+
+	{
+		name: "Coconut",
+		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Coconut",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PaperMario_Items_Coconut.png"
+	},
+
+	{
+		name: "Red Jar",
+		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot the Red Jar",
+		type: "kootFavor",
+		image: "koopa-koot-favors/PM_Red_Jar.png"
 	}
 ];

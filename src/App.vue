@@ -96,6 +96,11 @@ const allItemsFiltered = computed(() =>
 			heading="Letters"
 			:itemTypes="['letter']"
 		/>
+		<ItemTracker
+			:all-items="allItemsFiltered"
+			heading="Koopa Koot Favors"
+			:itemTypes="['kootFavor']"
+		/>
 	</main>
 
 	<ConfigModal
