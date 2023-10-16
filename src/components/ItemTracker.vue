@@ -14,7 +14,7 @@ const props = defineProps<{
 
 const tooltipRef = ref("");
 
-const { heading, tooltip, itemTypes } = toRefs(props);
+const { heading, itemTypes } = toRefs(props);
 
 const trackerItems = computed(() => {
 	const filteredItems = allItems.filter(
@@ -31,7 +31,7 @@ const trackerItems = computed(() => {
 	<TrackerPanel>
 		<div class="flex-header">
 			<h2>{{ heading }}</h2>
-			<span>{{ tooltip || tooltipRef }}</span>
+			<span>{{ props.tooltip || tooltipRef }}</span>
 		</div>
 		<slot>
 			<div class="grid">
@@ -39,8 +39,8 @@ const trackerItems = computed(() => {
 					class="grid-item"
 					v-for="item in trackerItems"
 					:key="item.name"
-					@mouseover="tooltip = item.name"
-					@mouseout="tooltip = ''"
+					@mouseover="tooltipRef = item.name"
+					@mouseout="tooltipRef = ''"
 				>
 					<TrackableItem :info="item" />
 				</div>
