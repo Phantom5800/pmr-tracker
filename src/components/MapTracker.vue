@@ -102,6 +102,17 @@ const unshuffledChecks = computed(() =>
 						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`
 					}"
 				></button>
+				<div
+					class="map-label"
+					v-for="label in region.labels"
+					:key="label.row * 100 + label.col"
+					:style="{
+						gridRow: `${label.row} / span ${label.rowSpan || 1}`,
+						gridColumn: `${label.col} / span ${label.colSpan || 1}`
+					}"
+				>
+					{{ label.content }}
+				</div>
 			</div>
 		</div>
 		<div class="map-checks">
@@ -198,6 +209,12 @@ button.checksInLogic {
 button.fullCleared {
 	text-decoration: line-through;
 	color: #333;
+}
+
+div.map-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .map-checks {

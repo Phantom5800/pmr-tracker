@@ -18,6 +18,7 @@ type Area = Coords & {
 };
 type Region = {
 	blanks?: Coords[];
+	labels?: (Coords & { content: string })[];
 	reqs?: Requirements;
 	areas: {
 		[key: string]: Area;
@@ -2158,27 +2159,41 @@ const regionData: MapRegions = {
 		reqs: [logic.canReachToadTown, [logic.forestOpen, "Forest Pass"]],
 		areas: {
 			"HP Plus": {
-				row: 2,
+				row: 1,
 				col: 5,
 				checks: { "? Block": { reqs: null } }
 			},
-			"Oaklie Room": { row: 2, col: 7, checks: {} },
-			"Forest Room 2": { row: 2, col: 9, checks: {} },
-			"Forest Room 5": { row: 4, col: 5, checks: {} },
+			"Oaklie Room": { row: 1, col: 7, checks: {} },
+			"Forest Room 2": { row: 1, col: 9, checks: {} },
+			"Forest Room 5": { row: 3, col: 5, checks: {} },
 			"Forest Seed Room": {
-				row: 4,
+				row: 3,
 				col: 7,
 				checks: { "Bub-ulb": { reqs: null } }
 			},
-			"Forest Entrance": { row: 4, col: 9, checks: {} },
+			"Forest Entrance": { row: 3, col: 9, checks: {} },
 			"FP Plus": {
-				row: 6,
+				row: 5,
 				col: 1,
 				checks: { "? Block": { reqs: null } }
 			},
-			"Forest Room 7": { row: 6, col: 3, checks: {} },
-			"Forest Room 6": { row: 6, col: 5, checks: {} }
-		}
+			"Forest Room 7": { row: 5, col: 3, checks: {} },
+			"Forest Room 6": { row: 5, col: 5, checks: {} }
+		},
+		labels: [
+			{ row: 3, col: 3, content: "Boo's Mansion" },
+			{ row: 5, col: 9, content: "Toad Town" },
+			{ row: 1, col: 8, content: "◀" },
+			{ row: 2, col: 5, content: "▲" },
+			{ row: 2, col: 7, content: "▼" },
+			{ row: 2, col: 9, content: "▲" },
+			{ row: 3, col: 6, content: "◀" },
+			{ row: 4, col: 3, content: "▲" },
+			{ row: 4, col: 5, content: "▼" },
+			{ row: 4, col: 9, content: "▲" },
+			{ row: 5, col: 2, content: "◀" },
+			{ row: 5, col: 4, content: "◀" }
+		]
 	},
 	"Boo's Mansion": {
 		reqs: [
