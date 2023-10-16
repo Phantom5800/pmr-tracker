@@ -60,10 +60,9 @@ const derivedData = computed(
 	}
 );
 
-const imageUrl = computed(() => {
-	const relativeUrl = `../assets/images/${derivedData.value.image}`;
-	return new URL(relativeUrl, import.meta.url).href;
-});
+function getImageUrl(image: string) {
+	return new URL(`../assets/images/${image}`, import.meta.url).href;
+}
 </script>
 
 <template>
@@ -86,7 +85,7 @@ const imageUrl = computed(() => {
 				playthroughStore.removeItem(derivedData.removing)
 		"
 	>
-		<img :src="imageUrl" :alt="name" />
+		<img :src="getImageUrl(derivedData.image)" :alt="name" />
 		<p class="label" v-if="label">{{ label }}</p>
 		<p class="count" v-if="multiple">
 			{{ playthroughStore.itemCount(name) + "/" + multiple }}

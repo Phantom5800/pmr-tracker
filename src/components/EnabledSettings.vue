@@ -34,8 +34,7 @@ const settings = [
 ];
 
 function getImageUrl(image: string) {
-	const relativeUrl = `../assets/images/${image}`;
-	return new URL(relativeUrl, import.meta.url).href;
+	return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
 </script>
 
