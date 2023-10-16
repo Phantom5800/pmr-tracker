@@ -81,7 +81,8 @@ export const chapterRewardReqs: Record<string, Requirements> = {
 		"Fertile Soil",
 		"Miracle Water",
 		"Lakilester",
-		"Super Boots"
+		"Super Boots",
+		"Hammer"
 	],
 	Kalmar: [
 		"Warehouse Key",
@@ -3236,9 +3237,9 @@ const regionData: MapRegions = {
 				checks: {
 					"Ride cloud elevator up to item": {
 						reqs: [
-							logic.chapter6Entry,
 							"Lakilester",
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
+							"Hammer",
 							"Magical Bean",
 							"Fertile Soil",
 							"Miracle Water"
@@ -3261,21 +3262,13 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					Lakilester: {
-						reqs: [
-							logic.chapter6Entry,
-							["Lakilester", "Bubble Berry"],
-							"Bombette"
-						]
+						reqs: [["Lakilester", "Bubble Berry"], "Bombette"]
 					},
 					"Item in grass": {
-						reqs: [logic.chapter6Entry, ["Lakilester", "Bubble Berry"]]
+						reqs: [["Lakilester", "Bubble Berry"]]
 					},
 					"Item in crevasse": {
-						reqs: [
-							logic.chapter6Entry,
-							["Lakilester", "Bubble Berry"],
-							"Bombette"
-						]
+						reqs: [["Lakilester", "Bubble Berry"], "Bombette"]
 					}
 				}
 			},
@@ -3284,10 +3277,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on ledge": {
-						reqs: [logic.chapter6Entry, ["Lakilester", "Bubble Berry"]]
+						reqs: [["Lakilester", "Bubble Berry"]]
 					},
 					"Item in vines immediately below ledge item": {
-						reqs: [logic.chapter6Entry]
+						reqs: null
 					}
 				}
 			},
@@ -3297,15 +3290,11 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item in second vine (jump to trigger it)": {
-						reqs: [logic.chapter6Entry]
+						reqs: "Boots"
 					},
 					"Item from ground pounding opposite side from partner upgrade block":
 						{
-							reqs: [
-								logic.chapter6Entry,
-								"Lakilester",
-								["Super Boots", "Ultra Boots"]
-							]
+							reqs: ["Lakilester", "Super Boots"]
 						}
 				}
 			},
@@ -3314,18 +3303,10 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item in grass at bottom of screen": {
-						reqs: [
-							logic.chapter6Entry,
-							"Lakilester",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: ["Lakilester", "Super Boots"]
 					},
 					"? Block before cloud machine room": {
-						reqs: [
-							logic.chapter6Entry,
-							"Lakilester",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: ["Lakilester", "Super Boots"]
 					}
 				}
 			},
@@ -3335,7 +3316,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Give Rosie the Crystal Berry": {
-						reqs: [logic.chapter6Entry, "Blue Berry", "Crystal Berry"]
+						reqs: ["Blue Berry", "Crystal Berry", "Boots"]
 					}
 				}
 			},
@@ -3345,10 +3326,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Coin Block] Hidden block between brick block and spring": {
-						reqs: [logic.chapter6Entry, "Blue Berry"]
+						reqs: [logic.canBreakBlocksAbove, "Blue Berry"]
 					},
 					"Hidden block above brick block": {
-						reqs: [logic.chapter6Entry, "Blue Berry"]
+						reqs: ["Boots", "Blue Berry"]
 					}
 				}
 			},
@@ -3357,12 +3338,9 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Hit trees Middle, Right, Left": {
-						reqs: [
-							logic.chapter6Entry,
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
-					"Second set of vines": { reqs: [logic.chapter6Entry] }
+					"Second set of vines": { reqs: null }
 				}
 			},
 			Petunia: {
@@ -3370,19 +3348,13 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"[Panel] Near bottom left corner of room directly above grass": {
-						reqs: [
-							logic.chapter6Entry,
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					},
 					"2 items in tree": {
-						reqs: [
-							logic.chapter6Entry,
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Talk to Petunia and defeat all moles": {
-						reqs: [logic.chapter6Entry]
+						reqs: null
 					}
 				}
 			},
@@ -3391,7 +3363,7 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"Give a blue berry to the well": {
-						reqs: [logic.chapter6Entry, "Blue Berry"]
+						reqs: "Blue Berry"
 					}
 				}
 			},
@@ -3400,7 +3372,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"2 items from Posie": {
-						reqs: [logic.chapter6Entry, "Red Berry"]
+						reqs: "Red Berry"
 					}
 				}
 			},
@@ -3409,21 +3381,13 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of tree": {
-						reqs: [
-							logic.chapter6Entry,
-							"Red Berry",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Red Berry", logic.canFlipPanel]
 					},
 					"2 items in tree": {
-						reqs: [
-							logic.chapter6Entry,
-							"Red Berry",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Red Berry", logic.canShakeTree]
 					},
 					"Item in middle vines": {
-						reqs: [logic.chapter6Entry, "Red Berry"]
+						reqs: "Red Berry"
 					}
 				}
 			},
@@ -3432,22 +3396,17 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Vines next to yellow flower": {
-						reqs: [logic.chapter6Entry]
+						reqs: null
 					},
 					"2 items in tree": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
+							logic.canShakeTree
 						]
 					},
 					"Item in grass right of tree": {
-						reqs: [
-							logic.chapter6Entry,
-							"Yellow Berry",
-							["Parakarry", "Lakilester"]
-						]
+						reqs: ["Yellow Berry", ["Parakarry", "Lakilester"]]
 					}
 				}
 			},
@@ -3457,34 +3416,34 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Under hidden block on right side": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
+							logic.canClimbLedges,
+							logic.canFlipPanel
 						]
 					},
 					"? Block on left side": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
+							["Parakarry", "Lakilester"],
+							logic.canBreakBlocksAbove
 						]
 					},
 					"2 items in tree": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
 							"Water Stone",
 							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
+							logic.canShakeTree
 						]
 					},
 					"Hidden ? Block on right side": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges
 						]
 					}
 				}
@@ -3495,17 +3454,18 @@ const regionData: MapRegions = {
 				checks: {
 					"Give Water Stone to Lily": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
 							"Water Stone"
 						]
 					},
 					"Item in tree": {
 						reqs: [
-							logic.chapter6Entry,
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
+							logic.canShakeTree
 						]
 					}
 				}
