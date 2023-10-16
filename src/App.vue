@@ -104,7 +104,7 @@ const allItemsFiltered = computed(() =>
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"
 			><img
-				width="15px"
+				:width="15"
 				src="https://resources.phantom-games.com/TwitterLogo.png"
 			/>
 			@Phantom5800</a
@@ -112,7 +112,7 @@ const allItemsFiltered = computed(() =>
 		&bull;
 		<a href="https://www.twitch.tv/phantom5800" target="_blank"
 			><img
-				width="15px"
+				:width="15"
 				src="https://resources.phantom-games.com/TwitchLogo.png"
 			/>
 			Phantom5800</a
@@ -120,7 +120,7 @@ const allItemsFiltered = computed(() =>
 		&bull;
 		<a href="https://www.youtube.com/@PhantomVODs" target="_blank"
 			><img
-				width="15px"
+				:width="15"
 				src="https://resources.phantom-games.com/YoutubeLogo.png"
 			/>
 			@PhantomVODs</a
