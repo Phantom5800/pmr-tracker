@@ -2449,11 +2449,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item at end of hall": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							logic.multipleItemCheck("Tubba Castle Key", 2)
-						]
+						reqs: logic.multipleItemCheck("Tubba Castle Key", 2)
 					}
 				}
 			},
@@ -2469,11 +2465,7 @@ const regionData: MapRegions = {
 				rowSpan: 3,
 				checks: {
 					"? Block at bottom of staircase": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							logic.multipleItemCheck("Tubba Castle Key", 2)
-						]
+						reqs: logic.multipleItemCheck("Tubba Castle Key", 2)
 					}
 				}
 			},
@@ -2486,10 +2478,10 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coinsanity] 6 items on bed": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
+						reqs: "Tubba Castle Key"
 					},
 					"Behind wall on shelf at left side of room": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
+						reqs: "Tubba Castle Key"
 					}
 				}
 			},
@@ -2498,12 +2490,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					Chest: {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							["Bow", "Lakilester"]
-						]
+						reqs: ["Tubba Castle Key", ["Bow", "Lakilester"]]
 					}
 				}
 			},
@@ -2516,7 +2503,7 @@ const regionData: MapRegions = {
 				row: 5,
 				col: 3,
 				checks: {
-					"On table": { reqs: ["Boo's Portrait", "Parakarry"] }
+					"On table": { reqs: null }
 				}
 			},
 			"Spring Room": {
@@ -2524,13 +2511,7 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"On left side, break panels in room above behind bombable wall": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							"Bombette",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: ["Tubba Castle Key", "Bombette", "Super Boots"]
 					}
 				}
 			},
@@ -2539,7 +2520,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"On table, fall down from above": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
+						reqs: "Tubba Castle Key"
 					}
 				}
 			},
@@ -2548,11 +2529,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					Chest: {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: "Super Boots"
 					}
 				}
 			}
@@ -2565,10 +2542,10 @@ const regionData: MapRegions = {
 				row: 1,
 				col: 1,
 				checks: {
-					"Left hidden block": { reqs: [logic.toyboxAccess] },
-					"Right hidden block": { reqs: [logic.toyboxAccess] },
+					"Left hidden block": { reqs: logic.canBreakBlocksAbove },
+					"Right hidden block": { reqs: logic.canBreakBlocksAbove },
 					"Items held by Shy Guys (all of them)": {
-						reqs: [logic.toyboxAccess]
+						reqs: null
 					}
 				}
 			},
@@ -2577,14 +2554,14 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block on left side": {
-						reqs: [logic.toyboxAccess]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])":
 						{
-							reqs: [logic.toyboxAccess]
+							reqs: null
 						},
 					"Hidden block on right side": {
-						reqs: [logic.toyboxAccess]
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -2593,13 +2570,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							logic.toyboxAccess,
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					},
 					"Hidden block on right side": {
-						reqs: [logic.toyboxAccess]
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -2608,114 +2582,32 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coinsanity] 3 items on left spring": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					"[Coinsanity] 5 items on elevated spring": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					"[Coin Block] ? Block on left side of wall": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					"[Coin Block] ? Block on right side of wall that can be jumped across":
 						{
-							reqs: [
-								logic.toyboxAccess,
-								[
-									"Hammer",
-									"Super Hammer",
-									"Ultra Hammer",
-									"Super Boots",
-									"Ultra Boots"
-								]
-							]
+							reqs: ["Boots", ["Hammer", "Super Boots"]]
 						},
 					"Item behind fallen blocks": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					"Item on roof of left house": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							],
-							"Parakarry"
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"], "Parakarry"]
 					},
 					"? Block on platform": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					"Item that Kammy spawns": {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					},
 					Chest: {
-						reqs: [
-							logic.toyboxAccess,
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]]
 					}
 				}
 			},
@@ -2724,19 +2616,19 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"Give Cake to Gourmet Guy": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"Hidden block left after Gourmet Guy arch": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"Hidden block between two other ? Blocks": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					}
 				}
 			},
@@ -2745,13 +2637,13 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block before Spy Guy": {
-						reqs: [logic.toyboxAccess, "Toy Train"]
+						reqs: logic.canMoveStations
 					},
 					"[Coin Block] Left ? Block by Groove Guy": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"[Coin Block] Right ? Block by Groove Guy": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					}
 				}
 			},
@@ -2760,17 +2652,13 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, logic.canFlipPanel]
 					},
 					"Chest on right side": {
-						reqs: [logic.toyboxAccess, "Toy Train"]
+						reqs: logic.canMoveStations
 					},
 					"Hidden block by pink switch": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					}
 				}
 			},
@@ -2779,69 +2667,19 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coin Block] ? Block": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]]
 					},
 					"Chest on wall": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]]
 					},
 					"Chest after door": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]]
 					},
 					"Item that Kammy spawns": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]]
 					},
 					"Chest at end of room": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]]
 					}
 				}
 			},
@@ -2850,15 +2688,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", logic.canFlipPanel]
 					},
 					"Hidden block in upper right corner": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					}
 				}
 			},
@@ -2867,24 +2700,24 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coinsanity] 3 items on first treadmill": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"[Coinsanity] 3 items on second treadmill": {
-						reqs: [logic.toyboxAccess, "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"]
 					},
 					"[Coinsanity] Ring of coins inside fort after moving blocks": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"]
 					},
 					"Item held by Shy Guy after treadmills": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"]
 					},
 					"Middle item inside fort after moving blocks": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"]
 					},
 					"Item that Kammy spawns": {
-						reqs: ["Bow", "Toy Train", "Cake", "Parakarry"]
+						reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"]
 					},
-					Chest: { reqs: ["Bow", "Toy Train", "Cake", "Parakarry"] }
+					Chest: { reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"] }
 				}
 			},
 			"Lantern Ghost": {
@@ -2892,12 +2725,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					Watt: {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					}
 				}
 			},
@@ -2906,44 +2734,19 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					},
 					"Hidden block by first elevator": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					},
 					"Hidden block between two other ? blocks": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					},
 					"Hidden block by door to Lantern Ghost room": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					}
 				}
 			},
@@ -2952,21 +2755,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer", logic.canFlipPanel]
 					},
 					"Hidden block on left side": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"]
 					}
 				}
 			},
@@ -2975,32 +2767,19 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coin Block] ? Block just past barricade": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Bombette", "Hammer"]
 					},
 					"Item on top of brick block": {
 						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
+							logic.canMoveStations,
 							"Cake",
 							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							["Kooper", "Ultra Boots"]
 						]
 					},
 					"? Block at end of room": {
-						reqs: [
-							logic.toyboxAccess,
-							"Toy Train",
-							"Cake",
-							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Bombette", "Hammer"]
 					}
 				}
 			},

@@ -44,10 +44,13 @@ export default {
 			settings.startingLocation === start;
 	},
 	toyboxAccess(items: string[], settings: OptionsValues) {
-		return items.includes("Bow") || settings.toyboxOpen;
+		return (
+			(items.includes("Boots") || items.includes("Parakarry")) &&
+			(items.includes("Bow") || settings.toyboxOpen)
+		);
 	},
-	koopaVillageAccess(items: string[], settings: OptionsValues) {
-		return items.includes("Bow") || settings.toyboxOpen;
+	canMoveStations(items: string[], settings: OptionsValues) {
+		return items.includes("Toy Train") && items.includes("Boots");
 	},
 	desertAccess(items: string[], settings: OptionsValues) {
 		return (
