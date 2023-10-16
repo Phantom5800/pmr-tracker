@@ -10,6 +10,16 @@ const { options } = storeToRefs(optionsStore);
 const props = defineProps<{
 	optionsKeys: string[];
 }>();
+
+function clamp(num: number, range?: [number, number]): number {
+	return range === undefined
+		? num
+		: num < range[0]
+		? range[0]
+		: num > range[1]
+		? range[1]
+		: num;
+}
 </script>
 
 <template>
@@ -59,6 +69,8 @@ const props = defineProps<{
 					:id="key"
 					type="number"
 					:value="options[key]"
+					:min="optionsStore.getRange(key)[0]"
+					:max="optionsStore.getRange(key)[1]"
 					@change="(event) => optionsStore.setValue(key, event.target.value)"
 				/>
 			</div>

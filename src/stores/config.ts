@@ -108,7 +108,8 @@ const optionsData = {
 		namespace: "settings",
 		name: "Magical Seeds Required",
 		type: "number",
-		default: 4
+		default: 4,
+		range: [0, 4]
 	},
 	blueHouseOpen: {
 		namespace: "settings",
@@ -217,7 +218,8 @@ const optionsData = {
 		namespace: "settings",
 		name: "Power Star Hunt Num",
 		type: "number",
-		default: 120
+		default: 120,
+		range: [0, 120]
 	},
 	sSkip: {
 		namespace: "settings",
@@ -274,6 +276,9 @@ export const useOptions = defineStore("options", {
 		},
 		getValue(key: keyof typeof optionsData) {
 			return this.options[key];
+		},
+		getRange(key: keyof typeof optionsData) {
+			return optionsData[key].range;
 		},
 		getChoices(key: keyof typeof optionsData) {
 			if (optionsData[key].type === "select") {
