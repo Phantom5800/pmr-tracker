@@ -2190,12 +2190,12 @@ const regionData: MapRegions = {
 				row: 1,
 				col: 1,
 				colSpan: 4,
-				checks: { Bow: { reqs: ["Boo's Portrait"] } }
+				checks: { Bow: { reqs: ["Boots", "Boo's Portrait"] } }
 			},
 			"Weight Room": {
 				row: 2,
 				col: 1,
-				checks: { "Chest guarded by Boo": { reqs: ["Record"] } }
+				checks: { "Chest guarded by Boo": { reqs: ["Boots", "Record"] } }
 			},
 			"Main Room": {
 				row: 2,
@@ -2204,10 +2204,11 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Panel] By couch": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: ["Boots", logic.canFlipPanel]
 					},
 					"[Letter] Franky (Chain)": {
 						reqs: [
+							"Boots",
 							"Franky (Boo's Mansion Entrance)",
 							"Boo's Portrait",
 							"Parakarry"
@@ -2215,7 +2216,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Franky after Koopa Koot requests the Old Photo": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Boots",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2238,9 +2239,9 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Panel] Middle of room": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: ["Boots", logic.canFlipPanel]
 					},
-					"Open middle cabinets and do minigame": { reqs: null }
+					"Open middle cabinets and do minigame": { reqs: "Boots" }
 				}
 			},
 			"Trap Chest": {
@@ -2250,12 +2251,9 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of grandfather clock downstairs": {
 						reqs: [
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
+							"Boots",
+							["Weight", ["Super Boots", "Bombette"]],
+							logic.canFlipPanel
 						]
 					}
 				}
@@ -2266,10 +2264,10 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Left crate on right side of room": {
-						reqs: [["Super Boots", "Ultra Boots"]]
+						reqs: "Super Boots"
 					},
 					"Right crate on right side of room under other crate": {
-						reqs: [["Super Boots", "Ultra Boots"]]
+						reqs: "Super Boots"
 					}
 				}
 			},
@@ -2278,7 +2276,7 @@ const regionData: MapRegions = {
 				col: 2,
 				colSpan: 2,
 				checks: {
-					"? Block before gate": { reqs: null },
+					"? Block before gate": { reqs: logic.canBreakBlocksAbove },
 					"Right bush before Gusty Gulch": { reqs: null }
 				}
 			},
@@ -2288,9 +2286,9 @@ const regionData: MapRegions = {
 				colSpan: 3,
 				checks: {
 					"Item on right bookshelf": {
-						reqs: [["Super Boots", "Ultra Boots"], "Parakarry"]
+						reqs: ["Super Boots", "Parakarry"]
 					},
-					"Bottom crate": { reqs: [["Super Boots", "Ultra Boots"]] }
+					"Bottom crate": { reqs: "Super Boots" }
 				}
 			},
 			"Above Shop": {
@@ -2298,10 +2296,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Right crate on left side of room": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"]
-						]
+						reqs: ["Super Boots", ["Weight", "Bombette"]]
 					}
 				}
 			},
@@ -2310,29 +2305,17 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Super Boots chest": {
-						reqs: [
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							]
-						]
+						reqs: ["Boots", ["Weight", ["Super Boots", "Bombette"]]]
 					},
 					"[Panel] On left near Boo": {
 						reqs: [
-							["Super Boots", "Ultra Boots", "Ultra Hammer"],
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							]
+							"Boots",
+							logic.canFlipPanel,
+							["Weight", ["Super Boots", "Bombette"]]
 						]
 					},
 					"Bottom left crate": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"]
-						]
+						reqs: ["Super Boots", ["Weight", "Bombette"]]
 					}
 				}
 			},
@@ -2342,15 +2325,11 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"],
-							"Boo's Portrait"
-						]
+						reqs: ["Super Boots", ["Weight", "Bombette"], "Boo's Portrait"]
 					},
 					"[Letter] Igor": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							["Weight", "Bombette"],
 							"Igor (Boo's Mansion Shop)",
 							"Parakarry"
@@ -2363,10 +2342,8 @@ const regionData: MapRegions = {
 	"Gusty Gulch": {
 		reqs: [
 			logic.canReachToadTown,
-			[
-				[logic.forestOpen, "Forest Pass"],
-				[logic.canClimbLedges, "Super Boots"]
-			],
+			[[logic.forestOpen, "Forest Pass"], "Super Boots"],
+			"Boots",
 			"Boo's Portrait"
 		],
 		areas: {
@@ -2375,10 +2352,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Panel] Near gate": {
-						reqs: [
-							"Boo's Portrait",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					}
 				}
 			},
@@ -2396,13 +2370,11 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Coin Block] Block in far right house": {
-						reqs: ["Boo's Portrait"]
+						reqs: null
 					},
 					"[Koot] Talk to Boo near Save Block after Koopa Koot requests a Package":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
-								"Boo's Portrait",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -2431,18 +2403,18 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Coin Block] First ? Block": {
-						reqs: ["Boo's Portrait"]
+						reqs: null
 					},
 					"[Coin Block] Upper ? Block near goomba": {
-						reqs: ["Boo's Portrait"]
+						reqs: null
 					},
 					"Item on ledge (use Kooper)": {
-						reqs: ["Boo's Portrait", "Kooper"]
+						reqs: "Kooper"
 					},
 					"? Block in middle near goomba": {
-						reqs: ["Boo's Portrait"]
+						reqs: null
 					},
-					"Item in front of log": { reqs: ["Boo's Portrait"] }
+					"Item in front of log": { reqs: null }
 				}
 			},
 			"Gulch 2": {
@@ -2450,13 +2422,13 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"[Coin Block] ? Block by exit": {
-						reqs: ["Boo's Portrait", "Parakarry"]
+						reqs: "Parakarry"
 					},
 					"? Block by goomba": {
-						reqs: ["Boo's Portrait", "Parakarry"]
+						reqs: "Parakarry"
 					},
 					"Item behind rock near exit": {
-						reqs: ["Boo's Portrait", "Parakarry"]
+						reqs: "Parakarry"
 					}
 				}
 			},
@@ -2466,10 +2438,8 @@ const regionData: MapRegions = {
 	"Tubba's Castle": {
 		reqs: [
 			logic.canReachToadTown,
-			[
-				[logic.forestOpen, "Forest Pass"],
-				[logic.canClimbLedges, "Super Boots"]
-			],
+			[[logic.forestOpen, "Forest Pass"], "Super Boots"],
+			"Boots",
 			"Boo's Portrait",
 			"Parakarry"
 		],
