@@ -1,5 +1,6 @@
 import type { TrackableItemInfo } from "@/types/items";
 import logic from "../utils/logic";
+import type { OptionsValues } from "@/stores/config";
 
 export const allItems: TrackableItemInfo[] = [
 	{
@@ -49,7 +50,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Star Rod",
 		type: "chapterReward",
 		image: "icons/PM_Starrod.png",
-		show: logic.noPowerStarHunt
+		show: (settings: OptionsValues) => !logic.powerStarHunt(settings)
 	},
 	{
 		chapter: 16,
@@ -186,7 +187,8 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Forest Pass",
 		type: "miscItem",
-		image: "icons/ForestPass.png"
+		image: "icons/ForestPass.png",
+		show: (settings) => !logic.forestOpen([], settings)
 	},
 	{
 		name: "Record",
@@ -274,25 +276,29 @@ export const allItems: TrackableItemInfo[] = [
 		chapter: 6,
 		name: "Magical Seed 1",
 		type: "required",
-		image: "icons/MagicalSeed1.png"
+		image: "icons/MagicalSeed1.png",
+		show: logic.showMagicalSeed(1)
 	},
 	{
 		chapter: 6,
 		name: "Magical Seed 2",
 		type: "required",
-		image: "icons/MagicalSeed2.png"
+		image: "icons/MagicalSeed2.png",
+		show: logic.showMagicalSeed(2)
 	},
 	{
 		chapter: 6,
 		name: "Magical Seed 3",
 		type: "required",
-		image: "icons/MagicalSeed3.png"
+		image: "icons/MagicalSeed3.png",
+		show: logic.showMagicalSeed(3)
 	},
 	{
 		chapter: 6,
 		name: "Magical Seed 4",
 		type: "required",
-		image: "icons/MagicalSeed4.png"
+		image: "icons/MagicalSeed4.png",
+		show: logic.showMagicalSeed(4)
 	},
 	{
 		chapter: 6,
@@ -350,7 +356,8 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Odd Key",
 		type: "miscKey",
 		image: "icons/OddKey.gif",
-		label: "O"
+		label: "O",
+		show: (settings: OptionsValues) => !logic.blueHouseOpen([], settings)
 	},
 	{
 		chapter: 7,
@@ -402,7 +409,8 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Bowser's Castle Key",
 		type: "required",
 		image: "icons/PM_Bowser_Castle_Key.png",
-		multiple: 5
+		multiple: 5,
+		show: (settings: OptionsValues) => !logic.fastBowserCastle([], settings)
 	},
 	{
 		name: "Prison Key",

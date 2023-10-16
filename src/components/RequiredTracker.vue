@@ -1,23 +1,34 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import ItemTracker from "./ItemTracker.vue";
-import { allItems } from "@/data/items";
+import { TrackableItemInfo } from "../types/items";
 
 const tooltip = ref("");
 const playthrough = usePlaythrough();
 
-const requiredItems = allItems.filter(
-	(el) => el.type === "required" || el.type === "chapterReward"
+const props = defineProps<{ allItems: TrackableItemInfo[] }>();
+
+const requiredItems = computed(() =>
+	props.allItems.filter(
+		(el) => el.type === "required" || el.type === "chapterReward"
+	)
 );
 </script>
 
 <template>
-	<ItemTracker heading="Required Items" :tooltip="tooltip">
+	<ItemTracker
+		:all-items="allItems"
+		heading="Required Items"
+		:tooltip="tooltip"
+	>
 		<div class="rows">
-			<div class="gridrow" v-for="chapter in [1, 2, 3, 4, 5, 6, 7, 8, 0, -1]">
+			<div
+				class="gridrow"
+				v-for="chapter in [1, 2, 3, 4, 5, 6, 7, 8, 16, 0, -1]"
+			>
 				<TrackableItem
 					v-for="(item, index) in requiredItems.filter(
 						(el) => el.chapter === chapter

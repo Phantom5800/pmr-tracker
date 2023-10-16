@@ -96,10 +96,10 @@ export default {
 	powerStarHunt(settings: OptionsValues) {
 		return settings.powerStarHunt;
 	},
-	noPowerStarHunt(settings: OptionsValues) {
-		return !settings.powerStarHunt;
-	},
 	powerStarNum(settings: OptionsValues) {
 		return settings.powerStarNum;
+	},
+	showMagicalSeed(num: number) {
+		return (settings: OptionsValues) => settings.seedsRequired >= num;
 	}
 };

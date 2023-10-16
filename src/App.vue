@@ -62,7 +62,10 @@ const allItemsFiltered = computed(() =>
 	<main>
 		<EnabledSettings />
 		<Notes />
-		<RequiredTracker v-if="!options.compactTracker" />
+		<RequiredTracker
+			v-if="!options.compactTracker"
+			:all-items="allItemsFiltered"
+		/>
 		<ItemTracker
 			v-if="options.compactTracker"
 			:all-items="allItemsFiltered"
