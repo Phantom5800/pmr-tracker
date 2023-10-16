@@ -937,24 +937,21 @@ const regionData: MapRegions = {
 				row: 1,
 				col: 1,
 				checks: {
-					"[Coin Block] Left ? Block": { reqs: null },
-					"Middle ? Block": { reqs: null },
-					"Right ? Block": { reqs: null }
+					"[Coin Block] Left ? Block": { reqs: logic.canBreakBlocksAbove },
+					"Middle ? Block": { reqs: logic.canBreakBlocksAbove },
+					"Right ? Block": { reqs: logic.canBreakBlocksAbove }
 				}
 			},
 			"Switch Bridge 1": {
 				row: 1,
 				col: 2,
 				checks: {
-					"? Block": { reqs: null },
+					"? Block": { reqs: logic.canBreakBlocksAbove },
 					"Kooper item": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
+						reqs: [logic.canShakeTree, "Kooper"]
 					},
 					"Item behind small fence": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges]
 					}
 				}
 			},
@@ -963,16 +960,18 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] Middle of three pillars": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canShakeTree, logic.canClimbLedges, logic.canFlipPanel]
 					},
 					"Item behind right-most pillar": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges]
 					},
 					"Break brick boxes (left, right, middle)": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canBreakGroundBlocks,
+							logic.canBreakBlocksAbove
+						]
 					}
 				}
 			},
@@ -981,24 +980,24 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Panel] Under 5 coins / items": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canShakeTree, logic.canClimbLedges, logic.canFlipPanel]
 					},
 					"[Coinsanity] 5 items at start of room": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges]
 					},
 					"Item on brick block": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
+							logic.canShakeTree,
+							logic.canClimbLedges,
 							["Kooper", "Ultra Boots"]
 						]
 					},
 					"Hidden ? block after bridge": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							"Kooper",
+							logic.canBreakBlocksAbove
 						]
 					}
 				}
@@ -1008,10 +1007,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item in first tree": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
+						reqs: [logic.canShakeTree, logic.canClimbLedges, "Kooper"]
 					}
 				}
 			}
@@ -1025,7 +1021,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Item Fuzzies are holding": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: "Hammer"
 					}
 				}
 			},
@@ -1034,10 +1030,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"On tall stump": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Kooper", "Parakarry"]
-						]
+						reqs: [["Kooper", "Parakarry"]]
 					}
 				}
 			},
@@ -1046,38 +1039,22 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					},
 					"[Panel] Left of tree": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					},
 					"[Letter] Mort T.": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Mort T. (Koopa Village Inn)",
-							"Parakarry"
-						]
+						reqs: ["Mort T. (Koopa Village Inn)", "Parakarry"]
 					},
 					"[Letter] Koover 1 (Chain)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Koover 1 (Koopa Village Entrance)",
-							"Parakarry"
-						]
+						reqs: ["Koover 1 (Koopa Village Entrance)", "Parakarry"]
 					},
 					"[Letter] Koover 2 (Chain)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Koover 2 (Koopa Village Entrance)",
-							"Parakarry"
-						]
+						reqs: ["Koover 2 (Koopa Village Entrance)", "Parakarry"]
 					},
 					"[Koot] Far right bush after Koopa Koot requests his Wallet": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1089,7 +1066,6 @@ const regionData: MapRegions = {
 					"[Koot] Second bush from left after Koopa Koot requests his Glasses":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1108,16 +1084,16 @@ const regionData: MapRegions = {
 							]
 						},
 					"Bottom bush on left side": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					},
 					"Third bush from the right": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					},
 					"[Foliage Coin] Far left bush": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					},
 					"[Foliage Coin] Second bush from the right": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					}
 				}
 			},
@@ -1128,47 +1104,25 @@ const regionData: MapRegions = {
 					"[Letter] Kolorado": { reqs: ["Kolorado", "Parakarry"] },
 					"[Koot] Talk to Kolorado's wife after starting Koopa Koot's first favor":
 						{
-							reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+							reqs: null
 						},
 					"[Koot Coin] Return Koopa Legends to Koopa Koot": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"], "Koopa Legends"]
+						reqs: "Koopa Legends"
 					},
 					"[Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Koopa Legends",
-							"Sleepy Sheep"
-						]
+						reqs: ["Koopa Legends", "Sleepy Sheep"]
 					},
 					"[Koot] Give Koopa Koot a Sleepy Sheep (second item)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Koopa Legends",
-							"Sleepy Sheep"
-						]
+						reqs: ["Koopa Legends", "Sleepy Sheep"]
 					},
 					"[Koot Coin] Return Koopa Koot's Tape": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							1,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape"
-						]
+						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape"]
 					},
 					"[Koot] Give Koopa Koot Koopa Tea": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							1,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape",
-							"Koopa Tea"
-						]
+						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape", "Koopa Tea"]
 					},
 					"[Koot Coin] Give Luigi's Autograph to Koopa Koot": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1179,7 +1133,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's wallet": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1191,7 +1144,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Tasty Tonic": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1204,7 +1156,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Merluvlee's Autograph to Koopa Koot": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1219,7 +1170,6 @@ const regionData: MapRegions = {
 					"[Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
 								3,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1233,7 +1183,6 @@ const regionData: MapRegions = {
 						},
 					"[Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1248,7 +1197,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Life Shroom (second item)": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1263,7 +1211,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Nutty Cake": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1279,7 +1226,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Koopa Koot after calming the Bob-ombs": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1297,7 +1243,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot the Old Photo": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1316,7 +1261,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot Koopasta": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1336,7 +1280,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's glasses": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1357,7 +1300,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Lime": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1379,7 +1321,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Kooky Cookie": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1402,7 +1343,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot his package": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1426,7 +1366,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Coconut": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1451,7 +1390,6 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot the Red Jar": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1476,13 +1414,10 @@ const regionData: MapRegions = {
 						]
 					},
 					"First bush on left": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					},
 					"Give Kooper his shell": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper's Shell"
-						]
+						reqs: "Kooper's Shell"
 					},
 					"Give Artifact to Kolorado": {
 						reqs: [
@@ -1496,10 +1431,10 @@ const regionData: MapRegions = {
 						]
 					},
 					"Item on top of brick block on right (after defeating fuzzies)": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"[Foliage Coin] Far right bush": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null
 					}
 				}
 			}
@@ -1519,17 +1454,10 @@ const regionData: MapRegions = {
 				rowSpan: 3,
 				checks: {
 					"Defeat Koopa by first locked door": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
+						reqs: null
 					},
 					"Top of room guarded by Bob-omb": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							logic.multipleItemCheck("Fortress Key", 4)
-						]
+						reqs: logic.multipleItemCheck("Fortress Key", 4)
 					}
 				}
 			},
@@ -1538,11 +1466,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"? Block behind bombable rock": {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							logic.multipleItemCheck("Fortress Key", 4)
-						]
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 4)]
 					}
 				}
 			},
@@ -1562,21 +1486,13 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Left Jail Cell": {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							logic.multipleItemCheck("Fortress Key", 3)
-						]
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 3)]
 					},
 					"Middle Jail Cell": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							"Fortress Key"
-						]
+						reqs: ["Bombette", "Fortress Key"]
 					},
 					"Right Jail Cell": {
-						reqs: ["Kooper", "Bombette", "Fortress Key"]
+						reqs: ["Bombette", "Fortress Key"]
 					}
 				}
 			},
@@ -1587,7 +1503,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Inside chest on ledge from bombable wall on previous screen": {
-						reqs: ["Kooper", "Bombette"]
+						reqs: "Bombette"
 					}
 				}
 			},
@@ -1596,11 +1512,7 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"Chest after bombable wall in trap room": {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							logic.multipleItemCheck("Fortress Key", 2)
-						]
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 2)]
 					}
 				}
 			},
@@ -1609,11 +1521,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item at end of room": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							"Fortress Key"
-						]
+						reqs: ["Bombette", "Fortress Key"]
 					}
 				}
 			},
@@ -1624,8 +1532,6 @@ const regionData: MapRegions = {
 				checks: {
 					Bombette: {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
 							[
 								["Fortress Key", "Bombette"],
 								logic.multipleItemCheck("Fortress Key", 2)
