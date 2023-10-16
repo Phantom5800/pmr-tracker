@@ -200,8 +200,16 @@ button.fullCleared {
 	color: #333;
 }
 
+.map-checks {
+	width: fit-content;
+	margin-inline: auto;
+}
+
 .map-checks ul {
 	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
 }
 
 .map-checks li {
@@ -215,5 +223,9 @@ button.fullCleared {
 .map-checks li.disabled {
 	color: #666;
 	text-decoration: line-through;
+}
+
+.map-checks li input[type="checkbox"] {
+	margin-right: 1rem;
 }
 </style>
