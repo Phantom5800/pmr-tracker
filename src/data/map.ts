@@ -2818,36 +2818,15 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Near middle of room": {
 						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"],
-							["Hammer", "Super Hammer", "Ultra Hammer"]
+							logic.canFlipPanel,
+							"Boots"
 						]
 					},
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					}
 				}
 			},
@@ -2857,36 +2836,10 @@ const regionData: MapRegions = {
 				rowSpan: 6,
 				checks: {
 					"Item on the outside Raph's Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					},
 					"Talk to Raphael at the top": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					}
 				}
 			},
@@ -2895,36 +2848,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Second Tree vine": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					},
 					"Last Tree vine": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					}
 				}
 			},
@@ -2933,35 +2860,15 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven"]
 					},
 					"Hidden block near first push block": {
 						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove
 						]
 					}
 				}
@@ -2972,51 +2879,18 @@ const regionData: MapRegions = {
 				checks: {
 					"Hidden block near bell plant": {
 						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove
 						]
 					},
 					"Tree vine near bell plant": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"]
 					},
 					"[Foliage Coin] Tree near bell plant": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", logic.canClimbLedges]
 					}
 				}
 			},
@@ -3025,22 +2899,7 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Item under water": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					}
 				}
 			},
@@ -3049,78 +2908,16 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Item in tree by right side exit": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree]
 					},
 					"[Foliage Coin] Tree on ledge": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canClimbLedges, logic.canShakeTree]
 					},
 					"[Foliage Coin] Second bush from right": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					},
 					"[Foliage Coin] Second bush from left": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					}
 				}
 			},
@@ -3129,34 +2926,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Coinsanity] Item under water on right side of room": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer"]
 					},
 					"[Foliage Coin] Tree near raven statue": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer"]
 					}
 				}
 			},
@@ -3165,19 +2938,7 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer"]
 					}
 				}
 			},
@@ -3187,56 +2948,13 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Coinsanity] 2 items on spinning flower": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"Coconut tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Item behind bush near top of screen": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					}
 				}
 			},
@@ -3245,114 +2963,22 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coinsanity] Three items under water": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					},
 					"Hidden block near exit to NW Jungle": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: ["Sushie", logic.canBreakBlocksAbove]
 					},
 					"[Foliage Coin] Tree near north exit": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree]
 					},
 					"[Foliage Coin] Tree near Spear Guy": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree]
 					},
 					"[Foliage Coin] Right bush near north exit": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					},
 					"[Foliage Coin] Bottom bush on left side": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					}
 				}
 			},
@@ -3362,74 +2988,16 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"? Block on island": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: ["Sushie", logic.canBreakBlocksAbove]
 					},
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Bottom left bush": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: ["Sushie", "Hammer"]
 					},
 					"[Foliage Coin] Bottom right bush": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					}
 				}
 			},
@@ -3438,75 +3006,16 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					Sushie: {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: "Hammer"
 					},
 					"Item on top right island": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					},
 					"Item in tree on top right island": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie"
 					},
 					"Chest after saving Misstar": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Misstar"
-						]
+						reqs: "Misstar"
 					}
 				}
 			},
@@ -3515,163 +3024,31 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coinsanity] 2 items on spinning flower": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"Coconut tree 1 (far left)": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Coconut tree 2": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Hidden block by bell plant": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: logic.canBreakBlocksAbove
 					},
 					"Coconut tree 3": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Item on rock formation": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"Coconut tree 4": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Coconut tree 5": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Coconut tree 6 (last tree, 2 items)": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -3680,57 +3057,16 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] In front of raven statue": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								"Watt",
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					},
 					"Talk to Yoshi Chief after saving all the kids": {
-						reqs: ["Watt", "Sushie", ["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: ["Watt", "Sushie", "Hammer"]
 					},
 					"Left Coconut tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Right Coconut tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -3740,75 +3076,19 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					},
 					"[Letter] Red Yoshi Kid (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							"Red Yoshi Kid",
-							"Parakarry"
-						]
+						reqs: ["Red Yoshi Kid", "Parakarry"]
 					},
 					"Give a Tayce T. item to Yellow Adult Yoshi": {
-						reqs: [
-							"Watt",
-							"Sushie",
-							"Misstar",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Watt", "Sushie", "Misstar", "Hammer"]
 					},
 					"Give the volcano vase to Kolorado": {
-						reqs: [
-							"Watt",
-							"Sushie",
-							"Volcano Vase",
-							"Misstar",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Watt", "Sushie", "Volcano Vase", "Misstar", "Hammer"]
 					},
 					"Coconut tree on right side of room": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -3817,21 +3097,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item behind large tree": {
-						reqs: [
-							[
-								logic.startingLocation("Yoshi Village"),
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								logic.whaleOpen,
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								[logic.blueHouseOpen, "Bombette"]
-							]
-						]
+						reqs: null
 					}
 				}
 			}
