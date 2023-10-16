@@ -1547,13 +1547,7 @@ const regionData: MapRegions = {
 		reqs: [
 			[
 				[logic.canReachToadTown, "Bombette"],
-				[
-					logic.canReachToadTown,
-					logic.canClimbLedges,
-					"Super Hammer",
-					logic.canClimbLedges
-				],
-				[logic.startingLocation("Dry Dry Outpost"), logic.canClimbLedges]
+				[logic.desertAccess, logic.canClimbLedges]
 			]
 		],
 		areas: {
@@ -1562,88 +1556,28 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block left after taking spring": {
-						reqs: [
-							[
-								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
-								[logic.startingLocation("Dry Dry Outpost"), "Kooper"],
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakGroundBlocks]
 					},
 					"[Coinsanity] Circle of items across Parakarry gap": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"]
 					},
 					"[Coinsanity] 2 items on ground below Parakarry gap": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"? Block by Cleft when entering room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove]
 					},
 					"Chest in cave": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"Item across Parakarry gap": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"]
 					},
 					"? Block past Cleft after spring": {
-						reqs: [
-							[
-								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
-								[logic.startingLocation("Dry Dry Outpost"), "Kooper"],
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakGroundBlocks]
 					},
 					"Item on far right ledge": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					}
 				}
 			},
@@ -1653,37 +1587,13 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] By wall near end of slide": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canClimbLedges, logic.canFlipPanel]
 					},
 					"Item on first ledge": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Kooper", "Parakarry"]
-						]
+						reqs: [logic.canClimbLedges, ["Kooper", "Parakarry"]]
 					},
 					"Item on second ledge": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"]
 					}
 				}
 			},
@@ -1693,25 +1603,10 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Bub-ulb": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"]
 					},
 					"Item on support beam when falling through opening at the top": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					}
 				}
 			},
@@ -1720,14 +1615,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item on ground by Cleft": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, ["Parakarry", logic.desertAccess]]
 					}
 				}
 			},
@@ -1736,34 +1624,13 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Item in top most bush": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					},
 					"Give three letters to Parakarry": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"[Foliage Coin] All 3 other bushes": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					}
 				}
 			},
@@ -1772,89 +1639,30 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Coinsanity] Three items on slide": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges
 					},
 					"Hit Whacka": {
-						reqs: [
-							[
-								[logic.startingLocation("Dry Dry Outpost"), "Hammer"],
-								["Bombette", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, "Hammer"]
 					},
 					"? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove]
 					}
 				}
 			}
 		}
 	},
 	"Dry Dry Desert": {
-		reqs: [
-			[
-				[logic.canReachToadTown, "Bombette", "Parakarry"],
-				[logic.canReachToadTown, logic.canClimbLedges, "Super Hammer"],
-				logic.startingLocation("Dry Dry Outpost")
-			]
-		],
+		reqs: logic.desertAccess,
 		areas: {
 			"NW Two ? Blocks": {
 				row: 1,
 				col: 2,
 				checks: {
 					"[Coin Block] Right ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"Left ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					}
 				}
 			},
@@ -1863,42 +1671,10 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"Right ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					}
 				}
 			},
@@ -1907,15 +1683,7 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Trade] Give Nutty Cake to Trading Event Toad": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							3
-						]
+						reqs: 3
 					}
 				}
 			},
@@ -1924,14 +1692,7 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"Behind cactus at top of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					}
 				}
 			},
@@ -1940,15 +1701,7 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -1957,14 +1710,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Hidden block above rock on right side": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -1973,61 +1719,13 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Hammer yellow block once": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove]
 					},
 					"Hammer yellow block five times": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove]
 					},
 					"Hammer yellow block ten times": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -2036,99 +1734,19 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Coin Block] Top-Left ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"[Coin Block] Top-Right ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"[Coin Block] Bottom-Left ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"[Coin Block] Bottom-Right ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"Center ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					}
 				}
 			},
@@ -2137,14 +1755,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Hidden block in the middle of three trees": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -2153,15 +1764,7 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2171,16 +1774,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Tree at camp location after saving Mamar": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Mamar",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Mamar", logic.canShakeTree]
 					}
 				}
 			},
@@ -2189,15 +1783,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Panel] Below stone cactus": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel
 					}
 				}
 			},
@@ -2206,27 +1792,10 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"[Letter] Nomadimouse": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Nomadimouse",
-							"Parakarry"
-						]
+						reqs: ["Nomadimouse", "Parakarry"]
 					},
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2235,15 +1804,7 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2252,48 +1813,16 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"Far right tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Second tree from left": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Fourth tree from right": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2303,58 +1832,19 @@ const regionData: MapRegions = {
 				checks: {
 					"[Shop] 3 randomized items in Shop (password items are guaranteed vanilla)":
 						{
-							reqs: [
-								[
-									logic.startingLocation("Dry Dry Outpost"),
-									["Bombette", "Parakarry"],
-									"Super Hammer",
-									"Ultra Hammer"
-								]
-							]
+							reqs: null
 						},
 					"[Letter] Shop (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Dry Dry Shop",
-							"Parakarry"
-						]
+						reqs: ["Dry Dry Shop", "Parakarry"]
 					},
 					"[Koot] Buy Dusty Hammer, Dried Pasta, Dusty Hammer, Dried Shroom": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					},
 					"Turn in Lyrics at far right house": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Lyrics"
-						]
+						reqs: "Lyrics"
 					},
 					"[Foliage Coin] Red tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2363,37 +1853,13 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					"[Panel] On rooftops": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Boots", logic.canFlipPanel]
 					},
 					"[Letter] Mr. E (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Mr. E",
-							"Parakarry"
-						]
+						reqs: ["Mr. E", "Parakarry"]
 					},
 					"[Koot] Talk to Merlee after Merluvlee requests Crystal Ball": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2405,24 +1871,10 @@ const regionData: MapRegions = {
 						]
 					},
 					"Item on rooftops": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: "Boots"
 					},
 					"Talk to Moustafa after buying Dried Shroom + Dusty Hammer": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: "Boots"
 					}
 				}
 			},
@@ -2431,23 +1883,7 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"[Coin Block] ? Block in middle of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					}
 				}
 			},
@@ -2456,23 +1892,7 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Coin Block] ? Block in middle of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					}
 				}
 			},
@@ -2481,25 +1901,10 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"Item on ledge (take Tweester in room down left from here)": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					},
 					"Item on brick block, requires Kooper or Ultra Boots": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Kooper", "Ultra Boots"]
-						]
+						reqs: [[["Kooper", logic.canClimbLedges], "Ultra Boots"]]
 					}
 				}
 			},
@@ -2508,44 +1913,13 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"[Coin Block] ? Block in middle of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks
 					},
 					"Hidden block directly above other ? Block": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: "Boots"
 					},
 					"[Foliage Coin] Bottom tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2554,25 +1928,10 @@ const regionData: MapRegions = {
 				col: 7,
 				checks: {
 					"Item behind bush on right side of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null
 					},
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2581,48 +1940,16 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"Lemon Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"Lime Tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					},
 					"[Foliage Coin] Bottom right tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			},
@@ -2631,14 +1958,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Hidden block in middle of room": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove]
 					}
 				}
 			},
@@ -2647,15 +1967,7 @@ const regionData: MapRegions = {
 				col: 8,
 				checks: {
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree
 					}
 				}
 			}

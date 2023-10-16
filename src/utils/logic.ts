@@ -46,6 +46,23 @@ export default {
 	toyboxAccess(items: string[], settings: OptionsValues) {
 		return items.includes("Bow") || settings.toyboxOpen;
 	},
+	koopaVillageAccess(items: string[], settings: OptionsValues) {
+		return items.includes("Bow") || settings.toyboxOpen;
+	},
+	desertAccess(items: string[], settings: OptionsValues) {
+		return (
+			settings.startingLocation === "Dry Dry Outpost" ||
+			((settings.startingLocation === "Toad Town" ||
+				(settings.startingLocation === "Goomba Village" &&
+					(items.includes("Hammer") || items.includes("Bombette")) &&
+					(items.includes("Boots") || items.includes("Parakarry"))) ||
+				(settings.startingLocation === "Yoshi Village" &&
+					(items.includes("Watt") || settings.whaleOpen))) &&
+				((items.includes("Bombette") && items.includes("Parakarry")) ||
+					((items.includes("Boots") || items.includes("Parakarry")) &&
+						items.includes("Super Hammer"))))
+		);
+	},
 	forestOpen(items: string[], settings: OptionsValues) {
 		return settings.forestOpen;
 	},
