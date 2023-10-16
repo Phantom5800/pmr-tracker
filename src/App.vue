@@ -98,8 +98,16 @@ const allItemsFiltered = computed(() =>
 		/>
 	</main>
 
-	<ConfigModal :isOpen="configOpen" :optionsKeys="configKeys" />
-	<SettingsModal :isOpen="settingsOpen" :optionsKeys="settingsKeys" />
+	<ConfigModal
+		:isOpen="configOpen"
+		:optionsKeys="configKeys"
+		:close="() => (configOpen = false)"
+	/>
+	<SettingsModal
+		:isOpen="settingsOpen"
+		:optionsKeys="settingsKeys"
+		:close="() => (settingsOpen = false)"
+	/>
 
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"

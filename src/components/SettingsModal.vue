@@ -5,6 +5,7 @@ import { storeToRefs, defineStore } from "pinia";
 import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
 import axios from "axios";
+import { vOnClickOutside } from "@vueuse/components";
 
 const optionsStore = useOptions();
 const playthroughStore = usePlaythrough();
@@ -18,6 +19,7 @@ const showingSeedSettings = ref(false);
 const props = defineProps<{
 	isOpen: boolean;
 	optionsKeys: string[];
+	close: () => void;
 }>();
 
 function fetchSeedSettings(id: string) {
@@ -39,7 +41,10 @@ function fetchSeedSettings(id: string) {
 </script>
 
 <template>
-	<div :class="[{ 'options-open': props.isOpen }, 'panel']">
+	<div
+		:class="[{ 'options-open': props.isOpen }, 'panel']"
+		v-on-click-outside="props.close"
+	>
 		<div class="flex">
 			<div class="flex-row">
 				<div>Import Seed</div>
