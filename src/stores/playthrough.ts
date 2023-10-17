@@ -168,7 +168,9 @@ export const usePlaythrough = defineStore("playthrough", {
 				"Foliage Coin": settings.foliageCoinsRandomized,
 				Coinsanity: settings.coinsRandomized,
 				"Coin Block": settings.coinBlocksRandomized,
-				Merlow: settings.merlowRandomized
+				Merlow: settings.merlowRandomized,
+				Upgrade: settings.superBlocksRandomized,
+				"Multicoin Block": settings.multicoinBlocksRandomized
 			};
 
 			if (check.startsWith("[")) {

@@ -30,6 +30,14 @@ const settings = [
 	{
 		id: "tradingEventRandomized",
 		src: "flags/TradingEvent_PM.png"
+	},
+	{
+		id: "superBlocksRandomized",
+		src: "icons/UltraStone.gif"
+	},
+	{
+		id: "multicoinBlocksRandomized",
+		src: "flags/brick.png"
 	}
 ];
 

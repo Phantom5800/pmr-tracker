@@ -208,6 +208,18 @@ const optionsData = {
 		type: "boolean",
 		default: true
 	},
+	superBlocksRandomized: {
+		namespace: "settings",
+		name: "Super Blocks Randomized",
+		type: "boolean",
+		default: false
+	},
+	multicoinBlocksRandomized: {
+		namespace: "settings",
+		name: "Multicoin Blocks Randomized",
+		type: "boolean",
+		default: false
+	},
 	powerStarHunt: {
 		namespace: "settings",
 		name: "Power Star Hunt",
