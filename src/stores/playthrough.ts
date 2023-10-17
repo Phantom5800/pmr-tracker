@@ -209,13 +209,15 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.checks = [];
 			this.items = [];
 			this.notes = "";
+			this.spiritAnnotations = spiritAnnotations;
 			this.save();
 		},
 		savePlaythrough() {
 			const saveData = JSON.stringify({
 				checks: this.checks,
 				items: this.items,
-				notes: this.notes
+				notes: this.notes,
+				spiritAnnotations: this.spiritAnnotations
 			});
 			const blob = new Blob([saveData], { type: "application/json" });
 			saveAs(blob, `pmr-tracker-${new Date().toISOString()}.json`);
@@ -226,10 +228,16 @@ export const usePlaythrough = defineStore("playthrough", {
 				const contents = e.target?.result;
 				if (typeof contents === "string") {
 					const saveData = JSON.parse(contents);
-					if (saveData.checks && saveData.items && saveData.notes) {
+					if (
+						"checks" in saveData &&
+						"items" in saveData &&
+						"notes" in saveData &&
+						"spiritAnnotations" in saveData
+					) {
 						this.checks = saveData.checks;
 						this.items = saveData.items;
 						this.notes = saveData.notes;
+						this.spiritAnnotations = saveData.spiritAnnotations;
 						this.save();
 					}
 				}
