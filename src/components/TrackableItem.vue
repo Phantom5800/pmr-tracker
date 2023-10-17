@@ -174,7 +174,7 @@ img {
 
 p.label {
 	position: absolute;
-	top: 4px;
+	top: 0;
 	right: 4px;
 	font-size: 2rem;
 	stroke: 1px black;
@@ -188,6 +188,7 @@ p.count {
 	-webkit-text-stroke: 1px black;
 	position: absolute;
 	bottom: 0;
+	font-weight: bold;
 }
 
 p.checkmark {
