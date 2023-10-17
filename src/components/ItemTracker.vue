@@ -20,9 +20,22 @@ const options = useOptions();
 
 const { heading, itemTypes } = toRefs(props);
 
+const uselessItems = [
+	"Mystery Note",
+	"Cookbook",
+	"Prison Key",
+	"Quizmo",
+	"Star Piece",
+	"Rip Cheato",
+	"Anti Guy"
+];
+
 const trackerItems = computed(() => {
 	const filteredItems = props.allItems.filter(
-		(el) => itemTypes.value && itemTypes.value.includes(el.type)
+		(el) =>
+			itemTypes.value &&
+			itemTypes.value.includes(el.type) &&
+			(options.$state.options.uselessItems || !uselessItems.includes(el.name))
 	);
 	if (options.$state.options.combineSortMode === "Required First") {
 		filteredItems.sort(

@@ -72,23 +72,27 @@ function closeSettingsDelay() {
 	</header>
 
 	<main>
-		<EnabledSettings />
-		<Notes />
-		<RequiredTracker
-			v-if="!options.compactTracker"
-			:all-items="allItemsFiltered"
-		/>
-		<ItemTracker
-			v-if="options.compactTracker"
-			:all-items="allItemsFiltered"
-			:heading="options.combineMisc ? 'Basically Everything' : 'Required Items'"
-			:itemTypes="
-				options.combineMisc
-					? ['required', 'chapterReward', 'miscItem', 'miscKey']
-					: ['required', 'chapterReward']
-			"
-		/>
-		<MapTracker />
+		<div class="flex-col">
+			<EnabledSettings v-if="options.seedFlags" />
+			<RequiredTracker
+				v-if="!options.compactTracker"
+				:all-items="allItemsFiltered"
+			/>
+			<ItemTracker
+				v-if="options.compactTracker"
+				:all-items="allItemsFiltered"
+				:heading="
+					options.combineMisc ? 'Basically Everything' : 'Required Items'
+				"
+				:itemTypes="
+					options.combineMisc
+						? ['required', 'chapterReward', 'miscItem', 'miscKey']
+						: ['required', 'chapterReward']
+				"
+			/>
+		</div>
+		<Notes v-if="options.userNotes" />
+		<MapTracker v-if="options.gameMaps" />
 		<ItemTracker
 			v-if="!options.combineMisc"
 			:all-items="allItemsFiltered"
@@ -102,7 +106,6 @@ function closeSettingsDelay() {
 			:itemTypes="['miscItem']"
 		/>
 
-		<InfoBlocks />
 		<ItemTracker
 			:all-items="allItemsFiltered"
 			heading="Letters"
@@ -113,6 +116,7 @@ function closeSettingsDelay() {
 			heading="Koopa Koot Favors"
 			:itemTypes="['kootFavor']"
 		/>
+		<InfoBlocks v-if="options.howToFields" />
 	</main>
 
 	<ConfigModal
@@ -229,5 +233,11 @@ footer {
 .options-open .hamburger-3 {
 	-webkit-transform: rotate(45deg) translate(-8px, -8px);
 	transform: rotate(45deg) translate(-8px, -8px);
+}
+
+div.flex-col {
+	display: flex;
+	flex-direction: column;
+	float: left;
 }
 </style>

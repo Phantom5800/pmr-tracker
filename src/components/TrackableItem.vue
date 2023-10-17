@@ -122,7 +122,7 @@ function getImageUrl(image: string) {
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
-		<div class="hover-tip" v-if="hoverTooltip">
+		<div class="hover-tip" v-if="hoverTooltip && options.recipeTooltips">
 			{{ hoverTooltip }}
 			<div class="down-arrow"></div>
 		</div>
