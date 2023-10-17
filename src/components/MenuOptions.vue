@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useOptions } from "@/stores/config";
 import { storeToRefs, defineStore } from "pinia";
-import { ref } from "vue";
+import { computed } from "vue";
 
 const optionsStore = useOptions();
 
@@ -10,6 +10,18 @@ const { options } = storeToRefs(optionsStore);
 const props = defineProps<{
 	optionsKeys: string[];
 }>();
+
+function showKey(key: string) {
+	return key === "combineSortMode"
+		? options.value.combineMisc && options.value.compactTracker
+		: key === "combineMisc"
+		? options.value.compactTracker
+		: true;
+}
+
+const keysToShow = computed(() =>
+	props.optionsKeys.filter((el) => showKey(el))
+);
 
 function clamp(num: number, range?: [number, number]): number {
 	return range === undefined
@@ -25,12 +37,17 @@ function clamp(num: number, range?: [number, number]): number {
 <template>
 	<div class="flex">
 		<div
-			v-for="key in optionsKeys"
+			v-for="key in keysToShow"
+			v-if="showKey(key)"
 			class="flex-row"
 			:key="key"
 			@click="
 				optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
 			"
+			:style="{
+				marginLeft:
+					key === 'combineMisc' || key === 'combineSortMode' ? '1rem' : 0
+			}"
 		>
 			<div class="option-name" colspan="3">{{ optionsStore.getName(key) }}</div>
 			<div v-if="optionsStore.getType(key) === 'boolean'" class="option">
@@ -98,6 +115,7 @@ div.flex-row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .checkbox-groove {

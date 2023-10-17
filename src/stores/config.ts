@@ -33,7 +33,7 @@ const optionsData = {
 	},
 	combineSortMode: {
 		namespace: "config",
-		name: "Combine Sort Mode",
+		name: "Sort Mode",
 		type: "select",
 		default: "Vanilla Acquired Order",
 		choices: ["Vanilla Acquired Order", "Required First"]
@@ -106,7 +106,7 @@ const optionsData = {
 	},
 	seedsRequired: {
 		namespace: "settings",
-		name: "Magical Seeds Required",
+		name: "Ch.6 Seeds Required",
 		type: "number",
 		default: 4,
 		range: [0, 4]
@@ -238,14 +238,14 @@ const optionsData = {
 		name: "Star Hunt Skips Ch. 8",
 		type: "boolean",
 		default: true
-	},
-	gearShuffle: {
-		namespace: "settings",
-		name: "Gear Shuffle",
-		type: "select",
-		default: "vanilla",
-		choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
 	}
+	// gearShuffle: {
+	// 	namespace: "settings",
+	// 	name: "Gear Shuffle",
+	// 	type: "select",
+	// 	default: "vanilla",
+	// 	choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
+	// }
 };
 
 export type OptionsValues = {

@@ -100,15 +100,15 @@ div.panel {
 	padding: 1rem;
 	font-size: 1.5em;
 	position: absolute;
-	left: -600px;
+	left: -40rem;
 	top: 58px;
-	width: 500px;
+	width: 36rem;
 	transition: 0.4s;
 }
 
 div.panel.options-open {
-	-webkit-transform: translate(608px);
-	transform: translate(608px);
+	-webkit-transform: translate(40rem);
+	transform: translate(40rem);
 }
 
 table {

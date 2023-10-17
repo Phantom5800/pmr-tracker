@@ -94,13 +94,13 @@ function closeSettingsDelay() {
 		<Notes v-if="options.userNotes" />
 		<MapTracker v-if="options.gameMaps" />
 		<ItemTracker
-			v-if="!options.combineMisc"
+			v-if="!options.compactTracker || !options.combineMisc"
 			:all-items="allItemsFiltered"
 			heading="Misc. Keys"
 			:itemTypes="['miscKey']"
 		/>
 		<ItemTracker
-			v-if="!options.combineMisc"
+			v-if="!options.compactTracker || !options.combineMisc"
 			:all-items="allItemsFiltered"
 			heading="Misc. Items"
 			:itemTypes="['miscItem']"
