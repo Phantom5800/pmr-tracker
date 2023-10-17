@@ -74,6 +74,15 @@ function clamp(num: number, range?: [number, number]): number {
 					@change="(event) => optionsStore.setValue(key, event.target.value)"
 				/>
 			</div>
+			<div v-else-if="optionsStore.getType(key) === 'color'">
+				<input
+					:name="key"
+					:id="key"
+					type="color"
+					:value="options[key]"
+					@change="(event) => optionsStore.setValue(key, event.target.value)"
+				/>
+			</div>
 		</div>
 	</div>
 </template>

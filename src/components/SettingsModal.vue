@@ -43,7 +43,13 @@ function fetchSeedSettings(id: string) {
 <template>
 	<div
 		:class="[{ 'options-open': props.isOpen }, 'panel']"
-		v-on-click-outside="props.close"
+		v-on-click-outside="
+			() => {
+				if (props.isOpen) {
+					props.close();
+				}
+			}
+		"
 	>
 		<div class="flex">
 			<div class="flex-row">

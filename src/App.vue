@@ -27,9 +27,19 @@ const year = new Date().getFullYear();
 const allItemsFiltered = computed(() =>
 	allItems.filter((el) => el.show === undefined || el.show(options.value))
 );
+
+function closeConfigDelay() {
+	setTimeout(() => (configOpen.value = false), 1);
+}
+function closeSettingsDelay() {
+	setTimeout(() => (settingsOpen.value = false), 1);
+}
 </script>
 
 <template>
+	<component is="style">
+		html, body { background: {{ options.backgroundColor }}; }
+	</component>
 	<header>
 		<div style="display: flex">
 			<div
@@ -51,7 +61,9 @@ const allItemsFiltered = computed(() =>
 			id="settings-menu-toggle"
 			:class="{ 'options-open': configOpen }"
 			@click="
-				configOpen = !configOpen;
+				if (!configOpen) {
+					configOpen = true;
+				}
 				settingsOpen = false;
 			"
 		>
@@ -106,12 +118,12 @@ const allItemsFiltered = computed(() =>
 	<ConfigModal
 		:isOpen="configOpen"
 		:optionsKeys="configKeys"
-		:close="() => (configOpen = false)"
+		:close="closeConfigDelay"
 	/>
 	<SettingsModal
 		:isOpen="settingsOpen"
 		:optionsKeys="settingsKeys"
-		:close="() => (settingsOpen = false)"
+		:close="closeSettingsDelay"
 	/>
 
 	<footer>
