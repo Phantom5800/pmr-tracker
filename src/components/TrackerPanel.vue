@@ -3,13 +3,18 @@ import { useOptions } from "@/stores/config";
 
 const options = useOptions();
 
-const { widthRem } = defineProps<{ widthRem?: number; resizable?: boolean }>();
+const { widthRem, padding } = defineProps<{
+	widthRem?: number;
+	resizable?: boolean;
+	padding?: string;
+}>();
 </script>
 
 <template>
 	<div
 		:style="{
 			width: `${widthRem}rem !important`,
+			padding: padding || '1rem',
 			backgroundColor: options.$state.options.sectionColor
 		}"
 	>
@@ -20,7 +25,6 @@ const { widthRem } = defineProps<{ widthRem?: number; resizable?: boolean }>();
 <style scoped>
 div {
 	margin: 5px;
-	padding: 1rem;
 	border-radius: 10px;
 	float: left;
 	text-align: center;

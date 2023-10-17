@@ -48,7 +48,7 @@ function getImageUrl(image: string) {
 </script>
 
 <template>
-	<TrackerPanel>
+	<TrackerPanel padding="0.4rem 1rem">
 		<div class="flex">
 			<img
 				v-for="setting in settings"
