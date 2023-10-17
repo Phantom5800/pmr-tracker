@@ -25,6 +25,7 @@ watch(content, (content) => {
 
 <style scoped>
 textarea {
+	font-family: monospace;
 	width: 100%;
 	height: 100%;
 	min-height: 6rem;

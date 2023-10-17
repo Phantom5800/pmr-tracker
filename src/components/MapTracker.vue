@@ -149,7 +149,6 @@ const unshuffledChecks = computed(() =>
 button {
 	height: 100%;
 	border-radius: 5px;
-	font-family: "Paper Mario";
 }
 
 button.map-select {

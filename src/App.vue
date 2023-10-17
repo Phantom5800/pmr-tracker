@@ -38,7 +38,9 @@ function closeSettingsDelay() {
 
 <template>
 	<component is="style">
-		html, body { background: {{ options.backgroundColor }}; }
+		html, body { background: {{ options.backgroundColor }}; font-family:
+		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};font-size:
+		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }
 	</component>
 	<header>
 		<div style="display: flex">

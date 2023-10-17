@@ -74,6 +74,12 @@ const optionsData = {
 		type: "boolean",
 		default: true
 	},
+	paperMarioFont: {
+		namespace: "config",
+		name: "Paper Mario Font",
+		type: "boolean",
+		default: true
+	},
 	backgroundColor: {
 		namespace: "config",
 		name: "Background Color",
