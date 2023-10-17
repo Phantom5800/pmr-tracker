@@ -48,18 +48,28 @@ function getImageUrl(image: string) {
 
 <template>
 	<TrackerPanel>
-		<img
-			v-for="setting in settings"
-			:key="setting.id"
-			:src="getImageUrl(setting.src)"
-			:class="{ hide: !options[setting.id] }"
-		/>
+		<div class="flex">
+			<img
+				v-for="setting in settings"
+				:key="setting.id"
+				:src="getImageUrl(setting.src)"
+				:class="{ hide: !options[setting.id] }"
+			/>
+		</div>
 	</TrackerPanel>
 </template>
 
 <style scoped>
+div.flex {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
 img {
-	height: 4rem;
+	object-fit: contain;
+	max-height: 4rem;
+	flex-grow: 1;
 }
 
 img.hide {

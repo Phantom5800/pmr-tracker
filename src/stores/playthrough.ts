@@ -146,6 +146,11 @@ export const usePlaythrough = defineStore("playthrough", {
 			);
 		},
 		canCheckLocation(reqs: Requirements, region?: string) {
+			const options = useOptions();
+			console.log(options.$state);
+			if (!options.$state.options.trackerLogic) {
+				return true;
+			}
 			const regionReqs = region ? getRegionData(region).reqs : null;
 			return (
 				resolveRequirement(regionReqs ?? null, "and") &&

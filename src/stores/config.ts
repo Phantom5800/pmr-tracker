@@ -78,13 +78,13 @@ const optionsData = {
 		namespace: "config",
 		name: "Background Color",
 		type: "color",
-		default: "#2f4f4f"
+		default: "rgb(50, 131, 180)"
 	},
 	sectionColor: {
 		namespace: "config",
 		name: "Section Color",
 		type: "color",
-		default: "#23233b"
+		default: "rgb(30, 49, 64)"
 	},
 	forestOpen: {
 		namespace: "settings",

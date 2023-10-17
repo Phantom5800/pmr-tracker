@@ -97,6 +97,7 @@ function getImageUrl(image: string) {
 					1 <= info.chapter &&
 					info.chapter <= 8) ||
 					(name in chapterRewardReqs &&
+						options.trackerLogic &&
 						playthroughStore.canCheckLocation(chapterRewardReqs[name])))
 		}"
 		@click="
