@@ -92,6 +92,12 @@ const optionsData = {
 		type: "color",
 		default: "#1e3140"
 	},
+	prologueOpen: {
+		namespace: "settings",
+		name: "Prologue Open",
+		type: "boolean",
+		default: true
+	},
 	forestOpen: {
 		namespace: "settings",
 		name: "Forever Forest Open",

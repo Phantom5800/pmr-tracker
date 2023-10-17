@@ -69,6 +69,9 @@ export default {
 	forestOpen(items: string[], settings: OptionsValues) {
 		return settings.forestOpen;
 	},
+	prologueOpen(items: string[], settings: OptionsValues) {
+		return settings.prologueOpen;
+	},
 	blueHouseOpen(items: string[], settings: OptionsValues) {
 		return settings.blueHouseOpen;
 	},
@@ -78,10 +81,6 @@ export default {
 	multipleItemCheck(item: string, quantity: number) {
 		return (items: string[], settings: OptionsValues) =>
 			items.filter((el) => el === item).length >= quantity;
-	},
-	gearShuffle(shuffle: string) {
-		return (items: string[], settings: OptionsValues) =>
-			settings.gearShuffle === shuffle;
 	},
 	shiverRegionAccess(items: string[], settings: OptionsValues) {
 		return (
