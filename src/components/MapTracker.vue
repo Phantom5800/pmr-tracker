@@ -158,10 +158,6 @@ button.map-select {
 	font-size: 0.9rem;
 }
 
-button:hover {
-	background-color: #5fcf80;
-}
-
 .map-buttons {
 	text-align: center;
 	margin: 0em 1em 1em 1em;
@@ -185,21 +181,42 @@ button.map-select.complete.selected {
 }
 
 button.selected {
-	background-color: #1e7438 !important;
+	background-color: #3aad5d !important;
 	border-color: black;
 }
 
 .map-areas {
 	display: grid;
+	gap: 2px;
 	justify-content: center;
-	grid-auto-rows: minmax(3rem, max-content);
-	grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+	grid-auto-columns: 5.3rem;
+	grid-auto-rows: 3.7rem;
+	grid-auto-flow: column;
 }
 
 button.map-area {
 	width: 100%;
+	height: 100%;
 	background-color: #ff818167;
 	font-size: 1rem;
+	border: 4px solid black;
+	border-radius: 8px;
+	word-wrap: normal;
+}
+
+button {
+	background-color: #ff818167;
+	font-size: 1rem;
+	border: 4px solid black;
+	border-radius: 8px;
+}
+
+button:hover {
+	background-color: #966666;
+}
+
+button.checksInLogic:hover {
+	background-color: #acdfc8;
 }
 
 button.checksInLogic {
@@ -234,6 +251,14 @@ div.map-label {
 }
 
 .map-checks li.available {
+	color: #e8e8e8;
+}
+
+.map-checks li:not(.disabled):hover {
+	color: #b0b0b0;
+}
+
+.map-checks li.available:not(.disabled):hover {
 	color: white;
 }
 

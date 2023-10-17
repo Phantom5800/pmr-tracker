@@ -3,7 +3,7 @@ import { useOptions } from "@/stores/config";
 
 const options = useOptions();
 
-const { widthRem } = defineProps<{ widthRem?: number }>();
+const { widthRem } = defineProps<{ widthRem?: number; resizable?: boolean }>();
 </script>
 
 <template>

@@ -84,11 +84,21 @@ h2 {
 
 div.grid {
 	display: grid;
-	grid-template-columns: repeat(8, minmax(0, 1fr));
+	/* flex-direction: row; */
+	/* flex-wrap: wrap; */
+	/* grid-template-columns: repeat(8, minmax(0, 1fr)); */
+	grid-template-columns: repeat(auto-fill, minmax(3.6rem, 1fr));
+	/* grid-auto-flow: column; */
 	gap: 1rem;
+	resize: horizontal;
 }
 
 div.grid-item {
-	height: 4rem;
+	aspect-ratio: 1;
+	/* min-width: 3.5rem;
+	max-width: 4rem; */
+	/* flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 0; */
 }
 </style>

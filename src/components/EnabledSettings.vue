@@ -59,7 +59,7 @@ function getImageUrl(image: string) {
 
 <style scoped>
 img {
-	height: 45px;
+	height: 4rem;
 }
 
 img.hide {
