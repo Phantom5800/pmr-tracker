@@ -1736,6 +1736,9 @@ const regionData: MapRegions = {
 					},
 					"Right ? Block": {
 						reqs: logic.canBreakGroundBlocks
+					},
+					"[Multicoin Block] Center of room": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -1763,6 +1766,9 @@ const regionData: MapRegions = {
 				checks: {
 					"[Foliage Coin] Tree": {
 						reqs: logic.canShakeTree
+					},
+					"[Multicoin Block] Block near tree": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -1820,6 +1826,18 @@ const regionData: MapRegions = {
 					}
 				}
 			},
+			"Seven Brick Blocks": {
+				row: 3,
+				col: 7,
+				checks: {
+					"[Multicoin Block] Second from right": {
+						reqs: logic.canBreakBlocksAbove
+					},
+					"[Multicoin Block] Third from right": {
+						reqs: logic.canBreakBlocksAbove
+					}
+				}
+			},
 			Tree: {
 				row: 3,
 				col: 8,
@@ -1836,6 +1854,15 @@ const regionData: MapRegions = {
 				checks: {
 					"Tree at camp location after saving Mamar": {
 						reqs: ["Mamar", logic.canShakeTree]
+					}
+				}
+			},
+			"South of Camp": {
+				row: 5,
+				col: 2,
+				checks: {
+					"[Multicoin Block] Center block": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -1957,6 +1984,15 @@ const regionData: MapRegions = {
 					}
 				}
 			},
+			"Three Brick Blocks": {
+				row: 6,
+				col: 4,
+				checks: {
+					"[Multicoin Block] Center block": {
+						reqs: logic.canBreakBlocksAbove
+					}
+				}
+			},
 			"Spin Attack": {
 				row: 5,
 				col: 7,
@@ -1993,6 +2029,9 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] Tree": {
 						reqs: logic.canShakeTree
+					},
+					"[Multicoin Block] Block near tree": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			},
@@ -2032,6 +2071,9 @@ const regionData: MapRegions = {
 				checks: {
 					"[Foliage Coin] Far right tree": {
 						reqs: logic.canShakeTree
+					},
+					"[Multicoin Block] Six Multicoin Blocks": {
+						reqs: logic.canBreakBlocksAbove
 					}
 				}
 			}
@@ -2047,16 +2089,13 @@ const regionData: MapRegions = {
 			{ row: 2, col: 8 },
 			{ row: 3, col: 3 },
 			{ row: 3, col: 5 },
-			{ row: 3, col: 7 },
 			{ row: 4, col: 3 },
 			{ row: 4, col: 4 },
-			{ row: 5, col: 2 },
 			{ row: 5, col: 3 },
 			{ row: 5, col: 4 },
 			{ row: 5, col: 6 },
 			{ row: 6, col: 2 },
 			{ row: 6, col: 3 },
-			{ row: 6, col: 4 },
 			{ row: 6, col: 5 },
 			{ row: 6, col: 6 },
 			{ row: 7, col: 2 },
