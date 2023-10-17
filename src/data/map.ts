@@ -864,7 +864,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
-							"Super Boots",
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -874,7 +874,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 2": {
 						reqs: [
-							"Super Boots",
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -884,7 +884,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 3": {
 						reqs: [
-							"Super Boots",
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -894,7 +894,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 4": {
 						reqs: [
-							"Super Boots",
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -904,7 +904,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] ? Block 5": {
 						reqs: [
-							"Super Boots",
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -3749,7 +3749,7 @@ const regionData: MapRegions = {
 	"Shiver Region": {
 		reqs: [
 			logic.canReachToadTown,
-			"Super Boots",
+			[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 			["Sushie", ["Odd Key", "Bombette"], [logic.blueHouseOpen, "Bombette"]]
 		],
 		areas: {

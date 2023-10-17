@@ -39,6 +39,9 @@ export default {
 			settings.seedsRequired
 		);
 	},
+	shiverBridgeVisible(items: string[], settings: OptionsValues) {
+		return settings.shiverBridgeVisible;
+	},
 	startingLocation(start: string) {
 		return (items: string[], settings: OptionsValues) =>
 			settings.startingLocation === start;
@@ -85,13 +88,6 @@ export default {
 	multipleItemCheck(item: string, quantity: number) {
 		return (items: string[], settings: OptionsValues) =>
 			items.filter((el) => el === item).length >= quantity;
-	},
-	shiverRegionAccess(items: string[], settings: OptionsValues) {
-		return (
-			(items.includes("Sushie") && items.includes("Super Boots")) ||
-			(items.includes("Bombette") &&
-				(settings.blueHouseOpen || items.includes("Odd Key")))
-		);
 	},
 	fastBowserCastle(items: string[], settings: OptionsValues) {
 		return settings.fastBowserCastle;

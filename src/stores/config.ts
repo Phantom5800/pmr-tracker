@@ -129,6 +129,12 @@ const optionsData = {
 		default: 4,
 		range: [0, 4]
 	},
+	shiverBridgeVisible: {
+		namespace: "settings",
+		name: "Ch.7 Bridge Visible",
+		type: "boolean",
+		default: false
+	},
 	blueHouseOpen: {
 		namespace: "settings",
 		name: "Blue House Open",
