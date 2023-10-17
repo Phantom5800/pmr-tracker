@@ -5,9 +5,8 @@
 		<div>Tracker Usage:</div>
 		<ul>
 			<li>
-				Make sure the tracker is configured exactly how you want it before
-				beginning. Changing some settings after marking off items may not update
-				certain parts of the tracker correctly.
+				Make sure to mark the Boots and Hammer if you start with them, as the
+				tracker assumes you don't.
 			</li>
 			<li>
 				Left clicking on any object toggles whether or not they are collected.
@@ -18,7 +17,7 @@
 			</li>
 			<li>
 				Star Spirits will highlight when all the requirements to acquire them
-				glitchlessly are met.
+				glitchlessly are met, as will the Star Rod.
 			</li>
 			<li>
 				Right clicking on a Star Spirit will increment a number from 1-7, that
@@ -27,25 +26,14 @@
 			</li>
 			<li>
 				Right clicking on various "optional" items will add a checkmark to them,
-				this can be used to signify that they have been turned in.
+				this can be used to signify that they have been turned in. This will
+				mark the respective checks in the map tracker as well.
 			</li>
 			<li>
-				Settings are expected to be configured before items are marked. Some
-				items or completion states may not update when changing settings.
-			</li>
-		</ul>
-	</div>
-	<div class="info-block">
-		<ul>
-			<li>
-				This site uses localstorage to remember your previously used settings!
-				Some browsers or plugins may disable this when you disable cookies as
-				well. This won't break anything, but you will have to manually re-enter
-				your settings each time.
-			</li>
-			<li>
-				If something looks weird, try force refreshing the page (Shift+F5 in
-				Windows browsers for example).
+				This site uses localstorage to remember your settings and progress! Some
+				browsers or plugins may disable this when you disable cookies as well.
+				This won't break anything, but you will have to manually re-enter your
+				settings each time and will lose progress if you refresh the page.
 			</li>
 			<li>
 				For suggestions and feature requests, please make issues on
@@ -70,5 +58,10 @@ div.info-block {
 	width: 34em;
 	margin: 10px 10px 10px 10px;
 	color: white;
+}
+ul {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 </style>

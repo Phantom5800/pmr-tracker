@@ -90,7 +90,7 @@ const allItemsFiltered = computed(() =>
 			:itemTypes="['miscItem']"
 		/>
 
-		<!-- <InfoBlocks /> -->
+		<InfoBlocks />
 		<ItemTracker
 			:all-items="allItemsFiltered"
 			heading="Letters"
