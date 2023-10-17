@@ -108,7 +108,11 @@ function getImageUrl(image: string) {
 		"
 		@contextmenu.prevent="
 			() => {
-				if (turnInCheck) {
+				if (name in chapterRewardReqs) {
+					playthroughStore.incrementSpiritAnnotation(
+						name as keyof typeof chapterRewardReqs
+					);
+				} else if (turnInCheck) {
 					const [checkArea, checkCheck] = turnInCheck.split(':');
 					playthroughStore.toggleCheck(checkArea, checkCheck);
 				} else if (powerStarNum || multiple || bootsOrHammer) {
@@ -118,7 +122,23 @@ function getImageUrl(image: string) {
 		"
 	>
 		<img :src="getImageUrl(derivedData.image)" :alt="name" />
-		<p class="label" v-if="label && options.colorblind">{{ label }}</p>
+		<p
+			class="label"
+			v-if="
+				(label && options.colorblind) ||
+				(name in chapterRewardReqs &&
+					playthroughStore.getSpiritAnnotation(
+						name as keyof typeof chapterRewardReqs
+					) > 0)
+			"
+		>
+			{{
+				label ||
+				playthroughStore.getSpiritAnnotation(
+					name as keyof typeof chapterRewardReqs
+				)
+			}}
+		</p>
 		<p class="checkmark" v-if="showCheck">✔</p>
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}

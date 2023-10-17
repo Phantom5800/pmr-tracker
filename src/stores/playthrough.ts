@@ -7,6 +7,16 @@ type PlaythroughProps = {
 	items: string[];
 	checks: string[];
 	notes: string;
+	spiritAnnotations: {
+		Eldstar: 0;
+		Mamar: 0;
+		Skolar: 0;
+		Muskular: 0;
+		Misstar: 0;
+		Klevar: 0;
+		Kalmar: 0;
+		"Star Rod": 0;
+	};
 };
 
 const fixedChapterRewards = [
@@ -31,11 +41,50 @@ const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
 // 	{}
 // );
 
-const init = { items: [], checks: [], notes: "", ...storagePlaythrough };
+const spiritAnnotations = {
+	Eldstar: 0,
+	Mamar: 0,
+	Skolar: 0,
+	Muskular: 0,
+	Misstar: 0,
+	Klevar: 0,
+	Kalmar: 0,
+	"Star Rod": 0
+};
+
+const init = {
+	items: [],
+	checks: [],
+	notes: "",
+	spiritAnnotations,
+	...storagePlaythrough
+};
 
 export const usePlaythrough = defineStore("playthrough", {
 	state: () => ({ ...init }),
 	actions: {
+		save() {
+			localStorage.setItem(
+				"playthrough",
+				JSON.stringify({
+					items: this.items,
+					checks: this.checks,
+					notes: this.notes,
+					spiritAnnotations: this.spiritAnnotations
+				})
+			);
+		},
+		getSpiritAnnotation(k: keyof PlaythroughProps["spiritAnnotations"]) {
+			return this.spiritAnnotations[k];
+		},
+		incrementSpiritAnnotation(k: keyof PlaythroughProps["spiritAnnotations"]) {
+			if (this.spiritAnnotations[k] >= 7) {
+				this.spiritAnnotations[k] = 0;
+			} else {
+				this.spiritAnnotations[k]++;
+			}
+			this.save();
+		},
 		toggleItem(item: string) {
 			if (this.items.includes(item)) {
 				this.items.splice(this.items.indexOf(item), 1);
@@ -49,28 +98,14 @@ export const usePlaythrough = defineStore("playthrough", {
 				}
 			}
 
-			localStorage.setItem(
-				"playthrough",
-				JSON.stringify({
-					items: this.items,
-					checks: this.checks,
-					notes: this.notes
-				})
-			);
+			this.save();
 		},
 		addItem(item: string | null, max: number = 1) {
 			if (item !== null) {
 				if (this.items.filter((el) => el === item).length < max) {
 					this.items.push(item);
 
-					localStorage.setItem(
-						"playthrough",
-						JSON.stringify({
-							items: this.items,
-							checks: this.checks,
-							notes: this.notes
-						})
-					);
+					this.save();
 				}
 			}
 		},
@@ -79,14 +114,7 @@ export const usePlaythrough = defineStore("playthrough", {
 				if (this.items.includes(item)) {
 					this.items.splice(this.items.indexOf(item), 1);
 
-					localStorage.setItem(
-						"playthrough",
-						JSON.stringify({
-							items: this.items,
-							checks: this.checks,
-							notes: this.notes
-						})
-					);
+					this.save();
 				}
 			}
 		},
@@ -118,14 +146,7 @@ export const usePlaythrough = defineStore("playthrough", {
 				}
 			}
 
-			localStorage.setItem(
-				"playthrough",
-				JSON.stringify({
-					items: this.items,
-					checks: this.checks,
-					notes: this.notes
-				})
-			);
+			this.save();
 		},
 		checkedLocation(area: string, check: string) {
 			const checkString = fixedChapterRewards.includes(check)
@@ -136,14 +157,7 @@ export const usePlaythrough = defineStore("playthrough", {
 		setNotes(notes: string) {
 			this.notes = notes;
 
-			localStorage.setItem(
-				"playthrough",
-				JSON.stringify({
-					items: this.items,
-					checks: this.checks,
-					notes: this.notes
-				})
-			);
+			this.save();
 		},
 		canCheckLocation(reqs: Requirements, region?: string) {
 			const options = useOptions();
@@ -195,10 +209,7 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.checks = [];
 			this.items = [];
 			this.notes = "";
-			localStorage.setItem(
-				"playthrough",
-				JSON.stringify({ checks: [], items: [], notes: "" })
-			);
+			this.save();
 		},
 		savePlaythrough() {
 			const saveData = JSON.stringify({
@@ -219,14 +230,7 @@ export const usePlaythrough = defineStore("playthrough", {
 						this.checks = saveData.checks;
 						this.items = saveData.items;
 						this.notes = saveData.notes;
-						localStorage.setItem(
-							"playthrough",
-							JSON.stringify({
-								items: this.items,
-								checks: this.checks,
-								notes: this.notes
-							})
-						);
+						this.save();
 					}
 				}
 			};
