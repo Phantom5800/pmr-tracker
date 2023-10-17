@@ -5,7 +5,7 @@ const optionsData = {
 		namespace: "config",
 		name: "Color Blind Labels",
 		type: "boolean",
-		default: false
+		default: true
 	},
 	highlightKey: {
 		namespace: "config",
@@ -35,7 +35,7 @@ const optionsData = {
 		namespace: "config",
 		name: "Combine Sort Mode",
 		type: "select",
-		default: "vanilla",
+		default: "Vanilla Acquired Order",
 		choices: ["Vanilla Acquired Order", "Required First"]
 	},
 	seedFlags: {
@@ -60,7 +60,7 @@ const optionsData = {
 		namespace: "config",
 		name: "Show Logic-Only Items",
 		type: "boolean",
-		default: false
+		default: true
 	},
 	recipeTooltips: {
 		namespace: "config",
@@ -78,13 +78,13 @@ const optionsData = {
 		namespace: "config",
 		name: "Background Color",
 		type: "color",
-		default: "rgb(50, 131, 180)"
+		default: "#3283b4"
 	},
 	sectionColor: {
 		namespace: "config",
 		name: "Section Color",
 		type: "color",
-		default: "rgb(30, 49, 64)"
+		default: "#1e3140"
 	},
 	forestOpen: {
 		namespace: "settings",
