@@ -3,7 +3,7 @@ import { type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
 import { saveAs } from "file-saver";
 
-type PlaythroughProps = {
+export type PlaythroughProps = {
 	items: string[];
 	checks: string[];
 	notes: string;

@@ -5,6 +5,7 @@ import { computed } from "vue";
 import { chapterRewardReqs } from "@/data/map";
 import type { TrackableItemInfo } from "@/types/items";
 import { useOptions } from "../stores/config";
+import type { PlaythroughProps } from "../stores/playthrough";
 
 const playthroughStore = usePlaythrough();
 const optionsStore = useOptions();
@@ -110,7 +111,7 @@ function getImageUrl(image: string) {
 			() => {
 				if (name in chapterRewardReqs) {
 					playthroughStore.incrementSpiritAnnotation(
-						name as keyof typeof chapterRewardReqs
+						name as keyof PlaythroughProps['spiritAnnotations']
 					);
 				} else if (turnInCheck) {
 					const [checkArea, checkCheck] = turnInCheck.split(':');
@@ -128,14 +129,14 @@ function getImageUrl(image: string) {
 				(label && options.colorblind) ||
 				(name in chapterRewardReqs &&
 					playthroughStore.getSpiritAnnotation(
-						name as keyof typeof chapterRewardReqs
+						name as keyof PlaythroughProps['spiritAnnotations']
 					) > 0)
 			"
 		>
 			{{
 				label ||
 				playthroughStore.getSpiritAnnotation(
-					name as keyof typeof chapterRewardReqs
+					name as keyof PlaythroughProps["spiritAnnotations"]
 				)
 			}}
 		</p>
