@@ -163,7 +163,6 @@ div.tracker-item {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	image-rendering: crisp-edges;
 	position: relative;
 }
 
