@@ -98,6 +98,12 @@ const optionsData = {
 		type: "boolean",
 		default: true
 	},
+	mtRuggedOpen: {
+		namespace: "settings",
+		name: "Mt. Rugged Open",
+		type: "boolean",
+		default: false
+	},
 	forestOpen: {
 		namespace: "settings",
 		name: "Forever Forest Open",

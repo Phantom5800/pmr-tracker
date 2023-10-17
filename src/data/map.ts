@@ -1702,7 +1702,7 @@ const regionData: MapRegions = {
 	"Mt. Rugged": {
 		reqs: [
 			[
-				[logic.canReachToadTown, "Bombette"],
+				[logic.canReachToadTown, ["Bombette", logic.mtRuggedOpen]],
 				[logic.desertAccess, logic.canClimbLedges]
 			]
 		],

@@ -61,7 +61,8 @@ export default {
 					(items.includes("Boots") || items.includes("Parakarry"))) ||
 				(settings.startingLocation === "Yoshi Village" &&
 					(items.includes("Watt") || settings.whaleOpen))) &&
-				((items.includes("Bombette") && items.includes("Parakarry")) ||
+				(((items.includes("Bombette") || settings.mtRuggedOpen) &&
+					items.includes("Parakarry")) ||
 					((items.includes("Boots") || items.includes("Parakarry")) &&
 						items.includes("Super Hammer"))))
 		);
@@ -71,6 +72,9 @@ export default {
 	},
 	prologueOpen(items: string[], settings: OptionsValues) {
 		return settings.prologueOpen;
+	},
+	mtRuggedOpen(items: string[], settings: OptionsValues) {
+		return settings.mtRuggedOpen;
 	},
 	blueHouseOpen(items: string[], settings: OptionsValues) {
 		return settings.blueHouseOpen;
