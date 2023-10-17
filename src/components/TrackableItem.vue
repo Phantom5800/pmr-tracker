@@ -11,6 +11,7 @@ const optionsStore = useOptions();
 const { info, shrink } = defineProps<{
 	info: TrackableItemInfo;
 	shrink?: boolean;
+	hoverTooltip?: string;
 }>();
 
 const { name, image, multiple, label, show, turnInCheck } = info;
@@ -85,6 +86,7 @@ function getImageUrl(image: string) {
 <template>
 	<div
 		v-if="show === undefined || show(options)"
+		class="tracker-item"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
 			shrink: shrink,
@@ -115,11 +117,15 @@ function getImageUrl(image: string) {
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
+		<div class="hover-tip" v-if="hoverTooltip">
+			{{ hoverTooltip }}
+			<div class="down-arrow"></div>
+		</div>
 	</div>
 </template>
 
 <style scoped>
-div {
+div.tracker-item {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -153,6 +159,36 @@ p.checkmark {
 	color: #00dd00;
 	stroke: 1px black;
 	-webkit-text-stroke: 1px black;
+}
+
+div.tracker-item div.hover-tip {
+	position: absolute;
+	top: 0;
+	translate: 0 -50%;
+	scale: 0;
+	transition: all 0.15s;
+	pointer-events: none;
+	background-color: #101020;
+	padding: 0.5rem 1rem;
+	width: 20rem;
+	border-radius: 8px;
+	z-index: 10;
+}
+
+div.tracker-item:hover div.hover-tip {
+	translate: 0 -115%;
+	scale: 100%;
+}
+
+.down-arrow {
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #101020;
+	position: absolute;
+	left: 50%;
+	translate: -50% 0;
 }
 
 .shrink > img {

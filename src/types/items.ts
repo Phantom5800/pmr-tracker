@@ -9,4 +9,5 @@ export type TrackableItemInfo = {
 	type: string;
 	show?: (settings: OptionsValues) => boolean;
 	turnInCheck?: string;
+	hoverTooltip?: string;
 };

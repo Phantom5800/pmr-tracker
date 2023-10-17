@@ -60,7 +60,7 @@ function equipmentTooltip(item: string) {
 					@mouseover="tooltipRef = equipmentTooltip(item.name)"
 					@mouseout="tooltipRef = ''"
 				>
-					<TrackableItem :info="item" />
+					<TrackableItem :info="item" :hover-tooltip="item.hoverTooltip" />
 				</div>
 			</div>
 		</slot>

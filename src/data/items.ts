@@ -460,12 +460,15 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Rip Cheato",
 		type: "miscItem",
 		image: "icons/RipCheato.png",
-		multiple: 11
+		multiple: 11,
+		hoverTooltip: "Total coins needed: 188"
 	},
 	{
 		name: "Anti Guy",
 		type: "miscItem",
-		image: "icons/Anti_Guy_Sprite_-_Paper_Mario.png"
+		image: "icons/Anti_Guy_Sprite_-_Paper_Mario.png",
+		hoverTooltip:
+			"Not in logic until Lemon Candy can be made (Cake Mix + Lemon)"
 	},
 	{
 		turnInCheck: "Central Plaza:[Letter] Merlon",
@@ -630,7 +633,8 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck:
 			"Koopa Village East:[Koot] Give Koopa Koot a Sleepy Sheep (second item)",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_SleepySheep.png"
+		image: "koopa-koot-favors/PaperMario_Items_SleepySheep.png",
+		hoverTooltip: "Recipe: Red/Yellow/Blue Berry + Strange Leaf"
 	},
 
 	{
@@ -644,7 +648,8 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Koopa Tea",
 		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot Koopa Tea",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_KoopaTea.png"
+		image: "koopa-koot-favors/PaperMario_Items_KoopaTea.png",
+		hoverTooltip: "Recipe: Koopa Leaf"
 	},
 
 	{
@@ -666,7 +671,9 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Tasty Tonic",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Tasty Tonic",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_TastyTonic.png"
+		image: "koopa-koot-favors/PaperMario_Items_TastyTonic.png",
+		hoverTooltip:
+			"Recipe: Red/Yellow/Blue Berry + Honey Syrup, OR Lime, Lemon, Bubble Berry or Coconut"
 	},
 
 	{
@@ -689,14 +696,17 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck:
 			"Koopa Village East:[Koot] Give Koopa Koot a Life Shroom (second item)",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_LifeShroom.png"
+		image: "koopa-koot-favors/PaperMario_Items_LifeShroom.png",
+		hoverTooltip:
+			"Recipe: Super Shroom (or better) + Koopa Leaf, Goomnut or Strange Leaf"
 	},
 
 	{
 		name: "Nutty Cake",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Nutty Cake",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_NuttyCake.png"
+		image: "koopa-koot-favors/PaperMario_Items_NuttyCake.png",
+		hoverTooltip: "Recipe: Goomnut"
 	},
 
 	{
@@ -710,7 +720,8 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Koopasta",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot Koopasta",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_Koopasta.png"
+		image: "koopa-koot-favors/PaperMario_Items_Koopasta.png",
+		hoverTooltip: "Recipe: Koopa Leaf + Dried Pasta"
 	},
 
 	{
@@ -732,7 +743,8 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck:
 			"Koopa Village East:[Koot Coin] Give Koopa Koot a Kooky Cookie",
 		type: "kootFavor",
-		image: "koopa-koot-favors/PaperMario_Items_KookyCookie.png"
+		image: "koopa-koot-favors/PaperMario_Items_KookyCookie.png",
+		hoverTooltip: "Recipe: Cake Mix + Koopa Leaf, Stinky Herb or Maple Syrup"
 	},
 
 	{
