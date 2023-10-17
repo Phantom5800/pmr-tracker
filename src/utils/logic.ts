@@ -13,13 +13,13 @@ export default {
 				(items.includes("Watt") || settings.whaleOpen))
 		);
 	},
-	canClimbLedges(items: string[], settings: OptionsValues) {
+	canClimbLedges(items: string[], _: OptionsValues) {
 		return items.includes("Boots") || items.includes("Parakarry");
 	},
-	canBreakBlocksAbove(items: string[], settings: OptionsValues) {
+	canBreakBlocksAbove(items: string[], _: OptionsValues) {
 		return items.includes("Boots") || items.includes("Kooper");
 	},
-	canBreakGroundBlocks(items: string[], settings: OptionsValues) {
+	canBreakGroundBlocks(items: string[], _: OptionsValues) {
 		return (
 			items.includes("Hammer") ||
 			items.includes("Kooper") ||
@@ -27,10 +27,10 @@ export default {
 			items.includes("Super Boots")
 		);
 	},
-	canShakeTree(items: string[], settings: OptionsValues) {
+	canShakeTree(items: string[], _: OptionsValues) {
 		return items.includes("Hammer") || items.includes("Bombette");
 	},
-	canFlipPanel(items: string[], settings: OptionsValues) {
+	canFlipPanel(items: string[], _: OptionsValues) {
 		return items.includes("Super Boots") || items.includes("Ultra Hammer");
 	},
 	chapter6Entry(items: string[], settings: OptionsValues) {
@@ -52,7 +52,7 @@ export default {
 			(items.includes("Bow") || settings.toyboxOpen)
 		);
 	},
-	canMoveStations(items: string[], settings: OptionsValues) {
+	canMoveStations(items: string[], _: OptionsValues) {
 		return items.includes("Toy Train") && items.includes("Boots");
 	},
 	desertAccess(items: string[], settings: OptionsValues) {
@@ -86,7 +86,7 @@ export default {
 		return settings.whaleOpen;
 	},
 	multipleItemCheck(item: string, quantity: number) {
-		return (items: string[], settings: OptionsValues) =>
+		return (items: string[], _: OptionsValues) =>
 			items.filter((el) => el === item).length >= quantity;
 	},
 	fastBowserCastle(items: string[], settings: OptionsValues) {

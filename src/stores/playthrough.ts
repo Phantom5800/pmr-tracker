@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { allRegions, type Requirements, getRegionData } from "../data/map";
+import { type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
 import { saveAs } from "file-saver";
 
@@ -147,7 +147,6 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		canCheckLocation(reqs: Requirements, region?: string) {
 			const options = useOptions();
-			console.log(options.$state);
 			if (!options.$state.options.trackerLogic) {
 				return true;
 			}
@@ -213,7 +212,6 @@ export const usePlaythrough = defineStore("playthrough", {
 		loadPlaythrough(file: File) {
 			const reader = new FileReader();
 			reader.onload = (e) => {
-				console.log(e.target?.result);
 				const contents = e.target?.result;
 				if (typeof contents === "string") {
 					const saveData = JSON.parse(contents);

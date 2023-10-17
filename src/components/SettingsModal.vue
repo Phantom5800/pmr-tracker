@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { useOptions } from "@/stores/config";
 import { usePlaythrough } from "@/stores/playthrough";
-import { storeToRefs, defineStore } from "pinia";
 import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
 import axios from "axios";
 import { vOnClickOutside } from "@vueuse/components";
+import type { OptionsValues } from "@/stores/config";
 
-const optionsStore = useOptions();
 const playthroughStore = usePlaythrough();
-
-const { options } = storeToRefs(optionsStore);
 
 const importButton = ref<HTMLInputElement | null>(null);
 const seedToLoad = ref("0");
@@ -18,7 +14,7 @@ const showingSeedSettings = ref(false);
 
 const props = defineProps<{
 	isOpen: boolean;
-	optionsKeys: string[];
+	optionsKeys: (keyof OptionsValues)[];
 	close: () => void;
 }>();
 
@@ -69,13 +65,15 @@ function fetchSeedSettings(id: string) {
 					ref="importButton"
 					:style="{ display: 'none' }"
 					@change="
-						(e) =>
-							playthroughStore.loadPlaythrough(
-								(<HTMLInputElement>e.target).files[0]
-							)
+						(e) => {
+							const file = (e.target as HTMLInputElement).files;
+							if (file && file.length > 0) {
+								playthroughStore.loadPlaythrough(file[0]);
+							}
+						}
 					"
 				/>
-				<button @click="importButton.click()">Import</button>
+				<button @click="importButton && importButton.click()">Import</button>
 			</div>
 		</div>
 		<hr />

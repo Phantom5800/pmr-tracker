@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import ItemTracker from "./ItemTracker.vue";
-import { TrackableItemInfo } from "../types/items";
+import type { TrackableItemInfo } from "../types/items";
 
 const tooltip = ref("");
 const playthrough = usePlaythrough();
@@ -42,6 +41,7 @@ function equipmentTooltip(item: string) {
 			<div
 				class="gridrow"
 				v-for="chapter in [1, 2, 3, 4, 5, 6, 7, 8, 16, 0, -1]"
+				:key="chapter"
 			>
 				<TrackableItem
 					v-for="(item, index) in requiredItems.filter(

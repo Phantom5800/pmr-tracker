@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
-import { allRegions, getChecks, getRegionData } from "../data/map";
+import { allRegions, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
 import { useOptions } from "@/stores/config";
 
@@ -26,7 +26,7 @@ function areaHasChecksInLogic(pRegion: string, area: string): boolean {
 function areaFullCleared(pRegion: string, area: string): boolean {
 	const checks = getRegionData(pRegion).areas[area].checks;
 	return Object.entries(checks).every(
-		([checkName, check]) =>
+		([checkName, _]) =>
 			!playthrough.locationIsRandomized(checkName) ||
 			playthrough.checkedLocation(area, checkName)
 	);
@@ -52,7 +52,7 @@ const unshuffledChecks = computed(() =>
 </script>
 
 <template>
-	<component is="style">
+	<component :is="'style'">
 		button { font-weight:
 		{{ options.$state.options.paperMarioFont ? "normal" : "bold" }};
 		letter-spacing:

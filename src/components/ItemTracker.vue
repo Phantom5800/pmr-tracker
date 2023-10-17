@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { ref, computed, toRef, watch, toRefs } from "vue";
+import { ref, computed, toRefs } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import type { TrackableItemInfo } from "../types/items.ts";
@@ -33,6 +33,7 @@ const uselessItems = [
 const trackerItems = computed(() => {
 	const filteredItems = props.allItems.filter(
 		(el) =>
+			itemTypes.value &&
 			itemTypes.value &&
 			itemTypes.value.includes(el.type) &&
 			(options.$state.options.uselessItems || !uselessItems.includes(el.name))

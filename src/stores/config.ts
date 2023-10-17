@@ -1,5 +1,33 @@
 import { defineStore } from "pinia";
 
+type OptionData =
+	| {
+			namespace: "config" | "settings";
+			name: string;
+			type: "boolean";
+			default: boolean;
+	  }
+	| {
+			namespace: "config" | "settings";
+			name: string;
+			type: "number";
+			range: [number, number];
+			default: number;
+	  }
+	| {
+			namespace: "config" | "settings";
+			name: string;
+			type: "select";
+			default: string;
+			choices: string[];
+	  }
+	| {
+			namespace: "config" | "settings";
+			name: string;
+			type: "color";
+			default: string;
+	  };
+
 const optionsData = {
 	colorblind: {
 		namespace: "config",
@@ -270,7 +298,7 @@ const optionsData = {
 	// 	default: "vanilla",
 	// 	choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
 	// }
-};
+} satisfies Record<string, OptionData>;
 
 export type OptionsValues = {
 	[key in keyof typeof optionsData]: (typeof optionsData)[key]["default"];
@@ -286,22 +314,23 @@ const defaultOptions: OptionsValues = Object.getOwnPropertyNames(
 	optionsData
 ).reduce(
 	(a, v) => ({ ...a, [v]: optionsData[v as keyof typeof optionsData].default }),
-	{}
+	{} as OptionsValues
 );
 
-const init = { ...defaultOptions, ...storageOptions };
+const init: OptionsValues = { ...defaultOptions, ...storageOptions };
 
 export const useOptions = defineStore("options", {
-	state: () => ({ options: { ...init } }),
+	state: () => ({ options: init }),
 	actions: {
-		toggle(key: keyof typeof optionsData) {
-			if (optionsData[key].type === "boolean") {
-				this.options[key] = !this.options[key];
+		toggle(key: keyof OptionsValues) {
+			const data: OptionData = optionsData[key];
+			if (data.type === "boolean") {
+				(this.options[key] as boolean) = !this.options[key];
 				localStorage.setItem("options", JSON.stringify(this.options));
 			}
 		},
-		setValue(key: keyof typeof optionsData, value: unknown) {
-			this.options[key] = value;
+		setValue(key: keyof typeof optionsData, value: string | number | boolean) {
+			(this.options[key] as string | number | boolean) = value;
 			localStorage.setItem("options", JSON.stringify(this.options));
 		},
 		getName(key: keyof typeof optionsData) {
@@ -313,22 +342,29 @@ export const useOptions = defineStore("options", {
 		getValue(key: keyof typeof optionsData) {
 			return this.options[key];
 		},
-		getRange(key: keyof typeof optionsData) {
-			return optionsData[key].range;
+		getRange(key: keyof typeof optionsData): [number, number] {
+			const data: OptionData = optionsData[key];
+			if (data.type === "number") {
+				return data.range;
+			} else {
+				return [0, 0];
+			}
 		},
 		getChoices(key: keyof typeof optionsData) {
-			if (optionsData[key].type === "select") {
-				return optionsData[key].choices;
+			const data: OptionData = optionsData[key];
+			if (data.type === "select") {
+				return data.choices;
 			}
 		}
 	}
 });
 
 export const settingsKeys = Object.getOwnPropertyNames(optionsData).filter(
-	(option) => optionsData[option].namespace === "settings"
-);
+	(k) => optionsData[k as keyof typeof optionsData].namespace === "settings"
+) as (keyof OptionsValues)[];
+
 export const configKeys = Object.getOwnPropertyNames(optionsData).filter(
-	(option) => optionsData[option].namespace === "config"
-);
+	(k) => optionsData[k as keyof typeof optionsData].namespace === "config"
+) as (keyof OptionsValues)[];
 
 export type OptionsStore = typeof useOptions;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
-import { computed, toRefs } from "vue";
+import { computed } from "vue";
 import { chapterRewardReqs } from "@/data/map";
 import type { TrackableItemInfo } from "@/types/items";
 import { useOptions } from "../stores/config";
@@ -94,6 +94,7 @@ function getImageUrl(image: string) {
 				!playthroughStore.hasItem(name) &&
 				((info.type === 'required' &&
 					options.highlightKey &&
+					info.chapter &&
 					1 <= info.chapter &&
 					info.chapter <= 8) ||
 					(name in chapterRewardReqs &&

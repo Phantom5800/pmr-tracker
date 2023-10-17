@@ -1,38 +1,13 @@
 <script setup lang="ts">
-import { useOptions } from "@/stores/config";
-import { usePlaythrough } from "@/stores/playthrough";
-import { storeToRefs, defineStore } from "pinia";
-import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
-import axios from "axios";
 import { vOnClickOutside } from "@vueuse/components";
-
-const optionsStore = useOptions();
-
-const { options } = storeToRefs(optionsStore);
+import type { OptionsValues } from "@/stores/config";
 
 const props = defineProps<{
 	isOpen: boolean;
-	optionsKeys: string[];
+	optionsKeys: (keyof OptionsValues)[];
 	close: () => void;
 }>();
-
-function fetchSeedSettings(id: string) {
-	axios
-		.get(
-			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`,
-			{
-				headers: {
-					Accept: "application/json",
-					Origin: "https://pmr-tracker.phantom-games.com",
-					Referer: "https://pmr-tracker.phantom-games.com/"
-				}
-			}
-		)
-		.then((result) => {
-			console.log(result);
-		});
-}
 </script>
 
 <template>

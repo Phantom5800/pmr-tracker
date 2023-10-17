@@ -2,11 +2,12 @@
 import TrackerPanel from "./TrackerPanel.vue";
 import { useOptions } from "@/stores/config";
 import { storeToRefs } from "pinia";
+import type { OptionsValues } from "@/stores/config";
 
 const optionsStore = useOptions();
 const { options } = storeToRefs(optionsStore);
 
-const settings = [
+const settings: { id: keyof OptionsValues; src: string }[] = [
 	{ id: "shopsRandomized", src: "flags/HarryTPM.png" },
 	{ id: "rowfRandomized", src: "flags/Rowf.png" },
 	{ id: "merlowRandomized", src: "flags/Merlow.png" },

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import Main from "./components/Main.vue";
-import MenuOptions from "./components/MenuOptions.vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import { configKeys, settingsKeys } from "./stores/config";
@@ -37,7 +35,7 @@ function closeSettingsDelay() {
 </script>
 
 <template>
-	<component is="style">
+	<component :is="'style'">
 		html, body { background: {{ options.backgroundColor }}; font-family:
 		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};font-size:
 		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }

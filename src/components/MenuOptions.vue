@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useOptions } from "@/stores/config";
-import { storeToRefs, defineStore } from "pinia";
+import { storeToRefs } from "pinia";
 import { computed } from "vue";
+import type { OptionsValues } from "@/stores/config";
 
 const optionsStore = useOptions();
 
 const { options } = storeToRefs(optionsStore);
 
 const props = defineProps<{
-	optionsKeys: string[];
+	optionsKeys: (keyof OptionsValues)[];
 }>();
 
 function showKey(key: string) {
@@ -22,23 +23,12 @@ function showKey(key: string) {
 const keysToShow = computed(() =>
 	props.optionsKeys.filter((el) => showKey(el))
 );
-
-function clamp(num: number, range?: [number, number]): number {
-	return range === undefined
-		? num
-		: num < range[0]
-		? range[0]
-		: num > range[1]
-		? range[1]
-		: num;
-}
 </script>
 
 <template>
 	<div class="flex">
 		<div
 			v-for="key in keysToShow"
-			v-if="showKey(key)"
 			class="flex-row"
 			:key="key"
 			@click="
@@ -58,7 +48,7 @@ function clamp(num: number, range?: [number, number]): number {
 						:id="key"
 						type="checkbox"
 						:name="key"
-						:checked="options[key]"
+						:checked="options[key] as boolean"
 					/>
 					<div class="checkbox-groove"></div>
 					<!-- <label class="checkbox-slider" :for="key"></label> -->
@@ -68,7 +58,13 @@ function clamp(num: number, range?: [number, number]): number {
 				<select
 					:name="key"
 					:id="key"
-					@change="(event) => optionsStore.setValue(key, event.target.value)"
+					@change="
+						(event) =>
+							optionsStore.setValue(
+								key,
+								(event.target as HTMLSelectElement).value
+							)
+					"
 				>
 					<option
 						v-for="option in optionsStore.getChoices(key)"
@@ -88,7 +84,13 @@ function clamp(num: number, range?: [number, number]): number {
 					:value="options[key]"
 					:min="optionsStore.getRange(key)[0]"
 					:max="optionsStore.getRange(key)[1]"
-					@change="(event) => optionsStore.setValue(key, event.target.value)"
+					@change="
+						(event) =>
+							optionsStore.setValue(
+								key,
+								(event.target as HTMLInputElement).value
+							)
+					"
 				/>
 			</div>
 			<div v-else-if="optionsStore.getType(key) === 'color'">
@@ -97,7 +99,13 @@ function clamp(num: number, range?: [number, number]): number {
 					:id="key"
 					type="color"
 					:value="options[key]"
-					@change="(event) => optionsStore.setValue(key, event.target.value)"
+					@change="
+						(event) =>
+							optionsStore.setValue(
+								key,
+								(event.target as HTMLInputElement).value
+							)
+					"
 				/>
 			</div>
 		</div>
