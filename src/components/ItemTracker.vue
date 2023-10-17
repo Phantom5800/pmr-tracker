@@ -4,6 +4,7 @@ import { ref, computed, toRef, watch, toRefs } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
 import type { TrackableItemInfo } from "../types/items.ts";
+import { useOptions } from "../stores/config";
 
 const props = defineProps<{
 	heading: string;
@@ -15,6 +16,7 @@ const props = defineProps<{
 const tooltipRef = ref("");
 
 const playthrough = usePlaythrough();
+const options = useOptions();
 
 const { heading, itemTypes } = toRefs(props);
 
@@ -22,10 +24,16 @@ const trackerItems = computed(() => {
 	const filteredItems = props.allItems.filter(
 		(el) => itemTypes.value && itemTypes.value.includes(el.type)
 	);
-	return filteredItems.sort(
+	if (options.$state.options.combineSortMode === "Required First") {
+		filteredItems.sort(
+			(a, b) => Number(b.type === "required") - Number(a.type === "required")
+		);
+	}
+	filteredItems.sort(
 		(a, b) =>
 			Number(b.type === "chapterReward") - Number(a.type === "chapterReward")
 	);
+	return filteredItems;
 });
 
 function equipmentTooltip(item: string) {
