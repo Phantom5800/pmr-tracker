@@ -110,11 +110,13 @@ function closeSettingsDelay() {
 
 		<ItemTracker
 			:all-items="allItemsFiltered"
+			v-if="options.lettersRandomized"
 			heading="Letters"
 			:itemTypes="['letter']"
 		/>
 		<ItemTracker
 			:all-items="allItemsFiltered"
+			v-if="options.koopaKootRandomized"
 			heading="Koopa Koot Favors"
 			:itemTypes="['kootFavor']"
 		/>
