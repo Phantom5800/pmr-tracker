@@ -91,9 +91,13 @@ function getImageUrl(image: string) {
 			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
 			shrink: shrink,
 			glow:
-				name in chapterRewardReqs &&
 				!playthroughStore.hasItem(name) &&
-				playthroughStore.canCheckLocation(chapterRewardReqs[name])
+				((info.type === 'required' &&
+					options.highlightKey &&
+					1 <= info.chapter &&
+					info.chapter <= 8) ||
+					(name in chapterRewardReqs &&
+						playthroughStore.canCheckLocation(chapterRewardReqs[name])))
 		}"
 		@click="
 			powerStarNum || multiple || bootsOrHammer
@@ -112,7 +116,7 @@ function getImageUrl(image: string) {
 		"
 	>
 		<img :src="getImageUrl(derivedData.image)" :alt="name" />
-		<p class="label" v-if="label">{{ label }}</p>
+		<p class="label" v-if="label && options.colorblind">{{ label }}</p>
 		<p class="checkmark" v-if="showCheck">✔</p>
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}

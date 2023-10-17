@@ -11,7 +11,7 @@ const optionsData = {
 		namespace: "config",
 		name: "Highlight Important Items",
 		type: "boolean",
-		default: true
+		default: false
 	},
 	trackerLogic: {
 		namespace: "config",
