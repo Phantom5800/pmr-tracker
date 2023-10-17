@@ -7,7 +7,7 @@ import InfoBlocks from "./components/InfoBlocks.vue";
 import { configKeys, settingsKeys } from "./stores/config";
 import MapTracker from "./components/MapTracker.vue";
 import ItemTracker from "./components/ItemTracker.vue";
-import Notes from "./components/Notes.vue";
+import UserNotes from "./components/UserNotes.vue";
 import RequiredTracker from "./components/RequiredTracker.vue";
 import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
@@ -93,7 +93,7 @@ function closeSettingsDelay() {
 				"
 			/>
 		</div>
-		<Notes v-if="options.userNotes" />
+		<UserNotes v-if="options.userNotes" />
 		<MapTracker v-if="options.gameMaps" />
 		<ItemTracker
 			v-if="!options.compactTracker || !options.combineMisc"

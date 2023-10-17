@@ -6,7 +6,7 @@
 		<ul>
 			<li>
 				Make sure to mark the Boots and Hammer if you start with them, as the
-				tracker assumes you don't.
+				tracker assumes you don't. Set your starting location also!
 			</li>
 			<li>
 				Left clicking on any object toggles whether or not they are collected.
