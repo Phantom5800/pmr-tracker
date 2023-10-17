@@ -2,14 +2,14 @@
 import { usePlaythrough } from "@/stores/playthrough";
 import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
-import axios from "axios";
+// import axios from "axios";
 import { vOnClickOutside } from "@vueuse/components";
 import type { OptionsValues } from "@/stores/config";
 
 const playthroughStore = usePlaythrough();
 
 const importButton = ref<HTMLInputElement | null>(null);
-const seedToLoad = ref("0");
+// const seedToLoad = ref("0");
 const showingSeedSettings = ref(false);
 
 const props = defineProps<{
@@ -18,22 +18,28 @@ const props = defineProps<{
 	close: () => void;
 }>();
 
-function fetchSeedSettings(id: string) {
-	axios
-		.get(
-			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`,
-			{
-				headers: {
-					Accept: "application/json",
-					Origin: "https://pmr-tracker.phantom-games.com",
-					Referer: "https://pmr-tracker.phantom-games.com/"
-				}
-			}
-		)
-		.then((result) => {
-			console.log(result);
-		});
+function doWithPrompt(prompt: string, fn: () => void): void {
+	if (confirm(prompt)) {
+		fn();
+	}
 }
+
+// function fetchSeedSettings(id: string) {
+// 	axios
+// 		.get(
+// 			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`,
+// 			{
+// 				headers: {
+// 					Accept: "application/json",
+// 					Origin: "https://pmr-tracker.phantom-games.com",
+// 					Referer: "https://pmr-tracker.phantom-games.com/"
+// 				}
+// 			}
+// 		)
+// 		.then((result) => {
+// 			console.log(result);
+// 		});
+// }
 </script>
 
 <template>
@@ -48,32 +54,46 @@ function fetchSeedSettings(id: string) {
 		"
 	>
 		<div class="flex">
-			<div class="flex-row">
+			<!-- <div class="flex-row">
 				<div>Import Seed</div>
 				<input type="text" v-model="seedToLoad" />
 				<button @click="fetchSeedSettings(seedToLoad)">Load</button>
-			</div>
+			</div> -->
 			<div class="flex-row">
 				<div>Reset Tracker</div>
-				<button @click="playthroughStore.resetPlaythrough()">Reset</button>
+				<button
+					@click="
+						doWithPrompt(
+							'This will reset your current progress! Proceed?',
+							playthroughStore.resetPlaythrough
+						)
+					"
+				>
+					Reset
+				</button>
 			</div>
 			<div class="flex-row">
 				<div>Saved Progress</div>
-				<button @click="playthroughStore.savePlaythrough()">Export</button>
-				<input
-					type="file"
-					ref="importButton"
-					:style="{ display: 'none' }"
-					@change="
-						(e) => {
-							const file = (e.target as HTMLInputElement).files;
-							if (file && file.length > 0) {
-								playthroughStore.loadPlaythrough(file[0]);
+				<div>
+					<button @click="playthroughStore.savePlaythrough()">Export</button>
+					<input
+						type="file"
+						ref="importButton"
+						:style="{ display: 'none' }"
+						@change="
+							(e) => {
+								const file = (e.target as HTMLInputElement).files;
+								if (file && file.length > 0) {
+									doWithPrompt(
+										'This will reset your current progress! Proceed?',
+										() => playthroughStore.loadPlaythrough(file[0])
+									);
+								}
 							}
-						}
-					"
-				/>
-				<button @click="importButton && importButton.click()">Import</button>
+						"
+					/>
+					<button @click="importButton && importButton.click()">Import</button>
+				</div>
 			</div>
 		</div>
 		<hr />
