@@ -154,6 +154,7 @@ p.label {
 	font-size: 2rem;
 	stroke: 1px black;
 	-webkit-text-stroke: 1px black;
+	font-weight: bold;
 }
 
 p.checkmark {

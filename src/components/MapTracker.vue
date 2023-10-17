@@ -3,8 +3,10 @@ import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
 import { allRegions, getChecks, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
+import { useOptions } from "@/stores/config";
 
 const playthrough = usePlaythrough();
+const options = useOptions();
 
 const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
@@ -50,6 +52,12 @@ const unshuffledChecks = computed(() =>
 </script>
 
 <template>
+	<component is="style">
+		button { font-weight:
+		{{ options.$state.options.paperMarioFont ? "normal" : "bold" }};
+		letter-spacing:
+		{{ options.$state.options.paperMarioFont ? "normal" : "-0.07rem" }}}
+	</component>
 	<TrackerPanel :width-rem="60">
 		<div class="map-buttons">
 			<button
@@ -154,7 +162,7 @@ button {
 button.map-select {
 	width: auto;
 	height: 2em;
-	font-size: 0.9rem;
+	font-size: 1rem;
 }
 
 .map-buttons {
@@ -201,6 +209,7 @@ button.map-area {
 	border: 4px solid black;
 	border-radius: 8px;
 	word-wrap: normal;
+	padding: 0;
 }
 
 button {
