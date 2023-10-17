@@ -64,13 +64,16 @@ function getImageUrl(image: string) {
 div.flex {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	gap: 4px;
 	width: 100%;
 }
 
 img {
 	object-fit: contain;
-	max-height: 4rem;
-	flex-grow: 1;
+	/* aspect-ratio: 1; */
+	height: 2.75rem;
+	/* max-height: 3rem; */
 }
 
 img.hide {

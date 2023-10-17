@@ -122,7 +122,11 @@ function getImageUrl(image: string) {
 			}
 		"
 	>
-		<img :src="getImageUrl(derivedData.image)" :alt="name" />
+		<img
+			:src="getImageUrl(derivedData.image)"
+			:alt="name"
+			:style="{ marginBottom: powerStarNum || multiple ? '1.5rem' : 0 }"
+		/>
 		<p
 			class="label"
 			v-if="
@@ -177,6 +181,14 @@ p.label {
 	stroke: 1px black;
 	-webkit-text-stroke: 1px black;
 	font-weight: bold;
+}
+
+p.count {
+	font-size: 1.75rem;
+	stroke: 1px black;
+	-webkit-text-stroke: 1px black;
+	position: absolute;
+	bottom: 0;
 }
 
 p.checkmark {
