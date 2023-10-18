@@ -11,8 +11,8 @@ const playthrough = usePlaythrough();
 const props = defineProps<{ allItems: TrackableItemInfo[] }>();
 
 const requiredItems = computed(() =>
-	props.allItems.filter(
-		(el) => el.type === "required" || el.type === "chapterReward"
+	props.allItems.filter((el) =>
+		["chapterReward", "partner", "equipment", "required"].includes(el.type)
 	)
 );
 
@@ -49,7 +49,7 @@ function equipmentTooltip(item: string) {
 					)"
 					:key="item.name"
 					:info="item"
-					:shrink="1 <= chapter && chapter <= 8 && index > 0"
+					:size="1 <= chapter && chapter <= 8 && index > 0 ? '55%' : '100%'"
 					@click="tooltip = equipmentTooltip(item.name)"
 					@contextmenu="tooltip = equipmentTooltip(item.name)"
 					@mouseover="tooltip = equipmentTooltip(item.name)"

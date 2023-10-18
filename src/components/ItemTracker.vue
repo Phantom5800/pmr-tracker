@@ -82,7 +82,15 @@ function equipmentTooltip(item: string) {
 					@mouseover="tooltipRef = equipmentTooltip(item.name)"
 					@mouseout="tooltipRef = ''"
 				>
-					<TrackableItem :info="item" :hover-tooltip="item.hoverTooltip" />
+					<TrackableItem
+						:info="item"
+						:hover-tooltip="item.hoverTooltip"
+						:size="
+							['chapterReward', 'partner', 'equipment'].includes(item.type)
+								? '100%'
+								: '75%'
+						"
+					/>
 				</div>
 			</div>
 		</slot>

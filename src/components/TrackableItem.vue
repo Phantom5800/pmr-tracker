@@ -9,9 +9,9 @@ import type { PlaythroughProps } from "../stores/playthrough";
 
 const playthroughStore = usePlaythrough();
 const optionsStore = useOptions();
-const { info, shrink } = defineProps<{
+const { info, size, hoverTooltip } = defineProps<{
 	info: TrackableItemInfo;
-	shrink?: boolean;
+	size: string;
 	hoverTooltip?: string;
 }>();
 
@@ -90,7 +90,6 @@ function getImageUrl(image: string) {
 		class="tracker-item"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
-			shrink: shrink,
 			glow:
 				!playthroughStore.hasItem(name) &&
 				((info.type === 'required' &&
@@ -125,7 +124,11 @@ function getImageUrl(image: string) {
 		<img
 			:src="getImageUrl(derivedData.image)"
 			:alt="name"
-			:style="{ marginBottom: powerStarNum || multiple ? '1.5rem' : 0 }"
+			:style="{
+				marginBottom: powerStarNum || multiple ? '1.5rem' : 0,
+				width: size,
+				height: size
+			}"
 		/>
 		<p
 			class="label"
@@ -232,8 +235,8 @@ div.tracker-item:hover div.hover-tip {
 }
 
 .shrink > img {
-	width: 60%;
-	height: 60%;
+	width: 70%;
+	height: 70%;
 }
 .fade > img {
 	filter: grayscale(1) brightness(50%);

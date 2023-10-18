@@ -55,74 +55,74 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		chapter: 16,
 		name: "Power Stars Found",
-		type: "required",
+		type: "chapterReward",
 		image: "icons/Power_Star.png",
 		show: logic.powerStarHunt
 	},
 	{
 		chapter: -1,
 		name: "Goombario",
-		type: "required",
+		type: "partner",
 		image: "partners/goombario.png"
 	},
 	{
 		chapter: -1,
 		name: "Kooper",
-		type: "required",
+		type: "partner",
 		image: "partners/kooper.png"
 	},
 	{
 		chapter: -1,
 		name: "Bombette",
-		type: "required",
+		type: "partner",
 		image: "partners/bombette.png"
 	},
 	{
 		chapter: -1,
 		name: "Parakarry",
-		type: "required",
+		type: "partner",
 		image: "partners/parakarr.png"
 	},
 	{
 		chapter: -1,
 		name: "Bow",
-		type: "required",
+		type: "partner",
 		image: "partners/bow.png"
 	},
 	{
 		chapter: -1,
 		name: "Watt",
-		type: "required",
+		type: "partner",
 		image: "partners/watt.png"
 	},
 	{
 		chapter: -1,
 		name: "Sushie",
-		type: "required",
+		type: "partner",
 		image: "partners/sushie.png"
 	},
 	{
 		chapter: -1,
 		name: "Lakilester",
-		type: "required",
+		type: "partner",
 		image: "partners/lakilester.png"
 	},
 	{
 		chapter: 0,
 		name: "Boots",
-		type: "required",
+		type: "equipment",
 		image: "upgrades/PM_Boots.png"
 	},
 	{
 		chapter: 0,
 		name: "Hammer",
-		type: "required",
+		type: "equipment",
 		image: "upgrades/PM_Hammer.png"
 	},
 	{
 		chapter: 0,
 		name: "Ultra Stone",
-		type: "required",
+		type: "equipment",
 		image: "icons/UltraStone.gif"
 	},
 	{

@@ -86,8 +86,15 @@ function closeSettingsDelay() {
 				"
 				:itemTypes="
 					options.combineMisc
-						? ['required', 'chapterReward', 'miscItem', 'miscKey']
-						: ['required', 'chapterReward']
+						? [
+								'required',
+								'chapterReward',
+								'equipment',
+								'partner',
+								'miscItem',
+								'miscKey'
+						  ]
+						: ['required', 'chapterReward', 'equipment', 'partner']
 				"
 			/>
 		</div>
