@@ -14,6 +14,7 @@ const optionsStore = useOptions();
 const importButton = ref<HTMLInputElement | null>(null);
 const seedToLoad = ref("0");
 const showingSeedSettings = ref(false);
+const loadingApiResponse = ref(false);
 
 const props = defineProps<{
 	isOpen: boolean;
@@ -68,7 +69,11 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 }
 
 function fetchSeedSettings(id: string) {
+	if (loadingApiResponse.value) {
+		return;
+	}
 	if (confirm("Are you sure you want to overwrite your randomizer settings?")) {
+		loadingApiResponse.value = true;
 		axios
 			.get(
 				`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
@@ -100,6 +105,9 @@ function fetchSeedSettings(id: string) {
 					);
 					console.error(err);
 				}
+			})
+			.finally(() => {
+				loadingApiResponse.value = false;
 			});
 	}
 }
@@ -119,8 +127,14 @@ function fetchSeedSettings(id: string) {
 		<div class="flex">
 			<div class="flex-row">
 				<div>Import Seed</div>
-				<input type="text" v-model="seedToLoad" />
-				<button @click="fetchSeedSettings(seedToLoad)">Load</button>
+				<form @submit.prevent="fetchSeedSettings(seedToLoad)" class="flex-row">
+					<input
+						type="text"
+						v-model="seedToLoad"
+						:disabled="loadingApiResponse"
+					/>
+					<button :disabled="loadingApiResponse">Load</button>
+				</form>
 			</div>
 			<div class="flex-row">
 				<div>Reset Tracker</div>
@@ -137,7 +151,7 @@ function fetchSeedSettings(id: string) {
 			</div>
 			<div class="flex-row">
 				<div>Saved Progress</div>
-				<div>
+				<div class="flex-row">
 					<button @click="playthroughStore.savePlaythrough()">Export</button>
 					<input
 						type="file"
@@ -206,6 +220,7 @@ div.flex-row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 }
 
 button {
@@ -216,6 +231,10 @@ button {
 	background-color: white;
 	border: 2px solid black;
 	padding-inline: 1rem;
+}
+
+button:disabled {
+	background-color: gray;
 }
 
 input {
