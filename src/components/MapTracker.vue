@@ -196,8 +196,8 @@ button.selected {
 	display: grid;
 	gap: 2px;
 	justify-content: center;
-	grid-auto-columns: 5.3rem;
-	grid-auto-rows: 3.7rem;
+	grid-auto-columns: minmax(5.3rem, min-content);
+	grid-auto-rows: minmax(3.7rem, min-content);
 	grid-auto-flow: column;
 }
 
@@ -208,8 +208,8 @@ button.map-area {
 	font-size: 1rem;
 	border: 4px solid black;
 	border-radius: 8px;
+	padding: 0.2rem 0.5rem;
 	word-wrap: normal;
-	padding: 0;
 }
 
 button {
