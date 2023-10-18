@@ -12,30 +12,38 @@ import { storeToRefs } from "pinia";
 import SettingsModal from "./components/SettingsModal.vue";
 import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
-import { GridLayout } from "grid-layout-plus";
+import { GridLayout, GridItem } from "grid-layout-plus";
 
 const layout = reactive([
-	{ x: 0, y: 0, w: 2, h: 2, i: "0", static: false },
-	{ x: 1, y: 0, w: 2, h: 4, i: "1", static: false }
-	// { x: 4, y: 0, w: 2, h: 5, i: "2", static: false },
-	// { x: 6, y: 0, w: 2, h: 3, i: "3", static: false },
-	// { x: 8, y: 0, w: 2, h: 3, i: "4", static: false },
-	// { x: 10, y: 0, w: 2, h: 3, i: "5", static: false },
-	// { x: 0, y: 5, w: 2, h: 5, i: "6", static: false },
-	// { x: 2, y: 5, w: 2, h: 5, i: "7", static: false },
-	// { x: 4, y: 5, w: 2, h: 5, i: "8", static: false },
-	// { x: 6, y: 3, w: 2, h: 4, i: "9", static: true },
-	// { x: 8, y: 4, w: 2, h: 4, i: "10", static: false },
-	// { x: 10, y: 4, w: 2, h: 4, i: "11", static: false },
-	// { x: 0, y: 10, w: 2, h: 5, i: "12", static: false },
-	// { x: 2, y: 10, w: 2, h: 5, i: "13", static: false },
-	// { x: 4, y: 8, w: 2, h: 4, i: "14", static: false },
-	// { x: 6, y: 8, w: 2, h: 4, i: "15", static: false },
-	// { x: 8, y: 10, w: 2, h: 5, i: "16", static: false },
-	// { x: 10, y: 4, w: 2, h: 2, i: "17", static: false },
-	// { x: 0, y: 9, w: 2, h: 3, i: "18", static: false },
-	// { x: 2, y: 6, w: 2, h: 2, i: "19", static: false }
+	{ x: 0, y: 0, w: 6, h: 2, i: "map", static: false },
+	{ x: 1, y: 1, w: 6, h: 4, i: "notes", static: false },
+	{ x: 1, y: 2, w: 6, h: 4, i: "info", static: false },
+	{ x: 1, y: 3, w: 6, h: 4, i: "flags", static: false },
+	{ x: 1, y: 4, w: 6, h: 4, i: "required", static: false },
+	{ x: 1, y: 5, w: 6, h: 4, i: "miscitem", static: false },
+	{ x: 1, y: 6, w: 6, h: 4, i: "misckey", static: false },
+	{ x: 1, y: 7, w: 6, h: 4, i: "letters", static: false },
+	{ x: 1, y: 8, w: 6, h: 4, i: "koot", static: false },
+	{ x: 1, y: 9, w: 6, h: 4, i: "compact", static: false }
 ]);
+
+const filteredLayout = computed(() => {
+	return layout.filter(
+		(el) =>
+			({
+				map: options.value.gameMaps,
+				notes: options.value.userNotes,
+				info: options.value.howToFields,
+				flags: options.value.seedFlags,
+				required: !options.value.compactTracker,
+				miscitem: !(options.value.compactTracker || options.value.combineMisc),
+				misckey: !(options.value.compactTracker || options.value.combineMisc),
+				letters: options.value.lettersRandomized,
+				koot: options.value.koopaKootRandomized,
+				compact: options.value.compactTracker
+			})[el.i]
+	);
+});
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -96,69 +104,68 @@ function closeSettingsDelay() {
 	</header>
 
 	<main>
-		<div class="flex-col">
-			<EnabledSettings v-if="options.seedFlags" />
-			<RequiredTracker
-				v-if="!options.compactTracker"
-				:all-items="allItemsFiltered"
-			/>
-			<ItemTracker
-				v-if="options.compactTracker"
-				:all-items="allItemsFiltered"
-				:heading="
-					options.combineMisc ? 'Basically Everything' : 'Required Items'
-				"
-				:itemTypes="
-					options.combineMisc
-						? [
-								'required',
-								'chapterReward',
-								'equipment',
-								'partner',
-								'miscItem',
-								'miscKey'
-						  ]
-						: ['required', 'chapterReward', 'equipment', 'partner']
-				"
-			/>
-		</div>
+		<div class="flex-col"></div>
 		<GridLayout
-			v-model:layout="layout"
-			:auto-size="true"
+			v-model:layout="filteredLayout"
 			:vertical-compact="true"
 			:is-resizable="true"
+			:auto-size="true"
 		>
 			<template #item="{ item }">
-				<UserNotes v-if="options.userNotes && item.i === '0'" />
-				<MapTracker v-if="options.gameMaps && item.i === '1'" />
+				<EnabledSettings v-if="item.i === 'flags'" />
+				<RequiredTracker
+					v-if="item.i === 'required'"
+					:all-items="allItemsFiltered"
+				/>
+				<ItemTracker
+					v-if="item.i === 'compact'"
+					:all-items="allItemsFiltered"
+					:heading="
+						options.combineMisc ? 'Basically Everything' : 'Required Items'
+					"
+					:itemTypes="
+						options.combineMisc
+							? [
+									'required',
+									'chapterReward',
+									'equipment',
+									'partner',
+									'miscItem',
+									'miscKey'
+							  ]
+							: ['required', 'chapterReward', 'equipment', 'partner']
+					"
+				/>
+				<UserNotes v-if="item.i === 'notes'" />
+				<MapTracker v-if="item.i === 'map'" />
+				<ItemTracker
+					v-if="item.i === 'misckey'"
+					:all-items="allItemsFiltered"
+					heading="Misc. Keys"
+					:itemTypes="['miscKey']"
+				/>
+				<ItemTracker
+					v-if="item.i === 'miscitem'"
+					:all-items="allItemsFiltered"
+					heading="Misc. Items"
+					:itemTypes="['miscItem']"
+				/>
+
+				<ItemTracker
+					:all-items="allItemsFiltered"
+					v-if="item.i === 'letters'"
+					heading="Letters"
+					:itemTypes="['letter']"
+				/>
+				<ItemTracker
+					:all-items="allItemsFiltered"
+					v-if="item.i === 'koot'"
+					heading="Koopa Koot Favors"
+					:itemTypes="['kootFavor']"
+				/>
+				<InfoBlocks v-if="item.i === 'info'" />
 			</template>
 		</GridLayout>
-		<ItemTracker
-			v-if="!options.compactTracker || !options.combineMisc"
-			:all-items="allItemsFiltered"
-			heading="Misc. Keys"
-			:itemTypes="['miscKey']"
-		/>
-		<ItemTracker
-			v-if="!options.compactTracker || !options.combineMisc"
-			:all-items="allItemsFiltered"
-			heading="Misc. Items"
-			:itemTypes="['miscItem']"
-		/>
-
-		<ItemTracker
-			:all-items="allItemsFiltered"
-			v-if="options.lettersRandomized"
-			heading="Letters"
-			:itemTypes="['letter']"
-		/>
-		<ItemTracker
-			:all-items="allItemsFiltered"
-			v-if="options.koopaKootRandomized"
-			heading="Koopa Koot Favors"
-			:itemTypes="['kootFavor']"
-		/>
-		<InfoBlocks v-if="options.howToFields" />
 
 		<!-- <GridLayout v-model:layout="layout" :row-height="30">
 			<template #item="{ item }">
