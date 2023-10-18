@@ -58,7 +58,7 @@ const unshuffledChecks = computed(() =>
 		letter-spacing:
 		{{ options.$state.options.paperMarioFont ? "normal" : "-0.07rem" }}}
 	</component>
-	<TrackerPanel :width-rem="60">
+	<TrackerPanel>
 		<div class="map-buttons">
 			<button
 				class="map-select"

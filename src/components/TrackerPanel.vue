@@ -28,6 +28,7 @@ div {
 	border-radius: 10px;
 	float: left;
 	text-align: center;
-	width: 40rem;
+	width: 100%;
+	height: 100%;
 }
 </style>
