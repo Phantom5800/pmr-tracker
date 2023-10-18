@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { usePlaythrough } from "@/stores/playthrough";
+import { useOptions } from "@/stores/config";
 import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
-// import axios from "axios";
+import axios from "axios";
 import { vOnClickOutside } from "@vueuse/components";
 import type { OptionsValues } from "@/stores/config";
+import type { SettingsApiData } from "@/types/settings";
 
 const playthroughStore = usePlaythrough();
+const optionsStore = useOptions();
 
 const importButton = ref<HTMLInputElement | null>(null);
-// const seedToLoad = ref("0");
+const seedToLoad = ref("0");
 const showingSeedSettings = ref(false);
 
 const props = defineProps<{
@@ -24,22 +27,82 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	}
 }
 
-// function fetchSeedSettings(id: string) {
-// 	axios
-// 		.get(
-// 			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`,
-// 			{
-// 				headers: {
-// 					Accept: "application/json",
-// 					Origin: "https://pmr-tracker.phantom-games.com",
-// 					Referer: "https://pmr-tracker.phantom-games.com/"
-// 				}
-// 			}
-// 		)
-// 		.then((result) => {
-// 			console.log(result);
-// 		});
-// }
+function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
+	optionsStore.setValue("blueHouseOpen", data.BlueHouseOpen);
+	optionsStore.setValue("coinBlocksRandomized", data.IncludeCoinsBlocks);
+	optionsStore.setValue("coinsRandomized", data.IncludeCoinsOverworld);
+	optionsStore.setValue("dojoRandomized", data.IncludeDojo);
+	optionsStore.setValue("fastBowserCastle", data.BowsersCastleMode >= 1);
+	optionsStore.setValue("foliageCoinsRandomized", data.IncludeCoinsFoliage);
+	optionsStore.setValue("forestOpen", data.ForeverForestOpen);
+	optionsStore.setValue("keysRandomized", data.KeyitemsOutsideDungeon);
+	optionsStore.setValue("koopaKootRandomized", data.IncludeFavorsMode >= 1);
+	optionsStore.setValue("kootCoinsRandomized", data.IncludeCoinsFavors);
+	optionsStore.setValue("lettersRandomized", data.IncludeLettersMode >= 1);
+	optionsStore.setValue("merlowRandomized", data.ProgressionOnMerlow);
+	optionsStore.setValue("mtRuggedOpen", data.MtRuggedOpen);
+	optionsStore.setValue("multicoinBlocksRandomized", data.ShuffleBlocks);
+	optionsStore.setValue("panelsRandomized", data.IncludePanels);
+	optionsStore.setValue("powerStarHunt", data.StarHunt);
+	optionsStore.setValue("powerStarNum", data.StarHuntRequired);
+	optionsStore.setValue("prologueOpen", data.PrologueOpen);
+	optionsStore.setValue("rowfRandomized", data.ProgressionOnRowf);
+	optionsStore.setValue("sSkip", data.StarHuntEndsGame);
+	optionsStore.setValue("seedsRequired", data.MagicalSeedsRequired);
+	optionsStore.setValue("shiverBridgeVisible", data.Ch7BridgeVisible);
+	optionsStore.setValue("shopsRandomized", data.IncludeShops);
+	optionsStore.setValue(
+		"startingLocation",
+		{
+			65796: "Toad Town",
+			257: "Goomba Village",
+			590080: "Dry Dry Outpost",
+			1114882: "Yoshi Village",
+			4294967295: "Toad Town" // default to Toad Town if Random Pick
+		}[data.StartingMap.toString()]
+	);
+	optionsStore.setValue("superBlocksRandomized", data.ShuffleBlocks);
+	optionsStore.setValue("toyboxOpen", data.ToyboxOpen);
+	optionsStore.setValue("tradingEventRandomized", data.IncludeRadioTradeEvent);
+	optionsStore.setValue("whaleOpen", data.WhaleOpen);
+}
+
+function fetchSeedSettings(id: string) {
+	if (confirm("Are you sure you want to overwrite your randomizer settings?")) {
+		axios
+			.get(
+				`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
+			)
+			.then((result) => {
+				if (result && result.data) {
+					setRandomizerSettingsFromApiResponse(result.data);
+				} else {
+					alert(
+						`Unknown error - please see the browser console and report this!`
+					);
+					console.error(result);
+				}
+			})
+			.catch((err) => {
+				if (axios.isAxiosError(err) && err.response.status === 404) {
+					alert(
+						`Could not find seed ${id}. Ensure it is correct and try again.`
+					);
+				} else if (
+					axios.isAxiosError(err) &&
+					err.response.status.toString().startsWith("5")
+				) {
+					alert(`Server error (code ${err.code})`);
+					console.error(err);
+				} else {
+					alert(
+						`Unknown error - please see the browser console and report this!`
+					);
+					console.error(err);
+				}
+			});
+	}
+}
 </script>
 
 <template>
@@ -54,11 +117,11 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 		"
 	>
 		<div class="flex">
-			<!-- <div class="flex-row">
+			<div class="flex-row">
 				<div>Import Seed</div>
 				<input type="text" v-model="seedToLoad" />
 				<button @click="fetchSeedSettings(seedToLoad)">Load</button>
-			</div> -->
+			</div>
 			<div class="flex-row">
 				<div>Reset Tracker</div>
 				<button
