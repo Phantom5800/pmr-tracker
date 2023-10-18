@@ -60,7 +60,7 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 			590080: "Dry Dry Outpost",
 			1114882: "Yoshi Village",
 			4294967295: "Toad Town" // default to Toad Town if Random Pick
-		}[data.StartingMap.toString()]
+		}[data.StartingMap.toString()] as string
 	);
 	optionsStore.setValue("superBlocksRandomized", data.ShuffleBlocks);
 	optionsStore.setValue("toyboxOpen", data.ToyboxOpen);
@@ -89,12 +89,17 @@ function fetchSeedSettings(id: string) {
 				}
 			})
 			.catch((err) => {
-				if (axios.isAxiosError(err) && err.response.status === 404) {
+				if (
+					axios.isAxiosError(err) &&
+					err.response &&
+					err.response.status === 404
+				) {
 					alert(
 						`Could not find seed ${id}. Ensure it is correct and try again.`
 					);
 				} else if (
 					axios.isAxiosError(err) &&
+					err.response &&
 					err.response.status.toString().startsWith("5")
 				) {
 					alert(`Server error (code ${err.code})`);
