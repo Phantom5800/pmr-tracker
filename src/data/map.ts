@@ -116,7 +116,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Furthest left bush": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges]
@@ -125,7 +125,7 @@ const regionData: MapRegions = {
 					},
 					"Far right tree": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges]
@@ -134,7 +134,7 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] 2 more trees": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges]
@@ -143,7 +143,7 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] 6 more bushes": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges]
@@ -152,7 +152,7 @@ const regionData: MapRegions = {
 					},
 					"[Multicoin Block] Block on ground": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges]
@@ -192,7 +192,7 @@ const regionData: MapRegions = {
 					},
 					"[Coin Block] Far left ? Block": {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]]
@@ -201,7 +201,7 @@ const regionData: MapRegions = {
 					},
 					Tree: {
 						reqs: [
-							"Hammer",
+							["Hammer", "Bombette"],
 							[
 								logic.startingLocation("Goomba Village"),
 								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]]
