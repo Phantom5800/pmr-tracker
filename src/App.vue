@@ -15,16 +15,24 @@ import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 
 const layout = reactive([
-	{ x: 0, y: 0, w: 6, h: 2, i: "map", static: false },
-	{ x: 1, y: 1, w: 6, h: 4, i: "notes", static: false },
-	{ x: 1, y: 2, w: 6, h: 4, i: "info", static: false },
-	{ x: 1, y: 3, w: 6, h: 4, i: "flags", static: false },
-	{ x: 1, y: 4, w: 6, h: 4, i: "required", static: false },
-	{ x: 1, y: 5, w: 6, h: 4, i: "miscitem", static: false },
-	{ x: 1, y: 6, w: 6, h: 4, i: "misckey", static: false },
-	{ x: 1, y: 7, w: 6, h: 4, i: "letters", static: false },
-	{ x: 1, y: 8, w: 6, h: 4, i: "koot", static: false },
-	{ x: 1, y: 9, w: 6, h: 4, i: "compact", static: false }
+	{ x: 0, y: 0, w: 36, h: 3, i: "flags", static: false, minH: 3 },
+	{
+		x: 0,
+		y: 1,
+		w: 40,
+		h: 31,
+		i: "required",
+		static: false,
+		isResizable: false
+	},
+	{ x: 0, y: 1, w: 40, h: 31, i: "compact", static: false },
+	{ x: 4, y: 0, w: 60, h: 4, i: "notes", static: false },
+	{ x: 4, y: 0, w: 60, h: 29, i: "map", static: false },
+	{ x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
+	{ x: 1, y: 5, w: 60, h: 4, i: "miscitem", static: false },
+	{ x: 1, y: 6, w: 60, h: 4, i: "misckey", static: false },
+	{ x: 1, y: 7, w: 60, h: 4, i: "letters", static: false },
+	{ x: 1, y: 8, w: 60, h: 4, i: "koot", static: false }
 ]);
 
 const filteredLayout = computed(() => {
@@ -36,8 +44,8 @@ const filteredLayout = computed(() => {
 				info: options.value.howToFields,
 				flags: options.value.seedFlags,
 				required: !options.value.compactTracker,
-				miscitem: !(options.value.compactTracker || options.value.combineMisc),
-				misckey: !(options.value.compactTracker || options.value.combineMisc),
+				miscitem: !options.value.compactTracker,
+				misckey: !options.value.compactTracker,
 				letters: options.value.lettersRandomized,
 				koot: options.value.koopaKootRandomized,
 				compact: options.value.compactTracker
@@ -104,14 +112,24 @@ function closeSettingsDelay() {
 	</header>
 
 	<main>
-		<div class="flex-col"></div>
 		<GridLayout
 			v-model:layout="filteredLayout"
 			:vertical-compact="true"
-			:is-resizable="true"
 			:auto-size="true"
+			:row-height="16"
+			:responsive="true"
+			:cols="{ lg: 120, md: 100, sm: 60, xs: 40, xxs: 20 }"
 		>
-			<template #item="{ item }">
+			<GridItem
+				v-for="item in filteredLayout"
+				:key="item.i"
+				:x="item.x"
+				:y="item.y"
+				:w="item.w"
+				:h="item.h"
+				:i="item.i"
+				drag-allow-from=".drag-handle"
+			>
 				<EnabledSettings v-if="item.i === 'flags'" />
 				<RequiredTracker
 					v-if="item.i === 'required'"
@@ -164,16 +182,8 @@ function closeSettingsDelay() {
 					:itemTypes="['kootFavor']"
 				/>
 				<InfoBlocks v-if="item.i === 'info'" />
-			</template>
+			</GridItem>
 		</GridLayout>
-
-		<!-- <GridLayout v-model:layout="layout" :row-height="30">
-			<template #item="{ item }">
-				<span class="text">{{
-					`${item.i}${item.static ? "- Static" : ""}`
-				}}</span>
-			</template>
-		</GridLayout> -->
 	</main>
 
 	<ConfigModal
