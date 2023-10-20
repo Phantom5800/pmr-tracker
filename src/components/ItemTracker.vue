@@ -39,8 +39,14 @@ const trackerItems = computed(() => {
 			(options.$state.options.uselessItems || !uselessItems.includes(el.name))
 	);
 	if (options.$state.options.combineSortMode === "Required First") {
+		const sortOrder: Record<string, number> = {
+			chapterReward: 0,
+			partner: 1,
+			equipment: 2,
+			required: 3
+		};
 		filteredItems.sort(
-			(a, b) => Number(b.type === "required") - Number(a.type === "required")
+			(a, b) => (sortOrder[a.type] ?? 9999) - (sortOrder[b.type] ?? 9999)
 		);
 	}
 	filteredItems.sort(
