@@ -152,12 +152,12 @@ function getImageUrl(image: string) {
 		<p class="checkmark" v-if="showCheck">✔</p>
 		<div class="upgrades" v-if="info.type === 'partner'">
 			<img
-				:src="'src/assets/images/koopa-koot-favors/Crystal_Ball_PM.png'"
+				:src="getImageUrl('koopa-koot-favors/Crystal_Ball_PM.png')"
 				alt=""
 				v-if="playthroughStore.hasItem(`${name}:super`)"
 			/>
 			<img
-				:src="'src/assets/images/icons/UltraStone.gif'"
+				:src="getImageUrl('icons/UltraStone.gif')"
 				alt=""
 				v-if="playthroughStore.hasItem(`${name}:ultra`)"
 			/>
