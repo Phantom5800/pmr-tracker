@@ -55,6 +55,7 @@ const filteredLayout = computed(() => {
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
+const moving = ref(false);
 
 const optionsStore = useOptions();
 
@@ -95,6 +96,7 @@ function closeSettingsDelay() {
 				<div class="hamburger-2"></div>
 				<div class="hamburger-3"></div>
 			</div>
+			<button @click="moving = !moving">Edit Layout</button>
 			<img id="logo-img" src="./assets/images/Logo.png" />
 		</div>
 		<div
@@ -129,13 +131,16 @@ function closeSettingsDelay() {
 				:h="item.h"
 				:i="item.i"
 				drag-allow-from=".drag-handle"
+				:is-resizable="moving"
 			>
-				<EnabledSettings v-if="item.i === 'flags'" />
+				<EnabledSettings :moving="moving" v-if="item.i === 'flags'" />
 				<RequiredTracker
+					:moving="moving"
 					v-if="item.i === 'required'"
 					:all-items="allItemsFiltered"
 				/>
 				<ItemTracker
+					:moving="moving"
 					v-if="item.i === 'compact'"
 					:all-items="allItemsFiltered"
 					:heading="
@@ -154,15 +159,17 @@ function closeSettingsDelay() {
 							: ['required', 'chapterReward', 'equipment', 'partner']
 					"
 				/>
-				<UserNotes v-if="item.i === 'notes'" />
-				<MapTracker v-if="item.i === 'map'" />
+				<UserNotes :moving="moving" v-if="item.i === 'notes'" />
+				<MapTracker :moving="moving" v-if="item.i === 'map'" />
 				<ItemTracker
+					:moving="moving"
 					v-if="item.i === 'misckey'"
 					:all-items="allItemsFiltered"
 					heading="Misc. Keys"
 					:itemTypes="['miscKey']"
 				/>
 				<ItemTracker
+					:moving="moving"
 					v-if="item.i === 'miscitem'"
 					:all-items="allItemsFiltered"
 					heading="Misc. Items"
@@ -170,12 +177,14 @@ function closeSettingsDelay() {
 				/>
 
 				<ItemTracker
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					v-if="item.i === 'letters'"
 					heading="Letters"
 					:itemTypes="['letter']"
 				/>
 				<ItemTracker
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					v-if="item.i === 'koot'"
 					heading="Koopa Koot Favors"

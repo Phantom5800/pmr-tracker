@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { ref, computed } from "vue";
+import { ref, computed, defineProps } from "vue";
 import { allRegions, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
 import { useOptions } from "@/stores/config";
 
 const playthrough = usePlaythrough();
 const options = useOptions();
+
+const { moving } = defineProps<{ moving: boolean }>();
 
 const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
@@ -58,7 +60,7 @@ const unshuffledChecks = computed(() =>
 		letter-spacing:
 		{{ options.$state.options.paperMarioFont ? "normal" : "-0.07rem" }}}
 	</component>
-	<TrackerPanel>
+	<TrackerPanel :moving="moving">
 		<div class="map-buttons">
 			<button
 				class="map-select"

@@ -11,6 +11,7 @@ const props = defineProps<{
 	tooltip?: string;
 	itemTypes?: string[];
 	allItems: TrackableItemInfo[];
+	moving: boolean;
 }>();
 
 const tooltipRef = ref("");
@@ -66,11 +67,13 @@ function equipmentTooltip(item: string) {
 </script>
 
 <template>
-	<TrackerPanel>
-		<div class="flex-header">
-			<h2>{{ heading }}</h2>
-			<span>{{ props.tooltip || tooltipRef }}</span>
-		</div>
+	<TrackerPanel :moving="moving">
+		<template #header>
+			<div class="flex-header">
+				<h2>{{ heading }}</h2>
+				<span>{{ props.tooltip || tooltipRef }}</span>
+			</div>
+		</template>
 		<slot>
 			<div class="grid">
 				<div
