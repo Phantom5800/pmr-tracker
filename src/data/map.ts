@@ -1,4 +1,4 @@
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 import logic from "../utils/logic";
 import { has3Letters } from "@/utils/letterLogic";
 
@@ -7,7 +7,7 @@ export type Requirements =
 	| number
 	| string
 	| boolean
-	| ((items: string[], settings: OptionsValues) => boolean)
+	| ((items: string[], settings: Options) => boolean)
 	| Requirements[];
 type Coords = { row: number; col: number; rowSpan?: number; colSpan?: number };
 type Area = Coords & {

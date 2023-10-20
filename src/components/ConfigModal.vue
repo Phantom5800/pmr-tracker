@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import MenuOptions from "./MenuOptions.vue";
 import { vOnClickOutside } from "@vueuse/components";
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 
 const props = defineProps<{
 	isOpen: boolean;
-	optionsKeys: (keyof OptionsValues)[];
+	optionsKeys: (keyof Options)[];
 	close: () => void;
 }>();
 </script>

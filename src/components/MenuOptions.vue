@@ -2,14 +2,14 @@
 import { useOptions } from "@/stores/config";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 
 const optionsStore = useOptions();
 
 const { options } = storeToRefs(optionsStore);
 
 const props = defineProps<{
-	optionsKeys: (keyof OptionsValues)[];
+	optionsKeys: (keyof Options)[];
 }>();
 
 function showKey(key: string) {

@@ -5,7 +5,7 @@ import { ref } from "vue";
 import MenuOptions from "./MenuOptions.vue";
 import axios from "axios";
 import { vOnClickOutside } from "@vueuse/components";
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 import type { SettingsApiData } from "@/types/settings";
 
 const playthroughStore = usePlaythrough();
@@ -18,7 +18,7 @@ const loadingApiResponse = ref(false);
 
 const props = defineProps<{
 	isOpen: boolean;
-	optionsKeys: (keyof OptionsValues)[];
+	optionsKeys: (keyof Options)[];
 	close: () => void;
 }>();
 

@@ -28,6 +28,53 @@ type OptionData =
 			default: string;
 	  };
 
+export type Options = {
+	colorblind: boolean;
+	highlightKey: boolean;
+	trackerLogic: boolean;
+	compactTracker: boolean;
+	combineMisc: boolean;
+	combineSortMode: string;
+	seedFlags: boolean;
+	gameMaps: boolean;
+	userNotes: boolean;
+	uselessItems: boolean;
+	recipeTooltips: boolean;
+	howToFields: boolean;
+	paperMarioFont: boolean;
+	backgroundColor: string;
+	sectionColor: string;
+	prologueOpen: boolean;
+	mtRuggedOpen: boolean;
+	forestOpen: boolean;
+	toyboxOpen: boolean;
+	whaleOpen: boolean;
+	seedsRequired: number;
+	shiverBridgeVisible: boolean;
+	blueHouseOpen: boolean;
+	startingLocation: string;
+	fastBowserCastle: boolean;
+	shopsRandomized: boolean;
+	rowfRandomized: boolean;
+	merlowRandomized: boolean;
+	keysRandomized: boolean;
+	panelsRandomized: boolean;
+	coinsRandomized: boolean;
+	coinBlocksRandomized: boolean;
+	foliageCoinsRandomized: boolean;
+	lettersRandomized: boolean;
+	koopaKootRandomized: boolean;
+	kootCoinsRandomized: boolean;
+	dojoRandomized: boolean;
+	tradingEventRandomized: boolean;
+	superBlocksRandomized: boolean;
+	multicoinBlocksRandomized: boolean;
+	powerStarHunt: boolean;
+	powerStarNum: number;
+	sSkip: boolean;
+	// gearShuffle: string;
+};
+
 const optionsData = {
 	colorblind: {
 		namespace: "config",
@@ -298,48 +345,42 @@ const optionsData = {
 	// 	default: "vanilla",
 	// 	choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
 	// }
-} satisfies Record<string, OptionData>;
-
-export type OptionsValues = {
-	[key in keyof typeof optionsData]: (typeof optionsData)[key]["default"];
-};
+} satisfies Record<keyof Options, OptionData>;
 
 const storageOptionsStr = localStorage.getItem("options");
 
-const storageOptions: Partial<OptionsValues> = storageOptionsStr
+const storageOptions: Partial<Options> = storageOptionsStr
 	? JSON.parse(storageOptionsStr)
 	: {};
 
-const defaultOptions: OptionsValues = Object.getOwnPropertyNames(
-	optionsData
-).reduce(
+const defaultOptions: Options = Object.getOwnPropertyNames(optionsData).reduce(
 	(a, v) => ({ ...a, [v]: optionsData[v as keyof typeof optionsData].default }),
-	{} as OptionsValues
+	{} as Options
 );
 
-const init: OptionsValues = { ...defaultOptions, ...storageOptions };
+const init: Options = { ...defaultOptions, ...storageOptions };
 
 export const useOptions = defineStore("options", {
 	state: () => ({ options: init }),
 	actions: {
-		toggle(key: keyof OptionsValues) {
-			const data: OptionData = optionsData[key];
+		toggle<T extends keyof Options>(key: T) {
+			const data = optionsData[key];
 			if (data.type === "boolean") {
 				(this.options[key] as boolean) = !this.options[key];
 				localStorage.setItem("options", JSON.stringify(this.options));
 			}
 		},
-		setValue(key: keyof typeof optionsData, value: string | number | boolean) {
-			(this.options[key] as string | number | boolean) = value;
+		setValue<T extends keyof Options>(key: T, value: Options[T]) {
+			this.options[key] = value;
 			localStorage.setItem("options", JSON.stringify(this.options));
 		},
-		getName(key: keyof typeof optionsData) {
+		getName(key: keyof Options) {
 			return optionsData[key].name;
 		},
-		getType(key: keyof typeof optionsData) {
+		getType(key: keyof Options) {
 			return optionsData[key].type;
 		},
-		getValue(key: keyof typeof optionsData) {
+		getValue<T extends keyof Options>(key: T) {
 			return this.options[key];
 		},
 		getRange(key: keyof typeof optionsData): [number, number] {
@@ -361,10 +402,10 @@ export const useOptions = defineStore("options", {
 
 export const settingsKeys = Object.getOwnPropertyNames(optionsData).filter(
 	(k) => optionsData[k as keyof typeof optionsData].namespace === "settings"
-) as (keyof OptionsValues)[];
+) as (keyof Options)[];
 
 export const configKeys = Object.getOwnPropertyNames(optionsData).filter(
 	(k) => optionsData[k as keyof typeof optionsData].namespace === "config"
-) as (keyof OptionsValues)[];
+) as (keyof Options)[];
 
 export type OptionsStore = typeof useOptions;

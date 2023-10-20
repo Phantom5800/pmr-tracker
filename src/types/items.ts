@@ -1,4 +1,4 @@
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 
 export type TrackableItemInfo = {
 	chapter?: number;
@@ -7,7 +7,7 @@ export type TrackableItemInfo = {
 	multiple?: number;
 	label?: string;
 	type: string;
-	show?: (settings: OptionsValues) => boolean;
+	show?: (settings: Options) => boolean;
 	turnInCheck?: string;
 	hoverTooltip?: string;
 };

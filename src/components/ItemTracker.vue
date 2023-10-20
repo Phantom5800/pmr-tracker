@@ -9,7 +9,7 @@ import { useOptions } from "../stores/config";
 const props = defineProps<{
 	heading: string;
 	tooltip?: string;
-	itemTypes?: string[];
+	itemTypes: string[];
 	allItems: TrackableItemInfo[];
 }>();
 
@@ -33,7 +33,7 @@ const uselessItems = [
 const trackerItems = computed(() => {
 	const filteredItems = props.allItems.filter(
 		(el) =>
-			itemTypes &&
+			itemTypes.value &&
 			itemTypes.value &&
 			itemTypes.value.includes(el.type) &&
 			(options.$state.options.uselessItems || !uselessItems.includes(el.name))

@@ -36,6 +36,7 @@ function equipmentTooltip(item: string) {
 		:all-items="allItems"
 		heading="Required Items"
 		:tooltip="tooltip"
+		:item-types="['required', 'chapterReward', 'partner', 'equipment']"
 	>
 		<div class="rows">
 			<div

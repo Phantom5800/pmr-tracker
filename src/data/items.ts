@@ -1,6 +1,6 @@
 import type { TrackableItemInfo } from "@/types/items";
 import logic from "../utils/logic";
-import type { OptionsValues } from "@/stores/config";
+import type { Options } from "@/stores/config";
 
 export const allItems: TrackableItemInfo[] = [
 	{
@@ -50,7 +50,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Star Rod",
 		type: "chapterReward",
 		image: "icons/PM_Starrod.png",
-		show: (settings: OptionsValues) => !logic.powerStarHunt(settings)
+		show: (settings: Options) => !logic.powerStarHunt(settings)
 	},
 	{
 		chapter: 16,
@@ -368,7 +368,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "miscKey",
 		image: "icons/OddKey.gif",
 		label: "O",
-		show: (settings: OptionsValues) => !logic.blueHouseOpen([], settings)
+		show: (settings: Options) => !logic.blueHouseOpen([], settings)
 	},
 	{
 		chapter: 7,
@@ -421,7 +421,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/PM_Bowser_Castle_Key.png",
 		multiple: 5,
-		show: (settings: OptionsValues) => !logic.fastBowserCastle([], settings)
+		show: (settings: Options) => !logic.fastBowserCastle([], settings)
 	},
 	{
 		name: "Prison Key",
