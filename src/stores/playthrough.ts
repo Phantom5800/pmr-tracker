@@ -85,6 +85,21 @@ export const usePlaythrough = defineStore("playthrough", {
 			}
 			this.save();
 		},
+		cycleUpgrade(k: string) {
+			const _super = `${k}:super`;
+			const _ultra = `${k}:ultra`;
+
+			if (this.items.includes(_ultra)) {
+				this.items.splice(this.items.indexOf(_ultra), 1);
+				this.items.splice(this.items.indexOf(_super), 1);
+			} else if (this.items.includes(_super)) {
+				this.items.push(_ultra);
+			} else {
+				this.items.push(_super);
+			}
+
+			this.save();
+		},
 		toggleItem(item: string) {
 			if (this.items.includes(item)) {
 				this.items.splice(this.items.indexOf(item), 1);

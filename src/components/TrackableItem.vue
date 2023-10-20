@@ -117,6 +117,8 @@ function getImageUrl(image: string) {
 					playthroughStore.toggleCheck(checkArea, checkCheck);
 				} else if (powerStarNum || multiple || bootsOrHammer) {
 					playthroughStore.removeItem(derivedData.removing);
+				} else if (info.type === 'partner') {
+					playthroughStore.cycleUpgrade(name);
 				}
 			}
 		"
@@ -148,6 +150,18 @@ function getImageUrl(image: string) {
 			}}
 		</p>
 		<p class="checkmark" v-if="showCheck">✔</p>
+		<div class="upgrades" v-if="info.type === 'partner'">
+			<img
+				:src="'src/assets/images/koopa-koot-favors/Crystal_Ball_PM.png'"
+				alt=""
+				v-if="playthroughStore.hasItem(`${name}:super`)"
+			/>
+			<img
+				:src="'src/assets/images/icons/UltraStone.gif'"
+				alt=""
+				v-if="playthroughStore.hasItem(`${name}:ultra`)"
+			/>
+		</div>
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
@@ -202,6 +216,19 @@ p.checkmark {
 	color: #00dd00;
 	stroke: 1px black;
 	-webkit-text-stroke: 1px black;
+}
+
+div.upgrades {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 35%;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+div.upgrades > img {
+	margin-top: -50%;
 }
 
 div.tracker-item div.hover-tip {
