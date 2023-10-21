@@ -132,26 +132,15 @@ function getImageUrl(image: string) {
 						options.trackerLogic &&
 						playthroughStore.canCheckLocation(chapterRewardReqs[name])))
 		}"
-		@blur="showStarTooltip = false"
-		@click="
-			powerStarNum || multiple || bootsOrHammer
-				? playthroughStore.addItem(derivedData.adding, powerStarNum || multiple)
-				: playthroughStore.toggleItem(name)
-		"
-		@contextmenu.prevent="
-			() => {
-				if (name in chapterRewardReqs) {
-					// playthroughStore.incrementSpiritAnnotation(
-					// 	name as keyof PlaythroughProps['spiritAnnotations']
-					// );
-					showStarTooltip = !showStarTooltip;
-				} else if (turnInCheck) {
-					const [checkArea, checkCheck] = turnInCheck.split(':');
-					playthroughStore.toggleCheck(checkArea, checkCheck);
-				} else if (powerStarNum || multiple || bootsOrHammer) {
-					playthroughStore.removeItem(derivedData.removing);
-				} else if (info.type === 'partner') {
-					playthroughStore.cycleUpgrade(name);
+		@blur="
+			(event) => {
+				if (
+					!(
+						event.currentTarget &&
+						event.currentTarget.contains(event.relatedTarget)
+					)
+				) {
+					showStarTooltip = false;
 				}
 			}
 		"
@@ -164,6 +153,31 @@ function getImageUrl(image: string) {
 				width: size,
 				height: size
 			}"
+			@click="
+				powerStarNum || multiple || bootsOrHammer
+					? playthroughStore.addItem(
+							derivedData.adding,
+							powerStarNum || multiple
+					  )
+					: playthroughStore.toggleItem(name)
+			"
+			@contextmenu.prevent="
+				() => {
+					if (name in chapterRewardReqs) {
+						// playthroughStore.incrementSpiritAnnotation(
+						// 	name as keyof PlaythroughProps['spiritAnnotations']
+						// );
+						showStarTooltip = !showStarTooltip;
+					} else if (turnInCheck) {
+						const [checkArea, checkCheck] = turnInCheck.split(':');
+						playthroughStore.toggleCheck(checkArea, checkCheck);
+					} else if (powerStarNum || multiple || bootsOrHammer) {
+						playthroughStore.removeItem(derivedData.removing);
+					} else if (info.type === 'partner') {
+						playthroughStore.cycleUpgrade(name);
+					}
+				}
+			"
 		/>
 		<p
 			class="label"
@@ -245,12 +259,24 @@ function getImageUrl(image: string) {
 				ref="arrowRef"
 			></div>
 			<h3>Chapter Scaling</h3>
-			<button class="scaling" v-for="num in [1, 2, 3, 4, 5, 6, 7]">
+			<button
+				tabindex="-1"
+				class="scaling"
+				@click="
+					console.log(num);
+					showStarTooltip = false;
+				"
+				v-for="num in [1, 2, 3, 4, 5, 6, 7]"
+			>
 				{{ num }}
 			</button>
 			<h3>Dungeon Entrances</h3>
 			<button
 				class="entrance"
+				@click="
+					console.log(star);
+					showStarTooltip = false;
+				"
 				v-for="star in Object.getOwnPropertyNames(chapterRewardReqs)"
 			>
 				<img
@@ -278,6 +304,10 @@ img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+}
+
+p {
+	pointer-events: none;
 }
 
 p.label {
@@ -311,6 +341,7 @@ p.checkmark {
 
 div.upgrades {
 	position: absolute;
+	pointer-events: none;
 	bottom: 0px;
 	right: 0px;
 	width: 35%;
@@ -329,7 +360,7 @@ div.tracker-item div.hover-tip {
 	/* scale: 0; */
 	/* transition: all 0.15s; */
 	transform-origin: bottom center;
-	pointer-events: none;
+	/* pointer-events: none; */
 	background-color: #101020;
 	padding: 0.5rem 1rem;
 	width: 20rem;
@@ -348,7 +379,7 @@ div.tracker-item div.hover-tip {
 }
 
 button {
-	pointer-events: all;
+	/* pointer-events: all; */
 	background-color: transparent;
 	padding: 0;
 	margin: 0;
@@ -365,6 +396,7 @@ button.scaling {
 div.star-tooltip {
 	display: grid;
 	place-items: center;
+	pointer-events: all;
 	grid-template-columns: repeat(7, 1fr);
 }
 
