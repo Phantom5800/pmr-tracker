@@ -28,7 +28,7 @@ type Region = {
 
 type MapRegions = { [key: string]: Region };
 
-export const chapterRewardReqs: Record<string, Requirements> = {
+export const chapterRewardReqs = {
 	Eldstar: [
 		logic.multipleItemCheck("Fortress Key", 4),
 		"Kooper",
@@ -104,7 +104,7 @@ export const chapterRewardReqs: Record<string, Requirements> = {
 			logic.fastBowserCastle
 		]
 	]
-};
+} satisfies Record<string, Requirements>;
 
 const regionData: MapRegions = {
 	Prologue: {

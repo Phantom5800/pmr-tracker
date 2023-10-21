@@ -10,7 +10,6 @@ import {
 	useFloating,
 	offset,
 	arrow,
-	flip,
 	shift,
 	autoUpdate,
 	autoPlacement
@@ -135,14 +134,18 @@ function getImageUrl(image: string) {
 					info.chapter <= 8) ||
 					(name in chapterRewardReqs &&
 						options.trackerLogic &&
-						playthroughStore.canCheckLocation(chapterRewardReqs[name])))
+						playthroughStore.canCheckLocation(
+							chapterRewardReqs[name as keyof typeof chapterRewardReqs]
+						)))
 		}"
 		@blur="
 			(event) => {
 				if (
 					!(
 						event.currentTarget &&
-						event.currentTarget.contains(event.relatedTarget)
+						(event.currentTarget as HTMLElement).contains(
+							event.relatedTarget as Element
+						)
 					)
 				) {
 					showStarTooltip = false;
@@ -303,8 +306,12 @@ function getImageUrl(image: string) {
 			<h3>Chapter Scaling</h3>
 			<button
 				class="scaling"
+				:key="num"
 				@click="
-					playthroughStore.setSpiritAnnotation(name, { scaling: num });
+					playthroughStore.setSpiritAnnotation(
+						name as keyof typeof chapterRewardReqs,
+						{ scaling: num }
+					);
 					showStarTooltip = false;
 				"
 				v-for="num in [1, 2, 3, 4, 5, 6, 7, 0]"
@@ -334,8 +341,12 @@ function getImageUrl(image: string) {
 			<h3>Dungeon Entrances</h3>
 			<button
 				class="entrance"
+				:key="star"
 				@click="
-					playthroughStore.setSpiritAnnotation(name, { entrance: star });
+					playthroughStore.setSpiritAnnotation(
+						name as keyof typeof chapterRewardReqs,
+						{ entrance: star }
+					);
 					showStarTooltip = false;
 				"
 				v-for="star in [
