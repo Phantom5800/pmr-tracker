@@ -7,16 +7,12 @@ export type PlaythroughProps = {
 	items: string[];
 	checks: string[];
 	notes: string;
-	spiritAnnotations: {
-		Eldstar: 0;
-		Mamar: 0;
-		Skolar: 0;
-		Muskular: 0;
-		Misstar: 0;
-		Klevar: 0;
-		Kalmar: 0;
-		"Star Rod": 0;
-	};
+	spiritAnnotations: typeof spiritAnnotations;
+};
+
+type SpiritAnnotations = {
+	scaling: number;
+	entrance: string;
 };
 
 const fixedChapterRewards = [
@@ -42,15 +38,39 @@ const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
 // );
 
 const spiritAnnotations = {
-	Eldstar: 0,
-	Mamar: 0,
-	Skolar: 0,
-	Muskular: 0,
-	Misstar: 0,
-	Klevar: 0,
-	Kalmar: 0,
-	"Star Rod": 0
-};
+	Eldstar: {
+		scaling: 0,
+		entrance: ""
+	},
+	Mamar: {
+		scaling: 0,
+		entrance: ""
+	},
+	Skolar: {
+		scaling: 0,
+		entrance: ""
+	},
+	Muskular: {
+		scaling: 0,
+		entrance: ""
+	},
+	Misstar: {
+		scaling: 0,
+		entrance: ""
+	},
+	Klevar: {
+		scaling: 0,
+		entrance: ""
+	},
+	Kalmar: {
+		scaling: 0,
+		entrance: ""
+	},
+	"Star Rod": {
+		scaling: 0,
+		entrance: ""
+	}
+} satisfies Record<string, SpiritAnnotations>;
 
 const init = {
 	items: [],
@@ -77,12 +97,11 @@ export const usePlaythrough = defineStore("playthrough", {
 		getSpiritAnnotation(k: keyof PlaythroughProps["spiritAnnotations"]) {
 			return this.spiritAnnotations[k];
 		},
-		incrementSpiritAnnotation(k: keyof PlaythroughProps["spiritAnnotations"]) {
-			if (this.spiritAnnotations[k] >= 7) {
-				this.spiritAnnotations[k] = 0;
-			} else {
-				this.spiritAnnotations[k]++;
-			}
+		setSpiritAnnotation(
+			k: keyof PlaythroughProps["spiritAnnotations"],
+			value: Partial<SpiritAnnotations>
+		) {
+			this.spiritAnnotations[k] = { ...this.spiritAnnotations[k], ...value };
 			this.save();
 		},
 		cycleUpgrade(k: string) {

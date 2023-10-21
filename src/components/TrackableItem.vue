@@ -13,7 +13,7 @@ import {
 	flip,
 	shift,
 	autoUpdate,
-	Placement
+	autoPlacement
 } from "@floating-ui/vue";
 
 const playthroughStore = usePlaythrough();
@@ -39,7 +39,12 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 	itemRef,
 	tooltipRef,
 	{
-		middleware: [flip(), offset(12), shift(), arrow({ element: arrowRef })],
+		middleware: [
+			autoPlacement({ allowedPlacements: ["bottom", "top"] }),
+			offset(12),
+			shift(),
+			arrow({ element: arrowRef })
+		],
 		placement: "top",
 		whileElementsMounted: autoUpdate,
 		transform: false
@@ -186,18 +191,18 @@ function getImageUrl(image: string) {
 				(name in chapterRewardReqs &&
 					playthroughStore.getSpiritAnnotation(
 						name as keyof PlaythroughProps['spiritAnnotations']
-					) > 0)
+					).scaling > 0)
 			"
 		>
 			{{
 				label ||
 				playthroughStore.getSpiritAnnotation(
 					name as keyof PlaythroughProps["spiritAnnotations"]
-				)
+				).scaling
 			}}
 		</p>
 		<p class="checkmark" v-if="showCheck">✔</p>
-		<div class="upgrades" v-if="info.type === 'partner'">
+		<div class="small-annotation upgrades" v-if="info.type === 'partner'">
 			<img
 				:src="getImageUrl('koopa-koot-favors/Crystal_Ball_PM.png')"
 				alt=""
@@ -207,6 +212,43 @@ function getImageUrl(image: string) {
 				:src="getImageUrl('icons/UltraStone.gif')"
 				alt=""
 				v-if="playthroughStore.hasItem(`${name}:ultra`)"
+			/>
+		</div>
+		<div
+			class="small-annotation entrance-annotation"
+			v-if="
+				name in chapterRewardReqs &&
+				playthroughStore.getSpiritAnnotation(
+					name as keyof PlaythroughProps['spiritAnnotations']
+				).entrance
+			"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="3"
+				stroke="currentColor"
+				class="w-6 h-6"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+				/>
+			</svg>
+
+			<img
+				:src="
+					getImageUrl(
+						`icons/${
+							playthroughStore.getSpiritAnnotation(
+								name as keyof PlaythroughProps['spiritAnnotations']
+							).entrance
+						}_PM.png`
+					)
+				"
+				alt=""
 			/>
 		</div>
 		<p class="count" v-if="powerStarNum || multiple">
@@ -263,7 +305,7 @@ function getImageUrl(image: string) {
 				tabindex="-1"
 				class="scaling"
 				@click="
-					console.log(num);
+					playthroughStore.setSpiritAnnotation(name, { scaling: num });
 					showStarTooltip = false;
 				"
 				v-for="num in [1, 2, 3, 4, 5, 6, 7]"
@@ -274,7 +316,7 @@ function getImageUrl(image: string) {
 			<button
 				class="entrance"
 				@click="
-					console.log(star);
+					playthroughStore.setSpiritAnnotation(name, { entrance: star });
 					showStarTooltip = false;
 				"
 				v-for="star in Object.getOwnPropertyNames(chapterRewardReqs)"
@@ -339,12 +381,26 @@ p.checkmark {
 	-webkit-text-stroke: 1px black;
 }
 
-div.upgrades {
+div.small-annotation {
 	position: absolute;
 	pointer-events: none;
 	bottom: 0px;
 	right: 0px;
 	width: 35%;
+}
+
+div.entrance-annotation {
+	stroke: 1px black;
+	-webkit-text-stroke: 1px black;
+	font-weight: bold;
+	/* font-size: 1.5rem; */
+	place-items: center;
+	width: 70%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+div.upgrades {
 	display: flex;
 	flex-direction: column-reverse;
 }
