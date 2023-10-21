@@ -335,11 +335,6 @@ div.tracker-item div.hover-tip {
 	width: 20rem;
 	border-radius: 8px;
 	z-index: 10;
-}
-
-div.tracker-item:hover div.hover-tip {
-	/* translate: 0 -115%; 
-	/* scale: 100%; */
 	animation: forwards tooltip-grow 0.15s;
 }
 
