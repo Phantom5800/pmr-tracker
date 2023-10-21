@@ -12,7 +12,8 @@ import {
 	arrow,
 	flip,
 	shift,
-	autoUpdate
+	autoUpdate,
+	Placement
 } from "@floating-ui/vue";
 
 const playthroughStore = usePlaythrough();
@@ -28,17 +29,22 @@ const { name, image, multiple, label, show, turnInCheck } = info;
 const { options } = storeToRefs(optionsStore);
 
 const hovering = ref(false);
+const showStarTooltip = ref(false);
 
 const itemRef = ref(null);
 const tooltipRef = ref(null);
 const arrowRef = ref(null);
 
-const { floatingStyles, middlewareData } = useFloating(itemRef, tooltipRef, {
-	middleware: [flip(), offset(12), shift(), arrow({ element: arrowRef })],
-	placement: "top",
-	whileElementsMounted: autoUpdate,
-	transform: false
-});
+const { floatingStyles, middlewareData, placement } = useFloating(
+	itemRef,
+	tooltipRef,
+	{
+		middleware: [flip(), offset(12), shift(), arrow({ element: arrowRef })],
+		placement: "top",
+		whileElementsMounted: autoUpdate,
+		transform: false
+	}
+);
 
 const powerStarNum = computed(() =>
 	name === "Power Stars Found" ? options.value.powerStarNum : null
@@ -110,6 +116,7 @@ function getImageUrl(image: string) {
 		v-if="show === undefined || show(options)"
 		@mouseover="hovering = true"
 		@mouseout="hovering = false"
+		tabindex="0"
 		ref="itemRef"
 		class="tracker-item"
 		:class="{
@@ -125,6 +132,7 @@ function getImageUrl(image: string) {
 						options.trackerLogic &&
 						playthroughStore.canCheckLocation(chapterRewardReqs[name])))
 		}"
+		@blur="showStarTooltip = false"
 		@click="
 			powerStarNum || multiple || bootsOrHammer
 				? playthroughStore.addItem(derivedData.adding, powerStarNum || multiple)
@@ -133,9 +141,10 @@ function getImageUrl(image: string) {
 		@contextmenu.prevent="
 			() => {
 				if (name in chapterRewardReqs) {
-					playthroughStore.incrementSpiritAnnotation(
-						name as keyof PlaythroughProps['spiritAnnotations']
-					);
+					// playthroughStore.incrementSpiritAnnotation(
+					// 	name as keyof PlaythroughProps['spiritAnnotations']
+					// );
+					showStarTooltip = !showStarTooltip;
 				} else if (turnInCheck) {
 					const [checkArea, checkCheck] = turnInCheck.split(':');
 					playthroughStore.toggleCheck(checkArea, checkCheck);
@@ -192,7 +201,10 @@ function getImageUrl(image: string) {
 		<div
 			class="hover-tip"
 			ref="tooltipRef"
-			:style="floatingStyles"
+			:style="{
+				...floatingStyles,
+				transformOrigin: placement === 'bottom' ? 'top center' : 'bottom center'
+			}"
 			v-if="hovering && hoverTooltip && options.recipeTooltips"
 		>
 			{{ hoverTooltip }}
@@ -202,10 +214,51 @@ function getImageUrl(image: string) {
 					left: middlewareData.arrow
 						? `${middlewareData.arrow.x}px`
 						: undefined,
-					top: middlewareData.arrow ? `${middlewareData.arrow.y}px` : undefined
+					top: placement === 'bottom' ? 0 : undefined,
+					bottom: placement === 'top' ? 0 : undefined,
+					translate: placement === 'bottom' ? '0 -50%' : '0 50%'
 				}"
 				ref="arrowRef"
 			></div>
+		</div>
+		<div
+			class="hover-tip star-tooltip"
+			ref="tooltipRef"
+			:style="{
+				...floatingStyles,
+				transformOrigin:
+					placement === 'bottom' ? 'top center' : 'bottom center',
+				width: 'max-content'
+			}"
+			v-if="info.type === 'chapterReward' && showStarTooltip"
+		>
+			<div
+				class="down-arrow"
+				:style="{
+					left: middlewareData.arrow
+						? `${middlewareData.arrow.x}px`
+						: undefined,
+					top: placement === 'bottom' ? 0 : undefined,
+					bottom: placement === 'top' ? 0 : undefined,
+					translate: placement === 'bottom' ? '0 -50%' : '0 50%'
+				}"
+				ref="arrowRef"
+			></div>
+			<h3>Chapter Scaling</h3>
+			<button class="scaling" v-for="num in [1, 2, 3, 4, 5, 6, 7]">
+				{{ num }}
+			</button>
+			<h3>Dungeon Entrances</h3>
+			<button
+				class="entrance"
+				v-for="star in Object.getOwnPropertyNames(chapterRewardReqs)"
+			>
+				<img
+					v-if="star !== 'Star Rod'"
+					:src="getImageUrl(`icons/${star}_PM.png`)"
+					alt=""
+				/>
+			</button>
 		</div>
 	</div>
 </template>
@@ -299,12 +352,45 @@ div.tracker-item:hover div.hover-tip {
 	}
 }
 
+button {
+	pointer-events: all;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+button.scaling {
+	font-size: 3rem;
+	color: white;
+	stroke: 1px black;
+	-webkit-text-stroke: 1px black;
+}
+
+div.star-tooltip {
+	display: grid;
+	place-items: center;
+	grid-template-columns: repeat(7, 1fr);
+}
+
+div.star-tooltip > h3 {
+	opacity: 0.6;
+	font-size: 1rem;
+	text-align: left;
+	width: 100%;
+	grid-column: 1 / 8;
+}
+
 .down-arrow {
 	width: 0;
 	height: 0;
-	border-left: 20px solid transparent;
+	padding: 0.6rem;
+	rotate: 45deg;
+	background-color: #101020;
+	z-index: -10;
+	/* border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
-	border-top: 20px solid #101020;
+	border-top: 20px solid #101020; */
 	position: absolute;
 	/* left: 50%; */
 	/* translate: -50% 0; */
