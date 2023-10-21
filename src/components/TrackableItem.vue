@@ -225,16 +225,14 @@ function getImageUrl(image: string) {
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="3"
-				stroke="currentColor"
-				class="w-6 h-6"
+				viewBox="0 0 20 20"
+				fill="currentColor"
+				class="w-5 h-5"
 			>
 				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+					fill-rule="evenodd"
+					d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+					clip-rule="evenodd"
 				/>
 			</svg>
 
@@ -286,7 +284,9 @@ function getImageUrl(image: string) {
 					placement === 'bottom' ? 'top center' : 'bottom center',
 				width: 'max-content'
 			}"
-			v-if="info.type === 'chapterReward' && showStarTooltip"
+			v-if="
+				info.type === 'chapterReward' && name !== 'Star Rod' && showStarTooltip
+			"
 		>
 			<div
 				class="down-arrow"
@@ -302,16 +302,35 @@ function getImageUrl(image: string) {
 			></div>
 			<h3>Chapter Scaling</h3>
 			<button
-				tabindex="-1"
 				class="scaling"
 				@click="
 					playthroughStore.setSpiritAnnotation(name, { scaling: num });
 					showStarTooltip = false;
 				"
-				v-for="num in [1, 2, 3, 4, 5, 6, 7]"
+				v-for="num in [1, 2, 3, 4, 5, 6, 7, 0]"
 			>
-				{{ num }}
+				<span v-if="num !== 0">{{ num }}</span>
+				<svg
+					v-else
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+					:style="{
+						width: '100%',
+						height: '100%'
+					}"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+					/>
+				</svg>
 			</button>
+
 			<h3>Dungeon Entrances</h3>
 			<button
 				class="entrance"
@@ -319,19 +338,46 @@ function getImageUrl(image: string) {
 					playthroughStore.setSpiritAnnotation(name, { entrance: star });
 					showStarTooltip = false;
 				"
-				v-for="star in Object.getOwnPropertyNames(chapterRewardReqs)"
+				v-for="star in [
+					...Object.getOwnPropertyNames(chapterRewardReqs).slice(0, 7),
+					''
+				]"
 			>
 				<img
-					v-if="star !== 'Star Rod'"
+					v-if="star !== ''"
 					:src="getImageUrl(`icons/${star}_PM.png`)"
 					alt=""
 				/>
+				<svg
+					v-else
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="white"
+					class="w-6 h-6"
+					:style="{
+						width: '100%',
+						height: '100%'
+					}"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+					/>
+				</svg>
 			</button>
 		</div>
 	</div>
 </template>
 
 <style scoped>
+svg {
+	display: block;
+	margin: auto;
+}
+
 div.tracker-item {
 	width: 100%;
 	height: 100%;
@@ -453,7 +499,7 @@ div.star-tooltip {
 	display: grid;
 	place-items: center;
 	pointer-events: all;
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(8, 3rem);
 }
 
 div.star-tooltip > h3 {
@@ -461,7 +507,7 @@ div.star-tooltip > h3 {
 	font-size: 1rem;
 	text-align: left;
 	width: 100%;
-	grid-column: 1 / 8;
+	grid-column: 1 / 9;
 }
 
 .down-arrow {
