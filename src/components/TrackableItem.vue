@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { usePlaythrough } from "@/stores/playthrough";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { chapterRewardReqs } from "@/data/map";
 import type { TrackableItemInfo } from "@/types/items";
 import { useOptions } from "../stores/config";
 import type { PlaythroughProps } from "../stores/playthrough";
+import {
+	useFloating,
+	offset,
+	arrow,
+	flip,
+	shift,
+	autoUpdate
+} from "@floating-ui/vue";
 
 const playthroughStore = usePlaythrough();
 const optionsStore = useOptions();
@@ -18,6 +26,19 @@ const { info, size, hoverTooltip } = defineProps<{
 const { name, image, multiple, label, show, turnInCheck } = info;
 
 const { options } = storeToRefs(optionsStore);
+
+const hovering = ref(false);
+
+const itemRef = ref(null);
+const tooltipRef = ref(null);
+const arrowRef = ref(null);
+
+const { floatingStyles, middlewareData } = useFloating(itemRef, tooltipRef, {
+	middleware: [flip(), offset(12), shift(), arrow({ element: arrowRef })],
+	placement: "top",
+	whileElementsMounted: autoUpdate,
+	transform: false
+});
 
 const powerStarNum = computed(() =>
 	name === "Power Stars Found" ? options.value.powerStarNum : null
@@ -87,6 +108,9 @@ function getImageUrl(image: string) {
 <template>
 	<div
 		v-if="show === undefined || show(options)"
+		@mouseover="hovering = true"
+		@mouseout="hovering = false"
+		ref="itemRef"
 		class="tracker-item"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
@@ -165,9 +189,23 @@ function getImageUrl(image: string) {
 		<p class="count" v-if="powerStarNum || multiple">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
-		<div class="hover-tip" v-if="hoverTooltip && options.recipeTooltips">
+		<div
+			class="hover-tip"
+			ref="tooltipRef"
+			:style="floatingStyles"
+			v-if="hovering && hoverTooltip && options.recipeTooltips"
+		>
 			{{ hoverTooltip }}
-			<div class="down-arrow"></div>
+			<div
+				class="down-arrow"
+				:style="{
+					left: middlewareData.arrow
+						? `${middlewareData.arrow.x}px`
+						: undefined,
+					top: middlewareData.arrow ? `${middlewareData.arrow.y}px` : undefined
+				}"
+				ref="arrowRef"
+			></div>
 		</div>
 	</div>
 </template>
@@ -232,11 +270,12 @@ div.upgrades > img {
 }
 
 div.tracker-item div.hover-tip {
-	position: absolute;
-	top: 0;
-	translate: 0 -50%;
-	scale: 0;
-	transition: all 0.15s;
+	/* position: absolute;
+	 top: 0; */
+	/* translate: 0 -50%; */
+	/* scale: 0; */
+	/* transition: all 0.15s; */
+	transform-origin: bottom center;
 	pointer-events: none;
 	background-color: #101020;
 	padding: 0.5rem 1rem;
@@ -246,8 +285,18 @@ div.tracker-item div.hover-tip {
 }
 
 div.tracker-item:hover div.hover-tip {
-	translate: 0 -115%;
-	scale: 100%;
+	/* translate: 0 -115%; 
+	/* scale: 100%; */
+	animation: forwards tooltip-grow 0.15s;
+}
+
+@keyframes tooltip-grow {
+	0% {
+		transform: scale(0%);
+	}
+	100% {
+		transform: scale(100%);
+	}
 }
 
 .down-arrow {
@@ -257,8 +306,8 @@ div.tracker-item:hover div.hover-tip {
 	border-right: 20px solid transparent;
 	border-top: 20px solid #101020;
 	position: absolute;
-	left: 50%;
-	translate: -50% 0;
+	/* left: 50%; */
+	/* translate: -50% 0; */
 }
 
 .shrink > img {
