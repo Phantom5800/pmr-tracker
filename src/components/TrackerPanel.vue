@@ -66,7 +66,7 @@ div.drag-handle {
 div.circle {
 	border-radius: 9999px;
 	aspect-ratio: 1;
-	background: linear-gradient(#ffffff44, #ffffff22);
+	background: #ffffff;
 	width: 4px;
 	height: 4px;
 }

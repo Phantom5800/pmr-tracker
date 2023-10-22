@@ -250,22 +250,9 @@ function saveLayout() {
 </template>
 
 <style scoped>
-/* .vgl-layout {
-	background-color: #eee;
+.vgl-layout {
+	--vgl-resizer-border-color: white;
 }
-
-:deep(.vgl-item:not(.vgl-item--placeholder)) {
-	background-color: #ccc;
-	border: 1px solid black;
-}
-
-:deep(.vgl-item--resizing) {
-	opacity: 90%;
-}
-
-:deep(.vgl-item--static) {
-	background-color: #cce;
-} */
 
 header {
 	padding-top: 5px;
