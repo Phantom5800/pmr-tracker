@@ -14,26 +14,30 @@ import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 
-const layout = reactive([
-	{ x: 0, y: 0, w: 36, h: 3, i: "flags", static: false, minH: 3 },
-	{
-		x: 0,
-		y: 1,
-		w: 40,
-		h: 31,
-		i: "required",
-		static: false,
-		isResizable: false
-	},
-	{ x: 0, y: 1, w: 40, h: 31, i: "compact", static: false },
-	{ x: 4, y: 0, w: 60, h: 4, i: "notes", static: false },
-	{ x: 4, y: 0, w: 60, h: 29, i: "map", static: false },
-	{ x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
-	{ x: 1, y: 5, w: 60, h: 4, i: "miscitem", static: false },
-	{ x: 1, y: 6, w: 60, h: 4, i: "misckey", static: false },
-	{ x: 1, y: 7, w: 60, h: 4, i: "letters", static: false },
-	{ x: 1, y: 8, w: 60, h: 4, i: "koot", static: false }
-]);
+let layout = reactive(
+	localStorage.getItem("layout")
+		? JSON.parse(localStorage.getItem("layout"))
+		: [
+				{ x: 0, y: 0, w: 36, h: 3, i: "flags", static: false, minH: 3 },
+				{
+					x: 0,
+					y: 1,
+					w: 40,
+					h: 31,
+					i: "required",
+					static: false,
+					isResizable: false
+				},
+				{ x: 0, y: 1, w: 40, h: 31, i: "compact", static: false },
+				{ x: 4, y: 0, w: 60, h: 4, i: "notes", static: false },
+				{ x: 4, y: 0, w: 60, h: 29, i: "map", static: false },
+				{ x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
+				{ x: 1, y: 5, w: 60, h: 4, i: "miscitem", static: false },
+				{ x: 1, y: 6, w: 60, h: 4, i: "misckey", static: false },
+				{ x: 1, y: 7, w: 60, h: 4, i: "letters", static: false },
+				{ x: 1, y: 8, w: 60, h: 4, i: "koot", static: false }
+		  ]
+);
 
 const filteredLayout = computed(() => {
 	return layout.filter(
@@ -72,6 +76,10 @@ function closeConfigDelay() {
 }
 function closeSettingsDelay() {
 	setTimeout(() => (settingsOpen.value = false), 1);
+}
+
+function saveLayout() {
+	localStorage.setItem("layout", JSON.stringify(layout));
 }
 </script>
 
@@ -132,6 +140,8 @@ function closeSettingsDelay() {
 				:i="item.i"
 				drag-allow-from=".drag-handle"
 				:is-resizable="moving"
+				@moved="saveLayout"
+				@resized="saveLayout"
 			>
 				<EnabledSettings :moving="moving" v-if="item.i === 'flags'" />
 				<RequiredTracker
