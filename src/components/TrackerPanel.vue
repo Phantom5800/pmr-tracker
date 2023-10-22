@@ -41,6 +41,8 @@ section {
 	overflow: hidden;
 	border-radius: 10px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	height: 100%;
 	transition:
@@ -53,6 +55,7 @@ header {
 	flex-direction: row;
 	gap: 1rem;
 	padding: 0.5rem;
+	flex-grow: 0;
 }
 
 div.drag-handle {
@@ -73,6 +76,6 @@ div.circle {
 
 div.content {
 	width: 100%;
-	height: 100%;
+	flex-grow: 1;
 }
 </style>
