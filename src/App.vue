@@ -26,17 +26,77 @@ const initialLayouts = {
 			h: 36,
 			i: "required",
 			static: false,
-			isResizable: false
+			isResizable: false,
 		},
 		{ x: 40, y: 14, w: 80, h: 35, i: "map", static: false },
-		// { x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
 		{ x: 40, y: 0, w: 40, h: 14, i: "miscitem", static: false },
 		{ x: 80, y: 0, w: 40, h: 14, i: "misckey", static: false },
 		{ x: 40, y: 50, w: 40, h: 18, i: "letters", static: false },
 		{ x: 80, y: 50, w: 40, h: 18, i: "koot", static: false },
-		{ x: 0, y: 39, w: 40, h: 28, i: "notes", static: false }
+		{ x: 0, y: 39, w: 40, h: 28, i: "notes", static: false },
 	],
-	md: [{ x: 0, y: 1, w: 40, h: 31, i: "map", static: false }]
+	md: [
+		{ x: 0, y: 0, w: 50, h: 3, i: "flags", static: false, minH: 3 },
+		{
+			x: 0,
+			y: 3,
+			w: 50,
+			h: 34,
+			i: "required",
+			static: false,
+			isResizable: false,
+		},
+		{ x: 0, y: 46, w: 100, h: 35, i: "map", static: false },
+		{ x: 50, y: 0, w: 50, h: 13, i: "miscitem", static: false },
+		{ x: 0, y: 37, w: 50, h: 9, i: "misckey", static: false },
+		{ x: 50, y: 13, w: 50, h: 16, i: "letters", static: false },
+		{ x: 50, y: 29, w: 50, h: 13, i: "koot", static: false },
+	],
+	sm: [
+		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
+		{
+			x: 0,
+			y: 3,
+			w: 40,
+			h: 22,
+			i: "compact",
+			static: false,
+		},
+		{ x: 40, y: 0, w: 20, h: 21, i: "miscitem", static: false },
+		{ x: 40, y: 21, w: 20, h: 9, i: "misckey", static: false },
+		{ x: 0, y: 25, w: 40, h: 15, i: "letters", static: false },
+		{ x: 40, y: 30, w: 20, h: 18, i: "koot", static: false },
+		{ x: 0, y: 48, w: 60, h: 35, i: "map", static: false },
+		{ x: 0, y: 40, w: 40, h: 8, i: "notes", static: false },
+	],
+	xs: [
+		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
+		{
+			x: 0,
+			y: 3,
+			w: 40,
+			h: 32,
+			i: "everything",
+			static: false,
+		},
+		{ x: 0, y: 35, w: 20, h: 27, i: "letters", static: false },
+		{ x: 20, y: 35, w: 20, h: 20, i: "koot", static: false },
+		{ x: 0, y: 62, w: 40, h: 35, i: "map", static: false },
+	],
+	xxs: [
+		{ x: 0, y: 0, w: 20, h: 3, i: "flags", static: false, minH: 3 },
+		{
+			x: 0,
+			y: 3,
+			w: 20,
+			h: 41,
+			i: "everything",
+			static: false,
+		},
+		{ x: 0, y: 44, w: 20, h: 17, i: "letters", static: false },
+		{ x: 0, y: 45, w: 20, h: 15, i: "koot", static: false },
+		{ x: 0, y: 76, w: 20, h: 44, i: "map", static: false },
+	],
 };
 
 const layout = ref(
@@ -151,6 +211,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 	<main>
 		<GridLayout
 			v-model:layout="layout"
+			:responsive-layouts="initialLayouts"
 			:vertical-compact="true"
 			:auto-size="true"
 			:row-height="16"
@@ -181,21 +242,22 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 					:moving="moving"
 					v-if="item.i === 'compact'"
 					:all-items="allItemsFiltered"
-					:heading="
-						options.combineMisc ? 'Basically Everything' : 'Required Items'
-					"
-					:itemTypes="
-						options.combineMisc
-							? [
-									'required',
-									'chapterReward',
-									'equipment',
-									'partner',
-									'miscItem',
-									'miscKey'
-							  ]
-							: ['required', 'chapterReward', 'equipment', 'partner']
-					"
+					:heading="'Required Items'"
+					:itemTypes="['required', 'chapterReward', 'equipment', 'partner']"
+				/>
+				<ItemTracker
+					:moving="moving"
+					v-if="item.i === 'everything'"
+					:all-items="allItemsFiltered"
+					:heading="'Basically Everything'"
+					:itemTypes="[
+						'required',
+						'chapterReward',
+						'equipment',
+						'partner',
+						'miscItem',
+						'miscKey',
+					]"
 				/>
 				<UserNotes :moving="moving" v-if="item.i === 'notes'" />
 				<MapTracker :moving="moving" v-if="item.i === 'map'" />
