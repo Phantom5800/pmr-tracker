@@ -12,52 +12,57 @@ import { storeToRefs } from "pinia";
 import SettingsModal from "./components/SettingsModal.vue";
 import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
-import { GridLayout, GridItem } from "grid-layout-plus";
+import { GridLayout, GridItem, Breakpoint, Layout } from "grid-layout-plus";
 
-const initialLayout = [
-	{ x: 0, y: 0, w: 36, h: 3, i: "flags", static: false, minH: 3 },
-	{
-		x: 0,
-		y: 1,
-		w: 40,
-		h: 31,
-		i: "required",
-		static: false,
-		isResizable: false
-	},
-	{ x: 0, y: 1, w: 40, h: 31, i: "compact", static: false },
-	{ x: 4, y: 0, w: 60, h: 4, i: "notes", static: false },
-	{ x: 4, y: 0, w: 60, h: 29, i: "map", static: false },
-	{ x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
-	{ x: 1, y: 5, w: 60, h: 4, i: "miscitem", static: false },
-	{ x: 1, y: 6, w: 60, h: 4, i: "misckey", static: false },
-	{ x: 1, y: 7, w: 60, h: 4, i: "letters", static: false },
-	{ x: 1, y: 8, w: 60, h: 4, i: "koot", static: false }
-];
+const initialLayouts = {
+	lg: [
+		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
+		{
+			x: 0,
+			y: 1,
+			w: 40,
+			h: 42,
+			i: "required",
+			static: false,
+			isResizable: false
+		},
+		{ x: 40, y: 14, w: 60, h: 35, i: "map", static: false },
+		// { x: 1, y: 2, w: 60, h: 4, i: "info", static: false },
+		{ x: 40, y: 0, w: 30, h: 14, i: "miscitem", static: false },
+		{ x: 70, y: 0, w: 30, h: 14, i: "misckey", static: false },
+		{ x: 0, y: 45, w: 30, h: 18, i: "letters", static: false },
+		{ x: 30, y: 65, w: 30, h: 14, i: "koot", static: false },
+		{ x: 60, y: 49, w: 40, h: 14, i: "notes", static: false }
+	],
+	md: [{ x: 0, y: 1, w: 40, h: 31, i: "map", static: false }]
+};
 
-let layout = reactive(
+const layout = ref(
 	localStorage.getItem("layout")
-		? JSON.parse(localStorage.getItem("layout"))
-		: initialLayout
+		? JSON.parse(localStorage.getItem("layout")).lg
+		: initialLayouts.lg
 );
 
-const filteredLayout = computed(() => {
-	return layout.filter(
-		(el) =>
-			({
-				map: options.value.gameMaps,
-				notes: options.value.userNotes,
-				info: options.value.howToFields,
-				flags: options.value.seedFlags,
-				required: !options.value.compactTracker,
-				miscitem: !options.value.compactTracker,
-				misckey: !options.value.compactTracker,
-				letters: options.value.lettersRandomized,
-				koot: options.value.koopaKootRandomized,
-				compact: options.value.compactTracker
-			})[el.i]
-	);
-});
+// const filteredLayout = computed(() => {
+// 	if (!layout.value) {
+// 		return [];
+// 	}
+// 	return layout.value.filter(
+// 		(el) =>
+// 			({
+// 				map: options.value.gameMaps,
+// 				notes: options.value.userNotes,
+// 				info: options.value.howToFields,
+// 				flags: options.value.seedFlags,
+// 				required: !options.value.compactTracker,
+// 				miscitem: !options.value.compactTracker,
+// 				misckey: !options.value.compactTracker,
+// 				letters: options.value.lettersRandomized,
+// 				koot: options.value.koopaKootRandomized,
+// 				compact: options.value.compactTracker
+// 			})[el.i]
+// 	);
+// });
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -90,8 +95,14 @@ function resetLayout() {
 			"Are you sure you want to reset your layout? You will not see the changes until you refresh the page."
 		)
 	) {
+		layout.value = initialLayouts.lg;
 		localStorage.removeItem("layout");
 	}
+}
+
+function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
+	console.info(newBreakpoint, newLayout);
+	layout.value = initialLayouts[newBreakpoint];
 }
 </script>
 
@@ -136,15 +147,16 @@ function resetLayout() {
 
 	<main>
 		<GridLayout
-			v-model:layout="filteredLayout"
+			v-model:layout="layout"
 			:vertical-compact="true"
 			:auto-size="true"
 			:row-height="16"
 			:responsive="true"
 			:cols="{ lg: 120, md: 100, sm: 60, xs: 40, xxs: 20 }"
+			@breakpoint-changed="breakpointChanged"
 		>
 			<GridItem
-				v-for="item in filteredLayout"
+				v-for="item in layout"
 				:key="item.i"
 				:x="item.x"
 				:y="item.y"
