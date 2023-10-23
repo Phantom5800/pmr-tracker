@@ -211,7 +211,7 @@ function removePanel(idx: number) {
 	saveLayout();
 }
 
-const dragItem = { x: -1, y: -1, w: 8, h: 12, i: "" };
+const dragItem = { x: -1, y: -1, w: 16, h: 12, i: "" };
 const dropId = "drop";
 
 const dragFromMenu = throttle((panelKey: string) => {
