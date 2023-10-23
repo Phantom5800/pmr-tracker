@@ -3,5 +3,5 @@
 	"useTabs": true,
 	"singleQuote": false,
 	"printWidth": 80,
-	"trailingComma": "none"
+	"trailingComma": "es5"
 }

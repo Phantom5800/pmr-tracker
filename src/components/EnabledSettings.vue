@@ -17,63 +17,82 @@ const settings: { id: keyof Options; src: string }[] = [
 	{ id: "foliageCoinsRandomized", src: "flags/bush.png" },
 	{
 		id: "lettersRandomized",
-		src: "flags/PM_Letter_Sprite.png"
+		src: "flags/PM_Letter_Sprite.png",
 	},
 	{ id: "panelsRandomized", src: "flags/Star_Piece.png" },
 	{
 		id: "dojoRandomized",
-		src: "icons/TheMasterFirst_PM.png"
+		src: "icons/TheMasterFirst_PM.png",
 	},
 	{
 		id: "koopaKootRandomized",
-		src: "flags/KoopaKoot_PM.png"
+		src: "flags/KoopaKoot_PM.png",
 	},
 	{
 		id: "tradingEventRandomized",
-		src: "flags/TradingEvent_PM.png"
+		src: "flags/TradingEvent_PM.png",
 	},
 	{
 		id: "superBlocksRandomized",
-		src: "icons/UltraStone.gif"
+		src: "icons/UltraStone.gif",
 	},
 	{
 		id: "multicoinBlocksRandomized",
-		src: "flags/brick.png"
-	}
+		src: "flags/brick.png",
+	},
 ];
 
 function getImageUrl(image: string) {
 	return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
+
+const { moving, removePanel } = defineProps<{
+	moving: boolean;
+	removePanel: () => void;
+}>();
 </script>
 
 <template>
-	<TrackerPanel padding="0.4rem 1rem">
-		<div class="flex">
-			<img
-				v-for="setting in settings"
-				:key="setting.id"
-				:src="getImageUrl(setting.src)"
-				:class="{ hide: !options[setting.id] }"
-			/>
+	<TrackerPanel
+		padding="0.4rem 1rem"
+		:moving="moving"
+		:remove-panel="removePanel"
+	>
+		<div class="wrapper">
+			<div class="flex">
+				<img
+					v-for="setting in settings"
+					:key="setting.id"
+					:src="getImageUrl(setting.src)"
+					:class="{ hide: !options[setting.id] }"
+				/>
+			</div>
 		</div>
 	</TrackerPanel>
 </template>
 
 <style scoped>
+div.wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 div.flex {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	gap: 4px;
+	gap: 1px;
 	width: 100%;
 }
 
 img {
 	object-fit: contain;
 	/* aspect-ratio: 1; */
-	height: 2.75rem;
-	/* max-height: 3rem; */
+	/* height: 100%; */
+	height: 3rem;
 }
 
 img.hide {

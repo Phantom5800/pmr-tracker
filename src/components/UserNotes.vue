@@ -12,10 +12,15 @@ const content = ref(notes);
 watch(content, (content) => {
 	playthroughStore.setNotes(content);
 });
+
+const { moving, removePanel } = defineProps<{
+	moving: boolean;
+	removePanel: () => void;
+}>();
 </script>
 
 <template>
-	<TrackerPanel>
+	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<textarea
 			v-model="content"
 			placeholder="Put your own notes here if you want them"
@@ -28,9 +33,7 @@ textarea {
 	font-family: monospace;
 	width: 100%;
 	height: 100%;
-	min-height: 6rem;
-	min-width: 100%;
-	max-width: 100%;
 	font-size: 1rem;
+	resize: none;
 }
 </style>

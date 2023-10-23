@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.2",
+    "@vexip-ui/utils": "^2.2.0",
     "@vueuse/components": "^10.5.0",
     "@vueuse/core": "^10.5.0",
     "axios": "^1.5.1",
     "file-saver": "^2.0.5",
+    "grid-layout-plus": "^1.0.3",
     "pinia": "^2.1.6",
     "serve": "^14.2.1",
     "vue": "^3.3.4"
