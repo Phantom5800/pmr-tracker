@@ -33,264 +33,269 @@ const optionsData = {
 		namespace: "config",
 		name: "Color Blind Labels",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	highlightKey: {
 		namespace: "config",
 		name: "Highlight Important Items",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	trackerLogic: {
 		namespace: "config",
 		name: "Tracker Logic",
 		type: "boolean",
-		default: true
+		default: true,
 	},
-	compactTracker: {
-		namespace: "config",
-		name: "Compact Tracker",
-		type: "boolean",
-		default: false
-	},
-	combineMisc: {
-		namespace: "config",
-		name: "Combine Misc. Items",
-		type: "boolean",
-		default: false
-	},
+	// compactTracker: {
+	// 	namespace: "config",
+	// 	name: "Compact Tracker",
+	// 	type: "boolean",
+	// 	default: false
+	// },
+	// combineMisc: {
+	// 	namespace: "config",
+	// 	name: "Combine Misc. Items",
+	// 	type: "boolean",
+	// 	default: false
+	// },
 	combineSortMode: {
 		namespace: "config",
-		name: "Sort Mode",
+		name: "Combined Sort Mode",
 		type: "select",
 		default: "Vanilla Acquired Order",
-		choices: ["Vanilla Acquired Order", "Required First"]
+		choices: ["Vanilla Acquired Order", "Required First"],
 	},
 	seedFlags: {
 		namespace: "config",
 		name: "Show Seed Flags",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	gameMaps: {
 		namespace: "config",
 		name: "Maps",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	userNotes: {
 		namespace: "config",
 		name: "Notes Field",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	uselessItems: {
 		namespace: "config",
 		name: "Show Logic-Only Items",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	recipeTooltips: {
 		namespace: "config",
 		name: "Tooltip Info",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	howToFields: {
 		namespace: "config",
 		name: "How-To Fields",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	paperMarioFont: {
 		namespace: "config",
 		name: "Paper Mario Font",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	backgroundColor: {
 		namespace: "config",
 		name: "Background Color",
 		type: "color",
-		default: "#3283b4"
+		default: "#3283b4",
 	},
 	sectionColor: {
 		namespace: "config",
 		name: "Section Color",
 		type: "color",
-		default: "#1e3140"
+		default: "#1e3140",
 	},
 	prologueOpen: {
 		namespace: "settings",
 		name: "Prologue Open",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	mtRuggedOpen: {
 		namespace: "settings",
 		name: "Mt. Rugged Open",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	forestOpen: {
 		namespace: "settings",
 		name: "Forever Forest Open",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	toyboxOpen: {
 		namespace: "settings",
 		name: "Toybox Open",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	whaleOpen: {
 		namespace: "settings",
 		name: "Whale Open",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	seedsRequired: {
 		namespace: "settings",
 		name: "Ch.6 Seeds Required",
 		type: "number",
 		default: 4,
-		range: [0, 4]
+		range: [0, 4],
 	},
 	shiverBridgeVisible: {
 		namespace: "settings",
 		name: "Ch.7 Bridge Visible",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	blueHouseOpen: {
 		namespace: "settings",
 		name: "Blue House Open",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	startingLocation: {
 		namespace: "settings",
 		name: "Starting Location",
 		type: "select",
 		default: "Toad Town",
-		choices: ["Toad Town", "Goomba Village", "Dry Dry Outpost", "Yoshi Village"]
+		choices: [
+			"Toad Town",
+			"Goomba Village",
+			"Dry Dry Outpost",
+			"Yoshi Village",
+		],
 	},
 	fastBowserCastle: {
 		namespace: "settings",
 		name: "Fast Bowser's Castle",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	shopsRandomized: {
 		namespace: "settings",
 		name: "Shopsanity",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	rowfRandomized: {
 		namespace: "settings",
 		name: "Rowf Shop In Logic",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	merlowRandomized: {
 		namespace: "settings",
 		name: "Merlow In Logic",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	keysRandomized: {
 		namespace: "settings",
 		name: "Keysanity",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	panelsRandomized: {
 		namespace: "settings",
 		name: "Panels Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	coinsRandomized: {
 		namespace: "settings",
 		name: "Overworld Coins",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	coinBlocksRandomized: {
 		namespace: "settings",
 		name: "Coin Blocks",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	foliageCoinsRandomized: {
 		namespace: "settings",
 		name: "Foliage Coins",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	lettersRandomized: {
 		namespace: "settings",
 		name: "Letters Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	koopaKootRandomized: {
 		namespace: "settings",
 		name: "Koopa Koot Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	kootCoinsRandomized: {
 		namespace: "settings",
 		name: "Koot Coins Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	dojoRandomized: {
 		namespace: "settings",
 		name: "Dojo Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	tradingEventRandomized: {
 		namespace: "settings",
 		name: "Trading Event Randomized",
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	superBlocksRandomized: {
 		namespace: "settings",
 		name: "Super Blocks Randomized",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	multicoinBlocksRandomized: {
 		namespace: "settings",
 		name: "Multicoin Blocks Randomized",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	powerStarHunt: {
 		namespace: "settings",
 		name: "Power Star Hunt",
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	powerStarNum: {
 		namespace: "settings",
 		name: "Power Star Hunt Num",
 		type: "number",
 		default: 120,
-		range: [0, 120]
+		range: [0, 120],
 	},
 	sSkip: {
 		namespace: "settings",
 		name: "Star Hunt Skips Ch. 8",
 		type: "boolean",
-		default: true
-	}
+		default: true,
+	},
 	// gearShuffle: {
 	// 	namespace: "settings",
 	// 	name: "Gear Shuffle",
@@ -355,8 +360,8 @@ export const useOptions = defineStore("options", {
 			if (data.type === "select") {
 				return data.choices;
 			}
-		}
-	}
+		},
+	},
 });
 
 export const settingsKeys = Object.getOwnPropertyNames(optionsData).filter(

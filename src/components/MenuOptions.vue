@@ -11,33 +11,17 @@ const { options } = storeToRefs(optionsStore);
 const props = defineProps<{
 	optionsKeys: (keyof OptionsValues)[];
 }>();
-
-function showKey(key: string) {
-	return key === "combineSortMode"
-		? options.value.combineMisc && options.value.compactTracker
-		: key === "combineMisc"
-		? options.value.compactTracker
-		: true;
-}
-
-const keysToShow = computed(() =>
-	props.optionsKeys.filter((el) => showKey(el))
-);
 </script>
 
 <template>
 	<div class="flex">
 		<div
-			v-for="key in keysToShow"
+			v-for="key in props.optionsKeys"
 			class="flex-row"
 			:key="key"
 			@click="
 				optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
 			"
-			:style="{
-				marginLeft:
-					key === 'combineMisc' || key === 'combineSortMode' ? '1rem' : 0
-			}"
 		>
 			<div class="option-name" colspan="3">{{ optionsStore.getName(key) }}</div>
 			<div v-if="optionsStore.getType(key) === 'boolean'" class="option">
