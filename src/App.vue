@@ -602,6 +602,7 @@ div.add-panels > div {
 	align-items: center;
 	border-radius: 8px;
 	background-color: #1e3140;
+	cursor: move;
 }
 
 main {
