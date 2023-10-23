@@ -12,7 +12,8 @@ import { storeToRefs } from "pinia";
 import SettingsModal from "./components/SettingsModal.vue";
 import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
-import { GridLayout, GridItem, Breakpoint, Layout } from "grid-layout-plus";
+import { GridLayout, GridItem } from "grid-layout-plus";
+import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "@vexip-ui/utils";
 
 const breakpoint = ref<Breakpoint>("lg");
@@ -116,7 +117,7 @@ const panels = {
 };
 
 const layouts = reactive(
-	["xxs", "xs", "sm", "md", "lg"].reduce(
+	(["xxs", "xs", "sm", "md", "lg"] as Breakpoint[]).reduce(
 		(a, bp) => {
 			if (bp in savedLayouts) {
 				return { ...a, [bp]: savedLayouts[bp] };
@@ -244,7 +245,9 @@ const dragFromMenu = throttle((panelKey: string) => {
 
 		try {
 			item.wrapper.style.display = "none";
-		} catch (e) {}
+		} catch (e) {
+			console.error(e);
+		}
 
 		Object.assign(item.state, {
 			top: mouseAt.y - parentRect.top,
@@ -331,7 +334,9 @@ function dragEnd(panelKey: string) {
 
 	try {
 		item.wrapper.style.display = "";
-	} catch (e) {}
+	} catch (e) {
+		console.error(e);
+	}
 
 	saveLayout();
 }
