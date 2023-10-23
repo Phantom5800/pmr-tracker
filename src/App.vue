@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from "vue";
+import { ref, computed, reactive, onMounted, onBeforeUnmount } from "vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import { configKeys, settingsKeys } from "./stores/config";
@@ -128,7 +128,26 @@ const layouts = reactive(
 	)
 );
 
+const mainRef = ref<HTMLElement>();
+const gridLayout = ref<InstanceType<typeof GridLayout>>();
+
+onMounted(() => {
+	document.addEventListener("dragover", syncMousePosition);
+});
+
+onBeforeUnmount(() => {
+	document.removeEventListener("dragover", syncMousePosition);
+});
+
+const mouseAt = { x: -1, y: -1 };
+
+function syncMousePosition(event: MouseEvent) {
+	mouseAt.x = event.clientX;
+	mouseAt.y = event.clientY;
+}
+
 const layout = computed(() => layouts[breakpoint.value]);
+const currentPanels = computed(() => layout.value.map((el) => el.i));
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -192,8 +211,11 @@ function removePanel(idx: number) {
 	saveLayout();
 }
 
+const dragItem = { x: -1, y: -1, w: 8, h: 12, i: "" };
+const dropId = "drop";
+
 const dragFromMenu = throttle((panelKey: string) => {
-	const parentRect = wrapper.value?.getBoundingClientRect();
+	const parentRect = mainRef.value?.getBoundingClientRect();
 
 	if (!parentRect || !gridLayout.value) return;
 
@@ -207,8 +229,8 @@ const dragFromMenu = throttle((panelKey: string) => {
 		layout.value.push({
 			x: (layout.value.length * 2) % 12,
 			y: layout.value.length + 12, // puts it at the bottom
-			w: 2,
-			h: 2,
+			w: dragItem.w,
+			h: dragItem.h,
 			i: dropId,
 		});
 	}
@@ -242,7 +264,6 @@ const dragFromMenu = throttle((panelKey: string) => {
 				dragItem.h,
 				dragItem.w
 			);
-			dragItem.i = String(index);
 			dragItem.x = layout.value[index].x;
 			dragItem.y = layout.value[index].y;
 		} else {
@@ -254,13 +275,15 @@ const dragFromMenu = throttle((panelKey: string) => {
 				dragItem.h,
 				dragItem.w
 			);
-			layout.value = layout.value.filter((item) => item.i !== dropId);
+			layouts[breakpoint.value] = layout.value.filter(
+				(item) => item.i !== dropId
+			);
 		}
 	}
 });
 
 function dragEnd(panelKey: string) {
-	const parentRect = wrapper.value?.getBoundingClientRect();
+	const parentRect = mainRef.value?.getBoundingClientRect();
 
 	if (!parentRect || !gridLayout.value) return;
 
@@ -271,13 +294,6 @@ function dragEnd(panelKey: string) {
 		mouseAt.y < parentRect.bottom;
 
 	if (mouseInGrid) {
-		alert(
-			`Dropped element props:\n${JSON.stringify(
-				dragItem,
-				["x", "y", "w", "h"],
-				2
-			)}`
-		);
 		gridLayout.value.dragEvent(
 			"dragend",
 			dropId,
@@ -286,21 +302,23 @@ function dragEnd(panelKey: string) {
 			dragItem.h,
 			dragItem.w
 		);
-		layout.value = layout.value.filter((item) => item.i !== dropId);
+		layouts[breakpoint.value] = layout.value.filter(
+			(item) => item.i !== dropId
+		);
 	} else {
 		return;
 	}
 
-	layout.value.push({
+	layouts[breakpoint.value].push({
 		x: dragItem.x,
 		y: dragItem.y,
 		w: dragItem.w,
 		h: dragItem.h,
-		i: dragItem.i,
+		i: panelKey,
 	});
 	gridLayout.value.dragEvent(
 		"dragend",
-		dragItem.i,
+		panelKey,
 		dragItem.x,
 		dragItem.y,
 		dragItem.h,
@@ -314,6 +332,8 @@ function dragEnd(panelKey: string) {
 	try {
 		item.wrapper.style.display = "";
 	} catch (e) {}
+
+	saveLayout();
 }
 </script>
 
@@ -362,9 +382,13 @@ function dragEnd(panelKey: string) {
 		>
 			<button @click="moving = false">Stop Editing</button>
 			<div
-				v-for="(panel, key) in panels"
+				v-for="[key, panel] in Object.entries(panels).filter(
+					([k, v]) => !currentPanels.includes(k)
+				)"
 				:key="panel.name"
-				@drag="dragFromMenu(key)"
+				draggable="true"
+				unselectable="on"
+				@drag="() => dragFromMenu(key)"
 				@dragend="dragEnd(key)"
 			>
 				{{ panel.name }}
@@ -373,11 +397,13 @@ function dragEnd(panelKey: string) {
 	</header>
 
 	<main
+		ref="mainRef"
 		:style="{
 			translate: moving ? '0 5rem' : undefined,
 		}"
 	>
 		<GridLayout
+			ref="gridLayout"
 			v-model:layout="layout"
 			:responsive-layouts="layouts"
 			:vertical-compact="true"
