@@ -13,6 +13,7 @@ import SettingsModal from "./components/SettingsModal.vue";
 import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem, Breakpoint, Layout } from "grid-layout-plus";
+import { throttle } from "@vexip-ui/utils";
 
 const breakpoint = ref<Breakpoint>("lg");
 
@@ -101,6 +102,19 @@ const initialLayouts: Record<Breakpoint, Layout> = {
 	],
 };
 
+const panels = {
+	flags: { name: "Seed Settings", h: 20, w: 10 },
+	required: { name: "Required Items", h: 20, w: 10 },
+	compact: { name: "Required Compact", h: 20, w: 10 },
+	everything: { name: "Basically Everything", h: 20, w: 10 },
+	miscitem: { name: "Misc. Items", h: 20, w: 10 },
+	misckey: { name: "Misc. Keys", h: 20, w: 10 },
+	letters: { name: "Letters", h: 20, w: 10 },
+	koot: { name: "Koopa Koot Favors", h: 20, w: 10 },
+	map: { name: "Map Tracker", h: 20, w: 10 },
+	notes: { name: "User Notepad", h: 20, w: 10 },
+};
+
 const layouts = reactive(
 	["xxs", "xs", "sm", "md", "lg"].reduce(
 		(a, bp) => {
@@ -177,6 +191,130 @@ function removePanel(idx: number) {
 	layouts[breakpoint.value].splice(idx, 1);
 	saveLayout();
 }
+
+const dragFromMenu = throttle((panelKey: string) => {
+	const parentRect = wrapper.value?.getBoundingClientRect();
+
+	if (!parentRect || !gridLayout.value) return;
+
+	const mouseInGrid =
+		mouseAt.x > parentRect.left &&
+		mouseAt.x < parentRect.right &&
+		mouseAt.y > parentRect.top &&
+		mouseAt.y < parentRect.bottom;
+
+	if (mouseInGrid && !layout.value.find((item) => item.i === dropId)) {
+		layout.value.push({
+			x: (layout.value.length * 2) % 12,
+			y: layout.value.length + 12, // puts it at the bottom
+			w: 2,
+			h: 2,
+			i: dropId,
+		});
+	}
+
+	const index = layout.value.findIndex((item) => item.i === dropId);
+
+	if (index !== -1) {
+		const item = gridLayout.value.getItem(dropId);
+
+		if (!item) return;
+
+		try {
+			item.wrapper.style.display = "none";
+		} catch (e) {}
+
+		Object.assign(item.state, {
+			top: mouseAt.y - parentRect.top,
+			left: mouseAt.x - parentRect.left,
+		});
+		const newPos = item.calcXY(
+			mouseAt.y - parentRect.top,
+			mouseAt.x - parentRect.left
+		);
+
+		if (mouseInGrid) {
+			gridLayout.value.dragEvent(
+				"dragstart",
+				dropId,
+				newPos.x,
+				newPos.y,
+				dragItem.h,
+				dragItem.w
+			);
+			dragItem.i = String(index);
+			dragItem.x = layout.value[index].x;
+			dragItem.y = layout.value[index].y;
+		} else {
+			gridLayout.value.dragEvent(
+				"dragend",
+				dropId,
+				newPos.x,
+				newPos.y,
+				dragItem.h,
+				dragItem.w
+			);
+			layout.value = layout.value.filter((item) => item.i !== dropId);
+		}
+	}
+});
+
+function dragEnd(panelKey: string) {
+	const parentRect = wrapper.value?.getBoundingClientRect();
+
+	if (!parentRect || !gridLayout.value) return;
+
+	const mouseInGrid =
+		mouseAt.x > parentRect.left &&
+		mouseAt.x < parentRect.right &&
+		mouseAt.y > parentRect.top &&
+		mouseAt.y < parentRect.bottom;
+
+	if (mouseInGrid) {
+		alert(
+			`Dropped element props:\n${JSON.stringify(
+				dragItem,
+				["x", "y", "w", "h"],
+				2
+			)}`
+		);
+		gridLayout.value.dragEvent(
+			"dragend",
+			dropId,
+			dragItem.x,
+			dragItem.y,
+			dragItem.h,
+			dragItem.w
+		);
+		layout.value = layout.value.filter((item) => item.i !== dropId);
+	} else {
+		return;
+	}
+
+	layout.value.push({
+		x: dragItem.x,
+		y: dragItem.y,
+		w: dragItem.w,
+		h: dragItem.h,
+		i: dragItem.i,
+	});
+	gridLayout.value.dragEvent(
+		"dragend",
+		dragItem.i,
+		dragItem.x,
+		dragItem.y,
+		dragItem.h,
+		dragItem.w
+	);
+
+	const item = gridLayout.value.getItem(dropId);
+
+	if (!item) return;
+
+	try {
+		item.wrapper.style.display = "";
+	} catch (e) {}
+}
 </script>
 
 <template>
@@ -216,9 +354,29 @@ function removePanel(idx: number) {
 		>
 			&#x2699;
 		</div>
+		<div
+			class="add-panels"
+			:style="{
+				translate: moving ? undefined : '0 -10rem',
+			}"
+		>
+			<button @click="moving = false">Stop Editing</button>
+			<div
+				v-for="(panel, key) in panels"
+				:key="panel.name"
+				@drag="dragFromMenu(key)"
+				@dragend="dragEnd(key)"
+			>
+				{{ panel.name }}
+			</div>
+		</div>
 	</header>
 
-	<main>
+	<main
+		:style="{
+			translate: moving ? '0 5rem' : undefined,
+		}"
+	>
 		<GridLayout
 			v-model:layout="layout"
 			:responsive-layouts="layouts"
@@ -384,6 +542,39 @@ header {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	position: relative;
+}
+
+div.add-panels {
+	background-color: #2273a4;
+	position: absolute;
+	border-bottom: 4px solid #1e3140;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 8rem;
+	z-index: 20;
+	transition: translate 0.2s;
+	display: flex;
+	flex-direction: row;
+	gap: 4px;
+	padding-block: 4px;
+}
+
+div.add-panels > div {
+	height: 100%;
+	width: 8rem;
+	text-align: center;
+	padding-inline: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	background-color: #1e3140;
+}
+
+main {
+	transition: translate 0.2s;
 }
 
 footer {
