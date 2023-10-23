@@ -172,6 +172,11 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 	console.info(newBreakpoint, newLayout);
 	breakpoint.value = newBreakpoint;
 }
+
+function removePanel(idx: number) {
+	layouts[breakpoint.value].splice(idx, 1);
+	saveLayout();
+}
 </script>
 
 <template>
@@ -225,7 +230,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 			@breakpoint-changed="breakpointChanged"
 		>
 			<GridItem
-				v-for="item in layout"
+				v-for="(item, idx) in layout"
 				:key="item.i"
 				:x="item.x"
 				:y="item.y"
@@ -237,11 +242,16 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 				@moved="saveLayout"
 				@resized="saveLayout"
 			>
-				<EnabledSettings :moving="moving" v-if="item.i === 'flags'" />
+				<EnabledSettings
+					:moving="moving"
+					v-if="item.i === 'flags'"
+					:remove-panel="() => removePanel(idx)"
+				/>
 				<RequiredTracker
 					:moving="moving"
 					v-if="item.i === 'required'"
 					:all-items="allItemsFiltered"
+					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
 					:moving="moving"
@@ -249,6 +259,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 					:all-items="allItemsFiltered"
 					:heading="'Required Items'"
 					:itemTypes="['required', 'chapterReward', 'equipment', 'partner']"
+					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
 					:moving="moving"
@@ -263,15 +274,25 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 						'miscItem',
 						'miscKey',
 					]"
+					:remove-panel="() => removePanel(idx)"
 				/>
-				<UserNotes :moving="moving" v-if="item.i === 'notes'" />
-				<MapTracker :moving="moving" v-if="item.i === 'map'" />
+				<UserNotes
+					:moving="moving"
+					v-if="item.i === 'notes'"
+					:remove-panel="() => removePanel(idx)"
+				/>
+				<MapTracker
+					:moving="moving"
+					v-if="item.i === 'map'"
+					:remove-panel="() => removePanel(idx)"
+				/>
 				<ItemTracker
 					:moving="moving"
 					v-if="item.i === 'misckey'"
 					:all-items="allItemsFiltered"
 					heading="Misc. Keys"
 					:itemTypes="['miscKey']"
+					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
 					:moving="moving"
@@ -279,6 +300,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 					:all-items="allItemsFiltered"
 					heading="Misc. Items"
 					:itemTypes="['miscItem']"
+					:remove-panel="() => removePanel(idx)"
 				/>
 
 				<ItemTracker
@@ -287,6 +309,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 					v-if="item.i === 'letters'"
 					heading="Letters"
 					:itemTypes="['letter']"
+					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
 					:moving="moving"
@@ -294,8 +317,12 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 					v-if="item.i === 'koot'"
 					heading="Koopa Koot Favors"
 					:itemTypes="['kootFavor']"
+					:remove-panel="() => removePanel(idx)"
 				/>
-				<InfoBlocks v-if="item.i === 'info'" />
+				<!-- <InfoBlocks
+					v-if="item.i === 'info'"
+					:remove-panel="() => removePanel(idx)"
+				/> -->
 			</GridItem>
 		</GridLayout>
 	</main>

@@ -8,7 +8,10 @@ import { useOptions } from "@/stores/config";
 const playthrough = usePlaythrough();
 const options = useOptions();
 
-const { moving } = defineProps<{ moving: boolean }>();
+const { moving, removePanel } = defineProps<{
+	moving: boolean;
+	removePanel: () => void;
+}>();
 
 const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
@@ -60,14 +63,14 @@ const unshuffledChecks = computed(() =>
 		letter-spacing:
 		{{ options.$state.options.paperMarioFont ? "normal" : "-0.07rem" }}}
 	</component>
-	<TrackerPanel :moving="moving">
+	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">
 			<button
 				class="map-select"
 				:class="{
 					selected: map === currentMap,
 					fullCleared: regionFullCleared(map),
-					checksInLogic: regionHasChecksInLogic(map)
+					checksInLogic: regionHasChecksInLogic(map),
 				}"
 				v-for="map in allRegions"
 				:key="map"
@@ -89,7 +92,7 @@ const unshuffledChecks = computed(() =>
 					:class="{
 						selected: area === currentArea,
 						checksInLogic: areaHasChecksInLogic(currentMap, area),
-						fullCleared: areaFullCleared(currentMap, area)
+						fullCleared: areaFullCleared(currentMap, area),
 					}"
 					@click="currentArea = area"
 					:style="{
@@ -98,7 +101,7 @@ const unshuffledChecks = computed(() =>
 						}`,
 						gridColumn: `${region.areas[area].col} / span ${
 							region.areas[area].colSpan || 1
-						}`
+						}`,
 					}"
 				>
 					{{ area }}
@@ -109,7 +112,7 @@ const unshuffledChecks = computed(() =>
 					:key="blank.row * 100 + blank.col"
 					:style="{
 						gridRow: `${blank.row} / span ${blank.rowSpan || 1}`,
-						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`
+						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`,
 					}"
 				></button>
 				<div
@@ -118,7 +121,7 @@ const unshuffledChecks = computed(() =>
 					:key="label.row * 100 + label.col"
 					:style="{
 						gridRow: `${label.row} / span ${label.rowSpan || 1}`,
-						gridColumn: `${label.col} / span ${label.colSpan || 1}`
+						gridColumn: `${label.col} / span ${label.colSpan || 1}`,
 					}"
 				>
 					{{ label.content }}
@@ -135,7 +138,7 @@ const unshuffledChecks = computed(() =>
 					:class="{
 						available: playthrough.canCheckLocation(check.reqs, currentMap),
 						obtained: playthrough.checkedLocation(currentArea, checkName),
-						disabled: unshuffledChecks.includes(checkName)
+						disabled: unshuffledChecks.includes(checkName),
 					}"
 				>
 					<input

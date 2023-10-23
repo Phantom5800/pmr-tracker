@@ -12,6 +12,7 @@ const props = defineProps<{
 	itemTypes?: string[];
 	allItems: TrackableItemInfo[];
 	moving: boolean;
+	removePanel: () => void;
 }>();
 
 const tooltipRef = ref("");
@@ -28,7 +29,7 @@ const uselessItems = [
 	"Quizmo",
 	"Star Piece",
 	"Rip Cheato",
-	"Anti Guy"
+	"Anti Guy",
 ];
 
 const trackerItems = computed(() => {
@@ -67,7 +68,7 @@ function equipmentTooltip(item: string) {
 </script>
 
 <template>
-	<TrackerPanel :moving="moving">
+	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<template #header>
 			<div class="flex-header">
 				<h2>{{ heading }}</h2>

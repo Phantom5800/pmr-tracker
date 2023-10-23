@@ -8,7 +8,11 @@ import type { TrackableItemInfo } from "../types/items";
 const tooltip = ref("");
 const playthrough = usePlaythrough();
 
-const props = defineProps<{ allItems: TrackableItemInfo[] }>();
+const props = defineProps<{
+	allItems: TrackableItemInfo[];
+	moving: boolean;
+	removePanel: () => void;
+}>();
 
 const requiredItems = computed(() =>
 	props.allItems.filter((el) =>
@@ -34,8 +38,10 @@ function equipmentTooltip(item: string) {
 <template>
 	<ItemTracker
 		:all-items="allItems"
+		:moving="props.moving"
 		heading="Required Items"
 		:tooltip="tooltip"
+		:removePanel="props.removePanel"
 	>
 		<div class="container">
 			<div class="rows">
