@@ -14,9 +14,11 @@ import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem, Breakpoint, Layout } from "grid-layout-plus";
 
-const breakpoint = ref("lg");
+const breakpoint = ref<Breakpoint>("lg");
 
-const initialLayouts = {
+const savedLayouts = JSON.parse(localStorage.getItem("layout") ?? "{}");
+
+const initialLayouts: Record<Breakpoint, Layout> = {
 	lg: [
 		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
 		{
@@ -99,32 +101,20 @@ const initialLayouts = {
 	],
 };
 
-const layout = ref(
-	localStorage.getItem("layout")
-		? JSON.parse(localStorage.getItem("layout")).lg
-		: initialLayouts.lg
+const layouts = reactive(
+	["xxs", "xs", "sm", "md", "lg"].reduce(
+		(a, bp) => {
+			if (bp in savedLayouts) {
+				return { ...a, [bp]: savedLayouts[bp] };
+			} else {
+				return { ...a, [bp]: initialLayouts[bp] };
+			}
+		},
+		{} as Record<Breakpoint, Layout>
+	)
 );
 
-// const filteredLayout = computed(() => {
-// 	if (!layout.value) {
-// 		return [];
-// 	}
-// 	return layout.value.filter(
-// 		(el) =>
-// 			({
-// 				map: options.value.gameMaps,
-// 				notes: options.value.userNotes,
-// 				info: options.value.howToFields,
-// 				flags: options.value.seedFlags,
-// 				required: !options.value.compactTracker,
-// 				miscitem: !options.value.compactTracker,
-// 				misckey: !options.value.compactTracker,
-// 				letters: options.value.lettersRandomized,
-// 				koot: options.value.koopaKootRandomized,
-// 				compact: options.value.compactTracker
-// 			})[el.i]
-// 	);
-// });
+const layout = computed(() => layouts[breakpoint.value]);
 
 const configOpen = ref(false);
 const settingsOpen = ref(false);
@@ -148,7 +138,15 @@ function closeSettingsDelay() {
 }
 
 function saveLayout() {
-	localStorage.setItem("layout", JSON.stringify(layout));
+	const savedLayoutsStr = localStorage.getItem("layout");
+	let savedLayouts = {} as Record<Breakpoint, Layout>;
+	if (savedLayoutsStr) {
+		savedLayouts = JSON.parse(savedLayoutsStr);
+	}
+	localStorage.setItem(
+		"layout",
+		JSON.stringify({ ...savedLayouts, [breakpoint.value]: layout.value })
+	);
 }
 
 function resetLayout() {
@@ -157,15 +155,22 @@ function resetLayout() {
 			"Are you sure you want to reset your layout? Your saved layout will be lost!"
 		)
 	) {
-		layout.value = initialLayouts.lg;
-		localStorage.removeItem("layout");
+		layouts[breakpoint.value] = initialLayouts[breakpoint.value];
+		const savedLayoutsStr = localStorage.getItem("layout");
+		let savedLayouts = {} as Record<Breakpoint, Layout>;
+		if (savedLayoutsStr) {
+			savedLayouts = JSON.parse(savedLayoutsStr);
+		}
+		localStorage.setItem(
+			"layout",
+			JSON.stringify({ ...savedLayouts, [breakpoint.value]: undefined })
+		);
 	}
 }
 
 function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 	console.info(newBreakpoint, newLayout);
 	breakpoint.value = newBreakpoint;
-	layout.value = initialLayouts[newBreakpoint];
 }
 </script>
 
@@ -211,7 +216,7 @@ function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
 	<main>
 		<GridLayout
 			v-model:layout="layout"
-			:responsive-layouts="initialLayouts"
+			:responsive-layouts="layouts"
 			:vertical-compact="true"
 			:auto-size="true"
 			:row-height="16"
