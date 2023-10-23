@@ -58,31 +58,41 @@ const { moving, removePanel } = defineProps<{
 		:moving="moving"
 		:remove-panel="removePanel"
 	>
-		<div class="flex">
-			<img
-				v-for="setting in settings"
-				:key="setting.id"
-				:src="getImageUrl(setting.src)"
-				:class="{ hide: !options[setting.id] }"
-			/>
+		<div class="wrapper">
+			<div class="flex">
+				<img
+					v-for="setting in settings"
+					:key="setting.id"
+					:src="getImageUrl(setting.src)"
+					:class="{ hide: !options[setting.id] }"
+				/>
+			</div>
 		</div>
 	</TrackerPanel>
 </template>
 
 <style scoped>
+div.wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 div.flex {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	gap: 4px;
+	gap: 1px;
 	width: 100%;
 }
 
 img {
 	object-fit: contain;
 	/* aspect-ratio: 1; */
-	height: 2.75rem;
-	/* max-height: 3rem; */
+	/* height: 100%; */
+	height: 3rem;
 }
 
 img.hide {
