@@ -5,16 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-<<<<<<< HEAD
   '@floating-ui/vue':
     specifier: ^1.0.2
     version: 1.0.2(vue@3.3.4)
-||||||| 248760b
-=======
   '@vexip-ui/utils':
     specifier: ^2.2.0
     version: 2.2.0
->>>>>>> grid-layout-plus
   '@vueuse/components':
     specifier: ^10.5.0
     version: 10.5.0(vue@3.3.4)

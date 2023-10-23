@@ -32,8 +32,8 @@ export type Options = {
 	colorblind: boolean;
 	highlightKey: boolean;
 	trackerLogic: boolean;
-	compactTracker: boolean;
-	combineMisc: boolean;
+	// compactTracker: boolean;
+	// combineMisc: boolean;
 	combineSortMode: string;
 	seedFlags: boolean;
 	gameMaps: boolean;
