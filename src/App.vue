@@ -16,6 +16,7 @@ import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
+import OptionsModal from "./components/OptionsModal.vue";
 
 const breakpoint = ref<Breakpoint>("lg");
 
@@ -351,6 +352,8 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};font-size:
 		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }
 	</component>
+
+	<OptionsModal />
 	<header>
 		<div style="display: flex; gap: 8px">
 			<Button
