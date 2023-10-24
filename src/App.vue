@@ -14,7 +14,7 @@ import ConfigModal from "./components/ConfigModal.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
-import { throttle } from "@vexip-ui/utils";
+import { throttle } from "lodash";
 
 const breakpoint = ref<Breakpoint>("lg");
 
@@ -203,7 +203,6 @@ function resetLayout() {
 }
 
 function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
-	console.info(newBreakpoint, newLayout);
 	breakpoint.value = newBreakpoint;
 }
 
@@ -283,7 +282,7 @@ const dragFromMenu = throttle((panelKey: string) => {
 			);
 		}
 	}
-});
+}, 33);
 
 function dragEnd(panelKey: string) {
 	const parentRect = mainRef.value?.getBoundingClientRect();
@@ -340,6 +339,9 @@ function dragEnd(panelKey: string) {
 
 	saveLayout();
 }
+
+const dragEndTimeout = (panelKey: string) =>
+	setTimeout(() => dragEnd(panelKey), 100);
 </script>
 
 <template>
@@ -393,8 +395,8 @@ function dragEnd(panelKey: string) {
 				:key="panel.name"
 				draggable="true"
 				unselectable="on"
-				@drag="() => dragFromMenu(key)"
-				@dragend="dragEnd(key)"
+				@drag="dragFromMenu(key)"
+				@dragend="dragEndTimeout(key)"
 			>
 				{{ panel.name }}
 			</div>
