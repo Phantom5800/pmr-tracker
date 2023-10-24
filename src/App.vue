@@ -566,14 +566,14 @@ function dragEnd(panelKey: string) {
 }
 
 header {
-	padding-top: 5px;
-	margin: 5px 5px 5px 5px;
+	padding: 1rem;
 	display: flex;
 	flex-direction: row;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	position: relative;
+	flex-grow: 0;
 }
 
 div.add-panels {
@@ -584,6 +584,7 @@ div.add-panels {
 	left: 0;
 	right: 0;
 	height: 8rem;
+	padding: 1rem;
 	z-index: 20;
 	transition: translate 0.2s;
 	display: flex;
@@ -607,6 +608,7 @@ div.add-panels > div {
 
 main {
 	transition: translate 0.2s;
+	flex-grow: 1;
 }
 
 footer {
@@ -614,7 +616,9 @@ footer {
 	display: inline-block;
 	text-align: center;
 	color: white;
-	font-size: 0.8em;
+	font-size: 1rem;
+	padding-bottom: 1rem;
+	flex-grow: 0;
 }
 
 #logo-img {
