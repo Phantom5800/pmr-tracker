@@ -659,6 +659,7 @@ div.add-panels {
 	transition: translate 0.2s;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	gap: 4px;
 	padding-block: 4px;
 }

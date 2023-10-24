@@ -90,11 +90,16 @@ div.button {
 	cursor: pointer !important;
 	aspect-ratio: 1 / 1;
 	height: 100%;
+	max-height: 4rem;
 	border-radius: 5px;
 	background-color: var(--section-color);
 	color: white;
 	display: grid;
 	place-items: center;
+	flex-shrink: 1;
+	flex-grow: 0;
+	flex-basis: 0;
+	padding: 0 !important;
 }
 
 div.button:hover {
