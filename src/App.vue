@@ -214,7 +214,7 @@ function removePanel(idx: number) {
 const dragItem = { x: -1, y: -1 };
 const dropId = "drop";
 
-const dragFromMenu = throttle((panelKey: string) => {
+const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 	const parentRect = mainRef.value?.getBoundingClientRect();
 
 	if (!parentRect || !gridLayout.value) return;
@@ -284,7 +284,7 @@ const dragFromMenu = throttle((panelKey: string) => {
 	}
 }, 33);
 
-function dragEnd(panelKey: string) {
+function dragEnd(panelKey: keyof typeof panels) {
 	const parentRect = mainRef.value?.getBoundingClientRect();
 
 	if (!parentRect || !gridLayout.value) return;
@@ -340,7 +340,7 @@ function dragEnd(panelKey: string) {
 	saveLayout();
 }
 
-const dragEndTimeout = (panelKey: string) =>
+const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	setTimeout(() => dragEnd(panelKey), 100);
 </script>
 
@@ -395,8 +395,8 @@ const dragEndTimeout = (panelKey: string) =>
 				:key="panel.name"
 				draggable="true"
 				unselectable="on"
-				@drag="dragFromMenu(key)"
-				@dragend="dragEndTimeout(key)"
+				@drag="dragFromMenu(key as keyof typeof panels)"
+				@dragend="dragEndTimeout(key as keyof typeof panels)"
 			>
 				{{ panel.name }}
 			</div>
