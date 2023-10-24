@@ -104,16 +104,16 @@ const initialLayouts: Record<Breakpoint, Layout> = {
 };
 
 const panels = {
-	flags: { name: "Seed Settings", h: 20, w: 10 },
-	required: { name: "Required Items", h: 20, w: 10 },
-	compact: { name: "Required Compact", h: 20, w: 10 },
-	everything: { name: "Basically Everything", h: 20, w: 10 },
-	miscitem: { name: "Misc. Items", h: 20, w: 10 },
-	misckey: { name: "Misc. Keys", h: 20, w: 10 },
-	letters: { name: "Letters", h: 20, w: 10 },
-	koot: { name: "Koopa Koot Favors", h: 20, w: 10 },
-	map: { name: "Map Tracker", h: 20, w: 10 },
-	notes: { name: "User Notepad", h: 20, w: 10 },
+	flags: { name: "Seed Settings", h: 3, w: 30 },
+	required: { name: "Required Items", h: 40, w: 40 },
+	compact: { name: "Required Compact", h: 20, w: 20 },
+	everything: { name: "Basically Everything", h: 30, w: 40 },
+	miscitem: { name: "Misc. Items", h: 20, w: 20 },
+	misckey: { name: "Misc. Keys", h: 20, w: 20 },
+	letters: { name: "Letters", h: 20, w: 20 },
+	koot: { name: "Koopa Koot Favors", h: 20, w: 20 },
+	map: { name: "Map Tracker", h: 20, w: 20 },
+	notes: { name: "User Notepad", h: 20, w: 20 },
 };
 
 const layouts = reactive(
@@ -211,7 +211,7 @@ function removePanel(idx: number) {
 	saveLayout();
 }
 
-const dragItem = { x: -1, y: -1, w: 16, h: 12, i: "" };
+const dragItem = { x: -1, y: -1 };
 const dropId = "drop";
 
 const dragFromMenu = throttle((panelKey: string) => {
@@ -229,8 +229,8 @@ const dragFromMenu = throttle((panelKey: string) => {
 		layout.value.push({
 			x: (layout.value.length * 2) % 12,
 			y: layout.value.length + 12, // puts it at the bottom
-			w: dragItem.w,
-			h: dragItem.h,
+			w: panels[panelKey].w,
+			h: panels[panelKey].h,
 			i: dropId,
 		});
 	}
@@ -263,8 +263,8 @@ const dragFromMenu = throttle((panelKey: string) => {
 				dropId,
 				newPos.x,
 				newPos.y,
-				dragItem.h,
-				dragItem.w
+				panels[panelKey].h,
+				panels[panelKey].w
 			);
 			dragItem.x = layout.value[index].x;
 			dragItem.y = layout.value[index].y;
@@ -274,8 +274,8 @@ const dragFromMenu = throttle((panelKey: string) => {
 				dropId,
 				newPos.x,
 				newPos.y,
-				dragItem.h,
-				dragItem.w
+				panels[panelKey].h,
+				panels[panelKey].w
 			);
 			layouts[breakpoint.value] = layout.value.filter(
 				(item) => item.i !== dropId
@@ -301,8 +301,8 @@ function dragEnd(panelKey: string) {
 			dropId,
 			dragItem.x,
 			dragItem.y,
-			dragItem.h,
-			dragItem.w
+			panels[panelKey].h,
+			panels[panelKey].w
 		);
 		layouts[breakpoint.value] = layout.value.filter(
 			(item) => item.i !== dropId
@@ -314,8 +314,8 @@ function dragEnd(panelKey: string) {
 	layouts[breakpoint.value].push({
 		x: dragItem.x,
 		y: dragItem.y,
-		w: dragItem.w,
-		h: dragItem.h,
+		w: panels[panelKey].w,
+		h: panels[panelKey].h,
 		i: panelKey,
 	});
 	gridLayout.value.dragEvent(
@@ -323,8 +323,8 @@ function dragEnd(panelKey: string) {
 		panelKey,
 		dragItem.x,
 		dragItem.y,
-		dragItem.h,
-		dragItem.w
+		panels[panelKey].h,
+		panels[panelKey].w
 	);
 
 	const item = gridLayout.value.getItem(dropId);
