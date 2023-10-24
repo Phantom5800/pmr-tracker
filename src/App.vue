@@ -611,6 +611,7 @@ div.add-panels > div {
 main {
 	transition: translate 0.2s;
 	flex-grow: 1;
+	min-width: 1920px;
 }
 
 footer {
