@@ -4,9 +4,11 @@ import EnabledSettings from "./components/EnabledSettings.vue";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import SvgButton from "./components/SvgButton.vue";
 import { configKeys, settingsKeys } from "./stores/config";
+import axios from "axios";
 import MapTracker from "./components/MapTracker.vue";
 import ItemTracker from "./components/ItemTracker.vue";
 import UserNotes from "./components/UserNotes.vue";
+import SeedImport from "./components/SeedImport.vue";
 import RequiredTracker from "./components/RequiredTracker.vue";
 import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
@@ -151,8 +153,7 @@ function syncMousePosition(event: MouseEvent) {
 const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map((el) => el.i));
 
-const configOpen = ref(false);
-const settingsOpen = ref(false);
+const openModal = ref<"settings" | "config" | "import" | null>(null);
 const moving = ref(false);
 
 const optionsStore = useOptions();
@@ -164,13 +165,6 @@ const year = new Date().getFullYear();
 const allItemsFiltered = computed(() =>
 	allItems.filter((el) => el.show === undefined || el.show(options.value))
 );
-
-function closeConfigDelay() {
-	setTimeout(() => (configOpen.value = false), 1);
-}
-function closeSettingsDelay() {
-	setTimeout(() => (settingsOpen.value = false), 1);
-}
 
 function saveLayout() {
 	const savedLayoutsStr = localStorage.getItem("layout");
@@ -348,26 +342,22 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 <template>
 	<component :is="'style'">
 		body { background: {{ options.backgroundColor }}; font-family:
-		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};font-size:
-		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }
+		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};}
 	</component>
 
-	<OverlayModal v-if="settingsOpen" @close="settingsOpen = false">
+	<OverlayModal v-if="openModal === 'settings'" @close="openModal = null">
 		<MenuOptions :optionsKeys="settingsKeys" />
 	</OverlayModal>
-	<OverlayModal v-if="configOpen" @close="configOpen = false">
+	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
 		<MenuOptions :optionsKeys="configKeys" />
 	</OverlayModal>
+	<OverlayModal v-if="openModal === 'import'" @close="openModal = null">
+		<SeedImport @seed-imported="openModal = null" />
+	</OverlayModal>
+
 	<header class="header">
 		<div class="buttons">
-			<SvgButton
-				name="Tracker Config"
-				@click="
-					if (!configOpen) {
-						configOpen = true;
-					}
-					settingsOpen = false;
-				"
+			<SvgButton name="Tracker Config" @click="openModal = 'config'"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -386,13 +376,7 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 					/>
 				</svg>
 			</SvgButton>
-			<SvgButton
-				name="Seed Settings"
-				@click="
-					settingsOpen = !settingsOpen;
-					configOpen = false;
-				"
-			>
+			<SvgButton name="Seed Settings" @click="openModal = 'settings'">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -408,9 +392,73 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 					/>
 				</svg>
 			</SvgButton>
+			<SvgButton name="Import Seed" @click="openModal = 'import'">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Reset Tracker">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+					/>
+				</svg>
+			</SvgButton>
 		</div>
 		<img id="logo-img" src="./assets/images/Logo.png" />
 		<div class="buttons">
+			<SvgButton name="Save Tracker Data">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Load Tracker Data">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+					/>
+				</svg>
+			</SvgButton>
 			<SvgButton name="Edit Layout" @click="moving = !moving">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

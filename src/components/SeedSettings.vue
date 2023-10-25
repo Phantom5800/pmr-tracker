@@ -28,46 +28,6 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	}
 }
 
-function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
-	optionsStore.setValue("blueHouseOpen", data.BlueHouseOpen);
-	optionsStore.setValue("coinBlocksRandomized", data.IncludeCoinsBlocks);
-	optionsStore.setValue("coinsRandomized", data.IncludeCoinsOverworld);
-	optionsStore.setValue("dojoRandomized", data.IncludeDojo);
-	optionsStore.setValue("fastBowserCastle", data.BowsersCastleMode >= 1);
-	optionsStore.setValue("foliageCoinsRandomized", data.IncludeCoinsFoliage);
-	optionsStore.setValue("forestOpen", data.ForeverForestOpen);
-	optionsStore.setValue("keysRandomized", data.KeyitemsOutsideDungeon);
-	optionsStore.setValue("koopaKootRandomized", data.IncludeFavorsMode >= 1);
-	optionsStore.setValue("kootCoinsRandomized", data.IncludeCoinsFavors);
-	optionsStore.setValue("lettersRandomized", data.IncludeLettersMode >= 1);
-	optionsStore.setValue("merlowRandomized", data.ProgressionOnMerlow);
-	optionsStore.setValue("mtRuggedOpen", data.MtRuggedOpen);
-	optionsStore.setValue("multicoinBlocksRandomized", data.ShuffleBlocks);
-	optionsStore.setValue("panelsRandomized", data.IncludePanels);
-	optionsStore.setValue("powerStarHunt", data.StarHunt);
-	optionsStore.setValue("powerStarNum", data.StarHuntRequired);
-	optionsStore.setValue("prologueOpen", data.PrologueOpen);
-	optionsStore.setValue("rowfRandomized", data.ProgressionOnRowf);
-	optionsStore.setValue("sSkip", data.StarHuntEndsGame);
-	optionsStore.setValue("seedsRequired", data.MagicalSeedsRequired);
-	optionsStore.setValue("shiverBridgeVisible", data.Ch7BridgeVisible);
-	optionsStore.setValue("shopsRandomized", data.IncludeShops);
-	optionsStore.setValue(
-		"startingLocation",
-		{
-			65796: "Toad Town",
-			257: "Goomba Village",
-			590080: "Dry Dry Outpost",
-			1114882: "Yoshi Village",
-			4294967295: "Toad Town", // default to Toad Town if Random Pick
-		}[data.StartingMap.toString()] as string
-	);
-	optionsStore.setValue("superBlocksRandomized", data.ShuffleBlocks);
-	optionsStore.setValue("toyboxOpen", data.ToyboxOpen);
-	optionsStore.setValue("tradingEventRandomized", data.IncludeRadioTradeEvent);
-	optionsStore.setValue("whaleOpen", data.WhaleOpen);
-}
-
 function fetchSeedSettings(id: string) {
 	if (loadingApiResponse.value) {
 		return;
