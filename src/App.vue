@@ -731,6 +731,21 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	margin-bottom: 1rem;
 }
 
+@media (max-width: 640px) {
+	#logo-img {
+		display: none !important;
+	}
+	.header {
+		flex-wrap: wrap;
+		justify-content: center;
+		height: auto;
+		gap: 8px;
+	}
+	.buttons {
+		height: 4rem;
+	}
+}
+
 #logo-img {
 	width: auto;
 	height: 100%;
