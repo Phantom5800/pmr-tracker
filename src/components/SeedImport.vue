@@ -49,8 +49,7 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 			257: "Goomba Village",
 			590080: "Dry Dry Outpost",
 			1114882: "Yoshi Village",
-			4294967295: "Toad Town", // default to Toad Town if Random Pick
-		}[data.StartingMap.toString()] as string
+		}[data.StartingMap.toString()] ?? "Toad Town" // default to Toad Town if Random Pick or unknown
 	);
 	optionsStore.setValue("superBlocksRandomized", data.ShuffleBlocks);
 	optionsStore.setValue("toyboxOpen", data.ToyboxOpen);
