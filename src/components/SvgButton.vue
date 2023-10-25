@@ -82,13 +82,15 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 	inset: 2;
 	scale: 0.75;
 }
-div.button {
+
+.button {
 	position: relative;
 	transition:
 		background-color 0.3s,
 		color 0.3s;
 	cursor: pointer !important;
 	aspect-ratio: 1 / 1;
+	min-height: 1rem;
 	height: 100%;
 	max-height: 4rem;
 	border-radius: 5px;

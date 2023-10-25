@@ -59,9 +59,7 @@ const unshuffledChecks = computed(() =>
 <template>
 	<component :is="'style'">
 		button { font-weight:
-		{{ options.$state.options.paperMarioFont ? "normal" : "bold" }};
-		letter-spacing:
-		{{ options.$state.options.paperMarioFont ? "normal" : "-0.07rem" }}}
+		{{ options.$state.options.paperMarioFont ? "normal" : "bold" }};}
 	</component>
 	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">

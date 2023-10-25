@@ -2,7 +2,7 @@
 import { ref, computed, reactive, onMounted, onBeforeUnmount } from "vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
 import InfoBlocks from "./components/InfoBlocks.vue";
-import Button from "./components/Button.vue";
+import SvgButton from "./components/SvgButton.vue";
 import { configKeys, settingsKeys } from "./stores/config";
 import MapTracker from "./components/MapTracker.vue";
 import ItemTracker from "./components/ItemTracker.vue";
@@ -10,13 +10,12 @@ import UserNotes from "./components/UserNotes.vue";
 import RequiredTracker from "./components/RequiredTracker.vue";
 import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
-import SettingsModal from "./components/SettingsModal.vue";
-import ConfigModal from "./components/ConfigModal.vue";
+import MenuOptions from "./components/MenuOptions.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
-import OptionsModal from "./components/OptionsModal.vue";
+import OverlayModal from "./components/OverlayModal.vue";
 
 const breakpoint = ref<Breakpoint>("lg");
 
@@ -353,10 +352,15 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }
 	</component>
 
-	<OptionsModal />
-	<header>
-		<div style="display: flex; gap: 8px">
-			<Button
+	<OverlayModal v-if="settingsOpen" @close="settingsOpen = false">
+		<MenuOptions :optionsKeys="settingsKeys" />
+	</OverlayModal>
+	<OverlayModal v-if="configOpen" @close="configOpen = false">
+		<MenuOptions :optionsKeys="configKeys" />
+	</OverlayModal>
+	<header class="header">
+		<div class="buttons">
+			<SvgButton
 				name="Tracker Config"
 				@click="
 					if (!configOpen) {
@@ -379,9 +383,10 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-					/></svg
-			></Button>
-			<Button
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton
 				name="Seed Settings"
 				@click="
 					settingsOpen = !settingsOpen;
@@ -402,8 +407,11 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 						d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
 					/>
 				</svg>
-			</Button>
-			<Button name="Edit Layout" @click="moving = !moving">
+			</SvgButton>
+		</div>
+		<img id="logo-img" src="./assets/images/Logo.png" />
+		<div class="buttons">
+			<SvgButton name="Edit Layout" @click="moving = !moving">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -418,8 +426,8 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 						d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
 					/>
 				</svg>
-			</Button>
-			<Button name="Reset Layout" @click="resetLayout"
+			</SvgButton>
+			<SvgButton name="Reset Layout" @click="resetLayout"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -434,8 +442,7 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 						d="M9 9l6-6m0 0l6 6m-6-6v12a6 6 0 01-12 0v-3"
 					/>
 				</svg>
-			</Button>
-			<img id="logo-img" src="./assets/images/Logo.png" />
+			</SvgButton>
 		</div>
 		<div
 			class="add-panels"
@@ -443,7 +450,7 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 				translate: moving ? undefined : '0 -10rem',
 			}"
 		>
-			<Button name="Lock Layout" @click="moving = false"
+			<SvgButton name="Lock Layout" @click="moving = false"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -458,7 +465,7 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 						d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
 					/>
 				</svg>
-			</Button>
+			</SvgButton>
 			<div
 				v-for="[key, panel] in Object.entries(panels).filter(
 					([k, v]) => !currentPanels.includes(k)
@@ -589,17 +596,6 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 		</GridLayout>
 	</main>
 
-	<ConfigModal
-		:isOpen="configOpen"
-		:optionsKeys="configKeys"
-		:close="closeConfigDelay"
-	/>
-	<SettingsModal
-		:isOpen="settingsOpen"
-		:optionsKeys="settingsKeys"
-		:close="closeSettingsDelay"
-	/>
-
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"
 			><img
@@ -631,6 +627,9 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 			>Phantom Games {{ year }}</a
 		>
 	</footer>
+	<div class="buttons">
+		<SvgButton name="asdf"></SvgButton>
+	</div>
 </template>
 
 <style scoped>
@@ -638,15 +637,30 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	--vgl-resizer-border-color: white;
 }
 
-header {
-	padding: 1rem;
-	display: flex;
-	flex-direction: row;
+.header {
 	width: 100%;
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
-	position: relative;
+	align-items: center;
+	padding: 1rem;
 	flex-grow: 0;
+	position: relative;
+	height: 4.5rem;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	min-width: auto;
+	height: 100%;
+}
+
+#logo-img {
+	width: auto;
+	height: 100%;
+	display: inline;
+	object-fit: contain;
 }
 
 div.add-panels {
@@ -693,17 +707,5 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
-}
-
-#logo-img {
-	height: 40px;
-	cursor: unset;
-	padding-left: 7.5em;
-}
-
-div.flex-col {
-	display: flex;
-	flex-direction: column;
-	float: left;
 }
 </style>
