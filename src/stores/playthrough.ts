@@ -162,7 +162,6 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		itemCount(item: string) {
 			if (item === "Letters") {
-				console.log("letters");
 				return (
 					letters.filter((el) => this.items.includes(el)).length +
 					this.items.filter((el) => el === item).length
