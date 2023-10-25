@@ -42,8 +42,8 @@ select {
 }
 
 a {
-	text-decoration: none;
-	color: lightblue;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 a:hover {

@@ -346,6 +346,11 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	</component>
 
 	<OverlayModal v-if="openModal === 'settings'" @close="openModal = null">
+		<p class="settings-warning">
+			Note: you probably don't need to set these manually! Use the Import Seed
+			option to import from the pm64randomizer website.<br />
+			<a @click="openModal = 'import'">Import Seed</a>
+		</p>
 		<MenuOptions :optionsKeys="settingsKeys" />
 	</OverlayModal>
 	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
@@ -702,6 +707,12 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	gap: 8px;
 	min-width: auto;
 	height: 100%;
+}
+
+.settings-warning {
+	font-size: 1.5rem;
+	width: 40ch;
+	margin-bottom: 1rem;
 }
 
 #logo-img {
