@@ -35,12 +35,8 @@ export type Options = {
 	// compactTracker: boolean;
 	// combineMisc: boolean;
 	combineSortMode: string;
-	seedFlags: boolean;
-	gameMaps: boolean;
-	userNotes: boolean;
 	uselessItems: boolean;
 	recipeTooltips: boolean;
-	howToFields: boolean;
 	paperMarioFont: boolean;
 	backgroundColor: string;
 	sectionColor: string;
@@ -113,24 +109,6 @@ const optionsData = {
 		default: "Vanilla Acquired Order",
 		choices: ["Vanilla Acquired Order", "Required First"],
 	},
-	seedFlags: {
-		namespace: "config",
-		name: "Show Seed Flags",
-		type: "boolean",
-		default: true,
-	},
-	gameMaps: {
-		namespace: "config",
-		name: "Maps",
-		type: "boolean",
-		default: true,
-	},
-	userNotes: {
-		namespace: "config",
-		name: "Notes Field",
-		type: "boolean",
-		default: false,
-	},
 	uselessItems: {
 		namespace: "config",
 		name: "Show Logic-Only Items",
@@ -140,12 +118,6 @@ const optionsData = {
 	recipeTooltips: {
 		namespace: "config",
 		name: "Tooltip Info",
-		type: "boolean",
-		default: true,
-	},
-	howToFields: {
-		namespace: "config",
-		name: "How-To Fields",
 		type: "boolean",
 		default: true,
 	},
