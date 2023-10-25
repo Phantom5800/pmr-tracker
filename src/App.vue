@@ -21,6 +21,7 @@ import OverlayModal from "./components/OverlayModal.vue";
 import { usePlaythrough, PlaythroughProps } from "./stores/playthrough";
 
 const breakpoint = ref<Breakpoint>("lg");
+const loadButton = ref(null);
 
 const savedLayouts = JSON.parse(localStorage.getItem("layout") ?? "{}");
 
@@ -448,7 +449,10 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 		</div>
 		<img id="logo-img" src="./assets/images/Logo.png" />
 		<div class="buttons">
-			<SvgButton name="Save Tracker Data">
+			<SvgButton
+				name="Save Tracker Data"
+				@click="playthroughStore.savePlaythrough()"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -464,7 +468,26 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 					/>
 				</svg>
 			</SvgButton>
-			<SvgButton name="Load Tracker Data">
+			<input
+				type="file"
+				ref="loadButton"
+				:style="{ display: 'none' }"
+				@change="
+					(e) => {
+						const file = (e.target as HTMLInputElement).files;
+						if (file && file.length > 0) {
+							doWithPrompt(
+								'This will reset your current progress! Proceed?',
+								() => playthroughStore.loadPlaythrough(file[0])
+							);
+						}
+					}
+				"
+			/>
+			<SvgButton
+				name="Load Tracker Data"
+				@click="loadButton && loadButton.click()"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
