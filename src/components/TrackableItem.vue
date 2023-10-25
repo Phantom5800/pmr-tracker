@@ -12,7 +12,7 @@ import {
 	arrow,
 	shift,
 	autoUpdate,
-	autoPlacement
+	autoPlacement,
 } from "@floating-ui/vue";
 
 const playthroughStore = usePlaythrough();
@@ -42,11 +42,11 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 			autoPlacement({ allowedPlacements: ["bottom", "top"] }),
 			offset(12),
 			shift(),
-			arrow({ element: arrowRef })
+			arrow({ element: arrowRef }),
 		],
 		placement: "top",
 		whileElementsMounted: autoUpdate,
-		transform: false
+		transform: false,
 	}
 );
 
@@ -71,28 +71,28 @@ const derivedData = computed(
 					adding: null,
 					removing: _ultra,
 					name: _ultra,
-					image: `upgrades/PM_${_ultra.replace(" ", "_")}.png`
+					image: `upgrades/PM_${_ultra.replace(" ", "_")}.png`,
 				};
 			} else if (playthroughStore.hasItem(_super)) {
 				return {
 					adding: _ultra,
 					removing: _super,
 					name: _ultra,
-					image: `upgrades/PM_${_super.replace(" ", "_")}.png`
+					image: `upgrades/PM_${_super.replace(" ", "_")}.png`,
 				};
 			} else if (playthroughStore.hasItem(name)) {
 				return {
 					adding: _super,
 					removing: name,
 					name: _ultra,
-					image: `upgrades/PM_${name}.png`
+					image: `upgrades/PM_${name}.png`,
 				};
 			} else {
 				return {
 					adding: name,
 					removing: null,
 					name: _ultra,
-					image: `upgrades/PM_No_${name}.png`
+					image: `upgrades/PM_No_${name}.png`,
 				};
 			}
 		} else {
@@ -124,7 +124,7 @@ function getImageUrl(image: string) {
 		ref="itemRef"
 		class="tracker-item"
 		:class="{
-			fade: !bootsOrHammer && !playthroughStore.hasItem(name),
+			fade: !bootsOrHammer && !playthroughStore.itemCount(name),
 			glow:
 				!playthroughStore.hasItem(name) &&
 				((info.type === 'required' &&
@@ -136,7 +136,7 @@ function getImageUrl(image: string) {
 						options.trackerLogic &&
 						playthroughStore.canCheckLocation(
 							chapterRewardReqs[name as keyof typeof chapterRewardReqs]
-						)))
+						))),
 		}"
 		@blur="
 			(event) => {
@@ -159,7 +159,7 @@ function getImageUrl(image: string) {
 			:style="{
 				marginBottom: powerStarNum || multiple ? '1.5rem' : 0,
 				width: size,
-				height: size
+				height: size,
 			}"
 			@click="
 				powerStarNum || multiple || bootsOrHammer
@@ -260,7 +260,8 @@ function getImageUrl(image: string) {
 			ref="tooltipRef"
 			:style="{
 				...floatingStyles,
-				transformOrigin: placement === 'bottom' ? 'top center' : 'bottom center'
+				transformOrigin:
+					placement === 'bottom' ? 'top center' : 'bottom center',
 			}"
 			v-if="hovering && hoverTooltip && options.recipeTooltips"
 		>
@@ -273,7 +274,7 @@ function getImageUrl(image: string) {
 						: undefined,
 					top: placement === 'bottom' ? 0 : undefined,
 					bottom: placement === 'top' ? 0 : undefined,
-					translate: placement === 'bottom' ? '0 -50%' : '0 50%'
+					translate: placement === 'bottom' ? '0 -50%' : '0 50%',
 				}"
 				ref="arrowRef"
 			></div>
@@ -285,7 +286,7 @@ function getImageUrl(image: string) {
 				...floatingStyles,
 				transformOrigin:
 					placement === 'bottom' ? 'top center' : 'bottom center',
-				width: 'max-content'
+				width: 'max-content',
 			}"
 			v-if="
 				info.type === 'chapterReward' && name !== 'Star Rod' && showStarTooltip
@@ -299,7 +300,7 @@ function getImageUrl(image: string) {
 						: undefined,
 					top: placement === 'bottom' ? 0 : undefined,
 					bottom: placement === 'top' ? 0 : undefined,
-					translate: placement === 'bottom' ? '0 -50%' : '0 50%'
+					translate: placement === 'bottom' ? '0 -50%' : '0 50%',
 				}"
 				ref="arrowRef"
 			></div>
@@ -327,7 +328,7 @@ function getImageUrl(image: string) {
 					class="w-6 h-6"
 					:style="{
 						width: '100%',
-						height: '100%'
+						height: '100%',
 					}"
 				>
 					<path
@@ -351,7 +352,7 @@ function getImageUrl(image: string) {
 				"
 				v-for="star in [
 					...Object.getOwnPropertyNames(chapterRewardReqs).slice(0, 7),
-					''
+					'',
 				]"
 			>
 				<img
@@ -369,7 +370,7 @@ function getImageUrl(image: string) {
 					class="w-6 h-6"
 					:style="{
 						width: '100%',
-						height: '100%'
+						height: '100%',
 					}"
 				>
 					<path

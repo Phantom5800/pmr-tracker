@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
 import { saveAs } from "file-saver";
+import { allItems } from "@/data/items";
 
 export type PlaythroughProps = {
 	items: string[];
@@ -23,8 +24,12 @@ const fixedChapterRewards = [
 	"Misstar",
 	"Klevar",
 	"Kalmar",
-	"Star Rod"
+	"Star Rod",
 ];
+
+const letters = allItems
+	.filter((el) => el.type === "letter")
+	.map((el) => el.name);
 
 const storagePlaythroughStr = localStorage.getItem("playthrough");
 
@@ -40,36 +45,36 @@ const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
 const spiritAnnotations = {
 	Eldstar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Mamar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Skolar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Muskular: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Misstar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Klevar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	Kalmar: {
 		scaling: 0,
-		entrance: ""
+		entrance: "",
 	},
 	"Star Rod": {
 		scaling: 0,
-		entrance: ""
-	}
+		entrance: "",
+	},
 } satisfies Record<string, SpiritAnnotations>;
 
 const init = {
@@ -77,7 +82,7 @@ const init = {
 	checks: [],
 	notes: "",
 	spiritAnnotations,
-	...storagePlaythrough
+	...storagePlaythrough,
 };
 
 export const usePlaythrough = defineStore("playthrough", {
@@ -90,7 +95,7 @@ export const usePlaythrough = defineStore("playthrough", {
 					items: this.items,
 					checks: this.checks,
 					notes: this.notes,
-					spiritAnnotations: this.spiritAnnotations
+					spiritAnnotations: this.spiritAnnotations,
 				})
 			);
 		},
@@ -156,7 +161,15 @@ export const usePlaythrough = defineStore("playthrough", {
 			return this.items.includes(item);
 		},
 		itemCount(item: string) {
-			return this.items.filter((el) => el === item).length;
+			if (item === "Letters") {
+				console.log("letters");
+				return (
+					letters.filter((el) => this.items.includes(el)).length +
+					this.items.filter((el) => el === item).length
+				);
+			} else {
+				return this.items.filter((el) => el === item).length;
+			}
 		},
 		filterItems(items: string[]) {
 			return this.items.filter((el) => items.includes(el));
@@ -222,7 +235,7 @@ export const usePlaythrough = defineStore("playthrough", {
 				"Coin Block": settings.coinBlocksRandomized,
 				Merlow: settings.merlowRandomized,
 				Upgrade: settings.superBlocksRandomized,
-				"Multicoin Block": settings.multicoinBlocksRandomized
+				"Multicoin Block": settings.multicoinBlocksRandomized,
 			};
 
 			if (check.startsWith("[")) {
@@ -251,7 +264,7 @@ export const usePlaythrough = defineStore("playthrough", {
 				checks: this.checks,
 				items: this.items,
 				notes: this.notes,
-				spiritAnnotations: this.spiritAnnotations
+				spiritAnnotations: this.spiritAnnotations,
 			});
 			const blob = new Blob([saveData], { type: "application/json" });
 			saveAs(blob, `pmr-tracker-${new Date().toISOString()}.json`);
@@ -277,8 +290,8 @@ export const usePlaythrough = defineStore("playthrough", {
 				}
 			};
 			reader.readAsText(file);
-		}
-	}
+		},
+	},
 });
 
 const resolveRequirement = (
@@ -303,7 +316,7 @@ const resolveRequirement = (
 				"Muskular",
 				"Misstar",
 				"Klevar",
-				"Kalmar"
+				"Kalmar",
 			]).length >= reqs
 		);
 	} else if (typeof reqs === "function") {
