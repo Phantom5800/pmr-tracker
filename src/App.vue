@@ -18,6 +18,7 @@ import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
 import OverlayModal from "./components/OverlayModal.vue";
+import { usePlaythrough, PlaythroughProps } from "./stores/playthrough";
 
 const breakpoint = ref<Breakpoint>("lg");
 
@@ -157,6 +158,7 @@ const openModal = ref<"settings" | "config" | "import" | null>(null);
 const moving = ref(false);
 
 const optionsStore = useOptions();
+const playthroughStore = usePlaythrough();
 
 const { options } = storeToRefs(optionsStore);
 
@@ -337,6 +339,12 @@ function dragEnd(panelKey: keyof typeof panels) {
 
 const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	setTimeout(() => dragEnd(panelKey), 100);
+
+function doWithPrompt(prompt: string, fn: () => void): void {
+	if (confirm(prompt)) {
+		fn();
+	}
+}
 </script>
 
 <template>
@@ -413,7 +421,15 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 					/>
 				</svg>
 			</SvgButton>
-			<SvgButton name="Reset Tracker">
+			<SvgButton
+				name="Reset Tracker"
+				@click="
+					doWithPrompt(
+						'This will reset your current progress! Proceed?',
+						playthroughStore.resetPlaythrough
+					)
+				"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
