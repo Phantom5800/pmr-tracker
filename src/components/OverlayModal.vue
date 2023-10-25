@@ -27,10 +27,11 @@ defineEmits(["close"]);
 
 .modal {
 	padding: 2rem;
-	min-height: 20rem;
+	min-height: 2rem;
 	max-height: 80%;
+	max-width: 95%;
 	overflow: auto;
-	min-width: 16rem;
+	min-width: 2rem;
 	background-color: rgb(0, 40, 80);
 	border-radius: 12px;
 	border: 4px solid rgb(100, 140, 180);
