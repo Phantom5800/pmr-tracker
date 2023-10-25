@@ -737,6 +737,7 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	flex-grow: 0;
 	position: relative;
 	height: 4.5rem;
+	min-width: 1920px;
 }
 
 .buttons {
@@ -752,7 +753,7 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	margin-bottom: 1rem;
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
 	#logo-img {
 		display: none !important;
 	}
@@ -765,7 +766,7 @@ function doWithPrompt(prompt: string, fn: () => void): void {
 	.buttons {
 		height: 4rem;
 	}
-}
+} */
 
 #logo-img {
 	width: auto;
@@ -819,5 +820,6 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
+	min-width: 1920px;
 }
 </style>
