@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, reactive, onMounted, onBeforeUnmount } from "vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
-import InfoBlocks from "./components/InfoBlocks.vue";
 import SvgButton from "./components/SvgButton.vue";
 import { configKeys, settingsKeys } from "./stores/config";
-import axios from "axios";
 import MapTracker from "./components/MapTracker.vue";
 import ItemTracker from "./components/ItemTracker.vue";
 import UserNotes from "./components/UserNotes.vue";
@@ -18,10 +16,10 @@ import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
 import OverlayModal from "./components/OverlayModal.vue";
-import { usePlaythrough, PlaythroughProps } from "./stores/playthrough";
+import { usePlaythrough } from "./stores/playthrough";
 
 const breakpoint = ref<Breakpoint>("lg");
-const loadButton = ref(null);
+const loadButton = ref<HTMLInputElement | null>(null);
 
 const savedLayouts = JSON.parse(localStorage.getItem("layout") ?? "{}");
 
@@ -200,7 +198,7 @@ function resetLayout() {
 	}
 }
 
-function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
+function breakpointChanged(newBreakpoint: Breakpoint) {
 	breakpoint.value = newBreakpoint;
 }
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useOptions } from "@/stores/config";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
 import type { Options } from "@/stores/config";
 
 const optionsStore = useOptions();

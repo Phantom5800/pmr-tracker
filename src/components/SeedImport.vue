@@ -2,20 +2,18 @@
 import axios from "axios";
 import { ref, defineEmits, onMounted } from "vue";
 import { useOptions } from "@/stores/config";
-import { usePlaythrough } from "@/stores/playthrough";
-import type { Options } from "@/stores/config";
 import type { SettingsApiData } from "@/types/settings";
 
 const optionsStore = useOptions();
 const loadingApiResponse = ref(false);
 const seedToLoad = ref("");
 const errorMessage = ref("");
-const seedInput = ref<HTMLInputElement>(null);
+const seedInput = ref<HTMLInputElement | null>(null);
 
 const emit = defineEmits(["seedImported"]);
 
 onMounted(() => {
-	seedInput.value.focus();
+	seedInput.value && seedInput.value.focus();
 });
 
 function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
