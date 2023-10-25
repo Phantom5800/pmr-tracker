@@ -3,6 +3,10 @@
 	src: url("./fonts/SuperMarioScript2Demo-Regular.ttf");
 }
 
+:root {
+	font-size: 14px;
+}
+
 html,
 body {
 	user-select: none;
