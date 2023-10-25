@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { ref, computed, reactive, onMounted, onBeforeUnmount } from "vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
-import InfoBlocks from "./components/InfoBlocks.vue";
+import SvgButton from "./components/SvgButton.vue";
 import { configKeys, settingsKeys } from "./stores/config";
 import MapTracker from "./components/MapTracker.vue";
 import ItemTracker from "./components/ItemTracker.vue";
 import UserNotes from "./components/UserNotes.vue";
+import SeedImport from "./components/SeedImport.vue";
 import RequiredTracker from "./components/RequiredTracker.vue";
 import { useOptions } from "./stores/config";
 import { storeToRefs } from "pinia";
-import SettingsModal from "./components/SettingsModal.vue";
-import ConfigModal from "./components/ConfigModal.vue";
+import MenuOptions from "./components/MenuOptions.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Breakpoint, Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
+import OverlayModal from "./components/OverlayModal.vue";
+import { usePlaythrough } from "./stores/playthrough";
 
 const breakpoint = ref<Breakpoint>("lg");
+const loadButton = ref<HTMLInputElement | null>(null);
 
 const savedLayouts = JSON.parse(localStorage.getItem("layout") ?? "{}");
 
@@ -150,11 +153,11 @@ function syncMousePosition(event: MouseEvent) {
 const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map((el) => el.i));
 
-const configOpen = ref(false);
-const settingsOpen = ref(false);
+const openModal = ref<"settings" | "config" | "import" | null>(null);
 const moving = ref(false);
 
 const optionsStore = useOptions();
+const playthroughStore = usePlaythrough();
 
 const { options } = storeToRefs(optionsStore);
 
@@ -163,13 +166,6 @@ const year = new Date().getFullYear();
 const allItemsFiltered = computed(() =>
 	allItems.filter((el) => el.show === undefined || el.show(options.value))
 );
-
-function closeConfigDelay() {
-	setTimeout(() => (configOpen.value = false), 1);
-}
-function closeSettingsDelay() {
-	setTimeout(() => (settingsOpen.value = false), 1);
-}
 
 function saveLayout() {
 	const savedLayoutsStr = localStorage.getItem("layout");
@@ -202,7 +198,7 @@ function resetLayout() {
 	}
 }
 
-function breakpointChanged(newBreakpoint: Breakpoint, newLayout: Layout) {
+function breakpointChanged(newBreakpoint: Breakpoint) {
 	breakpoint.value = newBreakpoint;
 }
 
@@ -342,44 +338,201 @@ function dragEnd(panelKey: keyof typeof panels) {
 
 const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	setTimeout(() => dragEnd(panelKey), 100);
+
+function doWithPrompt(prompt: string, fn: () => void): void {
+	if (confirm(prompt)) {
+		fn();
+	}
+}
 </script>
 
 <template>
 	<component :is="'style'">
 		body { background: {{ options.backgroundColor }}; font-family:
-		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};font-size:
-		{{ options.paperMarioFont ? "1.1rem" : "1rem" }} }
+		{{ options.paperMarioFont ? "Paper Mario" : "Open Sans" }};}
 	</component>
-	<header>
-		<div style="display: flex">
-			<div
-				id="options-menu-toggle"
-				:class="{ 'options-open': settingsOpen }"
-				class="hamburger"
+
+	<OverlayModal v-if="openModal === 'settings'" @close="openModal = null">
+		<p class="settings-warning">
+			Note: you probably don't need to set these manually! Use the Import Seed
+			option to import from the pm64randomizer website.<br />
+			<a @click="openModal = 'import'">Import Seed</a>
+		</p>
+		<MenuOptions :optionsKeys="settingsKeys" />
+	</OverlayModal>
+	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
+		<MenuOptions :optionsKeys="configKeys" />
+	</OverlayModal>
+	<OverlayModal v-if="openModal === 'import'" @close="openModal = null">
+		<SeedImport @seed-imported="openModal = null" />
+	</OverlayModal>
+
+	<header class="header">
+		<div class="buttons">
+			<SvgButton name="Tracker Config" @click="openModal = 'config'"
+				><svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"
+					/>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Seed Settings" @click="openModal = 'settings'">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Import Seed" @click="openModal = 'import'">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton
+				name="Reset Tracker"
 				@click="
-					settingsOpen = !settingsOpen;
-					configOpen = false;
+					doWithPrompt(
+						'This will reset your current progress! Proceed?',
+						playthroughStore.resetPlaythrough
+					)
 				"
 			>
-				<div class="hamburger-1"></div>
-				<div class="hamburger-2"></div>
-				<div class="hamburger-3"></div>
-			</div>
-			<button @click="moving = !moving">Edit Layout</button>
-			<button @click="resetLayout">Reset Layout</button>
-			<img id="logo-img" src="./assets/images/Logo.png" />
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+					/>
+				</svg>
+			</SvgButton>
 		</div>
-		<div
-			id="settings-menu-toggle"
-			:class="{ 'options-open': configOpen }"
-			@click="
-				if (!configOpen) {
-					configOpen = true;
-				}
-				settingsOpen = false;
-			"
-		>
-			&#x2699;
+		<img id="logo-img" src="./assets/images/Logo.png" />
+		<div class="buttons">
+			<SvgButton
+				name="Save Tracker Data"
+				@click="playthroughStore.savePlaythrough()"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+					/>
+				</svg>
+			</SvgButton>
+			<input
+				type="file"
+				ref="loadButton"
+				:style="{ display: 'none' }"
+				@change="
+					(e) => {
+						const file = (e.target as HTMLInputElement).files;
+						if (file && file.length > 0) {
+							doWithPrompt(
+								'This will reset your current progress! Proceed?',
+								() => playthroughStore.loadPlaythrough(file[0])
+							);
+						}
+					}
+				"
+			/>
+			<SvgButton
+				name="Load Tracker Data"
+				@click="loadButton && loadButton.click()"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Edit Layout" @click="moving = !moving">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+					/>
+				</svg>
+			</SvgButton>
+			<SvgButton name="Reset Layout" @click="resetLayout"
+				><svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M9 9l6-6m0 0l6 6m-6-6v12a6 6 0 01-12 0v-3"
+					/>
+				</svg>
+			</SvgButton>
 		</div>
 		<div
 			class="add-panels"
@@ -387,7 +540,22 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 				translate: moving ? undefined : '0 -10rem',
 			}"
 		>
-			<button @click="moving = false">Stop Editing</button>
+			<SvgButton name="Lock Layout" @click="moving = false"
+				><svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+					/>
+				</svg>
+			</SvgButton>
 			<div
 				v-for="[key, panel] in Object.entries(panels).filter(
 					([k, v]) => !currentPanels.includes(k)
@@ -518,17 +686,6 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 		</GridLayout>
 	</main>
 
-	<ConfigModal
-		:isOpen="configOpen"
-		:optionsKeys="configKeys"
-		:close="closeConfigDelay"
-	/>
-	<SettingsModal
-		:isOpen="settingsOpen"
-		:optionsKeys="settingsKeys"
-		:close="closeSettingsDelay"
-	/>
-
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"
 			><img
@@ -560,6 +717,9 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 			>Phantom Games {{ year }}</a
 		>
 	</footer>
+	<div class="buttons">
+		<SvgButton name="asdf"></SvgButton>
+	</div>
 </template>
 
 <style scoped>
@@ -567,15 +727,51 @@ const dragEndTimeout = (panelKey: keyof typeof panels) =>
 	--vgl-resizer-border-color: white;
 }
 
-header {
-	padding: 1rem;
-	display: flex;
-	flex-direction: row;
+.header {
 	width: 100%;
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
-	position: relative;
+	align-items: center;
+	padding: 1rem;
 	flex-grow: 0;
+	position: relative;
+	height: 4.5rem;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	min-width: auto;
+	height: 100%;
+}
+
+.settings-warning {
+	font-size: 1.5rem;
+	width: 40ch;
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+	#logo-img {
+		display: none !important;
+	}
+	.header {
+		flex-wrap: wrap;
+		justify-content: center;
+		height: auto;
+		gap: 8px;
+	}
+	.buttons {
+		height: 4rem;
+	}
+}
+
+#logo-img {
+	width: auto;
+	height: 100%;
+	display: inline;
+	object-fit: contain;
 }
 
 div.add-panels {
@@ -591,6 +787,7 @@ div.add-panels {
 	transition: translate 0.2s;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	gap: 4px;
 	padding-block: 4px;
 }
@@ -622,64 +819,5 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
-}
-
-#logo-img {
-	height: 40px;
-	cursor: unset;
-	padding-left: 7.5em;
-}
-
-#settings-menu-toggle {
-	cursor: pointer;
-	padding-right: 1em;
-	color: black;
-	font-size: 35px;
-	font-weight: bold;
-	-webkit-text-stroke-width: 0.125px;
-	-webkit-text-stroke-color: gainsboro;
-}
-
-#settings-menu-toggle.options-open {
-	color: gainsboro;
-	-webkit-text-stroke-color: black;
-}
-
-.hamburger {
-	cursor: pointer;
-	width: 40px;
-}
-
-.hamburger-1,
-.hamburger-2,
-.hamburger-3 {
-	width: 35px;
-	height: 3px;
-	background-color: black;
-	margin: 6px 0;
-	transition: 0.4s;
-	border-color: gainsboro;
-	border-width: 1px;
-	border-style: solid;
-}
-
-.options-open .hamburger-1 {
-	-webkit-transform: rotate(-45deg) translate(-9px, 6px);
-	transform: rotate(-45deg) translate(-9px, 6px);
-}
-
-.options-open .hamburger-2 {
-	opacity: 0;
-}
-
-.options-open .hamburger-3 {
-	-webkit-transform: rotate(45deg) translate(-8px, -8px);
-	transform: rotate(45deg) translate(-8px, -8px);
-}
-
-div.flex-col {
-	display: flex;
-	flex-direction: column;
-	float: left;
 }
 </style>
