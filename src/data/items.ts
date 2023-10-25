@@ -155,24 +155,28 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Pulse Stone",
 		type: "required",
 		image: "icons/PulseStone.gif",
+		turnInCheck: "Dry Dry Ruins:Place Pulse Stone",
 	},
 	{
 		chapter: 2,
 		name: "Pyramid Stone",
 		type: "required",
 		image: "icons/PyramidStone.gif",
+		turnInCheck: "Puzzle Room:Pyramid",
 	},
 	{
 		chapter: 2,
 		name: "Diamond Stone",
 		type: "required",
 		image: "icons/DiamondStone.png",
+		turnInCheck: "Puzzle Room:Diamond",
 	},
 	{
 		chapter: 2,
 		name: "Lunar Stone",
 		type: "required",
 		image: "icons/LunarStone.gif",
+		turnInCheck: "Puzzle Room:Lunar",
 	},
 	{
 		chapter: 2,
@@ -203,12 +207,14 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Weight",
 		type: "miscItem",
 		image: "icons/WeightPM.gif",
+		turnInCheck: "Main Room:Place Weight",
 	},
 	{
 		chapter: 3,
 		name: "Boo's Portrait",
 		type: "required",
 		image: "icons/Boo'sPortrait_PM.png",
+		turnInCheck: "Bow's Room:Bow",
 	},
 	{
 		chapter: 3,
@@ -222,12 +228,14 @@ export const allItems: TrackableItemInfo[] = [
 		type: "miscKey",
 		image: "icons/OddKey.gif",
 		label: "S",
+		turnInCheck: "Residential Area:Four items in Harry's Storeroom",
 	},
 	{
 		chapter: 4,
 		name: "Toy Train",
 		type: "required",
 		image: "icons/ToyTrain_PM.png",
+		turnInCheck: "Residential Area:Dropped Toy Train",
 	},
 	{
 		name: "Calculator",
@@ -252,11 +260,13 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Cake",
 		type: "required",
 		image: "icons/Cake.gif",
+		turnInCheck: "Gourmet Guy:Give Cake to Gourmet Guy",
 	},
 	{
 		name: "Cookbook",
 		type: "miscItem",
 		image: "icons/Cook_Book_Paper_Mario.png",
+		turnInCheck: "Below Plaza:Turn in Cookbook",
 	},
 	{
 		name: "Dictionary",
@@ -268,12 +278,14 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Mystery Note",
 		type: "miscItem",
 		image: "icons/MysteryNote.png",
+		turnInCheck: "Main Gate:Turn in Mystery Note",
 	},
 	{
 		chapter: 5,
 		name: "Jade Raven",
 		type: "required",
 		image: "icons/JadeRaven_PM.png",
+		turnInCheck: "NE Jungle:Turn in Jade Raven",
 	},
 	{
 		name: "Volcano Vase",
@@ -287,6 +299,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/MagicalSeed1.png",
 		show: logic.showMagicalSeed(1),
+		turnInCheck: "Central Plaza:Turn in Seed 1",
 	},
 	{
 		chapter: 6,
@@ -294,6 +307,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/MagicalSeed2.png",
 		show: logic.showMagicalSeed(2),
+		turnInCheck: "Central Plaza:Turn in Seed 2",
 	},
 	{
 		chapter: 6,
@@ -301,6 +315,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/MagicalSeed3.png",
 		show: logic.showMagicalSeed(3),
+		turnInCheck: "Central Plaza:Turn in Seed 3",
 	},
 	{
 		chapter: 6,
@@ -308,24 +323,28 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/MagicalSeed4.png",
 		show: logic.showMagicalSeed(4),
+		turnInCheck: "Central Plaza:Turn in Seed 4",
 	},
 	{
 		chapter: 6,
 		name: "Magical Bean",
 		type: "required",
 		image: "icons/MagicBean_PM.png",
+		turnInCheck: "Fields Tree:Bean",
 	},
 	{
 		name: "Red Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_RedBerry.png",
 		label: "R",
+		turnInCheck: "Red Flower:Feed Red Flower",
 	},
 	{
 		name: "Yellow Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_YellowBerry.png",
 		label: "Y",
+		turnInCheck: "Yellow Flower:Feed Yellow Flower",
 	},
 	{
 		name: "Blue Berry",
@@ -339,6 +358,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Fertile Soil",
 		type: "required",
 		image: "icons/Fertilesoil.png",
+		turnInCheck: "Fields Tree:Soil",
 	},
 	{
 		name: "Crystal Berry",
@@ -357,11 +377,13 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Miracle Water",
 		type: "required",
 		image: "icons/MiracleWater_PM.png",
+		turnInCheck: "Fields Tree:Water",
 	},
 	{
 		name: "Bubble Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_BubbleBerry.png",
+		turnInCheck: "Bubble Plant:Turn in Bubble",
 	},
 	{
 		name: "Odd Key",
@@ -369,6 +391,7 @@ export const allItems: TrackableItemInfo[] = [
 		image: "icons/OddKey.gif",
 		label: "O",
 		show: (settings: Options) => !logic.blueHouseOpen([], settings),
+		turnInCheck: "Residential Area:Unlock Blue House",
 	},
 	{
 		chapter: 7,
@@ -376,30 +399,35 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/OddKey.gif",
 		label: "W",
+		turnInCheck: "East Shiver City:Unlock Warehouse",
 	},
 	{
 		chapter: 7,
 		name: "Scarf",
 		type: "required",
 		image: "icons/Scarf.gif",
+		turnInCheck: "Shiver Snowfield:Scarf",
 	},
 	{
 		chapter: 7,
 		name: "Bucket",
 		type: "required",
 		image: "icons/Bucket.png",
+		turnInCheck: "Shiver Snowfield:Bucket",
 	},
 	{
 		chapter: 7,
 		name: "Star Stone",
 		type: "required",
 		image: "icons/StarStone_PM.png",
+		turnInCheck: "Merlar's Sanctuary:Star Stone",
 	},
 	{
 		name: "Blue Key",
 		type: "miscKey",
 		image: "icons/PM_BlueKey.png",
 		label: "B",
+		turnInCheck: "Mirror Room:Unlocked Blue Door",
 	},
 	{
 		chapter: 7,
@@ -407,6 +435,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/PM_Red_Key.png",
 		label: "R",
+		turnInCheck: "Mirror Room:Unlocked Red Door",
 	},
 
 	{
@@ -414,6 +443,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Palace Key",
 		type: "required",
 		image: "icons/PM_Palace_Key.png",
+		turnInCheck: "Mirror Room:Unlocked Palace Door",
 	},
 	{
 		chapter: 8,
@@ -469,6 +499,8 @@ export const allItems: TrackableItemInfo[] = [
 		image: "icons/Anti_Guy_Sprite_-_Paper_Mario.png",
 		hoverTooltip:
 			"Not in logic until Lemon Candy can be made (Cake Mix + Lemon)",
+		turnInCheck:
+			"Anti Guy:Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])",
 	},
 	{
 		turnInCheck: "Central Plaza:[Letter] Merlon",
