@@ -2,11 +2,13 @@
 import { ref, computed } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
+import { useOptions } from "@/stores/config";
 import ItemTracker from "./ItemTracker.vue";
 import type { TrackableItemInfo } from "../types/items";
 
 const tooltip = ref("");
 const playthrough = usePlaythrough();
+const options = useOptions();
 
 const props = defineProps<{
 	allItems: TrackableItemInfo[];
@@ -19,6 +21,14 @@ const requiredItems = computed(() =>
 		["chapterReward", "partner", "equipment", "required"].includes(el.type)
 	)
 );
+
+const chapterRows = computed(() => {
+	if (options.getValue("powerStarHunt")) {
+		return [1, 2, 3, 4, 5, 6, 7, 16, 0, -1];
+	} else {
+		return [1, 2, 3, 4, 5, 6, 7, 8, 0, -1];
+	}
+});
 
 function equipmentTooltip(item: string) {
 	if (item === "Boots" || item === "Hammer") {
@@ -46,11 +56,7 @@ function equipmentTooltip(item: string) {
 	>
 		<div class="container">
 			<div class="rows">
-				<div
-					class="gridrow"
-					v-for="chapter in [1, 2, 3, 4, 5, 6, 7, 8, 16, 0, -1]"
-					:key="chapter"
-				>
+				<div class="gridrow" v-for="chapter in chapterRows" :key="chapter">
 					<TrackableItem
 						v-for="(item, index) in requiredItems.filter(
 							(el) => el.chapter === chapter
@@ -79,13 +85,12 @@ div.container {
 }
 
 div.rows {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: repeat(10, 1fr);
 	justify-content: center;
 	row-gap: 0.5rem;
-	max-height: 100%;
-	max-width: 100%;
-	flex-grow: 1;
+	height: 100%;
+	width: 100%;
 }
 
 div.gridrow {
@@ -97,6 +102,6 @@ div.gridrow {
 }
 
 div.gridrow > div {
-	aspect-ratio: 1;
+	aspect-ratio: 1 / 1;
 }
 </style>

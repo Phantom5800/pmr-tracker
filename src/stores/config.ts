@@ -357,7 +357,7 @@ export const useOptions = defineStore("options", {
 		getType(key: keyof Options) {
 			return optionsData[key].type;
 		},
-		getValue<T extends keyof Options>(key: T) {
+		getValue<T extends keyof Options>(key: T): Options[T] {
 			return this.options[key];
 		},
 		getRange(key: keyof typeof optionsData): [number, number] {
