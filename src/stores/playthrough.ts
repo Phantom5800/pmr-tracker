@@ -16,7 +16,7 @@ type SpiritAnnotations = {
 	entrance: string;
 };
 
-const fixedChapterRewards = [
+const starSpirits = [
 	"Eldstar",
 	"Mamar",
 	"Skolar",
@@ -24,8 +24,9 @@ const fixedChapterRewards = [
 	"Misstar",
 	"Klevar",
 	"Kalmar",
-	"Star Rod",
 ];
+
+const fixedChapterRewards = [...starSpirits, "Star Rod"];
 
 const letters = allItems
 	.filter((el) => el.type === "letter")
@@ -204,6 +205,18 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.notes = notes;
 
 			this.save();
+		},
+		chaptersBeaten() {
+			return starSpirits.filter((el) => this.items.includes(el)).length;
+		},
+		getRequiredChapters(reqs: Requirements) {
+			if (typeof reqs === "number") {
+				return reqs;
+			} else if (Array.isArray(reqs)) {
+				return (reqs.find((el) => typeof el === "number") as number) ?? 0;
+			} else {
+				return 0;
+			}
 		},
 		canCheckLocation(reqs: Requirements, region?: string) {
 			const options = useOptions();

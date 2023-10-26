@@ -6,6 +6,7 @@ import { chapterRewardReqs } from "@/data/map";
 import type { TrackableItemInfo } from "@/types/items";
 import { useOptions } from "../stores/config";
 import type { PlaythroughProps } from "../stores/playthrough";
+import { kootReqs } from "../data/map";
 import {
 	useFloating,
 	offset,
@@ -110,6 +111,28 @@ const showCheck = computed(() => {
 	}
 });
 
+const shouldGlow = computed(() => {
+	return (
+		!playthroughStore.hasItem(name) &&
+		((info.type === "required" &&
+			options.value.highlightKey &&
+			info.chapter &&
+			1 <= info.chapter &&
+			info.chapter <= 8) ||
+			(name in chapterRewardReqs &&
+				options.value.trackerLogic &&
+				playthroughStore.canCheckLocation(
+					chapterRewardReqs[name as keyof typeof chapterRewardReqs]
+				)) ||
+			(info.type === "kootFavor" &&
+				info.turnInCheck &&
+				playthroughStore.chaptersBeaten() >=
+					playthroughStore.getRequiredChapters(
+						kootReqs[info.turnInCheck.split(":")[1]]
+					)))
+	);
+});
+
 function getImageUrl(image: string) {
 	return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
@@ -125,18 +148,7 @@ function getImageUrl(image: string) {
 		class="tracker-item"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.itemCount(name),
-			glow:
-				!playthroughStore.hasItem(name) &&
-				((info.type === 'required' &&
-					options.highlightKey &&
-					info.chapter &&
-					1 <= info.chapter &&
-					info.chapter <= 8) ||
-					(name in chapterRewardReqs &&
-						options.trackerLogic &&
-						playthroughStore.canCheckLocation(
-							chapterRewardReqs[name as keyof typeof chapterRewardReqs]
-						))),
+			glow: shouldGlow,
 		}"
 		@blur="
 			(event) => {

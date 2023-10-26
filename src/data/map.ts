@@ -4092,6 +4092,14 @@ const regionData: MapRegions = {
 	},
 };
 
+export const kootReqs = Object.entries(regionData)
+	.flatMap(([k, v]) =>
+		Object.entries(v.areas).flatMap(([ak, av]) =>
+			Object.entries(av.checks).filter(([ck, cv]) => ck.startsWith("[Koot"))
+		)
+	)
+	.reduce((a, v) => ({ ...a, [v[0]]: v[1].reqs }), {});
+
 export const allRegions = Object.getOwnPropertyNames(regionData);
 export const getRegionData = (region: string) => regionData[region];
 export const getChecks = (region: string, area: string) =>
