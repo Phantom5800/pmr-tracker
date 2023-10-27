@@ -107,6 +107,7 @@ div.flex-row {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	gap: 0.5rem;
 }
 
 .checkbox-groove {

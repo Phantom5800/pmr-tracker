@@ -391,7 +391,12 @@ if (!localStorage.getItem("visited")) {
 		<MenuOptions :optionsKeys="settingsKeys" />
 	</OverlayModal>
 	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
-		<a @click="openModal = 'filter'">Filter Individual Items</a>
+		<button
+			@click="openModal = 'filter'"
+			:style="{ padding: '0.5rem', marginBottom: '1rem' }"
+		>
+			Filter Individual Items
+		</button>
 		<MenuOptions :optionsKeys="configKeys" />
 	</OverlayModal>
 	<OverlayModal v-if="openModal === 'import'" @close="openModal = null">
