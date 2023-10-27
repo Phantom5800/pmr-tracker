@@ -171,6 +171,7 @@ function getImageUrl(image: string) {
 				marginBottom: powerStarNum || multiple ? '1.5rem' : 0,
 				width: size,
 				height: size,
+				cursor: 'pointer',
 			}"
 			@click="
 				powerStarNum || multiple || bootsOrHammer
@@ -516,6 +517,11 @@ button.scaling {
 	color: white;
 	stroke: 1px black;
 	-webkit-text-stroke: 1px black;
+	cursor: pointer;
+}
+
+button.entrance {
+	cursor: pointer;
 }
 
 div.star-tooltip {

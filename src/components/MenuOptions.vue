@@ -89,6 +89,7 @@ const props = defineProps<{
 								(event.target as HTMLInputElement).value
 							)
 					"
+					:style="{ cursor: 'pointer' }"
 				/>
 			</div>
 		</div>
@@ -138,6 +139,7 @@ div.flex-row {
 	display: block;
 	width: 60px;
 	height: 30px;
+	cursor: pointer;
 }
 
 input.checkbox-slider {

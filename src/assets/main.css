@@ -35,6 +35,10 @@ select {
 	font-family: inherit;
 }
 
+button {
+	cursor: pointer;
+}
+
 *,
 *::before,
 *::after {

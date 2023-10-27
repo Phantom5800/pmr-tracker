@@ -280,5 +280,10 @@ div.map-label {
 
 .map-checks li input[type="checkbox"] {
 	margin-right: 1rem;
+	cursor: pointer;
+}
+
+.map-checks li label {
+	cursor: pointer;
 }
 </style>
