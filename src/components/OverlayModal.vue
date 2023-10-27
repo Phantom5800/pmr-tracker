@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { vOnClickOutside } from "@vueuse/components";
-import { defineEmits } from "vue";
+import { defineEmits, defineProps } from "vue";
 
 defineEmits(["close"]);
+const { title } = defineProps<{ title?: string }>();
 </script>
 
 <template>
 	<div class="mask">
 		<div class="modal" v-on-click-outside="() => $emit('close')">
+			<div class="header">
+				<h2>{{ title }}</h2>
+				<div class="close" @click="() => $emit('close')">X</div>
+			</div>
 			<slot></slot>
 		</div>
 	</div>
@@ -25,7 +30,25 @@ defineEmits(["close"]);
 	place-items: center;
 }
 
+.header {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.close {
+	height: 2rem;
+	width: 2rem;
+	cursor: pointer;
+	display: grid;
+	font-weight: bold;
+	place-items: center;
+}
+
 .modal {
+	position: relative;
 	padding: 2rem;
 	min-height: 2rem;
 	max-height: 80%;

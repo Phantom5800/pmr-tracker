@@ -382,7 +382,11 @@ if (!localStorage.getItem("visited")) {
 				saveVisit();
 			"
 	/></OverlayModal>
-	<OverlayModal v-if="openModal === 'settings'" @close="openModal = null">
+	<OverlayModal
+		v-if="openModal === 'settings'"
+		@close="openModal = null"
+		title="Seed Settings"
+	>
 		<p class="settings-warning">
 			Note: you probably don't need to set these manually! Use the Import Seed
 			option to import from the pm64randomizer website.<br />
@@ -390,7 +394,11 @@ if (!localStorage.getItem("visited")) {
 		</p>
 		<MenuOptions :optionsKeys="settingsKeys" />
 	</OverlayModal>
-	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
+	<OverlayModal
+		v-if="openModal === 'config'"
+		@close="openModal = null"
+		title="Tracker Config"
+	>
 		<button
 			@click="openModal = 'filter'"
 			:style="{ padding: '0.5rem', marginBottom: '1rem' }"
@@ -399,10 +407,18 @@ if (!localStorage.getItem("visited")) {
 		</button>
 		<MenuOptions :optionsKeys="configKeys" />
 	</OverlayModal>
-	<OverlayModal v-if="openModal === 'import'" @close="openModal = null">
+	<OverlayModal
+		v-if="openModal === 'import'"
+		@close="openModal = null"
+		title="Import Seed"
+	>
 		<SeedImport @seed-imported="openModal = null" />
 	</OverlayModal>
-	<OverlayModal v-if="openModal === 'filter'" @close="openModal = 'config'">
+	<OverlayModal
+		v-if="openModal === 'filter'"
+		@close="openModal = 'config'"
+		title="Item Filters"
+	>
 		<FilterConfig />
 	</OverlayModal>
 
