@@ -235,7 +235,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on ledge": {
 						reqs: [
-							logic.canClimbLedges,
+							"Boots",
 							[
 								logic.startingLocation("Goomba Village"),
 								[
@@ -247,7 +247,7 @@ const regionData: MapRegions = {
 					},
 					"[Foliage Coin] Tree on ledge": {
 						reqs: [
-							logic.canClimbLedges,
+							"Boots",
 							logic.canShakeTree,
 							[
 								logic.startingLocation("Goomba Village"),
