@@ -64,14 +64,14 @@ const unshuffledChecks = computed(() =>
 	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">
 			<button
+				v-for="map in allRegions"
+				:key="map"
 				class="map-select"
 				:class="{
 					selected: map === currentMap,
 					fullCleared: regionFullCleared(map),
 					checksInLogic: regionHasChecksInLogic(map),
 				}"
-				v-for="map in allRegions"
-				:key="map"
 				@click="
 					currentMap = map;
 					currentArea = Object.getOwnPropertyNames(region.areas)[0];
@@ -84,15 +84,14 @@ const unshuffledChecks = computed(() =>
 			<h2>{{ currentMap }}</h2>
 			<div class="map-areas">
 				<button
-					class="map-area"
 					v-for="area in Object.getOwnPropertyNames(region.areas)"
 					:key="area"
+					class="map-area"
 					:class="{
 						selected: area === currentArea,
 						checksInLogic: areaHasChecksInLogic(currentMap, area),
 						fullCleared: areaFullCleared(currentMap, area),
 					}"
-					@click="currentArea = area"
 					:style="{
 						gridRow: `${region.areas[area].row} / span ${
 							region.areas[area].rowSpan || 1
@@ -101,22 +100,23 @@ const unshuffledChecks = computed(() =>
 							region.areas[area].colSpan || 1
 						}`,
 					}"
+					@click="currentArea = area"
 				>
 					{{ area }}
 				</button>
 				<button
-					class="map-area"
 					v-for="blank in region.blanks"
 					:key="blank.row * 100 + blank.col"
+					class="map-area"
 					:style="{
 						gridRow: `${blank.row} / span ${blank.rowSpan || 1}`,
 						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`,
 					}"
 				></button>
 				<div
-					class="map-label"
 					v-for="label in region.labels"
 					:key="label.row * 100 + label.col"
+					class="map-label"
 					:style="{
 						gridRow: `${label.row} / span ${label.rowSpan || 1}`,
 						gridColumn: `${label.col} / span ${label.colSpan || 1}`,
@@ -140,9 +140,9 @@ const unshuffledChecks = computed(() =>
 					}"
 				>
 					<input
+						:id="checkName"
 						type="checkbox"
 						:name="checkName"
-						:id="checkName"
 						:disabled="unshuffledChecks.includes(checkName)"
 						:checked="playthrough.checkedLocation(currentArea, checkName)"
 						@change="playthrough.toggleCheck(currentArea, checkName)"

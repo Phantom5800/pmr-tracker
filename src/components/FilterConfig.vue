@@ -23,14 +23,14 @@ const itemsToShow = computed(() =>
 		override the default behavior.
 	</p>
 	<input
-		type="text"
-		name="itemSearch"
 		id="itemSearch"
 		v-model="itemSearch"
+		type="text"
+		name="itemSearch"
 		placeholder="search"
 	/>
 	<ul class="itemList">
-		<li class="itemEntry" v-for="item in itemsToShow" :key="item.name">
+		<li v-for="item in itemsToShow" :key="item.name" class="itemEntry">
 			{{ item.name }}
 			<div class="buttons">
 				<button

@@ -16,8 +16,8 @@ const props = defineProps<{
 	<div class="flex">
 		<div
 			v-for="key in props.optionsKeys"
-			class="flex-row"
 			:key="key"
+			class="flex-row"
 			@click="
 				optionsStore.getType(key) === 'boolean' && optionsStore.toggle(key)
 			"
@@ -26,9 +26,9 @@ const props = defineProps<{
 			<div v-if="optionsStore.getType(key) === 'boolean'" class="option">
 				<div class="checkbox-slider">
 					<input
+						:id="key"
 						autocomplete="off"
 						class="checkbox-slider"
-						:id="key"
 						type="checkbox"
 						:name="key"
 						:checked="options[key] as boolean"
@@ -39,8 +39,8 @@ const props = defineProps<{
 			</div>
 			<div v-else-if="optionsStore.getType(key) === 'select'">
 				<select
-					:name="key"
 					:id="key"
+					:name="key"
 					@change="
 						event =>
 							optionsStore.setValue(
@@ -61,8 +61,8 @@ const props = defineProps<{
 			</div>
 			<div v-else-if="optionsStore.getType(key) === 'number'">
 				<input
-					:name="key"
 					:id="key"
+					:name="key"
 					type="number"
 					:value="options[key]"
 					:min="optionsStore.getRange(key)[0]"
@@ -78,10 +78,11 @@ const props = defineProps<{
 			</div>
 			<div v-else-if="optionsStore.getType(key) === 'color'">
 				<input
-					:name="key"
 					:id="key"
+					:name="key"
 					type="color"
 					:value="options[key]"
+					:style="{ cursor: 'pointer' }"
 					@change="
 						event =>
 							optionsStore.setValue(
@@ -89,7 +90,6 @@ const props = defineProps<{
 								(event.target as HTMLInputElement).value
 							)
 					"
-					:style="{ cursor: 'pointer' }"
 				/>
 			</div>
 		</div>

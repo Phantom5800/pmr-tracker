@@ -140,15 +140,15 @@ function getImageUrl(image: string) {
 
 <template>
 	<div
-		@mouseover="hovering = true"
-		@mouseout="hovering = false"
-		tabindex="0"
 		ref="itemRef"
+		tabindex="0"
 		class="tracker-item"
 		:class="{
 			fade: !bootsOrHammer && !playthroughStore.itemCount(name),
 			glow: shouldGlow,
 		}"
+		@mouseover="hovering = true"
+		@mouseout="hovering = false"
 		@blur="
 			event => {
 				if (
@@ -200,7 +200,6 @@ function getImageUrl(image: string) {
 			"
 		/>
 		<p
-			class="label"
 			v-if="
 				(label && options.colorblind) ||
 				(name in chapterRewardReqs &&
@@ -208,6 +207,7 @@ function getImageUrl(image: string) {
 						name as keyof PlaythroughProps['spiritAnnotations']
 					).scaling > 0)
 			"
+			class="label"
 		>
 			{{
 				label ||
@@ -216,27 +216,27 @@ function getImageUrl(image: string) {
 				).scaling
 			}}
 		</p>
-		<p class="checkmark" v-if="showCheck">✔</p>
-		<div class="small-annotation upgrades" v-if="info.type === 'partner'">
+		<p v-if="showCheck" class="checkmark">✔</p>
+		<div v-if="info.type === 'partner'" class="small-annotation upgrades">
 			<img
+				v-if="playthroughStore.hasItem(`${name}:super`)"
 				:src="getImageUrl('koopa-koot-favors/Crystal_Ball_PM.png')"
 				alt=""
-				v-if="playthroughStore.hasItem(`${name}:super`)"
 			/>
 			<img
+				v-if="playthroughStore.hasItem(`${name}:ultra`)"
 				:src="getImageUrl('icons/UltraStone.gif')"
 				alt=""
-				v-if="playthroughStore.hasItem(`${name}:ultra`)"
 			/>
 		</div>
 		<div
-			class="small-annotation entrance-annotation"
 			v-if="
 				name in chapterRewardReqs &&
 				playthroughStore.getSpiritAnnotation(
 					name as keyof PlaythroughProps['spiritAnnotations']
 				).entrance
 			"
+			class="small-annotation entrance-annotation"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -264,21 +264,22 @@ function getImageUrl(image: string) {
 				alt=""
 			/>
 		</div>
-		<p class="count" v-if="powerStarNum || multiple">
+		<p v-if="powerStarNum || multiple" class="count">
 			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
 		</p>
 		<div
-			class="hover-tip"
+			v-if="hovering && hoverTooltip && options.recipeTooltips"
 			ref="tooltipRef"
+			class="hover-tip"
 			:style="{
 				...floatingStyles,
 				transformOrigin:
 					placement === 'bottom' ? 'top center' : 'bottom center',
 			}"
-			v-if="hovering && hoverTooltip && options.recipeTooltips"
 		>
 			{{ hoverTooltip }}
 			<div
+				ref="arrowRef"
 				class="down-arrow"
 				:style="{
 					left: middlewareData.arrow
@@ -288,23 +289,23 @@ function getImageUrl(image: string) {
 					bottom: placement === 'top' ? 0 : undefined,
 					translate: placement === 'bottom' ? '0 -50%' : '0 50%',
 				}"
-				ref="arrowRef"
 			></div>
 		</div>
 		<div
-			class="hover-tip star-tooltip"
+			v-if="
+				info.type === 'chapterReward' && name !== 'Star Rod' && showStarTooltip
+			"
 			ref="tooltipRef"
+			class="hover-tip star-tooltip"
 			:style="{
 				...floatingStyles,
 				transformOrigin:
 					placement === 'bottom' ? 'top center' : 'bottom center',
 				width: 'max-content',
 			}"
-			v-if="
-				info.type === 'chapterReward' && name !== 'Star Rod' && showStarTooltip
-			"
 		>
 			<div
+				ref="arrowRef"
 				class="down-arrow"
 				:style="{
 					left: middlewareData.arrow
@@ -314,12 +315,12 @@ function getImageUrl(image: string) {
 					bottom: placement === 'top' ? 0 : undefined,
 					translate: placement === 'bottom' ? '0 -50%' : '0 50%',
 				}"
-				ref="arrowRef"
 			></div>
 			<h3>Chapter Scaling</h3>
 			<button
-				class="scaling"
+				v-for="num in [1, 2, 3, 4, 5, 6, 7, 0]"
 				:key="num"
+				class="scaling"
 				@click="
 					playthroughStore.setSpiritAnnotation(
 						name as keyof typeof chapterRewardReqs,
@@ -327,7 +328,6 @@ function getImageUrl(image: string) {
 					);
 					showStarTooltip = false;
 				"
-				v-for="num in [1, 2, 3, 4, 5, 6, 7, 0]"
 			>
 				<span v-if="num !== 0">{{ num }}</span>
 				<svg
@@ -353,8 +353,12 @@ function getImageUrl(image: string) {
 
 			<h3>Dungeon Entrances</h3>
 			<button
-				class="entrance"
+				v-for="star in [
+					...Object.getOwnPropertyNames(chapterRewardReqs).slice(0, 7),
+					'',
+				]"
 				:key="star"
+				class="entrance"
 				@click="
 					playthroughStore.setSpiritAnnotation(
 						name as keyof typeof chapterRewardReqs,
@@ -362,10 +366,6 @@ function getImageUrl(image: string) {
 					);
 					showStarTooltip = false;
 				"
-				v-for="star in [
-					...Object.getOwnPropertyNames(chapterRewardReqs).slice(0, 7),
-					'',
-				]"
 			>
 				<img
 					v-if="star !== ''"

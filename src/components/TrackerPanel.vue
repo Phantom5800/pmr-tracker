@@ -21,7 +21,7 @@ const { padding, removePanel } = defineProps<{
 	>
 		<header v-if="$slots.header || moving">
 			<div v-if="moving" class="drag-handle">
-				<div class="circle" v-for="idx in [0, 1, 2, 3, 4, 5]" :key="idx"></div>
+				<div v-for="idx in [0, 1, 2, 3, 4, 5]" :key="idx" class="circle"></div>
 			</div>
 			<slot name="header"></slot>
 			<div v-if="moving" class="drag-close" @click="removePanel">

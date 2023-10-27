@@ -108,12 +108,12 @@ function fetchSeedSettings(id: string) {
 			</p>
 			<p class="url">
 				https://pm64randomizer.com/seed?id=<input
+					ref="seedInput"
+					v-model="seedToLoad"
 					required
 					type="text"
 					class="id"
-					v-model="seedToLoad"
 					placeholder="123456789"
-					ref="seedInput"
 				/>
 			</p>
 			<p>
@@ -123,7 +123,7 @@ function fetchSeedSettings(id: string) {
 
 			<button class="importButton">Import</button>
 		</form>
-		<p class="error" v-if="errorMessage">{{ errorMessage }}</p>
+		<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 	</div>
 </template>
 

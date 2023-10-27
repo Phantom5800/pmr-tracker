@@ -52,11 +52,11 @@ function equipmentTooltip(item: string) {
 		heading="Required Items"
 		:tooltip="tooltip"
 		:item-types="['required', 'chapterReward', 'partner', 'equipment']"
-		:removePanel="props.removePanel"
+		:remove-panel="props.removePanel"
 	>
 		<div class="container">
 			<div class="rows">
-				<div class="gridrow" v-for="chapter in chapterRows" :key="chapter">
+				<div v-for="chapter in chapterRows" :key="chapter" class="gridrow">
 					<TrackableItem
 						v-for="(item, index) in requiredItems.filter(
 							el => el.chapter === chapter

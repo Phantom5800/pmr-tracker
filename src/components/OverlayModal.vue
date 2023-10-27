@@ -8,7 +8,7 @@ const { title } = defineProps<{ title?: string }>();
 
 <template>
 	<div class="mask">
-		<div class="modal" v-on-click-outside="() => $emit('close')">
+		<div v-on-click-outside="() => $emit('close')" class="modal">
 			<div class="header">
 				<h2>{{ title }}</h2>
 				<div class="close" @click="() => $emit('close')">X</div>

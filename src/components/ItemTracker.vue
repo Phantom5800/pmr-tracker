@@ -84,9 +84,9 @@ function equipmentTooltip(item: string) {
 		<slot>
 			<div class="grid">
 				<div
-					class="grid-item"
 					v-for="item in trackerItems"
 					:key="item.name"
+					class="grid-item"
 					@click="tooltipRef = equipmentTooltip(item.name)"
 					@contextmenu="tooltipRef = equipmentTooltip(item.name)"
 					@mouseover="tooltipRef = equipmentTooltip(item.name)"

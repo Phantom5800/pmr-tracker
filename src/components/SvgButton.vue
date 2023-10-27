@@ -42,13 +42,13 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 </script>
 
 <template>
-	<div class="button" :style="cssVars" ref="buttonRef">
+	<div ref="buttonRef" class="button" :style="cssVars">
 		<div class="svg">
 			<slot></slot>
 		</div>
 		<div
-			class="tooltip"
 			ref="tooltipRef"
+			class="tooltip"
 			:style="{
 				...floatingStyles,
 				transformOrigin:
@@ -57,6 +57,7 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 		>
 			{{ name }}
 			<div
+				ref="arrowRef"
 				class="arrow"
 				:style="{
 					left: middlewareData.arrow
@@ -66,7 +67,6 @@ const { floatingStyles, middlewareData, placement } = useFloating(
 					bottom: placement === 'top' ? 0 : undefined,
 					translate: placement === 'bottom' ? '0 -50%' : '0 50%',
 				}"
-				ref="arrowRef"
 			></div>
 		</div>
 	</div>

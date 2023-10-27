@@ -382,40 +382,40 @@ if (!localStorage.getItem("visited")) {
 	/></OverlayModal>
 	<OverlayModal
 		v-if="openModal === 'settings'"
-		@close="openModal = null"
 		title="Seed Settings"
+		@close="openModal = null"
 	>
 		<p class="settings-warning">
 			Note: you probably don't need to set these manually! Use the Import Seed
 			option to import from the pm64randomizer website.<br />
 			<a @click="openModal = 'import'">Import Seed</a>
 		</p>
-		<MenuOptions :optionsKeys="settingsKeys" />
+		<MenuOptions :options-keys="settingsKeys" />
 	</OverlayModal>
 	<OverlayModal
 		v-if="openModal === 'config'"
-		@close="openModal = null"
 		title="Tracker Config"
+		@close="openModal = null"
 	>
 		<button
-			@click="openModal = 'filter'"
 			:style="{ padding: '0.5rem', marginBottom: '1rem' }"
+			@click="openModal = 'filter'"
 		>
 			Filter Individual Items
 		</button>
-		<MenuOptions :optionsKeys="configKeys" />
+		<MenuOptions :options-keys="configKeys" />
 	</OverlayModal>
 	<OverlayModal
 		v-if="openModal === 'import'"
-		@close="openModal = null"
 		title="Import Seed"
+		@close="openModal = null"
 	>
 		<SeedImport @seed-imported="openModal = null" />
 	</OverlayModal>
 	<OverlayModal
 		v-if="openModal === 'filter'"
-		@close="openModal = 'config'"
 		title="Item Filters"
+		@close="openModal = 'config'"
 	>
 		<FilterConfig />
 	</OverlayModal>
@@ -536,8 +536,8 @@ if (!localStorage.getItem("visited")) {
 				</svg>
 			</SvgButton>
 			<input
-				type="file"
 				ref="loadButton"
+				type="file"
 				:style="{ display: 'none' }"
 				@change="
 					e => {
@@ -671,30 +671,30 @@ if (!localStorage.getItem("visited")) {
 				@resized="saveLayout"
 			>
 				<EnabledSettings
-					:moving="moving"
 					v-if="item.i === 'flags'"
+					:moving="moving"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<RequiredTracker
-					:moving="moving"
 					v-if="item.i === 'required'"
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
-					:moving="moving"
 					v-if="item.i === 'compact'"
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					:heading="'Required Items'"
-					:itemTypes="['required', 'chapterReward', 'equipment', 'partner']"
+					:item-types="['required', 'chapterReward', 'equipment', 'partner']"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
-					:moving="moving"
 					v-if="item.i === 'everything'"
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					:heading="'Basically Everything'"
-					:itemTypes="[
+					:item-types="[
 						'required',
 						'chapterReward',
 						'equipment',
@@ -705,46 +705,46 @@ if (!localStorage.getItem("visited")) {
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<UserNotes
-					:moving="moving"
 					v-if="item.i === 'notes'"
+					:moving="moving"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<MapTracker
-					:moving="moving"
 					v-if="item.i === 'map'"
+					:moving="moving"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
-					:moving="moving"
 					v-if="item.i === 'misckey'"
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					heading="Misc. Keys"
-					:itemTypes="['miscKey']"
+					:item-types="['miscKey']"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
-					:moving="moving"
 					v-if="item.i === 'miscitem'"
+					:moving="moving"
 					:all-items="allItemsFiltered"
 					heading="Misc. Items"
-					:itemTypes="['miscItem']"
+					:item-types="['miscItem']"
 					:remove-panel="() => removePanel(idx)"
 				/>
 
 				<ItemTracker
+					v-if="item.i === 'letters'"
 					:moving="moving"
 					:all-items="allItemsFiltered"
-					v-if="item.i === 'letters'"
 					heading="Letters"
-					:itemTypes="['letter']"
+					:item-types="['letter']"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<ItemTracker
+					v-if="item.i === 'koot'"
 					:moving="moving"
 					:all-items="allItemsFiltered"
-					v-if="item.i === 'koot'"
 					heading="Koopa Koot Favors"
-					:itemTypes="['kootFavor']"
+					:item-types="['kootFavor']"
 					:remove-panel="() => removePanel(idx)"
 				/>
 				<!-- <InfoBlocks
