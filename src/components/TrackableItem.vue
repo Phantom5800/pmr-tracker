@@ -140,7 +140,6 @@ function getImageUrl(image: string) {
 
 <template>
 	<div
-		v-if="show === undefined || show(options)"
 		@mouseover="hovering = true"
 		@mouseout="hovering = false"
 		tabindex="0"

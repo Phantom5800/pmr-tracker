@@ -168,7 +168,12 @@ const { options } = storeToRefs(optionsStore);
 const year = new Date().getFullYear();
 
 const allItemsFiltered = computed(() =>
-	allItems.filter((el) => el.show === undefined || el.show(options.value))
+	allItems.filter(
+		(el) =>
+			optionsStore.getItemFilter(el.name) === "show" ||
+			(!(optionsStore.getItemFilter(el.name) === "hide") &&
+				(el.show === undefined || el.show(options.value)))
+	)
 );
 
 function saveLayout() {

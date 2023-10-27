@@ -35,7 +35,7 @@ const uselessItems = [
 const trackerItems = computed(() => {
 	const filteredItems = props.allItems.filter(
 		(el) =>
-			itemTypes.value &&
+			itemTypes &&
 			itemTypes.value &&
 			itemTypes.value.includes(el.type) &&
 			(options.$state.options.uselessItems || !uselessItems.includes(el.name))
@@ -45,7 +45,7 @@ const trackerItems = computed(() => {
 			chapterReward: 0,
 			partner: 1,
 			equipment: 2,
-			required: 3
+			required: 3,
 		};
 		filteredItems.sort(
 			(a, b) => (sortOrder[a.type] ?? 9999) - (sortOrder[b.type] ?? 9999)
