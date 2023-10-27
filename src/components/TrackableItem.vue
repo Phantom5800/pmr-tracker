@@ -24,7 +24,7 @@ const { info, size, hoverTooltip } = defineProps<{
 	hoverTooltip?: string;
 }>();
 
-const { name, image, multiple, label, show, turnInCheck } = info;
+const { name, image, multiple, label, turnInCheck } = info;
 
 const { options } = storeToRefs(optionsStore);
 

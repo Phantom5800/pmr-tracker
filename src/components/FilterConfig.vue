@@ -30,7 +30,7 @@ const itemsToShow = computed(() =>
 		placeholder="search"
 	/>
 	<ul class="itemList">
-		<li class="itemEntry" v-for="item in itemsToShow">
+		<li class="itemEntry" v-for="item in itemsToShow" :key="item.name">
 			{{ item.name }}
 			<div class="buttons">
 				<button
