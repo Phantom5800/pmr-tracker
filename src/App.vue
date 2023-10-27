@@ -23,7 +23,14 @@ import FilterConfig from "./components/FilterConfig.vue";
 const breakpoint = ref<Breakpoint>("lg");
 const loadButton = ref<HTMLInputElement | null>(null);
 
-const savedLayouts = JSON.parse(localStorage.getItem("layout") ?? "{}");
+type TGridItem = typeof GridItem & {
+	calcXY: (top: number, left: number) => { x: number; y: number };
+	wrapper: HTMLElement;
+};
+
+const savedLayouts = JSON.parse(
+	localStorage.getItem("layout") ?? "{}"
+) as Record<Breakpoint, Layout>;
 
 const initialLayouts: Record<Breakpoint, Layout> = {
 	lg: [
@@ -121,7 +128,7 @@ const panels = {
 	notes: { name: "User Notepad", h: 20, w: 20 },
 };
 
-const layouts = reactive(
+const layouts: Record<Breakpoint, Layout> = reactive(
 	(["xxs", "xs", "sm", "md", "lg"] as Breakpoint[]).reduce(
 		(a, bp) => {
 			if (bp in savedLayouts) {
@@ -180,7 +187,7 @@ function saveLayout() {
 	const savedLayoutsStr = localStorage.getItem("layout");
 	let savedLayouts = {} as Record<Breakpoint, Layout>;
 	if (savedLayoutsStr) {
-		savedLayouts = JSON.parse(savedLayoutsStr);
+		savedLayouts = JSON.parse(savedLayoutsStr) as Record<Breakpoint, Layout>;
 	}
 	localStorage.setItem(
 		"layout",
@@ -198,7 +205,7 @@ function resetLayout() {
 		const savedLayoutsStr = localStorage.getItem("layout");
 		let savedLayouts = {} as Record<Breakpoint, Layout>;
 		if (savedLayoutsStr) {
-			savedLayouts = JSON.parse(savedLayoutsStr);
+			savedLayouts = JSON.parse(savedLayoutsStr) as Record<Breakpoint, Layout>;
 		}
 		localStorage.setItem(
 			"layout",
@@ -243,7 +250,7 @@ const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 	const index = layout.value.findIndex(item => item.i === dropId);
 
 	if (index !== -1) {
-		const item = gridLayout.value.getItem(dropId);
+		const item = gridLayout.value.getItem(dropId) as TGridItem;
 
 		if (!item) return;
 
@@ -330,7 +337,7 @@ function dragEnd(panelKey: keyof typeof panels) {
 		panels[panelKey].w
 	);
 
-	const item = gridLayout.value.getItem(dropId);
+	const item = gridLayout.value.getItem(dropId) as TGridItem;
 
 	if (!item) return;
 

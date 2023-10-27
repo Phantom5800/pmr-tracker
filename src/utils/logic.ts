@@ -1,7 +1,7 @@
 import type { Options } from "@/stores/config";
 
 export default {
-	canReachToadTown(items: string[], settings: Options) {
+	canReachToadTown(this: void, items: string[], settings: Options) {
 		return (
 			settings.startingLocation === "Toad Town" ||
 			(settings.startingLocation === "Goomba Village" &&
@@ -13,13 +13,13 @@ export default {
 				(items.includes("Watt") || settings.whaleOpen))
 		);
 	},
-	canClimbLedges(items: string[], _: Options) {
+	canClimbLedges(this: void, items: string[], _: Options) {
 		return items.includes("Boots") || items.includes("Parakarry");
 	},
-	canBreakBlocksAbove(items: string[], _: Options) {
+	canBreakBlocksAbove(this: void, items: string[], _: Options) {
 		return items.includes("Boots") || items.includes("Kooper");
 	},
-	canBreakGroundBlocks(items: string[], _: Options) {
+	canBreakGroundBlocks(this: void, items: string[], _: Options) {
 		return (
 			items.includes("Hammer") ||
 			items.includes("Kooper") ||
@@ -27,35 +27,35 @@ export default {
 			items.includes("Super Boots")
 		);
 	},
-	canShakeTree(items: string[], _: Options) {
+	canShakeTree(this: void, items: string[], _: Options) {
 		return items.includes("Hammer") || items.includes("Bombette");
 	},
-	canFlipPanel(items: string[], _: Options) {
+	canFlipPanel(this: void, items: string[], _: Options) {
 		return items.includes("Super Boots") || items.includes("Ultra Hammer");
 	},
-	chapter6Entry(items: string[], settings: Options) {
+	chapter6Entry(this: void, items: string[], settings: Options) {
 		return (
 			items.filter(el => el.includes("Magical Seed")).length >=
 			settings.seedsRequired
 		);
 	},
-	shiverBridgeVisible(items: string[], settings: Options) {
+	shiverBridgeVisible(this: void, items: string[], settings: Options) {
 		return settings.shiverBridgeVisible;
 	},
-	startingLocation(start: string) {
+	startingLocation(this: void, start: string) {
 		return (items: string[], settings: Options) =>
 			settings.startingLocation === start;
 	},
-	toyboxAccess(items: string[], settings: Options) {
+	toyboxAccess(this: void, items: string[], settings: Options) {
 		return (
 			(items.includes("Boots") || items.includes("Parakarry")) &&
 			(items.includes("Bow") || settings.toyboxOpen)
 		);
 	},
-	canMoveStations(items: string[], _: Options) {
+	canMoveStations(this: void, items: string[], _: Options) {
 		return items.includes("Toy Train") && items.includes("Boots");
 	},
-	desertAccess(items: string[], settings: Options) {
+	desertAccess(this: void, items: string[], settings: Options) {
 		return (
 			settings.startingLocation === "Dry Dry Outpost" ||
 			((settings.startingLocation === "Toad Town" ||
@@ -70,35 +70,35 @@ export default {
 						items.includes("Super Hammer"))))
 		);
 	},
-	forestOpen(items: string[], settings: Options) {
+	forestOpen(this: void, items: string[], settings: Options) {
 		return settings.forestOpen;
 	},
-	prologueOpen(items: string[], settings: Options) {
+	prologueOpen(this: void, items: string[], settings: Options) {
 		return settings.prologueOpen;
 	},
-	mtRuggedOpen(items: string[], settings: Options) {
+	mtRuggedOpen(this: void, items: string[], settings: Options) {
 		return settings.mtRuggedOpen;
 	},
-	blueHouseOpen(items: string[], settings: Options) {
+	blueHouseOpen(this: void, items: string[], settings: Options) {
 		return settings.blueHouseOpen;
 	},
-	whaleOpen(items: string[], settings: Options) {
+	whaleOpen(this: void, items: string[], settings: Options) {
 		return settings.whaleOpen;
 	},
-	multipleItemCheck(item: string, quantity: number) {
+	multipleItemCheck(this: void, item: string, quantity: number) {
 		return (items: string[], _: Options) =>
 			items.filter(el => el === item).length >= quantity;
 	},
-	fastBowserCastle(items: string[], settings: Options) {
+	fastBowserCastle(this: void, items: string[], settings: Options) {
 		return settings.fastBowserCastle;
 	},
-	powerStarHunt(settings: Options) {
+	powerStarHunt(this: void, settings: Options) {
 		return settings.powerStarHunt;
 	},
-	powerStarNum(settings: Options) {
+	powerStarNum(this: void, settings: Options) {
 		return settings.powerStarNum;
 	},
-	showMagicalSeed(num: number) {
+	showMagicalSeed(this: void, num: number) {
 		return (settings: Options) => settings.seedsRequired >= num;
 	},
 };

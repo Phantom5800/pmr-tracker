@@ -32,8 +32,8 @@ const letters = allItems.filter(el => el.type === "letter").map(el => el.name);
 
 const storagePlaythroughStr = localStorage.getItem("playthrough");
 
-const storagePlaythrough: Partial<PlaythroughProps> = storagePlaythroughStr
-	? JSON.parse(storagePlaythroughStr)
+const storagePlaythrough = storagePlaythroughStr
+	? (JSON.parse(storagePlaythroughStr) as Partial<PlaythroughProps>)
 	: {};
 
 // const defaultOptions = Object.getOwnPropertyNames(allOptions).reduce(
@@ -76,7 +76,7 @@ const spiritAnnotations = {
 	},
 } satisfies Record<string, SpiritAnnotations>;
 
-const init = {
+const init: PlaythroughProps = {
 	items: [],
 	checks: [],
 	notes: "",
@@ -284,7 +284,7 @@ export const usePlaythrough = defineStore("playthrough", {
 			reader.onload = e => {
 				const contents = e.target?.result;
 				if (typeof contents === "string") {
-					const saveData = JSON.parse(contents);
+					const saveData = JSON.parse(contents) as PlaythroughProps;
 					if (
 						"checks" in saveData &&
 						"items" in saveData &&

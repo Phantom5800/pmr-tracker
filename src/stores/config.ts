@@ -328,10 +328,12 @@ const optionsData = {
 
 const storageOptionsStr = localStorage.getItem("options");
 
-const storageOptions: {
-	options?: Partial<Options>;
-	itemFilters?: Record<string, ItemFilter>;
-} = storageOptionsStr ? JSON.parse(storageOptionsStr) : {};
+const storageOptions = storageOptionsStr
+	? (JSON.parse(storageOptionsStr) as {
+			options?: Partial<Options>;
+			itemFilters?: Record<string, ItemFilter>;
+	  })
+	: {};
 
 const defaultOptions: Options = Object.getOwnPropertyNames(optionsData).reduce(
 	(a, v) => ({ ...a, [v]: optionsData[v as keyof typeof optionsData].default }),

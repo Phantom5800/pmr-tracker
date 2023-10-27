@@ -68,7 +68,7 @@ function fetchSeedSettings(id: string) {
 		)
 		.then(result => {
 			if (result && result.data) {
-				setRandomizerSettingsFromApiResponse(result.data);
+				setRandomizerSettingsFromApiResponse(result.data as SettingsApiData);
 			} else {
 				errorMessage.value = `Unknown error - please see the browser console and report this!`;
 				console.error(result);
