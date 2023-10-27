@@ -71,6 +71,8 @@ export type Options = {
 	// gearShuffle: string;
 };
 
+export type ItemFilter = "show" | "default" | "hide";
+
 const optionsData = {
 	colorblind: {
 		namespace: "config",
@@ -326,30 +328,40 @@ const optionsData = {
 
 const storageOptionsStr = localStorage.getItem("options");
 
-const storageOptions: Partial<Options> = storageOptionsStr
-	? JSON.parse(storageOptionsStr)
-	: {};
+const storageOptions: {
+	options?: Partial<Options>;
+	itemFilters?: Record<string, ItemFilter>;
+} = storageOptionsStr ? JSON.parse(storageOptionsStr) : {};
 
 const defaultOptions: Options = Object.getOwnPropertyNames(optionsData).reduce(
 	(a, v) => ({ ...a, [v]: optionsData[v as keyof typeof optionsData].default }),
 	{} as Options
 );
 
-const init: Options = { ...defaultOptions, ...storageOptions };
+const init: Options = { ...defaultOptions, ...storageOptions.options };
 
 export const useOptions = defineStore("options", {
-	state: () => ({ options: init }),
+	state: () => ({
+		options: init,
+		itemFilters: storageOptions.itemFilters ?? {},
+	}),
 	actions: {
+		save() {
+			localStorage.setItem(
+				"options",
+				JSON.stringify({ options: this.options, itemFilters: this.itemFilters })
+			);
+		},
 		toggle<T extends keyof Options>(key: T) {
 			const data = optionsData[key];
 			if (data.type === "boolean") {
 				(this.options[key] as boolean) = !this.options[key];
-				localStorage.setItem("options", JSON.stringify(this.options));
+				this.save();
 			}
 		},
 		setValue<T extends keyof Options>(key: T, value: Options[T]) {
 			this.options[key] = value;
-			localStorage.setItem("options", JSON.stringify(this.options));
+			this.save();
 		},
 		getName(key: keyof Options) {
 			return optionsData[key].name;
@@ -373,6 +385,17 @@ export const useOptions = defineStore("options", {
 			if (data.type === "select") {
 				return data.choices;
 			}
+		},
+		getItemFilter(key: string): ItemFilter {
+			if (key in this.itemFilters) {
+				return this.itemFilters[key];
+			} else {
+				return "default";
+			}
+		},
+		setItemFilter(key: string, filt: ItemFilter) {
+			this.itemFilters[key] = filt;
+			this.save();
 		},
 	},
 });

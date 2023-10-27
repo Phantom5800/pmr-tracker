@@ -18,6 +18,7 @@ import { throttle } from "lodash";
 import OverlayModal from "./components/OverlayModal.vue";
 import { usePlaythrough } from "./stores/playthrough";
 import InfoBlocks from "./components/InfoBlocks.vue";
+import FilterConfig from "./components/FilterConfig.vue";
 
 const breakpoint = ref<Breakpoint>("lg");
 const loadButton = ref<HTMLInputElement | null>(null);
@@ -154,7 +155,9 @@ function syncMousePosition(event: MouseEvent) {
 const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map((el) => el.i));
 
-const openModal = ref<"settings" | "config" | "import" | "info" | null>(null);
+const openModal = ref<
+	"settings" | "config" | "import" | "info" | "filter" | null
+>(null);
 const moving = ref(false);
 
 const optionsStore = useOptions();
@@ -383,10 +386,14 @@ if (!localStorage.getItem("visited")) {
 		<MenuOptions :optionsKeys="settingsKeys" />
 	</OverlayModal>
 	<OverlayModal v-if="openModal === 'config'" @close="openModal = null">
+		<a @click="openModal = 'filter'">Filter Individual Items</a>
 		<MenuOptions :optionsKeys="configKeys" />
 	</OverlayModal>
 	<OverlayModal v-if="openModal === 'import'" @close="openModal = null">
 		<SeedImport @seed-imported="openModal = null" />
+	</OverlayModal>
+	<OverlayModal v-if="openModal === 'filter'" @close="openModal = 'config'">
+		<FilterConfig />
 	</OverlayModal>
 
 	<header class="header">
