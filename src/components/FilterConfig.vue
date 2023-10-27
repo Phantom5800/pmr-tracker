@@ -39,21 +39,21 @@ const itemsToShow = computed(() =>
 					}"
 					@click="optionsStore.setItemFilter(item.name, 'show')"
 				>
-					Show</button
+					✓</button
 				><button
 					:class="{
 						selected: optionsStore.getItemFilter(item.name) === 'default',
 					}"
 					@click="optionsStore.setItemFilter(item.name, 'default')"
 				>
-					Default</button
+					/</button
 				><button
 					:class="{
 						selected: optionsStore.getItemFilter(item.name) === 'hide',
 					}"
 					@click="optionsStore.setItemFilter(item.name, 'hide')"
 				>
-					Hide
+					X
 				</button>
 			</div>
 		</li>
@@ -88,26 +88,44 @@ const itemsToShow = computed(() =>
 
 .buttons {
 	display: flex;
+	flex-flow: row nowrap;
+	gap: 1px;
 }
 
 .buttons > button {
 	border: 0;
 	padding: 0.5rem;
+	min-width: 3rem;
+	cursor: pointer;
+	color: var(--primary-color);
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.buttons > button:hover {
+	background-color: rgba(220, 220, 220, 0.9);
 }
 
 .buttons > button:nth-child(1) {
 	border-radius: 8px 0 0 8px;
+	--primary-color: rgb(0, 180, 80);
 }
 
 .buttons > button:nth-child(2) {
 	border-radius: 0;
+	--primary-color: rgb(127, 127, 127);
 }
 
 .buttons > button:nth-child(3) {
 	border-radius: 0 8px 8px 0;
+	--primary-color: rgb(180, 0, 80);
 }
 
 .buttons > .selected {
-	background-color: slategray;
+	background-color: var(--primary-color);
+	color: white;
+}
+
+.buttons > .selected:hover {
+	background-color: var(--primary-color);
 }
 </style>
