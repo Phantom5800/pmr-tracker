@@ -149,6 +149,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "miscItem",
 		image: "icons/PM_Letter_Sprite.png",
 		multiple: 3,
+		show: (settings: Options) => !settings.lettersRandomized,
 	},
 	{
 		chapter: 2,
