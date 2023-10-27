@@ -42,7 +42,7 @@ const props = defineProps<{
 					:name="key"
 					:id="key"
 					@change="
-						(event) =>
+						event =>
 							optionsStore.setValue(
 								key,
 								(event.target as HTMLSelectElement).value
@@ -68,7 +68,7 @@ const props = defineProps<{
 					:min="optionsStore.getRange(key)[0]"
 					:max="optionsStore.getRange(key)[1]"
 					@change="
-						(event) =>
+						event =>
 							optionsStore.setValue(
 								key,
 								(event.target as HTMLInputElement).value
@@ -83,7 +83,7 @@ const props = defineProps<{
 					type="color"
 					:value="options[key]"
 					@change="
-						(event) =>
+						event =>
 							optionsStore.setValue(
 								key,
 								(event.target as HTMLInputElement).value

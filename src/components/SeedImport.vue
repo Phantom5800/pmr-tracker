@@ -66,7 +66,7 @@ function fetchSeedSettings(id: string) {
 		.get(
 			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
 		)
-		.then((result) => {
+		.then(result => {
 			if (result && result.data) {
 				setRandomizerSettingsFromApiResponse(result.data);
 			} else {
@@ -74,7 +74,7 @@ function fetchSeedSettings(id: string) {
 				console.error(result);
 			}
 		})
-		.catch((err) => {
+		.catch(err => {
 			if (
 				axios.isAxiosError(err) &&
 				err.response &&

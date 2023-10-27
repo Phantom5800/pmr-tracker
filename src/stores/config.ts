@@ -401,11 +401,11 @@ export const useOptions = defineStore("options", {
 });
 
 export const settingsKeys = Object.getOwnPropertyNames(optionsData).filter(
-	(k) => optionsData[k as keyof typeof optionsData].namespace === "settings"
+	k => optionsData[k as keyof typeof optionsData].namespace === "settings"
 ) as (keyof Options)[];
 
 export const configKeys = Object.getOwnPropertyNames(optionsData).filter(
-	(k) => optionsData[k as keyof typeof optionsData].namespace === "config"
+	k => optionsData[k as keyof typeof optionsData].namespace === "config"
 ) as (keyof Options)[];
 
 export type OptionsStore = typeof useOptions;

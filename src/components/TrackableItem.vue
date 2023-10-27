@@ -150,7 +150,7 @@ function getImageUrl(image: string) {
 			glow: shouldGlow,
 		}"
 		@blur="
-			(event) => {
+			event => {
 				if (
 					!(
 						event.currentTarget &&

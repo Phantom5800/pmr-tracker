@@ -153,7 +153,7 @@ function syncMousePosition(event: MouseEvent) {
 }
 
 const layout = computed(() => layouts[breakpoint.value]);
-const currentPanels = computed(() => layout.value.map((el) => el.i));
+const currentPanels = computed(() => layout.value.map(el => el.i));
 
 const openModal = ref<
 	"settings" | "config" | "import" | "info" | "filter" | null
@@ -169,7 +169,7 @@ const year = new Date().getFullYear();
 
 const allItemsFiltered = computed(() =>
 	allItems.filter(
-		(el) =>
+		el =>
 			optionsStore.getItemFilter(el.name) === "show" ||
 			(!(optionsStore.getItemFilter(el.name) === "hide") &&
 				(el.show === undefined || el.show(options.value)))
@@ -230,7 +230,7 @@ const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 		mouseAt.y > parentRect.top &&
 		mouseAt.y < parentRect.bottom;
 
-	if (mouseInGrid && !layout.value.find((item) => item.i === dropId)) {
+	if (mouseInGrid && !layout.value.find(item => item.i === dropId)) {
 		layout.value.push({
 			x: (layout.value.length * 2) % 12,
 			y: layout.value.length + 12, // puts it at the bottom
@@ -240,7 +240,7 @@ const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 		});
 	}
 
-	const index = layout.value.findIndex((item) => item.i === dropId);
+	const index = layout.value.findIndex(item => item.i === dropId);
 
 	if (index !== -1) {
 		const item = gridLayout.value.getItem(dropId);
@@ -283,7 +283,7 @@ const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 				panels[panelKey].w
 			);
 			layouts[breakpoint.value] = layout.value.filter(
-				(item) => item.i !== dropId
+				item => item.i !== dropId
 			);
 		}
 	}
@@ -309,9 +309,7 @@ function dragEnd(panelKey: keyof typeof panels) {
 			panels[panelKey].h,
 			panels[panelKey].w
 		);
-		layouts[breakpoint.value] = layout.value.filter(
-			(item) => item.i !== dropId
-		);
+		layouts[breakpoint.value] = layout.value.filter(item => item.i !== dropId);
 	} else {
 		return;
 	}
@@ -542,7 +540,7 @@ if (!localStorage.getItem("visited")) {
 				ref="loadButton"
 				:style="{ display: 'none' }"
 				@change="
-					(e) => {
+					e => {
 						const file = (e.target as HTMLInputElement).files;
 						if (file && file.length > 0) {
 							doWithPrompt(

@@ -38,13 +38,13 @@ function areaFullCleared(pRegion: string, area: string): boolean {
 }
 
 function regionHasChecksInLogic(pRegion: string): boolean {
-	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).some((el) =>
+	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).some(el =>
 		areaHasChecksInLogic(pRegion, el)
 	);
 }
 
 function regionFullCleared(pRegion: string): boolean {
-	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).every((el) =>
+	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).every(el =>
 		areaFullCleared(pRegion, el)
 	);
 }
@@ -52,7 +52,7 @@ function regionFullCleared(pRegion: string): boolean {
 const unshuffledChecks = computed(() =>
 	Object.getOwnPropertyNames(
 		region.value.areas[currentArea.value].checks
-	).filter((el) => !playthrough.locationIsRandomized(el))
+	).filter(el => !playthrough.locationIsRandomized(el))
 );
 </script>
 

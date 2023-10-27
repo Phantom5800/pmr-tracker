@@ -35,7 +35,7 @@ export default {
 	},
 	chapter6Entry(items: string[], settings: Options) {
 		return (
-			items.filter((el) => el.includes("Magical Seed")).length >=
+			items.filter(el => el.includes("Magical Seed")).length >=
 			settings.seedsRequired
 		);
 	},
@@ -87,7 +87,7 @@ export default {
 	},
 	multipleItemCheck(item: string, quantity: number) {
 		return (items: string[], _: Options) =>
-			items.filter((el) => el === item).length >= quantity;
+			items.filter(el => el === item).length >= quantity;
 	},
 	fastBowserCastle(items: string[], settings: Options) {
 		return settings.fastBowserCastle;
@@ -100,5 +100,5 @@ export default {
 	},
 	showMagicalSeed(num: number) {
 		return (settings: Options) => settings.seedsRequired >= num;
-	}
+	},
 };

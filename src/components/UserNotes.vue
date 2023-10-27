@@ -9,7 +9,7 @@ const { notes } = storeToRefs(playthroughStore);
 
 const content = ref(notes);
 
-watch(content, (content) => {
+watch(content, content => {
 	playthroughStore.setNotes(content);
 });
 

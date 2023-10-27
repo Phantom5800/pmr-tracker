@@ -196,7 +196,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Forest Pass",
 		type: "miscItem",
 		image: "icons/ForestPass.png",
-		show: (settings) => !logic.forestOpen([], settings),
+		show: settings => !logic.forestOpen([], settings),
 	},
 	{
 		name: "Record",

@@ -4093,8 +4093,8 @@ const regionData: MapRegions = {
 };
 
 export const kootReqs = Object.values(regionData)
-	.flatMap((v) =>
-		Object.values(v.areas).flatMap((av) =>
+	.flatMap(v =>
+		Object.values(v.areas).flatMap(av =>
 			Object.entries(av.checks).filter(([ck, _]) => ck.startsWith("[Koot"))
 		)
 	)

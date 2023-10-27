@@ -28,9 +28,7 @@ const starSpirits = [
 
 const fixedChapterRewards = [...starSpirits, "Star Rod"];
 
-const letters = allItems
-	.filter((el) => el.type === "letter")
-	.map((el) => el.name);
+const letters = allItems.filter(el => el.type === "letter").map(el => el.name);
 
 const storagePlaythroughStr = localStorage.getItem("playthrough");
 
@@ -142,7 +140,7 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		addItem(item: string | null, max: number = 1) {
 			if (item !== null) {
-				if (this.items.filter((el) => el === item).length < max) {
+				if (this.items.filter(el => el === item).length < max) {
 					this.items.push(item);
 
 					this.save();
@@ -164,24 +162,24 @@ export const usePlaythrough = defineStore("playthrough", {
 		itemCount(item: string) {
 			if (item === "Letters") {
 				return (
-					letters.filter((el) => this.items.includes(el)).length +
-					this.items.filter((el) => el === item).length
+					letters.filter(el => this.items.includes(el)).length +
+					this.items.filter(el => el === item).length
 				);
 			} else {
-				return this.items.filter((el) => el === item).length;
+				return this.items.filter(el => el === item).length;
 			}
 		},
 		filterItems(items: string[]) {
-			return this.items.filter((el) => items.includes(el));
+			return this.items.filter(el => items.includes(el));
 		},
 		toggleCheck(area: string, check: string) {
 			const checkString = fixedChapterRewards.includes(check)
 				? check
 				: `${area}:${check}`;
 			if (this.checks.includes(checkString)) {
-				this.checks = this.checks.filter((el) => el !== checkString);
+				this.checks = this.checks.filter(el => el !== checkString);
 				if (fixedChapterRewards.includes(check) && this.items.includes(check)) {
-					this.items = this.items.filter((el) => el !== check);
+					this.items = this.items.filter(el => el !== check);
 				}
 			} else {
 				this.checks.push(checkString);
@@ -207,13 +205,13 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.save();
 		},
 		chaptersBeaten() {
-			return starSpirits.filter((el) => this.items.includes(el)).length;
+			return starSpirits.filter(el => this.items.includes(el)).length;
 		},
 		getRequiredChapters(reqs: Requirements) {
 			if (typeof reqs === "number") {
 				return reqs;
 			} else if (Array.isArray(reqs)) {
-				return (reqs.find((el) => typeof el === "number") as number) ?? 0;
+				return (reqs.find(el => typeof el === "number") as number) ?? 0;
 			} else {
 				return 0;
 			}
@@ -253,7 +251,7 @@ export const usePlaythrough = defineStore("playthrough", {
 			if (check.startsWith("[")) {
 				const tag: keyof typeof tags | undefined = (
 					Object.getOwnPropertyNames(tags) as (keyof typeof tags)[]
-				).find((el) => check.startsWith(`[${el}]`));
+				).find(el => check.startsWith(`[${el}]`));
 				if (!tag) {
 					console.error(`Error processing tag ${check}`);
 					return true;
@@ -283,7 +281,7 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		loadPlaythrough(file: File) {
 			const reader = new FileReader();
-			reader.onload = (e) => {
+			reader.onload = e => {
 				const contents = e.target?.result;
 				if (typeof contents === "string") {
 					const saveData = JSON.parse(contents);
@@ -334,9 +332,9 @@ const resolveRequirement = (
 	} else if (typeof reqs === "function") {
 		return reqs(playthrough.$state.items, options.$state.options);
 	} else if (operation === "and") {
-		return reqs.every((el) => resolveRequirement(el, "or"));
+		return reqs.every(el => resolveRequirement(el, "or"));
 	} else if (operation === "or") {
-		return reqs.some((el) => resolveRequirement(el, "and"));
+		return reqs.some(el => resolveRequirement(el, "and"));
 	} else {
 		console.error("error in resolveRequirement", reqs);
 		throw "error in resolveRequirement";

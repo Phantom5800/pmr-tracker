@@ -17,7 +17,7 @@ const props = defineProps<{
 }>();
 
 const requiredItems = computed(() =>
-	props.allItems.filter((el) =>
+	props.allItems.filter(el =>
 		["chapterReward", "partner", "equipment", "required"].includes(el.type)
 	)
 );
@@ -59,7 +59,7 @@ function equipmentTooltip(item: string) {
 				<div class="gridrow" v-for="chapter in chapterRows" :key="chapter">
 					<TrackableItem
 						v-for="(item, index) in requiredItems.filter(
-							(el) => el.chapter === chapter
+							el => el.chapter === chapter
 						)"
 						:key="item.name"
 						:info="item"
