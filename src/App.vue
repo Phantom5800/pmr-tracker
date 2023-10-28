@@ -804,7 +804,9 @@ if (!localStorage.getItem("visited")) {
 </template>
 
 <style scoped>
-:root {
+header,
+main,
+footer {
 	--min-width: 1900px;
 }
 
