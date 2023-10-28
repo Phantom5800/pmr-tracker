@@ -4091,185 +4091,415 @@ const regionData: MapRegions = {
 		},
 	},
 	"Bowser's Castle": {
-		reqs: null,
+		reqs: [logic.canReachToadTown, "Boots", 7],
 		areas: {
 			"Bombette Switch Room": {
 				row: 2,
-				col: 9,
+				col: 1,
 				checks: {
 					"Item on floor": {
-						reqs: "Bombette",
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 				},
 			},
 			"Second Lobby": {
 				row: 2,
-				col: 10,
+				col: 2,
 				rowSpan: 2,
 				checks: {},
 			},
 			Staircase: {
 				row: 1,
-				col: 11,
+				col: 3,
 				rowSpan: 2,
 				checks: {},
 			},
 			"Kooper Switch Room": {
 				row: 1,
-				col: 12,
+				col: 4,
 				checks: {
 					"Item on Floor": {
-						reqs: "Kooper",
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+							"Kooper",
+						],
 					},
 				},
 			},
 			"Up/Down Hallway": {
 				row: 2,
-				col: 12,
+				col: 4,
 				colSpan: 2,
 				checks: {},
 			},
 			"Before Duplighosts": {
 				row: 2,
-				col: 14,
+				col: 6,
 				checks: {},
 			},
 			Duplighosts: {
 				row: 2,
-				col: 15,
+				col: 7,
 				checks: {},
 			},
 			"Jr. Troopa": {
 				row: 2,
-				col: 16,
+				col: 8,
+				checks: {},
+			},
+			"Stairway to Peach's Castle": {
+				row: 2,
+				col: 9,
 				checks: {},
 			},
 			"Upper Prison Inn": {
 				row: 3,
-				col: 9,
+				col: 1,
 				checks: {
 					"Koopatrol fight": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 				},
 			},
 			Battlements: {
 				row: 3,
-				col: 11,
+				col: 3,
 				rowSpan: 2,
 				checks: {
 					"Left ? Block": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 					"Center ? Block": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 					"Right ? Block": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 					"Item on ledge": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
 					},
 				},
 			},
 			"Bowser Door 2": {
 				row: 4,
-				col: 10,
+				col: 2,
 				checks: {},
 			},
 			"Push Block Hallways": {
-				row: 4,
+				row: 5,
 				col: 8,
 				rowSpan: 2,
 				colSpan: 2,
-				checks: {},
+				checks: {
+					"Hidden ? Block in Dry Bones room (left)": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"? Block in Dry Bones room (right)": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Item on floor in back left room": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
 			},
 			"Cannon Room": {
-				row: 5,
+				row: 6,
 				col: 6,
 				rowSpan: 2,
 				colSpan: 2,
 				checks: {},
 			},
 			"Flood Room": {
-				row: 5,
+				row: 6,
 				col: 4,
 				rowSpan: 2,
 				colSpan: 2,
-				checks: {},
+				checks: {
+					"Hidden ? Block on path to second chain": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Item on upper left ledge": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
 			},
 			Shop: {
-				row: 6,
+				row: 7,
 				col: 2,
 				checks: {
 					"[Shop] 6 items in shop": {
-						reqs: null,
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
 					},
 				},
 			},
 			"First Lobby": {
-				row: 6,
+				row: 7,
 				col: 3,
 				rowSpan: 2,
 				checks: {},
 			},
 			"Lower Prison Inn": {
-				row: 7,
+				row: 8,
 				col: 4,
+				checks: {
+					"Koopatrol fight": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"Bowser Door 1": {
+				row: 8,
+				col: 2,
+				checks: {},
+			},
+			"First Hallway": {
+				row: 8,
+				col: 1,
+				checks: {},
+			},
+			Prison: {
+				row: 9,
+				col: 2,
+				checks: {
+					"Lower left crate": {
+						reqs: ["Bowser's Castle Key", "Super Boots"],
+					},
+					"Right crate": {
+						reqs: ["Bowser's Castle Key", "Super Boots"],
+					},
+				},
+			},
+			"Outside Prison": {
+				row: 10,
+				col: 2,
 				checks: {
 					"Koopatrol fight": {
 						reqs: null,
 					},
 				},
 			},
-			"Bowser Door 1": {
-				row: 7,
-				col: 2,
-				checks: {},
-			},
-			"First Hallway": {
-				row: 7,
-				col: 1,
-				checks: {},
-			},
-			Prison: {
-				row: 8,
-				col: 2,
-				checks: {},
-			},
 			"Outside Bowser's Castle": {
-				row: 8,
-				col: 1,
-				checks: {},
-			},
-			"Star Haven": {
 				row: 9,
 				col: 1,
-				checks: {},
+				rowSpan: 2,
+				checks: {
+					"? Block on ledges": {
+						reqs: ["Bowser's Castle Key", "Bombette", "Lakilester"],
+					},
+				},
 			},
-			"Lava Corridor": {
-				row: 8,
+			"Star Haven": {
+				row: 11,
+				col: 1,
+				checks: {
+					"[Shop] 6 items in shop": {
+						reqs: null,
+					},
+				},
+			},
+			"Lava Corridor 1": {
+				row: 9,
 				col: 3,
-				colSpan: 6,
-				checks: {},
+				colSpan: 2,
+				checks: {
+					"? Block on platform near prison": {
+						reqs: ["Bowser's Castle Key", "Bombette", "Lakilester"],
+					},
+				},
+			},
+			"Lava Corridor 2": {
+				row: 9,
+				col: 5,
+				colSpan: 2,
+				checks: {
+					"Item in side room": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"Lava Corridor 3": {
+				row: 9,
+				col: 7,
+				colSpan: 2,
+				checks: {
+					"Item on left platform": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+						],
+					},
+					"Item on right platform": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
 			},
 			"Dark Cave": {
-				row: 7,
+				row: 8,
 				col: 5,
 				colSpan: 4,
-				checks: {},
+				checks: {
+					"Left ? block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+					"Right ? block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
 			},
 		},
 	},
 	"Peach's Castle": {
-		reqs: null,
+		reqs: [
+			logic.canReachToadTown,
+			"Boots",
+			7,
+			logic.multipleItemCheck("Bowser's Castle Key", 5),
+			"Bombette",
+			"Lakilester",
+			"Parakarry",
+			"Bow",
+			"Sushie",
+			"Ultra Boots",
+		],
 		areas: {
 			"Final Bowser": {
 				row: 1,
 				col: 2,
 				checks: {
 					"Star Rod": {
-						reqs: 7,
+						reqs: null,
 					},
 				},
 			},
@@ -4308,7 +4538,7 @@ const regionData: MapRegions = {
 						reqs: null,
 					},
 					"Item on ledge": {
-						reqs: logic.canClimbLedges,
+						reqs: null,
 					},
 				},
 			},
@@ -4338,7 +4568,7 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Hidden ? Block": {
-						reqs: logic.canBreakBlocksAbove,
+						reqs: null,
 					},
 				},
 			},
