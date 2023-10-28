@@ -4090,6 +4090,108 @@ const regionData: MapRegions = {
 			"Bombette Puzzle": { row: 8, col: 4, checks: {} },
 		},
 	},
+	"Peach's Castle": {
+		reqs: null,
+		areas: {
+			"Final Bowser": {
+				row: 1,
+				col: 2,
+				checks: {
+					"Star Rod": {
+						reqs: 7,
+					},
+				},
+			},
+			"Hallway Bowser": {
+				row: 2,
+				col: 2,
+				checks: {},
+			},
+			"Peach's Room": {
+				row: 2,
+				col: 3,
+				checks: {},
+			},
+			Balcony: {
+				row: 2,
+				col: 4,
+				checks: {},
+			},
+			"Second Lobby": {
+				row: 3,
+				col: 2,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Bowser's Room": {
+				row: 3,
+				col: 1,
+				checks: {},
+			},
+			"Castle Library": {
+				row: 4,
+				col: 1,
+				checks: {
+					"Item between shelves": {
+						reqs: null,
+					},
+					"Item on ledge": {
+						reqs: logic.canClimbLedges,
+					},
+				},
+			},
+			"Magic Chest": {
+				row: 3,
+				col: 4,
+				checks: {
+					"Item on floor": {
+						reqs: null,
+					},
+				},
+			},
+			"Dining Room": {
+				row: 4,
+				col: 4,
+				checks: {},
+			},
+			"First Lobby": {
+				row: 5,
+				col: 2,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Outside Peach's Castle": {
+				row: 7,
+				col: 2,
+				checks: {
+					"Hidden ? Block": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
+			},
+			"Quiz Room": {
+				row: 6,
+				col: 1,
+				checks: {},
+			},
+			Kitchen: {
+				row: 5,
+				col: 4,
+				checks: {},
+			},
+			"Wardrobe Toad": {
+				row: 6,
+				col: 4,
+				checks: {
+					Chest: {
+						reqs: null,
+					},
+				},
+			},
+		},
+	},
 };
 
 export const kootReqs = Object.values(regionData)
