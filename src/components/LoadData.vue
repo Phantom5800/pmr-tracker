@@ -23,7 +23,7 @@ function loadSaveData(contents: string) {
 		}
 		for (const key of [...configKeys, ...settingsKeys]) {
 			if (saveData[key] !== undefined) {
-				optionsStore.setValue(key, saveData[key]);
+				optionsStore.setValue(key, saveData[key] as string | number | boolean);
 			}
 		}
 		if (saveData.itemFilters) {

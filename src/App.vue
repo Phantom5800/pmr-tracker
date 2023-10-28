@@ -562,22 +562,6 @@ if (!localStorage.getItem("visited")) {
 					/>
 				</svg>
 			</SvgButton>
-			<input
-				ref="loadButton"
-				type="file"
-				:style="{ display: 'none' }"
-				@change="
-					e => {
-						const file = (e.target as HTMLInputElement).files;
-						if (file && file.length > 0) {
-							doWithPrompt(
-								'This will reset your current progress! Proceed?',
-								() => playthroughStore.loadPlaythrough(file[0])
-							);
-						}
-					}
-				"
-			/>
 			<SvgButton name="Load Tracker Data" @click="openModal = 'load'">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
