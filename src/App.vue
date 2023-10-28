@@ -799,6 +799,10 @@ if (!localStorage.getItem("visited")) {
 </template>
 
 <style scoped>
+:root {
+	--min-width: 1900px;
+}
+
 .vgl-layout {
 	--vgl-resizer-border-color: white;
 }
@@ -813,7 +817,7 @@ if (!localStorage.getItem("visited")) {
 	flex-grow: 0;
 	position: relative;
 	height: 4.5rem;
-	min-width: 1920px;
+	min-width: var(--min-width);
 }
 
 .buttons {
@@ -885,7 +889,7 @@ div.add-panels > div {
 main {
 	transition: translate 0.2s;
 	flex-grow: 1;
-	min-width: 1920px;
+	min-width: var(--min-width);
 }
 
 footer {
@@ -896,6 +900,6 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
-	min-width: 1920px;
+	min-width: var(--min-width);
 }
 </style>
