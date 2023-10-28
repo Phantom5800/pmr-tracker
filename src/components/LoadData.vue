@@ -12,24 +12,38 @@ const { setLayout } = defineProps<{ setLayout: (layout: Layout) => void }>();
 const emit = defineEmits(["close"]);
 
 const jsonPaste = ref("");
+const errorMessage = ref("");
 
 function loadSaveData(contents: string) {
-	const saveData = JSON.parse(contents) as SaveData;
-	if (saveData.playthrough) {
-		playthroughStore.loadPlaythrough(saveData.playthrough);
-	}
-	for (const key of [...configKeys, ...settingsKeys]) {
-		if (saveData[key] !== undefined) {
-			optionsStore.setValue(key, saveData[key]);
+	try {
+		const saveData = JSON.parse(contents) as SaveData;
+
+		if (saveData.playthrough) {
+			playthroughStore.loadPlaythrough(saveData.playthrough);
+		}
+		for (const key of [...configKeys, ...settingsKeys]) {
+			if (saveData[key] !== undefined) {
+				optionsStore.setValue(key, saveData[key]);
+			}
+		}
+		if (saveData.itemFilters) {
+			optionsStore.resetItemFilters(saveData.itemFilters);
+		}
+		if (saveData.layout) {
+			setLayout(saveData.layout);
+		}
+		emit("close");
+	} catch (err) {
+		console.error(err);
+		if (err instanceof Error) {
+			errorMessage.value = err.message;
+		} else if (typeof err === "string") {
+			errorMessage.value = err;
+		} else {
+			errorMessage.value =
+				"Unknown error - please see the browser console and report this!";
 		}
 	}
-	if (saveData.itemFilters) {
-		optionsStore.resetItemFilters(saveData.itemFilters);
-	}
-	if (saveData.layout) {
-		setLayout(saveData.layout);
-	}
-	emit("close");
 }
 
 function loadFromFile(file: File) {
@@ -46,7 +60,11 @@ function loadFromFile(file: File) {
 
 <template>
 	<div class="import">
-		<p></p>
+		<p>
+			Loading data will overwrite the data that was saved, but it will leave
+			everything else alone - e.g., if you saved only the playthrough and seed
+			settings, your tracker config will not be affected.
+		</p>
 		<input
 			ref="loadButton"
 			type="file"
@@ -54,7 +72,11 @@ function loadFromFile(file: File) {
 				e => {
 					const file = (e.target as HTMLInputElement).files;
 					if (file && file.length > 0) {
-						loadFromFile(file[0]);
+						if (file[0].size < 5000000) {
+							loadFromFile(file[0]);
+						} else {
+							errorMessage = `The file is too big (${file[0].size} bytes)! If you're sure this is a file obtained from the Save Tracker Data function, please report this.`;
+						}
 					}
 				}
 			"
@@ -69,6 +91,7 @@ function loadFromFile(file: File) {
 			placeholder="paste copied save data"
 		></textarea>
 		<button @click="loadSaveData(jsonPaste)">Load</button>
+		<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 	</div>
 </template>
 
@@ -120,5 +143,13 @@ function loadFromFile(file: File) {
 
 .toggle-button.checked::before {
 	content: "✓ ";
+}
+
+.error {
+	background-color: rgb(255, 200, 200);
+	color: black;
+	padding: 1rem;
+	border-radius: 8px;
+	border: 2px solid red;
 }
 </style>
