@@ -30,9 +30,11 @@ type MapRegions = { [key: string]: Region };
 
 export const chapterRewardReqs = {
 	Eldstar: [
-		logic.multipleItemCheck("Fortress Key", 4),
-		"Kooper",
+		logic.canReachToadTown,
+		logic.canClimbLedges,
 		["Hammer", "Bombette"],
+		"Kooper",
+		logic.multipleItemCheck("Fortress Key", 4),
 	],
 	Mamar: [
 		"Pulse Stone",
@@ -47,6 +49,7 @@ export const chapterRewardReqs = {
 		],
 	],
 	Skolar: [
+		logic.canReachToadTown,
 		"Boo's Portrait",
 		logic.multipleItemCheck("Tubba Castle Key", 3),
 		"Parakarry",
@@ -75,6 +78,7 @@ export const chapterRewardReqs = {
 		"Ultra Hammer",
 	],
 	Klevar: [
+		logic.canReachToadTown,
 		logic.chapter6Entry,
 		"Magical Bean",
 		"Fertile Soil",
@@ -94,13 +98,23 @@ export const chapterRewardReqs = {
 		"Hammer",
 		"Bombette",
 		logic.canReachToadTown,
-		"Super Boots",
+		[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 		["Sushie", logic.blueHouseOpen, "Odd Key"],
 	],
 	"Star Rod": [
+		logic.canReachToadTown,
+		"Boots",
 		7,
 		[
-			["Bowser's Castle Key", "Bombette", "Parakarry", "Bow", "Lakilester"],
+			[
+				logic.multipleItemCheck("Bowser's Castle Key", 5),
+				"Bombette",
+				"Lakilester",
+				"Parakarry",
+				"Bow",
+				"Sushie",
+				"Ultra Boots",
+			],
 			logic.fastBowserCastle,
 		],
 	],
@@ -4481,18 +4495,7 @@ const regionData: MapRegions = {
 		},
 	},
 	"Peach's Castle": {
-		reqs: [
-			logic.canReachToadTown,
-			"Boots",
-			7,
-			logic.multipleItemCheck("Bowser's Castle Key", 5),
-			"Bombette",
-			"Lakilester",
-			"Parakarry",
-			"Bow",
-			"Sushie",
-			"Ultra Boots",
-		],
+		reqs: chapterRewardReqs["Star Rod"],
 		areas: {
 			"Final Bowser": {
 				row: 1,
