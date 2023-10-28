@@ -36,6 +36,8 @@ export type Options = {
 	// combineMisc: boolean;
 	combineSortMode: string;
 	uselessItems: boolean;
+	hideBowsersCastle: boolean;
+	hidePeachsCastle: boolean;
 	recipeTooltips: boolean;
 	paperMarioFont: boolean;
 	backgroundColor: string;
@@ -114,6 +116,18 @@ const optionsData = {
 	uselessItems: {
 		namespace: "config",
 		name: "Show Logic-Only Items",
+		type: "boolean",
+		default: true,
+	},
+	hideBowsersCastle: {
+		namespace: "config",
+		name: "Hide Bowser's Castle when set to Fast",
+		type: "boolean",
+		default: true,
+	},
+	hidePeachsCastle: {
+		namespace: "config",
+		name: "Hide Peach's Castle",
 		type: "boolean",
 		default: true,
 	},

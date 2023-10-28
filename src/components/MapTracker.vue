@@ -13,6 +13,19 @@ const { moving, removePanel } = defineProps<{
 	removePanel: () => void;
 }>();
 
+const regions = computed(() =>
+	allRegions
+		.filter(
+			el =>
+				el !== "Bowser's Castle" ||
+				!options.getValue("fastBowserCastle") ||
+				!options.getValue("hideBowsersCastle")
+		)
+		.filter(
+			el => el !== "Peach's Castle" || !options.getValue("hidePeachsCastle")
+		)
+);
+
 const currentMap = ref("Toad Town");
 const currentArea = ref("Main Gate");
 
@@ -64,7 +77,7 @@ const unshuffledChecks = computed(() =>
 	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">
 			<button
-				v-for="map in allRegions"
+				v-for="map in regions"
 				:key="map"
 				class="map-select"
 				:class="{
