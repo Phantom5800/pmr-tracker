@@ -62,6 +62,7 @@ function fetchSeedSettings(id: string) {
 		return;
 	}
 	loadingApiResponse.value = true;
+	errorMessage.value = "";
 	axios
 		.get(
 			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
@@ -114,6 +115,7 @@ function fetchSeedSettings(id: string) {
 					type="text"
 					class="id"
 					placeholder="123456789"
+					:disabled="loadingApiResponse"
 				/>
 			</p>
 			<p>
@@ -121,7 +123,9 @@ function fetchSeedSettings(id: string) {
 				tracker.
 			</p>
 
-			<button class="importButton">Import</button>
+			<button class="importButton" :disabled="loadingApiResponse">
+				{{ loadingApiResponse ? "Loading..." : "Import" }}
+			</button>
 		</form>
 		<p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 	</div>
@@ -145,7 +149,8 @@ function fetchSeedSettings(id: string) {
 	background-color: white;
 }
 
-.id:valid {
+.id:valid,
+.id:disabled {
 	border: 2px solid transparent;
 }
 
@@ -153,6 +158,10 @@ function fetchSeedSettings(id: string) {
 	font-size: 2rem;
 	margin-top: 1rem;
 	padding: 0.5rem;
+}
+
+.importButton:disabled {
+	cursor: default;
 }
 
 .error {
