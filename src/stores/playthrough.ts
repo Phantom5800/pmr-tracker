@@ -268,27 +268,12 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.spiritAnnotations = spiritAnnotations;
 			this.save();
 		},
-		loadPlaythrough(file: File) {
-			const reader = new FileReader();
-			reader.onload = e => {
-				const contents = e.target?.result;
-				if (typeof contents === "string") {
-					const saveData = JSON.parse(contents) as PlaythroughProps;
-					if (
-						"checks" in saveData &&
-						"items" in saveData &&
-						"notes" in saveData &&
-						"spiritAnnotations" in saveData
-					) {
-						this.checks = saveData.checks;
-						this.items = saveData.items;
-						this.notes = saveData.notes;
-						this.spiritAnnotations = saveData.spiritAnnotations;
-						this.save();
-					}
-				}
-			};
-			reader.readAsText(file);
+		loadPlaythrough(data: PlaythroughProps) {
+			this.checks = data.checks;
+			this.items = data.items;
+			this.notes = data.notes;
+			this.spiritAnnotations = data.spiritAnnotations;
+			this.save();
 		},
 	},
 });

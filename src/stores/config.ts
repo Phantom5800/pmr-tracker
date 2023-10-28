@@ -413,6 +413,10 @@ export const useOptions = defineStore("options", {
 			this.itemFilters[key] = filt;
 			this.save();
 		},
+		resetItemFilters(filters: Record<string, ItemFilter>) {
+			this.itemFilters = filters;
+			this.save();
+		},
 	},
 });
 

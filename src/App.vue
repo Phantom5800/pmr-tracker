@@ -20,9 +20,9 @@ import { usePlaythrough } from "./stores/playthrough";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
+import LoadData from "./components/LoadData.vue";
 
 const breakpoint = ref<Breakpoint>("lg");
-const loadButton = ref<HTMLInputElement | null>(null);
 
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };
@@ -164,7 +164,7 @@ const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map(el => el.i));
 
 const openModal = ref<
-	"settings" | "config" | "import" | "info" | "filter" | "save" | null
+	"settings" | "config" | "import" | "info" | "filter" | "save" | "load" | null
 >(null);
 const moving = ref(false);
 
@@ -434,6 +434,21 @@ if (!localStorage.getItem("visited")) {
 	>
 		<SaveData :current-layout="layout" />
 	</OverlayModal>
+	<OverlayModal
+		v-if="openModal === 'load'"
+		title="Load Tracker Data"
+		@close="openModal = null"
+	>
+		<LoadData
+			:set-layout="
+				newLayout => {
+					layouts[breakpoint] = newLayout;
+					saveLayout();
+				}
+			"
+			@close="openModal = null"
+		/>
+	</OverlayModal>
 
 	<header class="header">
 		<div class="buttons">
@@ -563,10 +578,7 @@ if (!localStorage.getItem("visited")) {
 					}
 				"
 			/>
-			<SvgButton
-				name="Load Tracker Data"
-				@click="loadButton && loadButton.click()"
-			>
+			<SvgButton name="Load Tracker Data" @click="openModal = 'load'">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
