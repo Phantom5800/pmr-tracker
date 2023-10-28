@@ -66,7 +66,6 @@ function loadFromFile(file: File) {
 			settings, your tracker config will not be affected.
 		</p>
 		<input
-			ref="loadButton"
 			type="file"
 			@change="
 				e => {
