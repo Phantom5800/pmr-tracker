@@ -77,6 +77,10 @@ function copySaveData() {
 
 <template>
 	<div class="import">
+		<p>
+			Select which data you'd like to save. Only that data will be overwritten
+			when you load it later.
+		</p>
 		<div class="toggle-buttons">
 			<button
 				v-for="toggle in safeKeys(saveToggles)"
@@ -90,10 +94,12 @@ function copySaveData() {
 				{{ toggle }}
 			</button>
 		</div>
-		<button @click="downloadSaveData">Download JSON</button>
-		<button @click="copySaveData">
-			{{ copied ? "Copied!" : "Copy to clipboard" }}
-		</button>
+		<div class="save-buttons">
+			<button @click="downloadSaveData">Download JSON</button>
+			<button @click="copySaveData">
+				{{ copied ? "Copied!" : "Copy to clipboard" }}
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -106,6 +112,7 @@ function copySaveData() {
 
 .toggle-buttons {
 	display: flex;
+	flex-flow: row wrap;
 	gap: 0.5rem;
 	padding-block: 1rem;
 	justify-content: center;
@@ -113,11 +120,12 @@ function copySaveData() {
 
 .toggle-button {
 	--color: rgb(180, 0, 0);
-	padding: 0.25rem 0.5rem;
+	padding: 0.25rem 0.25rem;
 	line-height: 1rem;
 	border: 2px outset var(--color);
 	border-radius: 8px;
 	box-shadow: inset -2px -2px 4px var(--color);
+	width: 9rem;
 }
 
 .toggle-button:active,
@@ -137,10 +145,23 @@ function copySaveData() {
 .toggle-button::before {
 	content: "X ";
 	color: var(--color);
-	width: 1rem;
 }
 
 .toggle-button.checked::before {
 	content: "✓ ";
+}
+
+.save-buttons {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.save-buttons > button {
+	padding: 0.5rem;
+	font-size: large;
+	min-width: 12.5rem;
 }
 </style>
