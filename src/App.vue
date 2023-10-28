@@ -19,6 +19,7 @@ import OverlayModal from "./components/OverlayModal.vue";
 import { usePlaythrough } from "./stores/playthrough";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
+import SaveData from "./components/SaveData.vue";
 
 const breakpoint = ref<Breakpoint>("lg");
 const loadButton = ref<HTMLInputElement | null>(null);
@@ -163,7 +164,7 @@ const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map(el => el.i));
 
 const openModal = ref<
-	"settings" | "config" | "import" | "info" | "filter" | null
+	"settings" | "config" | "import" | "info" | "filter" | "save" | null
 >(null);
 const moving = ref(false);
 
@@ -426,6 +427,13 @@ if (!localStorage.getItem("visited")) {
 	>
 		<FilterConfig />
 	</OverlayModal>
+	<OverlayModal
+		v-if="openModal === 'save'"
+		title="Save Tracker Data"
+		@close="openModal = null"
+	>
+		<SaveData :current-layout="layout" />
+	</OverlayModal>
 
 	<header class="header">
 		<div class="buttons">
@@ -523,10 +531,7 @@ if (!localStorage.getItem("visited")) {
 					/>
 				</svg>
 			</SvgButton>
-			<SvgButton
-				name="Save Tracker Data"
-				@click="playthroughStore.savePlaythrough()"
-			>
+			<SvgButton name="Save Tracker Data" @click="openModal = 'save'">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

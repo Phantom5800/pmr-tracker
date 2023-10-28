@@ -75,7 +75,7 @@ export type Options = {
 
 export type ItemFilter = "show" | "default" | "hide";
 
-const optionsData = {
+export const optionsData = {
 	colorblind: {
 		namespace: "config",
 		name: "Color Blind Labels",

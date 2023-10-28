@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { type Requirements, getRegionData } from "../data/map";
 import { useOptions } from "./config";
-import { saveAs } from "file-saver";
 import { allItems } from "@/data/items";
 
 export type PlaythroughProps = {
@@ -268,16 +267,6 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.notes = "";
 			this.spiritAnnotations = spiritAnnotations;
 			this.save();
-		},
-		savePlaythrough() {
-			const saveData = JSON.stringify({
-				checks: this.checks,
-				items: this.items,
-				notes: this.notes,
-				spiritAnnotations: this.spiritAnnotations,
-			});
-			const blob = new Blob([saveData], { type: "application/json" });
-			saveAs(blob, `pmr-tracker-${new Date().toISOString()}.json`);
 		},
 		loadPlaythrough(file: File) {
 			const reader = new FileReader();
