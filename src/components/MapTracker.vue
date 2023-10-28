@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
-import { ref, computed, defineProps } from "vue";
+import { ref, computed } from "vue";
 import { allRegions, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
 import { useOptions } from "@/stores/config";

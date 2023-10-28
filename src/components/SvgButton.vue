@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useOptions } from "@/stores/config";
 import { storeToRefs } from "pinia";
-import { ref, computed, defineProps } from "vue";
+import { ref, computed } from "vue";
 import {
 	useFloating,
 	autoPlacement,

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineEmits } from "vue";
-
 defineEmits(["close"]);
 
 function getImageUrl(image: string) {

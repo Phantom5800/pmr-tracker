@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from "axios";
-import { ref, defineEmits, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useOptions } from "@/stores/config";
 import type { SettingsApiData } from "@/types/settings";
 

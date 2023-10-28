@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { vOnClickOutside } from "@vueuse/components";
-import { defineEmits, defineProps } from "vue";
 
 defineEmits(["close"]);
 const { title } = defineProps<{ title?: string }>();
