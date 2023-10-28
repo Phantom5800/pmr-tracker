@@ -4090,6 +4090,177 @@ const regionData: MapRegions = {
 			"Bombette Puzzle": { row: 8, col: 4, checks: {} },
 		},
 	},
+	"Bowser's Castle": {
+		reqs: null,
+		areas: {
+			"Bombette Switch Room": {
+				row: 2,
+				col: 9,
+				checks: {
+					"Item on floor": {
+						reqs: "Bombette",
+					},
+				},
+			},
+			"Second Lobby": {
+				row: 2,
+				col: 10,
+				rowSpan: 2,
+				checks: {},
+			},
+			Staircase: {
+				row: 1,
+				col: 11,
+				rowSpan: 2,
+				checks: {},
+			},
+			"Kooper Switch Room": {
+				row: 1,
+				col: 12,
+				checks: {
+					"Item on Floor": {
+						reqs: "Kooper",
+					},
+				},
+			},
+			"Up/Down Hallway": {
+				row: 2,
+				col: 12,
+				colSpan: 2,
+				checks: {},
+			},
+			"Before Duplighosts": {
+				row: 2,
+				col: 14,
+				checks: {},
+			},
+			Duplighosts: {
+				row: 2,
+				col: 15,
+				checks: {},
+			},
+			"Jr. Troopa": {
+				row: 2,
+				col: 16,
+				checks: {},
+			},
+			"Upper Prison Inn": {
+				row: 3,
+				col: 9,
+				checks: {
+					"Koopatrol fight": {
+						reqs: null,
+					},
+				},
+			},
+			Battlements: {
+				row: 3,
+				col: 11,
+				rowSpan: 2,
+				checks: {
+					"Left ? Block": {
+						reqs: null,
+					},
+					"Center ? Block": {
+						reqs: null,
+					},
+					"Right ? Block": {
+						reqs: null,
+					},
+					"Item on ledge": {
+						reqs: null,
+					},
+				},
+			},
+			"Bowser Door 2": {
+				row: 4,
+				col: 10,
+				checks: {},
+			},
+			"Push Block Hallways": {
+				row: 4,
+				col: 8,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Cannon Room": {
+				row: 5,
+				col: 6,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Flood Room": {
+				row: 5,
+				col: 4,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			Shop: {
+				row: 6,
+				col: 2,
+				checks: {
+					"[Shop] 6 items in shop": {
+						reqs: null,
+					},
+				},
+			},
+			"First Lobby": {
+				row: 6,
+				col: 3,
+				rowSpan: 2,
+				checks: {},
+			},
+			"Lower Prison Inn": {
+				row: 7,
+				col: 4,
+				checks: {
+					"Koopatrol fight": {
+						reqs: null,
+					},
+				},
+			},
+			"Bowser Door 1": {
+				row: 7,
+				col: 2,
+				checks: {},
+			},
+			"First Hallway": {
+				row: 7,
+				col: 1,
+				checks: {},
+			},
+			Prison: {
+				row: 8,
+				col: 2,
+				checks: {},
+			},
+			"Outside Bowser's Castle": {
+				row: 8,
+				col: 1,
+				checks: {},
+			},
+			"Star Haven": {
+				row: 9,
+				col: 1,
+				checks: {},
+			},
+			"Lava Corridor": {
+				row: 8,
+				col: 3,
+				colSpan: 6,
+				checks: {},
+			},
+			"Dark Cave": {
+				row: 7,
+				col: 5,
+				colSpan: 4,
+				checks: {},
+			},
+		},
+	},
 	"Peach's Castle": {
 		reqs: null,
 		areas: {
