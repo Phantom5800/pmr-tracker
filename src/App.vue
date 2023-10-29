@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, reactive, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import EnabledSettings from "./components/EnabledSettings.vue";
 import SvgButton from "./components/SvgButton.vue";
 import { configKeys, settingsKeys } from "./stores/config";
@@ -13,7 +13,7 @@ import { storeToRefs } from "pinia";
 import MenuOptions from "./components/MenuOptions.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
-import type { Breakpoint, Layout } from "grid-layout-plus";
+import type { Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
 import OverlayModal from "./components/OverlayModal.vue";
 import { usePlaythrough } from "./stores/playthrough";
@@ -22,99 +22,33 @@ import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
 import LoadData from "./components/LoadData.vue";
 
-const breakpoint = ref<Breakpoint>("lg");
-
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };
 	wrapper: HTMLElement;
 };
 
-const savedLayouts = JSON.parse(
-	localStorage.getItem("layout") ?? "{}"
-) as Record<Breakpoint, Layout>;
+const savedLayout = localStorage.getItem("layout")
+	? (JSON.parse(localStorage.getItem("layout") as string) as Layout)
+	: undefined;
 
-const initialLayouts: Record<Breakpoint, Layout> = {
-	lg: [
-		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
-		{
-			x: 0,
-			y: 3,
-			w: 40,
-			h: 36,
-			i: "required",
-			static: false,
-			isResizable: false,
-		},
-		{ x: 40, y: 14, w: 80, h: 35, i: "map", static: false },
-		{ x: 40, y: 0, w: 40, h: 14, i: "miscitem", static: false },
-		{ x: 80, y: 0, w: 40, h: 14, i: "misckey", static: false },
-		{ x: 40, y: 50, w: 40, h: 18, i: "letters", static: false },
-		{ x: 80, y: 50, w: 40, h: 18, i: "koot", static: false },
-		{ x: 0, y: 39, w: 40, h: 28, i: "notes", static: false },
-	],
-	md: [
-		{ x: 0, y: 0, w: 50, h: 3, i: "flags", static: false, minH: 3 },
-		{
-			x: 0,
-			y: 3,
-			w: 50,
-			h: 34,
-			i: "required",
-			static: false,
-			isResizable: false,
-		},
-		{ x: 0, y: 46, w: 100, h: 35, i: "map", static: false },
-		{ x: 50, y: 0, w: 50, h: 13, i: "miscitem", static: false },
-		{ x: 0, y: 37, w: 50, h: 9, i: "misckey", static: false },
-		{ x: 50, y: 13, w: 50, h: 16, i: "letters", static: false },
-		{ x: 50, y: 29, w: 50, h: 13, i: "koot", static: false },
-	],
-	sm: [
-		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
-		{
-			x: 0,
-			y: 3,
-			w: 40,
-			h: 22,
-			i: "compact",
-			static: false,
-		},
-		{ x: 40, y: 0, w: 20, h: 21, i: "miscitem", static: false },
-		{ x: 40, y: 21, w: 20, h: 9, i: "misckey", static: false },
-		{ x: 0, y: 25, w: 40, h: 15, i: "letters", static: false },
-		{ x: 40, y: 30, w: 20, h: 18, i: "koot", static: false },
-		{ x: 0, y: 48, w: 60, h: 35, i: "map", static: false },
-		{ x: 0, y: 40, w: 40, h: 8, i: "notes", static: false },
-	],
-	xs: [
-		{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
-		{
-			x: 0,
-			y: 3,
-			w: 40,
-			h: 32,
-			i: "everything",
-			static: false,
-		},
-		{ x: 0, y: 35, w: 20, h: 27, i: "letters", static: false },
-		{ x: 20, y: 35, w: 20, h: 20, i: "koot", static: false },
-		{ x: 0, y: 62, w: 40, h: 35, i: "map", static: false },
-	],
-	xxs: [
-		{ x: 0, y: 0, w: 20, h: 3, i: "flags", static: false, minH: 3 },
-		{
-			x: 0,
-			y: 3,
-			w: 20,
-			h: 41,
-			i: "everything",
-			static: false,
-		},
-		{ x: 0, y: 44, w: 20, h: 17, i: "letters", static: false },
-		{ x: 0, y: 45, w: 20, h: 15, i: "koot", static: false },
-		{ x: 0, y: 76, w: 20, h: 44, i: "map", static: false },
-	],
-};
+const initialLayout: Layout = [
+	{ x: 0, y: 0, w: 40, h: 3, i: "flags", static: false, minH: 3 },
+	{
+		x: 0,
+		y: 3,
+		w: 40,
+		h: 36,
+		i: "required",
+		static: false,
+		isResizable: false,
+	},
+	{ x: 40, y: 14, w: 80, h: 35, i: "map", static: false },
+	{ x: 40, y: 0, w: 40, h: 14, i: "miscitem", static: false },
+	{ x: 80, y: 0, w: 40, h: 14, i: "misckey", static: false },
+	{ x: 40, y: 50, w: 40, h: 18, i: "letters", static: false },
+	{ x: 80, y: 50, w: 40, h: 18, i: "koot", static: false },
+	{ x: 0, y: 39, w: 40, h: 28, i: "notes", static: false },
+];
 
 const panels = {
 	flags: { name: "Seed Settings", h: 3, w: 30 },
@@ -129,17 +63,8 @@ const panels = {
 	notes: { name: "User Notepad", h: 20, w: 20 },
 };
 
-const layouts: Record<Breakpoint, Layout> = reactive(
-	(["xxs", "xs", "sm", "md", "lg"] as Breakpoint[]).reduce(
-		(a, bp) => {
-			if (bp in savedLayouts) {
-				return { ...a, [bp]: savedLayouts[bp] };
-			} else {
-				return { ...a, [bp]: initialLayouts[bp] };
-			}
-		},
-		{} as Record<Breakpoint, Layout>
-	)
+const layout = ref(
+	savedLayout && Array.isArray(savedLayout) ? savedLayout : initialLayout
 );
 
 const mainRef = ref<HTMLElement>();
@@ -160,7 +85,6 @@ function syncMousePosition(event: MouseEvent) {
 	mouseAt.y = event.clientY;
 }
 
-const layout = computed(() => layouts[breakpoint.value]);
 const currentPanels = computed(() => layout.value.map(el => el.i));
 
 const openModal = ref<
@@ -185,15 +109,7 @@ const allItemsFiltered = computed(() =>
 );
 
 function saveLayout() {
-	const savedLayoutsStr = localStorage.getItem("layout");
-	let savedLayouts = {} as Record<Breakpoint, Layout>;
-	if (savedLayoutsStr) {
-		savedLayouts = JSON.parse(savedLayoutsStr) as Record<Breakpoint, Layout>;
-	}
-	localStorage.setItem(
-		"layout",
-		JSON.stringify({ ...savedLayouts, [breakpoint.value]: layout.value })
-	);
+	localStorage.setItem("layout", JSON.stringify(layout.value));
 }
 
 function resetLayout() {
@@ -202,25 +118,13 @@ function resetLayout() {
 			"Are you sure you want to reset your layout? Your saved layout will be lost!"
 		)
 	) {
-		layouts[breakpoint.value] = initialLayouts[breakpoint.value];
-		const savedLayoutsStr = localStorage.getItem("layout");
-		let savedLayouts = {} as Record<Breakpoint, Layout>;
-		if (savedLayoutsStr) {
-			savedLayouts = JSON.parse(savedLayoutsStr) as Record<Breakpoint, Layout>;
-		}
-		localStorage.setItem(
-			"layout",
-			JSON.stringify({ ...savedLayouts, [breakpoint.value]: undefined })
-		);
+		layout.value = initialLayout;
+		localStorage.setItem("layout", JSON.stringify([]));
 	}
 }
 
-function breakpointChanged(newBreakpoint: Breakpoint) {
-	breakpoint.value = newBreakpoint;
-}
-
 function removePanel(idx: number) {
-	layouts[breakpoint.value].splice(idx, 1);
+	layout.value.splice(idx, 1);
 	saveLayout();
 }
 
@@ -290,9 +194,7 @@ const dragFromMenu = throttle((panelKey: keyof typeof panels) => {
 				panels[panelKey].h,
 				panels[panelKey].w
 			);
-			layouts[breakpoint.value] = layout.value.filter(
-				item => item.i !== dropId
-			);
+			layout.value = layout.value.filter(item => item.i !== dropId);
 		}
 	}
 }, 33);
@@ -317,12 +219,12 @@ function dragEnd(panelKey: keyof typeof panels) {
 			panels[panelKey].h,
 			panels[panelKey].w
 		);
-		layouts[breakpoint.value] = layout.value.filter(item => item.i !== dropId);
+		layout.value = layout.value.filter(item => item.i !== dropId);
 	} else {
 		return;
 	}
 
-	layouts[breakpoint.value].push({
+	layout.value.push({
 		x: dragItem.x,
 		y: dragItem.y,
 		w: panels[panelKey].w,
@@ -442,7 +344,7 @@ if (!localStorage.getItem("visited")) {
 		<LoadData
 			:set-layout="
 				newLayout => {
-					layouts[breakpoint] = newLayout;
+					layout = newLayout;
 					saveLayout();
 				}
 			"
@@ -657,13 +559,10 @@ if (!localStorage.getItem("visited")) {
 		<GridLayout
 			ref="gridLayout"
 			v-model:layout="layout"
-			:responsive-layouts="layouts"
 			:vertical-compact="true"
 			:auto-size="true"
 			:row-height="16"
-			:responsive="true"
-			:cols="{ lg: 120, md: 100, sm: 60, xs: 40, xxs: 20 }"
-			@breakpoint-changed="breakpointChanged"
+			:col-num="120"
 		>
 			<GridItem
 				v-for="(item, idx) in layout"
