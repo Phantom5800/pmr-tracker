@@ -4,13 +4,13 @@ export const safeKeys = <T extends object>(o: T) =>
 /* eslint-enable */
 
 export function throttle<T>(
-	fn: (...args: T) => void,
+	fn: (...args: T[]) => void,
 	wait: number
-): (...args: T) => void {
+): (...args: T[]) => void {
 	let throttled = false;
-	return function (...args: unknown[]) {
+	return function (...args: T[]) {
 		if (!throttled) {
-			fn.apply(this, args);
+			fn(...args);
 			throttled = true;
 			setTimeout(() => {
 				throttled = false;
