@@ -324,12 +324,34 @@ export const usePlaythrough = defineStore("playthrough", {
 			}
 		},
 		resetPlaythrough() {
+			const optionsStore = useOptions();
+			const settings = optionsStore.$state.options;
 			this.checks = [];
 			this.items = [];
 			this.notes = "";
 			this.spiritAnnotations = JSON.parse(
 				JSON.stringify(spiritAnnotations)
 			) as Record<string, SpiritAnnotations>;
+			if (settings.startingBoots === "Boots") {
+				this.items.push("Boots");
+			} else if (settings.startingBoots === "Super Boots") {
+				this.items.push("Boots");
+				this.items.push("Super Boots");
+			} else if (settings.startingBoots === "Ultra Boots") {
+				this.items.push("Boots");
+				this.items.push("Super Boots");
+				this.items.push("Ultra Boots");
+			}
+			if (settings.startingHammer === "Hammer") {
+				this.items.push("Hammer");
+			} else if (settings.startingHammer === "Super Hammer") {
+				this.items.push("Hammer");
+				this.items.push("Super Hammer");
+			} else if (settings.startingHammer === "Ultra Hammer") {
+				this.items.push("Hammer");
+				this.items.push("Super Hammer");
+				this.items.push("Ultra Hammer");
+			}
 			this.save();
 		},
 		loadPlaythrough(data: PlaythroughProps) {

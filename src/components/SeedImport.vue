@@ -41,6 +41,22 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 	optionsStore.setValue("shiverBridgeVisible", data.Ch7BridgeVisible);
 	optionsStore.setValue("shopsRandomized", data.IncludeShops);
 	optionsStore.setValue(
+		"startingBoots",
+		-1 <= data.StartingBoots && data.StartingBoots <= 2
+			? ["Bootless", "Boots", "Super Boots", "Ultra Boots"][
+					data.StartingBoots + 1
+			  ]
+			: "Bootless"
+	);
+	optionsStore.setValue(
+		"startingHammer",
+		-1 <= data.StartingHammer && data.StartingHammer <= 2
+			? ["Hammerless", "Boots", "Super Boots", "Ultra Boots"][
+					data.StartingHammer + 1
+			  ]
+			: "Hammerless"
+	);
+	optionsStore.setValue(
 		"startingLocation",
 		{
 			65796: "Toad Town",

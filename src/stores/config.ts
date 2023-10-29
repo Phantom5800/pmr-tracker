@@ -56,6 +56,8 @@ export type Options = {
 	startingLocation: string;
 	fastBowserCastle: boolean;
 	limitChapterLogic: boolean;
+	startingBoots: string;
+	startingHammer: string;
 	shopsRandomized: boolean;
 	rowfRandomized: boolean;
 	merlowRandomized: boolean;
@@ -249,6 +251,20 @@ export const optionsData = {
 		name: "Limit Chapter Logic",
 		type: "boolean",
 		default: false,
+	},
+	startingBoots: {
+		namespace: "settings",
+		name: "Starting Boots",
+		type: "select",
+		default: "Boots",
+		choices: ["Bootless", "Boots", "Super Boots", "Ultra Boots"],
+	},
+	startingHammer: {
+		namespace: "settings",
+		name: "Starting Hammer",
+		type: "select",
+		default: "Hammer",
+		choices: ["Hammerless", "Hammer", "Super Hammer", "Ultra Hammer"],
 	},
 	shopsRandomized: {
 		namespace: "settings",
