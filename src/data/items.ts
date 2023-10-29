@@ -522,7 +522,7 @@ export const allItems: TrackableItemInfo[] = [
 	{
 		name: "Star Piece",
 		type: "miscItem",
-		image: "icons/Star_Piece.png",
+		image: "flags/Star_Piece.png",
 		multiple: 96,
 	},
 	{
