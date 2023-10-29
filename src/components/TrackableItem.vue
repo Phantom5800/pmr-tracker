@@ -7,6 +7,7 @@ import type { TrackableItemInfo } from "@/types/items";
 import { useOptions } from "../stores/config";
 import type { PlaythroughProps } from "../stores/playthrough";
 import { kootReqs } from "../data/map";
+import { getImageUrl } from "@/utils/helpers";
 import {
 	useFloating,
 	offset,
@@ -132,10 +133,6 @@ const shouldGlow = computed(() => {
 					)))
 	);
 });
-
-function getImageUrl(image: string) {
-	return new URL(`../assets/images/${image}`, import.meta.url).href;
-}
 </script>
 
 <template>

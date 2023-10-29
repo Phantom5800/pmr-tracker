@@ -20,7 +20,7 @@ import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
 import LoadData from "./components/LoadData.vue";
-import { throttle } from "./utils/helpers";
+import { throttle, getImageUrl } from "./utils/helpers";
 
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };
@@ -672,27 +672,15 @@ if (!localStorage.getItem("visited")) {
 
 	<footer>
 		<a href="https://twitter.com/Phantom5800" target="_blank"
-			><img
-				:width="15"
-				src="https://resources.phantom-games.com/TwitterLogo.png"
-			/>
-			@Phantom5800</a
+			><img :width="15" :src="getImageUrl('TwitterLogo.png')" /> @Phantom5800</a
 		>
 		&bull;
 		<a href="https://www.twitch.tv/phantom5800" target="_blank"
-			><img
-				:width="15"
-				src="https://resources.phantom-games.com/TwitchLogo.png"
-			/>
-			Phantom5800</a
+			><img :width="15" :src="getImageUrl('TwitchLogo.png')" /> Phantom5800</a
 		>
 		&bull;
 		<a href="https://www.youtube.com/@PhantomVODs" target="_blank"
-			><img
-				:width="15"
-				src="https://resources.phantom-games.com/YoutubeLogo.png"
-			/>
-			@PhantomVODs</a
+			><img :width="15" :src="getImageUrl('YoutubeLogo.png')" /> @PhantomVODs</a
 		>
 		&bull;
 		<a href="https://github.com/Phantom5800" target="_blank">Github</a>

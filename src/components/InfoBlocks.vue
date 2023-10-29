@@ -1,9 +1,6 @@
 <script setup lang="ts">
+import { getImageUrl } from "@/utils/helpers";
 defineEmits(["close"]);
-
-function getImageUrl(image: string) {
-	return new URL(`../assets/images/${image}`, import.meta.url).href;
-}
 </script>
 
 <template>

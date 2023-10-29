@@ -3,6 +3,7 @@ import TrackerPanel from "./TrackerPanel.vue";
 import { useOptions } from "@/stores/config";
 import { storeToRefs } from "pinia";
 import type { Options } from "@/stores/config";
+import { getImageUrl } from "@/utils/helpers";
 
 const optionsStore = useOptions();
 const { options } = storeToRefs(optionsStore);
@@ -41,10 +42,6 @@ const settings: { id: keyof Options; src: string }[] = [
 		src: "flags/brick.jpg",
 	},
 ];
-
-function getImageUrl(image: string) {
-	return new URL(`../assets/images/${image}`, import.meta.url).href;
-}
 
 const { moving, removePanel } = defineProps<{
 	moving: boolean;
