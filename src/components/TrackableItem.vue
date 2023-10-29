@@ -201,6 +201,7 @@ function getImageUrl(image: string) {
 		/>
 		<svg
 			v-if="
+				options.limitChapterLogic &&
 				name in chapterRewardReqs &&
 				!playthroughStore.getSpiritAnnotation(name).required
 			"

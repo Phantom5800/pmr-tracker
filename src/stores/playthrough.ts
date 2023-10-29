@@ -64,37 +64,37 @@ const spiritAnnotations: Record<string, SpiritAnnotations> = {
 	Eldstar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Mamar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Skolar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Muskular: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Misstar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Klevar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	Kalmar: {
 		scaling: 0,
 		entrance: "",
-		required: true,
+		required: false,
 	},
 	"Star Rod": {
 		scaling: 0,
