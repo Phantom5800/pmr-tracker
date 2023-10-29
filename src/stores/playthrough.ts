@@ -13,6 +13,7 @@ export type PlaythroughProps = {
 type SpiritAnnotations = {
 	scaling: number;
 	entrance: string;
+	required: boolean;
 };
 
 const starSpirits = [
@@ -40,40 +41,48 @@ const storagePlaythrough = storagePlaythroughStr
 // 	{}
 // );
 
-const spiritAnnotations = {
+const spiritAnnotations: Record<string, SpiritAnnotations> = {
 	Eldstar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Mamar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Skolar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Muskular: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Misstar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Klevar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	Kalmar: {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
 	"Star Rod": {
 		scaling: 0,
 		entrance: "",
+		required: true,
 	},
-} satisfies Record<string, SpiritAnnotations>;
+};
 
 const init: PlaythroughProps = {
 	items: [],
@@ -106,6 +115,20 @@ export const usePlaythrough = defineStore("playthrough", {
 		) {
 			this.spiritAnnotations[k] = { ...this.spiritAnnotations[k], ...value };
 			this.save();
+		},
+		toggleSpiritRequired(k: keyof PlaythroughProps["spiritAnnotations"]) {
+			this.spiritAnnotations[k].required = !this.spiritAnnotations[k].required;
+			this.save();
+		},
+		getLCLHiddenItems() {
+			return allItems.filter(
+				el =>
+					!starSpirits.includes(el.name) &&
+					el.chapter &&
+					1 <= el.chapter &&
+					el.chapter <= 7 &&
+					!this.spiritAnnotations[starSpirits[el.chapter - 1]].required
+			);
 		},
 		cycleUpgrade(k: string) {
 			const _super = `${k}:super`;

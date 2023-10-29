@@ -392,6 +392,31 @@ function getImageUrl(image: string) {
 					/>
 				</svg>
 			</button>
+
+			<h3 v-if="options.limitChapterLogic">Limit Chapter Logic</h3>
+			<button
+				v-if="options.limitChapterLogic"
+				:style="{
+					color: 'white',
+					width: '100%',
+					fontSize: '2rem',
+					gridColumn: '1 / 9',
+				}"
+				@click="
+					playthroughStore.toggleSpiritRequired(
+						name as keyof typeof chapterRewardReqs
+					);
+					showStarTooltip = false;
+				"
+			>
+				{{
+					playthroughStore.getSpiritAnnotation(
+						name as keyof typeof chapterRewardReqs
+					).required
+						? "Mark as Not Required"
+						: "Mark as Required"
+				}}
+			</button>
 		</div>
 	</div>
 </template>

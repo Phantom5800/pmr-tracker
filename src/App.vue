@@ -21,6 +21,7 @@ import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
 import LoadData from "./components/LoadData.vue";
+import type { TrackableItemInfo } from "./types/items";
 
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };
@@ -100,12 +101,19 @@ const { options } = storeToRefs(optionsStore);
 const year = new Date().getFullYear();
 
 const allItemsFiltered = computed(() =>
-	allItems.filter(
-		el =>
-			optionsStore.getItemFilter(el.name) === "show" ||
-			(!(optionsStore.getItemFilter(el.name) === "hide") &&
-				(el.show === undefined || el.show(options.value)))
-	)
+	allItems
+		.filter(el => optionsStore.getItemFilter(el.name) !== "hide")
+		.filter(
+			el =>
+				!options.value.hideLCLItems ||
+				!playthroughStore.getLCLHiddenItems().includes(el)
+		)
+		.filter(
+			el =>
+				optionsStore.getItemFilter(el.name) === "show" ||
+				el.show === undefined ||
+				el.show(options.value)
+		)
 );
 
 function saveLayout() {

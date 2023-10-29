@@ -38,6 +38,8 @@ export type Options = {
 	uselessItems: boolean;
 	hideBowsersCastle: boolean;
 	hidePeachsCastle: boolean;
+	hideLCLItems: boolean;
+	hideLCLAreas: boolean;
 	recipeTooltips: boolean;
 	paperMarioFont: boolean;
 	backgroundColor: string;
@@ -129,6 +131,18 @@ export const optionsData = {
 	hidePeachsCastle: {
 		namespace: "config",
 		name: "Hide Peach's Castle",
+		type: "boolean",
+		default: true,
+	},
+	hideLCLItems: {
+		namespace: "config",
+		name: "Hide LCL Items Not Required",
+		type: "boolean",
+		default: true,
+	},
+	hideLCLAreas: {
+		namespace: "config",
+		name: "Hide LCL Areas Not Required",
 		type: "boolean",
 		default: true,
 	},

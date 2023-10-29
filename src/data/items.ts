@@ -132,6 +132,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Goomba Village:Give Dolly to Goombaria",
 	},
 	{
+		chapter: 1,
 		name: "Kooper's Shell",
 		type: "miscItem",
 		image: "icons/Kooper'sShell_PM.png",
@@ -145,6 +146,7 @@ export const allItems: TrackableItemInfo[] = [
 		multiple: 4,
 	},
 	{
+		chapter: 2,
 		name: "Letters",
 		type: "miscItem",
 		image: "icons/PM_Letter_Sprite.png",
@@ -187,24 +189,28 @@ export const allItems: TrackableItemInfo[] = [
 		multiple: 4,
 	},
 	{
+		chapter: 2,
 		name: "Artifact",
 		type: "miscItem",
 		image: "icons/Artifact_PM.png",
 		turnInCheck: "Koopa Village East:Give Artifact to Kolorado",
 	},
 	{
+		chapter: 3,
 		name: "Forest Pass",
 		type: "miscItem",
 		image: "icons/ForestPass.png",
 		show: settings => !logic.forestOpen([], settings),
 	},
 	{
+		chapter: 3,
 		name: "Record",
 		type: "miscItem",
 		image: "icons/Record.gif",
 		turnInCheck: "Weight Room:Chest guarded by Boo",
 	},
 	{
+		chapter: 3,
 		name: "Weight",
 		type: "miscItem",
 		image: "icons/WeightPM.gif",
@@ -289,6 +295,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "NE Jungle:Turn in Jade Raven",
 	},
 	{
+		chapter: 5,
 		name: "Volcano Vase",
 		type: "miscItem",
 		image: "icons/VolcanoVase.gif",
@@ -334,6 +341,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Fields Tree:Bean",
 	},
 	{
+		chapter: 6,
 		name: "Red Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_RedBerry.png",
@@ -341,6 +349,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Red Flower:Feed Red Flower",
 	},
 	{
+		chapter: 6,
 		name: "Yellow Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_YellowBerry.png",
@@ -348,6 +357,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Yellow Flower:Feed Yellow Flower",
 	},
 	{
+		chapter: 6,
 		name: "Blue Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_BlueBerry.png",
@@ -362,12 +372,14 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Fields Tree:Soil",
 	},
 	{
+		chapter: 6,
 		name: "Crystal Berry",
 		type: "miscItem",
 		image: "icons/CrystalBerry_PM.png",
 		turnInCheck: "Rosie:Give Rosie the Crystal Berry",
 	},
 	{
+		chapter: 6,
 		name: "Water Stone",
 		type: "miscItem",
 		image: "icons/WaterStone_PM.png",
@@ -381,6 +393,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Fields Tree:Water",
 	},
 	{
+		chapter: 6,
 		name: "Bubble Berry",
 		type: "miscKey",
 		image: "icons/PaperMario_Items_BubbleBerry.png",
@@ -424,6 +437,7 @@ export const allItems: TrackableItemInfo[] = [
 		turnInCheck: "Merlar's Sanctuary:Star Stone",
 	},
 	{
+		chapter: 7,
 		name: "Blue Key",
 		type: "miscKey",
 		image: "icons/PM_BlueKey.png",
@@ -678,6 +692,7 @@ export const allItems: TrackableItemInfo[] = [
 		image: "Letters/PM_Goompapa_Sprite.png",
 	},
 	{
+		chapter: 1,
 		name: "Koopa Legends",
 		turnInCheck:
 			"Koopa Village East:[Koot Coin] Return Koopa Legends to Koopa Koot",
@@ -686,6 +701,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Sleepy Sheep",
 		turnInCheck:
 			"Koopa Village East:[Koot] Give Koopa Koot a Sleepy Sheep (second item)",
@@ -695,6 +711,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Tape",
 		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's Tape",
 		type: "kootFavor",
@@ -702,6 +719,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Koopa Tea",
 		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot Koopa Tea",
 		type: "kootFavor",
@@ -710,6 +728,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Luigi's Autograph",
 		turnInCheck:
 			"Koopa Village East:[Koot Coin] Give Luigi's Autograph to Koopa Koot",
@@ -718,6 +737,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Wallet",
 		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's wallet",
 		type: "kootFavor",
@@ -725,6 +745,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Tasty Tonic",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Tasty Tonic",
 		type: "kootFavor",
@@ -734,6 +755,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Crystal Ball",
 		turnInCheck: "Merluvlee's House:[Koot] Give Merluvlee the Crystal Ball",
 		type: "kootFavor",
@@ -741,6 +763,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Merluvlee's Autograph",
 		turnInCheck:
 			"Koopa Village East:[Koot] Give Merluvlee's Autograph to Koopa Koot",
@@ -749,6 +772,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Life Shroom",
 		turnInCheck:
 			"Koopa Village East:[Koot] Give Koopa Koot a Life Shroom (second item)",
@@ -759,6 +783,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Nutty Cake",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Nutty Cake",
 		type: "kootFavor",
@@ -767,6 +792,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Old Photo",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot the Old Photo",
 		type: "kootFavor",
@@ -774,6 +800,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Koopasta",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot Koopasta",
 		type: "kootFavor",
@@ -782,6 +809,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Glasses",
 		turnInCheck: "Koopa Village East:[Koot Coin] Return Koopa Koot's glasses",
 		type: "kootFavor",
@@ -789,6 +817,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Lime",
 		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot a Lime",
 		type: "kootFavor",
@@ -796,6 +825,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Kooky Cookie",
 		turnInCheck:
 			"Koopa Village East:[Koot Coin] Give Koopa Koot a Kooky Cookie",
@@ -805,6 +835,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Package",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot his package",
 		type: "kootFavor",
@@ -812,6 +843,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Coconut",
 		turnInCheck: "Koopa Village East:[Koot Coin] Give Koopa Koot a Coconut",
 		type: "kootFavor",
@@ -819,6 +851,7 @@ export const allItems: TrackableItemInfo[] = [
 	},
 
 	{
+		chapter: 1,
 		name: "Red Jar",
 		turnInCheck: "Koopa Village East:[Koot] Give Koopa Koot the Red Jar",
 		type: "kootFavor",
