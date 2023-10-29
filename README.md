@@ -1,38 +1,46 @@
-# PMR-Tracker
+# pmr-tracker-vue
 
-* This is a tracker for the Paper Mario 64 Randomizer found here: https://pm64randomizer.com/
-* The tracker itself is hosted over on: https://pmr-tracker.phantom-games.com/
+This template should help get you started developing with Vue 3 in Vite.
 
-## Features
+## Recommended IDE Setup
 
-### Tracker Logic
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-Automatically highlights star spirits that are available (without glitches) when all requirements are met.
+## Type Support for `.vue` Imports in TS
 
-### Seed Import
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-Import seed id's directly from the randomizer website to configure the tracker appropriately for each seed the end user generates.
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-### Map Tracker
+1. Disable the built-in TypeScript Extension
+    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-This was the first (and currently only?) tracker for Paper Mario Randomizer that has a checklist of every available item spawn location in the game in a very detailed map format.
+## Customize configuration
 
-## Contributing
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-While the production site is maintained exclusively by Phantom5800, anyone is welcome to submit features and bug fixes as pull requests. Feature development at this point is effectively done, there are a number of [Issues](https://github.com/Phantom5800/pmr-tracker/issues) that could use addressing, but they are all very low priority unless something comes in that absolutely needs addressing.
+## Project Setup
 
-For anyone that wants to submit changes or new features, all you have to do:
-* Create a fork on github
-* Submit a pull request from your own branch
-* Be descriptive in what you changed and consistent with existing code
-* ...
-* It will probably get merged unless there's major issues!
+```sh
+pnpm install
+```
 
-### Extra Credits
-Thanks to the following for major feature contributions:
-* MarioManTaw
-* MythicFrog
+### Compile and Hot-Reload for Development
 
-## Building
+```sh
+pnpm dev
+```
 
-This project uses Google's closure compiler for minifying javascript before pushing to live. Information on the compiler can be found on [Google's developer site](https://developers.google.com/closure/compiler), and the compiler itself can be found as a runnable jar file on [Maven](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler).
+### Type-Check, Compile and Minify for Production
+
+```sh
+pnpm build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+pnpm lint
+```

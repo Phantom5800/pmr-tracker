@@ -1,0 +1,39 @@
+@font-face {
+	font-family: "Paper Mario";
+	src: url("./fonts/SuperMarioScript2Demo-Regular.ttf");
+}
+
+html,
+body {
+	background-color: darkslategray;
+	font-family: "Paper Mario";
+	user-select: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: lightblue;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p,
+h1,
+h2,
+h3 {
+	margin: 0 0 0 0;
+	font-size: 1.5rem;
+	font-weight: normal;
+	color: white;
+
+	-webkit-text-stroke: 1px black;
+	stroke: 1px black;
+}

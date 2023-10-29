@@ -1,5 +1,0 @@
-Options +Includes
-AddType text/html .html
-AddOutputFilter INCLUDES .html
-AddType text/html .htm
-AddOutputFilter INCLUDES .htm
