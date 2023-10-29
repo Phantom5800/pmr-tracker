@@ -550,6 +550,10 @@ if (!localStorage.getItem("visited")) {
 				:key="panel.name"
 				draggable="true"
 				unselectable="on"
+				@click="
+					layout.push({ ...panel, x: 0, y: 0, i: key });
+					saveLayout();
+				"
 				@drag="dragFromMenu(key as keyof typeof panels)"
 				@dragend="dragEndTimeout(key as keyof typeof panels)"
 			>
