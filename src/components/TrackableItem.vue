@@ -199,6 +199,25 @@ function getImageUrl(image: string) {
 				}
 			"
 		/>
+		<svg
+			v-if="
+				name in chapterRewardReqs &&
+				!playthroughStore.getSpiritAnnotation(name).required
+			"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="not-required"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+			/>
+		</svg>
+
 		<p
 			v-if="
 				(label && options.colorblind) ||
@@ -445,6 +464,15 @@ img {
 
 p {
 	pointer-events: none;
+}
+
+.not-required {
+	color: rgb(200, 0, 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 40%;
+	bottom: 40%;
 }
 
 p.label {
