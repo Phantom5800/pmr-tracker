@@ -139,11 +139,7 @@ const shouldGlow = computed(() => {
 	<div
 		ref="itemRef"
 		tabindex="0"
-		class="tracker-item"
-		:class="{
-			fade: !bootsOrHammer && !playthroughStore.itemCount(name),
-			glow: shouldGlow,
-		}"
+		:style="{ width: '100%', height: '100%' }"
 		@mouseover="hovering = true"
 		@mouseout="hovering = false"
 		@blur="
@@ -161,14 +157,11 @@ const shouldGlow = computed(() => {
 			}
 		"
 	>
-		<img
-			:src="getImageUrl(derivedData.image)"
-			:alt="name"
-			:style="{
-				marginBottom: powerStarNum || multiple ? '1.5rem' : 0,
-				width: size,
-				height: size,
-				cursor: 'pointer',
+		<div
+			class="tracker-item"
+			:class="{
+				fade: !bootsOrHammer && !playthroughStore.itemCount(name),
+				glow: shouldGlow,
 			}"
 			@click="
 				powerStarNum || multiple || bootsOrHammer
@@ -195,95 +188,108 @@ const shouldGlow = computed(() => {
 					}
 				}
 			"
-		/>
-		<svg
-			v-if="
-				options.limitChapterLogic &&
-				name in chapterRewardReqs &&
-				!playthroughStore.getSpiritAnnotation(name).required
-			"
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="1.5"
-			stroke="currentColor"
-			class="not-required"
 		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-			/>
-		</svg>
-
-		<p
-			v-if="
-				(label && options.colorblind) ||
-				(name in chapterRewardReqs &&
-					playthroughStore.getSpiritAnnotation(
-						name as keyof PlaythroughProps['spiritAnnotations']
-					).scaling > 0)
-			"
-			class="label"
-		>
-			{{
-				label ||
-				playthroughStore.getSpiritAnnotation(
-					name as keyof PlaythroughProps["spiritAnnotations"]
-				).scaling
-			}}
-		</p>
-		<p v-if="showCheck" class="checkmark">✔</p>
-		<div v-if="info.type === 'partner'" class="small-annotation upgrades">
 			<img
-				v-if="playthroughStore.hasItem(`${name}:super`)"
-				:src="getImageUrl('koopa-koot-favors/Crystal_Ball_PM.png')"
-				alt=""
+				:src="getImageUrl(derivedData.image)"
+				:alt="name"
+				:style="{
+					marginBottom: powerStarNum || multiple ? '1.5rem' : 0,
+					width: size,
+					height: size,
+					cursor: 'pointer',
+				}"
 			/>
-			<img
-				v-if="playthroughStore.hasItem(`${name}:ultra`)"
-				:src="getImageUrl('icons/UltraStone.gif')"
-				alt=""
-			/>
-		</div>
-		<div
-			v-if="
-				name in chapterRewardReqs &&
-				playthroughStore.getSpiritAnnotation(
-					name as keyof PlaythroughProps['spiritAnnotations']
-				).entrance
-			"
-			class="small-annotation entrance-annotation"
-		>
 			<svg
+				v-if="
+					options.limitChapterLogic &&
+					name in chapterRewardReqs &&
+					!playthroughStore.getSpiritAnnotation(name).required
+				"
 				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 20 20"
-				fill="currentColor"
-				class="w-5 h-5"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke="currentColor"
+				class="not-required"
 			>
 				<path
-					fill-rule="evenodd"
-					d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-					clip-rule="evenodd"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
 				/>
 			</svg>
 
-			<img
-				:src="
-					getImageUrl(
-						`icons/${
-							playthroughStore.getSpiritAnnotation(
-								name as keyof PlaythroughProps['spiritAnnotations']
-							).entrance
-						}_PM.png`
-					)
+			<p
+				v-if="
+					(label && options.colorblind) ||
+					(name in chapterRewardReqs &&
+						playthroughStore.getSpiritAnnotation(
+							name as keyof PlaythroughProps['spiritAnnotations']
+						).scaling > 0)
 				"
-				alt=""
-			/>
+				class="label"
+			>
+				{{
+					label ||
+					playthroughStore.getSpiritAnnotation(
+						name as keyof PlaythroughProps["spiritAnnotations"]
+					).scaling
+				}}
+			</p>
+			<p v-if="showCheck" class="checkmark">✔</p>
+			<div v-if="info.type === 'partner'" class="small-annotation upgrades">
+				<img
+					v-if="playthroughStore.hasItem(`${name}:super`)"
+					:src="getImageUrl('koopa-koot-favors/Crystal_Ball_PM.png')"
+					alt=""
+				/>
+				<img
+					v-if="playthroughStore.hasItem(`${name}:ultra`)"
+					:src="getImageUrl('icons/UltraStone.gif')"
+					alt=""
+				/>
+			</div>
+			<div
+				v-if="
+					name in chapterRewardReqs &&
+					playthroughStore.getSpiritAnnotation(
+						name as keyof PlaythroughProps['spiritAnnotations']
+					).entrance
+				"
+				class="small-annotation entrance-annotation"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					class="w-5 h-5"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+
+				<img
+					:src="
+						getImageUrl(
+							`icons/${
+								playthroughStore.getSpiritAnnotation(
+									name as keyof PlaythroughProps['spiritAnnotations']
+								).entrance
+							}_PM.png`
+						)
+					"
+					alt=""
+				/>
+			</div>
+			<p v-if="powerStarNum || multiple" class="count">
+				{{
+					playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple)
+				}}
+			</p>
 		</div>
-		<p v-if="powerStarNum || multiple" class="count">
-			{{ playthroughStore.itemCount(name) + "/" + (powerStarNum || multiple) }}
-		</p>
 		<div
 			v-if="hovering && hoverTooltip && options.recipeTooltips"
 			ref="tooltipRef"
@@ -338,7 +344,7 @@ const shouldGlow = computed(() => {
 				v-for="num in [1, 2, 3, 4, 5, 6, 7, 0]"
 				:key="num"
 				class="scaling"
-				@click="
+				@click.prevent="
 					playthroughStore.setSpiritAnnotation(
 						name as keyof typeof chapterRewardReqs,
 						{ scaling: num }
@@ -452,6 +458,7 @@ div.tracker-item {
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	cursor: pointer;
 }
 
 img {
@@ -531,7 +538,7 @@ div.upgrades > img {
 	margin-top: -50%;
 }
 
-div.tracker-item div.hover-tip {
+div.hover-tip {
 	/* position: absolute;
 	 top: 0; */
 	/* translate: 0 -50%; */
