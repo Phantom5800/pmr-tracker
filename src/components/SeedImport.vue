@@ -2,11 +2,14 @@
 import { ref, onMounted } from "vue";
 import { useOptions } from "@/stores/config";
 import type { SettingsApiData } from "@/types/settings";
+import { usePlaythrough } from "../stores/playthrough";
 
 const optionsStore = useOptions();
+const playthroughStore = usePlaythrough();
 const loadingApiResponse = ref(false);
 const seedToLoad = ref("");
 const errorMessage = ref("");
+const alsoReset = ref(true);
 const seedInput = ref<HTMLInputElement | null>(null);
 
 const emit = defineEmits(["seedImported"]);
@@ -51,7 +54,7 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 	optionsStore.setValue(
 		"startingHammer",
 		-1 <= data.StartingHammer && data.StartingHammer <= 2
-			? ["Hammerless", "Boots", "Super Boots", "Ultra Boots"][
+			? ["Hammerless", "Hammer", "Super Hammer", "Ultra Hammer"][
 					data.StartingHammer + 1
 			  ]
 			: "Hammerless"
@@ -70,6 +73,9 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 	optionsStore.setValue("tradingEventRandomized", data.IncludeRadioTradeEvent);
 	optionsStore.setValue("whaleOpen", data.WhaleOpen);
 	errorMessage.value = "";
+	if (alsoReset.value) {
+		playthroughStore.resetPlaythrough();
+	}
 	emit("seedImported");
 }
 
@@ -128,11 +134,14 @@ function fetchSeedSettings(id: string) {
 					:disabled="loadingApiResponse"
 				/>
 			</p>
-			<p>
-				This will overwrite your current settings, but it will not reset the
-				tracker.
-			</p>
-
+			<p>This will overwrite your current settings.</p>
+			<input
+				id="alsoReset"
+				v-model="alsoReset"
+				type="checkbox"
+				name="alsoReset"
+			/>
+			<label for="alsoReset">Also reset the tracker</label><br />
 			<button class="importButton" :disabled="loadingApiResponse">
 				{{ loadingApiResponse ? "Loading..." : "Import" }}
 			</button>
@@ -164,9 +173,13 @@ function fetchSeedSettings(id: string) {
 	border: 2px solid transparent;
 }
 
+#alsoReset {
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+
 .importButton {
 	font-size: 2rem;
-	margin-top: 1rem;
 	padding: 0.5rem;
 }
 
