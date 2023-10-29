@@ -107,7 +107,10 @@ const init: PlaythroughProps = {
 	items: [],
 	checks: [],
 	notes: "",
-	spiritAnnotations,
+	spiritAnnotations: JSON.parse(JSON.stringify(spiritAnnotations)) as Record<
+		string,
+		SpiritAnnotations
+	>,
 	...storagePlaythrough,
 };
 
@@ -136,7 +139,10 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.save();
 		},
 		toggleSpiritRequired(k: keyof PlaythroughProps["spiritAnnotations"]) {
-			this.spiritAnnotations[k].required = !this.spiritAnnotations[k].required;
+			this.spiritAnnotations[k] = {
+				...this.spiritAnnotations[k],
+				required: !this.spiritAnnotations[k].required,
+			};
 			this.save();
 		},
 		getLCLHiddenItems() {
@@ -312,14 +318,18 @@ export const usePlaythrough = defineStore("playthrough", {
 			this.checks = [];
 			this.items = [];
 			this.notes = "";
-			this.spiritAnnotations = spiritAnnotations;
+			this.spiritAnnotations = JSON.parse(
+				JSON.stringify(spiritAnnotations)
+			) as Record<string, SpiritAnnotations>;
 			this.save();
 		},
 		loadPlaythrough(data: PlaythroughProps) {
 			this.checks = data.checks;
 			this.items = data.items;
 			this.notes = data.notes;
-			this.spiritAnnotations = data.spiritAnnotations;
+			this.spiritAnnotations = JSON.parse(
+				JSON.stringify(data.spiritAnnotations)
+			) as Record<string, SpiritAnnotations>;
 			this.save();
 		},
 	},
