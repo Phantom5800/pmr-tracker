@@ -43,65 +43,62 @@ const currentArea = ref("Main Gate");
 
 const currentRegionData = computed(() => getRegionData(currentRegion.value));
 
-const itemCounts: Record<string, ItemCounts & Record<string, ItemCounts>> =
-	computed(() =>
-		allRegions.reduce<Record<string, ItemCounts & Record<string, ItemCounts>>>(
-			(a, v) => {
-				const data = getRegionData(v);
-				const areaCounts = Object.entries(data.areas).reduce<
-					Record<string, ItemCounts>
-				>(
-					(aa, [ak, av]) => ({
-						...aa,
-						[ak]: Object.entries(av.checks).reduce<ItemCounts>(
-							(ca, [ck, cv]) => {
-								if (!playthrough.locationIsRandomized(ck)) {
-									return { ...ca };
-								} else if (playthrough.checkedLocation(ak, ck)) {
-									return {
-										...ca,
-										has: ca.has + 1,
-										total: ca.total + 1,
-									};
-								} else if (playthrough.canCheckLocation(cv.reqs, v)) {
-									return {
-										...ca,
-										available: ca.available + 1,
-										total: ca.total + 1,
-									};
-								} else {
-									return {
-										...ca,
-										total: ca.total + 1,
-									};
-								}
-							},
-							{ has: 0, available: 0, total: 0 }
-						),
-					}),
-					{}
-				);
-				const totalCounts = Object.values(areaCounts).reduce<ItemCounts>(
-					(a, v) => ({
-						has: a.has + v.has,
-						available: a.available + v.available,
-						total: a.total + v.total,
-					}),
-					{ has: 0, available: 0, total: 0 }
-				);
-				return {
-					...a,
-					[v]: {
-						has: totalCounts.has,
-						available: totalCounts.available,
-						total: totalCounts.total,
-						...areaCounts,
-					},
-				};
-			},
-			{}
-		)
-	);
+const itemCounts = computed(() =>
+	allRegions.reduce<Record<string, ItemCounts & Record<string, ItemCounts>>>(
+		(a, v) => {
+			const data = getRegionData(v);
+			const areaCounts = Object.entries(data.areas).reduce<
+				Record<string, ItemCounts>
+			>(
+				(aa, [ak, av]) => ({
+					...aa,
+					[ak]: Object.entries(av.checks).reduce<ItemCounts>(
+						(ca, [ck, cv]) => {
+							if (!playthrough.locationIsRandomized(ck)) {
+								return { ...ca };
+							} else if (playthrough.checkedLocation(ak, ck)) {
+								return {
+									...ca,
+									has: ca.has + 1,
+									total: ca.total + 1,
+								};
+							} else if (playthrough.canCheckLocation(cv.reqs, v)) {
+								return {
+									...ca,
+									available: ca.available + 1,
+									total: ca.total + 1,
+								};
+							} else {
+								return {
+									...ca,
+									total: ca.total + 1,
+								};
+							}
+						},
+						{ has: 0, available: 0, total: 0 }
+					),
+				}),
+				{}
+			);
+			const totalCounts = Object.values(areaCounts).reduce<ItemCounts>(
+				(a, v) => ({
+					has: a.has + v.has,
+					available: a.available + v.available,
+					total: a.total + v.total,
+				}),
+				{ has: 0, available: 0, total: 0 }
+			);
+			return {
+				...a,
+				[v]: {
+					...totalCounts,
+					...areaCounts,
+				},
+			} as Record<string, ItemCounts & Record<string, ItemCounts>>;
+		},
+		{}
+	)
+);
 
 const unshuffledChecks = computed(() =>
 	Object.getOwnPropertyNames(
