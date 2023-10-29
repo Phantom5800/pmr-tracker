@@ -14,13 +14,13 @@ import MenuOptions from "./components/MenuOptions.vue";
 import { allItems } from "@/data/items";
 import { GridLayout, GridItem } from "grid-layout-plus";
 import type { Layout } from "grid-layout-plus";
-import { throttle } from "lodash";
 import OverlayModal from "./components/OverlayModal.vue";
 import { usePlaythrough } from "./stores/playthrough";
 import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
 import LoadData from "./components/LoadData.vue";
+import { throttle } from "./utils/helpers";
 
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };

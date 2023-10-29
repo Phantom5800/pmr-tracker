@@ -2,3 +2,19 @@
 export const safeKeys = <T extends object>(o: T) =>
 	Object.getOwnPropertyNames(o) as Array<keyof T>;
 /* eslint-enable */
+
+export function throttle<T>(
+	fn: (...args: T) => void,
+	wait: number
+): (...args: T) => void {
+	let throttled = false;
+	return function (...args: unknown[]) {
+		if (!throttled) {
+			fn.apply(this, args);
+			throttled = true;
+			setTimeout(() => {
+				throttled = false;
+			}, wait);
+		}
+	};
+}

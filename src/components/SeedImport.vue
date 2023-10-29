@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useOptions } from "@/stores/config";
 import type { SettingsApiData } from "@/types/settings";
@@ -64,32 +63,26 @@ function fetchSeedSettings(id: string) {
 	}
 	loadingApiResponse.value = true;
 	errorMessage.value = "";
-	axios
-		.get(
-			`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
-		)
+	fetch(
+		`https://paper-mario-randomizer-server.ue.r.appspot.com/randomizer_settings/${id}`
+	)
 		.then(result => {
-			if (result && result.data) {
-				setRandomizerSettingsFromApiResponse(result.data as SettingsApiData);
-			} else {
-				errorMessage.value = `Unknown error - please see the browser console and report this!`;
-				console.error(result);
+			if (!result.ok) {
+				throw result;
 			}
+			return result.json() as Promise<SettingsApiData>;
 		})
-		.catch(err => {
-			if (
-				axios.isAxiosError(err) &&
-				err.response &&
-				err.response.status === 404
-			) {
-				errorMessage.value = `Could not find seed ${id}. Ensure it is correct and try again.`;
-			} else if (
-				axios.isAxiosError(err) &&
-				err.response &&
-				err.response.status.toString().startsWith("5")
-			) {
-				errorMessage.value = `Server error (code ${err.code})`;
-				console.error(err);
+		.then(data => {
+			setRandomizerSettingsFromApiResponse(data);
+		})
+		.catch((err: object) => {
+			if (err && "status" in err && typeof err.status === "number") {
+				if (err.status === 404) {
+					errorMessage.value = `Could not find seed ${id}. Ensure it is correct and try again.`;
+				} else if (err.status.toString().startsWith("5")) {
+					errorMessage.value = `Server error (code ${err.status})`;
+					console.error(err);
+				}
 			} else {
 				errorMessage.value = `Unknown error - please see the browser console and report this!`;
 				console.error(err);
