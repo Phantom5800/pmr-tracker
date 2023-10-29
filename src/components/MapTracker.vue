@@ -24,6 +24,12 @@ const regions = computed(() =>
 		.filter(
 			el => el !== "Peach's Castle" || !options.getValue("hidePeachsCastle")
 		)
+		.filter(
+			el =>
+				!options.getValue("limitChapterLogic") ||
+				!options.getValue("hideLCLAreas") ||
+				!playthrough.getLCLHiddenAreas().includes(el)
+		)
 );
 
 const currentMap = ref("Toad Town");

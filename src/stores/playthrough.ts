@@ -26,6 +26,25 @@ const starSpirits = [
 	"Kalmar",
 ];
 
+const regionsPerChapter: Record<string, string> = {
+	"Pleasant Path": "Eldstar",
+	"Koopa Village": "Eldstar",
+	"Koopa Bros. Fortress": "Eldstar",
+	"Mt. Rugged": "Mamar",
+	"Dry Dry Desert": "Mamar",
+	"Dry Dry Ruins": "Mamar",
+	"Forever Forest": "Skolar",
+	"Boo's Mansion": "Skolar",
+	"Gusty Gulch": "Skolar",
+	"Tubba's Castle": "Skolar",
+	"Shy Guy's Toybox": "Muskular",
+	"Yoshi's Island": "Misstar",
+	"Mt. Lavalava": "Misstar",
+	"Flower Fields": "Klevar",
+	"Shiver Region": "Kalmar",
+	"Crystal Palace": "Kalmar",
+};
+
 const fixedChapterRewards = [...starSpirits, "Star Rod"];
 
 const letters = allItems.filter(el => el.type === "letter").map(el => el.name);
@@ -128,6 +147,11 @@ export const usePlaythrough = defineStore("playthrough", {
 					1 <= el.chapter &&
 					el.chapter <= 7 &&
 					!this.spiritAnnotations[starSpirits[el.chapter - 1]].required
+			);
+		},
+		getLCLHiddenAreas() {
+			return Object.keys(regionsPerChapter).filter(
+				el => !this.spiritAnnotations[regionsPerChapter[el]].required
 			);
 		},
 		cycleUpgrade(k: string) {

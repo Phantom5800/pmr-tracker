@@ -21,7 +21,6 @@ import InfoBlocks from "./components/InfoBlocks.vue";
 import FilterConfig from "./components/FilterConfig.vue";
 import SaveData from "./components/SaveData.vue";
 import LoadData from "./components/LoadData.vue";
-import type { TrackableItemInfo } from "./types/items";
 
 type TGridItem = typeof GridItem & {
 	calcXY: (top: number, left: number) => { x: number; y: number };
@@ -105,6 +104,7 @@ const allItemsFiltered = computed(() =>
 		.filter(el => optionsStore.getItemFilter(el.name) !== "hide")
 		.filter(
 			el =>
+				!options.value.limitChapterLogic ||
 				!options.value.hideLCLItems ||
 				!playthroughStore.getLCLHiddenItems().includes(el)
 		)
