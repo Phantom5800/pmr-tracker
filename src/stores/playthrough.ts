@@ -270,8 +270,17 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		canCheckLocation(reqs: Requirements, region?: string) {
 			const options = useOptions();
+
 			if (!options.$state.options.trackerLogic) {
 				return true;
+			}
+			if (
+				options.getValue("limitChapterLogic") &&
+				region &&
+				region in regionsPerChapter &&
+				!this.spiritAnnotations[regionsPerChapter[region]].required
+			) {
+				return false;
 			}
 			const regionReqs = region ? getRegionData(region).reqs : null;
 			return (
