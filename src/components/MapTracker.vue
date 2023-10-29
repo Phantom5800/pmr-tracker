@@ -1,85 +1,236 @@
 <script setup lang="ts">
 import TrackerPanel from "./TrackerPanel.vue";
 import { ref, computed } from "vue";
-import { getAreas, allRegions, getBlanks, getChecks } from "../data/map";
+import { allRegions, getRegionData } from "../data/map";
+import { usePlaythrough } from "../stores/playthrough";
+import { useOptions } from "@/stores/config";
 
-const currentMap = ref("Toad Town");
-
-const areas = computed(() => getAreas(currentMap.value));
-
-const toadTown: Record<
-	string,
-	{ col: number; row: number; colSpan?: number; rowSpan?: number }
-> = {
-	"Castle Ruins": { col: 3, row: 1, rowSpan: 2 },
-	"Shooting Star Summit": { col: 4, row: 1 },
-	"Mario's House": { col: 2, row: 2 },
-	"Merluvlee's House": { col: 4, row: 2 },
-	"Outside Toad Town": { col: 1, row: 3 },
-	"Main Gate": { col: 2, row: 3 },
-	"Central Plaza": { col: 3, row: 3 },
-	Harbor: { col: 1, row: 4 },
-	"Residential Area": { col: 2, row: 4 },
-	"Below Plaza": { col: 3, row: 4 },
-	"Forever Forest Entrance": { col: 4, row: 4 },
-	"Train Station": { col: 4, row: 5 }
+type ItemCounts = {
+	has: number;
+	available: number;
+	total: number;
 };
+
+const playthrough = usePlaythrough();
+const options = useOptions();
+
+const { moving, removePanel } = defineProps<{
+	moving: boolean;
+	removePanel: () => void;
+}>();
+
+const regions = computed(() =>
+	allRegions
+		.filter(
+			el =>
+				el !== "Bowser's Castle" ||
+				!options.getValue("fastBowserCastle") ||
+				!options.getValue("hideBowsersCastle")
+		)
+		.filter(
+			el => el !== "Peach's Castle" || !options.getValue("hidePeachsCastle")
+		)
+		.filter(
+			el =>
+				!options.getValue("limitChapterLogic") ||
+				!options.getValue("hideLCLAreas") ||
+				!playthrough.getLCLHiddenAreas().includes(el)
+		)
+);
+
+const currentRegion = ref("Toad Town");
+const currentArea = ref("Main Gate");
+
+const currentRegionData = computed(() => getRegionData(currentRegion.value));
+
+const itemCounts = computed(() =>
+	allRegions.reduce<Record<string, ItemCounts & Record<string, ItemCounts>>>(
+		(a, v) => {
+			const data = getRegionData(v);
+			const areaCounts = Object.entries(data.areas).reduce<
+				Record<string, ItemCounts>
+			>(
+				(aa, [ak, av]) => ({
+					...aa,
+					[ak]: Object.entries(av.checks).reduce<ItemCounts>(
+						(ca, [ck, cv]) => {
+							if (!playthrough.locationIsRandomized(ck)) {
+								return { ...ca };
+							} else if (playthrough.checkedLocation(ak, ck)) {
+								return {
+									...ca,
+									has: ca.has + 1,
+									total: ca.total + 1,
+								};
+							} else if (playthrough.canCheckLocation(cv.reqs, v)) {
+								return {
+									...ca,
+									available: ca.available + 1,
+									total: ca.total + 1,
+								};
+							} else {
+								return {
+									...ca,
+									total: ca.total + 1,
+								};
+							}
+						},
+						{ has: 0, available: 0, total: 0 }
+					),
+				}),
+				{}
+			);
+			const totalCounts = Object.values(areaCounts).reduce<ItemCounts>(
+				(a, v) => ({
+					has: a.has + v.has,
+					available: a.available + v.available,
+					total: a.total + v.total,
+				}),
+				{ has: 0, available: 0, total: 0 }
+			);
+			return {
+				...a,
+				[v]: {
+					...totalCounts,
+					...areaCounts,
+				},
+			} as Record<string, ItemCounts & Record<string, ItemCounts>>;
+		},
+		{}
+	)
+);
+
+const unshuffledChecks = computed(() =>
+	Object.getOwnPropertyNames(
+		currentRegionData.value.areas[currentArea.value].checks
+	).filter(el => !playthrough.locationIsRandomized(el))
+);
+
+const checksToShow = computed(() =>
+	Object.entries(
+		currentRegionData.value.areas[currentArea.value].checks
+	).filter(
+		el =>
+			!options.getValue("hideNonShuffledChecks") ||
+			!unshuffledChecks.value.includes(el[0])
+	)
+);
 </script>
 
 <template>
-	<TrackerPanel>
+	<component :is="'style'">
+		button { font-weight:
+		{{ options.$state.options.paperMarioFont ? "normal" : "bold" }};}
+	</component>
+	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">
 			<button
+				v-for="region in regions"
+				:key="region"
 				class="map-select"
 				:class="{
-					selected: map === currentMap
+					selected: region === currentRegion,
+					fullCleared: itemCounts[region].has >= itemCounts[region].total,
+					checksInLogic: itemCounts[region].available > 0,
 				}"
-				v-for="map in allRegions"
-				:key="map"
-				@click="currentMap = map"
+				@click="
+					currentRegion = region;
+					currentArea = Object.getOwnPropertyNames(currentRegionData.areas)[0];
+				"
 			>
-				{{ map }}
+				{{ region }} {{ itemCounts[region].available || "" }}
 			</button>
 		</div>
 		<div class="map-grid">
-			<h2>{{ currentMap }}</h2>
+			<h2>
+				{{ currentRegion }} ({{ itemCounts[currentRegion].has }}/{{
+					itemCounts[currentRegion].available
+				}}/{{ itemCounts[currentRegion].total }})
+			</h2>
 			<div class="map-areas">
 				<button
-					class="map-area"
-					v-for="area in Object.getOwnPropertyNames(areas)"
+					v-for="area in Object.getOwnPropertyNames(currentRegionData.areas)"
 					:key="area"
-					:style="{
-						gridRow: `${areas[area].row} / span ${areas[area].rowSpan || 1}`,
-						gridColumn: `${areas[area].col} / span ${areas[area].colSpan || 1}`
+					class="map-area"
+					:class="{
+						selected: area === currentArea,
+						checksInLogic: itemCounts[currentRegion][area].available > 0,
+						fullCleared:
+							itemCounts[currentRegion][area].has >=
+							itemCounts[currentRegion][area].total,
 					}"
+					:style="{
+						gridRow: `${currentRegionData.areas[area].row} / span ${
+							currentRegionData.areas[area].rowSpan || 1
+						}`,
+						gridColumn: `${currentRegionData.areas[area].col} / span ${
+							currentRegionData.areas[area].colSpan || 1
+						}`,
+					}"
+					@click="currentArea = area"
 				>
 					{{ area }}
 				</button>
+				<button
+					v-for="blank in currentRegionData.blanks"
+					:key="blank.row * 100 + blank.col"
+					class="map-area"
+					:style="{
+						gridRow: `${blank.row} / span ${blank.rowSpan || 1}`,
+						gridColumn: `${blank.col} / span ${blank.colSpan || 1}`,
+					}"
+				></button>
+				<div
+					v-for="label in currentRegionData.labels"
+					:key="label.row * 100 + label.col"
+					class="map-label"
+					:style="{
+						gridRow: `${label.row} / span ${label.rowSpan || 1}`,
+						gridColumn: `${label.col} / span ${label.colSpan || 1}`,
+					}"
+				>
+					{{ label.content }}
+				</div>
 			</div>
 		</div>
-		<div class="map-checks"></div>
+		<div class="map-checks">
+			<ul>
+				<li
+					v-for="[checkName, check] in checksToShow"
+					:key="checkName"
+					:class="{
+						available: playthrough.canCheckLocation(check.reqs, currentRegion),
+						obtained: playthrough.checkedLocation(currentArea, checkName),
+						disabled: unshuffledChecks.includes(checkName),
+					}"
+				>
+					<input
+						:id="checkName"
+						type="checkbox"
+						:name="checkName"
+						:disabled="unshuffledChecks.includes(checkName)"
+						:checked="playthrough.checkedLocation(currentArea, checkName)"
+						@change="playthrough.toggleCheck(currentArea, checkName)"
+					/>
+					<label :for="checkName">
+						{{ checkName }}
+					</label>
+				</li>
+			</ul>
+		</div>
 	</TrackerPanel>
 </template>
 
 <style scoped>
 button {
 	height: 100%;
-
 	border-radius: 5px;
-	font-family: "Paper Mario";
 }
 
 button.map-select {
 	width: auto;
 	height: 2em;
-}
-
-button:hover {
-	background-color: #5fcf80;
-}
-
-button:focus {
-	background-color: #1e7438;
+	font-size: 1rem;
 }
 
 .map-buttons {
@@ -92,6 +243,7 @@ button:focus {
 
 .map-buttons button {
 	margin-bottom: 0.25em;
+	background-color: #ff818167;
 }
 
 button.map-select.complete {
@@ -104,18 +256,99 @@ button.map-select.complete.selected {
 }
 
 button.selected {
-	background-color: #1e7438;
+	background-color: #3aad5d !important;
 	border-color: black;
 }
 
 .map-areas {
 	display: grid;
+	gap: 2px;
 	justify-content: center;
-	grid-auto-rows: minmax(3rem, max-content);
-	grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+	grid-auto-columns: minmax(5.3rem, min-content);
+	grid-auto-rows: minmax(3.7rem, min-content);
+	grid-auto-flow: column;
 }
 
 button.map-area {
 	width: 100%;
+	height: 100%;
+	background-color: #ff818167;
+	font-size: 1rem;
+	border: 4px solid black;
+	border-radius: 8px;
+	padding: 0.2rem 0.5rem;
+	word-wrap: normal;
+}
+
+button {
+	background-color: #ff818167;
+	font-size: 1rem;
+	border: 4px solid black;
+	border-radius: 8px;
+}
+
+button:hover {
+	background-color: #966666;
+}
+
+button.checksInLogic:hover {
+	background-color: #acdfc8;
+}
+
+button.checksInLogic {
+	background-color: white;
+}
+
+button.fullCleared {
+	text-decoration: line-through;
+	color: #333;
+}
+
+div.map-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.map-checks {
+	width: fit-content;
+	margin-inline: auto;
+}
+
+.map-checks ul {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+
+.map-checks li {
+	color: #888;
+}
+
+.map-checks li.available {
+	color: #e8e8e8;
+}
+
+.map-checks li:not(.disabled):hover {
+	color: #b0b0b0;
+}
+
+.map-checks li.available:not(.disabled):hover {
+	color: white;
+}
+
+.map-checks li.disabled {
+	color: #666;
+	text-decoration: line-through;
+}
+
+.map-checks li input[type="checkbox"] {
+	margin-right: 1rem;
+	cursor: pointer;
+}
+
+.map-checks li label {
+	cursor: pointer;
 }
 </style>

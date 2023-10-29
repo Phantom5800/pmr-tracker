@@ -1,4 +1,14 @@
-type Requirements = null | number | string | Requirements[];
+import type { Options } from "@/stores/config";
+import logic from "../utils/logic";
+import { has3Letters } from "@/utils/letterLogic";
+
+export type Requirements =
+	| null
+	| number
+	| string
+	| boolean
+	| ((items: string[], settings: Options) => boolean)
+	| Requirements[];
 type Coords = { row: number; col: number; rowSpan?: number; colSpan?: number };
 type Area = Coords & {
 	checks: {
@@ -9,6 +19,8 @@ type Area = Coords & {
 };
 type Region = {
 	blanks?: Coords[];
+	labels?: (Coords & { content: string })[];
+	reqs?: Requirements;
 	areas: {
 		[key: string]: Area;
 	};
@@ -16,8 +28,101 @@ type Region = {
 
 type MapRegions = { [key: string]: Region };
 
+export const chapterRewardReqs = {
+	Eldstar: [
+		logic.canReachToadTown,
+		logic.canClimbLedges,
+		["Hammer", "Bombette"],
+		"Kooper",
+		logic.multipleItemCheck("Fortress Key", 4),
+	],
+	Mamar: [
+		"Pulse Stone",
+		"Pyramid Stone",
+		"Diamond Stone",
+		"Lunar Stone",
+		logic.multipleItemCheck("Ruins Key", 3),
+		[
+			logic.startingLocation("Dry Dry Outpost"),
+			["Bombette", "Parakarry"],
+			"Super Hammer",
+		],
+	],
+	Skolar: [
+		logic.canReachToadTown,
+		"Boo's Portrait",
+		logic.multipleItemCheck("Tubba Castle Key", 3),
+		"Parakarry",
+		"Super Boots",
+	],
+	Muskular: [
+		"Toy Train",
+		"Cake",
+		"Bombette",
+		"Watt",
+		"Hammer",
+		logic.toyboxAccess,
+	],
+	Misstar: [
+		"Jade Raven",
+		"Sushie",
+		"Hammer",
+		logic.canClimbLedges,
+		[
+			logic.startingLocation("Yoshi Village"),
+			"Watt",
+			logic.whaleOpen,
+			["Bombette", [logic.blueHouseOpen, "Odd Key"]],
+			["Super Boots", "Sushie"],
+		],
+		"Ultra Hammer",
+	],
+	Klevar: [
+		logic.canReachToadTown,
+		logic.chapter6Entry,
+		"Magical Bean",
+		"Fertile Soil",
+		"Miracle Water",
+		"Lakilester",
+		"Super Boots",
+		"Hammer",
+	],
+	Kalmar: [
+		"Warehouse Key",
+		"Bucket",
+		"Scarf",
+		"Star Stone",
+		"Red Key",
+		"Palace Key",
+		"Kooper",
+		"Hammer",
+		"Bombette",
+		logic.canReachToadTown,
+		[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
+		["Sushie", logic.blueHouseOpen, "Odd Key"],
+	],
+	"Star Rod": [
+		logic.canReachToadTown,
+		"Boots",
+		7,
+		[
+			[
+				logic.multipleItemCheck("Bowser's Castle Key", 5),
+				"Bombette",
+				"Lakilester",
+				"Parakarry",
+				"Bow",
+				"Sushie",
+				"Ultra Boots",
+			],
+			logic.fastBowserCastle,
+		],
+	],
+} satisfies Record<string, Requirements>;
+
 const regionData: MapRegions = {
 	Prologue: {
+		reqs: [[logic.startingLocation("Goomba Village"), logic.canReachToadTown]],
 		areas: {
 			Playground: {
 				row: 1,
@@ -25,32 +130,50 @@ const regionData: MapRegions = {
 				checks: {
 					"Furthest left bush": {
 						reqs: [
+							["Hammer", "Bombette"],
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
+							],
+						],
 					},
 					"Far right tree": {
 						reqs: [
+							["Hammer", "Bombette"],
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
+							],
+						],
 					},
-					"[Foliage Coin] All other bushes (6) and trees (2)": {
+					"[Foliage Coin] 2 more trees": {
 						reqs: [
+							["Hammer", "Bombette"],
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
+							],
+						],
+					},
+					"[Foliage Coin] 6 more bushes": {
+						reqs: [
+							["Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
+							],
+						],
+					},
+					"[Multicoin Block] Block on ground": {
+						reqs: [
+							["Hammer", "Bombette"],
+							[
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
+							],
+						],
+					},
+				},
 			},
 			"Outside Playground": {
 				row: 1,
@@ -58,54 +181,67 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Right of stone block": {
 						reqs: [
+							logic.canFlipPanel,
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									["Hammer", "Bombette"],
+									["Super Hammer", logic.prologueOpen],
+									logic.canClimbLedges,
+								],
 							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						],
 					},
 					"[Coinsanity] 4 items above spring": {
 						reqs: [
+							logic.canClimbLedges,
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									["Hammer", "Bombette"],
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
 					},
 					"[Coin Block] Far left ? Block": {
 						reqs: [
+							["Hammer", "Bombette"],
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
+							],
+						],
 					},
 					Tree: {
 						reqs: [
+							["Hammer", "Bombette"],
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
+							],
+						],
 					},
 					"Item on ledge above spring": {
 						reqs: [
+							logic.canClimbLedges,
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									["Hammer", "Bombette"],
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
 					},
 					"? Block above stone block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
-					}
-				}
+						reqs: [
+							"Super Hammer",
+							[logic.canClimbLedges, logic.startingLocation("Goomba Village")],
+							logic.canBreakBlocksAbove,
+						],
+					},
+				},
 			},
 			"Outside Village": {
 				row: 1,
@@ -113,24 +249,27 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on ledge": {
 						reqs: [
+							"Boots",
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
+							],
+						],
 					},
 					"[Foliage Coin] Tree on ledge": {
 						reqs: [
+							"Boots",
+							logic.canShakeTree,
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[["Super Hammer", logic.prologueOpen]],
 							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						],
+					},
+				},
 			},
 			"Goomba Village": {
 				row: 1,
@@ -140,105 +279,128 @@ const regionData: MapRegions = {
 					"[Letter] Goompa": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
 							"Goompa",
-							"Parakarry"
-						]
+							"Parakarry",
+						],
 					},
 					"[Letter] Goompapa 1 (Chain)": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
 							"Goompapa 1",
-							"Parakarry"
-						]
+							"Parakarry",
+						],
 					},
 					"[Letter] Goompapa 2 (Chain)": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
 							"Goompapa 2",
-							"Parakarry"
-						]
+							"Parakarry",
+						],
 					},
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
 							1,
 							"Koopa Legends",
-							"Sleepy Sheep"
-						]
+							"Sleepy Sheep",
+						],
 					},
 					Goombario: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
+							],
+						],
 					},
 					"Give Dolly to Goombaria": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
-							"Dolly"
-						]
+							"Dolly",
+						],
 					},
 					Goompa: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
+							],
+						],
 					},
 					"Goompa's Veranda": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
+							],
+						],
 					},
 					Tree: {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
 							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+							logic.canShakeTree,
+						],
 					},
 					"[Foliage Coin] Bottom right bush": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
+							],
+						],
+					},
+				},
 			},
 			"Mario's Landing": {
 				row: 2,
@@ -247,14 +409,17 @@ const regionData: MapRegions = {
 					"[Panel] Middle of the room": {
 						reqs: [
 							[
-								"starting-location:GoombaVillage",
-								"Super Hammer",
-								"Ultra Hammer"
+								logic.startingLocation("Goomba Village"),
+								[
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+									["Hammer", "Bombette"],
+								],
 							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+							logic.canFlipPanel,
+						],
+					},
+				},
 			},
 			"Goomba Road 1": {
 				row: 2,
@@ -262,23 +427,37 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] Left ? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"],
+								],
+								[
+									logic.canReachToadTown,
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
 					},
 					"[Coin Block] Right ? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"],
+								],
+								[
+									logic.canReachToadTown,
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
+					},
+				},
 			},
 			"Goomba Road 2": {
 				row: 2,
@@ -286,23 +465,36 @@ const regionData: MapRegions = {
 				checks: {
 					"? Block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"],
+								],
+								[
+									logic.canReachToadTown,
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
 					},
 					Sign: {
 						reqs: [
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+								[
+									logic.startingLocation("Goomba Village"),
+									["Hammer", "Bombette"],
+								],
+								[
+									logic.canReachToadTown,
+									logic.canClimbLedges,
+									["Super Hammer", logic.prologueOpen],
+								],
+							],
+						],
+					},
+				},
 			},
 			"Red & Blue Goomba": { row: 2, col: 7, checks: {} },
 			"Outside Castle": { row: 2, col: 8, checks: {} },
@@ -311,38 +503,44 @@ const regionData: MapRegions = {
 				col: 9,
 				checks: {
 					"[Panel] Right side of Goomba King's Fortress near tree": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [
+							logic.canFlipPanel,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"],
+						],
 					},
 					"Tree left of the fortress": {
 						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
 							[
-								["starting-location:GoombaVillage", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								[logic.canReachToadTown, ["Super Hammer", logic.prologueOpen]],
+								"Hammer",
+								"Bombette",
+							],
+						],
 					},
 					"Break brick block to spawn ? Block": {
 						reqs: [
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+							logic.canBreakBlocksAbove,
+							logic.canBreakGroundBlocks,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"],
+						],
 					},
 					"[Foliage Coin] Tree right of the fortress": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
-					}
-				}
-			}
-		}
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							[logic.canReachToadTown, "Hammer", "Bombette"],
+						],
+					},
+				},
+			},
+		},
 	},
 	"Toad Town": {
+		reqs: logic.canReachToadTown,
 		areas: {
 			"Castle Ruins": {
 				row: 1,
@@ -350,22 +548,22 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Letter] Muss T. (Chain)": {
-						reqs: ["Muss T. (Castle Ruins)", "Parakarry"]
+						reqs: ["Muss T. (Castle Ruins)", "Parakarry"],
 					},
 					"[Panel] Right side of bridge": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
-					}
-				}
+						reqs: logic.canFlipPanel,
+					},
+				},
 			},
 			"Shooting Star Summit": {
 				row: 1,
 				col: 4,
 				checks: {
 					"[Panel] On First Step": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel, logic.canClimbLedges],
 					},
-					"Left from entrance": { reqs: null }
-				}
+					"Left from entrance": { reqs: logic.canClimbLedges },
+				},
 			},
 			"Mario's House": {
 				row: 2,
@@ -373,30 +571,31 @@ const regionData: MapRegions = {
 				checks: {
 					"[Koot] Talk to Luigi after Koopa Koot requests his autograph": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							logic.canClimbLedges,
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
-							"Koopa Tea"
-						]
-					}
-				}
+							"Koopa Tea",
+						],
+					},
+				},
 			},
 			"Merluvlee's House": {
 				row: 2,
 				col: 4,
 				checks: {
 					"[Panel] In front of pot outside house": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel],
 					},
-					"[Shop] 6 items from Merlow Star Piece Rewards": {
-						reqs: null
+					"[Merlow] 6 items from Merlow Star Piece Rewards": {
+						reqs: logic.canClimbLedges,
 					},
 					"[Letter] Merlow": { reqs: ["Merlow", "Parakarry"] },
 					"[Koot] Give Merluvlee the Crystal Ball": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -405,52 +604,55 @@ const regionData: MapRegions = {
 							"Luigi's Autograph",
 							"Wallet",
 							"Tasty Tonic",
-							"Crystal Ball"
-						]
-					}
-				}
+							"Crystal Ball",
+						],
+					},
+				},
 			},
 			"Outside Gate": {
 				row: 3,
 				col: 1,
 				checks: {
 					"Chest on top of Gate": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges],
 					},
-					"? Block": { reqs: null }
-				}
+					"? Block": { reqs: logic.canBreakBlocksAbove },
+				},
 			},
 			"Main Gate": {
 				row: 3,
 				col: 2,
 				checks: {
 					"[Panel] By three toad sisters": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: [logic.canFlipPanel],
 					},
 					"[Dojo] Defeat Chan (logic from beginning)": {
-						reqs: null
+						reqs: null,
 					},
 					"[Dojo] Defeat Lee (logic after 2 star spirits)": {
-						reqs: [2]
+						reqs: 2,
 					},
 					"[Dojo] Defeat Master 1 (logic after 3 star spirits)": {
-						reqs: [3]
+						reqs: 3,
 					},
 					"[Dojo] Defeat Master 2 (logic after 4 star spirits)": {
-						reqs: [4]
+						reqs: 4,
 					},
 					"[Dojo] Defeat Master 3 (logic after 5 star spirits)": {
-						reqs: [5]
+						reqs: 5,
 					},
 					"[Letter] Miss T.": { reqs: ["Miss T.", "Parakarry"] },
 					"[Letter] Russ T.": { reqs: ["Russ T.", "Parakarry"] },
 					"[Shop] 6 items in Shop": { reqs: null },
 					"[Trade] Give Koopa Leaf to Trading Event Toad": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"], 1]
+						reqs: [["Hammer", "Bombette"], 1],
 					},
 					"Give Dictionary to Russ T.": { reqs: ["Dictionary"] },
-					"Item at Sushie panel": { reqs: ["Sushie"] }
-				}
+					"Item at Sushie panel": { reqs: ["Sushie"] },
+					"[Upgrade] Super Block": {
+						reqs: ["Sushie", logic.canClimbLedges, logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Central Plaza": {
 				row: 3,
@@ -458,47 +660,48 @@ const regionData: MapRegions = {
 				checks: {
 					"[Letter] Merlon": { reqs: ["Merlon", "Parakarry"] },
 					"[Letter] Minh T. (Chain)": {
-						reqs: ["Minh T.", "Parakarry"]
+						reqs: ["Minh T.", "Parakarry"],
 					},
-					"[Shop] 4 items in Rowf's Shop": { reqs: null },
-					"[Shop] 3 items in Rowf's Shop after clearing 1 chapter": {
-						reqs: [1]
+					"[Rowf] 4 items in Rowf's Shop": { reqs: null },
+					"[Rowf] 3 items in Rowf's Shop after clearing 1 chapter": {
+						reqs: 1,
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 2 chapters": {
-						reqs: [2]
+					"[Rowf] 3 items in Rowf's Shop after clearing 2 chapters": {
+						reqs: 2,
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 3 chapters": {
-						reqs: [3]
+					"[Rowf] 3 items in Rowf's Shop after clearing 3 chapters": {
+						reqs: 3,
 					},
-					"[Shop] 3 items in Rowf's Shop after clearing 4 chapters": {
-						reqs: [4]
+					"[Rowf] 3 items in Rowf's Shop after clearing 4 chapters": {
+						reqs: 4,
 					},
 					"Tree by Merlon's house": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: logic.canShakeTree,
 					},
-					"Give Calculator to Rowf": { reqs: ["Calculator"] },
-					"Give Mailbag to Post Office": { reqs: ["Mailbag"] },
+					"Give Calculator to Rowf": { reqs: "Calculator" },
+					"Give Mailbag to Post Office": { reqs: "Mailbag" },
 					"Ground Pound inside Merlon's house 3 times": {
-						reqs: [["Super Boots", "Ultra Boots"]]
-					}
-				}
+						reqs: "Super Boots",
+					},
+				},
 			},
 			Harbor: {
 				row: 4,
 				col: 1,
 				checks: {
 					"[Panel] Outside Club 64": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Fishmael (Chain)": {
-						reqs: ["Fishmael", "Parakarry"]
+						reqs: ["Fishmael", "Parakarry"],
 					},
 					"[Trade] Give Coconut to Trading Event Toad": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"], 5]
+						reqs: [["Hammer", "Bombette"], 5],
 					},
 					"Talk to Simon in Club 64 (first time)": { reqs: null },
-					"Give Melody to Simon in Club 64": { reqs: ["Melody"] }
-				}
+					"Give Melody to Simon in Club 64": { reqs: "Melody" },
+					"[Multicoin Block] Block on crates": { reqs: "Boots" },
+				},
 			},
 			"Residential Area": {
 				row: 4,
@@ -506,31 +709,30 @@ const regionData: MapRegions = {
 				checks: {
 					"[Shop] 6 items in Shop": { reqs: null },
 					"Four items in Harry's Storeroom": {
-						reqs: ["Storeroom Key"]
-					}
-				}
+						reqs: "Storeroom Key",
+					},
+				},
 			},
 			"Below Plaza": {
 				row: 4,
 				col: 3,
 				checks: {
 					"[Panel] By guard house": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Fice T.": { reqs: ["Fice T.", "Parakarry"] },
-					"Bub-ulb": { reqs: null },
-					"Give Frying Pan to Tayce T.": { reqs: ["Frying Pan"] },
+					"Bub-ulb": { reqs: logic.canClimbLedges },
+					"Give Frying Pan to Tayce T.": { reqs: "Frying Pan" },
 					"Inside Blue House": {
 						reqs: [
 							[
 								"Odd Key",
-								"blue-house-open",
-								["Super Boots", "Sushie", "Bombette"],
-								["Ultra Boots", "Sushie", "Bombette"]
-							]
-						]
-					}
-				}
+								logic.blueHouseOpen,
+								[logic.canClimbLedges, "Super Boots", "Sushie", "Bombette"],
+							],
+						],
+					},
+				},
 			},
 			"Forever Forest Entrance": { row: 4, col: 4, checks: {} },
 			"Train Station": {
@@ -538,19 +740,20 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] Bottom right side of room": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Dane T. 1 (Chain)": {
-						reqs: ["Dane T. 1", "Parakarry"]
+						reqs: ["Dane T. 1", "Parakarry"],
 					},
 					"[Letter] Dane T. 2 (Chain)": {
-						reqs: ["Dane T. 2", "Parakarry"]
-					}
-				}
-			}
-		}
+						reqs: ["Dane T. 2", "Parakarry"],
+					},
+				},
+			},
+		},
 	},
 	"Toad Town Tunnels": {
+		reqs: [logic.canReachToadTown, logic.canClimbLedges],
 		areas: {
 			Pipe: {
 				row: 1,
@@ -558,175 +761,195 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove],
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove],
 					},
 					"Middle ? Block": {
-						reqs: [["Super Hammer", "Ultra Hammer"]]
-					}
-				}
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			Shortcuts: { row: 1, col: 3, colSpan: 4, checks: {} },
 			Entrance: {
 				row: 1,
 				col: 7,
-				checks: {
-					"Defeat Koopa by first locked door": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
-					},
-					"Top of room guarded by Bob-omb": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
-						]
-					}
-				}
+				checks: {},
 			},
 			"Brick Blocks": {
 				row: 1,
 				col: 8,
 				checks: {
 					"Hidden block next to last brick block": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
-					}
-				}
+						reqs: ["Hammer", logic.canBreakBlocksAbove],
+					},
+					"[Multicoin Block] Third block from the left": {
+						reqs: ["Hammer", logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Shrink Stomp": {
 				row: 1,
 				col: 9,
 				checks: {
 					Chest: {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
-					}
-				}
+						reqs: ["Hammer"],
+					},
+				},
 			},
-			"Upgrade Block": {
+			"Lower Upgrade Block": {
 				row: 4,
 				col: 3,
 				checks: {
+					"[Upgrade] Super Block": {
+						reqs: ["Ultra Hammer", logic.canBreakBlocksAbove],
+					},
+				},
+			},
+			"Bridge Upgrade Block": {
+				row: 2,
+				col: 4,
+				checks: {
 					"[Coin Block] Left invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette", "Sushie"],
+							],
+						],
 					},
 					"[Coin Block] Middle invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette", "Sushie"],
+							],
+						],
 					},
 					"[Coin Block] Right invisible block": {
 						reqs: [
+							logic.canBreakBlocksAbove,
 							[
 								"Super Boots",
-								"Ultra Boots",
 								["Odd Key", "Bombette", "Sushie"],
-								["blue-house-open", "Bombette", "Sushie"]
-							]
-						]
-					}
-				}
+								[logic.blueHouseOpen, "Bombette", "Sushie"],
+							],
+						],
+					},
+					"[Upgrade] Super Block": {
+						reqs: [
+							logic.canBreakBlocksAbove,
+							[
+								"Super Boots",
+								["Odd Key", "Bombette", "Sushie"],
+								[logic.blueHouseOpen, "Bombette", "Sushie"],
+							],
+						],
+					},
+				},
 			},
-			"Chapter 3 Shortcut": { row: 2, col: 4, colSpan: 2, checks: {} },
-			"Tunnels Sushie Room": { row: 2, col: 6, checks: {} },
+			"Chapter 3 Shortcut": { row: 2, col: 5, colSpan: 2, checks: {} },
+			"Tunnels Sushie Room": { row: 2, col: 7, checks: {} },
 			"Above Spiny Room": {
 				row: 2,
-				col: 7,
+				col: 8,
 				checks: {
 					"Ultra Boots ? block": {
 						reqs: [
 							"Ultra Boots",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
-								"Sushie"
-							]
-						]
-					}
-				}
+								[logic.blueHouseOpen, "Bombette"],
+								"Sushie",
+							],
+						],
+					},
+				},
 			},
 			"Chapter 7 Door": {
 				row: 2,
-				col: 8,
+				col: 9,
 				rowSpan: 2,
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
 					},
 					"[Coin Block] ? Block 2": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
 					},
 					"[Coin Block] ? Block 3": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
 					},
 					"[Coin Block] ? Block 4": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
 					},
 					"[Coin Block] ? Block 5": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
-					}
-				}
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
+					},
+				},
 			},
-			"Chapter 7 Pipe": { row: 2, col: 9, checks: {} },
+			"Chapter 7 Pipe": {
+				row: 2,
+				col: 10,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: [
+							"Super Boots",
+							[
+								"Sushie",
+								["Odd Key", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
+							],
+						],
+					},
+				},
+			},
 			"Power Smash": {
 				row: 3,
 				col: 1,
 				checks: {
-					Chest: { reqs: [["Super Hammer", "Ultra Hammer"]] }
-				}
+					Chest: { reqs: ["Super Hammer", logic.canBreakBlocksAbove] },
+				},
 			},
 			Seesaw: { row: 3, col: 2, checks: {} },
 			Elevator: {
@@ -734,9 +957,18 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on far right ledge": {
-						reqs: [["Super Hammer", "Ultra Hammer"], "Parakarry"]
-					}
-				}
+						reqs: ["Super Hammer", "Parakarry"],
+					},
+				},
+			},
+			"Elevator Upgrade Block": {
+				row: 3,
+				col: 4,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Ultra Boots Room": {
 				row: 3,
@@ -747,14 +979,13 @@ const regionData: MapRegions = {
 							"Ultra Hammer",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
 							],
-							"Lakilester"
-						]
-					}
-				}
+							"Lakilester",
+						],
+					},
+				},
 			},
 			"Ultra Boots Blocks": {
 				row: 3,
@@ -763,40 +994,40 @@ const regionData: MapRegions = {
 					"[Coin Block] Left ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
-								"Sushie"
+								[logic.blueHouseOpen, "Bombette"],
+								"Sushie",
 							],
-							"Lakilester"
-						]
+							"Lakilester",
+						],
 					},
 					"[Coin Block] Right ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
-								"Sushie"
+								[logic.blueHouseOpen, "Bombette"],
+								"Sushie",
 							],
-							"Lakilester"
-						]
+							"Lakilester",
+						],
 					},
 					"Middle ? Block": {
 						reqs: [
 							"Ultra Boots",
-							["Super Hammer", "Ultra Hammer"],
+							"Super Hammer",
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
-								"Sushie"
+								[logic.blueHouseOpen, "Bombette"],
+								"Sushie",
 							],
-							"Lakilester"
-						]
-					}
-				}
+							"Lakilester",
+						],
+					},
+				},
 			},
 			"Spiny Room": {
 				row: 3,
@@ -806,93 +1037,93 @@ const regionData: MapRegions = {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
 							],
-							"Lakilester"
-						]
+							"Lakilester",
+						],
 					},
 					"Invisible block between first and second spiny": {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
 							],
-							"Lakilester"
-						]
+							"Lakilester",
+						],
 					},
 					"Invisible block next to visible ? block": {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
 							],
-							"Lakilester"
-						]
+							"Lakilester",
+						],
 					},
 					"[Coin Block] ? Block by stone block": {
 						reqs: [
 							[
 								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"],
+								[logic.blueHouseOpen, "Bombette"],
 								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"]
 							],
-							"Lakilester"
-						]
-					}
-				}
+							"Lakilester",
+						],
+					},
+				},
 			},
 			"Below Blue House": {
 				row: 3,
-				col: 9,
+				col: 10,
 				checks: {
 					"All items from Rip Cheato - 11 total, only first 6 (28 coins) can be progression":
 						{
 							reqs: [
 								[
 									"Odd Key",
-									"blue-house-open",
+									logic.blueHouseOpen,
 									["Super Boots", "Sushie", "Bombette"],
-									["Ultra Boots", "Sushie", "Bombette"]
-								]
-							]
-						}
-				}
-			}
-		}
+								],
+							],
+						},
+				},
+			},
+		},
 	},
 	"Pleasant Path": {
+		reqs: logic.canReachToadTown,
 		areas: {
 			"Outside Toad Town": {
 				row: 1,
 				col: 1,
 				checks: {
-					"[Coin Block] Left ? Block": { reqs: null },
-					"Middle ? Block": { reqs: null },
-					"Right ? Block": { reqs: null }
-				}
+					"[Coin Block] Left ? Block": { reqs: logic.canBreakBlocksAbove },
+					"Middle ? Block": { reqs: logic.canBreakBlocksAbove },
+					"Right ? Block": { reqs: logic.canBreakBlocksAbove },
+				},
 			},
-			"Switch Bridge #1": {
+			"Switch Bridge 1": {
 				row: 1,
 				col: 2,
 				checks: {
-					"? Block": { reqs: null },
+					"? Block": { reqs: logic.canBreakBlocksAbove },
 					"Kooper item": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
+						reqs: [logic.canShakeTree, "Kooper"],
 					},
 					"Item behind small fence": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
-					}
-				}
+						reqs: [logic.canShakeTree, logic.canClimbLedges],
+					},
+					"[Multicoin Block] Last block on the right": {
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove,
+						],
+					},
+				},
 			},
 			"Outside Koopa Village": {
 				row: 1,
@@ -900,131 +1131,119 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Middle of three pillars": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canFlipPanel,
+						],
 					},
 					"Item behind right-most pillar": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges],
 					},
 					"Break brick boxes (left, right, middle)": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
-					}
-				}
+						reqs: [
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canBreakGroundBlocks,
+							logic.canBreakBlocksAbove,
+						],
+					},
+				},
 			},
-			"Switch Bridge #2": {
+			"Switch Bridge 2": {
 				row: 1,
 				col: 4,
 				checks: {
 					"[Panel] Under 5 coins / items": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							logic.canFlipPanel,
+						],
 					},
 					"[Coinsanity] 5 items at start of room": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: [logic.canShakeTree, logic.canClimbLedges],
 					},
 					"Item on brick block": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Kooper", "Ultra Boots"]
-						]
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							["Kooper", "Ultra Boots"],
+						],
 					},
 					"Hidden ? block after bridge": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
-					}
-				}
+							logic.canShakeTree,
+							logic.canClimbLedges,
+							"Kooper",
+							logic.canBreakBlocksAbove,
+						],
+					},
+				},
 			},
 			"Path to Fortress": {
 				row: 1,
 				col: 5,
 				checks: {
 					"Item in first tree": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper"
-						]
-					}
-				}
-			}
-		}
+						reqs: [logic.canShakeTree, logic.canClimbLedges, "Kooper"],
+					},
+				},
+			},
+		},
 	},
 	"Koopa Village": {
+		reqs: [logic.canReachToadTown, logic.canShakeTree, logic.canClimbLedges],
 		areas: {
 			"Fuzzy Room": {
 				row: 1,
 				col: 2,
 				checks: {
 					"Item Fuzzies are holding": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
-					}
-				}
+						reqs: "Hammer",
+					},
+				},
 			},
 			"Behind Kooper's House": {
 				row: 2,
 				col: 2,
 				checks: {
 					"On tall stump": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Kooper", "Parakarry"]
-						]
-					}
-				}
+						reqs: [["Kooper", "Parakarry"]],
+					},
+				},
 			},
 			"Koopa Village West": {
 				row: 3,
 				col: 1,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null,
 					},
 					"[Panel] Left of tree": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Mort T.": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Mort T. (Koopa Village Inn)",
-							"Parakarry"
-						]
+						reqs: ["Mort T. (Koopa Village Inn)", "Parakarry"],
 					},
 					"[Letter] Koover 1 (Chain)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Koover 1 (Koopa Village Entrance)",
-							"Parakarry"
-						]
+						reqs: ["Koover 1 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Letter] Koover 2 (Chain)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Koover 2 (Koopa Village Entrance)",
-							"Parakarry"
-						]
+						reqs: ["Koover 2 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Koot] Far right bush after Koopa Koot requests his Wallet": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
 							"Koopa Tea",
-							"Luigi's Autograph"
-						]
+							"Luigi's Autograph",
+						],
 					},
 					"[Koot] Second bush from left after Koopa Koot requests his Glasses":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1039,22 +1258,22 @@ const regionData: MapRegions = {
 								"Eldstar",
 								"Bombette",
 								"Old Photo",
-								"Koopasta"
-							]
+								"Koopasta",
+							],
 						},
 					"Bottom bush on left side": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null,
 					},
 					"Third bush from the right": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null,
 					},
 					"[Foliage Coin] Far left bush": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null,
 					},
 					"[Foliage Coin] Second bush from the right": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"Koopa Village East": {
 				row: 3,
@@ -1063,70 +1282,35 @@ const regionData: MapRegions = {
 					"[Letter] Kolorado": { reqs: ["Kolorado", "Parakarry"] },
 					"[Koot] Talk to Kolorado's wife after starting Koopa Koot's first favor":
 						{
-							reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+							reqs: null,
 						},
-					"[Koot] [Koot Coin] Return Koopa Legends to Koopa Koot": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"], "Koopa Legends"]
+					"[Koot Coin] Return Koopa Legends to Koopa Koot": {
+						reqs: "Koopa Legends",
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Koopa Legends",
-							"Sleepy Sheep"
-						]
+					"[Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
+						reqs: ["Koopa Legends", "Sleepy Sheep"],
 					},
 					"[Koot] Give Koopa Koot a Sleepy Sheep (second item)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Koopa Legends",
-							"Sleepy Sheep"
-						]
+						reqs: ["Koopa Legends", "Sleepy Sheep"],
 					},
-					"[Koot] [Koot Coin] Return Koopa Koot's Tape": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							1,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape"
-						]
+					"[Koot Coin] Return Koopa Koot's Tape": {
+						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape"],
 					},
 					"[Koot] Give Koopa Koot Koopa Tea": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							1,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape",
-							"Koopa Tea"
-						]
+						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape", "Koopa Tea"],
 					},
-					"[Koot] [Koot Coin] Give Luigi's Autograph to Koopa Koot": {
+					"[Koot Coin] Give Luigi's Autograph to Koopa Koot": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							1,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape",
-							"Koopa Tea",
-							"Luigi's Autograph"
-						]
-					},
-					"[Koot] [Koot Coin] Return Koopa Koot's wallet": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
 							"Koopa Tea",
 							"Luigi's Autograph",
-							"Wallet"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Tasty Tonic": {
+					"[Koot Coin] Return Koopa Koot's wallet": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1134,12 +1318,10 @@ const regionData: MapRegions = {
 							"Koopa Tea",
 							"Luigi's Autograph",
 							"Wallet",
-							"Tasty Tonic"
-						]
+						],
 					},
-					"[Koot] Give Merluvlee's Autograph to Koopa Koot": {
+					"[Koot Coin] Give Koopa Koot a Tasty Tonic": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1148,13 +1330,24 @@ const regionData: MapRegions = {
 							"Luigi's Autograph",
 							"Wallet",
 							"Tasty Tonic",
-							"Merluvlee's Autograph"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
+					"[Koot] Give Merluvlee's Autograph to Koopa Koot": {
+						reqs: [
+							2,
+							"Koopa Legends",
+							"Sleepy Sheep",
+							"Tape",
+							"Koopa Tea",
+							"Luigi's Autograph",
+							"Wallet",
+							"Tasty Tonic",
+							"Merluvlee's Autograph",
+						],
+					},
+					"[Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
 								3,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1163,42 +1356,11 @@ const regionData: MapRegions = {
 								"Luigi's Autograph",
 								"Wallet",
 								"Tasty Tonic",
-								"Merluvlee's Autograph"
-							]
+								"Merluvlee's Autograph",
+							],
 						},
-					"[Koot] [Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
+					"[Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							3,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape",
-							"Koopa Tea",
-							"Luigi's Autograph",
-							"Wallet",
-							"Tasty Tonic",
-							"Merluvlee's Autograph",
-							"Life Shroom"
-						]
-					},
-					"[Koot] Give Koopa Koot a Life Shroom (second item)": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							3,
-							"Koopa Legends",
-							"Sleepy Sheep",
-							"Tape",
-							"Koopa Tea",
-							"Luigi's Autograph",
-							"Wallet",
-							"Tasty Tonic",
-							"Merluvlee's Autograph",
-							"Life Shroom"
-						]
-					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Nutty Cake": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1209,13 +1371,25 @@ const regionData: MapRegions = {
 							"Tasty Tonic",
 							"Merluvlee's Autograph",
 							"Life Shroom",
-							"Nutty Cake"
-						]
+						],
 					},
-					"[Koot] Talk to Koopa Koot after calming the Bob-ombs": {
+					"[Koot] Give Koopa Koot a Life Shroom (second item)": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							4,
+							3,
+							"Koopa Legends",
+							"Sleepy Sheep",
+							"Tape",
+							"Koopa Tea",
+							"Luigi's Autograph",
+							"Wallet",
+							"Tasty Tonic",
+							"Merluvlee's Autograph",
+							"Life Shroom",
+						],
+					},
+					"[Koot Coin] Give Koopa Koot a Nutty Cake": {
+						reqs: [
+							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
@@ -1226,13 +1400,10 @@ const regionData: MapRegions = {
 							"Merluvlee's Autograph",
 							"Life Shroom",
 							"Nutty Cake",
-							"Eldstar",
-							"Bombette"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot the Old Photo": {
+					"[Koot] Talk to Koopa Koot after calming the Bob-ombs": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1246,12 +1417,10 @@ const regionData: MapRegions = {
 							"Nutty Cake",
 							"Eldstar",
 							"Bombette",
-							"Old Photo"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot Koopasta": {
+					"[Koot Coin] Give Koopa Koot the Old Photo": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1266,13 +1435,11 @@ const regionData: MapRegions = {
 							"Eldstar",
 							"Bombette",
 							"Old Photo",
-							"Koopasta"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Return Koopa Koot's glasses": {
+					"[Koot Coin] Give Koopa Koot Koopasta": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							5,
+							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
@@ -1287,12 +1454,10 @@ const regionData: MapRegions = {
 							"Bombette",
 							"Old Photo",
 							"Koopasta",
-							"Glasses"
-						]
+						],
 					},
-					"[Koot] Give Koopa Koot a Lime": {
+					"[Koot Coin] Return Koopa Koot's glasses": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1309,12 +1474,10 @@ const regionData: MapRegions = {
 							"Old Photo",
 							"Koopasta",
 							"Glasses",
-							"Lime"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Kooky Cookie": {
+					"[Koot] Give Koopa Koot a Lime": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1332,13 +1495,11 @@ const regionData: MapRegions = {
 							"Koopasta",
 							"Glasses",
 							"Lime",
-							"Kooky Cookie"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot his package": {
+					"[Koot Coin] Give Koopa Koot a Kooky Cookie": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							6,
+							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
 							"Tape",
@@ -1356,12 +1517,10 @@ const regionData: MapRegions = {
 							"Glasses",
 							"Lime",
 							"Kooky Cookie",
-							"Package"
-						]
+						],
 					},
-					"[Koot] [Koot Coin] Give Koopa Koot a Coconut": {
+					"[Koot Coin] Give Koopa Koot his package": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1381,12 +1540,10 @@ const regionData: MapRegions = {
 							"Lime",
 							"Kooky Cookie",
 							"Package",
-							"Coconut"
-						]
+						],
 					},
-					"[Koot] Give Koopa Koot the Red Jar": {
+					"[Koot Coin] Give Koopa Koot a Coconut": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1407,17 +1564,38 @@ const regionData: MapRegions = {
 							"Kooky Cookie",
 							"Package",
 							"Coconut",
-							"Red Jar"
-						]
+						],
+					},
+					"[Koot] Give Koopa Koot the Red Jar": {
+						reqs: [
+							6,
+							"Koopa Legends",
+							"Sleepy Sheep",
+							"Tape",
+							"Koopa Tea",
+							"Luigi's Autograph",
+							"Wallet",
+							"Tasty Tonic",
+							"Merluvlee's Autograph",
+							"Life Shroom",
+							"Nutty Cake",
+							"Eldstar",
+							"Bombette",
+							"Old Photo",
+							"Koopasta",
+							"Glasses",
+							"Lime",
+							"Kooky Cookie",
+							"Package",
+							"Coconut",
+							"Red Jar",
+						],
 					},
 					"First bush on left": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
+						reqs: null,
 					},
 					"Give Kooper his shell": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper's Shell"
-						]
+						reqs: "Kooper's Shell",
 					},
 					"Give Artifact to Kolorado": {
 						reqs: [
@@ -1426,40 +1604,59 @@ const regionData: MapRegions = {
 								"Mamar",
 								["Bombette", "Parakarry"],
 								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+								"Ultra Hammer",
+							],
+						],
 					},
 					"Item on top of brick block on right (after defeating fuzzies)": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"[Foliage Coin] Far right bush": {
-						reqs: [["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]]
-					}
-				}
-			}
-		}
+						reqs: null,
+					},
+				},
+			},
+		},
 	},
 	"Koopa Bros. Fortress": {
+		reqs: [
+			logic.canReachToadTown,
+			logic.canShakeTree,
+			logic.canClimbLedges,
+			"Kooper",
+		],
 		areas: {
-			"Fortress Entrance": { row: 1, col: 2, rowSpan: 3, checks: {} },
+			"Fortress Entrance": {
+				row: 1,
+				col: 2,
+				rowSpan: 3,
+				checks: {
+					"Defeat Koopa by first locked door": {
+						reqs: null,
+					},
+					"Top of room guarded by Bob-omb": {
+						reqs: logic.multipleItemCheck("Fortress Key", 4),
+					},
+				},
+			},
 			Cannons: {
 				row: 1,
 				col: 3,
 				checks: {
 					"? Block behind bombable rock": {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
-						]
-					}
-				}
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 4)],
+					},
+				},
 			},
-			"Boss Room": { row: 1, col: 4, checks: {} },
+			"Boss Room": {
+				row: 1,
+				col: 4,
+				checks: {
+					Eldstar: {
+						reqs: chapterRewardReqs.Eldstar,
+					},
+				},
+			},
 			"Bomb Room": { row: 2, col: 3, rowSpan: 2, checks: {} },
 			"Kooper Puzzle Room": {
 				row: 2,
@@ -1467,25 +1664,15 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Left Jail Cell": {
-						reqs: [
-							"Kooper",
-							"Bombette",
-							"Fortress Key",
-							"Fortress Key",
-							"Fortress Key"
-						]
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 3)],
 					},
 					"Middle Jail Cell": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							"Fortress Key"
-						]
+						reqs: ["Bombette", "Fortress Key"],
 					},
 					"Right Jail Cell": {
-						reqs: ["Kooper", "Bombette", "Fortress Key"]
-					}
-				}
+						reqs: ["Bombette", "Fortress Key"],
+					},
+				},
 			},
 			"Staircase Room": { row: 2, col: 5, rowSpan: 3, checks: {} },
 			"Trap Room": { row: 2, col: 6, rowSpan: 2, colSpan: 2, checks: {} },
@@ -1494,31 +1681,27 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Inside chest on ledge from bombable wall on previous screen": {
-						reqs: ["Kooper", "Bombette"]
-					}
-				}
+						reqs: "Bombette",
+					},
+				},
 			},
 			"Outside Chest": {
 				row: 3,
 				col: 8,
 				checks: {
 					"Chest after bombable wall in trap room": {
-						reqs: ["Kooper", "Bombette", "Fortress Key", "Fortress Key"]
-					}
-				}
+						reqs: ["Bombette", logic.multipleItemCheck("Fortress Key", 2)],
+					},
+				},
 			},
 			Firebars: {
 				row: 4,
 				col: 3,
 				checks: {
 					"Item at end of room": {
-						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							"Fortress Key"
-						]
-					}
-				}
+						reqs: ["Bombette", "Fortress Key"],
+					},
+				},
 			},
 			"The Pit": { row: 4, col: 4, checks: {} },
 			Jail: {
@@ -1527,107 +1710,54 @@ const regionData: MapRegions = {
 				checks: {
 					Bombette: {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"],
-							"Kooper",
-							[["Fortress Key", "Bombette"], "Fortress Key", "Fortress Key"]
-						]
-					}
-				}
+							[
+								["Fortress Key", "Bombette"],
+								logic.multipleItemCheck("Fortress Key", 2),
+							],
+						],
+					},
+				},
 			},
-			"Fortress Save Block": { row: 4, col: 7, checks: {} }
-		}
+			"Fortress Save Block": { row: 4, col: 7, checks: {} },
+		},
 	},
 	"Mt. Rugged": {
+		reqs: [
+			[
+				[logic.canReachToadTown, ["Bombette", logic.mtRuggedOpen]],
+				[logic.desertAccess, logic.canClimbLedges],
+			],
+		],
 		areas: {
 			"Letter 3": {
 				row: 1,
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block left after taking spring": {
-						reqs: [
-							[
-								["starting-location:DryDryOutpost", "Hammer"],
-								["starting-location:DryDryOutpost", "Kooper"],
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakGroundBlocks],
 					},
 					"[Coinsanity] Circle of items across Parakarry gap": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"],
 					},
 					"[Coinsanity] 2 items on ground below Parakarry gap": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"? Block by Cleft when entering room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
 					},
 					"Chest in cave": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"Item across Parakarry gap": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"],
 					},
 					"? Block past Cleft after spring": {
-						reqs: [
-							[
-								["starting-location:DryDryOutpost", "Hammer"],
-								["starting-location:DryDryOutpost", "Kooper"],
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, logic.canBreakGroundBlocks],
 					},
 					"Item on far right ledge": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: logic.canClimbLedges,
+					},
+				},
 			},
 			"Letter 1": {
 				row: 1,
@@ -1635,39 +1765,15 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] By wall near end of slide": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canClimbLedges, logic.canFlipPanel],
 					},
 					"Item on first ledge": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Kooper", "Parakarry"]
-						]
+						reqs: [logic.canClimbLedges, ["Kooper", "Parakarry"]],
 					},
 					"Item on second ledge": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
-					}
-				}
+						reqs: [logic.canClimbLedges, "Parakarry"],
+					},
+				},
 			},
 			"Seed Room": {
 				row: 1,
@@ -1675,464 +1781,191 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Bub-ulb": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Parakarry"
-						]
+						reqs: [logic.canClimbLedges, "Parakarry"],
 					},
 					"Item on support beam when falling through opening at the top": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: logic.canClimbLedges,
+					},
+				},
 			},
 			Buzzar: {
 				row: 1,
 				col: 5,
 				checks: {
 					"Item on ground by Cleft": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: [logic.canClimbLedges, ["Parakarry", logic.desertAccess]],
+					},
+				},
 			},
 			Station: {
 				row: 2,
 				col: 1,
 				checks: {
 					"Item in top most bush": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null,
 					},
 					"Give three letters to Parakarry": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, has3Letters],
 					},
 					"[Foliage Coin] All 3 other bushes": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: null,
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Super Hammer", logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			Whacka: {
 				row: 2,
 				col: 2,
 				checks: {
 					"[Coinsanity] Three items on slide": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"Hit Whacka": {
-						reqs: [
-							[
-								["starting-location:DryDryOutpost", "Hammer"],
-								["Bombette", "Hammer"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: [logic.canClimbLedges, "Hammer"],
 					},
 					"? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
-			}
-		}
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
+					},
+				},
+			},
+		},
 	},
 	"Dry Dry Desert": {
+		reqs: logic.desertAccess,
 		areas: {
+			"NW Two ? Blocks": {
+				row: 1,
+				col: 2,
+				checks: {
+					"[Coin Block] Right ? Block": {
+						reqs: logic.canBreakGroundBlocks,
+					},
+					"Left ? Block": {
+						reqs: logic.canBreakGroundBlocks,
+					},
+				},
+			},
 			"Two ? Blocks": {
 				row: 2,
 				col: 6,
 				checks: {
-					"[Coin Block] Right ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					},
-					"Left ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					},
 					"[Coin Block] Left ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"Right ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					}
-				}
+						reqs: logic.canBreakGroundBlocks,
+					},
+					"[Multicoin Block] Center of room": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Dry Dry Ruins": {
 				row: 1,
 				col: 4,
 				checks: {
 					"[Trade] Give Nutty Cake to Trading Event Toad": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							3
-						]
-					}
-				}
+						reqs: 3,
+					},
+				},
 			},
 			"Pokeys Room": {
 				row: 1,
 				col: 7,
 				checks: {
 					"Behind cactus at top of room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
-			"Northeast Tree": {
+			"NE Tree": {
 				row: 1,
 				col: 8,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+					"[Multicoin Block] Block near tree": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Thunder Rage": {
 				row: 2,
 				col: 2,
 				checks: {
 					"Hidden block above rock on right side": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Hammer Block": {
 				row: 3,
 				col: 2,
 				checks: {
 					"Hammer yellow block once": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove],
 					},
 					"Hammer yellow block five times": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove],
 					},
 					"Hammer yellow block ten times": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					}
-				}
+						reqs: [logic.canBreakGroundBlocks, logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Five ? Blocks": {
 				row: 3,
 				col: 4,
 				checks: {
 					"[Coin Block] Top-Left ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"[Coin Block] Top-Right ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"[Coin Block] Bottom-Left ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"[Coin Block] Bottom-Right ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"Center ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					}
-				}
+						reqs: logic.canBreakGroundBlocks,
+					},
+				},
 			},
 			"Runaway Pay": {
 				row: 3,
 				col: 6,
 				checks: {
 					"Hidden block in the middle of three trees": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
+			},
+			"Seven Brick Blocks": {
+				row: 3,
+				col: 7,
+				checks: {
+					"[Multicoin Block] Second from right": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+					"[Multicoin Block] Third from right": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			Tree: {
 				row: 3,
 				col: 8,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"Desert Save Block": { row: 4, col: 1, checks: {} },
 			"Kolorado's Camp": {
@@ -2140,115 +1973,66 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"Tree at camp location after saving Mamar": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Mamar",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: ["Mamar", logic.canShakeTree],
+					},
+				},
+			},
+			"South of Camp": {
+				row: 5,
+				col: 2,
+				checks: {
+					"[Multicoin Block] Center block": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Stone Cactus": {
 				row: 4,
 				col: 5,
 				checks: {
 					"[Panel] Below stone cactus": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: logic.canFlipPanel,
+					},
+				},
 			},
 			Mouse: {
 				row: 4,
 				col: 6,
 				checks: {
 					"[Letter] Nomadimouse": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Nomadimouse",
-							"Parakarry"
-						]
+						reqs: ["Nomadimouse", "Parakarry"],
 					},
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
-			"Far Left Tree": { row: 4, col: 7, checks: {} },
+			"Far Left Tree": {
+				row: 4,
+				col: 7,
+				checks: {
+					"[Foliage Coin] Far left tree": {
+						reqs: logic.canShakeTree,
+					},
+				},
+			},
 			"Outside Outpost": {
 				row: 4,
 				col: 8,
 				checks: {
 					"Far right tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Second tree from left": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Fourth tree from right": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"Dry Dry Outpost West": {
 				row: 4,
@@ -2256,97 +2040,34 @@ const regionData: MapRegions = {
 				checks: {
 					"[Shop] 3 randomized items in Shop (password items are guaranteed vanilla)":
 						{
-							reqs: [
-								[
-									"starting-location:DryDryOutpost",
-									["Bombette", "Parakarry"],
-									"Super Hammer",
-									"Ultra Hammer"
-								]
-							]
+							reqs: null,
 						},
 					"[Letter] Shop (Chain)": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Dry Dry Shop",
-							"Parakarry"
-						]
+						reqs: ["Dry Dry Shop", "Parakarry"],
 					},
 					"[Koot] Buy Dusty Hammer, Dried Pasta, Dusty Hammer, Dried Shroom": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null,
 					},
 					"Turn in Lyrics at far right house": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Lyrics"
-						]
+						reqs: "Lyrics",
 					},
 					"[Foliage Coin] Red tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"Dry Dry Outpost East": {
 				row: 4,
 				col: 10,
 				checks: {
 					"[Panel] On rooftops": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Boots", logic.canFlipPanel],
 					},
 					"[Letter] Mr. E (Chain)": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Mr. E",
-							"Parakarry"
-						]
+						reqs: ["Mr. E", "Parakarry"],
 					},
 					"[Koot] Talk to Merlee after Merluvlee requests Crystal Ball": {
 						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer"],
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2354,239 +2075,128 @@ const regionData: MapRegions = {
 							"Koopa Tea",
 							"Luigi's Autograph",
 							"Wallet",
-							"Tasty Tonic"
-						]
+							"Tasty Tonic",
+						],
 					},
 					"Item on rooftops": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: "Boots",
 					},
 					"Talk to Moustafa after buying Dried Shroom + Dusty Hammer": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: "Boots",
+					},
+				},
 			},
 			"? Block": {
 				row: 7,
 				col: 6,
 				checks: {
 					"[Coin Block] ? Block in middle of room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
-					}
-				}
+						reqs: logic.canBreakGroundBlocks,
+					},
+				},
+			},
+			"Green Cactus": {
+				row: 5,
+				col: 5,
+				checks: {
+					"[Coin Block] ? Block in middle of room": {
+						reqs: logic.canBreakGroundBlocks,
+					},
+				},
+			},
+			"Three Brick Blocks": {
+				row: 6,
+				col: 4,
+				checks: {
+					"[Multicoin Block] Center block": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Spin Attack": {
 				row: 5,
 				col: 7,
 				checks: {
 					"Item on ledge (take Tweester in room down left from here)": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null,
 					},
 					"Item on brick block, requires Kooper or Ultra Boots": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Kooper", "Ultra Boots"]
-						]
-					}
-				}
+						reqs: [[["Kooper", logic.canClimbLedges], "Ultra Boots"]],
+					},
+				},
 			},
 			"Life Shroom": {
 				row: 5,
 				col: 8,
 				checks: {
 					"[Coin Block] ? Block in middle of room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots",
-								"Bombette",
-								"Kooper"
-							]
-						]
+						reqs: logic.canBreakGroundBlocks,
 					},
 					"Hidden block directly above other ? Block": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: "Boots",
 					},
 					"[Foliage Coin] Bottom tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"Before Oasis": {
 				row: 6,
 				col: 7,
 				checks: {
 					"Item behind bush on right side of room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
+						reqs: null,
 					},
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+					"[Multicoin Block] Block near tree": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			Oasis: {
 				row: 6,
 				col: 8,
 				checks: {
 					"Lemon Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Lime Tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Bottom right tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+					"[Upgrade] Super Block": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Attack FX C": {
 				row: 7,
 				col: 3,
 				checks: {
 					"Hidden block in middle of room": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							]
-						]
-					}
-				}
+						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"Six Multicoin Blocks": {
 				row: 7,
 				col: 8,
 				checks: {
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
-			}
+						reqs: logic.canShakeTree,
+					},
+					"[Multicoin Block] Six Multicoin Blocks": {
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
+			},
 		},
 		blanks: [
 			{ row: 1, col: 3 },
@@ -2599,116 +2209,80 @@ const regionData: MapRegions = {
 			{ row: 2, col: 8 },
 			{ row: 3, col: 3 },
 			{ row: 3, col: 5 },
-			{ row: 3, col: 7 },
 			{ row: 4, col: 3 },
 			{ row: 4, col: 4 },
-			{ row: 5, col: 2 },
 			{ row: 5, col: 3 },
 			{ row: 5, col: 4 },
 			{ row: 5, col: 6 },
 			{ row: 6, col: 2 },
 			{ row: 6, col: 3 },
-			{ row: 6, col: 4 },
 			{ row: 6, col: 5 },
 			{ row: 6, col: 6 },
 			{ row: 7, col: 2 },
 			{ row: 7, col: 4 },
 			{ row: 7, col: 5 },
-			{ row: 7, col: 7 }
-		]
+			{ row: 7, col: 7 },
+		],
 	},
 	"Dry Dry Ruins": {
+		reqs: [logic.desertAccess, "Pulse Stone"],
 		areas: {
 			"Pokey Hall": {
 				row: 1,
 				col: 3,
+				rowSpan: 2,
 				checks: {
 					"Inside middle coffin": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone"
-						]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
-			"Sand Switch Room": {
+			"Sand Switch Room 1": {
+				row: 1,
+				col: 4,
+				checks: {},
+			},
+			"Sand Switch Room 2": {
 				row: 1,
 				col: 6,
 				checks: {
 					"Bottom right corner after lowering sand": {
-						reqs: ["Bombette", "Parakarry", "Pulse Stone", "Ruins Key"]
-					}
-				}
+						reqs: [logic.canClimbLedges, "Bombette", "Parakarry", "Ruins Key"],
+					},
+				},
 			},
-			Hub: { row: 3, col: 3, checks: {} },
+			"West Hub": { row: 3, col: 3, rowSpan: 2, checks: {} },
+			"East Hub": { row: 1, col: 5, rowSpan: 3, checks: {} },
 			"Ruins Entrance": { row: 2, col: 2, checks: {} },
 			"Sand Room": {
-				row: 2,
-				col: 3,
-				checks: {
-					"Item on elevated platform": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Ruins Key"
-						]
-					}
-				}
-			},
-			"Key Room": {
 				row: 2,
 				col: 4,
 				checks: {
 					"Item on elevated platform": {
-						reqs: ["Bombette", "Parakarry", "Pulse Stone", "Ruins Key"]
-					}
-				}
+						reqs: logic.canClimbLedges,
+					},
+				},
+			},
+			"Key Room": {
+				row: 2,
+				col: 6,
+				checks: {
+					"Item on elevated platform": {
+						reqs: [logic.canClimbLedges, "Bombette", "Parakarry", "Ruins Key"],
+					},
+				},
 			},
 			"Super Hammer Room": {
 				row: 3,
 				col: 2,
 				checks: {
 					"Item in chest behind wall on ledge above Super Hammer chest": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
-						]
+						reqs: ["Parakarry", logic.multipleItemCheck("Ruins Key", 3)],
 					},
 					"Super Hammer chest": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								"Bombette",
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
-						]
-					}
-				}
+						reqs: ["Parakarry", logic.multipleItemCheck("Ruins Key", 3)],
+					},
+				},
 			},
 			"Pokey Room": {
 				row: 3,
@@ -2716,121 +2290,163 @@ const regionData: MapRegions = {
 				checks: {
 					"Defeat all three Pokey's after hitting ? Block": {
 						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Ruins Key",
-							"Ruins Key"
-						]
+							logic.canClimbLedges,
+							logic.multipleItemCheck("Ruins Key", 2),
+						],
 					},
 					"On ledge behind hammer block": {
 						reqs: [
+							logic.canClimbLedges,
+							"Super Hammer",
+							logic.multipleItemCheck("Ruins Key", 2),
+						],
+					},
+				},
+			},
+			"Chomp Room 2": {
+				row: 3,
+				col: 6,
+				checks: {
+					"Item on pedestal": {
+						reqs: [logic.canClimbLedges, "Super Hammer", "Ruins Key"],
+					},
+				},
+			},
+			"Chomp Room 3": {
+				row: 5,
+				col: 7,
+				checks: {
+					"Item on pedestal": {
+						reqs: [
 							[
-								"starting-location:DryDryOutpost",
+								logic.startingLocation("Dry Dry Outpost"),
 								["Bombette", "Parakarry"],
 								"Super Hammer",
-								"Ultra Hammer"
+								"Ultra Hammer",
 							],
 							"Pulse Stone",
 							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
-						]
-					}
-				}
+							logic.multipleItemCheck("Ruins Key", 4),
+						],
+					},
+				},
 			},
-			"Chomp Room": {
+			"Chomp Room 1": {
 				row: 7,
 				col: 1,
 				checks: {
 					"Item on pedestal": {
 						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Parakarry",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
-						]
-					}
-				}
+							"Bombette",
+							logic.canClimbLedges,
+							"Super Hammer",
+							logic.multipleItemCheck("Ruins Key", 3),
+						],
+					},
+				},
 			},
-			"Ruins Spring Room": { row: 4, col: 2, checks: {} },
-			"Puzzle Room": { row: 4, col: 3, checks: {} },
-			"Puzzle Solution Room": { row: 4, col: 5, checks: {} },
+			"Ruins Spring Room": {
+				row: 4,
+				col: 2,
+				rowSpan: 4,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: [
+							"Bombette",
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove,
+							logic.multipleItemCheck("Ruins Key", 3),
+						],
+					},
+				},
+			},
+			"Puzzle Room": { row: 4, col: 4, rowSpan: 2, colSpan: 2, checks: {} },
+			"Puzzle Solution Room": { row: 4, col: 6, checks: {} },
 			"Wall Stairs": {
 				row: 5,
-				col: 4,
+				col: 6,
+				rowSpan: 3,
 				checks: {
 					"Item on ledge, reachable by breaking block and hitting switch": {
 						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							"Pulse Stone",
-							"Ruins Key",
-							"Ruins Key",
-							"Ruins Key"
-						]
-					}
-				}
+							logic.canClimbLedges,
+							logic.multipleItemCheck("Ruins Key", 3),
+						],
+					},
+				},
 			},
 			"Heart Block": { row: 6, col: 4, checks: {} },
-			"Boss Room": { row: 6, col: 5, checks: {} },
-			"Beetle Room": { row: 7, col: 2, checks: {} }
-		}
+			"Boss Room": {
+				row: 6,
+				col: 5,
+				checks: {
+					Mamar: {
+						reqs: chapterRewardReqs.Mamar,
+					},
+				},
+			},
+			"Beetle Room": { row: 7, col: 3, colSpan: 3, checks: {} },
+		},
 	},
 	"Forever Forest": {
+		reqs: [logic.canReachToadTown, [logic.forestOpen, "Forest Pass"]],
 		areas: {
 			"HP Plus": {
-				row: 2,
+				row: 1,
 				col: 5,
-				checks: { "? Block": { reqs: null } }
+				checks: { "? Block": { reqs: null } },
 			},
-			"Oaklie Room": { row: 2, col: 7, checks: {} },
-			"Forest Room 2": { row: 2, col: 9, checks: {} },
-			"Forest Room 5": { row: 4, col: 5, checks: {} },
+			"Oaklie Room": { row: 1, col: 7, checks: {} },
+			"Forest Room 2": { row: 1, col: 9, checks: {} },
+			"Forest Room 5": { row: 3, col: 5, checks: {} },
 			"Forest Seed Room": {
-				row: 4,
+				row: 3,
 				col: 7,
-				checks: { "Bub-ulb": { reqs: null } }
+				checks: { "Bub-ulb": { reqs: null } },
 			},
-			"Forest Entrance": { row: 4, col: 9, checks: {} },
+			"Forest Entrance": { row: 3, col: 9, checks: {} },
 			"FP Plus": {
-				row: 6,
+				row: 5,
 				col: 1,
-				checks: { "? Block": { reqs: null } }
+				checks: { "? Block": { reqs: null } },
 			},
-			"Forest Room 7": { row: 6, col: 3, checks: {} },
-			"Forest Room 6": { row: 6, col: 5, checks: {} }
-		}
+			"Forest Room 7": { row: 5, col: 3, checks: {} },
+			"Forest Room 6": { row: 5, col: 5, checks: {} },
+		},
+		labels: [
+			{ row: 3, col: 3, content: "Boo's Mansion" },
+			{ row: 5, col: 9, content: "Toad Town" },
+			{ row: 1, col: 8, content: "◀" },
+			{ row: 2, col: 5, content: "▲" },
+			{ row: 2, col: 7, content: "▼" },
+			{ row: 2, col: 9, content: "▲" },
+			{ row: 3, col: 6, content: "◀" },
+			{ row: 4, col: 3, content: "▲" },
+			{ row: 4, col: 5, content: "▼" },
+			{ row: 4, col: 9, content: "▲" },
+			{ row: 5, col: 2, content: "◀" },
+			{ row: 5, col: 4, content: "◀" },
+		],
 	},
 	"Boo's Mansion": {
+		reqs: [
+			logic.canReachToadTown,
+			[
+				[logic.forestOpen, "Forest Pass"],
+				[logic.canClimbLedges, "Super Boots"],
+			],
+		],
 		areas: {
 			"Bow's Room": {
 				row: 1,
 				col: 1,
 				colSpan: 4,
-				checks: { Bow: { reqs: ["Boo's Portrait"] } }
+				checks: { Bow: { reqs: ["Boots", "Boo's Portrait"] } },
 			},
 			"Weight Room": {
 				row: 2,
 				col: 1,
-				checks: { "Chest guarded by Boo": { reqs: ["Record"] } }
+				checks: { "Chest guarded by Boo": { reqs: ["Boots", "Record"] } },
 			},
 			"Main Room": {
 				row: 2,
@@ -2839,18 +2455,19 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Panel] By couch": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: ["Boots", logic.canFlipPanel],
 					},
 					"[Letter] Franky (Chain)": {
 						reqs: [
+							"Boots",
 							"Franky (Boo's Mansion Entrance)",
 							"Boo's Portrait",
-							"Parakarry"
-						]
+							"Parakarry",
+						],
 					},
 					"[Koot] Talk to Franky after Koopa Koot requests the Old Photo": {
 						reqs: [
-							["Hammer", "Super Hammer", "Ultra Hammer"],
+							"Boots",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2863,20 +2480,20 @@ const regionData: MapRegions = {
 							"Life Shroom",
 							"Nutty Cake",
 							"Eldstar",
-							"Bombette"
-						]
-					}
-				}
+							"Bombette",
+						],
+					},
+				},
 			},
 			"Record Room": {
 				row: 2,
 				col: 4,
 				checks: {
 					"[Panel] Middle of room": {
-						reqs: [["Super Boots", "Ultra Boots", "Ultra Hammer"]]
+						reqs: ["Boots", logic.canFlipPanel],
 					},
-					"Open middle cabinets and do minigame": { reqs: null }
-				}
+					"Open middle cabinets and do minigame": { reqs: "Boots" },
+				},
 			},
 			"Trap Chest": {
 				row: 3,
@@ -2885,15 +2502,12 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] In front of grandfather clock downstairs": {
 						reqs: [
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+							"Boots",
+							["Weight", ["Super Boots", "Bombette"]],
+							logic.canFlipPanel,
+						],
+					},
+				},
 			},
 			"Pixel Mario Room": {
 				row: 3,
@@ -2901,21 +2515,21 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"Left crate on right side of room": {
-						reqs: [["Super Boots", "Ultra Boots"]]
+						reqs: "Super Boots",
 					},
 					"Right crate on right side of room under other crate": {
-						reqs: [["Super Boots", "Ultra Boots"]]
-					}
-				}
+						reqs: "Super Boots",
+					},
+				},
 			},
 			"Outside Boo's Mansion": {
 				row: 4,
 				col: 2,
 				colSpan: 2,
 				checks: {
-					"? Block before gate": { reqs: null },
-					"Right bush before Gusty Gulch": { reqs: null }
-				}
+					"? Block before gate": { reqs: logic.canBreakBlocksAbove },
+					"Right bush before Gusty Gulch": { reqs: null },
+				},
 			},
 			Library: {
 				row: 5,
@@ -2923,53 +2537,38 @@ const regionData: MapRegions = {
 				colSpan: 3,
 				checks: {
 					"Item on right bookshelf": {
-						reqs: [["Super Boots", "Ultra Boots"], "Parakarry"]
+						reqs: ["Super Boots", "Parakarry"],
 					},
-					"Bottom crate": { reqs: [["Super Boots", "Ultra Boots"]] }
-				}
+					"Bottom crate": { reqs: "Super Boots" },
+				},
 			},
 			"Above Shop": {
 				row: 6,
 				col: 1,
 				checks: {
 					"Right crate on left side of room": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"]
-						]
-					}
-				}
+						reqs: ["Super Boots", ["Weight", "Bombette"]],
+					},
+				},
 			},
 			"Super Boots Room": {
 				row: 6,
 				col: 2,
 				checks: {
 					"Super Boots chest": {
-						reqs: [
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							]
-						]
+						reqs: ["Boots", ["Weight", ["Super Boots", "Bombette"]]],
 					},
 					"[Panel] On left near Boo": {
 						reqs: [
-							["Super Boots", "Ultra Boots", "Ultra Hammer"],
-							[
-								"Weight",
-								["Super Boots", "Bombette"],
-								["Ultra Boots", "Bombette"]
-							]
-						]
+							"Boots",
+							logic.canFlipPanel,
+							["Weight", ["Super Boots", "Bombette"]],
+						],
 					},
 					"Bottom left crate": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"]
-						]
-					}
-				}
+						reqs: ["Super Boots", ["Weight", "Bombette"]],
+					},
+				},
 			},
 			Shop: {
 				row: 7,
@@ -2977,51 +2576,56 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							["Super Boots", "Ultra Boots"],
-							["Weight", "Bombette"],
-							"Boo's Portrait"
-						]
+						reqs: ["Super Boots", ["Weight", "Bombette"], "Boo's Portrait"],
 					},
 					"[Letter] Igor": {
 						reqs: [
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
 							["Weight", "Bombette"],
 							"Igor (Boo's Mansion Shop)",
-							"Parakarry"
-						]
-					}
-				}
-			}
-		}
+							"Parakarry",
+						],
+					},
+				},
+			},
+		},
 	},
 	"Gusty Gulch": {
+		reqs: [
+			logic.canReachToadTown,
+			[[logic.forestOpen, "Forest Pass"], "Super Boots"],
+			"Boots",
+			"Boo's Portrait",
+		],
 		areas: {
 			Gate: {
 				row: 1,
 				col: 1,
 				checks: {
 					"[Panel] Near gate": {
-						reqs: [
-							"Boo's Portrait",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: logic.canFlipPanel,
+					},
+				},
 			},
-			Windmill: { row: 1, col: 2, checks: {} },
+			Windmill: {
+				row: 1,
+				col: 2,
+				checks: {
+					Skolar: {
+						reqs: chapterRewardReqs.Skolar,
+					},
+				},
+			},
 			"Village 1": {
 				row: 1,
 				col: 3,
 				checks: {
 					"[Coin Block] Block in far right house": {
-						reqs: ["Boo's Portrait"]
+						reqs: null,
 					},
 					"[Koot] Talk to Boo near Save Block after Koopa Koot requests a Package":
 						{
 							reqs: [
-								["Hammer", "Super Hammer", "Ultra Hammer"],
-								"Boo's Portrait",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -3039,10 +2643,10 @@ const regionData: MapRegions = {
 								"Koopasta",
 								"Glasses",
 								"Lime",
-								"Kooky Cookie"
-							]
-						}
-				}
+								"Kooky Cookie",
+							],
+						},
+				},
 			},
 			"Village 2": { row: 1, col: 4, checks: {} },
 			"Gulch 1": {
@@ -3050,598 +2654,428 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Coin Block] First ? Block": {
-						reqs: ["Boo's Portrait"]
+						reqs: null,
 					},
 					"[Coin Block] Upper ? Block near goomba": {
-						reqs: ["Boo's Portrait"]
+						reqs: null,
 					},
 					"Item on ledge (use Kooper)": {
-						reqs: ["Boo's Portrait", "Kooper"]
+						reqs: "Kooper",
 					},
 					"? Block in middle near goomba": {
-						reqs: ["Boo's Portrait"]
+						reqs: null,
 					},
-					"Item in front of log": { reqs: ["Boo's Portrait"] }
-				}
+					"Item in front of log": { reqs: null },
+				},
 			},
 			"Gulch 2": {
 				row: 1,
 				col: 6,
 				checks: {
 					"[Coin Block] ? Block by exit": {
-						reqs: ["Boo's Portrait", "Parakarry"]
+						reqs: "Parakarry",
 					},
-					"? Block by goomba": {
-						reqs: ["Boo's Portrait", "Parakarry"]
+					"? Block by Goomba": {
+						reqs: "Parakarry",
 					},
 					"Item behind rock near exit": {
-						reqs: ["Boo's Portrait", "Parakarry"]
-					}
-				}
+						reqs: "Parakarry",
+					},
+					"[Multicoin Block] Near exit": {
+						reqs: "Parakarry",
+					},
+				},
 			},
-			"Outside Tubba's Castle": { row: 1, col: 7, checks: {} }
-		}
+			"Outside Tubba's Castle": { row: 1, col: 7, checks: {} },
+		},
 	},
 	"Tubba's Castle": {
+		reqs: [
+			logic.canReachToadTown,
+			[[logic.forestOpen, "Forest Pass"], "Super Boots"],
+			"Boots",
+			"Boo's Portrait",
+			"Parakarry",
+		],
 		areas: {
 			"Sleeping Clubba's": {
 				row: 1,
 				col: 3,
 				checks: {
 					"Item at end of hall": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							"Tubba Castle Key"
-						]
-					}
-				}
+						reqs: logic.multipleItemCheck("Tubba Castle Key", 2),
+					},
+				},
 			},
-			Stairwell: {
+			"Stairwell 1": {
 				row: 6,
 				col: 1,
+				rowSpan: 2,
+				checks: { "[Upgrade] Super Block": { reqs: null } },
+			},
+			"Stairwell 3": {
+				row: 2,
+				col: 1,
+				rowSpan: 3,
 				checks: {
 					"? Block at bottom of staircase": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							"Tubba Castle Key"
-						]
-					}
-				}
+						reqs: logic.multipleItemCheck("Tubba Castle Key", 2),
+					},
+				},
 			},
-			"Tubba Chase Room": { row: 2, col: 2, checks: {} },
+			"Tubba Chase Room": { row: 2, col: 2, colSpan: 2, checks: {} },
 			"Castle Save Block": { row: 2, col: 4, checks: {} },
-			"Main Hall": { row: 2, col: 5, checks: {} },
+			"Main Hall": { row: 2, col: 5, rowSpan: 5, checks: {} },
 			"Tubba's Bedroom": { row: 2, col: 6, checks: {} },
 			"Behind Clock": {
 				row: 3,
-				col: 1,
+				col: 2,
 				checks: {
 					"[Coinsanity] 6 items on bed": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
+						reqs: "Tubba Castle Key",
 					},
 					"Behind wall on shelf at left side of room": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
-					}
-				}
+						reqs: "Tubba Castle Key",
+					},
+				},
 			},
 			"Spike Room": {
 				row: 3,
-				col: 2,
+				col: 3,
 				checks: {
 					Chest: {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							["Bow", "Lakilester"]
-						]
-					}
-				}
+						reqs: ["Tubba Castle Key", ["Bow", "Lakilester"]],
+					},
+				},
 			},
-			"Floor Panel Room": { row: 3, col: 3, checks: {} },
-			"Above Table": { row: 4, col: 1, checks: {} },
-			"Left Hall": { row: 6, col: 3, checks: {} },
-			"Right Hall / Stairwell": { row: 4, col: 4, checks: {} },
+			"Floor Panel Room": { row: 3, col: 4, checks: {} },
+			"Above Table": { row: 4, col: 2, checks: {} },
+			"Left Hall 1": { row: 6, col: 3, colSpan: 2, checks: {} },
+			"Left Hall 2": { row: 4, col: 3, colSpan: 2, checks: {} },
+			"Right Hall / Stairwell": { row: 4, col: 6, rowSpan: 3, checks: {} },
 			Study: {
 				row: 5,
 				col: 3,
 				checks: {
-					"On table": { reqs: ["Boo's Portrait", "Parakarry"] }
-				}
+					"On table": { reqs: null },
+				},
 			},
 			"Spring Room": {
 				row: 5,
 				col: 4,
 				checks: {
 					"On left side, break panels in room above behind bombable wall": {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							"Tubba Castle Key",
-							"Bombette",
-							["Super Boots", "Ultra Boots"]
-						]
-					}
-				}
+						reqs: ["Tubba Castle Key", "Bombette", "Super Boots"],
+					},
+				},
 			},
 			Table: {
 				row: 6,
 				col: 2,
 				checks: {
 					"On table, fall down from above": {
-						reqs: ["Boo's Portrait", "Parakarry", "Tubba Castle Key"]
-					}
-				}
+						reqs: "Tubba Castle Key",
+					},
+				},
 			},
 			"Basement Chest": {
 				row: 7,
-				col: 1,
+				col: 2,
 				checks: {
 					Chest: {
-						reqs: [
-							"Boo's Portrait",
-							"Parakarry",
-							["Super Boots", "Ultra Boots"]
-						]
-					}
-				}
-			}
-		}
+						reqs: "Super Boots",
+					},
+				},
+			},
+		},
 	},
 	"Shy Guy's Toybox": {
+		reqs: [logic.canReachToadTown, logic.toyboxAccess],
 		areas: {
 			Playroom: {
 				row: 1,
 				col: 1,
 				checks: {
-					"Left hidden block": { reqs: [["Bow", "toybox-open"]] },
-					"Right hidden block": { reqs: [["Bow", "toybox-open"]] },
+					"Left hidden block": { reqs: logic.canBreakBlocksAbove },
+					"Right hidden block": { reqs: logic.canBreakBlocksAbove },
 					"Items held by Shy Guys (all of them)": {
-						reqs: [["Bow", "toybox-open"]]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"Anti Guy": {
 				row: 1,
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block on left side": {
-						reqs: [["Bow", "toybox-open"]]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"Anti Guy Chest (in logic if you can make a Lemon Candy [Lemon + Cake Mix])":
 						{
-							reqs: [["Bow", "toybox-open"]]
+							reqs: null,
 						},
 					"Hidden block on right side": {
-						reqs: [["Bow", "toybox-open"]]
-					}
-				}
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Blue Station": {
 				row: 1,
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							["Bow", "toybox-open"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel,
 					},
 					"Hidden block on right side": {
-						reqs: [["Bow", "toybox-open"]]
-					}
-				}
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Block City": {
 				row: 1,
 				col: 4,
 				checks: {
 					"[Coinsanity] 3 items on left spring": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					"[Coinsanity] 5 items on elevated spring": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					"[Coin Block] ? Block on left side of wall": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					"[Coin Block] ? Block on right side of wall that can be jumped across":
 						{
-							reqs: [
-								["Bow", "toybox-open"],
-								[
-									"Hammer",
-									"Super Hammer",
-									"Ultra Hammer",
-									"Super Boots",
-									"Ultra Boots"
-								]
-							]
+							reqs: ["Boots", ["Hammer", "Super Boots"]],
 						},
 					"Item behind fallen blocks": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					"Item on roof of left house": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							],
-							"Parakarry"
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"], "Parakarry"],
 					},
 					"? Block on platform": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					"Item that Kammy spawns": {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
 					},
 					Chest: {
-						reqs: [
-							["Bow", "toybox-open"],
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
-					}
-				}
+						reqs: ["Boots", ["Hammer", "Super Boots"]],
+					},
+				},
 			},
 			"Gourmet Guy": {
 				row: 2,
 				col: 1,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"Give Cake to Gourmet Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"Hidden block left after Gourmet Guy arch": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"Hidden block between two other ? Blocks": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake"],
+					},
+				},
 			},
 			"Tracks Hallway": {
 				row: 2,
 				col: 2,
 				checks: {
 					"[Coin Block] ? Block before Spy Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train"]
+						reqs: logic.canMoveStations,
 					},
 					"[Coin Block] Left ? Block by Groove Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"[Coin Block] Right ? Block by Groove Guy": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake"],
+					},
+					"[Multicoin Block] Between two ? Blocks": {
+						reqs: [logic.canMoveStations, "Cake"],
+					},
+				},
 			},
 			"Pink Station": {
 				row: 2,
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, logic.canFlipPanel],
 					},
 					"Chest on right side": {
-						reqs: [["Bow", "toybox-open"], "Toy Train"]
+						reqs: logic.canMoveStations,
 					},
 					"Hidden block by pink switch": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake"],
+					},
+				},
 			},
 			Playhouse: {
 				row: 2,
 				col: 4,
 				checks: {
 					"[Coin Block] ? Block": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]],
 					},
 					"Chest on wall": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]],
 					},
 					"Chest after door": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]],
 					},
 					"Item that Kammy spawns": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]],
 					},
 					"Chest at end of room": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							[
-								"Hammer",
-								"Super Hammer",
-								"Ultra Hammer",
-								"Super Boots",
-								"Ultra Boots"
-							]
-						]
-					}
-				}
+						reqs: [logic.canMoveStations, ["Hammer", "Super Boots"]],
+					},
+				},
 			},
 			"Green Station": {
 				row: 3,
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", logic.canFlipPanel],
 					},
 					"Hidden block in upper right corner": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake"],
+					},
+				},
 			},
 			Treadmill: {
 				row: 3,
 				col: 4,
 				checks: {
 					"[Coinsanity] 3 items on first treadmill": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"[Coinsanity] 3 items on second treadmill": {
-						reqs: [["Bow", "toybox-open"], "Toy Train", "Cake"]
+						reqs: [logic.canMoveStations, "Cake"],
 					},
 					"[Coinsanity] Ring of coins inside fort after moving blocks": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"],
 					},
 					"Item held by Shy Guy after treadmills": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"],
+					},
+					"[Multicoin Block] On pink moving platform": {
+						reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"],
 					},
 					"Middle item inside fort after moving blocks": {
-						reqs: ["Bow", "Toy Train", "Cake"]
+						reqs: ["Bow", logic.canMoveStations, "Cake"],
 					},
 					"Item that Kammy spawns": {
-						reqs: ["Bow", "Toy Train", "Cake", "Parakarry"]
+						reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"],
 					},
-					Chest: { reqs: ["Bow", "Toy Train", "Cake", "Parakarry"] }
-				}
+					Chest: { reqs: ["Bow", logic.canMoveStations, "Cake", "Parakarry"] },
+				},
 			},
 			"Lantern Ghost": {
 				row: 4,
 				col: 1,
 				checks: {
 					Watt: {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
+					},
+				},
 			},
 			"Toybox Moving Platforms": {
 				row: 4,
 				col: 2,
 				checks: {
 					"[Coin Block] Left ? Block": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
 					},
 					"[Coin Block] Right ? Block": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
 					},
 					"Hidden block by first elevator": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
 					},
 					"Hidden block between two other ? blocks": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
 					},
 					"Hidden block by door to Lantern Ghost room": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
+					},
+					"[Upgrade] Super Block": {
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
+					},
+					"[Multicoin Block] On top of wheel": {
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
+					},
+				},
 			},
 			"Red Station": {
 				row: 4,
 				col: 3,
 				checks: {
 					"[Panel] In front of station": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Hammer", logic.canFlipPanel],
 					},
 					"Hidden block on left side": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake", "Hammer"],
+					},
+				},
 			},
 			"Shy Guy Barricade": {
 				row: 4,
 				col: 4,
 				checks: {
 					"[Coin Block] ? Block just past barricade": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: [logic.canMoveStations, "Cake", "Bombette", "Hammer"],
 					},
 					"Item on top of brick block": {
 						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
+							logic.canMoveStations,
 							"Cake",
 							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Kooper", "Ultra Boots"]
-						]
+							"Hammer",
+							["Kooper", "Ultra Boots"],
+						],
 					},
 					"? Block at end of room": {
-						reqs: [
-							["Bow", "toybox-open"],
-							"Toy Train",
-							"Cake",
-							"Bombette",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: [logic.canMoveStations, "Cake", "Bombette", "Hammer"],
+					},
+				},
 			},
 			"Dark Room": { row: 4, col: 5, checks: {} },
-			"General Guy": { row: 4, col: 6, checks: {} }
-		}
+			"General Guy": {
+				row: 4,
+				col: 6,
+				checks: {
+					Muskular: {
+						reqs: chapterRewardReqs.Muskular,
+					},
+				},
+			},
+		},
 	},
 	"Yoshi's Island": {
+		reqs: [
+			[
+				logic.startingLocation("Yoshi Village"),
+				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
+				[
+					logic.canReachToadTown,
+					logic.canClimbLedges,
+					[
+						["Super Boots", "Sushie"],
+						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
+					],
+				],
+			],
+		],
 		areas: {
 			"Ambush Room": {
 				row: 1,
@@ -3650,38 +3084,17 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Near middle of room": {
 						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"],
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+							logic.canFlipPanel,
+							"Boots",
+						],
 					},
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
+					},
+				},
 			},
 			"Raph's Tree": {
 				row: 1,
@@ -3689,114 +3102,42 @@ const regionData: MapRegions = {
 				rowSpan: 6,
 				checks: {
 					"Item on the outside Raph's Tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
 					},
 					"Talk to Raphael at the top": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
+					},
+				},
 			},
 			"Vine Room": {
 				row: 2,
 				col: 3,
 				checks: {
 					"Second Tree vine": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
 					},
 					"Last Tree vine": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
+					},
+				},
 			},
 			"Block Puzzle": {
 				row: 3,
 				col: 3,
 				checks: {
 					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven"],
 					},
 					"Hidden block near first push block": {
 						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove,
+						],
+					},
+				},
 			},
 			"Deep Jungle": {
 				row: 4,
@@ -3804,214 +3145,68 @@ const regionData: MapRegions = {
 				checks: {
 					"Hidden block near bell plant": {
 						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Sushie",
+							"Hammer",
 							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+							logic.canClimbLedges,
+							logic.canBreakBlocksAbove,
+						],
 					},
 					"Tree vine near bell plant": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer", "Jade Raven", "Boots"],
 					},
 					"[Foliage Coin] Tree near bell plant": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer", "Jade Raven", logic.canClimbLedges],
+					},
+				},
 			},
 			"Light-Blue Yoshi": {
 				row: 5,
 				col: 1,
 				checks: {
 					"Item under water": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
-					}
-				}
+						reqs: "Sushie",
+					},
+				},
 			},
 			"NW Jungle": {
 				row: 5,
 				col: 2,
 				checks: {
 					"Item in tree by right side exit": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree],
 					},
 					"[Foliage Coin] Tree on ledge": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canClimbLedges, logic.canShakeTree],
 					},
 					"[Foliage Coin] Second bush from right": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie",
 					},
 					"[Foliage Coin] Second bush from left": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
-					}
-				}
+						reqs: "Sushie",
+					},
+				},
 			},
 			"NE Jungle": {
 				row: 5,
 				col: 3,
 				checks: {
 					"[Coinsanity] Item under water on right side of room": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Sushie", "Hammer"],
 					},
 					"[Foliage Coin] Tree near raven statue": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer"],
+					},
+				},
 			},
 			"Yellow Yoshi": {
 				row: 5,
 				col: 4,
 				checks: {
 					"[Foliage Coin] Tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Sushie", "Hammer"],
+					},
+				},
 			},
 			Whale: {
 				row: 6,
@@ -4019,174 +3214,42 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Coinsanity] 2 items on spinning flower": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"Coconut tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Item behind bush near top of screen": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"SW Jungle": {
 				row: 6,
 				col: 2,
 				checks: {
 					"[Coinsanity] Three items under water": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie",
 					},
 					"Hidden block near exit to NW Jungle": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: ["Sushie", logic.canBreakBlocksAbove],
 					},
 					"[Foliage Coin] Tree near north exit": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree],
 					},
 					"[Foliage Coin] Tree near Spear Guy": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Sushie", logic.canShakeTree],
 					},
 					"[Foliage Coin] Right bush near north exit": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie",
 					},
 					"[Foliage Coin] Bottom bush on left side": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
-					}
-				}
+						reqs: "Sushie",
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Sushie", logic.canBreakBlocksAbove],
+					},
+				},
 			},
 			"SE Jungle": {
 				row: 6,
@@ -4194,377 +3257,87 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"? Block on island": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: ["Sushie", logic.canBreakBlocksAbove],
 					},
 					"[Foliage Coin] Far right tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"[Foliage Coin] Bottom left bush": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: ["Sushie", "Hammer"],
 					},
 					"[Foliage Coin] Bottom right bush": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"Sushie Room": {
 				row: 6,
 				col: 5,
 				checks: {
 					Sushie: {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: "Hammer",
 					},
 					"Item on top right island": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie",
 					},
 					"Item in tree on top right island": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie"
-						]
+						reqs: "Sushie",
 					},
 					"Chest after saving Misstar": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Misstar"
-						]
-					}
-				}
+						reqs: "Misstar",
+					},
+				},
 			},
 			Beach: {
 				row: 7,
 				col: 2,
 				checks: {
 					"[Coinsanity] 2 items on spinning flower": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"Coconut tree 1 (far left)": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Coconut tree 2": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Hidden block by bell plant": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"Coconut tree 3": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Item on rock formation": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: logic.canClimbLedges,
 					},
 					"Coconut tree 4": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Coconut tree 5": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Coconut tree 6 (last tree, 2 items)": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"West Village": {
 				row: 7,
 				col: 3,
 				checks: {
 					"[Panel] In front of raven statue": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel,
 					},
 					"Talk to Yoshi Chief after saving all the kids": {
-						reqs: ["Watt", "Sushie", ["Hammer", "Super Hammer", "Ultra Hammer"]]
+						reqs: ["Watt", "Sushie", "Hammer"],
 					},
 					"Left Coconut tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Right Coconut tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"East Village": {
 				row: 7,
@@ -4572,375 +3345,169 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: null,
 					},
 					"[Letter] Red Yoshi Kid (Chain)": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Red Yoshi Kid",
-							"Parakarry"
-						]
+						reqs: ["Red Yoshi Kid", "Parakarry"],
 					},
 					"Give a Tayce T. item to Yellow Adult Yoshi": {
-						reqs: [
-							"Watt",
-							"Sushie",
-							"Misstar",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Watt", "Sushie", "Misstar", "Hammer"],
 					},
 					"Give the volcano vase to Kolorado": {
-						reqs: [
-							"Watt",
-							"Sushie",
-							"Volcano Vase",
-							"Misstar",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Watt", "Sushie", "Volcano Vase", "Misstar", "Hammer"],
 					},
 					"Coconut tree on right side of room": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					}
-				}
+						reqs: logic.canShakeTree,
+					},
+				},
 			},
 			"Outside Volcano": {
 				row: 7,
 				col: 6,
 				checks: {
 					"Item behind large tree": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								["Watt", "Hammer"],
-								["Watt", "Super Hammer"],
-								["Watt", "Ultra Hammer"],
-								["Watt", "Super Boots"],
-								["Watt", "Ultra Boots"],
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
-					}
-				}
-			}
-		}
+						reqs: null,
+					},
+				},
+			},
+		},
 	},
 	"Mt. Lavalava": {
+		reqs: [
+			[
+				logic.startingLocation("Yoshi Village"),
+				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
+				[
+					logic.canReachToadTown,
+					logic.canClimbLedges,
+					[
+						["Super Boots", "Sushie"],
+						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
+					],
+				],
+			],
+			"Sushie",
+			"Jade Raven",
+			"Hammer",
+			logic.canClimbLedges,
+		],
 		areas: {
 			"Mt. Lavalava Entrance": { row: 1, col: 2, checks: {} },
 			"Sinking Platforms": { row: 1, col: 3, checks: {} },
 			"Hub Room": {
 				row: 1,
 				col: 4,
+				rowSpan: 3,
 				checks: {
 					"[Coin Block] ? Block 1": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"[Coin Block] ? Block 2": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"[Coin Block] ? Block 3": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"[Coin Block] ? Block 4": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: logic.canBreakBlocksAbove,
 					},
 					"Item on top of brick block": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Kooper", "Ultra Boots"]
-						]
+						reqs: ["Ultra Boots", ["Boots", "Kooper"]],
 					},
 					"Item on platform halfway down second zip line": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: "Boots",
+					},
+				},
 			},
-			"Firebars + Upgrade": { row: 1, col: 5, checks: {} },
+			"Firebars + Upgrade": {
+				row: 1,
+				col: 5,
+				checks: {
+					"[Upgrade] Super Block": {
+						reqs: "Boots",
+					},
+				},
+			},
 			Zipline: {
 				row: 2,
-				col: 4,
+				col: 5,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Right side of lower level": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: logic.canFlipPanel,
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Boots", "Ultra Hammer"],
+					},
+				},
 			},
-			"Spike Ball Chase": { row: 2, col: 5, checks: {} },
-			"Moving Platforms": { row: 2, col: 6, checks: {} },
-			"Spike Ball Wall Break": { row: 2, col: 7, checks: {} },
-			"Save Block": {
+			"Spike Ball Chase": { row: 2, col: 6, checks: {} },
+			"Moving Platforms": { row: 2, col: 7, checks: {} },
+			"Spike Ball Wall Break": { row: 2, col: 8, checks: {} },
+			"Volcano Save Block": {
 				row: 2,
-				col: 8,
+				col: 9,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Left of heart block": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Ultra Hammer", "Boots", logic.canFlipPanel],
+					},
+				},
 			},
 			Deadend: {
 				row: 2,
-				col: 9,
+				col: 10,
 				checks: {
 					"Left ? Block": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
+						reqs: ["Ultra Hammer", "Boots"],
 					},
 					"Right ? Block": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
+						reqs: ["Ultra Hammer", "Boots"],
+					},
+				},
 			},
 			"Ultra Hammer Room": {
 				row: 3,
 				col: 1,
 				checks: {
 					"Ultra Hammer chest": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
+						reqs: [["Parakarry", "Lakilester"]],
+					},
+				},
 			},
 			"Lava Puzzle": {
 				row: 3,
 				col: 2,
+				rowSpan: 2,
 				checks: {
 					"Hidden block on right side of room": {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: logic.canBreakBlocksAbove,
+					},
+				},
 			},
 			"Slope Hallway": { row: 3, col: 3, checks: {} },
-			"Lava Piranha": { row: 3, col: 7, checks: {} },
+			"Lava Piranha": {
+				row: 3,
+				col: 10,
+				checks: {
+					Misstar: {
+						reqs: chapterRewardReqs.Misstar,
+					},
+				},
+			},
 			"Dizzy Stomp": {
 				row: 4,
-				col: 2,
+				col: 3,
 				checks: {
 					Chest: {
-						reqs: [
-							[
-								"starting-location:YoshiVillage",
-								"Watt",
-								"whale-open",
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Sushie",
-							"Jade Raven",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
-			}
-		}
+						reqs: ["Ultra Hammer", ["Parakarry", "Lakilester"]],
+					},
+				},
+			},
+		},
 	},
 	"Flower Fields": {
+		reqs: [logic.canReachToadTown, logic.chapter6Entry],
 		areas: {
 			"In The Clouds": {
 				row: 1,
@@ -4948,52 +3515,52 @@ const regionData: MapRegions = {
 				checks: {
 					"Ride cloud elevator up to item": {
 						reqs: [
-							"chapter-6-entry",
 							"Lakilester",
-							["Super Boots", "Ultra Boots"],
+							"Super Boots",
+							"Hammer",
 							"Magical Bean",
 							"Fertile Soil",
-							"Miracle Water"
-						]
-					}
-				}
+							"Miracle Water",
+						],
+					},
+				},
 			},
-			"Huff n Puff": { row: 1, col: 5, checks: {} },
+			"Huff n Puff": {
+				row: 1,
+				col: 5,
+				checks: {
+					Klevar: {
+						reqs: chapterRewardReqs.Klevar,
+					},
+				},
+			},
 			"Sun Tower": { row: 2, col: 1, checks: {} },
 			Lakilester: {
 				row: 2,
 				col: 2,
 				checks: {
 					Lakilester: {
-						reqs: [
-							"chapter-6-entry",
-							["Lakilester", "Bubble Berry"],
-							"Bombette"
-						]
+						reqs: [["Lakilester", "Bubble Berry"], "Bombette"],
 					},
 					"Item in grass": {
-						reqs: ["chapter-6-entry", ["Lakilester", "Bubble Berry"]]
+						reqs: [["Lakilester", "Bubble Berry"]],
 					},
 					"Item in crevasse": {
-						reqs: [
-							"chapter-6-entry",
-							["Lakilester", "Bubble Berry"],
-							"Bombette"
-						]
-					}
-				}
+						reqs: [["Lakilester", "Bubble Berry"], "Bombette"],
+					},
+				},
 			},
 			"Bubble Plant": {
 				row: 2,
 				col: 3,
 				checks: {
 					"Item on ledge": {
-						reqs: ["chapter-6-entry", ["Lakilester", "Bubble Berry"]]
+						reqs: [["Lakilester", "Bubble Berry"]],
 					},
 					"Item in vines immediately below ledge item": {
-						reqs: ["chapter-6-entry"]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"Fields Tree": { row: 2, col: 4, rowSpan: 3, checks: {} },
 			Elevators: {
@@ -5001,37 +3568,28 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item in second vine (jump to trigger it)": {
-						reqs: ["chapter-6-entry"]
+						reqs: "Boots",
 					},
 					"Item from ground pounding opposite side from partner upgrade block":
 						{
-							reqs: [
-								"chapter-6-entry",
-								"Lakilester",
-								["Super Boots", "Ultra Boots"]
-							]
-						}
-				}
+							reqs: ["Lakilester", "Super Boots"],
+						},
+					"[Upgrade] Super Block": {
+						reqs: ["Lakilester", "Super Boots"],
+					},
+				},
 			},
 			"Fallen Logs": {
 				row: 2,
 				col: 6,
 				checks: {
 					"Item in grass at bottom of screen": {
-						reqs: [
-							"chapter-6-entry",
-							"Lakilester",
-							["Super Boots", "Ultra Boots"]
-						]
+						reqs: ["Lakilester", "Super Boots"],
 					},
 					"? Block before cloud machine room": {
-						reqs: [
-							"chapter-6-entry",
-							"Lakilester",
-							["Super Boots", "Ultra Boots"]
-						]
-					}
-				}
+						reqs: ["Lakilester", "Super Boots"],
+					},
+				},
 			},
 			"Cloud Machine": { row: 2, col: 7, checks: {} },
 			Rosie: {
@@ -5039,132 +3597,114 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Give Rosie the Crystal Berry": {
-						reqs: ["chapter-6-entry", "Blue Berry", "Crystal Berry"]
-					}
-				}
+						reqs: ["Blue Berry", "Crystal Berry", "Boots"],
+					},
+				},
 			},
-			Maze: { row: 3, col: 2, checks: {} },
+			Maze: {
+				row: 3,
+				col: 2,
+				checks: {
+					"[Multicoin Block] Right of exit pipe": {
+						reqs: ["Blue Berry", "Boots"],
+					},
+				},
+			},
 			"Blue Flower": {
 				row: 3,
 				col: 3,
 				checks: {
 					"[Coin Block] Hidden block between brick block and spring": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
+						reqs: [logic.canBreakBlocksAbove, "Blue Berry"],
 					},
 					"Hidden block above brick block": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
-					}
-				}
+						reqs: ["Boots", "Blue Berry"],
+					},
+				},
 			},
 			"Three Trees": {
 				row: 3,
 				col: 5,
 				checks: {
-					"[Foliage Coin] Far left tree": {
-						reqs: [
-							[
-								"starting-location:DryDryOutpost",
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer"
-							],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
-					},
 					"Hit trees Middle, Right, Left": {
-						reqs: [
-							"chapter-6-entry",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
-					"Second set of vines": { reqs: ["chapter-6-entry"] }
-				}
+					"Second set of vines": { reqs: null },
+				},
 			},
 			Petunia: {
 				row: 3,
 				col: 6,
 				checks: {
 					"[Panel] Near bottom left corner of room directly above grass": {
-						reqs: [
-							"chapter-6-entry",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel,
 					},
 					"2 items in tree": {
-						reqs: [
-							"chapter-6-entry",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: logic.canShakeTree,
 					},
 					"Talk to Petunia and defeat all moles": {
-						reqs: ["chapter-6-entry"]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			Well: {
 				row: 3,
 				col: 7,
 				checks: {
 					"Give a blue berry to the well": {
-						reqs: ["chapter-6-entry", "Blue Berry"]
-					}
-				}
+						reqs: "Blue Berry",
+					},
+				},
 			},
 			Posie: {
 				row: 4,
 				col: 2,
 				checks: {
 					"2 items from Posie": {
-						reqs: ["chapter-6-entry", "Red Berry"]
-					}
-				}
+						reqs: "Red Berry",
+					},
+				},
 			},
 			"Red Flower": {
 				row: 4,
 				col: 3,
 				checks: {
 					"[Panel] In front of tree": {
-						reqs: [
-							"chapter-6-entry",
-							"Red Berry",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Red Berry", logic.canFlipPanel],
 					},
 					"2 items in tree": {
-						reqs: [
-							"chapter-6-entry",
-							"Red Berry",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+						reqs: ["Red Berry", logic.canShakeTree],
 					},
 					"Item in middle vines": {
-						reqs: ["chapter-6-entry", "Red Berry"]
-					}
-				}
+						reqs: "Red Berry",
+					},
+				},
 			},
 			"Yellow Flower": {
 				row: 4,
 				col: 5,
 				checks: {
 					"Vines next to yellow flower": {
-						reqs: ["chapter-6-entry"]
+						reqs: null,
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+							logic.canShakeTree,
+						],
 					},
 					"Item in grass right of tree": {
+						reqs: ["Yellow Berry", ["Parakarry", "Lakilester"]],
+					},
+					"[Upgrade] Super Block": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
+						],
+					},
+				},
 			},
 			"Bubble Berry Tree": {
 				row: 4,
@@ -5172,37 +3712,37 @@ const regionData: MapRegions = {
 				checks: {
 					"[Panel] Under hidden block on right side": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+							logic.canClimbLedges,
+							logic.canFlipPanel,
+						],
 					},
 					"? Block on left side": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
-						]
+							["Parakarry", "Lakilester"],
+							logic.canBreakBlocksAbove,
+						],
 					},
 					"2 items in tree": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
 							"Water Stone",
 							"Sushie",
-							["Hammer", "Super Hammer", "Ultra Hammer", "Bombette"]
-						]
+							logic.canShakeTree,
+						],
 					},
 					"Hidden ? Block on right side": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
+						],
+					},
+				},
 			},
 			Lily: {
 				row: 4,
@@ -5210,24 +3750,30 @@ const regionData: MapRegions = {
 				checks: {
 					"Give Water Stone to Lily": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
 							["Parakarry", "Lakilester"],
-							"Water Stone"
-						]
+							logic.canClimbLedges,
+							"Water Stone",
+						],
 					},
 					"Item in tree": {
 						reqs: [
-							"chapter-6-entry",
 							"Yellow Berry",
-							["Parakarry", "Lakilester"]
-						]
-					}
-				}
-			}
-		}
+							["Parakarry", "Lakilester"],
+							logic.canClimbLedges,
+							logic.canShakeTree,
+						],
+					},
+				},
+			},
+		},
 	},
 	"Shiver Region": {
+		reqs: [
+			logic.canReachToadTown,
+			[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
+			["Sushie", ["Odd Key", "Bombette"], [logic.blueHouseOpen, "Bombette"]],
+		],
 		areas: {
 			"Ice Staircase": {
 				row: 1,
@@ -5235,39 +3781,25 @@ const regionData: MapRegions = {
 				checks: {
 					"? Block up first set of stairs": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone"
-						]
+							"Hammer",
+							"Star Stone",
+						],
 					},
 					"Item on ledge when falling down after second set of stairs": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone"
-						]
-					}
-				}
+							"Hammer",
+							"Star Stone",
+						],
+					},
+				},
 			},
 			"Merlar's Sanctuary": {
 				row: 1,
@@ -5275,214 +3807,93 @@ const regionData: MapRegions = {
 				checks: {
 					"Sacred item sealed away for centuries": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
-							["Super Boots", "Ultra Boots"],
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Bombette"
-						]
-					}
-				}
+							"Hammer",
+							"Bombette",
+						],
+					},
+				},
 			},
 			"Shiver Mountain Tunnel": {
 				row: 2,
 				col: 5,
 				checks: {
 					"Left pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
 					},
 					"Middle pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
 					},
 					"Right pillar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
-					}
-				}
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+					},
+				},
 			},
 			"Shiver Mountain Hills": {
 				row: 3,
 				col: 5,
 				checks: {
 					"Item below Kooper switch": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"]
-						]
-					}
-				}
+						reqs: ["Warehouse Key", "Scarf", "Bucket"],
+					},
+					"[Upgrade] Super Block": {
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+					},
+				},
 			},
 			"Shiver Mountain Passage": {
 				row: 4,
 				col: 5,
 				checks: {
 					"Ultra Boots block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							"Ultra Boots"
-						]
-					}
-				}
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Ultra Boots"],
+					},
+				},
 			},
 			"West Shiver City": {
 				row: 5,
 				col: 1,
 				checks: {
 					"[Panel] Next to the Mayor's house": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Mayor Penguin": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Mayor Penguin",
-							"Parakarry"
-						]
+						reqs: ["Mayor Penguin", "Parakarry"],
 					},
 					"Talk to Mayor after having met Merle": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key",
 					},
 					"Chest in middle house": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
-					}
-				}
+						reqs: null,
+					},
+				},
 			},
 			"Center Shiver City": {
 				row: 5,
 				col: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: null,
 					},
 					"Item in the Inn": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							]
-						]
+						reqs: null,
 					},
 					"5 items in the Inn after giving Scarf and Bucket to snowmen": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket"
-						]
-					}
-				}
+						reqs: ["Warehouse Key", "Scarf", "Bucket"],
+					},
+				},
 			},
 			"East Shiver City": {
 				row: 5,
 				col: 3,
 				checks: {
 					"Item in lake": {
-						reqs: [["Super Boots", "Ultra Boots"], "Sushie"]
-					}
-				}
+						reqs: "Sushie",
+					},
+				},
 			},
 			"Outside Shiver City": { row: 5, col: 4, checks: {} },
 			"Shiver Snowfield": {
@@ -5490,335 +3901,715 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"[Panel] Along bottom of room": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							["Super Boots", "Ultra Boots", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", logic.canFlipPanel],
 					},
 					"Hit left pine tree 4 times": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							["Hammer", "Super Hammer", "Ultra Hammer"]
-						]
+						reqs: ["Warehouse Key", "Hammer"],
 					},
 					"Item behind pine tree in top right corner": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key"
-						]
-					}
-				}
+						reqs: "Warehouse Key",
+					},
+				},
 			},
 			"Outside Starborn Valley": {
 				row: 5,
 				col: 6,
 				checks: {
 					"Item behind ice": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key"
-						]
+						reqs: "Warehouse Key",
 					},
 					"Hidden block where you fight Monstar": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key"
-						]
-					}
-				}
+						reqs: "Warehouse Key",
+					},
+				},
 			},
 			"Starborn Valley": {
 				row: 5,
 				col: 7,
 				checks: {
 					"[Letter] Frost T. (Chain)": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Frost T.",
-							"Parakarry"
-						]
+						reqs: ["Warehouse Key", "Frost T.", "Parakarry"],
 					},
 					"Talk to Merle": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key"
-						]
-					}
-				}
-			}
-		}
+						reqs: "Warehouse Key",
+					},
+				},
+			},
+		},
 	},
 	"Crystal Palace": {
+		reqs: [
+			logic.canReachToadTown,
+			logic.canClimbLedges,
+			[
+				["Super Boots", "Sushie"],
+				["Odd Key", "Bombette"],
+				[logic.blueHouseOpen, "Bombette"],
+			],
+			"Warehouse Key",
+			"Scarf",
+			"Bucket",
+			"Super Boots",
+			"Kooper",
+			"Hammer",
+			"Star Stone",
+		],
 		areas: {
 			"Ground Panel Room": {
 				row: 1,
 				col: 3,
+				rowSpan: 3,
 				checks: {
 					"? Block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
-					}
-				}
+						reqs: [["Red Key", "Blue Key"]],
+					},
+				},
 			},
-			"Duplighost Room": { row: 7, col: 8, checks: {} },
-			"Item Room": {
-				row: 8,
+			"Duplighost Room 1": { row: 1, col: 4, checks: {} },
+			"P-Down/​D-Up": {
+				row: 2,
+				col: 5,
+				checks: {
+					Chest: {
+						reqs: [["Red Key", "Blue Key"]],
+					},
+				},
+			},
+			"Upper Swooper Room": { row: 2, col: 4, checks: {} },
+			"Shooting Star": {
+				row: 1,
 				col: 5,
 				checks: {
 					"Item on ledge": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
+						reqs: [["Red Key", "Blue Key"]],
 					},
-					Chest: {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
-					}
-				}
+				},
 			},
-			"Swooper Room": { row: 7, col: 4, checks: {} },
+			"Duplighost Room 2": { row: 7, col: 9, checks: {} },
+			"Red Key": {
+				row: 8,
+				col: 5,
+				checks: {
+					Chest: {
+						reqs: [["Red Key", "Blue Key"], "Bombette"],
+					},
+				},
+			},
+			"Lower Swooper Room": { row: 7, col: 4, checks: {} },
+			"Blue Key": {
+				row: 7,
+				col: 5,
+				checks: {
+					Chest: {
+						reqs: null,
+					},
+				},
+			},
 			"Small Statue Room": {
 				row: 2,
-				col: 7,
+				col: 8,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"],
 					},
 					"? Block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							"Ultra Boots",
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
-					}
-				}
+						reqs: ["Red Key", "Bombette"],
+					},
+				},
 			},
-			"Clubba Room": { row: 2, col: 8, checks: {} },
+			"Clubba Room": { row: 2, col: 9, checks: {} },
+			"P-Up/​D-Down": {
+				row: 2,
+				col: 10,
+				checks: {
+					Chest: {
+						reqs: ["Red Key", "Bombette"],
+					},
+				},
+			},
 			Cave: {
 				row: 4,
 				col: 1,
 				checks: {
 					"Item in cave": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							["Red Key", "Blue Key"]
-						]
-					}
-				}
+						reqs: [["Red Key", "Blue Key"]],
+					},
+				},
 			},
-			"Crystal Palace Entrance": { row: 4, col: 2, checks: {} },
-			"First Room": { row: 4, col: 3, checks: {} },
-			"Elevator + Clubba Room": { row: 4, col: 4, checks: {} },
-			"Bomb Switch": { row: 4, col: 5, checks: {} },
+			"Crystal Palace Entrance": { row: 4, col: 2, rowSpan: 2, checks: {} },
+			"Mirror Room": {
+				row: 4,
+				col: 3,
+				rowSpan: 2,
+				checks: {
+					"[Multicoin Block] 2 Blocks past blue door": {
+						reqs: ["Blue Key", "Bombette"],
+					},
+				},
+			},
+			"Elevator + Clubba Room": { row: 4, col: 4, rowSpan: 2, checks: {} },
+			"Bomb Switch": { row: 4, col: 5, rowSpan: 2, checks: {} },
 			"Triple Dip": {
 				row: 4,
 				col: 6,
+				rowSpan: 2,
 				checks: {
 					"Chest, blow up right wall in switch room": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
-					}
-				}
+						reqs: ["Red Key", "Bombette"],
+					},
+				},
 			},
-			"Kooper Puzzle": { row: 4, col: 7, checks: {} },
-			"Hub 2": { row: 4, col: 8, checks: {} },
+			"Kooper Puzzle": { row: 4, col: 7, rowSpan: 2, checks: {} },
+			"Hub 2": { row: 4, col: 8, rowSpan: 2, checks: {} },
+			"Palace Key": {
+				row: 7,
+				col: 10,
+				checks: {
+					Chest: {
+						reqs: ["Red Key", "Bombette"],
+					},
+				},
+			},
 			"Kooper Switch + Palace Key Lock": {
 				row: 4,
 				col: 9,
-				checks: {}
+				rowSpan: 2,
+				checks: {},
 			},
 			"Albino Dinos + Crystal King": {
 				row: 4,
 				col: 10,
-				checks: {}
+				rowSpan: 2,
+				checks: {
+					Kalmar: {
+						reqs: chapterRewardReqs.Kalmar,
+					},
+				},
 			},
-			"X Mark Room": { row: 6, col: 3, checks: {} },
+			"X Mark Room": { row: 6, col: 3, rowSpan: 3, checks: {} },
 			"Large Statue Room": {
 				row: 6,
 				col: 8,
+				rowSpan: 2,
 				checks: {
 					"[Panel] Under block": {
-						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
-							["Super Boots", "Ultra Boots"],
-							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
+						reqs: ["Red Key", "Bombette"],
 					},
 					"? Block": {
+						reqs: ["Red Key", "Bombette"],
+					},
+				},
+			},
+			"Bombette Puzzle": { row: 8, col: 4, checks: {} },
+		},
+	},
+	"Bowser's Castle": {
+		reqs: [logic.canReachToadTown, "Boots", 7],
+		areas: {
+			"Bombette Switch Room": {
+				row: 2,
+				col: 1,
+				checks: {
+					"Item on floor": {
 						reqs: [
-							[
-								["Super Boots", "Sushie"],
-								["Ultra Boots", "Sushie"],
-								["Odd Key", "Bombette"],
-								["blue-house-open", "Bombette"]
-							],
-							"Warehouse Key",
-							"Scarf",
-							"Bucket",
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
+			},
+			"Second Lobby": {
+				row: 2,
+				col: 2,
+				rowSpan: 2,
+				checks: {},
+			},
+			Staircase: {
+				row: 1,
+				col: 3,
+				rowSpan: 2,
+				checks: {},
+			},
+			"Kooper Switch Room": {
+				row: 1,
+				col: 4,
+				checks: {
+					"Item on Floor": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
 							"Ultra Boots",
 							"Kooper",
-							["Hammer", "Super Hammer", "Ultra Hammer"],
-							"Star Stone",
-							"Red Key",
-							"Bombette"
-						]
-					}
-				}
+						],
+					},
+				},
 			},
-			"Bombette Puzzle": { row: 8, col: 4, checks: {} }
-		}
-	}
+			"Up/Down Hallway": {
+				row: 2,
+				col: 4,
+				colSpan: 2,
+				checks: {},
+			},
+			"Before Duplighosts": {
+				row: 2,
+				col: 6,
+				checks: {},
+			},
+			Duplighosts: {
+				row: 2,
+				col: 7,
+				checks: {},
+			},
+			"Jr. Troopa": {
+				row: 2,
+				col: 8,
+				checks: {},
+			},
+			"Stairway to Peach's Castle": {
+				row: 2,
+				col: 9,
+				checks: {},
+			},
+			"Upper Prison Inn": {
+				row: 3,
+				col: 1,
+				checks: {
+					"Koopatrol fight": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
+			},
+			Battlements: {
+				row: 3,
+				col: 3,
+				rowSpan: 2,
+				checks: {
+					"Left ? Block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Center ? Block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Right ? Block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Item on ledge": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 4),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
+			},
+			"Bowser Door 2": {
+				row: 4,
+				col: 2,
+				checks: {},
+			},
+			"Push Block Hallways": {
+				row: 5,
+				col: 8,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {
+					"Hidden ? Block in Dry Bones room (left)": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"? Block in Dry Bones room (right)": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Item on floor in back left room": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 3),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
+			},
+			"Cannon Room": {
+				row: 6,
+				col: 6,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Flood Room": {
+				row: 6,
+				col: 4,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {
+					"Hidden ? Block on path to second chain": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+					"Item on upper left ledge": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+							"Sushie",
+							"Ultra Boots",
+						],
+					},
+				},
+			},
+			Shop: {
+				row: 7,
+				col: 2,
+				checks: {
+					"[Shop] 6 items in shop": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"First Lobby": {
+				row: 7,
+				col: 3,
+				rowSpan: 2,
+				checks: {},
+			},
+			"Lower Prison Inn": {
+				row: 8,
+				col: 4,
+				checks: {
+					"Koopatrol fight": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"Bowser Door 1": {
+				row: 8,
+				col: 2,
+				checks: {},
+			},
+			"First Hallway": {
+				row: 8,
+				col: 1,
+				checks: {},
+			},
+			Prison: {
+				row: 9,
+				col: 2,
+				checks: {
+					"Lower left crate": {
+						reqs: ["Bowser's Castle Key", "Super Boots"],
+					},
+					"Right crate": {
+						reqs: ["Bowser's Castle Key", "Super Boots"],
+					},
+				},
+			},
+			"Outside Prison": {
+				row: 10,
+				col: 2,
+				checks: {
+					"Koopatrol fight": {
+						reqs: null,
+					},
+				},
+			},
+			"Outside Bowser's Castle": {
+				row: 9,
+				col: 1,
+				rowSpan: 2,
+				checks: {
+					"? Block on ledges": {
+						reqs: ["Bowser's Castle Key", "Bombette", "Lakilester"],
+					},
+				},
+			},
+			"Star Haven": {
+				row: 11,
+				col: 1,
+				checks: {
+					"[Shop] 6 items in shop": {
+						reqs: null,
+					},
+				},
+			},
+			"Lava Corridor 1": {
+				row: 9,
+				col: 3,
+				colSpan: 2,
+				checks: {
+					"? Block on platform near prison": {
+						reqs: ["Bowser's Castle Key", "Bombette", "Lakilester"],
+					},
+				},
+			},
+			"Lava Corridor 2": {
+				row: 9,
+				col: 5,
+				colSpan: 2,
+				checks: {
+					"Item in side room": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"Lava Corridor 3": {
+				row: 9,
+				col: 7,
+				colSpan: 2,
+				checks: {
+					"Item on left platform": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+						],
+					},
+					"Item on right platform": {
+						reqs: [
+							"Bowser's Castle Key",
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+			"Dark Cave": {
+				row: 8,
+				col: 5,
+				colSpan: 4,
+				checks: {
+					"Left ? block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+					"Right ? block": {
+						reqs: [
+							logic.multipleItemCheck("Bowser's Castle Key", 2),
+							"Bombette",
+							"Lakilester",
+							"Parakarry",
+							"Bow",
+						],
+					},
+				},
+			},
+		},
+	},
+	"Peach's Castle": {
+		reqs: chapterRewardReqs["Star Rod"],
+		areas: {
+			"Final Bowser": {
+				row: 1,
+				col: 2,
+				checks: {
+					"Star Rod": {
+						reqs: null,
+					},
+				},
+			},
+			"Hallway Bowser": {
+				row: 2,
+				col: 2,
+				checks: {},
+			},
+			"Peach's Room": {
+				row: 2,
+				col: 3,
+				checks: {},
+			},
+			Balcony: {
+				row: 2,
+				col: 4,
+				checks: {},
+			},
+			"Second Lobby": {
+				row: 3,
+				col: 2,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Bowser's Room": {
+				row: 3,
+				col: 1,
+				checks: {},
+			},
+			"Castle Library": {
+				row: 4,
+				col: 1,
+				checks: {
+					"Item between shelves": {
+						reqs: null,
+					},
+					"Item on ledge": {
+						reqs: null,
+					},
+				},
+			},
+			"Magic Chest": {
+				row: 3,
+				col: 4,
+				checks: {
+					"Item on floor": {
+						reqs: null,
+					},
+				},
+			},
+			"Dining Room": {
+				row: 4,
+				col: 4,
+				checks: {},
+			},
+			"First Lobby": {
+				row: 5,
+				col: 2,
+				rowSpan: 2,
+				colSpan: 2,
+				checks: {},
+			},
+			"Outside Peach's Castle": {
+				row: 7,
+				col: 2,
+				checks: {
+					"Hidden ? Block": {
+						reqs: null,
+					},
+				},
+			},
+			"Quiz Room": {
+				row: 6,
+				col: 1,
+				checks: {},
+			},
+			Kitchen: {
+				row: 5,
+				col: 4,
+				checks: {},
+			},
+			"Wardrobe Toad": {
+				row: 6,
+				col: 4,
+				checks: {
+					Chest: {
+						reqs: null,
+					},
+				},
+			},
+		},
+	},
 };
 
+export const kootReqs = Object.values(regionData)
+	.flatMap(v =>
+		Object.values(v.areas).flatMap(av =>
+			Object.entries(av.checks).filter(([ck, _]) => ck.startsWith("[Koot"))
+		)
+	)
+	.reduce(
+		(a, v) => ({ ...a, [v[0]]: v[1].reqs }),
+		{} as Record<string, Requirements>
+	);
+
 export const allRegions = Object.getOwnPropertyNames(regionData);
-export const getAreas = (region: string) => regionData[region].areas;
-export const getBlanks = (region: string) => regionData[region].blanks;
+export const getRegionData = (region: string) => regionData[region];
 export const getChecks = (region: string, area: string) =>
 	regionData[region].areas[area].checks;
