@@ -13,7 +13,7 @@ const settings: { id: keyof Options; src: string }[] = [
 	{ id: "merlowRandomized", src: "flags/Merlow.png" },
 	{ id: "keysRandomized", src: "flags/OddKey.gif" },
 	{ id: "coinsRandomized", src: "flags/coin.png" },
-	{ id: "coinBlocksRandomized", src: "flags/coinblock.png" },
+	{ id: "coinBlocksRandomized", src: "flags/coinblock.jpg" },
 	{ id: "foliageCoinsRandomized", src: "flags/bush.png" },
 	{
 		id: "lettersRandomized",
@@ -38,7 +38,7 @@ const settings: { id: keyof Options; src: string }[] = [
 	},
 	{
 		id: "multicoinBlocksRandomized",
-		src: "flags/brick.png",
+		src: "flags/brick.jpg",
 	},
 ];
 
