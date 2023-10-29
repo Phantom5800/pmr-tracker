@@ -516,7 +516,7 @@ if (!localStorage.getItem("visited")) {
 		<div
 			class="add-panels"
 			:style="{
-				translate: moving ? undefined : '0 -10rem',
+				transform: moving ? undefined : 'translate(0, -10rem)',
 			}"
 		>
 			<SvgButton name="Lock Layout" @click="moving = false"
@@ -553,7 +553,7 @@ if (!localStorage.getItem("visited")) {
 	<main
 		ref="mainRef"
 		:style="{
-			translate: moving ? '0 5rem' : undefined,
+			transform: moving ? 'translate(0, 5rem)' : undefined,
 		}"
 	>
 		<GridLayout
@@ -767,7 +767,7 @@ div.add-panels {
 	height: 8rem;
 	padding: 1rem;
 	z-index: 20;
-	transition: translate 0.2s;
+	transition: transform 0.2s;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -789,7 +789,7 @@ div.add-panels > div {
 }
 
 main {
-	transition: translate 0.2s;
+	transition: transform 0.2s;
 	flex-grow: 1;
 	min-width: var(--min-width);
 }

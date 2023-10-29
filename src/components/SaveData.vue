@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
 	useOptions,
 	configKeys,
@@ -17,6 +17,7 @@ const playthroughStore = usePlaythrough();
 
 const { currentLayout } = defineProps<{ currentLayout: Layout }>();
 
+const dataTextarea = ref<HTMLTextAreaElement | null>(null);
 const copied = ref(false);
 const saveToggles = ref({
 	Playthrough: true,
@@ -25,7 +26,7 @@ const saveToggles = ref({
 	"Tracker Layout": false,
 });
 
-function generateSaveData(): SaveData {
+const saveDataString = computed(() => {
 	let saveData: SaveData = {};
 	if (saveToggles.value.Playthrough) {
 		saveData.playthrough = playthroughStore.$state;
@@ -52,25 +53,25 @@ function generateSaveData(): SaveData {
 	if (saveToggles.value["Tracker Layout"]) {
 		saveData.layout = currentLayout;
 	}
-	return saveData;
-}
+	return JSON.stringify(saveData);
+});
 
 function downloadSaveData() {
-	const dataString = JSON.stringify(generateSaveData());
-	const blob = new Blob([dataString], { type: "application/json" });
+	const blob = new Blob([saveDataString.value], { type: "application/json" });
 	saveAs(blob, `pmr-tracker-${new Date().toISOString()}.json`);
 }
 
 function copySaveData() {
-	const dataString = JSON.stringify(generateSaveData());
 	navigator.clipboard
-		.writeText(dataString)
+		.writeText(saveDataString.value)
 		.then(() => {
 			copied.value = true;
 			setTimeout(() => (copied.value = false), 1000);
 		})
 		.catch(err => {
 			console.error(err);
+			dataTextarea.value && dataTextarea.value.select();
+			document.execCommand("copy");
 		});
 }
 </script>
@@ -95,10 +96,19 @@ function copySaveData() {
 			</button>
 		</div>
 		<div class="save-buttons">
-			<button @click="downloadSaveData">Download JSON</button>
+			<textarea
+				id="saveData"
+				ref="dataTextarea"
+				v-model="saveDataString"
+				readonly
+				name="saveData"
+				cols="30"
+				rows="10"
+			></textarea>
 			<button @click="copySaveData">
 				{{ copied ? "Copied!" : "Copy to clipboard" }}
 			</button>
+			<button @click="downloadSaveData">Download JSON</button>
 		</div>
 	</div>
 </template>
@@ -153,7 +163,7 @@ function copySaveData() {
 
 .save-buttons {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	width: 100%;
 	justify-content: center;
 	gap: 0.5rem;
