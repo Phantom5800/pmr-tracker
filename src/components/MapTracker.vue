@@ -5,6 +5,12 @@ import { allRegions, getRegionData } from "../data/map";
 import { usePlaythrough } from "../stores/playthrough";
 import { useOptions } from "@/stores/config";
 
+type ItemCounts = {
+	has: number;
+	available: number;
+	total: number;
+};
+
 const playthrough = usePlaythrough();
 const options = useOptions();
 
@@ -32,50 +38,81 @@ const regions = computed(() =>
 		)
 );
 
-const currentMap = ref("Toad Town");
+const currentRegion = ref("Toad Town");
 const currentArea = ref("Main Gate");
 
-const region = computed(() => getRegionData(currentMap.value));
+const currentRegionData = computed(() => getRegionData(currentRegion.value));
 
-function areaHasChecksInLogic(pRegion: string, area: string): boolean {
-	const checks = getRegionData(pRegion).areas[area].checks;
-	return Object.entries(checks).some(
-		([checkName, check]) =>
-			playthrough.locationIsRandomized(checkName) &&
-			!playthrough.checkedLocation(area, checkName) &&
-			playthrough.canCheckLocation(check.reqs, pRegion)
+const itemCounts: Record<string, ItemCounts & Record<string, ItemCounts>> =
+	computed(() =>
+		allRegions.reduce<Record<string, ItemCounts & Record<string, ItemCounts>>>(
+			(a, v) => {
+				const data = getRegionData(v);
+				const areaCounts = Object.entries(data.areas).reduce<
+					Record<string, ItemCounts>
+				>(
+					(aa, [ak, av]) => ({
+						...aa,
+						[ak]: Object.entries(av.checks).reduce<ItemCounts>(
+							(ca, [ck, cv]) => {
+								if (!playthrough.locationIsRandomized(ck)) {
+									return { ...ca };
+								} else if (playthrough.checkedLocation(ak, ck)) {
+									return {
+										...ca,
+										has: ca.has + 1,
+										total: ca.total + 1,
+									};
+								} else if (playthrough.canCheckLocation(cv.reqs, v)) {
+									return {
+										...ca,
+										available: ca.available + 1,
+										total: ca.total + 1,
+									};
+								} else {
+									return {
+										...ca,
+										total: ca.total + 1,
+									};
+								}
+							},
+							{ has: 0, available: 0, total: 0 }
+						),
+					}),
+					{}
+				);
+				const totalCounts = Object.values(areaCounts).reduce<ItemCounts>(
+					(a, v) => ({
+						has: a.has + v.has,
+						available: a.available + v.available,
+						total: a.total + v.total,
+					}),
+					{ has: 0, available: 0, total: 0 }
+				);
+				return {
+					...a,
+					[v]: {
+						has: totalCounts.has,
+						available: totalCounts.available,
+						total: totalCounts.total,
+						...areaCounts,
+					},
+				};
+			},
+			{}
+		)
 	);
-}
-
-function areaFullCleared(pRegion: string, area: string): boolean {
-	const checks = getRegionData(pRegion).areas[area].checks;
-	return Object.entries(checks).every(
-		([checkName, _]) =>
-			!playthrough.locationIsRandomized(checkName) ||
-			playthrough.checkedLocation(area, checkName)
-	);
-}
-
-function regionHasChecksInLogic(pRegion: string): boolean {
-	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).some(el =>
-		areaHasChecksInLogic(pRegion, el)
-	);
-}
-
-function regionFullCleared(pRegion: string): boolean {
-	return Object.getOwnPropertyNames(getRegionData(pRegion).areas).every(el =>
-		areaFullCleared(pRegion, el)
-	);
-}
 
 const unshuffledChecks = computed(() =>
 	Object.getOwnPropertyNames(
-		region.value.areas[currentArea.value].checks
+		currentRegionData.value.areas[currentArea.value].checks
 	).filter(el => !playthrough.locationIsRandomized(el))
 );
 
 const checksToShow = computed(() =>
-	Object.entries(region.value.areas[currentArea.value].checks).filter(
+	Object.entries(
+		currentRegionData.value.areas[currentArea.value].checks
+	).filter(
 		el =>
 			!options.getValue("hideNonShuffledChecks") ||
 			!unshuffledChecks.value.includes(el[0])
@@ -91,40 +128,46 @@ const checksToShow = computed(() =>
 	<TrackerPanel :moving="moving" :remove-panel="removePanel">
 		<div class="map-buttons">
 			<button
-				v-for="map in regions"
-				:key="map"
+				v-for="region in regions"
+				:key="region"
 				class="map-select"
 				:class="{
-					selected: map === currentMap,
-					fullCleared: regionFullCleared(map),
-					checksInLogic: regionHasChecksInLogic(map),
+					selected: region === currentRegion,
+					fullCleared: itemCounts[region].has >= itemCounts[region].total,
+					checksInLogic: itemCounts[region].available > 0,
 				}"
 				@click="
-					currentMap = map;
-					currentArea = Object.getOwnPropertyNames(region.areas)[0];
+					currentRegion = region;
+					currentArea = Object.getOwnPropertyNames(currentRegionData.areas)[0];
 				"
 			>
-				{{ map }}
+				{{ region }} {{ itemCounts[region].available || "" }}
 			</button>
 		</div>
 		<div class="map-grid">
-			<h2>{{ currentMap }}</h2>
+			<h2>
+				{{ currentRegion }} ({{ itemCounts[currentRegion].has }}/{{
+					itemCounts[currentRegion].available
+				}}/{{ itemCounts[currentRegion].total }})
+			</h2>
 			<div class="map-areas">
 				<button
-					v-for="area in Object.getOwnPropertyNames(region.areas)"
+					v-for="area in Object.getOwnPropertyNames(currentRegionData.areas)"
 					:key="area"
 					class="map-area"
 					:class="{
 						selected: area === currentArea,
-						checksInLogic: areaHasChecksInLogic(currentMap, area),
-						fullCleared: areaFullCleared(currentMap, area),
+						checksInLogic: itemCounts[currentRegion][area].available > 0,
+						fullCleared:
+							itemCounts[currentRegion][area].has >=
+							itemCounts[currentRegion][area].total,
 					}"
 					:style="{
-						gridRow: `${region.areas[area].row} / span ${
-							region.areas[area].rowSpan || 1
+						gridRow: `${currentRegionData.areas[area].row} / span ${
+							currentRegionData.areas[area].rowSpan || 1
 						}`,
-						gridColumn: `${region.areas[area].col} / span ${
-							region.areas[area].colSpan || 1
+						gridColumn: `${currentRegionData.areas[area].col} / span ${
+							currentRegionData.areas[area].colSpan || 1
 						}`,
 					}"
 					@click="currentArea = area"
@@ -132,7 +175,7 @@ const checksToShow = computed(() =>
 					{{ area }}
 				</button>
 				<button
-					v-for="blank in region.blanks"
+					v-for="blank in currentRegionData.blanks"
 					:key="blank.row * 100 + blank.col"
 					class="map-area"
 					:style="{
@@ -141,7 +184,7 @@ const checksToShow = computed(() =>
 					}"
 				></button>
 				<div
-					v-for="label in region.labels"
+					v-for="label in currentRegionData.labels"
 					:key="label.row * 100 + label.col"
 					class="map-label"
 					:style="{
@@ -159,7 +202,7 @@ const checksToShow = computed(() =>
 					v-for="[checkName, check] in checksToShow"
 					:key="checkName"
 					:class="{
-						available: playthrough.canCheckLocation(check.reqs, currentMap),
+						available: playthrough.canCheckLocation(check.reqs, currentRegion),
 						obtained: playthrough.checkedLocation(currentArea, checkName),
 						disabled: unshuffledChecks.includes(checkName),
 					}"
