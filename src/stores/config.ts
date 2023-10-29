@@ -52,6 +52,7 @@ export type Options = {
 	blueHouseOpen: boolean;
 	startingLocation: string;
 	fastBowserCastle: boolean;
+	limitChapterLogic: boolean;
 	shopsRandomized: boolean;
 	rowfRandomized: boolean;
 	merlowRandomized: boolean;
@@ -219,6 +220,12 @@ export const optionsData = {
 	fastBowserCastle: {
 		namespace: "settings",
 		name: "Fast Bowser's Castle",
+		type: "boolean",
+		default: false,
+	},
+	limitChapterLogic: {
+		namespace: "settings",
+		name: "Limit Chapter Logic",
 		type: "boolean",
 		default: false,
 	},
