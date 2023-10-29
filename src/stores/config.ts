@@ -32,6 +32,7 @@ export type Options = {
 	colorblind: boolean;
 	highlightKey: boolean;
 	trackerLogic: boolean;
+	hideNonShuffledChecks: boolean;
 	// compactTracker: boolean;
 	// combineMisc: boolean;
 	combineSortMode: string;
@@ -94,6 +95,12 @@ export const optionsData = {
 	trackerLogic: {
 		namespace: "config",
 		name: "Tracker Logic",
+		type: "boolean",
+		default: true,
+	},
+	hideNonShuffledChecks: {
+		namespace: "config",
+		name: "Hide Non-Shuffled Checks",
 		type: "boolean",
 		default: true,
 	},

@@ -73,6 +73,14 @@ const unshuffledChecks = computed(() =>
 		region.value.areas[currentArea.value].checks
 	).filter(el => !playthrough.locationIsRandomized(el))
 );
+
+const checksToShow = computed(() =>
+	Object.entries(region.value.areas[currentArea.value].checks).filter(
+		el =>
+			!options.getValue("hideNonShuffledChecks") ||
+			!unshuffledChecks.value.includes(el[0])
+	)
+);
 </script>
 
 <template>
@@ -148,9 +156,7 @@ const unshuffledChecks = computed(() =>
 		<div class="map-checks">
 			<ul>
 				<li
-					v-for="[checkName, check] in Object.entries(
-						region.areas[currentArea].checks
-					)"
+					v-for="[checkName, check] in checksToShow"
 					:key="checkName"
 					:class="{
 						available: playthrough.canCheckLocation(check.reqs, currentMap),
