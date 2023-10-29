@@ -471,6 +471,7 @@ p {
 	left: 0;
 	right: 40%;
 	bottom: 40%;
+	pointer-events: none;
 }
 
 p.label {
