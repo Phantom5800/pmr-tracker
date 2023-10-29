@@ -67,6 +67,10 @@ const layout = ref(
 	savedLayout && Array.isArray(savedLayout) ? savedLayout : initialLayout
 );
 
+console.log(savedLayout);
+console.log(initialLayout);
+console.log(layout.value);
+
 const mainRef = ref<HTMLElement>();
 const gridLayout = ref<InstanceType<typeof GridLayout>>();
 
@@ -119,7 +123,7 @@ function resetLayout() {
 		)
 	) {
 		layout.value = initialLayout;
-		localStorage.setItem("layout", JSON.stringify([]));
+		localStorage.removeItem("layout");
 	}
 }
 
