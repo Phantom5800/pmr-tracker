@@ -26,6 +26,12 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 	optionsStore.setValue("fastBowserCastle", data.BowsersCastleMode >= 1);
 	optionsStore.setValue("foliageCoinsRandomized", data.IncludeCoinsFoliage);
 	optionsStore.setValue("forestOpen", data.ForeverForestOpen);
+	optionsStore.setValue(
+		"gearShuffle",
+		0 <= data.GearShuffleMode && data.GearShuffleMode <= 2
+			? ["Vanilla", "Big Chest Shuffle", "Full Shuffle"][data.GearShuffleMode]
+			: "Vanilla"
+	);
 	optionsStore.setValue("keysRandomized", data.KeyitemsOutsideDungeon);
 	optionsStore.setValue("koopaKootRandomized", data.IncludeFavorsMode >= 1);
 	optionsStore.setValue("kootCoinsRandomized", data.IncludeCoinsFavors);
