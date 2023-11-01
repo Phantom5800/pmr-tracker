@@ -76,7 +76,7 @@ export type Options = {
 	powerStarHunt: boolean;
 	powerStarNum: number;
 	sSkip: boolean;
-	// gearShuffle: string;
+	gearShuffle: string;
 };
 
 export type ItemFilter = "show" | "default" | "hide";
@@ -375,13 +375,13 @@ export const optionsData = {
 		type: "boolean",
 		default: true,
 	},
-	// gearShuffle: {
-	// 	namespace: "settings",
-	// 	name: "Gear Shuffle",
-	// 	type: "select",
-	// 	default: "vanilla",
-	// 	choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"]
-	// }
+	gearShuffle: {
+		namespace: "settings",
+		name: "Gear Shuffle",
+		type: "select",
+		default: "Vanilla",
+		choices: ["Vanilla", "Big Chest Shuffle", "Full Shuffle"],
+	},
 } satisfies Record<keyof Options, OptionData>;
 
 const storageOptionsStr = localStorage.getItem("options");
