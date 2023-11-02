@@ -200,7 +200,7 @@ export const allItems: TrackableItemInfo[] = [
 		name: "Forest Pass",
 		type: "miscItem",
 		image: "icons/ForestPass.png",
-		show: settings => !logic.forestOpen([], settings),
+		show: (settings: Options) => !settings.forestOpen,
 	},
 	{
 		chapter: 3,
@@ -404,7 +404,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "miscKey",
 		image: "icons/OddKey.gif",
 		label: "O",
-		show: (settings: Options) => !logic.blueHouseOpen([], settings),
+		show: (settings: Options) => !settings.blueHouseOpen,
 		turnInCheck: "Residential Area:Unlock Blue House",
 	},
 	{
@@ -466,7 +466,7 @@ export const allItems: TrackableItemInfo[] = [
 		type: "required",
 		image: "icons/PM_Bowser_Castle_Key.png",
 		multiple: 5,
-		show: (settings: Options) => !logic.fastBowserCastle([], settings),
+		show: (settings: Options) => !settings.fastBowserCastle,
 	},
 	{
 		name: "Prison Key",

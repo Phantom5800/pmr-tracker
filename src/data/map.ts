@@ -7,7 +7,15 @@ export type Requirements =
 	| number
 	| string
 	| boolean
-	| ((items: string[], settings: Options) => boolean)
+	| (({
+			items,
+			checks,
+			settings,
+	  }: {
+			items: string[];
+			checks: string[];
+			settings: Options;
+	  }) => boolean)
 	| Requirements[];
 type Coords = { row: number; col: number; rowSpan?: number; colSpan?: number };
 type Area = Coords & {
@@ -75,7 +83,7 @@ export const chapterRewardReqs = {
 			["Bombette", [logic.blueHouseOpen, "Odd Key"]],
 			["Super Boots", "Sushie"],
 		],
-		"Ultra Hammer",
+		logic.canBreakVolcanoBlocks,
 	],
 	Klevar: [
 		logic.canReachToadTown,
@@ -2297,7 +2305,7 @@ const regionData: MapRegions = {
 					"On ledge behind hammer block": {
 						reqs: [
 							logic.canClimbLedges,
-							"Super Hammer",
+							logic.canBreakRuinsBlocks,
 							logic.multipleItemCheck("Ruins Key", 2),
 						],
 					},
@@ -2308,7 +2316,11 @@ const regionData: MapRegions = {
 				col: 6,
 				checks: {
 					"Item on pedestal": {
-						reqs: [logic.canClimbLedges, "Super Hammer", "Ruins Key"],
+						reqs: [
+							logic.canClimbLedges,
+							logic.canBreakRuinsBlocks,
+							"Ruins Key",
+						],
 					},
 				},
 			},
@@ -2318,14 +2330,7 @@ const regionData: MapRegions = {
 				checks: {
 					"Item on pedestal": {
 						reqs: [
-							[
-								logic.startingLocation("Dry Dry Outpost"),
-								["Bombette", "Parakarry"],
-								"Super Hammer",
-								"Ultra Hammer",
-							],
-							"Pulse Stone",
-							"Parakarry",
+							logic.canBreakRuinsBlocks,
 							logic.multipleItemCheck("Ruins Key", 4),
 						],
 					},
@@ -2339,7 +2344,7 @@ const regionData: MapRegions = {
 						reqs: [
 							"Bombette",
 							logic.canClimbLedges,
-							"Super Hammer",
+							logic.canBreakRuinsBlocks,
 							logic.multipleItemCheck("Ruins Key", 3),
 						],
 					},
@@ -2370,6 +2375,7 @@ const regionData: MapRegions = {
 					"Item on ledge, reachable by breaking block and hitting switch": {
 						reqs: [
 							logic.canClimbLedges,
+							logic.canBreakRuinsBlocks,
 							logic.multipleItemCheck("Ruins Key", 3),
 						],
 					},
@@ -3437,7 +3443,7 @@ const regionData: MapRegions = {
 						reqs: logic.canFlipPanel,
 					},
 					"[Upgrade] Super Block": {
-						reqs: ["Boots", "Ultra Hammer"],
+						reqs: ["Boots", logic.canBreakVolcanoBlocks],
 					},
 				},
 			},
@@ -3450,7 +3456,7 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Panel] Left of heart block": {
-						reqs: ["Ultra Hammer", "Boots", logic.canFlipPanel],
+						reqs: [logic.canBreakVolcanoBlocks, "Boots", logic.canFlipPanel],
 					},
 				},
 			},
@@ -3459,10 +3465,10 @@ const regionData: MapRegions = {
 				col: 10,
 				checks: {
 					"Left ? Block": {
-						reqs: ["Ultra Hammer", "Boots"],
+						reqs: [logic.canBreakVolcanoBlocks, "Boots"],
 					},
 					"Right ? Block": {
-						reqs: ["Ultra Hammer", "Boots"],
+						reqs: [logic.canBreakVolcanoBlocks, "Boots"],
 					},
 				},
 			},
@@ -3500,7 +3506,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					Chest: {
-						reqs: ["Ultra Hammer", ["Parakarry", "Lakilester"]],
+						reqs: [logic.canBreakVolcanoBlocks, ["Parakarry", "Lakilester"]],
 					},
 				},
 			},

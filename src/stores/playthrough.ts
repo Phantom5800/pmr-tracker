@@ -392,7 +392,11 @@ const resolveRequirement = (
 			]).length >= reqs
 		);
 	} else if (typeof reqs === "function") {
-		return reqs(playthrough.$state.items, options.$state.options);
+		return reqs({
+			items: playthrough.$state.items,
+			checks: playthrough.$state.checks,
+			settings: options.$state.options,
+		});
 	} else if (operation === "and") {
 		return reqs.every(el => resolveRequirement(el, "or"));
 	} else if (operation === "or") {
