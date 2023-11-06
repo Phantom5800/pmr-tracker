@@ -3777,7 +3777,8 @@ const regionData: MapRegions = {
 	"Shiver Region": {
 		reqs: [
 			logic.canReachToadTown,
-			[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
+			logic.canClimbLedges,
+			[logic.shiverBridgeVisible, "Ultra Boots"],
 			["Sushie", ["Odd Key", "Bombette"], [logic.blueHouseOpen, "Bombette"]],
 		],
 		areas: {
