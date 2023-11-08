@@ -751,10 +751,10 @@ const regionData: MapRegions = {
 						reqs: logic.canFlipPanel,
 					},
 					"[Letter] Dane T. 1 (Chain)": {
-						reqs: ["Dane T. 1", "Parakarry"],
+						reqs: ["Boots", "Dane T. 1", "Parakarry"],
 					},
 					"[Letter] Dane T. 2 (Chain)": {
-						reqs: ["Dane T. 2", "Parakarry"],
+						reqs: ["Boots", "Dane T. 2", "Parakarry"],
 					},
 				},
 			},
