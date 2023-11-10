@@ -1,77 +1,16 @@
-<html>
-    <head>
-        <title>PMR Tracker</title>
-        <meta name="description" content="Tracker for Paper Mario 64 randomizer">
-        <meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64">
-        <meta name="author" content="Phantom Games LLC.">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="main.min.js?version=56"></script>
-        <link rel="stylesheet" href="styles/main.css?version=24">
-
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW6YPGQDM5"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-LW6YPGQDM5');
-        </script>
-
-        <!-- Pre-Fetch Boots and Hammer images -->
-        <link rel="preload" as="image" href="images/upgrades/PM_No_Boots.png">
-        <link rel="preload" as="image" href="images/upgrades/PM_Normal_Boots_Sprite.png">
-        <link rel="preload" as="image" href="images/upgrades/SuperBoots_PM.png">
-        <link rel="preload" as="image" href="images/upgrades/UltraBoots_PM.png">
-        <link rel="preload" as="image" href="images/upgrades/PM_No_Hammer.png">
-        <link rel="preload" as="image" href="images/upgrades/PM_Normal_Hammer_Sprite.png">
-        <link rel="preload" as="image" href="images/upgrades/PM_Super_Hammer_Sprite.png">
-        <link rel="preload" as="image" href="images/upgrades/PM_Ultra_Hammer_Sprite.png">
-    </head>
-    <body>
-        <header>
-            <div style="display:flex;">
-                <div id="options-menu-toggle" class="hamburger">
-                    <div class="hamburger-1"></div>
-                    <div class="hamburger-2"></div>
-                    <div class="hamburger-3"></div>
-                </div>
-                <img id="logo-img" src="images/Logo.png">
-            </div>
-            <div id="settings-menu-toggle">
-                &#x2699;
-            </div>
-        </header>
-        <div id="page">
-            <div class="flex-column">
-                <!--#include virtual="/html/enabled_settings.html" -->
-                <!--#include virtual="/html/main_tracker.html" -->
-                <!--#include virtual="/html/compact_tracker.html" -->
-            </div>
-
-            <!--#include virtual="/html/limited_chapters.html" -->
-            <!--#include virtual="/html/misc_items_tracker.html" -->
-            <!--#include virtual="/html/misc_keys_tracker.html" -->
-
-            <!--
-                User Notes
-            -->
-            <div id="notes" class="section" style="display: none;">
-                <textarea placeholder="Put your own notes here if you want them"></textarea>
-            </div>
-
-            <!--#include virtual="/html/letter_tracker.html" -->
-            <!--#include virtual="/html/koot_tracker.html" -->
-
-            <!--#include virtual="/html/map.html" -->
-
-            <!--#include virtual="/html/info_blocks.html" -->
-        </div>
-        
-        <!--#include virtual="/html/menu_config.html" -->
-        <!--#include virtual="/html/menu_seed.html" -->
-
-        <footer style="width: 100%; display: inline-block; text-align: center;">
-            <script type="text/javascript" src="https://resources.phantom-games.com/copywriteNotice.js"></script>
-        </footer>
-    </body>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Tracker for Paper Mario 64 randomizer" />
+		<meta name="keywords" contents="Paper Mario, Randomizer, Tracker, N64" />
+		<meta name="author" content="Phantom Games LLC." />
+		<title>PMR Tracker</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
 </html>

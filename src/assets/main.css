@@ -1,0 +1,67 @@
+@font-face {
+	font-family: "Paper Mario";
+	src: url("./fonts/SuperMarioScript2Demo-Regular.ttf");
+}
+
+:root {
+	font-size: 14px;
+}
+
+html,
+body {
+	user-select: none;
+	color: white;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	position: relative;
+}
+
+#app {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+input,
+textarea,
+button,
+option,
+select {
+	font-family: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0 0 0 0;
+	font-size: 1.5rem;
+	font-weight: normal;
+}
