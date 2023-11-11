@@ -224,6 +224,18 @@ export const usePlaythrough = defineStore("playthrough", {
 		filterItems(items: string[]) {
 			return this.items.filter(el => items.includes(el));
 		},
+		checkRegion(region: string) {
+			const data = getRegionData(region);
+			Object.getOwnPropertyNames(data.areas).forEach(area => {
+				this.checkArea(region, area);
+			});
+		},
+		checkArea(region: string, area: string) {
+			const data = getRegionData(region);
+			Object.getOwnPropertyNames(data.areas[area].checks).forEach(check => {
+				this.checks.push(`${area}:${check}`);
+			});
+		},
 		toggleCheck(area: string, check: string) {
 			const checkString = fixedChapterRewards.includes(check)
 				? check
