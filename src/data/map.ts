@@ -137,49 +137,19 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Furthest left bush": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"Far right tree": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] 2 more trees": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] 6 more bushes": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Multicoin Block] Block on ground": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 				},
 			},
@@ -188,64 +158,24 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Panel] Right of stone block": {
-						reqs: [
-							logic.canFlipPanel,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-									logic.canClimbLedges,
-								],
-							],
-						],
+						reqs: [logic.canFlipPanel, logic.goombaVillageAccess],
 					},
 					"[Coinsanity] 4 items above spring": {
-						reqs: [
-							logic.canClimbLedges,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-								],
-							],
-						],
+						reqs: [logic.canClimbLedges, logic.goombaVillageAccess],
 					},
 					"[Coin Block] Far left ? Block": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					Tree: {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"Item on ledge above spring": {
-						reqs: [
-							logic.canClimbLedges,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-								],
-							],
-						],
+						reqs: [logic.canClimbLedges, logic.goombaVillageAccess],
 					},
 					"? Block above stone block": {
 						reqs: [
+							logic.goombaVillageAccess,
 							"Super Hammer",
-							[logic.canClimbLedges, logic.startingLocation("Goomba Village")],
 							logic.canBreakBlocksAbove,
 						],
 					},
@@ -256,26 +186,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on ledge": {
-						reqs: [
-							"Boots",
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: ["Boots", logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] Tree on ledge": {
-						reqs: [
-							"Boots",
-							logic.canShakeTree,
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: ["Boots", logic.canShakeTree, logic.goombaVillageAccess],
 					},
 				},
 			},
@@ -285,128 +199,39 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Letter] Goompa": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompa",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompa", "Parakarry"],
 					},
 					"[Letter] Goompapa 1 (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompapa 1",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompapa 1", "Parakarry"],
 					},
 					"[Letter] Goompapa 2 (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompapa 2",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompapa 2", "Parakarry"],
 					},
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
+							logic.goombaVillageAccess,
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
 						],
 					},
 					Goombario: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					"Give Dolly to Goombaria": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Dolly",
-						],
+						reqs: [logic.goombaVillageAccess, "Dolly"],
 					},
 					Goompa: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					"Goompa's Veranda": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					Tree: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-							logic.canShakeTree,
-						],
+						reqs: [logic.goombaVillageAccess, logic.canShakeTree],
 					},
 					"[Foliage Coin] Bottom right bush": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 				},
 			},
@@ -415,17 +240,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] Middle of the room": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							logic.canFlipPanel,
-						],
+						reqs: [logic.goombaVillageAccess, logic.canFlipPanel],
 					},
 				},
 			},
@@ -437,14 +252,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -453,14 +265,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -475,14 +284,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -490,14 +296,11 @@ const regionData: MapRegions = {
 					Sign: {
 						reqs: [
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -514,7 +317,10 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canFlipPanel,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 					"Tree left of the fortress": {
@@ -522,9 +328,8 @@ const regionData: MapRegions = {
 							logic.canShakeTree,
 							logic.canClimbLedges,
 							[
-								[logic.canReachToadTown, ["Super Hammer", logic.prologueOpen]],
-								"Hammer",
-								"Bombette",
+								[logic.canReachToadTown, logic.prologueOpen],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 							],
 						],
 					},
@@ -533,14 +338,20 @@ const regionData: MapRegions = {
 							logic.canBreakBlocksAbove,
 							logic.canBreakGroundBlocks,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 					"[Foliage Coin] Tree right of the fortress": {
 						reqs: [
 							logic.canShakeTree,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 				},

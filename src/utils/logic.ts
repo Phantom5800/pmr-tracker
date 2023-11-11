@@ -162,13 +162,21 @@ export function canMoveStations({
 }
 export function goombaVillageAccess({
 	items,
+	checks,
 	settings,
 }: {
 	items: string[];
 	checks: string[];
 	settings: Options;
 }) {
-	return;
+	return (
+		settings.startingLocation === "Goomba Village" ||
+		(canReachToadTown({ items, checks, settings }) &&
+			(items.includes("Bombette") || items.includes("Hammer")) &&
+			canClimbLedges({ items, checks, settings }) &&
+			settings.prologueOpen) ||
+		(items.includes("Boots") && items.includes("Super Hammer"))
+	);
 }
 export function desertAccess({
 	items,
