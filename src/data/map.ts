@@ -3076,7 +3076,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canClimbLedges,
+					"Boots",
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
@@ -3387,7 +3387,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canClimbLedges,
+					"Boots",
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
