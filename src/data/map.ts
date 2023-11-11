@@ -1,5 +1,5 @@
 import type { Options } from "@/stores/config";
-import logic from "../utils/logic";
+import * as logic from "../utils/logic";
 import { has3Letters } from "@/utils/letterLogic";
 
 export type Requirements =
