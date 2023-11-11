@@ -2437,7 +2437,12 @@ const regionData: MapRegions = {
 	"Boo's Mansion": {
 		reqs: [
 			logic.canReachToadTown,
-			[logic.forestOpen, "Forest Pass", [logic.canClimbLedges, "Super Boots"]],
+			[
+				logic.forestOpen,
+				"Forest Pass",
+				"Super Boots",
+				[[logic.blueHouseOpen, "Odd Key"], "Bombette", "Sushie", "Boots"],
+			],
 		],
 		areas: {
 			"Bow's Room": {
