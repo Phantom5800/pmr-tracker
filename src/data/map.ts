@@ -465,7 +465,7 @@ const regionData: MapRegions = {
 					"[Letter] Russ T.": { reqs: ["Russ T.", "Parakarry"] },
 					"[Shop] 6 items in Shop": { reqs: null },
 					"[Trade] Give Koopa Leaf to Trading Event Toad": {
-						reqs: [["Hammer", "Bombette"], 1],
+						reqs: [logic.canClimbLedges, "Hammer", 1, "Koopa Leaf"],
 					},
 					"Give Dictionary to Russ T.": { reqs: ["Dictionary"] },
 					"Item at Sushie panel": { reqs: ["Sushie"] },
@@ -516,7 +516,7 @@ const regionData: MapRegions = {
 						reqs: ["Fishmael", "Parakarry"],
 					},
 					"[Trade] Give Coconut to Trading Event Toad": {
-						reqs: [["Hammer", "Bombette"], 5],
+						reqs: [logic.canClimbLedges, "Hammer", 5, "Coconut"],
 					},
 					"Talk to Simon in Club 64 (first time)": { reqs: null },
 					"Give Melody to Simon in Club 64": { reqs: "Melody" },
@@ -1727,7 +1727,13 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Trade] Give Nutty Cake to Trading Event Toad": {
-						reqs: 3,
+						reqs: [
+							3,
+							logic.canReachToadTown,
+							logic.canClimbLedges,
+							"Hammer",
+							"Nutty Cake",
+						],
 					},
 				},
 			},
