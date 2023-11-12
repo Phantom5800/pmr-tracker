@@ -697,7 +697,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
-							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -753,7 +753,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Upgrade] Super Block": {
 						reqs: [
-							"Super Boots",
+							["Ultra Boots", logic.shiverBridgeVisible],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -3612,6 +3612,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Star Stone",
@@ -3622,6 +3623,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Star Stone",
@@ -3638,6 +3640,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Bombette",
@@ -3650,13 +3653,34 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Left pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 					"Middle pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 					"Right pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 				},
 			},
@@ -3665,10 +3689,17 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item below Kooper switch": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket"],
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Super Boots"],
 					},
 					"[Upgrade] Super Block": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 				},
 			},
@@ -3719,7 +3750,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item in lake": {
-						reqs: "Sushie",
+						reqs: [["Super Boots", "Bombette"], "Sushie"],
 					},
 				},
 			},
@@ -3774,6 +3805,7 @@ const regionData: MapRegions = {
 				["Odd Key", "Bombette"],
 				[logic.blueHouseOpen, "Bombette"],
 			],
+			["Ultra Boots", logic.shiverBridgeVisible],
 			"Warehouse Key",
 			"Scarf",
 			"Bucket",
