@@ -226,7 +226,11 @@ export const usePlaythrough = defineStore("playthrough", {
 		},
 		fullClearedArea(region: string, area: string) {
 			const data = getRegionData(region);
-			const areaChecks = Object.getOwnPropertyNames(data.areas[area].checks);
+			const areaChecks = Object.getOwnPropertyNames(
+				data.areas[area].checks
+			).filter(el =>
+				this.canCheckLocation(data.areas[area].checks[el].reqs, region)
+			);
 			return areaChecks.every(el => this.checks.includes(`${area}:${el}`));
 		},
 		toggleRegionChecks(region: string) {
@@ -244,7 +248,11 @@ export const usePlaythrough = defineStore("playthrough", {
 			force: boolean | undefined = undefined
 		) {
 			const data = getRegionData(region);
-			const areaChecks = Object.getOwnPropertyNames(data.areas[area].checks);
+			const areaChecks = Object.getOwnPropertyNames(
+				data.areas[area].checks
+			).filter(el =>
+				this.canCheckLocation(data.areas[area].checks[el].reqs, region)
+			);
 			const hasAll = areaChecks.every(el =>
 				this.checks.includes(`${area}:${el}`)
 			);
