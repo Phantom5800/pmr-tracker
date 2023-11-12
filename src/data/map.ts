@@ -210,6 +210,7 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
 							logic.goombaVillageAccess,
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1045,13 +1046,14 @@ const regionData: MapRegions = {
 						reqs: ["Mort T. (Koopa Village Inn)", "Parakarry"],
 					},
 					"[Letter] Koover 1 (Chain)": {
-						reqs: ["Koover 1 (Koopa Village Entrance)", "Parakarry"],
+						reqs: ["Hammer", "Koover 1 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Letter] Koover 2 (Chain)": {
-						reqs: ["Koover 2 (Koopa Village Entrance)", "Parakarry"],
+						reqs: ["Hammer", "Koover 2 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Koot] Far right bush after Koopa Koot requests his Wallet": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1063,6 +1065,8 @@ const regionData: MapRegions = {
 					"[Koot] Second bush from left after Koopa Koot requests his Glasses":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1101,25 +1105,33 @@ const regionData: MapRegions = {
 					"[Letter] Kolorado": { reqs: ["Kolorado", "Parakarry"] },
 					"[Koot] Talk to Kolorado's wife after starting Koopa Koot's first favor":
 						{
-							reqs: null,
+							reqs: "Hammer",
 						},
 					"[Koot Coin] Return Koopa Legends to Koopa Koot": {
-						reqs: "Koopa Legends",
+						reqs: ["Hammer", "Koopa Legends"],
 					},
 					"[Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
-						reqs: ["Koopa Legends", "Sleepy Sheep"],
+						reqs: ["Hammer", "Koopa Legends", "Sleepy Sheep"],
 					},
 					"[Koot] Give Koopa Koot a Sleepy Sheep (second item)": {
-						reqs: ["Koopa Legends", "Sleepy Sheep"],
+						reqs: ["Hammer", "Koopa Legends", "Sleepy Sheep"],
 					},
 					"[Koot Coin] Return Koopa Koot's Tape": {
-						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape"],
+						reqs: ["Hammer", 1, "Koopa Legends", "Sleepy Sheep", "Tape"],
 					},
 					"[Koot] Give Koopa Koot Koopa Tea": {
-						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape", "Koopa Tea"],
+						reqs: [
+							"Hammer",
+							1,
+							"Koopa Legends",
+							"Sleepy Sheep",
+							"Tape",
+							"Koopa Tea",
+						],
 					},
 					"[Koot Coin] Give Luigi's Autograph to Koopa Koot": {
 						reqs: [
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1130,6 +1142,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's wallet": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1141,6 +1154,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Tasty Tonic": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1153,6 +1167,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Merluvlee's Autograph to Koopa Koot": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1167,6 +1182,8 @@ const regionData: MapRegions = {
 					"[Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								3,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1180,6 +1197,8 @@ const regionData: MapRegions = {
 						},
 					"[Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1194,6 +1213,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Life Shroom (second item)": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1208,6 +1229,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Nutty Cake": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1223,6 +1246,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Koopa Koot after calming the Bob-ombs": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1240,6 +1265,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot the Old Photo": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1258,6 +1285,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot Koopasta": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1277,6 +1306,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's glasses": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1297,6 +1328,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Lime": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1318,6 +1351,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Kooky Cookie": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1340,6 +1375,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot his package": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1363,6 +1400,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Coconut": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1387,6 +1426,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot the Red Jar": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1887,6 +1928,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Merlee after Merluvlee requests Crystal Ball": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2287,6 +2329,8 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Franky after Koopa Koot requests the Old Photo": {
 						reqs: [
 							"Boots",
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2453,6 +2497,8 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Boo near Save Block after Koopa Koot requests a Package":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
