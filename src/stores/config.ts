@@ -36,6 +36,7 @@ export type Options = {
 	// compactTracker: boolean;
 	// combineMisc: boolean;
 	combineSortMode: string;
+	trackerWidth: number;
 	uselessItems: boolean;
 	hideBowsersCastle: boolean;
 	hidePeachsCastle: boolean;
@@ -124,6 +125,13 @@ export const optionsData = {
 		type: "select",
 		default: "Vanilla Acquired Order",
 		choices: ["Vanilla Acquired Order", "Required First"],
+	},
+	trackerWidth: {
+		namespace: "config",
+		name: "Tracker Width (px) (0 = auto)",
+		type: "number",
+		default: 1900,
+		range: [0, 10000],
 	},
 	uselessItems: {
 		namespace: "config",

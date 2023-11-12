@@ -97,6 +97,12 @@ const playthroughStore = usePlaythrough();
 
 const { options } = storeToRefs(optionsStore);
 
+const mainWidth = computed(() =>
+	options.value.trackerWidth.toString() === "0"
+		? "auto"
+		: `${options.value.trackerWidth}px`
+);
+
 const year = new Date().getFullYear();
 
 const allItemsFiltered = computed(() =>
@@ -566,6 +572,7 @@ if (!localStorage.getItem("visited")) {
 		ref="mainRef"
 		:style="{
 			transform: moving ? 'translate(0, 5rem)' : undefined,
+			width: mainWidth,
 		}"
 	>
 		<GridLayout
@@ -699,12 +706,6 @@ if (!localStorage.getItem("visited")) {
 </template>
 
 <style scoped>
-header,
-main,
-footer {
-	--min-width: 1900px;
-}
-
 .vgl-layout {
 	--vgl-resizer-border-color: white;
 }
@@ -719,7 +720,6 @@ footer {
 	flex-grow: 0;
 	position: relative;
 	height: 4.5rem;
-	min-width: var(--min-width);
 }
 
 .buttons {
@@ -791,7 +791,6 @@ div.add-panels > div {
 main {
 	transition: transform 0.2s;
 	flex-grow: 1;
-	min-width: var(--min-width);
 }
 
 footer {
@@ -802,6 +801,5 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
-	min-width: var(--min-width);
 }
 </style>
