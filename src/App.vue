@@ -445,7 +445,7 @@ if (!localStorage.getItem("visited")) {
 			</SvgButton>
 		</div>
 		<img id="logo-img" src="./assets/images/Logo.png" />
-		<div class="buttons">
+		<div class="buttons" :style="{ justifyContent: 'flex-end' }">
 			<SvgButton name="How to Use" @click="openModal = 'info'"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -732,20 +732,11 @@ if (!localStorage.getItem("visited")) {
 	margin-bottom: 1rem;
 }
 
-/* @media (max-width: 640px) {
+@media (max-width: 640px) {
 	#logo-img {
 		display: none !important;
 	}
-	.header {
-		flex-wrap: wrap;
-		justify-content: center;
-		height: auto;
-		gap: 8px;
-	}
-	.buttons {
-		height: 4rem;
-	}
-} */
+}
 
 #logo-img {
 	width: auto;
