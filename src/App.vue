@@ -700,9 +700,6 @@ if (!localStorage.getItem("visited")) {
 			>Phantom Games {{ year }}</a
 		>
 	</footer>
-	<div class="buttons">
-		<SvgButton name="asdf"></SvgButton>
-	</div>
 </template>
 
 <style scoped>
