@@ -1683,7 +1683,7 @@ const regionData: MapRegions = {
 						reqs: logic.canClimbLedges,
 					},
 					"Hit Whacka": {
-						reqs: [logic.canClimbLedges, "Hammer"],
+						reqs: [logic.canClimbLedges, ["Hammer", "Bombette"]],
 					},
 					"? Block": {
 						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
