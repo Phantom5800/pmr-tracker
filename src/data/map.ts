@@ -2395,12 +2395,20 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: ["Super Boots", ["Weight", "Bombette"], "Boo's Portrait"],
+						reqs: [
+							[
+								["Boots", "Weight"],
+								["Super Boots", "Bombette"],
+							],
+							"Boo's Portrait",
+						],
 					},
 					"[Letter] Igor": {
 						reqs: [
-							"Super Boots",
-							["Weight", "Bombette"],
+							[
+								["Boots", "Weight"],
+								["Super Boots", "Bombette"],
+							],
 							"Igor (Boo's Mansion Shop)",
 							"Parakarry",
 						],
