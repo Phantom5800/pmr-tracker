@@ -97,6 +97,12 @@ const playthroughStore = usePlaythrough();
 
 const { options } = storeToRefs(optionsStore);
 
+const mainWidth = computed(() =>
+	options.value.trackerWidth.toString() === "0"
+		? "auto"
+		: `${options.value.trackerWidth}px`
+);
+
 const year = new Date().getFullYear();
 
 const allItemsFiltered = computed(() =>
@@ -439,7 +445,7 @@ if (!localStorage.getItem("visited")) {
 			</SvgButton>
 		</div>
 		<img id="logo-img" src="./assets/images/Logo.png" />
-		<div class="buttons">
+		<div class="buttons" :style="{ justifyContent: 'flex-end' }">
 			<SvgButton name="How to Use" @click="openModal = 'info'"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -566,6 +572,7 @@ if (!localStorage.getItem("visited")) {
 		ref="mainRef"
 		:style="{
 			transform: moving ? 'translate(0, 5rem)' : undefined,
+			width: mainWidth,
 		}"
 	>
 		<GridLayout
@@ -693,18 +700,9 @@ if (!localStorage.getItem("visited")) {
 			>Phantom Games {{ year }}</a
 		>
 	</footer>
-	<div class="buttons">
-		<SvgButton name="asdf"></SvgButton>
-	</div>
 </template>
 
 <style scoped>
-header,
-main,
-footer {
-	--min-width: 1900px;
-}
-
 .vgl-layout {
 	--vgl-resizer-border-color: white;
 }
@@ -719,7 +717,6 @@ footer {
 	flex-grow: 0;
 	position: relative;
 	height: 4.5rem;
-	min-width: var(--min-width);
 }
 
 .buttons {
@@ -735,20 +732,11 @@ footer {
 	margin-bottom: 1rem;
 }
 
-/* @media (max-width: 640px) {
+@media (max-width: 640px) {
 	#logo-img {
 		display: none !important;
 	}
-	.header {
-		flex-wrap: wrap;
-		justify-content: center;
-		height: auto;
-		gap: 8px;
-	}
-	.buttons {
-		height: 4rem;
-	}
-} */
+}
 
 #logo-img {
 	width: auto;
@@ -791,7 +779,6 @@ div.add-panels > div {
 main {
 	transition: transform 0.2s;
 	flex-grow: 1;
-	min-width: var(--min-width);
 }
 
 footer {
@@ -802,6 +789,5 @@ footer {
 	font-size: 1rem;
 	padding-bottom: 1rem;
 	flex-grow: 0;
-	min-width: var(--min-width);
 }
 </style>

@@ -1,5 +1,5 @@
 import type { Options } from "@/stores/config";
-import logic from "../utils/logic";
+import * as logic from "../utils/logic";
 import { has3Letters } from "@/utils/letterLogic";
 
 export type Requirements =
@@ -137,49 +137,19 @@ const regionData: MapRegions = {
 				col: 1,
 				checks: {
 					"Furthest left bush": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"Far right tree": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] 2 more trees": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] 6 more bushes": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"[Multicoin Block] Block on ground": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen], logic.canClimbLedges],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 				},
 			},
@@ -188,64 +158,24 @@ const regionData: MapRegions = {
 				col: 2,
 				checks: {
 					"[Panel] Right of stone block": {
-						reqs: [
-							logic.canFlipPanel,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-									logic.canClimbLedges,
-								],
-							],
-						],
+						reqs: [logic.canFlipPanel, logic.goombaVillageAccess],
 					},
 					"[Coinsanity] 4 items above spring": {
-						reqs: [
-							logic.canClimbLedges,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-								],
-							],
-						],
+						reqs: [logic.canClimbLedges, logic.goombaVillageAccess],
 					},
 					"[Coin Block] Far left ? Block": {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					Tree: {
-						reqs: [
-							["Hammer", "Bombette"],
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: [["Hammer", "Bombette"], logic.goombaVillageAccess],
 					},
 					"Item on ledge above spring": {
-						reqs: [
-							logic.canClimbLedges,
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Hammer", "Bombette"],
-									["Super Hammer", logic.prologueOpen],
-								],
-							],
-						],
+						reqs: [logic.canClimbLedges, logic.goombaVillageAccess],
 					},
 					"? Block above stone block": {
 						reqs: [
+							logic.goombaVillageAccess,
 							"Super Hammer",
-							[logic.canClimbLedges, logic.startingLocation("Goomba Village")],
 							logic.canBreakBlocksAbove,
 						],
 					},
@@ -256,26 +186,10 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item on ledge": {
-						reqs: [
-							"Boots",
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: ["Boots", logic.goombaVillageAccess],
 					},
 					"[Foliage Coin] Tree on ledge": {
-						reqs: [
-							"Boots",
-							logic.canShakeTree,
-							[
-								logic.startingLocation("Goomba Village"),
-								[["Super Hammer", logic.prologueOpen]],
-							],
-						],
+						reqs: ["Boots", logic.canShakeTree, logic.goombaVillageAccess],
 					},
 				},
 			},
@@ -285,128 +199,40 @@ const regionData: MapRegions = {
 				rowSpan: 2,
 				checks: {
 					"[Letter] Goompa": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompa",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompa", "Parakarry"],
 					},
 					"[Letter] Goompapa 1 (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompapa 1",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompapa 1", "Parakarry"],
 					},
 					"[Letter] Goompapa 2 (Chain)": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Goompapa 2",
-							"Parakarry",
-						],
+						reqs: [logic.goombaVillageAccess, "Goompapa 2", "Parakarry"],
 					},
 					"[Koot] Talk to Goompa after Koopa Koot asks for his Tape": {
 						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
+							logic.goombaVillageAccess,
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
 						],
 					},
 					Goombario: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					"Give Dolly to Goombaria": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							"Dolly",
-						],
+						reqs: [logic.goombaVillageAccess, "Dolly"],
 					},
 					Goompa: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					"Goompa's Veranda": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 					Tree: {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[logic.canClimbLedges, ["Super Hammer", logic.prologueOpen]],
-							],
-							logic.canShakeTree,
-						],
+						reqs: [logic.goombaVillageAccess, logic.canShakeTree],
 					},
 					"[Foliage Coin] Bottom right bush": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-						],
+						reqs: logic.goombaVillageAccess,
 					},
 				},
 			},
@@ -415,17 +241,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"[Panel] Middle of the room": {
-						reqs: [
-							[
-								logic.startingLocation("Goomba Village"),
-								[
-									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
-									["Hammer", "Bombette"],
-								],
-							],
-							logic.canFlipPanel,
-						],
+						reqs: [logic.goombaVillageAccess, logic.canFlipPanel],
 					},
 				},
 			},
@@ -437,14 +253,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -453,14 +266,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -475,14 +285,11 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canBreakBlocksAbove,
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -490,14 +297,11 @@ const regionData: MapRegions = {
 					Sign: {
 						reqs: [
 							[
-								[
-									logic.startingLocation("Goomba Village"),
-									["Hammer", "Bombette"],
-								],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 								[
 									logic.canReachToadTown,
 									logic.canClimbLedges,
-									["Super Hammer", logic.prologueOpen],
+									logic.prologueOpen,
 								],
 							],
 						],
@@ -514,7 +318,10 @@ const regionData: MapRegions = {
 						reqs: [
 							logic.canFlipPanel,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 					"Tree left of the fortress": {
@@ -522,9 +329,8 @@ const regionData: MapRegions = {
 							logic.canShakeTree,
 							logic.canClimbLedges,
 							[
-								[logic.canReachToadTown, ["Super Hammer", logic.prologueOpen]],
-								"Hammer",
-								"Bombette",
+								[logic.canReachToadTown, logic.prologueOpen],
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
 							],
 						],
 					},
@@ -533,14 +339,20 @@ const regionData: MapRegions = {
 							logic.canBreakBlocksAbove,
 							logic.canBreakGroundBlocks,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 					"[Foliage Coin] Tree right of the fortress": {
 						reqs: [
 							logic.canShakeTree,
 							logic.canClimbLedges,
-							[logic.canReachToadTown, "Hammer", "Bombette"],
+							[
+								logic.canReachToadTown,
+								[logic.goombaVillageAccess, ["Hammer", "Bombette"]],
+							],
 						],
 					},
 				},
@@ -653,7 +465,7 @@ const regionData: MapRegions = {
 					"[Letter] Russ T.": { reqs: ["Russ T.", "Parakarry"] },
 					"[Shop] 6 items in Shop": { reqs: null },
 					"[Trade] Give Koopa Leaf to Trading Event Toad": {
-						reqs: [["Hammer", "Bombette"], 1],
+						reqs: [logic.canClimbLedges, "Hammer", 1, "Koopa Leaf"],
 					},
 					"Give Dictionary to Russ T.": { reqs: ["Dictionary"] },
 					"Item at Sushie panel": { reqs: ["Sushie"] },
@@ -704,7 +516,7 @@ const regionData: MapRegions = {
 						reqs: ["Fishmael", "Parakarry"],
 					},
 					"[Trade] Give Coconut to Trading Event Toad": {
-						reqs: [["Hammer", "Bombette"], 5],
+						reqs: [logic.canClimbLedges, "Hammer", 5, "Coconut"],
 					},
 					"Talk to Simon in Club 64 (first time)": { reqs: null },
 					"Give Melody to Simon in Club 64": { reqs: "Melody" },
@@ -886,7 +698,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Coin Block] ? Block 1": {
 						reqs: [
-							[["Super Boots", logic.shiverBridgeVisible], "Ultra Boots"],
+							"Super Boots",
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -942,7 +754,7 @@ const regionData: MapRegions = {
 				checks: {
 					"[Upgrade] Super Block": {
 						reqs: [
-							"Super Boots",
+							["Ultra Boots", logic.shiverBridgeVisible],
 							[
 								"Sushie",
 								["Odd Key", "Bombette"],
@@ -1234,13 +1046,14 @@ const regionData: MapRegions = {
 						reqs: ["Mort T. (Koopa Village Inn)", "Parakarry"],
 					},
 					"[Letter] Koover 1 (Chain)": {
-						reqs: ["Koover 1 (Koopa Village Entrance)", "Parakarry"],
+						reqs: ["Hammer", "Koover 1 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Letter] Koover 2 (Chain)": {
-						reqs: ["Koover 2 (Koopa Village Entrance)", "Parakarry"],
+						reqs: ["Hammer", "Koover 2 (Koopa Village Entrance)", "Parakarry"],
 					},
 					"[Koot] Far right bush after Koopa Koot requests his Wallet": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1252,6 +1065,8 @@ const regionData: MapRegions = {
 					"[Koot] Second bush from left after Koopa Koot requests his Glasses":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1290,25 +1105,33 @@ const regionData: MapRegions = {
 					"[Letter] Kolorado": { reqs: ["Kolorado", "Parakarry"] },
 					"[Koot] Talk to Kolorado's wife after starting Koopa Koot's first favor":
 						{
-							reqs: null,
+							reqs: "Hammer",
 						},
 					"[Koot Coin] Return Koopa Legends to Koopa Koot": {
-						reqs: "Koopa Legends",
+						reqs: ["Hammer", "Koopa Legends"],
 					},
 					"[Koot Coin] Give Koopa Koot a Sleepy Sheep (first item)": {
-						reqs: ["Koopa Legends", "Sleepy Sheep"],
+						reqs: ["Hammer", "Koopa Legends", "Sleepy Sheep"],
 					},
 					"[Koot] Give Koopa Koot a Sleepy Sheep (second item)": {
-						reqs: ["Koopa Legends", "Sleepy Sheep"],
+						reqs: ["Hammer", "Koopa Legends", "Sleepy Sheep"],
 					},
 					"[Koot Coin] Return Koopa Koot's Tape": {
-						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape"],
+						reqs: ["Hammer", 1, "Koopa Legends", "Sleepy Sheep", "Tape"],
 					},
 					"[Koot] Give Koopa Koot Koopa Tea": {
-						reqs: [1, "Koopa Legends", "Sleepy Sheep", "Tape", "Koopa Tea"],
+						reqs: [
+							"Hammer",
+							1,
+							"Koopa Legends",
+							"Sleepy Sheep",
+							"Tape",
+							"Koopa Tea",
+						],
 					},
 					"[Koot Coin] Give Luigi's Autograph to Koopa Koot": {
 						reqs: [
+							"Hammer",
 							1,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1319,6 +1142,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's wallet": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1330,6 +1154,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Tasty Tonic": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1342,6 +1167,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Merluvlee's Autograph to Koopa Koot": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1356,6 +1182,8 @@ const regionData: MapRegions = {
 					"[Koot Coin] Talk to Koopa Koot after reading the news in Toad Town":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								3,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -1369,6 +1197,8 @@ const regionData: MapRegions = {
 						},
 					"[Koot Coin] Give Koopa Koot a Life Shroom (first item)": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1383,6 +1213,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Life Shroom (second item)": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1397,6 +1229,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Nutty Cake": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							3,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1412,6 +1246,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Koopa Koot after calming the Bob-ombs": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1429,6 +1265,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot the Old Photo": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1447,6 +1285,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot Koopasta": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1466,6 +1306,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Return Koopa Koot's glasses": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1486,6 +1328,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot a Lime": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1507,6 +1351,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Kooky Cookie": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							5,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1529,6 +1375,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot his package": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1552,6 +1400,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot Coin] Give Koopa Koot a Coconut": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1576,6 +1426,8 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Give Koopa Koot the Red Jar": {
 						reqs: [
+							logic.canReachToadTown,
+							"Hammer",
 							6,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -1831,7 +1683,7 @@ const regionData: MapRegions = {
 						reqs: logic.canClimbLedges,
 					},
 					"Hit Whacka": {
-						reqs: [logic.canClimbLedges, "Hammer"],
+						reqs: [logic.canClimbLedges, ["Hammer", "Bombette"]],
 					},
 					"? Block": {
 						reqs: [logic.canClimbLedges, logic.canBreakBlocksAbove],
@@ -1875,7 +1727,13 @@ const regionData: MapRegions = {
 				col: 4,
 				checks: {
 					"[Trade] Give Nutty Cake to Trading Event Toad": {
-						reqs: 3,
+						reqs: [
+							3,
+							logic.canReachToadTown,
+							logic.canClimbLedges,
+							"Hammer",
+							"Nutty Cake",
+						],
 					},
 				},
 			},
@@ -2076,6 +1934,7 @@ const regionData: MapRegions = {
 					},
 					"[Koot] Talk to Merlee after Merluvlee requests Crystal Ball": {
 						reqs: [
+							"Hammer",
 							2,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2438,8 +2297,10 @@ const regionData: MapRegions = {
 		reqs: [
 			logic.canReachToadTown,
 			[
-				[logic.forestOpen, "Forest Pass"],
-				[logic.canClimbLedges, "Super Boots"],
+				logic.forestOpen,
+				"Forest Pass",
+				"Super Boots",
+				[[logic.blueHouseOpen, "Odd Key"], "Bombette", "Sushie", "Boots"],
 			],
 		],
 		areas: {
@@ -2474,6 +2335,8 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Franky after Koopa Koot requests the Old Photo": {
 						reqs: [
 							"Boots",
+							logic.canReachToadTown,
+							"Hammer",
 							4,
 							"Koopa Legends",
 							"Sleepy Sheep",
@@ -2582,12 +2445,20 @@ const regionData: MapRegions = {
 				colSpan: 2,
 				checks: {
 					"[Shop] 6 items in Shop": {
-						reqs: ["Super Boots", ["Weight", "Bombette"], "Boo's Portrait"],
+						reqs: [
+							[
+								["Boots", "Weight"],
+								["Super Boots", "Bombette"],
+							],
+							"Boo's Portrait",
+						],
 					},
 					"[Letter] Igor": {
 						reqs: [
-							"Super Boots",
-							["Weight", "Bombette"],
+							[
+								["Boots", "Weight"],
+								["Super Boots", "Bombette"],
+							],
 							"Igor (Boo's Mansion Shop)",
 							"Parakarry",
 						],
@@ -2632,6 +2503,8 @@ const regionData: MapRegions = {
 					"[Koot] Talk to Boo near Save Block after Koopa Koot requests a Package":
 						{
 							reqs: [
+								logic.canReachToadTown,
+								"Hammer",
 								5,
 								"Koopa Legends",
 								"Sleepy Sheep",
@@ -3074,7 +2947,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canClimbLedges,
+					"Boots",
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
@@ -3385,7 +3258,7 @@ const regionData: MapRegions = {
 				[logic.canReachToadTown, ["Watt", logic.whaleOpen]],
 				[
 					logic.canReachToadTown,
-					logic.canClimbLedges,
+					"Boots",
 					[
 						["Super Boots", "Sushie"],
 						[[logic.blueHouseOpen, "Odd Key"], "Bombette"],
@@ -3791,6 +3664,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Star Stone",
@@ -3801,6 +3675,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Star Stone",
@@ -3817,6 +3692,7 @@ const regionData: MapRegions = {
 							"Warehouse Key",
 							"Scarf",
 							"Bucket",
+							"Super Boots",
 							"Kooper",
 							"Hammer",
 							"Bombette",
@@ -3829,13 +3705,34 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Left pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 					"Middle pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 					"Right pillar": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 				},
 			},
@@ -3844,10 +3741,17 @@ const regionData: MapRegions = {
 				col: 5,
 				checks: {
 					"Item below Kooper switch": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket"],
+						reqs: ["Warehouse Key", "Scarf", "Bucket", "Super Boots"],
 					},
 					"[Upgrade] Super Block": {
-						reqs: ["Warehouse Key", "Scarf", "Bucket", "Kooper", "Hammer"],
+						reqs: [
+							"Warehouse Key",
+							"Scarf",
+							"Bucket",
+							"Super Boots",
+							"Kooper",
+							"Hammer",
+						],
 					},
 				},
 			},
@@ -3898,7 +3802,7 @@ const regionData: MapRegions = {
 				col: 3,
 				checks: {
 					"Item in lake": {
-						reqs: "Sushie",
+						reqs: [["Super Boots", "Bombette"], "Sushie"],
 					},
 				},
 			},
@@ -3953,6 +3857,7 @@ const regionData: MapRegions = {
 				["Odd Key", "Bombette"],
 				[logic.blueHouseOpen, "Bombette"],
 			],
+			["Ultra Boots", logic.shiverBridgeVisible],
 			"Warehouse Key",
 			"Scarf",
 			"Bucket",

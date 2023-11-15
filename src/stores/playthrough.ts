@@ -224,6 +224,45 @@ export const usePlaythrough = defineStore("playthrough", {
 		filterItems(items: string[]) {
 			return this.items.filter(el => items.includes(el));
 		},
+		fullClearedArea(region: string, area: string) {
+			const data = getRegionData(region);
+			const areaChecks = Object.getOwnPropertyNames(
+				data.areas[area].checks
+			).filter(el =>
+				this.canCheckLocation(data.areas[area].checks[el].reqs, region)
+			);
+			return areaChecks.every(el => this.checks.includes(`${area}:${el}`));
+		},
+		toggleRegionChecks(region: string) {
+			const data = getRegionData(region);
+			const hasAll = Object.getOwnPropertyNames(data.areas).every(el =>
+				this.fullClearedArea(region, el)
+			);
+			Object.getOwnPropertyNames(data.areas).forEach(area => {
+				this.toggleAreaChecks(region, area, !hasAll);
+			});
+		},
+		toggleAreaChecks(
+			region: string,
+			area: string,
+			force: boolean | undefined = undefined
+		) {
+			const data = getRegionData(region);
+			const areaChecks = Object.getOwnPropertyNames(
+				data.areas[area].checks
+			).filter(el =>
+				this.canCheckLocation(data.areas[area].checks[el].reqs, region)
+			);
+			const hasAll = areaChecks.every(el =>
+				this.checks.includes(`${area}:${el}`)
+			);
+			const toggle = force ?? !hasAll;
+			areaChecks
+				.filter(el => this.checkedLocation(area, el) === !toggle)
+				.forEach(el => {
+					this.toggleCheck(area, el);
+				});
+		},
 		toggleCheck(area: string, check: string) {
 			const checkString = fixedChapterRewards.includes(check)
 				? check

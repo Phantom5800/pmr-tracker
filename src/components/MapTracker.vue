@@ -137,6 +137,7 @@ const checksToShow = computed(() =>
 					currentRegion = region;
 					currentArea = Object.getOwnPropertyNames(currentRegionData.areas)[0];
 				"
+				@contextmenu.prevent="playthrough.toggleRegionChecks(region)"
 			>
 				{{ region }} {{ itemCounts[region].available || "" }}
 			</button>
@@ -168,6 +169,9 @@ const checksToShow = computed(() =>
 						}`,
 					}"
 					@click="currentArea = area"
+					@contextmenu.prevent="
+						playthrough.toggleAreaChecks(currentRegion, area)
+					"
 				>
 					{{ area }}
 				</button>

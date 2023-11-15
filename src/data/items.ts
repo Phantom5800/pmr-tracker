@@ -1,5 +1,5 @@
 import type { TrackableItemInfo } from "@/types/items";
-import logic from "../utils/logic";
+import * as logic from "../utils/logic";
 import type { Options } from "@/stores/config";
 
 export const allItems: TrackableItemInfo[] = [
