@@ -46,7 +46,10 @@ function setRandomizerSettingsFromApiResponse(data: SettingsApiData) {
 	optionsStore.setValue("prologueOpen", data.PrologueOpen);
 	optionsStore.setValue("rowfRandomized", data.ProgressionOnRowf);
 	optionsStore.setValue("sSkip", data.StarHuntEndsGame);
-	optionsStore.setValue("seedsRequired", data.MagicalSeedsRequired);
+	optionsStore.setValue(
+		"seedsRequired",
+		Math.min(4, data.MagicalSeedsRequired)
+	);
 	optionsStore.setValue("shiverBridgeVisible", data.Ch7BridgeVisible);
 	optionsStore.setValue("shopsRandomized", data.IncludeShops);
 	optionsStore.setValue(
