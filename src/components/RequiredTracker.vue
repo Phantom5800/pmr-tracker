@@ -2,13 +2,11 @@
 import { ref, computed } from "vue";
 import TrackableItem from "./TrackableItem.vue";
 import { usePlaythrough } from "../stores/playthrough";
-import { useOptions } from "@/stores/config";
 import ItemTracker from "./ItemTracker.vue";
 import type { TrackableItemInfo } from "../types/items";
 
 const tooltip = ref("");
 const playthrough = usePlaythrough();
-const options = useOptions();
 
 const props = defineProps<{
 	allItems: TrackableItemInfo[];
@@ -21,14 +19,6 @@ const requiredItems = computed(() =>
 		["chapterReward", "partner", "equipment", "required"].includes(el.type)
 	)
 );
-
-const chapterRows = computed(() => {
-	if (options.getValue("powerStarHunt")) {
-		return [1, 2, 3, 4, 5, 6, 7, 16, 0, -1];
-	} else {
-		return [1, 2, 3, 4, 5, 6, 7, 8, 0, -1];
-	}
-});
 
 function equipmentTooltip(item: string) {
 	if (item === "Boots" || item === "Hammer") {
@@ -56,7 +46,11 @@ function equipmentTooltip(item: string) {
 	>
 		<div class="container">
 			<div class="rows">
-				<div v-for="chapter in chapterRows" :key="chapter" class="gridrow">
+				<div
+					v-for="chapter in [1, 2, 3, 4, 5, 6, 7, 8, 0, -1]"
+					:key="chapter"
+					class="gridrow"
+				>
 					<TrackableItem
 						v-for="(item, index) in requiredItems.filter(
 							el => el.chapter === chapter

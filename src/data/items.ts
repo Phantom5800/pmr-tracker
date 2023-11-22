@@ -47,17 +47,17 @@ export const allItems: TrackableItemInfo[] = [
 	},
 	{
 		chapter: 8,
-		name: "Star Rod",
-		type: "chapterReward",
-		image: "icons/PM_Starrod.png",
-		show: (settings: Options) => !logic.powerStarHunt(settings),
-	},
-	{
-		chapter: 16,
 		name: "Power Stars Found",
 		type: "chapterReward",
 		image: "icons/Power_Star.png",
 		show: logic.powerStarHunt,
+	},
+	{
+		chapter: 8,
+		name: "Star Rod",
+		type: "chapterReward",
+		image: "icons/PM_Starrod.png",
+		show: (settings: Options) => !logic.powerStarHunt(settings),
 	},
 	{
 		chapter: -1,
